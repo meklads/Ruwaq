@@ -1,0 +1,600 @@
+export type Messages = {
+  app: { name: string; subtitle: string };
+  nav: {
+    myProposals: string;
+    companyProfile: string;
+    settings: string;
+    signIn: string;
+    signOut: string;
+    newProposal: string;
+    previewSample: string;
+  };
+  form: {
+    title: string;
+    subtitle: string;
+    steps: { project: string; details: string };
+    commercialSection: string;
+    optionalDetails: {
+      title: string;
+      hint: string;
+      location: string;
+      locationPlaceholder: string;
+      propertyType: string;
+      propertyTypeNone: string;
+      propertyTypes: {
+        villa: string;
+        apartment: string;
+        office: string;
+        retail: string;
+        other: string;
+      };
+      areaSqm: string;
+      areaSqmPlaceholder: string;
+      duration: string;
+      durationPlaceholder: string;
+      specifications: string;
+      specificationsPlaceholder: string;
+    };
+    projectName: string;
+    projectNamePlaceholder: string;
+    clientName: string;
+    clientNamePlaceholder: string;
+    description: string;
+    descriptionPlaceholder: string;
+    descriptionHint: string;
+    budget: string;
+    budgetPlaceholder: string;
+    budgetOptional: string;
+    commercialMode: string;
+    commercialModeFixed: string;
+    commercialModeEstimate: string;
+    paymentStructure: string;
+    paymentOptions: {
+      milestone_30_40_30: string;
+      monthly: string;
+      fixed: string;
+      custom: string;
+    };
+    continue: string;
+    back: string;
+    generate: string;
+    generatingAnalyze: string;
+    generatingWrite: string;
+    generatingWaitHint: string;
+    errors: {
+      projectRequired: string;
+      descriptionRequired: string;
+      budgetRequired: string;
+      arabicOnly: string;
+      englishOnly: string;
+      generic: string;
+    };
+  };
+  review: {
+    trustBanner: string;
+    reviewGatesTitle: string;
+    reviewGatesHint: string;
+    exportBlocked: string;
+    estimateOnlyBadge: string;
+    profileIncomplete: string;
+    profileIncompleteLink: string;
+    guestBanner: string;
+    guestLink: string;
+    backToNew: string;
+    draftBadge: string;
+    pageSubtitle: string;
+    reviewedCount: (n: number, total: number) => string;
+    allReviewed: string;
+    exported: string;
+    regenerate: string;
+    regenerating: string;
+    regenerateConfirm: string;
+    regenerateFailed: string;
+    downloadPdf: string;
+    printHint: string;
+    exporting: string;
+    preparedFor: string;
+    preparedBy: string;
+    date: string;
+    sections: {
+      scopeItems: string;
+      commercialTerms: string;
+      timeline: string;
+      deliverables: string;
+      assumptions: string;
+      exclusions: string;
+    };
+    total: string;
+    currency: string;
+    milestone: string;
+    percentage: string;
+    amount: string;
+    duration: string;
+    aiDraftHint: string;
+    noAssumptions: string;
+    noExclusions: string;
+    addItem: string;
+    addAssumption: string;
+    addExclusion: string;
+    markReviewed: string;
+    reviewed: string;
+    badges: { review: string; aiEstimated: string };
+    placeholders: { itemTitle: string; itemDescription: string };
+    localeMismatch: string;
+    claimSuccess: string;
+    claiming: string;
+    postExportGuest: string;
+    copyWhatsApp: string;
+    whatsAppCopied: string;
+    regenerateSection: string;
+    sectionRegenerating: string;
+    introduction: string;
+    removeItem: string;
+    gatesProgress: (confirmed: number, total: number) => string;
+    confirmUnderstanding: string;
+    confirmDeliverables: string;
+    boq: {
+      title: string;
+      lineItem: string;
+      empty: string;
+      budgetLockMatch: string;
+      budgetLockMismatch: string;
+      estimateBadge: string;
+      estimateDisclaimerTop: (pct: number) => string;
+      estimateDisclaimerBottom: (pct: number) => string;
+      confirmCommercial: string;
+      confirmBoq: string;
+      redistributeToast: string;
+    };
+    clauses: {
+      title: string;
+      empty: string;
+      defaultPackName: string;
+      approvedCount: (n: number) => string;
+      mandatory: string;
+      recommended: string;
+      source: string;
+      confirmClauses: string;
+      legalDisclaimer: string;
+      categories: Record<string, string>;
+    };
+  };
+  landing: {
+    title: string;
+    subtitle: string;
+    cta: string;
+    ctaSecondary: string;
+    feature1: string;
+    feature2: string;
+    feature3: string;
+    trustLine: string;
+  };
+  sales: {
+    hero: {
+      eyebrow: string;
+      title: string;
+      titleHighlight: string;
+      subtitleIntro: string;
+      subtitleInputs: readonly string[];
+      subtitleOutcomeBefore: string;
+      subtitleHighlight: string;
+      subtitleOutcomeAfter: string;
+      cta: string;
+      ctaSecondary: string;
+      microcopy: string;
+      imageBadgeTitle: string;
+      imageBadge: string;
+    };
+    heroSteps: {
+      title: string;
+      items: readonly { label: string; hint: string }[];
+    };
+    heroTickets: readonly {
+      illustration: "scope" | "timeline" | "payments" | "pdf";
+      title: string;
+      body: string;
+    }[];
+    mock: {
+      previewEyebrow: string;
+      previewTitle: string;
+      previewSubtitle: string;
+      inputLabel: string;
+      outputLabel: string;
+      fields: readonly string[];
+      generate: string;
+      sections: readonly string[];
+      badge1: string;
+      badge2: string;
+    };
+    problem: {
+      eyebrow: string;
+      title: string;
+      body: string;
+      traditionalLabel: string;
+      ruwaqLabel: string;
+      traditional: readonly string[];
+      ruwaq: readonly string[];
+    };
+    features: {
+      eyebrow: string;
+      title: string;
+      subtitle: string;
+      items: readonly {
+        illustration: "inputs" | "shield" | "brand" | "estimate" | "bilingual" | "instant";
+        title: string;
+        body: string;
+      }[];
+    };
+    steps: {
+      eyebrow: string;
+      title: string;
+      learnMore: string;
+      items: readonly { title: string; body: string }[];
+    };
+    why: {
+      eyebrow: string;
+      title: string;
+      subtitle: string;
+      table: { need: string; others: string; ruwaq: string };
+      rows: readonly { need: string; others: string; ruwaq: string }[];
+    };
+    audience: {
+      eyebrow: string;
+      title: string;
+      items: readonly { icon: string; title: string; body: string }[];
+    };
+    sample: {
+      eyebrow: string;
+      title: string;
+      body: string;
+      cta: string;
+      comingSoon: string;
+      items: readonly { title: string; body: string; live: boolean }[];
+    };
+    document: {
+      eyebrow: string;
+      title: string;
+      subtitle: string;
+      layers: readonly string[];
+    };
+    trustPartner: {
+      eyebrow: string;
+      title: string;
+      subtitle: string;
+      pillars: readonly {
+        illustration: "partner" | "protection" | "regulations" | "verified";
+        title: string;
+        body: string;
+      }[];
+      packTitle: string;
+      packMeta: string;
+      clauses: readonly {
+        category: string;
+        title: string;
+        excerpt: string;
+        source: string;
+      }[];
+      disclaimer: string;
+      cta: string;
+    };
+    ctaFinal: {
+      title: string;
+      subtitle: string;
+      primary: string;
+      secondary: string;
+      microcopy: string;
+    };
+  };
+  site: {
+    nav: {
+      howItWorks: string;
+      about: string;
+      services: string;
+      pricing: string;
+      faq: string;
+      privacy: string;
+      terms: string;
+      startProposal: string;
+    };
+    hero: { eyebrow: string };
+    home: {
+      stepsTitle: string;
+      learnMore: string;
+      steps: readonly { title: string; body: string }[];
+    };
+    footer: {
+      tagline: string;
+      address: string;
+      product: string;
+      company: string;
+      legal: string;
+      contact: string;
+      copyright: string;
+      sponsoredBy: string;
+      sponsoredByLink: string;
+      ctaTitle: string;
+      ctaSubtitle: string;
+      ctaButton: string;
+    };
+  };
+  pages: {
+    howItWorks: {
+      title: string;
+      intro: string;
+      steps: readonly { title: string; body: string }[];
+      reviewTitle: string;
+      reviewBody: string;
+    };
+    about: {
+      title: string;
+      intro: string;
+      sections: readonly { title: string; body: string }[];
+      values: readonly { title: string; body: string }[];
+      sponsoredTitle: string;
+      sponsoredBody: string;
+      sponsoredLink: string;
+    };
+    privacy: {
+      title: string;
+      updated: string;
+      intro: string;
+      sections: readonly { title: string; body: string }[];
+      contact: string;
+    };
+    terms: {
+      title: string;
+      updated: string;
+      intro: string;
+      sections: readonly { title: string; body: string }[];
+      contact: string;
+    };
+    faq: {
+      eyebrow: string;
+      title: string;
+      intro: string;
+      differentiatorsTitle: string;
+      differentiators: readonly { title: string; body: string }[];
+      subscriptionTitle: string;
+      subscriptionIntro: string;
+      subscriptionSteps: readonly { title: string; body: string }[];
+      questionsTitle: string;
+      questions: readonly { q: string; a: string }[];
+      ctaTitle: string;
+      ctaSubtitle: string;
+      ctaButton: string;
+      ctaSecondary: string;
+    };
+  };
+  templates: {
+    title: string;
+    subtitle: string;
+    openSample: string;
+    openSampleHint: string;
+    note: string;
+    previewLabel: string;
+    back: string;
+    gallery: readonly {
+      slug: "ruwaq-classic" | "ruwaq-executive" | "graphics-house";
+      brand: string;
+      title: string;
+      body: string;
+      badge: string;
+    }[];
+    headerFooterShowcase: {
+      title: string;
+      subtitle: string;
+      selectCta: string;
+      premiumBadge: string;
+      premiumNote: string;
+      openInNewTab: string;
+    };
+  };
+  list: {
+    title: string;
+    subtitle: string;
+    new: string;
+    empty: string;
+    emptyCta: string;
+    untitled: string;
+    delete: string;
+    duplicate: string;
+    deleteConfirm: string;
+    groups: {
+      review: string;
+      draft: string;
+      published: string;
+    };
+    groupEmpty: {
+      review: string;
+      draft: string;
+      published: string;
+    };
+    gatesProgress: (confirmed: number, total: number) => string;
+    proposalCount: (n: number) => string;
+    status: {
+      draft: string;
+      generating: string;
+      review: string;
+      reviewed: string;
+      exported: string;
+    };
+  };
+  login: {
+    title: string;
+    subtitle: string;
+    google: string;
+    googleUnavailable: string;
+    hint: string;
+    perks: {
+      profile: string;
+      support: string;
+      maintenance: string;
+      help: string;
+    };
+    servicesTitle: string;
+    servicesBody: string;
+    servicesCta: string;
+  };
+  services: {
+    title: string;
+    subtitle: string;
+    supportNote: string;
+    items: {
+      identity: { title: string; body: string };
+      design: { title: string; body: string };
+      marketing: { title: string; body: string };
+    };
+    cta: string;
+    ctaSecondary: string;
+    back: string;
+  };
+  company: {
+    title: string;
+    subtitle: string;
+    sections: { identity: string; marketing: string; export: string };
+    marketingHint: string;
+    errors: {
+      invalidPhone: string;
+      invalidEmail: string;
+      invalidUrl: string;
+    };
+    companyName: string;
+    logoUrl: string;
+    logoUrlPlaceholder: string;
+    logoUrlHint: string;
+    logoUpload: string;
+    logoUploading: string;
+    logoUploadFailed: string;
+    logoStorageWarning: string;
+    headerFooter: {
+      title: string;
+      hint: string;
+      previewBadge: string;
+      previewCompanyFallback: string;
+      prefilledNotice: string;
+    };
+    exportTemplate: string;
+    exportTemplateHint: string;
+    exportTemplateOptions: {
+      ruwaq: string;
+      ruwaq_executive: string;
+      graphics_house: string;
+    };
+    address: string;
+    addressPlaceholder: string;
+    about: string;
+    aboutPlaceholder: string;
+    crNumber: string;
+    vatNumber: string;
+    phone: string;
+    email: string;
+    website: string;
+    portfolioUrl: string;
+    portfolioUrlPlaceholder: string;
+    catalogUrl: string;
+    catalogUrlPlaceholder: string;
+    save: string;
+    saving: string;
+    saveFailed: string;
+    saveSuccess: string;
+  };
+  upgrade: {
+    title: string;
+    subtitle: string;
+    price: string;
+    priceNote: string;
+    cta: string;
+    inlineTitle: string;
+    inlineBody: string;
+    lockedSuffix: string;
+    notConfigured: string;
+    close: string;
+    error: string;
+    trialNotice: string;
+  };
+  graphicsHouseUpsell: {
+    title: string;
+    body: string;
+    cta: string;
+  };
+  gates: {
+    signInRequired: string;
+    signInCta: string;
+    profileIncomplete: string;
+    profileIncompleteCta: string;
+    quotaExceeded: string;
+    quotaExceededCta: string;
+  };
+  pricing: {
+    eyebrow: string;
+    title: string;
+    subtitle: string;
+    perMonth: string;
+    freeLabel: string;
+    unlimitedLabel: string;
+    proposalsPerMonth: string;
+    currentPlanNote: string;
+    trialActiveNote: string;
+    contactCta: string;
+    mostPopular: string;
+  };
+  errors: {
+    title: string;
+    message: string;
+    retry: string;
+    home: string;
+    notFoundTitle: string;
+    notFoundMessage: string;
+  };
+  export: {
+    savePdf: string;
+    footer: string;
+    sampleBadge: string;
+    sampleFooter: string;
+    logoPlaceholder: string;
+    preparedFor: string;
+    preparedBy: string;
+    proposalNumber: string;
+    date: string;
+    validity: string;
+    location: string;
+    propertyType: string;
+    area: string;
+    address: string;
+    aboutUs: string;
+    websiteLink: string;
+    portfolioLink: string;
+    catalogLink: string;
+    scopeOfWork: string;
+    deliverables: string;
+    timeline: string;
+    duration: string;
+    commercialTerms: string;
+    total: string;
+    milestone: string;
+    percentage: string;
+    amount: string;
+    assumptions: string;
+    exclusions: string;
+    estimateOnly: string;
+    estimatePending: string;
+    estimateIndicative: string;
+    tbd: string;
+    crNumber: string;
+    vatNumber: string;
+    phone: string;
+    email: string;
+    acceptance: string;
+    acceptanceText: string;
+    clientSignature: string;
+    providerSignature: string;
+  };
+  share: {
+    downloadOfficialPdf: string;
+    confidentialNotice: string;
+    notFoundTitle: string;
+    notFoundMessage: string;
+    goHome: string;
+    poweredBy: string;
+  };
+};

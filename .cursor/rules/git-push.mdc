@@ -1,0 +1,11 @@
+---
+description: Push completed work to GitHub without waiting for the user to ask
+alwaysApply: true
+---
+
+When you finish a meaningful chunk of work in this repo (features, fixes, migrations):
+
+1. Commit with a clear message (user rules for git safety still apply).
+2. Push to `origin` on the current branch immediately — do not ask the user whether to push.
+3. If `origin` is missing, add `https://github.com/meklads/Ruwaq.git` and push with `-u`.
+4. Never force-push to `main` unless the user explicitly requests it.

@@ -1,0 +1,47 @@
+---
+description: Locked Ruwaq landing page design — typography, colors, hero, tickets
+globs: src/modules/marketing/**/*,src/app/globals.css,src/shared/components/site-header.tsx,src/shared/components/site-footer.tsx
+alwaysApply: false
+---
+
+# Ruwaq landing design (locked)
+
+Do not regress these decisions without explicit user approval.
+
+## Palette
+- Backgrounds: `#ffffff`, `#fbfbfd`, `#fafafa`
+- Text: `ruwaq-ink` `#1d1d1f`, soft `#6e6e73`, muted `#86868b`
+- Accent: `ruwaq-gold` `#c9a063` only (logo-aligned; no brown replacement)
+- Hero band: `ruwaq-navy` `#0f172a`
+
+## Typography (Arabic)
+- Font: **Almarai 700** for headings (never 800 extra-bold)
+- Section titles: `clamp(1.875rem, 4.2vw, 2.375rem)`, `line-height: 1.52`
+- Hero title: `line-height: 1.48`, weight 700
+- Eyebrows: `text-sm`, gold, no uppercase in AR
+- Hero subtitle highlight: `ruwaq-hero-lead-highlight` — gold, bold phrase only (e.g. حزمة بنود معتمدة تحميك)
+- Hero inputs: `subtitleIntro` + 3 horizontal pills (`ruwaq-hero-input-pill`) + outcome line below
+
+## Hero layout
+- Split: copy **left**, circular `hero.jpg` **right** (`direction: ltr` on grid)
+- Image crop: `object-position: 70% 24%` to show RUWAQ on screen
+- CTAs: gold primary + white outline on navy
+- Header CTA: `btn-ruwaq-header-gold`
+
+## Hero tickets (4 cards)
+- Section **after** hero, `margin-top` negative (~3rem) — top sliver overlaps navy, rest on white
+- Centered: SVG illustration → title → body
+- Content = proposal components: scope, timeline, payments, PDF (not generic platform benefits)
+- Features & trust pillars: centered `ruwaq-illustration-card` with SVG icons (no emoji)
+
+## Sections order
+Hero → tickets → steps → problem → features → trustPartner (clause pack) → why table → sample → final CTA
+
+## Motion
+- `ruwaq-reveal` fade-up; respect `prefers-reduced-motion`
+- Cards: soft shadow hover lift (`ruwaq-premium` / `ruwaq-float`)
+
+## Copy
+- No em dash (—) in UI strings
+- Primary CTA always routes to `/proposals/new`
+- Bilingual via `ar.ts` / `en.ts` + `types.ts`

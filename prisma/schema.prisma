@@ -1,0 +1,504 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+/// Required by Auth.js — User model
+model User {
+  id            String    @id @default(cuid())
+  email         String?   @unique
+  emailVerified DateTime?
+  name          String?
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  accounts  Account[]
+  sessions  Session[]
+  proposals Proposal[]
+  company   CompanyProfile?
+  payments  Payment[]
+  designCredits DesignCreditAccount?
+  designGenerations DesignGeneration[]
+}
+
+/// Required by Auth.js
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+/// Required by Auth.js
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+/// Required by Auth.js
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+/// Company branding profile — one per user
+model CompanyProfile {
+  id          String @id @default(cuid())
+  userId      String @unique
+  companyName String @default("")
+  logoUrl     String?
+  address     String?
+  about       String? @db.Text
+  crNumber    String?
+  vatNumber   String?
+  phone       String?
+  email       String?
+  website     String?
+  portfolioUrl String?
+  catalogUrl   String?
+  /// ruwaq | ruwaq_executive | graphics_house
+  exportTemplateId String @default("ruwaq")
+
+  /// Header/footer color skin — only applies when exportTemplateId is
+  /// "ruwaq". See src/modules/proposal/export/header-footer-styles.ts.
+  headerFooterStyleId String @default("gold_classic")
+
+  /// True once a one-time payment unlocks premium export templates
+  /// (ruwaq_executive, graphics_house). Free tier always keeps "ruwaq".
+  isPaid Boolean   @default(false)
+  paidAt DateTime?
+
+  /// Monthly proposal-count plan: free | starter | professional | business
+  /// (see src/modules/billing/lib/plans.ts). Only enforced when the
+  /// BILLING_ENABLED env switch is on.
+  planId          String    @default("free")
+  planActivatedAt DateTime?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+/// Lightweight product-usage log — no external analytics account needed.
+/// Deliberately has NO foreign-key relation to User: analytics rows should
+/// never block or cascade with account changes, and guest events (no
+/// userId) are common and expected here.
+model UsageEvent {
+  id         String   @id @default(cuid())
+  /// proposal_created | proposal_generated | pdf_exported | guest_claimed
+  type       String
+  userId     String?
+  proposalId String?
+  /// Free-form context, e.g. { locale, commercialMode, isGuest }
+  metadata   Json?
+  createdAt  DateTime @default(now())
+
+  @@index([type, createdAt])
+  @@index([createdAt])
+}
+
+/// One-time payments — starts with PayPal; provider column keeps the
+/// door open for Moyasar / Tap (Mada support) without a shape change.
+model Payment {
+  id              String   @id @default(cuid())
+  userId          String
+  provider        String   /// paypal | moyasar | tap
+  providerOrderId String   @unique
+  amount          Float
+  currency        String   @default("USD")
+  status          String   @default("pending") /// pending | completed | failed
+  purpose         String   @default("premium_templates")
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+/// The core entity — a proposal document
+model Proposal {
+  id          String   @id @default(cuid())
+  userId      String?
+  status      String   @default("draft") /// draft | generating | review | reviewed | exported
+  version     Int      @default(1)
+
+  /// Document language at creation — ar | en
+  locale      String   @default("ar")
+
+  /// AI-generated introduction paragraph
+  introduction String?
+
+  /// USER INPUT — Step 1
+  projectName String   @default("")
+  clientName  String   @default("")
+  description String   @default("")
+
+  /// Optional context — enriches AI output (never required)
+  projectLocation String?
+  propertyType    String? /// villa | apartment | office | retail | other
+  areaSqm         Float?
+  durationHint    String?
+  specifications  String? @db.Text
+
+  /// USER INPUT — commercial
+  budget         Float   @default(0)
+  paymentType    String  @default("milestone_30_40_30")
+  /// fixed_price | estimate_only
+  commercialMode String  @default("fixed_price")
+
+  /// AI GENERATED OUTPUT (JSON)
+  scopeItems      Json? /// ScopeItem[]
+  deliverables    Json? /// Deliverable[]
+  timeline        Json? /// Timeline
+  commercialTerms Json? /// CommercialTerms
+  assumptions     Json? /// string[]
+  exclusions      Json? /// string[]
+
+  /// CONFIDENCE LEVELS
+  confidence Json? /// { scopeItems: "high" | "medium" | "low", ... }
+
+  /// REVIEW STATE — legacy string[]; prefer reviewGates for new flow
+  reviewedSections Json? @default("[]") /// string[] of reviewed section IDs
+
+  /// Trust Layer v1 — classification & packs
+  projectArchetype   String? /// fit_out | supervision | maintenance | other
+  clausePackId       String?
+  clausePackVersion  String? /// snapshot e.g. "1.0.0"
+  estimateVariancePercent Float @default(15) /// for estimate_only BOQ disclaimer
+
+  /// Structured gate confirmations (see ARCHITECTURE_TRUST_LAYER.md)
+  reviewGates Json?
+  publishedAt DateTime?
+
+  /// Guest edit secret — required with httpOnly cookie when userId is null
+  editToken      String?
+
+  /// METADATA
+  proposalNumber String?
+  exportedAt     DateTime?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  user      User?             @relation(fields: [userId], references: [id], onDelete: SetNull)
+  clausePack ClausePack?      @relation(fields: [clausePackId], references: [id], onDelete: SetNull)
+  documents GeneratedDocument[]
+  boqLines  ProposalBoqLine[]
+  clauseSelections ProposalClauseSelection[]
+  shareLinks ProposalShareLink[]
+  amendmentRequests AmendmentRequest[]
+}
+
+/// Immutable export record
+model GeneratedDocument {
+  id         String   @id @default(cuid())
+  proposalId String
+  type       String   /// pdf | share_link
+  fileUrl    String?  /// S3 or local path
+  shareToken String?  @unique
+  createdAt  DateTime @default(now())
+
+  proposal Proposal @relation(fields: [proposalId], references: [id], onDelete: Cascade)
+}
+
+// ============================================================
+// Trust Layer v1 — Clause Library (global, seeded)
+// ============================================================
+
+/// Pre-vetted clause pack — fit_out_v1, supervision_v1, maintenance_v1
+model ClausePack {
+  id        String   @id @default(cuid())
+  slug      String   @unique /// fit_out_v1
+  nameAr    String
+  nameEn    String
+  archetype String   /// fit_out | supervision | maintenance
+  version   String   /// semver snapshot e.g. 1.0.0
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  clauses   ClauseTemplate[]
+  proposals Proposal[]
+}
+
+/// Single pre-vetted clause — AI may select/fill placeholders only
+model ClauseTemplate {
+  id               String  @id @default(cuid())
+  packId           String
+  clauseKey        String  /// SA-FITOUT-MAT-SUPPLY-A
+  category         String  /// materials | permits | payment | warranty | scope_change | delay | vat | other
+  riskSide         String  @default("protects_contractor") /// protects_contractor | balanced
+  textAr           String  @db.Text
+  textEn           String  @db.Text
+  placeholders     Json    @default("[]") /// string[] allowed keys
+  sortOrder        Int     @default(0)
+  isMandatory      Boolean @default(false)
+  /// Clauses sharing a group are mutually exclusive (pick one)
+  alternativeGroup String?
+  /// Auto-enable when conditions met, e.g. {"minDurationDays": 90}
+  autoTriggerRules Json?
+  sourceRef        String?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  pack        ClausePack                @relation(fields: [packId], references: [id], onDelete: Cascade)
+  selections  ProposalClauseSelection[]
+
+  @@unique([packId, clauseKey])
+  @@index([packId, sortOrder])
+}
+
+// ============================================================
+// Trust Layer v1 — Smart BOQ (8–15 lines per proposal)
+// ============================================================
+
+model ProposalBoqLine {
+  id         String  @id @default(cuid())
+  proposalId String
+  sortOrder  Int
+  labelAr    String
+  labelEn    String
+  amount     Float
+  percent    Float   /// display-only; derived from amount / total
+  category   String  /// materials | labor | equipment | phase | management | other
+  note       String?
+  source     String  @default("ai_suggested") /// ai_suggested | user_edited | user_added
+  isEstimated Boolean @default(false)
+  aiReason   String? /// why AI suggested this bucket (UX tooltip)
+
+  proposal Proposal @relation(fields: [proposalId], references: [id], onDelete: Cascade)
+
+  @@index([proposalId, sortOrder])
+}
+
+/// Selected clauses for a proposal — rendered from ClauseTemplate only
+model ProposalClauseSelection {
+  id                 String  @id @default(cuid())
+  proposalId         String
+  clauseTemplateId   String
+  enabled            Boolean @default(true)
+  sortOrder          Int     @default(0)
+  filledPlaceholders Json?   /// { "warranty_months": "12" }
+  source             String  @default("ai_suggested") /// ai_suggested | user_toggled | user_alternative
+  renderedTextAr     String? @db.Text
+  renderedTextEn     String? @db.Text
+  disabledReason     String? /// audit if user turned off mandatory clause
+
+  proposal       Proposal       @relation(fields: [proposalId], references: [id], onDelete: Cascade)
+  clauseTemplate ClauseTemplate @relation(fields: [clauseTemplateId], references: [id], onDelete: Restrict)
+
+  @@unique([proposalId, clauseTemplateId])
+  @@index([proposalId, sortOrder])
+}
+
+// ============================================================
+// Trust Layer v1 — Live Proposal Room
+// ============================================================
+
+/// Primary client-facing share link (web view first, PDF secondary)
+model ProposalShareLink {
+  id                  String    @id @default(cuid())
+  proposalId          String
+  token               String    @unique
+  passwordHash        String?
+  expiresAt           DateTime?
+  status              String    @default("active") /// active | expired | revoked
+  watermarkClientName String?
+  publishedAt         DateTime  @default(now())
+  revokedAt           DateTime?
+  createdAt           DateTime  @default(now())
+
+  proposal          Proposal              @relation(fields: [proposalId], references: [id], onDelete: Cascade)
+  viewSessions      ProposalViewSession[]
+  clientActions     ClientAction[]
+  amendmentRequests AmendmentRequest[]
+
+  @@index([proposalId])
+}
+
+model ProposalViewSession {
+  id          String    @id @default(cuid())
+  shareLinkId String
+  openedAt    DateTime  @default(now())
+  closedAt    DateTime?
+  durationSec Int?
+  userAgent   String?   @db.Text
+  ipHash      String?
+  geoApprox   String?
+
+  shareLink     ProposalShareLink     @relation(fields: [shareLinkId], references: [id], onDelete: Cascade)
+  sectionViews  ProposalSectionView[]
+  clientActions ClientAction[]
+
+  @@index([shareLinkId, openedAt])
+}
+
+model ProposalSectionView {
+  id         String @id @default(cuid())
+  sessionId  String
+  sectionKey String /// understanding | scope | deliverables | commercial | boq | payment | timeline | clauses | acceptance
+  dwellMs    Int    @default(0)
+  viewCount  Int    @default(1)
+
+  session ProposalViewSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  @@unique([sessionId, sectionKey])
+}
+
+model ClientAction {
+  id           String   @id @default(cuid())
+  shareLinkId  String
+  sessionId    String?
+  type         String   /// link_open | section_view | download_pdf | soft_approve | request_amendment | ask_question
+  payload      Json?
+  clientName   String?
+  clientIpHash String?
+  createdAt    DateTime @default(now())
+
+  shareLink        ProposalShareLink  @relation(fields: [shareLinkId], references: [id], onDelete: Cascade)
+  session          ProposalViewSession? @relation(fields: [sessionId], references: [id], onDelete: SetNull)
+  amendmentRequest AmendmentRequest?
+
+  @@index([shareLinkId, createdAt])
+}
+
+model AmendmentRequest {
+  id                        String    @id @default(cuid())
+  shareLinkId               String
+  proposalId                String
+  clientActionId            String?   @unique
+  sectionKey                String
+  note                      String    @db.Text
+  status                    String    @default("open") /// open | in_progress | resolved | declined
+  clientName                String
+  clientIpHash              String?
+  contractorNote            String?   @db.Text
+  resolvedAt                DateTime?
+  resolvedInProposalVersion Int?
+  createdAt                 DateTime  @default(now())
+  updatedAt                 DateTime  @updatedAt
+
+  shareLink    ProposalShareLink @relation(fields: [shareLinkId], references: [id], onDelete: Cascade)
+  proposal     Proposal          @relation(fields: [proposalId], references: [id], onDelete: Cascade)
+  clientAction ClientAction?     @relation(fields: [clientActionId], references: [id], onDelete: SetNull)
+
+  @@index([proposalId, status])
+  @@index([shareLinkId, createdAt])
+}
+
+// ============================================================
+// AI Design Studio — credits, generations, consultation leads
+// ============================================================
+
+/// Per-user design credit balance (3 free on first access)
+model DesignCreditAccount {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  balance   Int      @default(3)
+  totalUsed Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+/// A single AI design generation (before/after)
+model DesignGeneration {
+  id         String   @id @default(cuid())
+  userId     String?
+  guestSessionId String?
+  spaceType  String   /// interior | exterior | booth
+  roomType   String
+  styleId    String
+  beforeUrl  String
+  afterUrl   String
+  isMock     Boolean  @default(false)
+  locale     String   @default("ar")
+  /// Detected executable materials from vision / catalog match
+  materials  Json?
+  materialsAiDetected Boolean @default(false)
+  furniture  Json?
+  furnitureAiDetected Boolean @default(false)
+  /// jeddah | makkah | other
+  city       String?
+  /// Raw AI output before low-res watermark preview
+  afterUrlSource String?
+  createdAt  DateTime @default(now())
+
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([userId, createdAt])
+}
+
+/// Consultation / execution lead from design studio
+model ConsultationLead {
+  id        String   @id @default(cuid())
+  name      String
+  phone     String
+  message   String?  @db.Text
+  /// jeddah | makkah | other
+  city      String?
+  generationId String?
+  /// execution | bespoke | both
+  interest  String?
+  source    String   @default("design_studio")
+  locale    String   @default("ar")
+  userId    String?
+  /// Progressive qualification fields (conversion flow)
+  projectType     String?
+  executionScope  String?
+  budget          String?
+  timeline        String?
+  leadScore       Int?
+  qualified       Boolean?
+  guestSessionId  String?
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+  @@index([phone])
+}
+
+/// Anonymous guest session for free preview + bonus credits after qualification
+model DesignGuestSession {
+  id          String   @id @default(cuid())
+  guestToken  String   @unique @default(cuid())
+  previewUsed Boolean  @default(false)
+  bonusCredits Int     @default(0)
+  bonusUsed   Int      @default(0)
+  leadScore   Int?
+  qualified   Boolean?
+  projectType     String?
+  executionScope  String?
+  budget          String?
+  timeline        String?
+  name            String?
+  phone           String?
+  locale      String   @default("ar")
+  ipHash      String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([guestToken])
+  @@index([ipHash, createdAt])
+}
