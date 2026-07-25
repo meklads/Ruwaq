@@ -171,7 +171,7 @@
   }
 
   .ruwaq-app-title {
-    @apply mt-2 text-2xl font-semibold leading-tight tracking-tight text-ruwaq-ink sm:text-3xl;
+    @apply mt-2 text-[1.75rem] font-semibold leading-[1.2] tracking-tight text-ruwaq-ink sm:text-[2rem] lg:text-[2.25rem];
   }
 
   html[lang="en"] .ruwaq-app-title {
@@ -183,7 +183,7 @@
   }
 
   .ruwaq-form-card {
-    @apply rounded-3xl border border-ruwaq-stone/50 bg-ruwaq-paper p-6 shadow-ruwaq sm:p-8 md:p-10;
+    @apply rounded-3xl border border-ruwaq-stone/45 bg-ruwaq-paper p-6 shadow-ruwaq sm:p-8 sm:shadow-ruwaq-lg md:p-10;
   }
 
   .ruwaq-step-pill {
@@ -199,7 +199,7 @@
   }
 
   .ruwaq-field {
-    @apply mt-2 block w-full rounded-2xl border border-ruwaq-stone/80 bg-white px-4 py-3 text-sm text-ruwaq-ink shadow-sm placeholder:text-ruwaq-ink-muted/60 transition-all focus:border-ruwaq-champagne/50 focus:outline-none focus:ring-4 focus:ring-ruwaq-champagne/10;
+    @apply mt-2 block w-full rounded-2xl border border-ruwaq-stone/80 bg-white px-4 py-3.5 text-base text-ruwaq-ink shadow-sm placeholder:text-ruwaq-ink-muted/50 transition-all focus:border-ruwaq-gold/45 focus:outline-none focus:ring-4 focus:ring-ruwaq-gold/10;
   }
 
   .ruwaq-label {
@@ -1166,37 +1166,41 @@
 
   .ruwaq-logo-img {
     @apply max-w-none bg-transparent object-contain object-left;
-    image-rendering: -webkit-optimize-contrast;
   }
 
-  .turriva-brand-lockup {
-    @apply inline-flex max-w-none items-center gap-2.5 sm:gap-3;
-    height: inherit;
-    max-height: 100%;
+  .ruwaq-brand-lockup {
+    @apply inline-flex max-w-none items-center;
   }
 
-  .turriva-brand-motif {
-    @apply block h-[88%] w-auto max-w-[4.5rem] shrink-0 object-contain sm:max-w-[5rem];
+  .ruwaq-brand-wordmark {
+    @apply flex flex-col items-start justify-center leading-none;
   }
 
-  .turriva-brand-wordmark {
-    @apply flex min-w-0 flex-col justify-center leading-none;
+  /* Classic lockup — 2.5× previous chrome sizes, vector text (crisp at any DPI) */
+  .ruwaq-brand-lockup--chrome .ruwaq-brand-ar {
+    @apply font-display text-[2.375rem] font-bold tracking-tight text-ruwaq-navy sm:text-[2.625rem] lg:text-[2.875rem];
+    -webkit-font-smoothing: antialiased;
   }
 
-  .turriva-brand-ar {
-    @apply font-display text-[0.95rem] font-bold tracking-tight text-ruwaq-navy sm:text-[1.05rem] lg:text-[1.15rem];
+  .ruwaq-brand-lockup--chrome .ruwaq-brand-en {
+    @apply mt-1.5 font-display-en text-[1.55rem] font-normal uppercase tracking-[0.32em] text-ruwaq-gold sm:text-[1.7rem];
+    -webkit-font-smoothing: antialiased;
   }
 
-  .turriva-brand-en {
-    @apply mt-1 font-display text-[0.62rem] font-medium uppercase tracking-[0.28em] text-ruwaq-gold sm:text-[0.68rem];
+  .ruwaq-brand-lockup--footer .ruwaq-brand-ar {
+    @apply font-display text-[2rem] font-bold tracking-tight text-ruwaq-navy sm:text-[2.25rem];
   }
 
-  .turriva-brand-lockup--dark .turriva-brand-ar {
+  .ruwaq-brand-lockup--footer .ruwaq-brand-en {
+    @apply mt-1 font-display-en text-[1.35rem] font-normal uppercase tracking-[0.32em] text-ruwaq-gold sm:text-[1.45rem];
+  }
+
+  .ruwaq-brand-lockup--dark .ruwaq-brand-ar {
     @apply text-white;
   }
 
-  .turriva-brand-lockup--dark .turriva-brand-en {
-    @apply text-ruwaq-gold;
+  .ruwaq-brand-lockup--dark .ruwaq-brand-en {
+    @apply text-ruwaq-gold-light;
   }
 
   .proposal-section {

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { getMessages } from "@/shared/i18n";
 import { getLocale } from "@/shared/i18n/server";
-import { RuwaqLogo, SITE_LOGO_SIZE_CLASS } from "@/shared/components/ruwaq-logo";
+import { RuwaqLogo } from "@/shared/components/ruwaq-logo";
 import { LocaleSwitcher } from "@/shared/i18n/locale-switcher";
 import { UserNav } from "@/modules/auth/components/user-nav";
 
@@ -20,9 +20,9 @@ export async function SiteHeader() {
   return (
     <header className="ruwaq-header">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="flex h-[4.75rem] items-center justify-between gap-4 sm:h-20 lg:h-[5.5rem]">
-          <div className="shrink-0 lg:min-w-[260px]">
-            <RuwaqLogo href={homeHref} priority className={SITE_LOGO_SIZE_CLASS} />
+        <div className="flex min-h-[6.25rem] items-center justify-between gap-4 py-3 sm:min-h-[6.75rem] sm:py-4 lg:min-h-[7.25rem]">
+          <div className="shrink-0 lg:min-w-[11rem]">
+            <RuwaqLogo href={homeHref} />
           </div>
 
           <nav

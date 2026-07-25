@@ -19,7 +19,7 @@ export function AppPageHero({ eyebrow, title, subtitle, children }: Props) {
           {title}
         </h1>
         {subtitle ? (
-          <p className="mt-3 max-w-2xl text-base leading-relaxed text-ruwaq-ink-muted">
+          <p className="mt-3 max-w-2xl text-[1.0625rem] leading-relaxed text-ruwaq-ink-muted sm:text-lg">
             {subtitle}
           </p>
         ) : null}

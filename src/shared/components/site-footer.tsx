@@ -2,7 +2,7 @@ import Link from "next/link";
 import { getMessages } from "@/shared/i18n";
 import { getLocale } from "@/shared/i18n/server";
 import { RUWQ_PUBLIC_EMAIL, RUWQ_PUBLIC_HOST, RUWQ_PUBLIC_URL } from "@/shared/constants/brand";
-import { RuwaqLogo, SITE_LOGO_SIZE_CLASS } from "@/shared/components/ruwaq-logo";
+import { RuwaqLogo } from "@/shared/components/ruwaq-logo";
 import { GraphicsHouseLogo } from "@/shared/components/graphics-house-logo";
 
 export async function SiteFooter() {
@@ -63,7 +63,7 @@ export async function SiteFooter() {
 
         <div className="grid gap-10 py-12 lg:grid-cols-[1.2fr_1fr] lg:gap-16 lg:py-14">
           <div>
-            <RuwaqLogo href="/proposals/new" className={SITE_LOGO_SIZE_CLASS} />
+            <RuwaqLogo href="/proposals/new" size="footer" />
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-ruwaq-ink-soft">
               {t.site.footer.tagline}
             </p>
