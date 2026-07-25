@@ -15,7 +15,8 @@ export async function SiteHeader() {
     { href: "/templates/sample", label: t.nav.previewSample },
   ];
 
-  const homeHref = "/proposals/new";
+  const homeHref = "/";
+  const startHref = "/#create-proposal";
 
   return (
     <header className="ruwaq-header">
@@ -37,7 +38,7 @@ export async function SiteHeader() {
           </nav>
 
           <div className="flex shrink-0 items-center justify-end gap-2 sm:gap-3 lg:min-w-[200px]">
-            <Link href="/proposals/new" className="btn-ruwaq-header-gold hidden sm:inline-flex">
+            <Link href={startHref} className="btn-ruwaq-header-gold hidden sm:inline-flex">
               {t.nav.newProposal}
             </Link>
             <UserNav />
@@ -59,7 +60,7 @@ export async function SiteHeader() {
             </Link>
           ))}
           <Link
-            href="/proposals/new"
+            href={startHref}
             className="btn-ruwaq-header-gold shrink-0 px-3.5 py-1.5 text-xs sm:hidden"
           >
             {t.nav.newProposal}

@@ -182,6 +182,19 @@
     @apply mx-auto w-full max-w-5xl px-4 pb-16 pt-8 sm:px-6 sm:pt-10;
   }
 
+  .ruwaq-home-tool {
+    @apply relative border-t border-ruwaq-stone/60 bg-ruwaq-canvas-soft;
+  }
+
+  .ruwaq-home-tool::before {
+    content: "";
+    @apply pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-ruwaq-gold/25 to-transparent;
+  }
+
+  .ruwaq-home-tool-inner {
+    @apply mx-auto w-full max-w-6xl px-4 py-14 sm:px-6 sm:py-16 lg:py-20;
+  }
+
   .ruwaq-form-card {
     @apply rounded-3xl border border-ruwaq-stone/45 bg-ruwaq-paper p-6 shadow-ruwaq sm:p-8 sm:shadow-ruwaq-lg md:p-10;
   }

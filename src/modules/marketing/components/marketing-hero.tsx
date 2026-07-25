@@ -8,6 +8,8 @@ const HERO_IMAGE = "/brand/hero/hero.webp";
 type Props = {
   hero: Messages["sales"]["hero"];
   locale: Locale;
+  /** Primary CTA target — home page scrolls to the embedded tool. */
+  primaryCtaHref?: string;
 };
 
 function HeroSkyBackdrop() {
@@ -24,7 +26,11 @@ function HeroSkyBackdrop() {
 }
 
 /** Optimistic sky hero — image left, copy right, animated clouds. */
-export function MarketingHero({ hero, locale }: Props) {
+export function MarketingHero({
+  hero,
+  locale,
+  primaryCtaHref = "#create-proposal",
+}: Props) {
   const arrow = locale === "ar" ? "←" : "→";
   const textDir = locale === "ar" ? "rtl" : "ltr";
 
@@ -58,9 +64,9 @@ export function MarketingHero({ hero, locale }: Props) {
           </div>
 
           <div className="mt-10 flex flex-wrap items-center gap-3 sm:mt-12">
-            <Link href="/proposals/new" className="btn-ruwaq-hero-gold px-10 py-4 text-base">
+            <a href={primaryCtaHref} className="btn-ruwaq-hero-gold px-10 py-4 text-base">
               {hero.cta} {arrow}
-            </Link>
+            </a>
             <Link href="/templates/sample" className="btn-ruwaq-hero-outline px-8 py-3.5">
               {hero.ctaSecondary}
             </Link>

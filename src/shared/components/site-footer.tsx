@@ -9,12 +9,13 @@ export async function SiteFooter() {
   const locale = await getLocale();
   const t = getMessages(locale);
   const arrow = locale === "ar" ? "←" : "→";
+  const startHref = "/#create-proposal";
 
   const columns = [
     {
       title: t.site.footer.product,
       links: [
-        { href: "/proposals/new", label: t.site.nav.startProposal },
+        { href: startHref, label: t.site.nav.startProposal },
         { href: "/proposals", label: t.nav.myProposals },
         { href: "/templates/sample", label: t.nav.previewSample },
         { href: "/settings/company", label: t.nav.settings },
@@ -35,7 +36,7 @@ export async function SiteFooter() {
             <p className="mt-5 max-w-md text-base leading-relaxed text-ruwaq-ink-soft">
               {t.site.footer.ctaSubtitle}
             </p>
-            <Link href="/proposals/new" className="btn-ruwaq-primary mt-8 inline-flex px-9 py-3.5">
+            <Link href={startHref} className="btn-ruwaq-primary mt-8 inline-flex px-9 py-3.5">
               {t.site.footer.ctaButton} {arrow}
             </Link>
           </div>
@@ -63,7 +64,7 @@ export async function SiteFooter() {
 
         <div className="grid gap-10 py-12 lg:grid-cols-[1.2fr_1fr] lg:gap-16 lg:py-14">
           <div>
-            <RuwaqLogo href="/proposals/new" size="footer" />
+            <RuwaqLogo href="/" size="footer" />
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-ruwaq-ink-soft">
               {t.site.footer.tagline}
             </p>
