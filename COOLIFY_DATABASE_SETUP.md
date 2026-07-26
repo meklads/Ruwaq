@@ -4,7 +4,20 @@
 ```
 Environment variable not found: DATABASE_URL
 ```
-التطبيق شغّال لكن **PostgreSQL غير مربوط** في Coolify.
+أو في الموقع:
+```
+Database is not connected. Add DATABASE_URL in Coolify Environment Variables, then Redeploy.
+```
+التطبيق شغّال لكن **PostgreSQL غير مربوط** أو **قاعدة جديدة فارغة** بعد حذف القديمة.
+
+> **تنبيه:** قاعدة جديدة = **لا استرجاع** للعروض والحسابات القديمة إلا إذا عندك **نسخة احتياطية** (Coolify backup / dump). بعد الربط، `npm start` يشغّل `prisma db push` + seed للبنود تلقائياً.
+
+### تحقق سريع (قبل وبعد)
+```bash
+curl -s https://ruwaq.co/api/health
+```
+- قبل الإصلاح: `"db": false`, `"error": "DATABASE_URL is not set"`
+- بعد النجاح: `"db": true`, `"tables": true`, `"schemaReady": true`
 
 ---
 
@@ -30,6 +43,7 @@ Environment variable not found: DATABASE_URL
 | `AUTH_SECRET` | أي نص عشوائي 32 حرف (مثال: `openssl rand -base64 32`) |
 | `AUTH_URL` | `https://ruwaq.co` |
 | `NEXT_PUBLIC_APP_URL` | `https://ruwaq.co` |
+| `OPENAI_API_KEY` | مفتاح OpenAI (مطلوب لتوليد العروض؛ بدونه قد يفشل التوليد) |
 
 ### الخطوة 4: Redeploy
 1. اضغط **Redeploy** على تطبيق ruwaq
