@@ -12,6 +12,12 @@ import {
 import { getListingsForCityCategory } from "@/modules/marketplace/server/lead.actions";
 import { ProviderCard } from "@/modules/marketplace/components/provider-card";
 import { CategoryQuoteCta } from "@/modules/marketplace/components/category-quote-cta";
+import { JsonLdScript } from "@/modules/marketplace/components/json-ld-script";
+import {
+  buildCategoryCollectionJsonLd,
+  buildCategoryItemListJsonLd,
+  buildCategoryListingMetadata,
+} from "@/modules/marketplace/seo/marketplace-seo";
 
 type Props = {
   params: { city: string; category: string };
@@ -23,17 +29,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const cat = getCategoryBySlug(params.category);
   if (!city || !cat) return {};
   const locale = await getLocale();
-  const title =
-    locale === "ar"
-      ? `أفضل شركات ${cat.nameAr} في ${city.nameAr} | منصة رواق`
-      : `Best ${cat.nameEn} in ${city.nameEn} | Ruwaq`;
-  return {
-    title,
-    description:
-      locale === "ar"
-        ? `دليل ${cat.nameAr} المعتمد في ${city.nameAr} — اطلب عرض سعر عبر رواق.`
-        : `Verified ${cat.nameEn} directory in ${city.nameEn}.`,
-  };
+  const { listings } = await getListingsForCityCategory(
+    params.city as MarketplaceCitySlug,
+    params.category as MarketplaceCategorySlug
+  );
+  return buildCategoryListingMetadata({
+    locale,
+    citySlug: params.city as MarketplaceCitySlug,
+    categorySlug: params.category as MarketplaceCategorySlug,
+    listingCount: listings.length,
+  });
 }
 
 export default async function CategoryListingPage({ params, searchParams }: Props) {
@@ -61,8 +66,25 @@ export default async function CategoryListingPage({ params, searchParams }: Prop
   const catName = locale === "ar" ? catMeta.nameAr : catMeta.nameEn;
   const cityName = locale === "ar" ? city.nameAr : city.nameEn;
 
+  const itemListJsonLd =
+    filtered.length > 0
+      ? buildCategoryItemListJsonLd({
+          locale,
+          citySlug: city.slug,
+          categorySlug: catMeta.slug,
+          listings: filtered,
+        })
+      : null;
+  const collectionJsonLd = buildCategoryCollectionJsonLd({
+    locale,
+    citySlug: city.slug,
+    categorySlug: catMeta.slug,
+  });
+
   return (
     <div className="app-content-area max-w-6xl">
+      <JsonLdScript data={itemListJsonLd ?? collectionJsonLd} />
+      {itemListJsonLd ? <JsonLdScript data={collectionJsonLd} /> : null}
       <nav className="text-sm text-ruwaq-ink-muted">
         <Link href="/" className="hover:text-ruwaq-gold">
           رواق
