@@ -60,19 +60,20 @@ export const en: Messages = {
    eyebrow: "Ruwaq · Western Region",
    title: "About the platform",
    intro:
-    "Ruwaq is an engineering and property directory connecting villa, hotel, and project owners in Jeddah, Makkah, and Madinah with verified service providers — plus free quote requests within 24 hours.",
+    "Ruwaq is an engineering and property directory for Western Region cities — seven verified sectors and matching in Jeddah, Makkah, and Madinah.",
+   closingHint: "To request a quote, use the button in the site header — or browse sectors below.",
    sections: [
     {
      title: "Who is this for?",
-     body: "Property owners, hotel operators, and project managers looking for trusted contractors across seven high-value engineering sectors.",
+     body: "Villa and hotel owners and project managers looking for trusted contractors without random outreach.",
     },
     {
      title: "How providers are listed",
-     body: "We surface verified listings by city and category. Major fit-out and contracting leads are coordinated with the Turriva team.",
+     body: "Lists by city and sector. Major fit-out and contracting requests are coordinated with Turriva.",
     },
     {
      title: "Is Ruwaq a proposal SaaS?",
-     body: "Yes — in a separate portal. The public homepage is client-first; contractors use the AI proposal tool via the contractor hub button.",
+     body: "Yes — in a separate portal (/proposals). The public site is client-first; AI proposals are for contractors only.",
     },
    ],
   },
@@ -103,9 +104,12 @@ export const en: Messages = {
    requestCta: "Request a quote for this category",
   },
   footerCta: {
-   title: "Get quotes from verified companies",
-   subtitle: "Describe your project for free — we respond within 24 hours across Jeddah, Makkah, and Madinah.",
+   title: "Explore approved sectors",
+   subtitle: "Seven engineering categories across three cities — pick yours or search from the homepage.",
+   button: "Browse sectors",
   },
+  footerTagline:
+   "Engineering & property directory for Western Region — verified companies and quote requests in one place.",
  },
  form: {
   title: "Create a professional real estate proposal",

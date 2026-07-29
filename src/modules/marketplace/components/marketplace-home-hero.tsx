@@ -1,13 +1,18 @@
+"use client";
+
 import Link from "next/link";
+import { QuoteRequestCtaButton } from "@/modules/marketplace/components/quote-request-cta-button";
 import type { Messages } from "@/shared/i18n/messages/types";
 import type { Locale } from "@/shared/i18n/locale";
 
 type Props = {
   copy: Messages["marketplace"]["hero"];
+  quoteCopy: Messages["marketplace"]["quote"];
+  closeModalLabel: string;
   locale: Locale;
 };
 
-export function MarketplaceHomeHero({ copy, locale }: Props) {
+export function MarketplaceHomeHero({ copy, quoteCopy, closeModalLabel, locale }: Props) {
   const arrow = locale === "ar" ? "←" : "→";
 
   return (
@@ -21,9 +26,13 @@ export function MarketplaceHomeHero({ copy, locale }: Props) {
         </h1>
         <p className="ruwaq-market-subtitle">{copy.subtitle}</p>
         <div className="mt-9 flex flex-wrap items-center justify-center gap-3 sm:mt-10">
-          <Link href="/request-quote" className="btn-ruwaq-hero-gold px-10 py-4 text-base">
-            {copy.ctaPrimary} {arrow}
-          </Link>
+          <QuoteRequestCtaButton
+            triggerLabel={`${copy.ctaPrimary} ${arrow}`}
+            closeLabel={closeModalLabel}
+            copy={quoteCopy}
+            locale={locale}
+            className="btn-ruwaq-hero-gold px-10 py-4 text-base"
+          />
           <Link href="/categories" className="ruwaq-market-btn-outline">
             {copy.ctaSecondary}
           </Link>

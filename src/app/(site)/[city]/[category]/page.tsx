@@ -11,6 +11,7 @@ import {
 } from "@/shared/constants/marketplace-taxonomy";
 import { getListingsForCityCategory } from "@/modules/marketplace/server/lead.actions";
 import { ProviderCard } from "@/modules/marketplace/components/provider-card";
+import { CategoryQuoteCta } from "@/modules/marketplace/components/category-quote-cta";
 
 type Props = {
   params: { city: string; category: string };
@@ -83,12 +84,14 @@ export default async function CategoryListingPage({ params, searchParams }: Prop
           {locale === "ar" ? `نتائج البحث: «${q}»` : `Search: “${q}”`}
         </p>
       )}
-      <Link
-        href={`/request-quote?city=${city.slug}&category=${catMeta.slug}`}
-        className="btn-ruwaq-primary mt-8 inline-flex"
-      >
-        {t.marketplace.listing.requestCta}
-      </Link>
+      <CategoryQuoteCta
+        label={t.marketplace.listing.requestCta}
+        closeLabel={t.nav.closeModal}
+        copy={t.marketplace.quote}
+        locale={locale}
+        citySlug={city.slug}
+        categorySlug={catMeta.slug}
+      />
       {filtered.length === 0 ? (
         <p className="mt-12 rounded-2xl border border-dashed border-ruwaq-stone p-10 text-center text-ruwaq-ink-soft">
           {t.marketplace.listing.empty}

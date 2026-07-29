@@ -53,6 +53,7 @@ export type Messages = {
       eyebrow: string;
       title: string;
       intro: string;
+      closingHint: string;
       sections: readonly { title: string; body: string }[];
     };
     quote: {
@@ -84,7 +85,9 @@ export type Messages = {
     footerCta: {
       title: string;
       subtitle: string;
+      button: string;
     };
+    footerTagline: string;
   };
   form: {
     title: string;

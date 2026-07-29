@@ -3,7 +3,7 @@ import { getMessages } from "@/shared/i18n";
 import { getLocale } from "@/shared/i18n/server";
 import { RuwaqLogo } from "@/shared/components/ruwaq-logo";
 import { LocaleSwitcher } from "@/shared/i18n/locale-switcher";
-import { QuoteRequestModal } from "@/modules/marketplace/components/quote-request-modal";
+import { QuoteRequestCtaButton } from "@/modules/marketplace/components/quote-request-cta-button";
 
 export async function SiteHeader() {
   const locale = await getLocale();
@@ -41,7 +41,7 @@ export async function SiteHeader() {
           </nav>
 
           <div className="flex shrink-0 items-center justify-end gap-2 sm:gap-3">
-            <QuoteRequestModal
+            <QuoteRequestCtaButton
               triggerLabel={t.nav.requestQuote}
               closeLabel={t.nav.closeModal}
               copy={t.marketplace.quote}
@@ -68,7 +68,7 @@ export async function SiteHeader() {
               {link.label}
             </Link>
           ))}
-          <QuoteRequestModal
+          <QuoteRequestCtaButton
             triggerLabel={t.nav.requestQuote}
             closeLabel={t.nav.closeModal}
             copy={t.marketplace.quote}

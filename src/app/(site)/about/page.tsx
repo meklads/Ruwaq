@@ -1,6 +1,6 @@
+import Link from "next/link";
 import { getMessages } from "@/shared/i18n";
 import { getLocale } from "@/shared/i18n/server";
-import Link from "next/link";
 
 export default async function AboutPage() {
   const locale = await getLocale();
@@ -22,12 +22,13 @@ export default async function AboutPage() {
         ))}
       </div>
 
-      <div className="mt-14 flex flex-wrap gap-3">
-        <Link href="/request-quote" className="btn-ruwaq-primary px-8 py-3.5">
-          {t.nav.requestQuote}
-        </Link>
-        <Link href="/categories" className="btn-ruwaq-secondary px-8 py-3.5">
+      <p className="mt-14 text-sm text-ruwaq-ink-muted">{content.closingHint}</p>
+      <div className="mt-4 flex flex-wrap gap-3">
+        <Link href="/categories" className="btn-ruwaq-primary px-8 py-3.5">
           {t.nav.browseCategories}
+        </Link>
+        <Link href="/proposals" className="btn-ruwaq-secondary px-8 py-3.5">
+          {t.nav.contractorHub}
         </Link>
       </div>
     </div>

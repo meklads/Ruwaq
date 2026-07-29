@@ -10,19 +10,9 @@ export async function SiteFooter() {
   const t = getMessages(locale);
   const arrow = locale === "ar" ? "←" : "→";
 
-  const columns = [
-    {
-      title: t.site.footer.product,
-      links: [
-        { href: "/categories", label: t.nav.browseCategories },
-        { href: "/request-quote", label: t.nav.requestQuote },
-        { href: "/about", label: t.nav.aboutPlatform },
-      ],
-    },
-    {
-      title: t.site.footer.company,
-      links: [{ href: `mailto:${RUWQ_PUBLIC_EMAIL}`, label: t.site.footer.contact }],
-    },
+  const productLinks = [
+    { href: "/categories", label: t.nav.browseCategories },
+    { href: "/about", label: t.nav.aboutPlatform },
   ];
 
   return (
@@ -34,29 +24,48 @@ export async function SiteFooter() {
             <p className="mt-5 max-w-md text-base leading-relaxed text-ruwaq-ink-soft">
               {t.marketplace.footerCta.subtitle}
             </p>
-            <Link href="/request-quote" className="btn-ruwaq-primary mt-8 inline-flex px-9 py-3.5">
-              {t.nav.requestQuote} {arrow}
+            <Link href="/categories" className="btn-ruwaq-secondary mt-8 inline-flex px-9 py-3.5">
+              {t.marketplace.footerCta.button} {arrow}
             </Link>
           </div>
 
           <div className="grid gap-10 sm:grid-cols-2">
-            {columns.map((col) => (
-              <div key={col.title}>
-                <h3 className="ruwaq-footer-col-title">{col.title}</h3>
-                <ul className="mt-5 space-y-3">
-                  {col.links.map((link) => (
-                    <li key={link.href}>
-                      <Link
-                        href={link.href}
-                        className="text-sm text-ruwaq-ink-soft transition-colors hover:text-ruwaq-ink"
-                      >
-                        {link.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+            <div>
+              <h3 className="ruwaq-footer-col-title">{t.site.footer.product}</h3>
+              <ul className="mt-5 space-y-3">
+                {productLinks.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      className="text-sm text-ruwaq-ink-soft transition-colors hover:text-ruwaq-ink"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h3 className="ruwaq-footer-col-title">{t.site.footer.company}</h3>
+              <ul className="mt-5 space-y-3">
+                <li>
+                  <Link
+                    href={`mailto:${RUWQ_PUBLIC_EMAIL}`}
+                    className="text-sm text-ruwaq-ink-soft transition-colors hover:text-ruwaq-ink"
+                  >
+                    {t.site.footer.contact}
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/proposals"
+                    className="text-sm text-ruwaq-ink-soft transition-colors hover:text-ruwaq-ink"
+                  >
+                    {t.nav.contractorHub}
+                  </Link>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
 
@@ -64,18 +73,12 @@ export async function SiteFooter() {
           <div>
             <RuwaqLogo href="/" size="footer" />
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-ruwaq-ink-soft">
-              {t.site.footer.tagline}
+              {t.marketplace.footerTagline}
             </p>
             <p className="mt-4 text-xs text-ruwaq-ink-muted">{t.site.footer.address}</p>
             <p className="mt-4 flex flex-wrap items-center gap-x-2 gap-y-2 text-xs text-ruwaq-ink-muted">
               <span>{t.site.footer.sponsoredBy}</span>
               <GraphicsHouseLogo variant="mark" className="h-7 w-auto sm:h-8" />
-            </p>
-            <p className="mt-6 text-xs text-ruwaq-ink-muted">
-              {t.nav.contractorHub}:{" "}
-              <Link href="/proposals" className="font-semibold text-ruwaq-gold hover:underline">
-                /proposals
-              </Link>
             </p>
           </div>
         </div>

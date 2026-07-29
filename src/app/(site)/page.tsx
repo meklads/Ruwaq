@@ -12,7 +12,12 @@ export default async function HomePage() {
   return (
     <>
       {/* 1. Marketplace: owners & quote requests */}
-      <MarketplaceHomeHero copy={t.marketplace.hero} locale={locale} />
+      <MarketplaceHomeHero
+        copy={t.marketplace.hero}
+        quoteCopy={t.marketplace.quote}
+        closeModalLabel={t.nav.closeModal}
+        locale={locale}
+      />
       <MarketplaceSearchBar copy={t.marketplace.search} locale={locale} />
       <MarketplaceCategoryGrid copy={t.marketplace.categories} locale={locale} />
 
