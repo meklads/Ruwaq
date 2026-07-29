@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
-import { CLAUSE_PACKS, PLACEHOLDER_DEFAULTS } from "../src/shared/constants/clause-pack-seed.ts";
-import { MARKETPLACE_CATEGORIES } from "../src/shared/constants/marketplace-taxonomy.ts";
+import { CLAUSE_PACKS, PLACEHOLDER_DEFAULTS } from "../src/shared/constants/clause-pack-seed";
+import { MARKETPLACE_CATEGORIES } from "../src/shared/constants/marketplace-taxonomy";
+import { MARKETPLACE_LISTING_SEEDS } from "./data/marketplace-listings.seed";
 
 const prisma = new PrismaClient();
 
@@ -15,22 +16,82 @@ async function seedMarketplaceCategories() {
         nameEn: cat.nameEn,
         icon: cat.icon,
         sortOrder: i,
-        subcategories: cat.subcategoriesAr,
+        subcategories: {
+          ar: cat.subcategoriesAr,
+          en: cat.subcategoriesEn,
+        },
       },
       update: {
         nameAr: cat.nameAr,
         nameEn: cat.nameEn,
         icon: cat.icon,
         sortOrder: i,
-        subcategories: cat.subcategoriesAr,
+        subcategories: {
+          ar: cat.subcategoriesAr,
+          en: cat.subcategoriesEn,
+        },
       },
     });
   }
   console.log(`  ✓ ${MARKETPLACE_CATEGORIES.length} service categories`);
 }
 
-async function main() {
-  await seedMarketplaceCategories();
+async function seedMarketplaceListings() {
+  console.log("🌱 Seeding provider listings (21 companies)…");
+
+  const categories = await prisma.serviceCategory.findMany({
+    select: { id: true, slug: true },
+  });
+  const bySlug = new Map(categories.map((c) => [c.slug, c.id]));
+
+  let created = 0;
+  let updated = 0;
+
+  for (const row of MARKETPLACE_LISTING_SEEDS) {
+    const categoryId = bySlug.get(row.categorySlug);
+    if (!categoryId) {
+      console.warn(`  ⚠ Skipping ${row.slug}: unknown category ${row.categorySlug}`);
+      continue;
+    }
+
+    const existing = await prisma.providerListing.findUnique({
+      where: { slug: row.slug },
+    });
+
+    const data = {
+      titleAr: row.titleAr,
+      titleEn: row.titleEn,
+      descriptionAr: row.descriptionAr,
+      descriptionEn: row.descriptionEn,
+      city: row.city,
+      categoryId,
+      phone: row.phone,
+      whatsapp: row.whatsapp,
+      address: row.address,
+      isVerified: row.isVerified,
+      isFeatured: row.isFeatured,
+      images: row.images,
+    };
+
+    if (existing) {
+      await prisma.providerListing.update({
+        where: { slug: row.slug },
+        data,
+      });
+      updated += 1;
+    } else {
+      await prisma.providerListing.create({
+        data: { slug: row.slug, ...data },
+      });
+      created += 1;
+    }
+  }
+
+  const total = await prisma.providerListing.count();
+  console.log(`  ✓ Listings: ${created} created, ${updated} updated (${total} total)`);
+}
+
+async function seedClausePacks() {
   console.log("🌱 Seeding Ruwaq Trust Layer clause packs…");
   console.log(
     "   Approved defaults:",
@@ -91,7 +152,14 @@ async function main() {
 
   const totalPacks = await prisma.clausePack.count();
   const totalClauses = await prisma.clauseTemplate.count();
-  console.log(`\n✅ Done: ${totalPacks} packs, ${totalClauses} clause templates`);
+  console.log(`  ✓ ${totalPacks} packs, ${totalClauses} clause templates`);
+}
+
+async function main() {
+  await seedMarketplaceCategories();
+  await seedMarketplaceListings();
+  await seedClausePacks();
+  console.log("\n✅ Database seed complete (categories, listings, clause packs)");
 }
 
 main()

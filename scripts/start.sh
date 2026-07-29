@@ -11,8 +11,8 @@ echo "=========================================="
   echo "→ Database schema setup..."
   if ./node_modules/.bin/prisma db push --skip-generate 2>&1; then
     echo "→ Database schema ready ✓"
-    echo "→ Seeding clause packs (fit_out_v1, supervision_v1, maintenance_v1)..."
-    if node --experimental-strip-types prisma/seed.ts 2>&1; then
+    echo "→ Seeding categories, marketplace listings, and clause packs..."
+    if npx tsx prisma/seed.ts 2>&1; then
       echo "→ Clause packs seeded ✓"
     else
       echo "⚠ Clause pack seed failed — will auto-seed on first proposal"
