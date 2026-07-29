@@ -60,7 +60,7 @@ export async function exportProposalAsPdf(proposalId: string) {
 
   return {
     url: `/api/proposals/${proposalId}/export/pdf`,
-    filename: `${fileBase}_Proposal.html`,
+    filename: `${fileBase}_Quote.pdf`,
     proposalNumber,
     shareUrl: `${base}/share/${shareToken}`,
   };

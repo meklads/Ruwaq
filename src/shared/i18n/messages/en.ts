@@ -200,10 +200,11 @@ export const en: Messages = {
   regenerateConfirm:
    "Regenerate the entire proposal? Your current edits will be replaced.",
   regenerateFailed: "Regeneration failed. Please try again.",
-  downloadPdf: "Open printable document",
-  printHint:
-   "Opens a print-ready HTML page. Use your browser Print → Save as PDF.",
-  exporting: "Opening document...",
+  downloadPdf: "Download PDF",
+  previewPdf: "Preview PDF",
+  closePreview: "Close preview",
+  printHint: "A4 PDF with line items, 15% VAT, and payment terms.",
+  exporting: "Generating PDF...",
   preparedFor: "Prepared for:",
   preparedBy: "Prepared by:",
   date: "Date:",
@@ -1192,6 +1193,17 @@ export const en: Messages = {
    "By accepting this proposal, both parties agree to the scope and terms above. This proposal is valid for 30 days from the issue date.",
   clientSignature: "Client signature",
   providerSignature: "Service provider signature",
+  pdfQuote: {
+   description: "Description",
+   qty: "Qty",
+   unitPrice: "Unit price",
+   lineTotal: "Total",
+   subtotal: "Subtotal (excl. VAT)",
+   vat: "VAT",
+   grandTotal: "Grand total (incl. VAT)",
+   termsTitle: "Terms & conditions",
+   paymentTermsTitle: "Payment & acceptance",
+  },
  },
  share: {
   downloadOfficialPdf: "Download Official PDF",

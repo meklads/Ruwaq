@@ -171,6 +171,8 @@ export type Messages = {
     regenerateConfirm: string;
     regenerateFailed: string;
     downloadPdf: string;
+    previewPdf: string;
+    closePreview: string;
     printHint: string;
     exporting: string;
     preparedFor: string;
@@ -668,6 +670,17 @@ export type Messages = {
     acceptanceText: string;
     clientSignature: string;
     providerSignature: string;
+    pdfQuote: {
+      description: string;
+      qty: string;
+      unitPrice: string;
+      lineTotal: string;
+      subtotal: string;
+      vat: string;
+      grandTotal: string;
+      termsTitle: string;
+      paymentTermsTitle: string;
+    };
   };
   share: {
     downloadOfficialPdf: string;

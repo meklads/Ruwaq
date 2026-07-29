@@ -10,13 +10,14 @@ import {
   asStringList,
   buildProposalExportHtml,
 } from "./proposal-export-html";
+import type { ProposalExportData } from "../export/proposal-export-types";
 
 export type BuildProposalExportOptions = {
   /** Default true — client name + date watermark on PDF/share exports. */
   watermarked?: boolean;
 };
 
-export async function buildProposalExportHtmlForId(
+export async function loadProposalExportContext(
   proposalId: string,
   options: BuildProposalExportOptions = {}
 ) {
@@ -86,7 +87,9 @@ export async function buildProposalExportHtmlForId(
       ? proposal.clausePack?.nameAr ?? messages.review.clauses.defaultPackName
       : proposal.clausePack?.nameEn ?? messages.review.clauses.defaultPackName;
 
-  const html = buildProposalExportHtml(locale, {
+  const exportData: Omit<ProposalExportData, "appBaseUrl"> & {
+    templateId?: ProposalExportData["templateId"];
+  } = {
     projectName: proposal.projectName,
     clientName: proposal.clientName,
     companyName: company?.companyName ?? undefined,
@@ -132,16 +135,29 @@ export async function buildProposalExportHtmlForId(
     estimateVariancePercent: proposal.estimateVariancePercent,
     watermarkClientName: watermarked ? proposal.clientName : undefined,
     watermarkDate: watermarked ? issueDate : undefined,
-    // Defense-in-depth: even if a stale/tampered profile row carries a
-    // premium templateId, never render it unless isPaid is true — except
-    // during the free trial (BILLING_ENABLED=false), when everyone is
-    // entitled to every template.
     templateId: resolveEntitledExportTemplateId(
       company?.exportTemplateId,
       (company?.isPaid ?? false) || !isBillingEnabled()
     ),
     headerFooterStyleId: company?.headerFooterStyleId ?? undefined,
-  });
+  };
 
-  return { html, projectName: proposal.projectName };
+  return {
+    locale,
+    messages,
+    exportData,
+    projectName: proposal.projectName,
+  };
+}
+
+export async function buildProposalExportHtmlForId(
+  proposalId: string,
+  options: BuildProposalExportOptions = {}
+) {
+  const ctx = await loadProposalExportContext(proposalId, options);
+  if (!ctx) return null;
+
+  const html = buildProposalExportHtml(ctx.locale, ctx.exportData);
+
+  return { html, projectName: ctx.projectName };
 }

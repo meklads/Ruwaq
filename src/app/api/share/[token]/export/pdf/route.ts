@@ -1,16 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { asciiFilename } from "@/modules/proposal/server/proposal-export-html";
-import { buildProposalExportHtmlForId } from "@/modules/proposal/server/proposal-export-data";
 import { getProposalIdByShareToken } from "@/modules/proposal/server/proposal.service";
+import { buildProposalQuotePdfBuffer } from "@/modules/proposal/pdf/build-proposal-quote-pdf";
 
 export const dynamic = "force-dynamic";
 
-async function buildExportResponse(proposalId: string) {
-  return buildProposalExportHtmlForId(proposalId, { watermarked: true });
-}
-
 export async function GET(
-  _req: NextRequest,
+  req: NextRequest,
   { params }: { params: { token: string } }
 ) {
   try {
@@ -19,15 +15,20 @@ export async function GET(
       return NextResponse.json({ error: "Not found" }, { status: 404 });
     }
 
-    const result = await buildExportResponse(proposalId);
+    const result = await buildProposalQuotePdfBuffer(proposalId, { watermarked: true });
     if (!result) {
       return NextResponse.json({ error: "Not found" }, { status: 404 });
     }
 
-    return new NextResponse(result.html, {
+    const fileBase = asciiFilename(result.projectName, "proposal");
+    const inline = req.nextUrl.searchParams.get("inline") !== "0";
+    const filename = `${fileBase}_Quote.pdf`;
+
+    return new NextResponse(new Uint8Array(result.buffer), {
       status: 200,
       headers: {
-        "Content-Type": "text/html; charset=utf-8",
+        "Content-Type": "application/pdf",
+        "Content-Disposition": `${inline ? "inline" : "attachment"}; filename="${filename}"`,
         "Cache-Control": "no-store",
       },
     });

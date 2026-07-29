@@ -13,6 +13,7 @@ import {
   regenerateSectionAction,
 } from "@/modules/proposal/server/proposal.actions";
 import Link from "next/link";
+import { ProposalPdfPreviewDialog } from "@/modules/proposal/components/proposal-pdf-preview-dialog";
 import { useLocale, useT } from "@/shared/i18n/context";
 import { validateLocaleText } from "@/shared/i18n/locale";
 import { formatDate, formatSar } from "@/shared/lib/format";
@@ -92,6 +93,7 @@ export function ProposalReviewClient({
   );
   const [shareUrl, setShareUrl] = useState<string | null>(null);
   const [toast, setToast] = useState<string | null>(null);
+  const [previewOpen, setPreviewOpen] = useState(false);
 
   const hasDeliverables = (proposal.deliverables ?? []).length > 0;
   const gateProgress = useMemo(
@@ -206,19 +208,41 @@ export function ProposalReviewClient({
     setExporting(true);
     try {
       const result = await exportPdfAction(proposal.id);
-      if (result.success) {
-        setExported(true);
-        if (result.shareUrl) setShareUrl(result.shareUrl);
-        const url = new URL(result.url, window.location.origin).href;
-        window.open(url, "_blank", "noopener,noreferrer");
-      } else {
+      if (!result.success) {
         alert(result.error ?? t.form.errors.generic);
+        return;
       }
+      setExported(true);
+      if (result.shareUrl) setShareUrl(result.shareUrl);
+
+      const pdfRes = await fetch(
+        `/api/proposals/${proposal.id}/export/pdf`,
+        { credentials: "include" }
+      );
+      if (!pdfRes.ok) {
+        alert(t.form.errors.generic);
+        return;
+      }
+      const blob = await pdfRes.blob();
+      const objectUrl = URL.createObjectURL(blob);
+      const anchor = document.createElement("a");
+      anchor.href = objectUrl;
+      anchor.download = result.filename ?? "Ruwaq_Quote.pdf";
+      anchor.click();
+      URL.revokeObjectURL(objectUrl);
     } catch {
       alert(t.form.errors.generic);
     } finally {
       setExporting(false);
     }
+  };
+
+  const handlePreviewPdf = () => {
+    if (!gatesComplete) {
+      alert(t.review.exportBlocked);
+      return;
+    }
+    setPreviewOpen(true);
   };
 
   const handleRegenerate = async () => {
@@ -338,6 +362,13 @@ export function ProposalReviewClient({
               className="btn-ruwaq-soft disabled:opacity-50"
             >
               {regenerating ? t.review.regenerating : t.review.regenerate}
+            </button>
+            <button
+              onClick={handlePreviewPdf}
+              disabled={!gatesComplete}
+              className="btn-ruwaq-soft disabled:opacity-50"
+            >
+              {t.review.previewPdf}
             </button>
             <button
               onClick={handleExport}
@@ -818,15 +849,32 @@ export function ProposalReviewClient({
           <span className="text-sm text-ruwaq-ink-muted">
             {t.review.gatesProgress(gateProgress.confirmed, gateProgress.total)}
           </span>
-          <button
-            onClick={handleExport}
-            disabled={exporting || !gatesComplete}
-            className="btn-ruwaq-primary px-6 py-2.5 disabled:opacity-50"
-          >
-            {exporting ? t.review.exporting : t.review.downloadPdf}
-          </button>
+          <div className="flex flex-wrap items-center gap-2">
+            <button
+              onClick={handlePreviewPdf}
+              disabled={!gatesComplete}
+              className="btn-ruwaq-secondary px-4 py-2.5 disabled:opacity-50"
+            >
+              {t.review.previewPdf}
+            </button>
+            <button
+              onClick={handleExport}
+              disabled={exporting || !gatesComplete}
+              className="btn-ruwaq-primary px-6 py-2.5 disabled:opacity-50"
+            >
+              {exporting ? t.review.exporting : t.review.downloadPdf}
+            </button>
+          </div>
         </div>
       </div>
+
+      <ProposalPdfPreviewDialog
+        open={previewOpen}
+        onOpenChange={setPreviewOpen}
+        pdfUrl={`/api/proposals/${proposal.id}/export/pdf?inline=1`}
+        title={t.review.previewPdf}
+        closeLabel={t.review.closePreview}
+      />
     </div>
   );
 }

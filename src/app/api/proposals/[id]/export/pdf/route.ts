@@ -1,13 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { asciiFilename } from "@/modules/proposal/server/proposal-export-html";
-import { buildProposalExportHtmlForId } from "@/modules/proposal/server/proposal-export-data";
 import { hasProposalEditAccess } from "@/modules/proposal/server/proposal-edit-access";
 import { logServerError } from "@/shared/lib/usage-events";
+import { buildProposalQuotePdfBuffer } from "@/modules/proposal/pdf/build-proposal-quote-pdf";
 
 export const dynamic = "force-dynamic";
 
 export async function GET(
-  _req: NextRequest,
+  req: NextRequest,
   { params }: { params: { id: string } }
 ) {
   try {
@@ -16,19 +16,20 @@ export async function GET(
       return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
     }
 
-    const result = await buildProposalExportHtmlForId(params.id);
-
+    const result = await buildProposalQuotePdfBuffer(params.id);
     if (!result) {
       return NextResponse.json({ error: "Not found" }, { status: 404 });
     }
 
     const fileBase = asciiFilename(result.projectName, "proposal");
+    const inline = req.nextUrl.searchParams.get("inline") === "1";
+    const filename = `${fileBase}_Quote.pdf`;
 
-    return new NextResponse(result.html, {
+    return new NextResponse(new Uint8Array(result.buffer), {
       status: 200,
       headers: {
-        "Content-Type": "text/html; charset=utf-8",
-        "Content-Disposition": `inline; filename="${fileBase}_Proposal.html"`,
+        "Content-Type": "application/pdf",
+        "Content-Disposition": `${inline ? "inline" : "attachment"}; filename="${filename}"`,
         "Cache-Control": "no-store",
       },
     });

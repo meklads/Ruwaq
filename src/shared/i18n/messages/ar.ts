@@ -197,10 +197,11 @@ export const ar = {
   regenerateConfirm:
    "إعادة توليد العرض بالكامل؟ سيتم استبدال تعديلاتك الحالية.",
   regenerateFailed: "فشلت إعادة التوليد. حاول مرة أخرى.",
-  downloadPdf: "فتح مستند للطباعة",
-  printHint:
-   "يفتح صفحة HTML جاهزة للطباعة. استخدم طباعة المتصفح ← حفظ كـ PDF.",
-  exporting: "جاري فتح المستند...",
+  downloadPdf: "تحميل PDF",
+  previewPdf: "معاينة PDF",
+  closePreview: "إغلاق المعاينة",
+  printHint: "ملف PDF A4 بالعربية — جدول بنود، ضريبة 15%، وشروط الدفع.",
+  exporting: "جاري إنشاء PDF...",
   preparedFor: "مُعد لـ:",
   preparedBy: "مُعد بواسطة:",
   date: "التاريخ:",
@@ -1197,6 +1198,17 @@ export const ar = {
    "بقبول هذا العرض، يوافق الطرفان على النطاق والشروط الواردة أعلاه. هذا العرض ساري لمدة 30 يوماً من تاريخ الإصدار.",
   clientSignature: "توقيع العميل",
   providerSignature: "توقيع مقدم الخدمة",
+  pdfQuote: {
+   description: "الوصف",
+   qty: "الكمية",
+   unitPrice: "سعر الوحدة",
+   lineTotal: "الإجمالي",
+   subtotal: "المجموع الفرعي (بدون ضريبة)",
+   vat: "ضريبة القيمة المضافة",
+   grandTotal: "الإجمالي شامل الضريبة",
+   termsTitle: "الشروط والأحكام",
+   paymentTermsTitle: "الدفع والقبول",
+  },
  },
  share: {
   downloadOfficialPdf: "تحميل PDF الرسمي",
