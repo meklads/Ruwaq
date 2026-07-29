@@ -3,8 +3,7 @@ import { getLocale } from "@/shared/i18n/server";
 import { MarketplaceHomeHero } from "@/modules/marketplace/components/marketplace-home-hero";
 import { MarketplaceSearchBar } from "@/modules/marketplace/components/marketplace-search-bar";
 import { MarketplaceCategoryGrid } from "@/modules/marketplace/components/marketplace-category-grid";
-import { ContractorToolIntro } from "@/modules/marketplace/components/contractor-tool-intro";
-import { NewProposalForm } from "@/modules/proposal/components/new-proposal-form";
+import { ContractorPromoBanner } from "@/modules/marketplace/components/contractor-promo-banner";
 
 export default async function HomePage() {
   const locale = await getLocale();
@@ -17,11 +16,7 @@ export default async function HomePage() {
       <MarketplaceSearchBar copy={t.marketplace.search} locale={locale} />
       <MarketplaceCategoryGrid copy={t.marketplace.categories} locale={locale} />
 
-      {/* 2. Contractors: AI proposal tool (separate visual band) */}
-      <div className="ruwaq-contractor-zone">
-        <ContractorToolIntro copy={t.marketplace.contractorSection} locale={locale} />
-        <NewProposalForm variant="embedded" />
-      </div>
+      <ContractorPromoBanner copy={t.marketplace.contractorPromo} locale={locale} />
     </>
   );
 }

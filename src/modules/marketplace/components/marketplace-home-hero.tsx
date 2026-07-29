@@ -27,7 +27,7 @@ export function MarketplaceHomeHero({ copy, locale }: Props) {
           <a href="#categories" className="ruwaq-market-btn-outline">
             {copy.ctaSecondary}
           </a>
-          <a href="#create-proposal" className="ruwaq-market-btn-ghost">
+          <a href="#contractor-promo" className="ruwaq-market-btn-ghost">
             {copy.ctaContractor}
           </a>
         </div>

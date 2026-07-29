@@ -9,16 +9,21 @@ export async function SiteFooter() {
   const locale = await getLocale();
   const t = getMessages(locale);
   const arrow = locale === "ar" ? "←" : "→";
-  const startHref = "/#create-proposal";
 
   const columns = [
     {
       title: t.site.footer.product,
       links: [
-        { href: startHref, label: t.site.nav.startProposal },
+        { href: "/request-quote", label: t.nav.requestQuote },
+        { href: "/#categories", label: t.nav.browseCategories },
+      ],
+    },
+    {
+      title: t.nav.contractorHub,
+      links: [
         { href: "/proposals", label: t.nav.myProposals },
+        { href: "/proposals/new", label: t.nav.newProposal },
         { href: "/templates/sample", label: t.nav.previewSample },
-        { href: "/settings/company", label: t.nav.settings },
       ],
     },
     {
@@ -36,8 +41,8 @@ export async function SiteFooter() {
             <p className="mt-5 max-w-md text-base leading-relaxed text-ruwaq-ink-soft">
               {t.site.footer.ctaSubtitle}
             </p>
-            <Link href={startHref} className="btn-ruwaq-primary mt-8 inline-flex px-9 py-3.5">
-              {t.site.footer.ctaButton} {arrow}
+            <Link href="/proposals" className="btn-ruwaq-primary mt-8 inline-flex px-9 py-3.5">
+              {t.marketplace.contractorPromo.cta} {arrow}
             </Link>
           </div>
 

@@ -4,35 +4,37 @@ import { getLocale } from "@/shared/i18n/server";
 import { RuwaqLogo } from "@/shared/components/ruwaq-logo";
 import { LocaleSwitcher } from "@/shared/i18n/locale-switcher";
 import { UserNav } from "@/modules/auth/components/user-nav";
+import { ContractorNavMenu } from "@/shared/components/contractor-nav-menu";
 
 export async function SiteHeader() {
   const locale = await getLocale();
   const t = getMessages(locale);
 
-  const links = [
+  const b2cLinks = [
     { href: "/#categories", label: t.nav.browseCategories },
     { href: "/request-quote", label: t.nav.requestQuote },
-    { href: "/proposals", label: t.nav.myProposals },
-    { href: "/settings/company", label: t.nav.settings },
-    { href: "/templates/sample", label: t.nav.previewSample },
   ];
 
-  const homeHref = "/";
-  const startHref = "/#create-proposal";
+  const contractorItems = [
+    { href: "/proposals/new", label: t.nav.newProposal },
+    { href: "/proposals", label: t.nav.myProposals },
+    { href: "/templates/sample", label: t.nav.previewSample },
+    { href: "/settings/company", label: t.nav.settings },
+  ];
 
   return (
     <header className="ruwaq-header">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="flex min-h-[6.25rem] items-center justify-between gap-4 py-3 sm:min-h-[6.75rem] sm:py-4 lg:min-h-[7.25rem]">
           <div className="shrink-0 lg:min-w-[11rem]">
-            <RuwaqLogo href={homeHref} />
+            <RuwaqLogo href="/" />
           </div>
 
           <nav
             className="hidden flex-1 items-center justify-center gap-1 lg:flex"
-            aria-label="Main"
+            aria-label={locale === "ar" ? "خدمات العملاء" : "For clients"}
           >
-            {links.map((link) => (
+            {b2cLinks.map((link) => (
               <Link key={link.href} href={link.href} className="ruwaq-nav-link">
                 {link.label}
               </Link>
@@ -40,9 +42,11 @@ export async function SiteHeader() {
           </nav>
 
           <div className="flex shrink-0 items-center justify-end gap-2 sm:gap-3 lg:min-w-[200px]">
-            <Link href={startHref} className="btn-ruwaq-header-gold hidden sm:inline-flex">
-              {t.nav.newProposal}
-            </Link>
+            <ContractorNavMenu
+              hubLabel={t.nav.contractorHub}
+              items={contractorItems}
+              className="hidden sm:block"
+            />
             <UserNav />
             <LocaleSwitcher />
           </div>
@@ -52,7 +56,7 @@ export async function SiteHeader() {
           className="flex gap-2 overflow-x-auto border-t border-slate-100 py-3 lg:hidden"
           aria-label="Mobile"
         >
-          {links.map((link) => (
+          {b2cLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
@@ -62,10 +66,10 @@ export async function SiteHeader() {
             </Link>
           ))}
           <Link
-            href={startHref}
-            className="btn-ruwaq-header-gold shrink-0 px-3.5 py-1.5 text-xs sm:hidden"
+            href="/proposals/new"
+            className="btn-ruwaq-header-gold shrink-0 px-3.5 py-1.5 text-xs"
           >
-            {t.nav.newProposal}
+            {t.nav.contractorHub}
           </Link>
         </nav>
       </div>

@@ -20,16 +20,6 @@ const nextConfig = {
   async redirects() {
     return [
       {
-        source: "/proposals/new",
-        destination: "/",
-        permanent: false,
-      },
-      {
-        source: "/workspace/proposals/new",
-        destination: "/",
-        permanent: false,
-      },
-      {
         source: "/proposals",
         destination: "/workspace/proposals",
         permanent: false,

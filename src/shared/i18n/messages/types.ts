@@ -10,6 +10,7 @@ export type Messages = {
     previewSample: string;
     requestQuote: string;
     browseCategories: string;
+    contractorHub: string;
   };
   marketplace: {
     hero: {
@@ -38,6 +39,16 @@ export type Messages = {
       title: string;
       subtitle: string;
       cta: string;
+    };
+    contractorPromo: {
+      eyebrow: string;
+      title: string;
+      subtitle: string;
+      bullets: readonly string[];
+      cta: string;
+      previewLabel: string;
+      previewPill: string;
+      previewNote: string;
     };
     quote: {
       title: string;

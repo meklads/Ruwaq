@@ -1,6 +1,5 @@
-import { redirect } from "next/navigation";
+import { NewProposalForm } from "@/modules/proposal/components/new-proposal-form";
 
-/** Legacy URL — tool lives on the home page. */
-export default function NewProposalRedirectPage() {
-  redirect("/");
+export default function NewProposalPage() {
+  return <NewProposalForm variant="page" />;
 }

@@ -33,6 +33,11 @@ export const MARKETPLACE_CATEGORIES = [
       "صيانة تكييف فنادق وعمائر",
       "أنظمة كاسيت وسبليت للمشاريع",
     ],
+    subcategoriesEn: [
+      "Central AC & ducting",
+      "Hotel & tower maintenance",
+      "Cassette & split for projects",
+    ],
     turrivaCapture: false,
   },
   {
@@ -44,6 +49,11 @@ export const MARKETPLACE_CATEGORIES = [
       "تصميم داخلي فاخر",
       "تشطيب فلل ومقرات تجارية",
       "أعمال الجبس والأرضيات والرخام",
+    ],
+    subcategoriesEn: [
+      "Luxury interior design",
+      "Villas & commercial fit-out",
+      "Gypsum, flooring & marble",
     ],
     turrivaCapture: true,
   },
@@ -57,6 +67,11 @@ export const MARKETPLACE_CATEGORIES = [
       "بناء الملاحق والتوسعات",
       "بناء عظم وهياكل إنشائية",
     ],
+    subcategoriesEn: [
+      "Building & hotel renovation",
+      "Annexes & extensions",
+      "Structural shell works",
+    ],
     turrivaCapture: true,
   },
   {
@@ -68,6 +83,7 @@ export const MARKETPLACE_CATEGORIES = [
       "توريد وتركيب مصاعد",
       "صيانة مصاعد واعتمادات الدفاع المدني",
     ],
+    subcategoriesEn: ["Supply & install elevators", "Maintenance & civil defense approvals"],
     turrivaCapture: false,
   },
   {
@@ -76,6 +92,7 @@ export const MARKETPLACE_CATEGORIES = [
     nameEn: "Waterproofing",
     icon: "💧",
     subcategoriesAr: ["عزل أسطح وفوم", "عزل خزانات ومسابح", "معالجة التسربات"],
+    subcategoriesEn: ["Roof & foam insulation", "Tanks & pools", "Leak treatment"],
     turrivaCapture: false,
   },
   {
@@ -87,6 +104,7 @@ export const MARKETPLACE_CATEGORIES = [
       "تأثيث فنادق وإسكان حجاج",
       "تجهيز شقق الإيجار اليومي والفلل",
     ],
+    subcategoriesEn: ["Hotels & pilgrim housing", "Serviced apartments & villas"],
     turrivaCapture: false,
   },
   {
@@ -98,6 +116,7 @@ export const MARKETPLACE_CATEGORIES = [
       "جلي وتلميع رخام",
       "غسيل واجهات مرتفعات (زجاج وكلادينج)",
     ],
+    subcategoriesEn: ["Marble polish & grind", "High-rise facade cleaning"],
     turrivaCapture: false,
   },
 ] as const;

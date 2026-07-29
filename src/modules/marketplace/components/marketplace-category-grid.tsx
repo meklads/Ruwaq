@@ -34,7 +34,7 @@ export function MarketplaceCategoryGrid({
           )}
         </h2>
         <p className="ruwaq-section-lead">{copy.subtitle}</p>
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {MARKETPLACE_CATEGORIES.map((cat) => (
             <Link
               key={cat.slug}
@@ -48,7 +48,7 @@ export function MarketplaceCategoryGrid({
                 {locale === "ar" ? cat.nameAr : cat.nameEn}
               </h3>
               <ul className="mt-3 space-y-1 text-sm text-ruwaq-ink-soft">
-                {cat.subcategoriesAr.slice(0, 2).map((s) => (
+                {(locale === "ar" ? cat.subcategoriesAr : cat.subcategoriesEn).slice(0, 2).map((s) => (
                   <li key={s}>• {s}</li>
                 ))}
               </ul>

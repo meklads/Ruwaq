@@ -15,6 +15,7 @@ export const en: Messages = {
   previewSample: "Preview sample",
   requestQuote: "Request a quote",
   browseCategories: "Categories",
+  contractorHub: "Contractor hub",
  },
  marketplace: {
   hero: {
@@ -44,6 +45,21 @@ export const en: Messages = {
    title: "Proposal tool for contractors",
    subtitle: "Draft professional AI proposals and export branded PDFs in minutes.",
    cta: "Start a proposal",
+  },
+  contractorPromo: {
+   eyebrow: "For contractors & operators",
+   title: "AI proposal builder",
+   subtitle:
+    "A quick preview — open the full interactive tool in the contractor workspace, separate from client browsing.",
+   bullets: [
+    "Three steps: project, details, export PDF",
+    "Your brand and clause library",
+    "Save proposals and share with clients",
+   ],
+   cta: "Try the proposal tool",
+   previewLabel: "Preview",
+   previewPill: "Pro proposal",
+   previewNote: "The full form opens in the contractor area.",
   },
   quote: {
    title: "Get competitive quotes within 24 hours",
