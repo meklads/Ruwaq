@@ -8,6 +8,59 @@ export type Messages = {
     signOut: string;
     newProposal: string;
     previewSample: string;
+    requestQuote: string;
+    browseCategories: string;
+  };
+  marketplace: {
+    hero: {
+      title: string;
+      subtitle: string;
+      ctaPrimary: string;
+      ctaSecondary: string;
+    };
+    search: {
+      cityLabel: string;
+      cityAll: string;
+      categoryLabel: string;
+      categoryPlaceholder: string;
+      queryPlaceholder: string;
+      submit: string;
+    };
+    categories: {
+      title: string;
+      subtitle: string;
+    };
+    contractorSection: {
+      title: string;
+      subtitle: string;
+      cta: string;
+    };
+    quote: {
+      title: string;
+      submit: string;
+      success: string;
+      errors: {
+        validation: string;
+        invalid_phone: string;
+        category_missing: string;
+        server: string;
+      };
+      fields: {
+        name: string;
+        phone: string;
+        city: string;
+        category: string;
+        details: string;
+        budget: string;
+      };
+    };
+    listing: {
+      verified: string;
+      featured: string;
+      whatsapp: string;
+      empty: string;
+      requestCta: string;
+    };
   };
   form: {
     title: string;

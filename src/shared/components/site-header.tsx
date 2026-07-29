@@ -10,6 +10,8 @@ export async function SiteHeader() {
   const t = getMessages(locale);
 
   const links = [
+    { href: "/#categories", label: t.nav.browseCategories },
+    { href: "/request-quote", label: t.nav.requestQuote },
     { href: "/proposals", label: t.nav.myProposals },
     { href: "/settings/company", label: t.nav.settings },
     { href: "/templates/sample", label: t.nav.previewSample },

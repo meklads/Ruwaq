@@ -61,12 +61,12 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title:
       locale === "ar"
-        ? "رواق — عروض قطاع العقار والهندسة"
-        : "Ruwaq — Real estate & engineering proposals",
+        ? "رواق | منصة الهندسة والعقار — المنطقة الغربية"
+        : "Ruwaq | Engineering & property marketplace — Western Region",
     description:
       locale === "ar"
-        ? "أنشئ عروضاً عقارية احترافية بالذكاء الاصطناعي — بدون حساب للبدء."
-        : "Create professional real estate proposals with AI — start without an account.",
+        ? "دليل مقاولات وتكييف وتشطيبات معتمد في جدة ومكة والمدينة — مع أداة عروض احترافية للمقاولين."
+        : "Verified contractors directory in Jeddah, Makkah, and Madinah — plus AI proposal builder.",
   };
 }
 

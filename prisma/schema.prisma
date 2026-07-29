@@ -24,6 +24,11 @@ model User {
   payments  Payment[]
   designCredits DesignCreditAccount?
   designGenerations DesignGeneration[]
+  providerListings ProviderListing[]
+
+  /// USER | CONTRACTOR | TURRIVA_ADMIN — marketplace role (Auth.js user)
+  marketplaceRole String @default("USER")
+  phone           String?
 }
 
 /// Required by Auth.js
@@ -501,4 +506,81 @@ model DesignGuestSession {
 
   @@index([guestToken])
   @@index([ipHash, createdAt])
+}
+
+// ============================================================
+// Ruwaq Marketplace — listings, categories, lead routing
+// ============================================================
+
+enum MarketplaceCity {
+  JEDDAH
+  MAKKAH
+  MADINAH
+}
+
+enum MarketplaceLeadStatus {
+  NEW
+  ASSIGNED_TO_TURRIVA
+  BROADCASTED_TO_PARTNERS
+  CLOSED
+}
+
+model ServiceCategory {
+  id            String   @id @default(cuid())
+  slug          String   @unique
+  nameAr        String
+  nameEn        String
+  icon          String   @default("building")
+  sortOrder     Int      @default(0)
+  subcategories Json?
+  listings      ProviderListing[]
+  leads         MarketplaceLead[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ProviderListing {
+  id            String          @id @default(cuid())
+  titleAr       String
+  titleEn       String?
+  slug          String          @unique
+  descriptionAr String          @db.Text
+  descriptionEn String?         @db.Text
+  city          MarketplaceCity
+  categoryId    String
+  category      ServiceCategory @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  ownerUserId   String?
+  owner         User?           @relation(fields: [ownerUserId], references: [id], onDelete: SetNull)
+  phone         String
+  whatsapp      String
+  address       String?
+  isVerified    Boolean         @default(false)
+  isFeatured    Boolean         @default(false)
+  images        Json            @default("[]")
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+
+  @@index([city, categoryId, isVerified])
+  @@index([categoryId, isFeatured])
+}
+
+model MarketplaceLead {
+  id             String                @id @default(cuid())
+  clientName     String
+  clientPhone    String
+  city           MarketplaceCity
+  categoryId     String
+  category       ServiceCategory       @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  projectDetails String                @db.Text
+  budgetRange    String?
+  status         MarketplaceLeadStatus @default(NEW)
+  assignedTo     String?
+  locale         String                @default("ar")
+  routingNote    String?
+  createdAt      DateTime              @default(now())
+  updatedAt      DateTime              @updatedAt
+
+  @@index([status, createdAt])
+  @@index([city, categoryId])
 }

@@ -1,6 +1,9 @@
 import { getMessages } from "@/shared/i18n";
 import { getLocale } from "@/shared/i18n/server";
-import { MarketingHero } from "@/modules/marketing/components/marketing-hero";
+import { MarketplaceHomeHero } from "@/modules/marketplace/components/marketplace-home-hero";
+import { MarketplaceSearchBar } from "@/modules/marketplace/components/marketplace-search-bar";
+import { MarketplaceCategoryGrid } from "@/modules/marketplace/components/marketplace-category-grid";
+import { ContractorToolIntro } from "@/modules/marketplace/components/contractor-tool-intro";
 import { NewProposalForm } from "@/modules/proposal/components/new-proposal-form";
 
 export default async function HomePage() {
@@ -9,7 +12,10 @@ export default async function HomePage() {
 
   return (
     <>
-      <MarketingHero hero={t.sales.hero} locale={locale} primaryCtaHref="#create-proposal" />
+      <MarketplaceHomeHero copy={t.marketplace.hero} locale={locale} />
+      <MarketplaceSearchBar copy={t.marketplace.search} locale={locale} />
+      <MarketplaceCategoryGrid copy={t.marketplace.categories} locale={locale} />
+      <ContractorToolIntro copy={t.marketplace.contractorSection} locale={locale} />
       <NewProposalForm variant="embedded" />
     </>
   );

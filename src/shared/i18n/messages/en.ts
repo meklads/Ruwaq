@@ -13,6 +13,60 @@ export const en: Messages = {
   signOut: "Sign Out",
   newProposal: "New Proposal",
   previewSample: "Preview sample",
+  requestQuote: "Request a quote",
+  browseCategories: "Categories",
+ },
+ marketplace: {
+  hero: {
+   title: "Ruwaq | Western Region engineering & property directory",
+   subtitle:
+    "Connect with verified contracting, HVAC, fit-out, and elevator firms in Jeddah, Makkah, and Madinah.",
+   ctaPrimary: "Get a quote",
+   ctaSecondary: "Browse verified providers",
+  },
+  search: {
+   cityLabel: "City",
+   cityAll: "All cities",
+   categoryLabel: "Service category",
+   categoryPlaceholder: "Select category",
+   queryPlaceholder: "Search services (e.g. central AC maintenance, villa fit-out...)",
+   submit: "Search",
+  },
+  categories: {
+   title: "Approved categories",
+   subtitle: "7 high-ticket sectors across Western Region cities",
+  },
+  contractorSection: {
+   title: "Proposal tool for contractors",
+   subtitle: "Draft professional AI proposals and export branded PDFs in minutes.",
+   cta: "Start a proposal",
+  },
+  quote: {
+   title: "Get competitive quotes within 24 hours",
+   submit: "Send request — free",
+   success: "Request received. We will contact you soon.",
+   errors: {
+    validation: "Please fill in all required fields.",
+    invalid_phone: "Enter a valid KSA mobile number (05xxxxxxxx).",
+    category_missing: "Category unavailable. Try again later.",
+    server: "Something went wrong. Please try again.",
+   },
+   fields: {
+    name: "Full name",
+    phone: "Mobile number",
+    city: "City",
+    category: "Service type",
+    details: "Project details",
+    budget: "Budget range (optional)",
+   },
+  },
+  listing: {
+   verified: "Verified",
+   featured: "Featured",
+   whatsapp: "WhatsApp",
+   empty: "No verified providers yet. Request a quote and we will match you.",
+   requestCta: "Request a quote for this category",
+  },
  },
  form: {
   title: "Create a professional real estate proposal",
