@@ -28,7 +28,7 @@ export function UserNav() {
         </span>
         <button
           type="button"
-          onClick={() => signOut({ callbackUrl: "/proposals/new" })}
+          onClick={() => signOut({ callbackUrl: "/proposals" })}
           className="btn-ruwaq-ghost text-xs"
         >
           {t.nav.signOut}

@@ -11,6 +11,9 @@ export type Messages = {
     requestQuote: string;
     browseCategories: string;
     contractorHub: string;
+    aboutPlatform: string;
+    backToDirectory: string;
+    closeModal: string;
   };
   marketplace: {
     hero: {
@@ -41,14 +44,16 @@ export type Messages = {
       cta: string;
     };
     contractorPromo: {
-      eyebrow: string;
+      eyebrow?: string;
       title: string;
       subtitle: string;
-      bullets: readonly string[];
       cta: string;
-      previewLabel: string;
-      previewPill: string;
-      previewNote: string;
+    };
+    aboutPage: {
+      eyebrow: string;
+      title: string;
+      intro: string;
+      sections: readonly { title: string; body: string }[];
     };
     quote: {
       title: string;
@@ -75,6 +80,10 @@ export type Messages = {
       whatsapp: string;
       empty: string;
       requestCta: string;
+    };
+    footerCta: {
+      title: string;
+      subtitle: string;
     };
   };
   form: {

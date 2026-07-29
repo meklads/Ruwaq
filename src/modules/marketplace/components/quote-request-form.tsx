@@ -14,6 +14,7 @@ type Props = {
   locale: Locale;
   initialCity?: string;
   initialCategory?: string;
+  variant?: "page" | "modal";
 };
 
 export function QuoteRequestForm({
@@ -21,6 +22,7 @@ export function QuoteRequestForm({
   locale,
   initialCity = "jeddah",
   initialCategory = "fit-out",
+  variant = "page",
 }: Props) {
   const [clientName, setClientName] = useState("");
   const [clientPhone, setClientPhone] = useState("");
@@ -62,9 +64,18 @@ export function QuoteRequestForm({
     );
   }
 
+  const formClass =
+    variant === "modal"
+      ? "ruwaq-form-card mx-auto max-w-xl space-y-5 border-0 shadow-none"
+      : "ruwaq-form-card mx-auto max-w-xl space-y-5";
+
   return (
-    <form onSubmit={onSubmit} className="ruwaq-form-card mx-auto max-w-xl space-y-5">
-      <h1 className="ruwaq-app-title text-center">{copy.title}</h1>
+    <form onSubmit={onSubmit} className={formClass}>
+      {variant === "page" ? (
+        <h1 className="ruwaq-app-title text-center">{copy.title}</h1>
+      ) : (
+        <h2 className="ruwaq-app-title pt-2 text-center text-xl">{copy.title}</h2>
+      )}
       {error && (
         <div className="rounded-xl bg-red-50 px-4 py-3 text-sm text-red-600">{error}</div>
       )}

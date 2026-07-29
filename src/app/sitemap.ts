@@ -12,7 +12,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
     { path: "/", priority: 1, changeFrequency: "weekly" as const },
     { path: "/request-quote", priority: 0.9, changeFrequency: "weekly" as const },
-    { path: "/templates/sample", priority: 0.7, changeFrequency: "monthly" as const },
+    { path: "/categories", priority: 0.9, changeFrequency: "weekly" as const },
+    { path: "/about", priority: 0.75, changeFrequency: "monthly" as const },
   ];
 
   const cityRoutes = MARKETPLACE_CITIES.map((city) => ({

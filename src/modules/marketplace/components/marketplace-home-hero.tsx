@@ -24,12 +24,9 @@ export function MarketplaceHomeHero({ copy, locale }: Props) {
           <Link href="/request-quote" className="btn-ruwaq-hero-gold px-10 py-4 text-base">
             {copy.ctaPrimary} {arrow}
           </Link>
-          <a href="#categories" className="ruwaq-market-btn-outline">
+          <Link href="/categories" className="ruwaq-market-btn-outline">
             {copy.ctaSecondary}
-          </a>
-          <a href="#contractor-promo" className="ruwaq-market-btn-ghost">
-            {copy.ctaContractor}
-          </a>
+          </Link>
         </div>
         <p className="ruwaq-market-trust mt-8">{copy.trustLine}</p>
       </div>

@@ -15,7 +15,10 @@ export const en: Messages = {
   previewSample: "Preview sample",
   requestQuote: "Request a quote",
   browseCategories: "Categories",
-  contractorHub: "Contractor hub",
+  contractorHub: "Contractor proposal tool",
+  aboutPlatform: "About the platform",
+  backToDirectory: "← Client directory",
+  closeModal: "Close",
  },
  marketplace: {
   hero: {
@@ -26,7 +29,7 @@ export const en: Messages = {
     "Verified contractors, HVAC, fit-out, and elevators — or request quotes within 24 hours.",
    trustLine: "7 sectors · 3 cities · Free quote requests",
    ctaPrimary: "Get a quote",
-   ctaSecondary: "Browse sectors",
+   ctaSecondary: "Browse verified companies",
    ctaContractor: "Contractor proposal tool",
   },
   search: {
@@ -47,19 +50,31 @@ export const en: Messages = {
    cta: "Start a proposal",
   },
   contractorPromo: {
-   eyebrow: "For contractors & operators",
-   title: "AI proposal builder",
+   eyebrow: "For contractors only",
+   title: "Run a contracting or engineering company?",
    subtitle:
-    "A quick preview — open the full interactive tool in the contractor workspace, separate from client browsing.",
-   bullets: [
-    "Three steps: project, details, export PDF",
-    "Your brand and clause library",
-    "Save proposals and share with clients",
-   ],
+    "Create professional engineering quotes for your clients with AI in about two minutes — free to start.",
    cta: "Try the proposal tool",
-   previewLabel: "Preview",
-   previewPill: "Pro proposal",
-   previewNote: "The full form opens in the contractor area.",
+  },
+  aboutPage: {
+   eyebrow: "Ruwaq · Western Region",
+   title: "About the platform",
+   intro:
+    "Ruwaq is an engineering and property directory connecting villa, hotel, and project owners in Jeddah, Makkah, and Madinah with verified service providers — plus free quote requests within 24 hours.",
+   sections: [
+    {
+     title: "Who is this for?",
+     body: "Property owners, hotel operators, and project managers looking for trusted contractors across seven high-value engineering sectors.",
+    },
+    {
+     title: "How providers are listed",
+     body: "We surface verified listings by city and category. Major fit-out and contracting leads are coordinated with the Turriva team.",
+    },
+    {
+     title: "Is Ruwaq a proposal SaaS?",
+     body: "Yes — in a separate portal. The public homepage is client-first; contractors use the AI proposal tool via the contractor hub button.",
+    },
+   ],
   },
   quote: {
    title: "Get competitive quotes within 24 hours",
@@ -86,6 +101,10 @@ export const en: Messages = {
    whatsapp: "WhatsApp",
    empty: "No verified providers yet. Request a quote and we will match you.",
    requestCta: "Request a quote for this category",
+  },
+  footerCta: {
+   title: "Get quotes from verified companies",
+   subtitle: "Describe your project for free — we respond within 24 hours across Jeddah, Makkah, and Madinah.",
   },
  },
  form: {

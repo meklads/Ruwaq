@@ -14,16 +14,9 @@ export async function SiteFooter() {
     {
       title: t.site.footer.product,
       links: [
+        { href: "/categories", label: t.nav.browseCategories },
         { href: "/request-quote", label: t.nav.requestQuote },
-        { href: "/#categories", label: t.nav.browseCategories },
-      ],
-    },
-    {
-      title: t.nav.contractorHub,
-      links: [
-        { href: "/proposals", label: t.nav.myProposals },
-        { href: "/proposals/new", label: t.nav.newProposal },
-        { href: "/templates/sample", label: t.nav.previewSample },
+        { href: "/about", label: t.nav.aboutPlatform },
       ],
     },
     {
@@ -37,12 +30,12 @@ export async function SiteFooter() {
       <div className="mx-auto max-w-6xl px-4 pt-16 sm:px-6 sm:pt-20 lg:pt-24">
         <div className="grid gap-12 border-b border-slate-100 pb-14 lg:grid-cols-[1.2fr_1fr] lg:gap-20 lg:pb-16">
           <div>
-            <h2 className="ruwaq-footer-cta-title">{t.site.footer.ctaTitle}</h2>
+            <h2 className="ruwaq-footer-cta-title">{t.marketplace.footerCta.title}</h2>
             <p className="mt-5 max-w-md text-base leading-relaxed text-ruwaq-ink-soft">
-              {t.site.footer.ctaSubtitle}
+              {t.marketplace.footerCta.subtitle}
             </p>
-            <Link href="/proposals" className="btn-ruwaq-primary mt-8 inline-flex px-9 py-3.5">
-              {t.marketplace.contractorPromo.cta} {arrow}
+            <Link href="/request-quote" className="btn-ruwaq-primary mt-8 inline-flex px-9 py-3.5">
+              {t.nav.requestQuote} {arrow}
             </Link>
           </div>
 
@@ -77,6 +70,12 @@ export async function SiteFooter() {
             <p className="mt-4 flex flex-wrap items-center gap-x-2 gap-y-2 text-xs text-ruwaq-ink-muted">
               <span>{t.site.footer.sponsoredBy}</span>
               <GraphicsHouseLogo variant="mark" className="h-7 w-auto sm:h-8" />
+            </p>
+            <p className="mt-6 text-xs text-ruwaq-ink-muted">
+              {t.nav.contractorHub}:{" "}
+              <Link href="/proposals" className="font-semibold text-ruwaq-gold hover:underline">
+                /proposals
+              </Link>
             </p>
           </div>
         </div>
