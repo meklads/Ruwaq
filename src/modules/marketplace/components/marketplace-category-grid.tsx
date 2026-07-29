@@ -20,12 +20,20 @@ export function MarketplaceCategoryGrid({
   const city = MARKETPLACE_CITIES.find((c) => c.slug === defaultCitySlug);
 
   return (
-    <section id="categories" className="scroll-mt-28 px-4 py-14 sm:px-6 sm:py-16">
+    <section id="categories" className="ruwaq-category-section scroll-mt-28">
       <div className="mx-auto max-w-6xl">
-        <h2 className="ruwaq-section-title text-center">{copy.title}</h2>
-        <p className="mx-auto mt-3 max-w-2xl text-center text-ruwaq-ink-soft">
-          {copy.subtitle}
-        </p>
+        <h2 className="ruwaq-section-title text-center">
+          {locale === "ar" ? (
+            <>
+              القطاعات <span className="ruwaq-section-title-accent">المعتمدة</span>
+            </>
+          ) : (
+            <>
+              Approved <span className="ruwaq-section-title-accent">sectors</span>
+            </>
+          )}
+        </h2>
+        <p className="ruwaq-section-lead">{copy.subtitle}</p>
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {MARKETPLACE_CATEGORIES.map((cat) => (
             <Link

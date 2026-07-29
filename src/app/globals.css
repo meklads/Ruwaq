@@ -171,7 +171,7 @@
   }
 
   .ruwaq-app-title {
-    @apply mt-2 text-[1.75rem] font-semibold leading-[1.2] tracking-tight text-ruwaq-ink sm:text-[2rem] lg:text-[2.25rem];
+    @apply mt-2 text-[1.75rem] font-semibold leading-[1.2] tracking-tight text-[#0f2c59] sm:text-[2rem] lg:text-[2.25rem];
   }
 
   html[lang="en"] .ruwaq-app-title {
@@ -183,16 +183,83 @@
   }
 
   .ruwaq-home-tool {
-    @apply relative border-t border-ruwaq-stone/60 bg-ruwaq-canvas-soft;
+    @apply relative scroll-mt-[7.5rem] bg-transparent;
   }
 
   .ruwaq-home-tool::before {
-    content: "";
-    @apply pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-ruwaq-gold/25 to-transparent;
+    content: none;
   }
 
   .ruwaq-home-tool-inner {
-    @apply mx-auto w-full max-w-6xl px-4 py-14 sm:px-6 sm:py-16 lg:py-20;
+    @apply mx-auto w-full max-w-6xl px-4 pb-16 pt-2 sm:px-6 sm:pb-20;
+  }
+
+  .ruwaq-market-hero {
+    @apply relative overflow-hidden border-b border-white/10 px-4 pb-20 pt-14 text-white sm:px-6 sm:pb-24 sm:pt-16 lg:pb-28 lg:pt-20;
+  }
+
+  .ruwaq-market-hero-bg {
+    @apply pointer-events-none absolute inset-0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201, 160, 99, 0.18), transparent 55%),
+      linear-gradient(165deg, #0f2c59 0%, #1a4a3e 42%, #0f172a 100%);
+  }
+
+  .ruwaq-market-hero-inner {
+    @apply relative z-[1] mx-auto max-w-4xl text-center;
+  }
+
+  .ruwaq-market-eyebrow {
+    @apply text-sm font-semibold tracking-wide text-ruwaq-gold-light;
+  }
+
+  /* Overrides global h1 { color: ink } on dark hero */
+  .ruwaq-market-title {
+    @apply mt-5 font-bold leading-[1.38] text-white;
+    font-size: clamp(1.75rem, 4.5vw, 2.65rem);
+    text-wrap: balance;
+  }
+
+  html[lang="ar"] .ruwaq-market-title,
+  html[data-lang="ar"] .ruwaq-market-title {
+    color: #ffffff;
+    line-height: 1.48;
+  }
+
+  .ruwaq-market-title-highlight {
+    @apply block text-ruwaq-gold-light sm:inline;
+  }
+
+  .ruwaq-market-subtitle {
+    @apply mx-auto mt-6 max-w-2xl text-base leading-relaxed text-white/90 sm:text-lg;
+  }
+
+  .ruwaq-market-trust {
+    @apply text-sm text-white/65;
+  }
+
+  .ruwaq-market-btn-outline {
+    @apply inline-flex items-center justify-center rounded-full border border-white/35 bg-white/10 px-8 py-3.5 text-sm font-semibold text-white backdrop-blur-sm transition hover:border-white/55 hover:bg-white/15;
+  }
+
+  .ruwaq-market-btn-ghost {
+    @apply inline-flex items-center justify-center rounded-full px-5 py-3.5 text-sm font-semibold text-ruwaq-gold-light underline-offset-4 hover:underline;
+  }
+
+  .ruwaq-section-title-accent {
+    @apply text-ruwaq-gold;
+  }
+
+  .ruwaq-section-lead {
+    @apply mx-auto mt-3 max-w-2xl text-center text-base text-ruwaq-ink-soft;
+  }
+
+  .ruwaq-contractor-zone {
+    @apply border-t border-ruwaq-stone/60 bg-gradient-to-b from-ruwaq-linen to-white;
+  }
+
+  .ruwaq-category-section {
+    @apply bg-ruwaq-canvas-soft px-4 py-14 sm:px-6 sm:py-16;
   }
 
   .ruwaq-form-card {
@@ -802,7 +869,7 @@
     font-weight: 700;
     line-height: 1.28;
     text-wrap: balance;
-    @apply text-ruwaq-ink;
+    @apply text-[#0f2c59];
   }
 
   html[lang="ar"] .ruwaq-section-title,

@@ -31,10 +31,10 @@ export function MarketplaceSearchBar({ copy, locale }: Props) {
   };
 
   return (
-    <section className="relative z-10 -mt-8 mx-auto max-w-5xl px-4 sm:px-6">
+    <section className="relative z-10 -mt-10 px-4 sm:px-6 lg:-mt-12">
       <form
         onSubmit={onSubmit}
-        className="ruwaq-form-card flex flex-col gap-4 shadow-ruwaq-lg sm:flex-row sm:flex-wrap sm:items-end"
+        className="ruwaq-form-card mx-auto flex max-w-5xl flex-col gap-4 shadow-ruwaq-lg ring-1 ring-ruwaq-stone/40 sm:flex-row sm:flex-wrap sm:items-end"
       >
         <div className="min-w-[140px] flex-1">
           <label className="ruwaq-label">{copy.cityLabel}</label>

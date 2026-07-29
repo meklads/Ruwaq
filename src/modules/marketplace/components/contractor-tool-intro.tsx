@@ -10,16 +10,25 @@ type Props = {
 export function ContractorToolIntro({ copy, locale }: Props) {
   const arrow = locale === "ar" ? "←" : "→";
   return (
-    <section className="border-y border-ruwaq-stone/50 bg-white px-4 py-12 sm:px-6 sm:py-14">
-      <div className="mx-auto flex max-w-5xl flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
-        <div>
-          <h2 className="text-2xl font-bold text-ruwaq-ink">{copy.title}</h2>
-          <p className="mt-2 max-w-xl text-ruwaq-ink-soft">{copy.subtitle}</p>
-        </div>
-        <Link href="#create-proposal" className="btn-ruwaq-primary shrink-0 px-8 py-3.5">
-          {copy.cta} {arrow}
-        </Link>
+    <div className="mx-auto flex max-w-5xl flex-col gap-4 border-b border-ruwaq-stone/50 px-4 pb-10 pt-12 sm:flex-row sm:items-end sm:justify-between sm:px-6">
+      <div>
+        <p className="ruwaq-eyebrow">{copy.title}</p>
+        <h2 id="home-tool-title" className="ruwaq-section-title mt-2 text-start text-2xl sm:text-[1.75rem]">
+          {locale === "ar" ? (
+            <>
+              أنشئ <span className="ruwaq-section-title-accent">عرضاً</span> احترافياً
+            </>
+          ) : (
+            <>
+              Build a <span className="ruwaq-section-title-accent">pro</span> proposal
+            </>
+          )}
+        </h2>
+        <p className="mt-2 max-w-xl text-ruwaq-ink-soft">{copy.subtitle}</p>
       </div>
-    </section>
+      <Link href="#create-proposal" className="btn-ruwaq-primary shrink-0 px-8 py-3.5">
+        {copy.cta} {arrow}
+      </Link>
+    </div>
   );
 }

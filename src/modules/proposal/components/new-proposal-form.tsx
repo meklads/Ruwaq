@@ -377,20 +377,14 @@ export function NewProposalForm({ variant = "embedded" }: Props) {
       >
         <div className="ruwaq-home-tool-inner">
           <div className="mx-auto max-w-xl">
-            <p className="ruwaq-eyebrow">{t.nav.newProposal}</p>
-            <h2 id="home-tool-title" className="ruwaq-app-title">
-              {t.form.title}
-            </h2>
-            <p className="mt-3 text-[1.0625rem] leading-relaxed text-ruwaq-ink-muted sm:text-lg">
-              {t.form.subtitle}
-            </p>
             <Link
               href="/templates/sample"
-              className="mt-4 inline-flex text-sm font-semibold text-ruwaq-gold hover:underline"
+              className="inline-flex text-sm font-semibold text-ruwaq-gold hover:underline"
             >
               {t.nav.previewSample} {forward}
             </Link>
-            <div className="mt-10">{formBody}</div>
+            <p className="mt-2 text-sm text-ruwaq-ink-muted">{t.form.subtitle}</p>
+            <div className="mt-8">{formBody}</div>
           </div>
         </div>
       </section>

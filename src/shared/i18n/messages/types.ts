@@ -14,9 +14,13 @@ export type Messages = {
   marketplace: {
     hero: {
       title: string;
+      titleHighlight: string;
       subtitle: string;
+      eyebrow: string;
+      trustLine: string;
       ctaPrimary: string;
       ctaSecondary: string;
+      ctaContractor: string;
     };
     search: {
       cityLabel: string;

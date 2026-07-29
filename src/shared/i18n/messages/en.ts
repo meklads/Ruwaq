@@ -18,11 +18,15 @@ export const en: Messages = {
  },
  marketplace: {
   hero: {
-   title: "Ruwaq | Western Region engineering & property directory",
+   eyebrow: "Ruwaq · Western Region",
+   title: "Engineering & property directory",
+   titleHighlight: "for Jeddah, Makkah & Madinah",
    subtitle:
-    "Connect with verified contracting, HVAC, fit-out, and elevator firms in Jeddah, Makkah, and Madinah.",
+    "Verified contractors, HVAC, fit-out, and elevators — or request quotes within 24 hours.",
+   trustLine: "7 sectors · 3 cities · Free quote requests",
    ctaPrimary: "Get a quote",
-   ctaSecondary: "Browse verified providers",
+   ctaSecondary: "Browse sectors",
+   ctaContractor: "Contractor proposal tool",
   },
   search: {
    cityLabel: "City",

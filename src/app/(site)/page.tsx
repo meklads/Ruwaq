@@ -12,11 +12,16 @@ export default async function HomePage() {
 
   return (
     <>
+      {/* 1. Marketplace: owners & quote requests */}
       <MarketplaceHomeHero copy={t.marketplace.hero} locale={locale} />
       <MarketplaceSearchBar copy={t.marketplace.search} locale={locale} />
       <MarketplaceCategoryGrid copy={t.marketplace.categories} locale={locale} />
-      <ContractorToolIntro copy={t.marketplace.contractorSection} locale={locale} />
-      <NewProposalForm variant="embedded" />
+
+      {/* 2. Contractors: AI proposal tool (separate visual band) */}
+      <div className="ruwaq-contractor-zone">
+        <ContractorToolIntro copy={t.marketplace.contractorSection} locale={locale} />
+        <NewProposalForm variant="embedded" />
+      </div>
     </>
   );
 }

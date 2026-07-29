@@ -11,31 +11,27 @@ export function MarketplaceHomeHero({ copy, locale }: Props) {
   const arrow = locale === "ar" ? "←" : "→";
 
   return (
-    <section className="ruwaq-market-hero relative overflow-hidden border-b border-ruwaq-stone/50 bg-gradient-to-b from-[#0F2C59] via-[#1B4D3E] to-[#0f172a] px-4 py-16 text-white sm:px-6 sm:py-20 lg:py-24">
-      <div className="pointer-events-none absolute -start-24 top-0 h-72 w-72 rounded-full bg-ruwaq-gold/10 blur-3xl" />
-      <div className="pointer-events-none absolute -bottom-16 end-0 h-64 w-64 rounded-full bg-emerald-400/10 blur-3xl" />
-      <div className="relative mx-auto max-w-4xl text-center">
-        <p className="text-sm font-semibold text-ruwaq-gold-light">ruwaq.co</p>
-        <h1 className="mt-4 text-3xl font-bold leading-[1.35] sm:text-4xl lg:text-[2.35rem]">
+    <section className="ruwaq-market-hero">
+      <div className="ruwaq-market-hero-bg" aria-hidden />
+      <div className="ruwaq-market-hero-inner">
+        <p className="ruwaq-market-eyebrow">{copy.eyebrow}</p>
+        <h1 className="ruwaq-market-title">
           {copy.title}
+          <span className="ruwaq-market-title-highlight"> {copy.titleHighlight}</span>
         </h1>
-        <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-white/85 sm:text-lg">
-          {copy.subtitle}
-        </p>
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-          <Link
-            href="/request-quote"
-            className="btn-ruwaq-hero-gold inline-flex px-10 py-4 text-base"
-          >
+        <p className="ruwaq-market-subtitle">{copy.subtitle}</p>
+        <div className="mt-9 flex flex-wrap items-center justify-center gap-3 sm:mt-10">
+          <Link href="/request-quote" className="btn-ruwaq-hero-gold px-10 py-4 text-base">
             {copy.ctaPrimary} {arrow}
           </Link>
-          <a
-            href="#categories"
-            className="btn-ruwaq-hero-outline inline-flex px-8 py-3.5"
-          >
+          <a href="#categories" className="ruwaq-market-btn-outline">
             {copy.ctaSecondary}
           </a>
+          <a href="#create-proposal" className="ruwaq-market-btn-ghost">
+            {copy.ctaContractor}
+          </a>
         </div>
+        <p className="ruwaq-market-trust mt-8">{copy.trustLine}</p>
       </div>
     </section>
   );
