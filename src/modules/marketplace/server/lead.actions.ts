@@ -5,6 +5,7 @@ import { db } from "@/shared/lib/db";
 import {
   getCategoryBySlug,
   getCityBySlug,
+  MARKETPLACE_CATEGORIES,
   type MarketplaceCategorySlug,
   type MarketplaceCitySlug,
 } from "@/shared/constants/marketplace-taxonomy";
@@ -13,101 +14,154 @@ import {
   notifyLeadRouting,
   resolveLeadStatus,
 } from "@/modules/marketplace/server/lead-routing";
+import {
+  buildClientFollowUpWhatsAppMessage,
+  buildWhatsAppUrl,
+  leadReferenceCode,
+  normalizeKsaPhone,
+  supportWhatsAppE164,
+} from "@/modules/marketplace/lib/lead-phone";
 import type { MarketplaceCity } from "@prisma/client";
+
+const categorySlugs = MARKETPLACE_CATEGORIES.map((c) => c.slug) as [
+  MarketplaceCategorySlug,
+  ...MarketplaceCategorySlug[],
+];
 
 const ksaPhone = z
   .string()
+  .trim()
   .min(9)
-  .max(20)
-  .transform((v) => v.replace(/\s+/g, ""))
-  .refine(
-    (v) => /^(\+966|966|05)\d{8,9}$/.test(v) || /^05\d{8}$/.test(v),
-    { message: "invalid_phone" }
-  );
+  .max(24)
+  .superRefine((value, ctx) => {
+    try {
+      normalizeKsaPhone(value);
+    } catch {
+      ctx.addIssue({ code: "custom", message: "invalid_phone" });
+    }
+  })
+  .transform((value) => normalizeKsaPhone(value));
 
-const leadSchema = z.object({
-  clientName: z.string().trim().min(2).max(120),
+const submitLeadSchema = z.object({
+  clientName: z.string().trim().min(2, { message: "validation" }).max(120),
   clientPhone: ksaPhone,
   citySlug: z.enum(["jeddah", "makkah", "madinah"]),
-  categorySlug: z.enum([
-    "hvac",
-    "fit-out",
-    "contracting",
-    "elevators",
-    "waterproofing",
-    "furnishing",
-    "facades",
-  ]),
-  projectDetails: z.string().trim().min(10).max(4000),
+  categorySlug: z.enum(categorySlugs),
+  projectDetails: z.string().trim().min(10, { message: "validation" }).max(4000),
   budgetRange: z.string().trim().max(80).optional(),
   locale: z.enum(["ar", "en"]).default("ar"),
 });
 
+export type SubmitLeadInput = z.infer<typeof submitLeadSchema>;
+
 export type SubmitLeadResult =
-  | { success: true; leadId: string; status: string }
+  | {
+      success: true;
+      leadId: string;
+      status: string;
+      referenceCode: string;
+      whatsAppUrl: string | null;
+    }
   | { success: false; error: string };
 
-export async function submitMarketplaceLeadAction(
-  input: z.infer<typeof leadSchema>
+async function persistAndRouteLead(
+  data: SubmitLeadInput
 ): Promise<SubmitLeadResult> {
-  const parsed = leadSchema.safeParse(input);
-  if (!parsed.success) {
-    const code = parsed.error.issues[0]?.message;
-    if (code === "invalid_phone") {
-      return { success: false, error: "invalid_phone" };
-    }
-    return { success: false, error: "validation" };
-  }
-
-  const data = parsed.data;
   const cityMeta = getCityBySlug(data.citySlug);
   const categoryMeta = getCategoryBySlug(data.categorySlug);
   if (!cityMeta || !categoryMeta) {
     return { success: false, error: "validation" };
   }
 
-  let category = await db.serviceCategory.findUnique({
+  const category = await db.serviceCategory.findUnique({
     where: { slug: data.categorySlug },
   });
   if (!category) {
     return { success: false, error: "category_missing" };
   }
 
-  const status = resolveLeadStatus(data.categorySlug as MarketplaceCategorySlug);
-  const assignedTo =
-    status === "ASSIGNED_TO_TURRIVA" ? "TURRIVA" : null;
+  const status = resolveLeadStatus(data.categorySlug);
+  const assignedTo = status === "ASSIGNED_TO_TURRIVA" ? "TURRIVA" : null;
+
+  const lead = await db.marketplaceLead.create({
+    data: {
+      clientName: data.clientName,
+      clientPhone: data.clientPhone,
+      city: cityMeta.enum as MarketplaceCity,
+      categoryId: category.id,
+      projectDetails: data.projectDetails,
+      budgetRange: data.budgetRange || null,
+      status,
+      assignedTo,
+      locale: data.locale,
+      routingNote: buildRoutingNote(data.categorySlug),
+    },
+  });
+
+  const categoryLabel =
+    data.locale === "ar" ? categoryMeta.nameAr : categoryMeta.nameEn;
+  const cityLabel = data.locale === "ar" ? cityMeta.nameAr : cityMeta.nameEn;
+
+  await notifyLeadRouting({
+    leadId: lead.id,
+    status,
+    clientName: lead.clientName,
+    clientPhone: lead.clientPhone,
+    city: data.citySlug,
+    categorySlug: data.categorySlug,
+    categoryLabel,
+    projectDetails: lead.projectDetails,
+    budgetRange: lead.budgetRange,
+  });
+
+  const referenceCode = leadReferenceCode(lead.id);
+  const supportPhone = supportWhatsAppE164();
+  const whatsAppUrl = supportPhone
+    ? buildWhatsAppUrl(
+        supportPhone,
+        buildClientFollowUpWhatsAppMessage({
+          locale: data.locale,
+          referenceCode,
+          clientName: data.clientName,
+          cityLabel,
+          categoryLabel,
+        })
+      )
+    : null;
+
+  return {
+    success: true,
+    leadId: lead.id,
+    status,
+    referenceCode,
+    whatsAppUrl,
+  };
+}
+
+/** Server Action: validate, route, and save marketplace quote requests. */
+export async function submitLead(input: SubmitLeadInput): Promise<SubmitLeadResult> {
+  const parsed = submitLeadSchema.safeParse(input);
+  if (!parsed.success) {
+    const issue = parsed.error.issues[0];
+    const code = issue?.message;
+    if (code === "invalid_phone") return { success: false, error: "invalid_phone" };
+    if (code === "validation") return { success: false, error: "validation" };
+    return { success: false, error: "validation" };
+  }
 
   try {
-    const lead = await db.marketplaceLead.create({
-      data: {
-        clientName: data.clientName,
-        clientPhone: data.clientPhone,
-        city: cityMeta.enum as MarketplaceCity,
-        categoryId: category.id,
-        projectDetails: data.projectDetails,
-        budgetRange: data.budgetRange || null,
-        status,
-        assignedTo,
-        locale: data.locale,
-        routingNote: buildRoutingNote(data.categorySlug),
-      },
-    });
-
-    await notifyLeadRouting({
-      leadId: lead.id,
-      status,
-      clientName: lead.clientName,
-      clientPhone: lead.clientPhone,
-      city: data.citySlug,
-      categorySlug: data.categorySlug,
-      projectDetails: lead.projectDetails,
-    });
-
-    return { success: true, leadId: lead.id, status };
+    return await persistAndRouteLead(parsed.data);
   } catch (err) {
-    console.error("[submitMarketplaceLead]", err);
+    console.error("[submitLead]", err);
     return { success: false, error: "server" };
   }
+}
+
+/** @deprecated Use `submitLead` — kept for existing imports */
+export async function submitMarketplaceLeadAction(
+  input: SubmitLeadInput
+): Promise<SubmitLeadResult> {
+  return submitLead(input);
 }
 
 export async function getListingsForCityCategory(

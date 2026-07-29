@@ -59,7 +59,17 @@ export type Messages = {
     quote: {
       title: string;
       submit: string;
+      submitting: string;
       success: string;
+      successModal: {
+        title: string;
+        subtitle: string;
+        referenceLabel: string;
+        whatsAppCta: string;
+        close: string;
+        browseCategories: string;
+        noWhatsAppHint: string;
+      };
       errors: {
         validation: string;
         invalid_phone: string;
@@ -69,6 +79,7 @@ export type Messages = {
       fields: {
         name: string;
         phone: string;
+        phonePlaceholder: string;
         city: string;
         category: string;
         details: string;

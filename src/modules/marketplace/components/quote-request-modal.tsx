@@ -69,6 +69,7 @@ export function QuoteRequestModal({
             initialCity={initialCity}
             initialCategory={initialCategory}
             variant="modal"
+            onSuccessClose={() => setOpen(false)}
           />
         </div>
       </dialog>

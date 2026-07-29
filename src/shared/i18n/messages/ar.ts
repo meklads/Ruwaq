@@ -78,16 +78,27 @@ export const ar = {
   quote: {
    title: "احصل على أفضل عروض الأسعار خلال 24 ساعة",
    submit: "إرسال الطلب مجاناً",
+   submitting: "جاري الإرسال...",
    success: "تم استلام طلبك. سنتواصل معك قريباً.",
+   successModal: {
+    title: "تم استلام طلبك بنجاح",
+    subtitle: "فريق رواق يراجع طلبك ويتواصل معك خلال 24 ساعة. احفظ رقم المرجع للمتابعة.",
+    referenceLabel: "مرجع الطلب",
+    whatsAppCta: "متابعة عبر واتساب",
+    close: "إغلاق",
+    browseCategories: "تصفح القطاعات",
+    noWhatsAppHint: "سنتواصل معك على رقم الجوال الذي أدخلته.",
+   },
    errors: {
     validation: "يرجى تعبئة جميع الحقول المطلوبة.",
-    invalid_phone: "يرجى إدخال رقم جوال سعودي صحيح (05xxxxxxxx).",
+    invalid_phone: "أدخل رقم جوال سعودي صحيح (05xxxxxxxx أو +9665xxxxxxxx).",
     category_missing: "القطاع غير متاح حالياً. حاول لاحقاً.",
     server: "حدث خطأ. يرجى المحاولة مرة أخرى.",
    },
    fields: {
     name: "الاسم الكامل",
     phone: "رقم الجوال",
+    phonePlaceholder: "+966 5xxxxxxxx",
     city: "المدينة",
     category: "نوع الخدمة",
     details: "تفاصيل المشروع / الطلب",

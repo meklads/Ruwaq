@@ -80,16 +80,27 @@ export const en: Messages = {
   quote: {
    title: "Get competitive quotes within 24 hours",
    submit: "Send request — free",
+   submitting: "Sending...",
    success: "Request received. We will contact you soon.",
+   successModal: {
+    title: "Request received",
+    subtitle: "Our team will review your request and respond within 24 hours. Save your reference code for follow-up.",
+    referenceLabel: "Reference",
+    whatsAppCta: "Follow up on WhatsApp",
+    close: "Close",
+    browseCategories: "Browse sectors",
+    noWhatsAppHint: "We will contact you on the mobile number you provided.",
+   },
    errors: {
     validation: "Please fill in all required fields.",
-    invalid_phone: "Enter a valid KSA mobile number (05xxxxxxxx).",
+    invalid_phone: "Enter a valid KSA mobile (+9665xxxxxxxx or 05xxxxxxxx).",
     category_missing: "Category unavailable. Try again later.",
     server: "Something went wrong. Please try again.",
    },
    fields: {
     name: "Full name",
     phone: "Mobile number",
+    phonePlaceholder: "+966 5xxxxxxxx",
     city: "City",
     category: "Service type",
     details: "Project details",

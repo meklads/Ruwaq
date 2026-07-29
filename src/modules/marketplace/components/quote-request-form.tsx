@@ -5,7 +5,8 @@ import {
   MARKETPLACE_CATEGORIES,
   MARKETPLACE_CITIES,
 } from "@/shared/constants/marketplace-taxonomy";
-import { submitMarketplaceLeadAction } from "@/modules/marketplace/server/lead.actions";
+import { submitLead } from "@/modules/marketplace/server/lead.actions";
+import { QuoteRequestSuccessModal } from "@/modules/marketplace/components/quote-request-success-modal";
 import type { Messages } from "@/shared/i18n/messages/types";
 import type { Locale } from "@/shared/i18n/locale";
 
@@ -15,6 +16,7 @@ type Props = {
   initialCity?: string;
   initialCategory?: string;
   variant?: "page" | "modal";
+  onSuccessClose?: () => void;
 };
 
 export function QuoteRequestForm({
@@ -23,6 +25,7 @@ export function QuoteRequestForm({
   initialCity = "jeddah",
   initialCategory = "fit-out",
   variant = "page",
+  onSuccessClose,
 }: Props) {
   const [clientName, setClientName] = useState("");
   const [clientPhone, setClientPhone] = useState("");
@@ -31,18 +34,21 @@ export function QuoteRequestForm({
   const [projectDetails, setProjectDetails] = useState("");
   const [budgetRange, setBudgetRange] = useState("");
   const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState(false);
   const [pending, setPending] = useState(false);
+  const [success, setSuccess] = useState<{
+    referenceCode: string;
+    whatsAppUrl: string | null;
+  } | null>(null);
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
     setPending(true);
-    const result = await submitMarketplaceLeadAction({
+    const result = await submitLead({
       clientName,
       clientPhone,
       citySlug: citySlug as "jeddah" | "makkah" | "madinah",
-      categorySlug: categorySlug as typeof MARKETPLACE_CATEGORIES[number]["slug"],
+      categorySlug: categorySlug as (typeof MARKETPLACE_CATEGORIES)[number]["slug"],
       projectDetails,
       budgetRange: budgetRange || undefined,
       locale,
@@ -53,14 +59,22 @@ export function QuoteRequestForm({
       setError(copy.errors[key] ?? copy.errors.server);
       return;
     }
-    setSuccess(true);
+    setSuccess({
+      referenceCode: result.referenceCode,
+      whatsAppUrl: result.whatsAppUrl,
+    });
   };
 
   if (success) {
     return (
-      <div className="rounded-2xl border border-emerald-200 bg-emerald-50 px-6 py-8 text-center text-emerald-900">
-        {copy.success}
-      </div>
+      <QuoteRequestSuccessModal
+        copy={copy.successModal}
+        locale={locale}
+        referenceCode={success.referenceCode}
+        whatsAppUrl={success.whatsAppUrl}
+        onClose={onSuccessClose}
+        variant={variant === "modal" ? "inline" : "overlay"}
+      />
     );
   }
 
@@ -95,7 +109,7 @@ export function QuoteRequestForm({
           className="ruwaq-field"
           type="tel"
           inputMode="tel"
-          placeholder="05xxxxxxxx"
+          placeholder={copy.fields.phonePlaceholder}
           value={clientPhone}
           onChange={(e) => setClientPhone(e.target.value)}
           required
@@ -140,6 +154,7 @@ export function QuoteRequestForm({
           value={projectDetails}
           onChange={(e) => setProjectDetails(e.target.value)}
           required
+          minLength={10}
           dir={locale === "ar" ? "rtl" : "ltr"}
         />
       </div>
@@ -153,7 +168,7 @@ export function QuoteRequestForm({
         />
       </div>
       <button type="submit" disabled={pending} className="btn-ruwaq-primary w-full disabled:opacity-50">
-        {copy.submit}
+        {pending ? copy.submitting : copy.submit}
       </button>
     </form>
   );
