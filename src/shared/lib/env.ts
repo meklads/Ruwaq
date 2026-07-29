@@ -48,7 +48,7 @@ function parseEnv(): Env {
 
   const appUrl = normalizeAppUrl(
     process.env.NEXT_PUBLIC_APP_URL ?? process.env.AUTH_URL,
-    isBuildTime ? "http://localhost:3000" : "https://turriva.co"
+    isBuildTime ? "http://localhost:3000" : "https://ruwaq.co"
   );
 
   const normalized = {

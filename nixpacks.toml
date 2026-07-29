@@ -1,14 +1,22 @@
+# Prefer Dockerfile on Coolify (see /Dockerfile). Nixpacks kept as fallback.
 [phases.setup]
-nixPkgs = ["nodejs_22"]
+nixPkgs = ["nodejs_20", "openssl"]
 
 [phases.install]
 cmds = ["npm ci"]
 
 [phases.build]
-cmds = ["npm run build"]
+cmds = [
+  "export DATABASE_URL=${DATABASE_URL:-postgresql://build:build@127.0.0.1:5432/build?schema=public}",
+  "export AUTH_SECRET=${AUTH_SECRET:-build-placeholder-secret-min-32-characters}",
+  "export NEXT_PUBLIC_APP_URL=${NEXT_PUBLIC_APP_URL:-https://ruwaq.co}",
+  "npx prisma generate",
+  "npm run build",
+]
 
 [start]
 cmd = "npm start"
 
 [variables]
-NIXPACKS_NODE_VERSION = "22"
+NIXPACKS_NODE_VERSION = "20"
+NODE_OPTIONS = "--max-old-space-size=4096"

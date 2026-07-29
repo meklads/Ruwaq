@@ -1,0 +1,19 @@
+# Dependencies & build
+.git
+.github
+.cursor
+node_modules
+.next
+out
+coverage
+.env
+.env.*
+!.env.example
+*.md
+!README.md
+**/*.docx
+public/uploads/logos/*
+!public/uploads/logos/.gitkeep
+public/uploads/designs/*
+!public/uploads/designs/.gitkeep
+.DS_Store
