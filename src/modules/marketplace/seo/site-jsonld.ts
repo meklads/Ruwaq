@@ -1,4 +1,5 @@
 import {
+  BEESMOTION_URL,
   GRAPHICS_HOUSE_URL,
   RUWQ_PUBLIC_EMAIL,
   RUWQ_PUBLIC_URL,
@@ -26,7 +27,7 @@ export function buildOrganizationJsonLd(locale: Locale) {
       { "@type": "City", name: "Makkah" },
       { "@type": "City", name: "Madinah" },
     ],
-    sameAs: [TURRIVA_URL, GRAPHICS_HOUSE_URL],
+    sameAs: [TURRIVA_URL, GRAPHICS_HOUSE_URL, BEESMOTION_URL],
   };
 }
 

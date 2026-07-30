@@ -647,6 +647,7 @@ export type Messages = {
       graphicsHouse: string;
       graphicsHouseVisualization: string;
       turriva: string;
+      beesmotion: string;
       followUs: string;
       regionLabel: string;
       affiliateNote: string;

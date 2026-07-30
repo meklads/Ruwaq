@@ -2,10 +2,12 @@ import Link from "next/link";
 import { getMessages } from "@/shared/i18n";
 import { getLocale } from "@/shared/i18n/server";
 import {
+  BEESMOTION_URL,
   GRAPHICS_HOUSE_URL,
   RUWQ_PUBLIC_EMAIL,
   RUWQ_PUBLIC_URL,
   TURRIVA_URL,
+  beesmotionReferralUrl,
   graphicsHouseReferralUrl,
 } from "@/shared/constants/brand";
 import { RuwaqLogo } from "@/shared/components/ruwaq-logo";
@@ -34,6 +36,11 @@ export async function SiteFooter() {
       external: true,
     },
     { href: TURRIVA_URL, label: footer.turriva, external: true },
+    {
+      href: beesmotionReferralUrl("footer_ecosystem"),
+      label: footer.beesmotion,
+      external: true,
+    },
     { href: "/proposals", label: t.nav.contractorHub, external: false },
     { href: "/pricing", label: t.site.nav.pricing, external: false },
   ];

@@ -41,7 +41,7 @@ export function PartnerPromoRow({ locale }: Props) {
 
   return (
     <section
-      className="ruwaq-ad-partner-row scroll-mt-28"
+      className="ruwaq-ad-partner-row"
       aria-label={locale === "ar" ? "شركاء رواق" : "Ruwaq partners"}
     >
       <div className="ruwaq-ad-partner-row__frame">

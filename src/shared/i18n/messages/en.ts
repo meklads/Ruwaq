@@ -1066,10 +1066,11 @@ export const en: Messages = {
    graphicsHouse: "Graphics House, visualization",
    graphicsHouseVisualization: "Register visualization project",
    turriva: "Turriva, decor & contracting",
+   beesmotion: "Beesmotion, digital marketing",
    followUs: "Follow us",
    regionLabel: "Saudi Arabia, Western Region",
    affiliateNote:
-    "Ruwaq is part of the Graphics House ecosystem. Visualization leads may be referred to Graphics House; fit-out and contracting leads may route to Turriva.",
+    "Ruwaq is part of the Graphics House ecosystem. Visualization leads may route to Graphics House; fit-out and contracting to Turriva; digital marketing for businesses to Beesmotion.",
   },
  },
  pages: {

@@ -39,7 +39,7 @@ export function ContractorToolsPromoRow({ locale }: Props) {
 
   return (
     <section
-      className="ruwaq-ad-partner-row ruwaq-ad-partner-row--white scroll-mt-28"
+      className="ruwaq-ad-partner-row ruwaq-ad-partner-row--white"
       aria-label={locale === "ar" ? "أدوات المنشآت" : "Business tools"}
     >
       <div className="ruwaq-ad-partner-row__frame">

@@ -2075,6 +2075,18 @@
   }
 
   /* Partner row: Turriva + Graphics House side by side */
+  .ruwaq-ad-partner-bands {
+    @apply border-t border-neutral-200;
+  }
+
+  .ruwaq-ad-partner-bands .ruwaq-ad-partner-row {
+    @apply border-t-0 py-5 sm:py-8 lg:py-10;
+  }
+
+  .ruwaq-ad-partner-bands .ruwaq-ad-partner-row + .ruwaq-ad-partner-row {
+    @apply pt-0;
+  }
+
   .ruwaq-ad-partner-row {
     @apply border-t border-neutral-200 bg-[var(--ruwaq-ad-stone)] py-8 sm:py-10 lg:py-12;
   }
@@ -2085,6 +2097,27 @@
 
   .ruwaq-ad-partner-row__frame {
     @apply mx-auto grid w-full max-w-[80rem] grid-cols-1 gap-3 px-4 sm:grid-cols-2 sm:gap-4 sm:px-6 lg:gap-5 lg:px-8;
+  }
+
+  @media (max-width: 639px) {
+    .ruwaq-ad-partner-bands .ruwaq-ad-partner-row__frame {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      gap: 0.75rem;
+      padding-bottom: 0.25rem;
+    }
+
+    .ruwaq-ad-partner-bands .ruwaq-ad-partner-row__frame::-webkit-scrollbar {
+      display: none;
+    }
+
+    .ruwaq-ad-partner-bands .ruwaq-ad-partner-row__item {
+      flex: 0 0 min(92vw, 28rem);
+      scroll-snap-align: start;
+    }
   }
 
   .ruwaq-ad-partner-row__item {
