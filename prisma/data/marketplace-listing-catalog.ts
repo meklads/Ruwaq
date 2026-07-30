@@ -1,4 +1,5 @@
 import type { MarketplaceCity } from "@prisma/client";
+import { MARKETPLACE_LISTING_EXPANSION } from "./marketplace-listing-expansion";
 
 export type ListingSeed = {
   categorySlug: string;
@@ -636,7 +637,7 @@ const MARKETPLACE_LISTING_CATALOG: CatalogCell[] = [
         address: "مكة المكرمة - حي العزيزية، شارع المنصور",
       },
       {
-        slug: "رضوان-haram-furniture-makkah",
+        slug: "ridwan-haram-furniture-makkah",
         titleAr: "شركة أثاث رضوان الحرم",
         titleEn: "Ridwan Al-Haram Furniture",
         descriptionAr:
@@ -793,7 +794,8 @@ const MARKETPLACE_LISTING_CATALOG: CatalogCell[] = [
   },
 ];
 
-const EXPECTED_LISTING_COUNT = 21 * 3; // 7 categories × 3 cities × 3 companies
+const COMPANIES_PER_CELL = 6;
+const EXPECTED_LISTING_COUNT = 21 * COMPANIES_PER_CELL; // 7 categories × 3 cities × 6 companies
 
 function assertListingSeeds(seeds: ListingSeed[]): void {
   if (seeds.length !== EXPECTED_LISTING_COUNT) {
@@ -820,6 +822,15 @@ function assertListingSeeds(seeds: ListingSeed[]): void {
   if (seeds.some((s) => !s.isVerified)) {
     throw new Error("All listing seeds must set isVerified: true");
   }
+
+  for (let i = 0; i < seeds.length; i++) {
+    const expectedPhone = `+966551234${String(i + 1).padStart(3, "0")}`;
+    if (seeds[i].phone !== expectedPhone) {
+      throw new Error(
+        `Listing #${i + 1} (${seeds[i].slug}) expected phone ${expectedPhone}, got ${seeds[i].phone}`
+      );
+    }
+  }
 }
 
 export function buildMarketplaceListingSeeds(): ListingSeed[] {
@@ -827,8 +838,18 @@ export function buildMarketplaceListingSeeds(): ListingSeed[] {
   let phoneIndex = 1;
 
   for (const cell of MARKETPLACE_LISTING_CATALOG) {
-    for (let i = 0; i < cell.companies.length; i++) {
-      const company = cell.companies[i];
+    const expansionKey = `${cell.categorySlug}:${cell.city}` as `${string}:${MarketplaceCity}`;
+    const extra = MARKETPLACE_LISTING_EXPANSION[expansionKey] ?? [];
+    const allCompanies = [...cell.companies, ...extra];
+
+    if (allCompanies.length !== COMPANIES_PER_CELL) {
+      throw new Error(
+        `Expected ${COMPANIES_PER_CELL} companies for ${expansionKey}, got ${allCompanies.length}`
+      );
+    }
+
+    for (let i = 0; i < allCompanies.length; i++) {
+      const company = allCompanies[i];
       const phone = `+966551234${String(phoneIndex).padStart(3, "0")}`;
       phoneIndex++;
 

@@ -183,7 +183,7 @@ async function seedMarketplaceListings(
   categoriesBySlug: Map<string, ServiceCategory>,
   admin: User
 ): Promise<void> {
-  console.log("🌱 Seeding ProviderListing (63 companies)…");
+  console.log("🌱 Seeding ProviderListing (126 companies)…");
 
   let created = 0;
   let updated = 0;
@@ -244,7 +244,7 @@ async function seedMarketplaceListings(
     });
     if (removed.count > 0) {
       console.log(
-        `  ✓ Removed ${removed.count} stale listing(s) not in the 63-company catalog`
+        `  ✓ Removed ${removed.count} stale listing(s) not in the 126-company catalog`
       );
     }
   }
@@ -266,9 +266,9 @@ async function verifyMarketplaceListingCounts(
       const count = await prisma.providerListing.count({
         where: { categoryId: category.id, city, isVerified: true },
       });
-      if (count !== 3) {
+      if (count !== 6) {
         console.warn(
-          `  ⚠ Expected 3 verified listings for ${catSlug}/${city}, found ${count}`
+          `  ⚠ Expected 6 verified listings for ${catSlug}/${city}, found ${count}`
         );
         problems += 1;
       }
@@ -280,7 +280,7 @@ async function verifyMarketplaceListingCounts(
       `  ⚠ ${problems} city×category cells have wrong counts — run: SEED_RESET=true npx prisma db seed`
     );
   } else {
-    console.log("  ✓ 3 verified listings per city×category (63 total)");
+    console.log("  ✓ 6 verified listings per city×category (126 total)");
   }
 }
 
