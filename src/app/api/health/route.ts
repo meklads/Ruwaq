@@ -4,9 +4,28 @@ import { isGoogleAuthConfigured } from "@/shared/lib/env";
 
 export const dynamic = "force-dynamic";
 
+function envSet(name: string): boolean {
+  return Boolean(process.env[name]?.trim());
+}
+
+function buildIntegrations() {
+  return {
+    googleAuth: isGoogleAuthConfigured(),
+    authSecret: envSet("AUTH_SECRET"),
+    authUrl: envSet("AUTH_URL"),
+    resend: envSet("RESEND_API_KEY") && envSet("RESEND_FROM"),
+    ruwaqLeadEmail: envSet("RUWQ_LEAD_EMAIL"),
+    turrivaLeadEmail: envSet("TURRIVA_LEAD_EMAIL"),
+    graphicsHouseLeadEmail: envSet("GRAPHICS_HOUSE_LEAD_EMAIL"),
+    supportWhatsApp:
+      envSet("RUWQ_SUPPORT_WHATSAPP") || envSet("NEXT_PUBLIC_RUWQ_SUPPORT_WHATSAPP"),
+    ga4: envSet("NEXT_PUBLIC_GA_MEASUREMENT_ID"),
+  };
+}
+
 /** Liveness probe — always 200 so Coolify does not 502 when DB is misconfigured */
 export async function GET() {
-  const googleAuth = isGoogleAuthConfigured();
+  const integrations = buildIntegrations();
 
   if (!process.env.DATABASE_URL) {
     return NextResponse.json({
@@ -14,7 +33,8 @@ export async function GET() {
       app: true,
       db: false,
       tables: false,
-      googleAuth,
+      schemaReady: false,
+      integrations,
       error: "DATABASE_URL is not set",
       timestamp: new Date().toISOString(),
     });
@@ -34,11 +54,14 @@ export async function GET() {
          AND (
            (table_name = 'Proposal' AND column_name = 'editToken')
            OR (table_name = 'CompanyProfile' AND column_name = 'exportTemplateId')
+           OR (table_name = 'DirectoryApplication' AND column_name = 'listingId')
          )`
     );
     const columnNames = new Set(columns.map((c) => c.column_name));
     const schemaReady =
-      columnNames.has("editToken") && columnNames.has("exportTemplateId");
+      columnNames.has("editToken") &&
+      columnNames.has("exportTemplateId") &&
+      columnNames.has("listingId");
 
     return NextResponse.json({
       ok: true,
@@ -46,7 +69,7 @@ export async function GET() {
       db: true,
       tables: hasProposalTable,
       schemaReady,
-      googleAuth,
+      integrations,
       timestamp: new Date().toISOString(),
     });
   } catch (error) {
@@ -58,7 +81,8 @@ export async function GET() {
       app: true,
       db: false,
       tables: false,
-      googleAuth,
+      schemaReady: false,
+      integrations,
       error: message,
       timestamp: new Date().toISOString(),
     });
