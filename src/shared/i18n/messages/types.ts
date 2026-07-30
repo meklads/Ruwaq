@@ -500,6 +500,7 @@ export type Messages = {
       featured: string;
       howItWorks: string;
       forContractors: string;
+      startProposal: string;
       mainNavLabel: string;
     };
     nav: {

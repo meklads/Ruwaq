@@ -881,6 +881,7 @@ export const en: Messages = {
    featured: "Featured",
    howItWorks: "How it works",
    forContractors: "For contractors",
+   startProposal: "Start a proposal",
    mainNavLabel: "Main navigation",
   },
   nav: {

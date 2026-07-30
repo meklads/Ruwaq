@@ -69,10 +69,11 @@ const config: Config = {
       },
       fontFamily: {
         ar: ["var(--font-ar)", "Segoe UI", "sans-serif"],
-        latin: ["var(--font-latin)", "system-ui", "sans-serif"],
+        "ar-heading": ["var(--font-marketing-ar)", "var(--font-ar)", "sans-serif"],
+        latin: ["var(--font-marketing-latin)", "system-ui", "sans-serif"],
         sans: ["var(--font-ar)", "Segoe UI", "sans-serif"],
-        display: ["var(--font-ar-display)", "var(--font-ar)", "serif"],
-        "display-en": ["var(--font-latin-display)", "Georgia", "serif"],
+        display: ["var(--font-marketing-ar)", "var(--font-ar)", "sans-serif"],
+        "display-en": ["var(--font-marketing-latin)", "system-ui", "sans-serif"],
       },
       boxShadow: {
         ruwaq:

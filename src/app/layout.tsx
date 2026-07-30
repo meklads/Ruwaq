@@ -86,7 +86,7 @@ export default async function RootLayout({
       className={`${almarai.variable} ${amiri.variable} ${inter.variable} ${montserrat.variable} ${playfair.variable} ${plusJakarta.variable} ${ibmPlexArabic.variable}`}
     >
       <body
-        className={`min-h-screen bg-white ${locale === "ar" ? almarai.className : inter.className}`}
+        className={`min-h-screen bg-white ${locale === "ar" ? almarai.className : plusJakarta.className}`}
       >
         <Providers locale={locale}>{children}</Providers>
       </body>

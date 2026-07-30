@@ -875,6 +875,7 @@ export const ar = {
    featured: "المميزون",
    howItWorks: "كيف يعمل",
    forContractors: "للمقاولين",
+   startProposal: "ابدأ عرضاً",
    mainNavLabel: "التنقل الرئيسي",
   },
   nav: {

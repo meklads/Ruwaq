@@ -6,8 +6,9 @@ import {
 import type { Messages } from "@/shared/i18n/messages/types";
 import type { Locale } from "@/shared/i18n/locale";
 
+/** Luxury interior — high contrast, readable with dark gradient overlay */
 const HERO_IMAGE =
-  "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1920&auto=format&fit=crop";
+  "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=1920&auto=format&fit=crop";
 
 const QUICK_CATEGORY_SLUGS = ["fit-out", "kitchens", "luxury-materials"] as const;
 
@@ -43,16 +44,23 @@ export function RuwaqProHero({
       <div className="ruwaq-pro-hero-overlay" aria-hidden />
 
       <div className="ruwaq-pro-hero-inner">
-        <p className="ruwaq-pro-eyebrow">{copy.eyebrow}</p>
+        <p className="ruwaq-pro-eyebrow-badge">{copy.eyebrow}</p>
         <h1
           id="ruwaq-pro-hero-title"
-          className="ruwaq-pro-display mt-4 font-serif text-4xl tracking-tight md:text-6xl"
+          className="ruwaq-pro-display mt-6 text-4xl md:text-6xl"
         >
-          {copy.title}
+          {locale === "ar" ? (
+            <>
+              دليل رواق <span className="ruwaq-pro-display-accent">PRO</span> للمعتمدين
+            </>
+          ) : (
+            <>
+              Ruwaq <span className="ruwaq-pro-display-accent">PRO</span> Directory
+            </>
+          )}
         </h1>
         <p className="ruwaq-pro-subtitle">{copy.subtitle}</p>
 
-        {/* Dual-CTA: clients — category pills */}
         <div className="ruwaq-pro-hero-dual-cta mt-10 w-full max-w-4xl">
           <p className="ruwaq-pro-hero-section-label">{copy.clientsSection}</p>
           <div className="mt-4 flex flex-wrap justify-center gap-3">
@@ -70,13 +78,12 @@ export function RuwaqProHero({
           </div>
         </div>
 
-        {/* Dual-CTA: providers — join directory */}
         <div className="ruwaq-pro-hero-dual-cta mt-10 flex flex-col items-center">
           <p className="ruwaq-pro-hero-section-label">{copy.providersSection}</p>
           <Link href={copy.applyHref} className="ruwaq-pro-apply mt-4">
             {copy.applyCta}
           </Link>
-          <p className="mt-3 max-w-md text-[10px] uppercase tracking-widest text-white/60">
+          <p className="mt-3 max-w-md text-xs leading-relaxed text-white/75">
             {copy.applyHint}
           </p>
         </div>

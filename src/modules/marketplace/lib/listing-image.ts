@@ -1,7 +1,7 @@
 import type { ProviderListing } from "@prisma/client";
 
 const DEFAULT_EDITORIAL_IMAGE =
-  "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop";
+  "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=1200&auto=format&fit=crop";
 
 export function listingGalleryImages(listing: ProviderListing): string[] {
   const images = listing.images;
