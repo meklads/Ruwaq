@@ -1,7 +1,6 @@
 import { getMessages } from "@/shared/i18n";
 import { getLocale } from "@/shared/i18n/server";
 import { RuwaqProHero } from "@/modules/marketplace/components/directory/RuwaqProHero";
-import { MarketplaceSearchBar } from "@/modules/marketplace/components/marketplace-search-bar";
 import { TodaysDirectorySection } from "@/modules/marketplace/components/todays-directory-section";
 import { ProjectToursSection } from "@/modules/marketplace/components/project-tours-section";
 import { GuidesSection } from "@/modules/marketplace/components/guides-section";
@@ -17,8 +16,11 @@ export default async function HomePage() {
 
   return (
     <>
-      <RuwaqProHero copy={t.marketplace.proDirectory} locale={locale} />
-      <MarketplaceSearchBar copy={t.marketplace.search} locale={locale} />
+      <RuwaqProHero
+        copy={t.marketplace.proDirectory}
+        searchCopy={t.marketplace.search}
+        locale={locale}
+      />
       <TodaysDirectorySection />
       <ProjectToursSection />
       <EditorialCategoryGrid

@@ -1590,25 +1590,75 @@
 
   /* —— Ruwaq PRO · AD PRO editorial luxury —— */
   .ruwaq-pro-hero {
-    @apply relative flex min-h-[580px] w-full flex-col items-center justify-center overflow-hidden border-b border-neutral-200 bg-neutral-950 px-4 py-24 text-center md:min-h-[640px];
+    @apply relative flex min-h-[620px] w-full flex-col items-center justify-center overflow-hidden border-b border-neutral-950 bg-neutral-950 px-4 pb-16 pt-20 text-center md:min-h-[720px] md:pb-20 md:pt-24;
   }
 
   .ruwaq-pro-hero-bg {
-    @apply absolute inset-0 scale-105 bg-cover bg-center;
+    @apply absolute inset-0 scale-[1.03] bg-cover bg-center;
+    filter: saturate(0.92) contrast(1.05);
   }
 
   .ruwaq-pro-hero-overlay {
     @apply absolute inset-0;
     background: linear-gradient(
-      180deg,
-      rgba(0, 0, 0, 0.35) 0%,
-      rgba(0, 0, 0, 0.62) 45%,
-      rgba(0, 0, 0, 0.82) 100%
+      165deg,
+      rgba(0, 0, 0, 0.52) 0%,
+      rgba(0, 0, 0, 0.68) 42%,
+      rgba(0, 0, 0, 0.88) 100%
+    );
+  }
+
+  .ruwaq-pro-hero-vignette {
+    @apply pointer-events-none absolute inset-0;
+    background: radial-gradient(
+      ellipse 85% 70% at 50% 45%,
+      transparent 0%,
+      rgba(0, 0, 0, 0.35) 100%
     );
   }
 
   .ruwaq-pro-hero-inner {
-    @apply relative z-10 mx-auto flex max-w-5xl flex-col items-center;
+    @apply relative z-10 mx-auto flex w-full max-w-5xl flex-col items-center;
+  }
+
+  .ruwaq-pro-hero-search {
+    @apply mt-8 w-full max-w-4xl px-0;
+  }
+
+  .ruwaq-pro-hero-search-form {
+    @apply flex w-full flex-col gap-3 border border-white/20 bg-white/[0.97] p-4 shadow-[0_24px_64px_rgba(0,0,0,0.35)] backdrop-blur-md sm:flex-row sm:items-end sm:gap-4 sm:p-5;
+  }
+
+  .ruwaq-pro-hero-trust {
+    @apply text-[11px] font-medium uppercase tracking-[0.22em] text-white/65 md:text-xs;
+  }
+
+  html[lang="ar"] .ruwaq-pro-hero-trust {
+    @apply normal-case tracking-wide font-normal text-white/70;
+  }
+
+  .ruwaq-pro-hero-chip {
+    @apply border border-white/20 bg-white/10 px-3.5 py-2 text-xs text-white/95 backdrop-blur-sm transition-colors hover:border-white/40 hover:bg-white/20;
+  }
+
+  html[lang="ar"] .ruwaq-pro-hero-chip {
+    @apply text-sm font-normal;
+  }
+
+  .ruwaq-pro-hero-chip--accent {
+    @apply border-[#c9a063]/50 bg-[#c9a063]/15 text-[#f5e6cc];
+  }
+
+  .ruwaq-pro-hero-meta-link {
+    @apply text-white/80 underline-offset-4 transition-colors hover:text-white hover:underline;
+  }
+
+  .ruwaq-pro-hero-meta-link--gold {
+    @apply text-[#d4b47a] hover:text-[#f5e6cc];
+  }
+
+  html[lang="ar"] .ruwaq-pro-hero-meta-link {
+    @apply text-sm;
   }
 
   .ruwaq-pro-hero-section-label {
@@ -1653,7 +1703,13 @@
   }
 
   .ruwaq-pro-display-accent {
-    color: #c0923e;
+    color: #d4b47a;
+    font-weight: 500;
+  }
+
+  html[lang="ar"] .ruwaq-pro-display-accent,
+  html[data-lang="ar"] .ruwaq-pro-display-accent {
+    font-weight: 500;
   }
 
   .ruwaq-pro-subtitle {

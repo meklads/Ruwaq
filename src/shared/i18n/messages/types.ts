@@ -197,8 +197,12 @@ export type Messages = {
     };
     proDirectory: {
       eyebrow: string;
+      titleBefore: string;
+      titleAccent: string;
+      titleAfter: string;
       title: string;
       subtitle: string;
+      trustLine: string;
       allCategories: string;
       applyCta: string;
       applyHint: string;
@@ -207,6 +211,8 @@ export type Messages = {
       featuredLink: string;
       clientsSection: string;
       providersSection: string;
+      requestQuoteLink: string;
+      proposalStudioLink: string;
     };
     join: {
       eyebrow: string;
