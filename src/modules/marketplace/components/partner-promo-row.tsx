@@ -29,6 +29,9 @@ const GRAPHICS_HOUSE_AD = {
   },
 } as const;
 
+const PARTNER_AD_WIDTH = 1749;
+const PARTNER_AD_HEIGHT = 718;
+
 /** Turriva + Graphics House, side by side on desktop, stacked on mobile. */
 export function PartnerPromoRow({ locale }: Props) {
   const turriva = TURRIVA_AD[locale];
@@ -52,8 +55,8 @@ export function PartnerPromoRow({ locale }: Props) {
           <Image
             src={MARKETING_IMAGES.turrivaAd}
             alt={turriva.alt}
-            width={1749}
-            height={899}
+            width={PARTNER_AD_WIDTH}
+            height={PARTNER_AD_HEIGHT}
             className="ruwaq-ad-partner-row__image"
             sizes="(max-width: 640px) 100vw, 50vw"
           />
@@ -69,8 +72,8 @@ export function PartnerPromoRow({ locale }: Props) {
           <Image
             src={MARKETING_IMAGES.graphicsHouseAd}
             alt={gh.alt}
-            width={1774}
-            height={887}
+            width={PARTNER_AD_WIDTH}
+            height={PARTNER_AD_HEIGHT}
             className="ruwaq-ad-partner-row__image"
             sizes="(max-width: 640px) 100vw, 50vw"
           />

@@ -37,8 +37,8 @@ export function GraphicsHousePromoBanner({ locale }: Props) {
           <Image
             src={MARKETING_IMAGES.graphicsHouseAd}
             alt={ad.alt}
-            width={1774}
-            height={887}
+            width={1749}
+            height={718}
             className="ruwaq-ad-featured-image-banner"
             sizes="(max-width: 768px) 100vw, 1140px"
           />

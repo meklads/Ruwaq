@@ -24,7 +24,7 @@ export function TurrivaPromoBanner() {
             src={MARKETING_IMAGES.turrivaAd}
             alt="Turriva, Architecture, Interior, Construction"
             width={1749}
-            height={899}
+            height={718}
             className="ruwaq-ad-featured-image-banner"
             sizes="(max-width: 768px) 100vw, 1140px"
             priority={false}

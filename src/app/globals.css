@@ -2084,11 +2084,12 @@
   }
 
   .ruwaq-ad-partner-row__item {
-    @apply block min-w-0 overflow-hidden border border-neutral-200/80 bg-white shadow-sm transition-[opacity,box-shadow] hover:opacity-95 hover:shadow-md;
+    aspect-ratio: 1749 / 718;
+    @apply block min-w-0 overflow-hidden border border-neutral-300/90 bg-neutral-950/[0.03] shadow-sm transition-[opacity,box-shadow] hover:opacity-95 hover:shadow-md;
   }
 
   .ruwaq-ad-partner-row__image {
-    @apply h-auto w-full;
+    @apply block h-full w-full object-cover object-center;
   }
 
   /* Banner card — 1140 × 160 px at desktop (matches AD editorial unit). */
