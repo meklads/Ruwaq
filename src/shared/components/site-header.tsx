@@ -11,6 +11,8 @@ export async function SiteHeader() {
 
   const mainLinks = [
     { href: "/categories", label: nav.directory },
+    { href: "/tours", label: nav.tours },
+    { href: "/guides", label: nav.guides },
     { href: "/pro", label: nav.featured },
     { href: "/how-it-works", label: nav.howItWorks },
   ];

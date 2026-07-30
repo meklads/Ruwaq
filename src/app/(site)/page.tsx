@@ -3,6 +3,8 @@ import { getLocale } from "@/shared/i18n/server";
 import { RuwaqProHero } from "@/modules/marketplace/components/directory/RuwaqProHero";
 import { MarketplaceSearchBar } from "@/modules/marketplace/components/marketplace-search-bar";
 import { TodaysDirectorySection } from "@/modules/marketplace/components/todays-directory-section";
+import { ProjectToursSection } from "@/modules/marketplace/components/project-tours-section";
+import { GuidesSection } from "@/modules/marketplace/components/guides-section";
 import { EditorialCategoryGrid } from "@/modules/marketplace/components/editorial-category-grid";
 import { HowItWorksSection } from "@/modules/marketplace/components/how-it-works-section";
 import { SocialProofSection } from "@/modules/marketplace/components/social-proof-section";
@@ -17,11 +19,13 @@ export default async function HomePage() {
       <RuwaqProHero copy={t.marketplace.proDirectory} locale={locale} />
       <MarketplaceSearchBar copy={t.marketplace.search} locale={locale} />
       <TodaysDirectorySection />
+      <ProjectToursSection />
       <EditorialCategoryGrid
         copy={t.marketplace.categories}
         magazineCopy={t.marketplace.homeMagazine}
         locale={locale}
       />
+      <GuidesSection />
       <HowItWorksSection copy={t.marketplace.howItWorks} locale={locale} />
       <SocialProofSection copy={t.marketplace.socialProof} />
       <ContractorPromoBanner copy={t.marketplace.contractorPromo} locale={locale} />

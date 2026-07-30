@@ -87,3 +87,10 @@ export async function getListingsForCityCategory(
 
   return { category, listings, total, page, pageSize, totalPages };
 }
+
+export async function getListingBySlug(slug: string) {
+  return db.providerListing.findUnique({
+    where: { slug },
+    include: { category: true },
+  });
+}

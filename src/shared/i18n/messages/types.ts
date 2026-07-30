@@ -149,6 +149,11 @@ export type Messages = {
       submitting: string;
       successTitle: string;
       successBody: string;
+      stepCompany: string;
+      stepVerification: string;
+      stepPortfolio: string;
+      trustTitle: string;
+      trustItems: readonly string[];
       errors: {
         validation: string;
         invalid_phone: string;
@@ -207,6 +212,32 @@ export type Messages = {
       trendingEyebrow: string;
       trendingTitle: string;
       allSectors: string;
+    };
+    projectTours: {
+      eyebrow: string;
+      title: string;
+      subtitle: string;
+      viewAll: string;
+      readTour: string;
+      metaTitle: string;
+      metaDescription: string;
+      creditsTitle: string;
+      viewProfile: string;
+      browseCategory: string;
+      allTours: string;
+      backHome: string;
+    };
+    guides: {
+      eyebrow: string;
+      title: string;
+      subtitle: string;
+      viewAll: string;
+      readGuide: string;
+      minRead: string;
+      metaTitle: string;
+      metaDescription: string;
+      ctaLead: string;
+      allGuides: string;
     };
     footerCta: {
       title: string;
@@ -501,6 +532,8 @@ export type Messages = {
       howItWorks: string;
       forContractors: string;
       startProposal: string;
+      tours: string;
+      guides: string;
       mainNavLabel: string;
     };
     nav: {

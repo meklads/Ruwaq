@@ -242,6 +242,16 @@ export const ar = {
    submitting: "جاري الإرسال…",
    successTitle: "تم استلام طلبك",
    successBody: "سيراجع فريقنا السجل التجاري ويتواصل معك خلال 3–5 أيام عمل.",
+   stepCompany: "بيانات الشركة",
+   stepVerification: "التوثيق",
+   stepPortfolio: "معرض الأعمال والإرسال",
+   trustTitle: "معايير Ruwaq PRO",
+   trustItems: [
+    "السجل التجاري الساري مطلوب للإدراج",
+    "مراجعة معرض الأعمال أو الموقع قبل الموافقة",
+    "شارة «معتمد» بعد اعتماد فريق رواق",
+    "تصنيف PRO للظهور المميز في الدليل",
+   ],
    errors: {
     validation: "يرجى تعبئة جميع الحقول المطلوبة بشكل صحيح.",
     invalid_phone: "أدخل رقم جوال سعودي صحيح (05xxxxxxxx أو +9665xxxxxxxx).",
@@ -302,6 +312,36 @@ export const ar = {
    trendingEyebrow: "قطاعات رائجة",
    trendingTitle: "تصفّح حسب التخصص",
    allSectors: "جميع القطاعات",
+  },
+  projectTours: {
+   eyebrow: "جولة في مشروع",
+   title: "جولات مشاريع رواق",
+   subtitle:
+    "فلل ومشاريع ضيافة مكتملة — تعرّف على الفرق المعتمدة التي نفّذت كل مشروع.",
+   viewAll: "كل الجولات",
+   readTour: "شاهد الجولة",
+   metaTitle: "جولات المشاريع | Ruwaq PRO",
+   metaDescription:
+    "جولات تحريرية في جدة ومكة والمدينة مع شركات Ruwaq PRO المعتمدة.",
+   creditsTitle: "فريق المشروع",
+   viewProfile: "عرض الملف",
+   browseCategory: "تصفّح هذا القطاع",
+   allTours: "كل الجولات",
+   backHome: "← الرئيسية",
+  },
+  guides: {
+   eyebrow: "أدلة رواق",
+   title: "أدلة عملية للمالكين",
+   subtitle:
+    "مقالات قصيرة عن الرخام والتكييف والمطابخ والإشراف — مع روابط للشركات المعتمدة.",
+   viewAll: "كل الأدلة",
+   readGuide: "اقرأ الدليل",
+   minRead: "دقائق قراءة",
+   metaTitle: "أدلة رواق | Ruwaq PRO",
+   metaDescription:
+    "أدلة تشطيب ومواد وصيانة للمنطقة الغربية — رواق PRO Directory.",
+   ctaLead: "جاهز للتواصل مع شركات معتمدة في هذا القطاع؟",
+   allGuides: "← كل الأدلة",
   },
   footerCta: {
    title: "استكشف القطاعات المعتمدة",
@@ -876,6 +916,8 @@ export const ar = {
    howItWorks: "كيف يعمل",
    forContractors: "للمقاولين",
    startProposal: "ابدأ عرضاً",
+   tours: "جولات المشاريع",
+   guides: "الأدلة",
    mainNavLabel: "التنقل الرئيسي",
   },
   nav: {

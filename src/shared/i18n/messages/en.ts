@@ -245,6 +245,16 @@ export const en: Messages = {
    successTitle: "Application received",
    successBody:
     "Our team will review your commercial registration and contact you within 3–5 business days.",
+   stepCompany: "Company profile",
+   stepVerification: "Verification",
+   stepPortfolio: "Portfolio & submit",
+   trustTitle: "Ruwaq PRO standards",
+   trustItems: [
+    "Active commercial registration (CR) required for listing",
+    "Portfolio or website review before approval",
+    "Verified badge after Ruwaq team sign-off",
+    "PRO tier available for featured directory placement",
+   ],
    errors: {
     validation: "Please fill in all required fields correctly.",
     invalid_phone: "Enter a valid Saudi mobile number (05xxxxxxxx or +9665xxxxxxxx).",
@@ -305,6 +315,36 @@ export const en: Messages = {
    trendingEyebrow: "Trending sectors",
    trendingTitle: "Browse by trade",
    allSectors: "All sectors",
+  },
+  projectTours: {
+   eyebrow: "Project tour",
+   title: "Ruwaq project tours",
+   subtitle:
+    "Completed villas and hospitality projects — meet the verified teams behind each delivery.",
+   viewAll: "All tours",
+   readTour: "View tour",
+   metaTitle: "Project tours | Ruwaq PRO",
+   metaDescription:
+    "Editorial project walkthroughs in Jeddah, Makkah, and Madinah with credited Ruwaq PRO partners.",
+   creditsTitle: "Project credits",
+   viewProfile: "View profile",
+   browseCategory: "Browse this sector",
+   allTours: "All tours",
+   backHome: "← Home",
+  },
+  guides: {
+   eyebrow: "Ruwaq guides",
+   title: "Practical guides for owners",
+   subtitle:
+    "Short reads on marble, HVAC, kitchens, and supervision — with links to verified companies.",
+   viewAll: "All guides",
+   readGuide: "Read guide",
+   minRead: "min read",
+   metaTitle: "Guides | Ruwaq PRO Directory",
+   metaDescription:
+    "Expert guides for fit-out, materials, and maintenance in Saudi Arabia's Western Region.",
+   ctaLead: "Ready to talk to verified companies in this sector?",
+   allGuides: "← All guides",
   },
   footerCta: {
    title: "Explore approved sectors",
@@ -882,6 +922,8 @@ export const en: Messages = {
    howItWorks: "How it works",
    forContractors: "For contractors",
    startProposal: "Start a proposal",
+   tours: "Project tours",
+   guides: "Guides",
    mainNavLabel: "Main navigation",
   },
   nav: {
