@@ -44,7 +44,7 @@ export default async function HomePage() {
       <HowItWorksSection copy={t.marketplace.howItWorks} locale={locale} />
       <SocialProofSection copy={t.marketplace.socialProof} />
       <TurrivaPromoBanner />
-      <GraphicsHousePromoBanner />
+      <GraphicsHousePromoBanner locale={locale} />
       <ContractorPromoBanner locale={locale} />
     </>
   );
