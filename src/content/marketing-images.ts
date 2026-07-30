@@ -21,6 +21,8 @@ export const MARKETING_IMAGES = {
   familySavings: "/images/marketing/family-savings-home.jpg",
   turrivaAd: "/images/marketing/ad1.png",
   graphicsHouseAd: "/images/marketing/ad2.png",
+  proposalsAdAr: "/images/marketing/ad3Ar.png",
+  proposalsAdEn: "/images/marketing/ad3En.png",
 } as const;
 
 /** One unique image per directory sector (homepage category grid). */
