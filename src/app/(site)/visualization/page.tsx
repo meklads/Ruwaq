@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { getMessages } from "@/shared/i18n";
 import { getLocale } from "@/shared/i18n/server";
+import { VISUALIZATION_HERO } from "@/content/marketing-images";
 import { VisualizationLeadForm } from "@/modules/marketplace/components/visualization-lead-form";
 import { GraphicsHouseLogo } from "@/shared/components/graphics-house-logo";
 import { graphicsHouseReferralUrl } from "@/shared/constants/brand";
@@ -26,6 +28,16 @@ export default async function VisualizationPage() {
     <div className="ruwaq-ad-page">
       <div className="ruwaq-join-editorial">
         <aside className="ruwaq-join-editorial-aside">
+          <div className="relative mb-8 aspect-[16/10] overflow-hidden bg-neutral-100">
+            <Image
+              src={VISUALIZATION_HERO}
+              alt=""
+              fill
+              className="object-cover"
+              sizes="(max-width: 1024px) 100vw, 40vw"
+              priority
+            />
+          </div>
           <p className="ruwaq-ad-eyebrow">{copy.eyebrow}</p>
           <h1 className="ruwaq-ad-section-title mt-3">{copy.title}</h1>
           <p className="ruwaq-ad-section-lead mt-4">{copy.subtitle}</p>

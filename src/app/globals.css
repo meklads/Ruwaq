@@ -2049,23 +2049,49 @@
   }
 
   /* —— AD-style horizontal featured ads (homepage partner + proposals) —— */
+  /* Section: full-width band with its own bg; banner is a contained card inside. */
+  .ruwaq-ad-featured-section {
+    @apply py-10 sm:py-12 lg:py-14;
+  }
+
+  .ruwaq-ad-featured-section--white {
+    background-color: #ffffff;
+  }
+
+  .ruwaq-ad-featured-section--stone {
+    background-color: var(--ruwaq-ad-stone);
+  }
+
+  .ruwaq-ad-featured-section__frame {
+    @apply mx-auto w-full max-w-[80rem] px-4 sm:px-6 lg:px-8;
+  }
+
+  .ruwaq-ad-featured-image-link {
+    @apply mx-auto block w-full max-w-[71.25rem] transition-opacity hover:opacity-95;
+  }
+
+  .ruwaq-ad-featured-image-banner {
+    @apply h-auto w-full;
+  }
+
+  /* Banner card — 1140 × 160 px at desktop (matches AD editorial unit). */
   .ruwaq-ad-featured-banner {
     background-color: var(--ruwaq-ad-featured-bg);
     color: #000000;
-    @apply border-t border-black/10;
+    @apply mx-auto w-full max-w-[71.25rem];
   }
 
   .ruwaq-ad-featured-banner__inner {
-    @apply mx-auto flex w-full max-w-[1280px] flex-col items-center justify-center gap-6 px-6 py-8 sm:px-8 lg:h-[12.5rem] lg:min-h-[12.5rem] lg:max-h-[12.5rem] lg:flex-row lg:justify-between lg:gap-8 lg:px-10 lg:py-0;
+    @apply flex w-full flex-col items-center justify-center gap-5 px-5 py-7 sm:px-7 sm:py-8 lg:h-[10rem] lg:min-h-[10rem] lg:max-h-[10rem] lg:flex-row lg:justify-between lg:gap-6 lg:px-8 lg:py-0;
   }
 
   .ruwaq-ad-featured-banner__copy {
-    @apply w-full shrink-0 text-center lg:max-w-[22rem] lg:flex-1 lg:text-start xl:max-w-[24rem];
+    @apply w-full shrink-0 text-center lg:max-w-[19rem] lg:flex-1 lg:text-start xl:max-w-[21rem];
   }
 
   .ruwaq-ad-featured-headline {
     font-family: var(--font-latin-display), Georgia, "Times New Roman", Times, serif;
-    @apply text-[1.375rem] font-normal leading-[1.2] text-black sm:text-[1.5rem] lg:text-[1.625rem];
+    @apply text-[1.25rem] font-normal leading-[1.2] text-black sm:text-[1.375rem] lg:text-[1.5rem];
   }
 
   html[lang="ar"] .ruwaq-ad-featured-headline,
@@ -2073,7 +2099,7 @@
     font-family: var(--font-ar), var(--font-ar-fallback);
     font-weight: 300;
     letter-spacing: 0;
-    @apply text-[1.35rem] sm:text-[1.45rem] lg:text-[1.55rem];
+    @apply text-[1.2rem] sm:text-[1.3rem] lg:text-[1.4rem];
   }
 
   .ruwaq-ad-featured-headline-em {
@@ -2088,7 +2114,7 @@
 
   .ruwaq-ad-featured-offer {
     font-family: var(--font-marketing-latin), system-ui, -apple-system, sans-serif;
-    @apply mt-2 text-[0.8125rem] leading-snug text-black sm:text-sm;
+    @apply mt-1.5 text-xs leading-snug text-black sm:text-[0.8125rem];
   }
 
   html[lang="ar"] .ruwaq-ad-featured-offer {
@@ -2114,7 +2140,7 @@
   }
 
   .ruwaq-ad-featured-cta {
-    @apply inline-flex items-center justify-center rounded-none bg-black px-5 py-3.5 text-center text-[10px] font-bold uppercase leading-none tracking-[0.18em] text-white transition-colors hover:bg-neutral-900 sm:px-6 sm:py-4 sm:text-[11px];
+    @apply inline-flex items-center justify-center rounded-none bg-black px-4 py-3 text-center text-[10px] font-bold uppercase leading-none tracking-[0.18em] text-white transition-colors hover:bg-neutral-900 sm:px-5 sm:py-3.5 sm:text-[11px];
   }
 
   html[lang="ar"] .ruwaq-ad-featured-cta {
@@ -2122,7 +2148,7 @@
   }
 
   .ruwaq-ad-featured-devices {
-    @apply relative h-[7.25rem] w-[11.5rem] sm:h-[7.75rem] sm:w-[12.5rem];
+    @apply relative h-[6.25rem] w-[10rem] sm:h-[6.5rem] sm:w-[10.75rem];
   }
 
   .ruwaq-ad-featured-device {
@@ -2130,11 +2156,11 @@
   }
 
   .ruwaq-ad-featured-device--tablet {
-    @apply end-0 top-1/2 h-[6.75rem] w-[5.25rem] -translate-y-1/2 rounded-none border border-black/20 sm:h-[7.25rem] sm:w-[5.65rem];
+    @apply end-0 top-1/2 h-[5.85rem] w-[4.65rem] -translate-y-1/2 rounded-none border border-black/20 sm:h-[6.1rem] sm:w-[4.95rem];
   }
 
   .ruwaq-ad-featured-device--phone {
-    @apply bottom-0 start-0 z-10 h-[5.85rem] w-[2.85rem] rounded-[0.35rem] border border-black/25 sm:h-[6.15rem] sm:w-[3rem];
+    @apply bottom-0 start-0 z-10 h-[5.1rem] w-[2.55rem] rounded-[0.35rem] border border-black/25 sm:h-[5.35rem] sm:w-[2.7rem];
     transform: rotate(-10deg);
     transform-origin: center bottom;
   }
@@ -2145,6 +2171,10 @@
 
   .ruwaq-ad-featured-screen {
     @apply relative h-full w-full overflow-hidden bg-neutral-200;
+  }
+
+  .ruwaq-ad-featured-screen--photo {
+    @apply bg-neutral-300;
   }
 
   /* Interior preview — warm AD-style room */

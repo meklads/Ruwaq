@@ -1,4 +1,5 @@
 import type { MarketplaceCitySlug, MarketplaceCategorySlug } from "@/shared/constants/marketplace-taxonomy";
+import { TOUR_IMAGES } from "@/content/marketing-images";
 
 export type ProjectTourCredit = {
   roleAr: string;
@@ -27,14 +28,8 @@ export const PROJECT_TOURS: ProjectTour[] = [
     slug: "north-jeddah-villa-fitout",
     citySlug: "jeddah",
     categorySlug: "fit-out",
-    heroImage:
-      "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=1920&auto=format&fit=crop",
-    gallery: [
-      "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1556911220-bff31c812dba?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=1200&auto=format&fit=crop",
-    ],
+    heroImage: TOUR_IMAGES.jeddahHero,
+    gallery: [...TOUR_IMAGES.jeddahGallery],
     titleAr: "فيلا شمال جدة — تشطيب فاخر متكامل",
     titleEn: "North Jeddah Villa — Full Luxury Fit-Out",
     subtitleAr: "تصميم داخلي، مطبخ مخصص، وتكييف مخفي — تسليم 2025",
@@ -74,13 +69,8 @@ export const PROJECT_TOURS: ProjectTour[] = [
     slug: "makkah-serviced-residence",
     citySlug: "makkah",
     categorySlug: "fit-out",
-    heroImage:
-      "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1920&auto=format&fit=crop",
-    gallery: [
-      "https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1566665797739-1674de7a421a?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1631545806606-4119a794c1a1?q=80&w=1200&auto=format&fit=crop",
-    ],
+    heroImage: TOUR_IMAGES.makkahHero,
+    gallery: [...TOUR_IMAGES.makkahGallery],
     titleAr: "عمارة فندقية — تشطيب وحدات ضيافة",
     titleEn: "Serviced Tower — Hospitality Unit Fit-Out",
     subtitleAr: "120 وحدة — مواد مقاومة للرطوبة ومعايير ضيافة",
@@ -115,13 +105,8 @@ export const PROJECT_TOURS: ProjectTour[] = [
     slug: "madinah-villa-garden",
     citySlug: "madinah",
     categorySlug: "outdoor",
-    heroImage:
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1920&auto=format&fit=crop",
-    gallery: [
-      "https://images.unsplash.com/photo-1558904541-efa843a96f01?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1600047509807-ba8f99d2cd09?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1600566753376-12c8ab7fb165?q=80&w=1200&auto=format&fit=crop",
-    ],
+    heroImage: TOUR_IMAGES.madinahHero,
+    gallery: [...TOUR_IMAGES.madinahGallery],
     titleAr: "فيلا المدينة — حديقة ومساحات خارجية",
     titleEn: "Madinah Villa — Landscape & Outdoor Living",
     subtitleAr: "تنسيق حدائق، مسبح، وإضاءة خارجية متكاملة",

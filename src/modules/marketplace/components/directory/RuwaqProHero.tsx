@@ -3,13 +3,12 @@ import {
   MARKETPLACE_CATEGORIES,
   MARKETPLACE_CITIES,
 } from "@/shared/constants/marketplace-taxonomy";
+import { MARKETING_IMAGES } from "@/content/marketing-images";
 import { MarketplaceSearchBar } from "@/modules/marketplace/components/marketplace-search-bar";
 import type { Messages } from "@/shared/i18n/messages/types";
 import type { Locale } from "@/shared/i18n/locale";
 
-/** Editorial luxury interior — strong depth for white type + search card */
-const HERO_IMAGE =
-  "https://images.unsplash.com/photo-1618221195710-e0661401dec6?q=80&w=1920&auto=format&fit=crop";
+const HERO_IMAGE = MARKETING_IMAGES.hero;
 
 const QUICK_CATEGORY_SLUGS = ["fit-out", "contracting", "kitchens", "luxury-materials"] as const;
 

@@ -12,6 +12,7 @@ export function ContractorPromoBanner({ copy }: Props) {
       id="contractor-promo"
       titleId="contractor-featured-title"
       copy={copy}
+      sectionTone="stone"
       cta={{ href: "/proposals/new", label: copy.cta }}
       visual={<ProposalAdMockup />}
     />

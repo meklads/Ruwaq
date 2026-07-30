@@ -14,3 +14,11 @@ export function graphicsHouseReferralUrl(campaign: string): string {
   url.searchParams.set("utm_campaign", campaign);
   return url.toString();
 }
+
+export function turrivaReferralUrl(campaign: string): string {
+  const url = new URL(TURRIVA_URL);
+  url.searchParams.set("utm_source", "ruwaq");
+  url.searchParams.set("utm_medium", "referral");
+  url.searchParams.set("utm_campaign", campaign);
+  return url.toString();
+}

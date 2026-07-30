@@ -1,4 +1,5 @@
-import type { MarketplaceCategorySlug, MarketplaceCitySlug } from "@/shared/constants/marketplace-taxonomy";
+import type { MarketplaceCitySlug, MarketplaceCategorySlug } from "@/shared/constants/marketplace-taxonomy";
+import { GUIDE_IMAGES } from "@/content/marketing-images";
 
 export type RuwaqGuide = {
   slug: string;
@@ -29,8 +30,7 @@ export const RUWQ_GUIDES: RuwaqGuide[] = [
     excerptEn:
       "Humidity, salt air, and outdoor use — a practical guide before you buy.",
     readMinutes: 6,
-    heroImage:
-      "https://images.unsplash.com/photo-1615874959477-df969457a1eb?q=80&w=1200&auto=format&fit=crop",
+    heroImage: GUIDE_IMAGES.marble,
     bodyAr: [
       "مناخ جدة الساحلي يفرض معايير مختلفة عن الداخل: الرطوبة العالية والملوحة قد تؤثر على بعض أنواع الرخام الناعم.",
       "للواجهات الخارجية: فضّل granite أو travertine مع معالجة sealant، وتجنب الرخام الناعم غير المعالج في المناطق المعرّضة للمطر.",
@@ -56,8 +56,7 @@ export const RUWQ_GUIDES: RuwaqGuide[] = [
     excerptAr: "مقارنة التكلفة، الصيانة، والكفاءة في المشاريع السكنية الفاخرة.",
     excerptEn: "Cost, maintenance, and efficiency compared for luxury homes.",
     readMinutes: 5,
-    heroImage:
-      "https://images.unsplash.com/photo-1631545806606-4119a794c1a1?q=80&w=1200&auto=format&fit=crop",
+    heroImage: GUIDE_IMAGES.hvac,
     bodyAr: [
       "التكييف المركزي (ducted) مناسب للفلل الكبيرة مع توزيع متساوٍ وصوت منخفض — لكنه يتطلب مساحة سقف للدكت.",
       "أنظمة VRF/ concealed cassette توفر مرونة zone-by-zone وتوفير طاقة أفضل في الفلل متعددة الطوابق.",
@@ -83,8 +82,7 @@ export const RUWQ_GUIDES: RuwaqGuide[] = [
     excerptAr: "ترتيب workflow، نقاط الخدمات، واختيار الخامات.",
     excerptEn: "Workflow, MEP points, and material selection.",
     readMinutes: 7,
-    heroImage:
-      "https://images.unsplash.com/photo-1556911220-bff31c812dba?q=80&w=1200&auto=format&fit=crop",
+    heroImage: GUIDE_IMAGES.kitchen,
     bodyAr: [
       "المطبخ المخصص يُخطّط قبل أعمال التشطيب: حدّد triangle workflow (ثلاجة — حوض — موقد) مبكراً.",
       "تنسيق مع مقاول التشطيب لنقاط MEP (غاز، مياه، drainage، كهرباء) قبل الجبس.",
@@ -109,8 +107,7 @@ export const RUWQ_GUIDES: RuwaqGuide[] = [
     excerptAr: "حماية المالك، جودة التنفيذ، ومحاضر الاستلام.",
     excerptEn: "Owner protection, execution quality, and sign-off minutes.",
     readMinutes: 5,
-    heroImage:
-      "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1200&auto=format&fit=crop",
+    heroImage: GUIDE_IMAGES.supervision,
     bodyAr: [
       "الإشراف الهندسي المستقل يحمي المالك عندما ينفّذ مقاول مختلف عن المصمم — أو في المشاريع فوق 2 مليون ريال.",
       "يتضمن: زيارات دورية، تقارير PDF، مطابقة BOQ، ومحاضر استلام مراحل.",
@@ -136,8 +133,7 @@ export const RUWQ_GUIDES: RuwaqGuide[] = [
     excerptAr: "SLA، الزيارات الدورية، وعزل الأسطح.",
     excerptEn: "SLA, periodic visits, and roof waterproofing.",
     readMinutes: 4,
-    heroImage:
-      "https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=1200&auto=format&fit=crop",
+    heroImage: GUIDE_IMAGES.maintenance,
     bodyAr: [
       "عقد FM السنوي للفلل ي typically يشمل: كهرباء، سباكة، تكييف، و فحص أسطح قبل موسم الأمطار.",
       "اطلب SLA مكتوباً: زمن استجابة الطوارئ (مثلاً 4 ساعات) وزيارات وقائية شهرية.",
@@ -163,8 +159,7 @@ export const RUWQ_GUIDES: RuwaqGuide[] = [
     excerptAr: "نباتات مقاومة للحرارة وري ذكي.",
     excerptEn: "Heat-tolerant plants and smart irrigation.",
     readMinutes: 5,
-    heroImage:
-      "https://images.unsplash.com/photo-1558904541-efa843a96f01?q=80&w=1200&auto=format&fit=crop",
+    heroImage: GUIDE_IMAGES.landscape,
     bodyAr: [
       "المدينة المنورة: درجات حرارة مرتفعة صيفاً — فضّل نباتات محلية مثل الاشجار الظل وال shrubs قليلة المياه.",
       "نظام الري: drip irrigation مع controller ذكي يوفر 30–40% من استهلاك المياه.",
