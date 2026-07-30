@@ -6,8 +6,7 @@ import { ProjectToursSection } from "@/modules/marketplace/components/project-to
 import { GuidesSection } from "@/modules/marketplace/components/guides-section";
 import { EditorialCategoryGrid } from "@/modules/marketplace/components/editorial-category-grid";
 import { HowItWorksSection } from "@/modules/marketplace/components/how-it-works-section";
-import { ContractorPromoBanner } from "@/modules/marketplace/components/contractor-promo-banner";
-import { BeesmotionPromoBanner } from "@/modules/marketplace/components/beesmotion-promo-banner";
+import { ContractorToolsPromoRow } from "@/modules/marketplace/components/contractor-tools-promo-row";
 import { PartnerPromoRow } from "@/modules/marketplace/components/partner-promo-row";
 import { buildOrganizationJsonLd, buildWebSiteJsonLd } from "@/modules/marketplace/seo/site-jsonld";
 
@@ -42,8 +41,7 @@ export default async function HomePage() {
       <GuidesSection />
       <HowItWorksSection copy={t.marketplace.howItWorks} locale={locale} />
       <PartnerPromoRow locale={locale} />
-      <BeesmotionPromoBanner locale={locale} />
-      <ContractorPromoBanner locale={locale} />
+      <ContractorToolsPromoRow locale={locale} />
     </>
   );
 }

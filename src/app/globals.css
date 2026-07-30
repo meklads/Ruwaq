@@ -2079,6 +2079,10 @@
     @apply border-t border-neutral-200 bg-[var(--ruwaq-ad-stone)] py-8 sm:py-10 lg:py-12;
   }
 
+  .ruwaq-ad-partner-row--white {
+    @apply bg-white;
+  }
+
   .ruwaq-ad-partner-row__frame {
     @apply mx-auto grid w-full max-w-[80rem] grid-cols-1 gap-3 px-4 sm:grid-cols-2 sm:gap-4 sm:px-6 lg:gap-5 lg:px-8;
   }

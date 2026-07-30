@@ -10,14 +10,14 @@ type Props = {
 const PROPOSALS_AD = {
   ar: {
     src: MARKETING_IMAGES.proposalsAdAr,
-    width: 1874,
-    height: 839,
+    width: 1749,
+    height: 718,
     alt: "رواق، أداة العروض الاحترافية",
   },
   en: {
     src: MARKETING_IMAGES.proposalsAdEn,
-    width: 1871,
-    height: 840,
+    width: 1749,
+    height: 718,
     alt: "Ruwaq, Professional proposal tool",
   },
 } as const;
