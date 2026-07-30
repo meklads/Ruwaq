@@ -152,7 +152,6 @@ export default async function CategoryListingPage({ params, searchParams }: Prop
                 key={listing.id}
                 listing={listing}
                 labels={t.marketplace.listing}
-                trustCopy={t.marketplace.trustStandards}
                 locale={locale}
               />
             ))}
