@@ -2074,6 +2074,23 @@
     @apply h-auto w-full;
   }
 
+  /* Partner row: Turriva + Graphics House side by side */
+  .ruwaq-ad-partner-row {
+    @apply border-t border-neutral-200 bg-white py-8 sm:py-10 lg:py-12;
+  }
+
+  .ruwaq-ad-partner-row__frame {
+    @apply mx-auto grid w-full max-w-[80rem] grid-cols-1 gap-3 px-4 sm:grid-cols-2 sm:gap-4 sm:px-6 lg:px-8;
+  }
+
+  .ruwaq-ad-partner-row__item {
+    @apply block min-w-0 transition-opacity hover:opacity-95;
+  }
+
+  .ruwaq-ad-partner-row__image {
+    @apply h-auto w-full;
+  }
+
   /* Banner card — 1140 × 160 px at desktop (matches AD editorial unit). */
   .ruwaq-ad-featured-banner {
     background-color: var(--ruwaq-ad-featured-bg);
