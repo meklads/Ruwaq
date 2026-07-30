@@ -8,6 +8,7 @@ import {
   getCityBySlug,
 } from "@/shared/constants/marketplace-taxonomy";
 import { listingHeroImage } from "@/modules/marketplace/lib/listing-image";
+import { VerifiedBadgeTooltip } from "@/modules/marketplace/components/verified-badge-tooltip";
 
 type ListingWithCategory = ProviderListing & { category?: ServiceCategory };
 
@@ -98,7 +99,12 @@ export function ListingCard({
             <span className="ruwaq-pro-badge ruwaq-pro-badge--featured">{labels.featuredPro}</span>
           ) : null}
           {tier === "VERIFIED" ? (
-            <span className="ruwaq-pro-badge ruwaq-pro-badge--verified">{labels.verifiedPro}</span>
+            <VerifiedBadgeTooltip
+              label={labels.verifiedPro}
+              title={labels.verifiedTooltip.title}
+              body={labels.verifiedTooltip.body}
+              variant="verified"
+            />
           ) : null}
         </div>
       </div>

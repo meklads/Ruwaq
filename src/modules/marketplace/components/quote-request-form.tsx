@@ -81,7 +81,13 @@ export function QuoteRequestForm({
   }, [initialIntent]);
 
   const isVisualization = intent === "visualization";
+  const isCompactModal = variant === "modal" && !isVisualization;
   const ghUrl = graphicsHouseReferralUrl("request_quote_visualization");
+
+  const buildCompactProjectDetails = () => {
+    const typeLabel = visualizationCopy.projectTypes[projectType];
+    return locale === "ar" ? `طلب سريع — ${typeLabel}` : `Quick request — ${typeLabel}`;
+  };
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -116,8 +122,8 @@ export function QuoteRequestForm({
       clientPhone,
       citySlug,
       categorySlug,
-      projectDetails,
-      budgetRange: budgetRange || undefined,
+      projectDetails: isCompactModal ? buildCompactProjectDetails() : projectDetails,
+      budgetRange: isCompactModal ? undefined : budgetRange || undefined,
       locale,
     });
     setPending(false);
@@ -156,20 +162,22 @@ export function QuoteRequestForm({
 
   if (marketplaceSuccess) {
     return (
-      <QuoteRequestSuccessModal
-        copy={copy.successModal}
-        locale={locale}
-        referenceCode={marketplaceSuccess.referenceCode}
-        whatsAppUrl={marketplaceSuccess.whatsAppUrl}
-        onClose={onSuccessClose}
-        variant={variant === "modal" ? "inline" : "overlay"}
-      />
+      <div className={variant === "modal" ? "px-6 pb-8 pt-10" : undefined}>
+        <QuoteRequestSuccessModal
+          copy={copy.successModal}
+          locale={locale}
+          referenceCode={marketplaceSuccess.referenceCode}
+          whatsAppUrl={marketplaceSuccess.whatsAppUrl}
+          onClose={onSuccessClose}
+          variant={variant === "modal" ? "inline" : "overlay"}
+        />
+      </div>
     );
   }
 
   const formClass =
     variant === "modal"
-      ? "ruwaq-form-card mx-auto max-w-xl space-y-5 border-0 shadow-none"
+      ? "ruwaq-form-card mx-auto max-w-xl space-y-4 px-6 pb-8 pt-10"
       : "mx-auto max-w-xl space-y-5";
 
   const labelClass = variant === "page" ? "ruwaq-ad-field-label" : "ruwaq-label";
@@ -181,8 +189,12 @@ export function QuoteRequestForm({
       ? "ruwaq-pro-btn-solid w-full px-8 py-3 disabled:opacity-50"
       : "btn-ruwaq-primary w-full disabled:opacity-50";
 
-  const pageTitle = isVisualization ? copy.visualizationTitle : copy.title;
-  const pageSubtitle = isVisualization ? copy.visualizationSubtitle : null;
+  const pageTitle = isVisualization ? copy.visualizationTitle : isCompactModal ? copy.modalTitle : copy.title;
+  const pageSubtitle = isVisualization
+    ? copy.visualizationSubtitle
+    : isCompactModal
+      ? copy.modalSubtitle
+      : null;
 
   return (
     <form onSubmit={onSubmit} className={formClass}>
@@ -195,41 +207,43 @@ export function QuoteRequestForm({
         <p className="text-center text-sm leading-relaxed text-neutral-600">{pageSubtitle}</p>
       ) : null}
 
-      <div>
-        <p className={labelClass}>{copy.requestTypeLabel}</p>
-        <div className="mt-2 grid grid-cols-1 gap-2 sm:grid-cols-2">
-          <button
-            type="button"
-            onClick={() => setIntent("marketplace")}
-            className={`border px-4 py-3 text-start text-sm transition-colors ${
-              intent === "marketplace"
-                ? "border-neutral-950 bg-neutral-950 text-white"
-                : "border-neutral-300 bg-white text-neutral-700 hover:border-neutral-950"
-            }`}
-          >
-            {copy.requestTypes.marketplace}
-          </button>
-          <button
-            type="button"
-            onClick={() => setIntent("visualization")}
-            className={`border px-4 py-3 text-start text-sm transition-colors ${
-              intent === "visualization"
-                ? "border-neutral-950 bg-neutral-950 text-white"
-                : "border-neutral-300 bg-white text-neutral-700 hover:border-neutral-950"
-            }`}
-          >
-            {copy.requestTypes.visualization}
-          </button>
+      {variant === "page" ? (
+        <div>
+          <p className={labelClass}>{copy.requestTypeLabel}</p>
+          <div className="mt-2 grid grid-cols-1 gap-2 sm:grid-cols-2">
+            <button
+              type="button"
+              onClick={() => setIntent("marketplace")}
+              className={`border px-4 py-3 text-start text-sm transition-colors ${
+                intent === "marketplace"
+                  ? "border-neutral-950 bg-neutral-950 text-white"
+                  : "border-neutral-300 bg-white text-neutral-700 hover:border-neutral-950"
+              }`}
+            >
+              {copy.requestTypes.marketplace}
+            </button>
+            <button
+              type="button"
+              onClick={() => setIntent("visualization")}
+              className={`border px-4 py-3 text-start text-sm transition-colors ${
+                intent === "visualization"
+                  ? "border-neutral-950 bg-neutral-950 text-white"
+                  : "border-neutral-300 bg-white text-neutral-700 hover:border-neutral-950"
+              }`}
+            >
+              {copy.requestTypes.visualization}
+            </button>
+          </div>
+          {isVisualization ? (
+            <p className="mt-3 text-xs leading-relaxed text-neutral-500">
+              {copy.visualizationHint}{" "}
+              <Link href="/visualization" className="underline underline-offset-2 hover:text-neutral-950">
+                {copy.visualizationPageLink}
+              </Link>
+            </p>
+          ) : null}
         </div>
-        {isVisualization ? (
-          <p className="mt-3 text-xs leading-relaxed text-neutral-500">
-            {copy.visualizationHint}{" "}
-            <Link href="/visualization" className="underline underline-offset-2 hover:text-neutral-950">
-              {copy.visualizationPageLink}
-            </Link>
-          </p>
-        ) : null}
-      </div>
+      ) : null}
 
       {error ? (
         <div className="rounded-xl bg-red-50 px-4 py-3 text-sm text-red-600">{error}</div>
@@ -246,7 +260,7 @@ export function QuoteRequestForm({
         />
       </div>
 
-      {isVisualization ? (
+      {isVisualization && variant === "page" ? (
         <div>
           <label className={labelClass}>{visualizationCopy.fields.company}</label>
           <input
@@ -259,21 +273,7 @@ export function QuoteRequestForm({
         </div>
       ) : null}
 
-      <div>
-        <label className={labelClass}>{copy.fields.phone}</label>
-        <input
-          className={fieldClass}
-          type="tel"
-          inputMode="tel"
-          placeholder={copy.fields.phonePlaceholder}
-          value={clientPhone}
-          onChange={(e) => setClientPhone(e.target.value)}
-          required
-          dir="ltr"
-        />
-      </div>
-
-      <div className={`grid gap-5 ${isVisualization ? "sm:grid-cols-2" : "sm:grid-cols-2"}`}>
+      <div className={isCompactModal ? "grid gap-4 sm:grid-cols-2" : undefined}>
         <div>
           <label className={labelClass}>{copy.fields.city}</label>
           <select
@@ -289,7 +289,25 @@ export function QuoteRequestForm({
           </select>
         </div>
 
-        {isVisualization ? (
+        {isCompactModal ? (
+          <div>
+            <label className={labelClass}>{copy.fields.projectType}</label>
+            <select
+              className={fieldClass}
+              value={projectType}
+              onChange={(e) =>
+                setProjectType(e.target.value as (typeof PROJECT_TYPE_KEYS)[number])
+              }
+              required
+            >
+              {PROJECT_TYPE_KEYS.map((key) => (
+                <option key={key} value={key}>
+                  {visualizationCopy.projectTypes[key]}
+                </option>
+              ))}
+            </select>
+          </div>
+        ) : isVisualization ? (
           <div>
             <label className={labelClass}>{visualizationCopy.fields.projectType}</label>
             <select
@@ -326,27 +344,45 @@ export function QuoteRequestForm({
       </div>
 
       <div>
-        <label className={labelClass}>{copy.fields.details}</label>
-        <textarea
+        <label className={labelClass}>{copy.fields.phone}</label>
+        <input
           className={fieldClass}
-          rows={5}
-          value={projectDetails}
-          onChange={(e) => setProjectDetails(e.target.value)}
+          type="tel"
+          inputMode="tel"
+          placeholder={copy.fields.phonePlaceholder}
+          value={clientPhone}
+          onChange={(e) => setClientPhone(e.target.value)}
           required
-          minLength={10}
-          dir={locale === "ar" ? "rtl" : "ltr"}
+          dir="ltr"
         />
       </div>
 
-      <div>
-        <label className={labelClass}>{copy.fields.budget}</label>
-        <input
-          className={fieldClass}
-          value={budgetRange}
-          onChange={(e) => setBudgetRange(e.target.value)}
-          dir={locale === "ar" ? "rtl" : "ltr"}
-        />
-      </div>
+      {!isCompactModal ? (
+        <>
+          <div>
+            <label className={labelClass}>{copy.fields.details}</label>
+            <textarea
+              className={fieldClass}
+              rows={5}
+              value={projectDetails}
+              onChange={(e) => setProjectDetails(e.target.value)}
+              required
+              minLength={10}
+              dir={locale === "ar" ? "rtl" : "ltr"}
+            />
+          </div>
+
+          <div>
+            <label className={labelClass}>{copy.fields.budget}</label>
+            <input
+              className={fieldClass}
+              value={budgetRange}
+              onChange={(e) => setBudgetRange(e.target.value)}
+              dir={locale === "ar" ? "rtl" : "ltr"}
+            />
+          </div>
+        </>
+      ) : null}
 
       <button type="submit" disabled={pending} className={submitClass}>
         {pending

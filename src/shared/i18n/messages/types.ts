@@ -184,7 +184,10 @@ export type Messages = {
         category: string;
         details: string;
         budget: string;
+        projectType: string;
       };
+      modalTitle: string;
+      modalSubtitle: string;
     };
     listing: {
       verified: string;
@@ -198,6 +201,20 @@ export type Messages = {
       viewProfile: string;
       empty: string;
       requestCta: string;
+      verifiedTooltip: {
+        title: string;
+        body: string;
+      };
+      emptyState: {
+        title: string;
+        body: string;
+        searchTitle: string;
+        searchBody: string;
+        submit: string;
+        submitting: string;
+        successTitle: string;
+        successBody: string;
+      };
     };
     proDirectory: {
       eyebrow: string;

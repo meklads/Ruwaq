@@ -9,6 +9,7 @@ import {
 } from "@/shared/constants/marketplace-taxonomy";
 import { getProShowcaseListings } from "@/modules/marketplace/server/join.actions";
 import { ListingCard } from "@/modules/marketplace/components/directory/ListingCard";
+import { DirectoryEmptyState } from "@/modules/marketplace/components/directory-empty-state";
 import { parseCitySlug } from "@/modules/marketplace/lib/marketplace-slugs";
 
 type Props = {
@@ -48,9 +49,14 @@ export default async function ProShowcasePage({ searchParams }: Props) {
       </header>
 
       {listings.length === 0 ? (
-        <p className="mx-auto mt-12 max-w-6xl border border-dashed border-neutral-300 bg-white p-12 text-center text-neutral-600">
-          {copy.empty}
-        </p>
+        <DirectoryEmptyState
+          copy={t.marketplace.listing.emptyState}
+          quoteErrors={t.marketplace.quote.errors}
+          fields={t.marketplace.quote.fields}
+          locale={locale}
+          citySlug={citySlug ?? "jeddah"}
+          categorySlug="fit-out"
+        />
       ) : (
         <div className="ruwaq-pro-editorial-grid">
           {listings.map((listing) => {

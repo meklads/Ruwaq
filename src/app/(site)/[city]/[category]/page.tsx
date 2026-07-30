@@ -13,6 +13,7 @@ import { legacyCategoryRedirectTarget } from "@/modules/marketplace/lib/marketpl
 import { getListingsForCityCategory } from "@/modules/marketplace/server/listings.service";
 import { ListingCard } from "@/modules/marketplace/components/directory/ListingCard";
 import { DirectoryFilters } from "@/modules/marketplace/components/directory-filters";
+import { DirectoryEmptyState } from "@/modules/marketplace/components/directory-empty-state";
 import { CategoryQuoteCta } from "@/modules/marketplace/components/category-quote-cta";
 import {
   parseFeaturedOnly,
@@ -173,9 +174,15 @@ export default async function CategoryListingPage({ params, searchParams }: Prop
         </div>
       </header>
       {listings.length === 0 ? (
-        <p className="mx-auto mt-12 max-w-6xl border border-dashed border-neutral-300 bg-white p-12 text-center text-neutral-600">
-          {t.marketplace.listing.empty}
-        </p>
+        <DirectoryEmptyState
+          copy={t.marketplace.listing.emptyState}
+          quoteErrors={t.marketplace.quote.errors}
+          fields={t.marketplace.quote.fields}
+          locale={locale}
+          citySlug={city.slug}
+          categorySlug={catMeta.slug}
+          searchQuery={q}
+        />
       ) : (
         <>
           <div className="ruwaq-pro-editorial-grid">

@@ -266,6 +266,8 @@ export const en: Messages = {
    },
    submit: "Send request, free",
    submitting: "Sending...",
+   modalTitle: "Quick quote request",
+   modalSubtitle: "Four fields only — we review and respond within 24 hours.",
    success: "Request received. We will contact you soon.",
    successModal: {
     title: "Request received",
@@ -290,6 +292,7 @@ export const en: Messages = {
     category: "Service type",
     details: "Project details",
     budget: "Budget range (optional)",
+    projectType: "Project type",
    },
   },
   listing: {
@@ -304,6 +307,20 @@ export const en: Messages = {
    viewProfile: "Profile",
    empty: "No verified providers yet. Request a quote and we will match you.",
    requestCta: "Request a quote for this category",
+   verifiedTooltip: {
+    title: "Ruwaq verified company",
+    body: "Commercial registration, completed work, and adherence to our clause & warranty pack confirmed.",
+   },
+   emptyState: {
+    title: "We are expanding coverage here",
+    body: "Leave your number and we will connect you with a verified advisor as soon as providers are available.",
+    searchTitle: "No results for your search",
+    searchBody: "Try different keywords or request a callback and we will match you within 24 hours.",
+    submit: "Send contact request",
+    submitting: "Sending…",
+    successTitle: "Request received",
+    successBody: "The Ruwaq team will reach out on WhatsApp within 24 hours.",
+   },
   },
   proDirectory: {
    eyebrow: "RUWAQ PRO, Western Region",
