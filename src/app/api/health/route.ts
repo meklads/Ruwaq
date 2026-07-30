@@ -8,10 +8,16 @@ function envSet(name: string): boolean {
   return Boolean(process.env[name]?.trim());
 }
 
+function authSecretReady(): boolean {
+  const secret =
+    process.env.AUTH_SECRET?.trim() || process.env.NEXTAUTH_SECRET?.trim();
+  return Boolean(secret && secret.length >= 32 && secret !== "runtime-placeholder-change-me");
+}
+
 function buildIntegrations() {
   return {
     googleAuth: isGoogleAuthConfigured(),
-    authSecret: envSet("AUTH_SECRET"),
+    authSecret: authSecretReady(),
     authUrl: envSet("AUTH_URL"),
     resend: envSet("RESEND_API_KEY") && envSet("RESEND_FROM"),
     ruwaqLeadEmail: envSet("RUWQ_LEAD_EMAIL"),
