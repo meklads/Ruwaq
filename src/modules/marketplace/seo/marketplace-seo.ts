@@ -9,6 +9,11 @@ import {
   type MarketplaceCitySlug,
 } from "@/shared/constants/marketplace-taxonomy";
 import { appBaseUrlFromEnv } from "@/modules/proposal/export/proposal-export-utils";
+import {
+  absoluteMarketingImage,
+  categoryImageForSlug,
+  DEFAULT_MARKETING_HERO,
+} from "@/content/marketing-images";
 
 type CityMeta = NonNullable<ReturnType<typeof getCityBySlug>>;
 type CatMeta = NonNullable<ReturnType<typeof getCategoryBySlug>>;
@@ -74,6 +79,10 @@ export function buildCategoryListingMetadata(opts: {
   );
   const path = `/${city.slug}/${cat.slug}`;
   const url = canonical(path);
+  const ogImage = absoluteMarketingImage(
+    categoryImageForSlug(cat.slug),
+    appBaseUrlFromEnv()
+  );
 
   const keywordsAr = [
     cat.nameAr,
@@ -106,11 +115,13 @@ export function buildCategoryListingMetadata(opts: {
       siteName: opts.locale === "ar" ? "رواق" : "Ruwaq",
       locale: opts.locale === "ar" ? "ar_SA" : "en_SA",
       type: "website",
+      images: [{ url: ogImage, width: 1200, height: 630, alt: title }],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
+      images: [ogImage],
     },
     robots: { index: true, follow: true },
   };
@@ -229,6 +240,17 @@ export function buildProviderListingMetadata(
   const url = canonical(path);
 
   const images = parseListingImages(listing.images);
+  const base = appBaseUrlFromEnv();
+  const fallbackImage = absoluteMarketingImage(
+    categoryImageForSlug(listing.category.slug),
+    base
+  );
+  const ogImage =
+    images.length > 0
+      ? images[0]!.startsWith("http")
+        ? images[0]!
+        : absoluteMarketingImage(images[0]!, base)
+      : fallbackImage;
 
   return {
     title,
@@ -240,9 +262,9 @@ export function buildProviderListingMetadata(
       url,
       type: "website",
       locale: locale === "ar" ? "ar_SA" : "en_SA",
-      images: images.length > 0 ? images.map((u) => ({ url: u })) : undefined,
+      images: [{ url: ogImage, width: 1200, height: 630, alt: title }],
     },
-    twitter: { card: "summary_large_image", title, description },
+    twitter: { card: "summary_large_image", title, description, images: [ogImage] },
     robots: { index: true, follow: true },
   };
 }

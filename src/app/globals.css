@@ -2051,7 +2051,7 @@
   /* —— AD-style horizontal featured ads (homepage partner + proposals) —— */
   /* Section: full-width band with its own bg; banner is a contained card inside. */
   .ruwaq-ad-featured-section {
-    @apply py-10 sm:py-12 lg:py-14;
+    @apply py-8 sm:py-10 lg:py-12;
   }
 
   .ruwaq-ad-featured-section--white {
@@ -2076,15 +2076,15 @@
 
   /* Partner row: Turriva + Graphics House side by side */
   .ruwaq-ad-partner-row {
-    @apply border-t border-neutral-200 bg-white py-8 sm:py-10 lg:py-12;
+    @apply border-t border-neutral-200 bg-[var(--ruwaq-ad-stone)] py-8 sm:py-10 lg:py-12;
   }
 
   .ruwaq-ad-partner-row__frame {
-    @apply mx-auto grid w-full max-w-[80rem] grid-cols-1 gap-3 px-4 sm:grid-cols-2 sm:gap-4 sm:px-6 lg:px-8;
+    @apply mx-auto grid w-full max-w-[80rem] grid-cols-1 gap-3 px-4 sm:grid-cols-2 sm:gap-4 sm:px-6 lg:gap-5 lg:px-8;
   }
 
   .ruwaq-ad-partner-row__item {
-    @apply block min-w-0 transition-opacity hover:opacity-95;
+    @apply block min-w-0 overflow-hidden border border-neutral-200/80 bg-white shadow-sm transition-[opacity,box-shadow] hover:opacity-95 hover:shadow-md;
   }
 
   .ruwaq-ad-partner-row__image {

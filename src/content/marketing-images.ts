@@ -1,7 +1,7 @@
 /**
  * Central marketing image registry — no duplicate URLs across homepage sections.
  * Dot For Life assets live in /public/images/marketing (optimized JPEG).
- * Remaining slots use distinct Unsplash IDs not reused in listings seed pools.
+ * HVAC uses one topic-specific Unsplash; everything else is local.
  */
 
 const U = (id: string, w = 1200) =>
@@ -26,58 +26,69 @@ export const MARKETING_IMAGES = {
   proposalsAdEn: "/images/marketing/ad3En.png",
 } as const;
 
-/** One unique image per directory sector (homepage category grid). */
+/** Default social / listing fallback when no upload exists. */
+export const DEFAULT_MARKETING_HERO = MARKETING_IMAGES.hero;
+
+/** One unique, topic-relevant image per directory sector. */
 export const CATEGORY_IMAGES: Record<string, string> = {
   "fit-out": MARKETING_IMAGES.interiorLounge,
   contracting: MARKETING_IMAGES.modelHousePlanning,
   supervision: MARKETING_IMAGES.familyDining,
   hvac: U("photo-1631679706909-d082507cbce0"),
   kitchens: MARKETING_IMAGES.kitchenFamily,
-  "luxury-materials": U("photo-1615529328331-f8917597711f"),
-  outdoor: U("photo-1600566753086-00f18fb576b9"),
-  maintenance: U("photo-1581094794329-c8112a89af12"),
+  "luxury-materials": MARKETING_IMAGES.architecturalModel,
+  outdoor: MARKETING_IMAGES.hero,
+  maintenance: MARKETING_IMAGES.keysNewHome,
 };
 
-/** Featured ad device previews */
 export const FEATURED_AD_IMAGES = {
   visualization: MARKETING_IMAGES.ghStudio,
   proposals: MARKETING_IMAGES.proposalDesk,
 } as const;
 
-/** Guides — each image unique vs category grid and hero. */
+/** Guide heroes — aligned with each article topic. */
 export const GUIDE_IMAGES = {
-  marble: U("photo-1615874959477-df969457a1eb"),
+  marble: MARKETING_IMAGES.architecturalModel,
   hvac: U("photo-1621905251189-08b45d6a269e"),
-  kitchen: U("photo-1600585154526-990dced4db0d"),
+  kitchen: MARKETING_IMAGES.kitchenFamily,
   supervision: MARKETING_IMAGES.keysNewHome,
-  maintenance: U("photo-1581578731548-c64695cc6952"),
-  landscape: U("photo-1416879595882-3373a0480b0b"),
+  maintenance: MARKETING_IMAGES.familySavings,
+  landscape: MARKETING_IMAGES.hero,
 } as const;
 
-/** Project tour heroes & galleries (detail pages — may reuse Unsplash not shown on homepage). */
+/** Project tour heroes & galleries (local assets). */
 export const TOUR_IMAGES = {
   jeddahHero: MARKETING_IMAGES.familyLiving,
   jeddahGallery: [
-    U("photo-1618221195710-dd6b41faaea6"),
-    U("photo-1600585154340-be6161a56a0c"),
-    U("photo-1556911220-bff31c812dba"),
-    U("photo-1600607687920-4e2a09cf159d"),
+    MARKETING_IMAGES.interiorLounge,
+    MARKETING_IMAGES.kitchenFamily,
+    MARKETING_IMAGES.familyDining,
+    MARKETING_IMAGES.proposalDesk,
   ],
   makkahHero: MARKETING_IMAGES.architecturalModel,
   makkahGallery: [
-    U("photo-1595526114035-0d45ed16cfbf"),
-    U("photo-1566665797739-1674de7a421a"),
-    U("photo-1631545806606-4119a794c1a1"),
-    U("photo-1616486338812-3dadae4b4ace"),
+    MARKETING_IMAGES.ghStudio,
+    MARKETING_IMAGES.modelHousePlanning,
+    MARKETING_IMAGES.familyLiving,
+    MARKETING_IMAGES.interiorLounge,
   ],
   madinahHero: MARKETING_IMAGES.familySavings,
   madinahGallery: [
-    U("photo-1600047509807-ba8f99d2cd09"),
-    U("photo-1600566753376-12c8ab7fb165"),
-    U("photo-1558904541-efa843a96f01"),
-    U("photo-1600607687939-ce8a6c25118c"),
+    MARKETING_IMAGES.hero,
+    MARKETING_IMAGES.keysNewHome,
+    MARKETING_IMAGES.familySavings,
+    MARKETING_IMAGES.kitchenFamily,
   ],
 } as const;
 
-/** Visualization landing aside */
 export const VISUALIZATION_HERO = MARKETING_IMAGES.ghStudio;
+
+export function categoryImageForSlug(slug: string | undefined): string {
+  if (slug && CATEGORY_IMAGES[slug]) return CATEGORY_IMAGES[slug]!;
+  return DEFAULT_MARKETING_HERO;
+}
+
+export function absoluteMarketingImage(path: string, siteOrigin: string): string {
+  const base = siteOrigin.replace(/\/$/, "");
+  return path.startsWith("http") ? path : `${base}${path}`;
+}

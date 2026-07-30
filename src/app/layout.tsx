@@ -14,6 +14,7 @@ import { GoogleAnalytics } from "@/shared/components/google-analytics";
 import { getLocale } from "@/shared/i18n/server";
 import { localeDir } from "@/shared/i18n/locale";
 import { RUWQ_PUBLIC_URL } from "@/shared/constants/brand";
+import { DEFAULT_MARKETING_HERO } from "@/content/marketing-images";
 
 /** Graphics House ProjectLaunch™, Tajawal primary, IBM Plex Sans Arabic fallback */
 const tajawal = Tajawal({

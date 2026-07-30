@@ -4,6 +4,7 @@ import {
   RUWQ_PUBLIC_URL,
   TURRIVA_URL,
 } from "@/shared/constants/brand";
+import { DEFAULT_MARKETING_HERO } from "@/content/marketing-images";
 import type { Locale } from "@/shared/i18n/locale";
 
 export function buildOrganizationJsonLd(locale: Locale) {
@@ -15,7 +16,7 @@ export function buildOrganizationJsonLd(locale: Locale) {
     name,
     url: RUWQ_PUBLIC_URL,
     email: RUWQ_PUBLIC_EMAIL,
-    logo: `${RUWQ_PUBLIC_URL}/opengraph-image`,
+    logo: `${RUWQ_PUBLIC_URL}${DEFAULT_MARKETING_HERO}`,
     description:
       locale === "ar"
         ? "دليل هندسي وعقاري للمنطقة الغربية مع أداة عروض احترافية للمقاولين."

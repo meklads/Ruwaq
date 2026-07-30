@@ -36,22 +36,35 @@ export default function OpenGraphImage() {
             letterSpacing: "0.38em",
             paddingLeft: "0.38em",
             color: "#d4b47a",
-            marginBottom: 40,
+            marginBottom: 36,
           }}
         >
           RUWAQ
         </div>
         <div
           style={{
-            fontSize: 32,
-            fontWeight: 300,
+            fontSize: 28,
+            fontWeight: 400,
             textAlign: "center",
-            maxWidth: 900,
-            lineHeight: 1.35,
+            maxWidth: 920,
+            lineHeight: 1.45,
             color: "rgba(255,255,255,0.92)",
           }}
         >
-          Engineering directory + AI proposal studio, Western Region KSA
+          دليل هندسي وعقاري في المنطقة الغربية
+        </div>
+        <div
+          style={{
+            fontSize: 22,
+            fontWeight: 300,
+            textAlign: "center",
+            maxWidth: 920,
+            lineHeight: 1.45,
+            color: "rgba(255,255,255,0.72)",
+            marginTop: 12,
+          }}
+        >
+          Engineering directory and AI proposal studio, Western Region KSA
         </div>
       </div>
     ),

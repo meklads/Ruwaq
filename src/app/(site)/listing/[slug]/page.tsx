@@ -13,7 +13,7 @@ import {
 import { JsonLdScript } from "@/modules/marketplace/components/json-ld-script";
 import { RuwaqProBadge } from "@/modules/marketplace/components/ruwaq-pro-badge";
 import { ListingGallery } from "@/modules/marketplace/components/listing-gallery";
-import { listingGalleryImages } from "@/modules/marketplace/lib/listing-image";
+import { listingGalleryWithFallback } from "@/modules/marketplace/lib/listing-image";
 import {
   buildProviderListingJsonLdGraph,
   buildProviderListingMetadata,
@@ -58,7 +58,7 @@ export default async function ListingDetailPage({ params }: Props) {
     : listing.category.nameAr;
 
   const jsonLd = buildProviderListingJsonLdGraph(listing, locale);
-  const gallery = listingGalleryImages(listing);
+  const gallery = listingGalleryWithFallback(listing);
 
   const digits = listing.whatsapp.replace(/\D/g, "");
   const waIntl = digits.startsWith("966") ? digits : `966${digits.replace(/^0/, "")}`;

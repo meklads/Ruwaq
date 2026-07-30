@@ -12,10 +12,11 @@ type Props = {
 
 export function ListingGallery({ images, title, copy }: Props) {
   const [active, setActive] = useState(0);
-  const slides = images.length > 0 ? images : [];
-  const activeSrc = slides[active] ?? slides[0]!;
+  const slides = images.filter(Boolean);
 
   if (slides.length === 0) return null;
+
+  const activeSrc = slides[active] ?? slides[0]!;
 
   return (
     <section className="ruwaq-pro-listing-gallery" aria-label={copy.galleryTitle}>
@@ -34,7 +35,7 @@ export function ListingGallery({ images, title, copy }: Props) {
         <div className="ruwaq-pro-listing-gallery-thumbs">
           {slides.map((src, index) => (
             <button
-              key={src}
+              key={`${src}-${index}`}
               type="button"
               className={`ruwaq-pro-listing-gallery-thumb${index === active ? " is-active" : ""}`}
               onClick={() => setActive(index)}

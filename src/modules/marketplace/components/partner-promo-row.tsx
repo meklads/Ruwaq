@@ -11,6 +11,15 @@ type Props = {
   locale: Locale;
 };
 
+const TURRIVA_AD = {
+  ar: {
+    alt: "توريفا، هندسة معمارية وتشطيبات وبناء",
+  },
+  en: {
+    alt: "Turriva, Architecture, Interior, Construction",
+  },
+} as const;
+
 const GRAPHICS_HOUSE_AD = {
   ar: {
     src: MARKETING_IMAGES.graphicsHouseAdAr,
@@ -28,6 +37,7 @@ const GRAPHICS_HOUSE_AD = {
 
 /** Turriva + Graphics House, side by side on desktop, stacked on mobile. */
 export function PartnerPromoRow({ locale }: Props) {
+  const turriva = TURRIVA_AD[locale];
   const gh = GRAPHICS_HOUSE_AD[locale];
   const turrivaHref = turrivaReferralUrl("homepage_featured_ad");
   const ghHref = graphicsHouseProjectLaunchReferralUrl("homepage_featured_ad");
@@ -47,7 +57,7 @@ export function PartnerPromoRow({ locale }: Props) {
         >
           <Image
             src={MARKETING_IMAGES.turrivaAd}
-            alt="Turriva, Architecture, Interior, Construction"
+            alt={turriva.alt}
             width={1749}
             height={899}
             className="ruwaq-ad-partner-row__image"

@@ -29,7 +29,7 @@ export function ContractorPromoBanner({ locale }: Props) {
   return (
     <section
       id="contractor-promo"
-      className="ruwaq-ad-featured-section ruwaq-ad-featured-section--stone scroll-mt-28"
+      className="ruwaq-ad-featured-section ruwaq-ad-featured-section--white scroll-mt-28"
       aria-label={ad.alt}
     >
       <div className="ruwaq-ad-featured-section__frame">
