@@ -293,6 +293,9 @@ export const en: Messages = {
     details: "Project details",
     budget: "Budget range (optional)",
     projectType: "Project type",
+    email: "Email (optional)",
+    emailPlaceholder: "name@example.com",
+    emailHint: "Optional — we send a receipt with your reference number.",
    },
   },
   listing: {

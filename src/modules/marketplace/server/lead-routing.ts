@@ -1,6 +1,9 @@
 import type { MarketplaceLeadStatus } from "@prisma/client";
 import { getCategoryBySlug } from "@/shared/constants/marketplace-taxonomy";
-import { sendTurrivaLeadEmail } from "@/modules/marketplace/server/lead-notify-email";
+import {
+  sendRuwaqOpsLeadEmail,
+  sendTurrivaLeadEmail,
+} from "@/modules/marketplace/server/lead-notify-email";
 
 const TURRIVA_SLUGS = new Set(["fit-out", "contracting"]);
 
@@ -29,6 +32,8 @@ export async function notifyLeadRouting(payload: {
   categoryLabel: string;
   projectDetails: string;
   budgetRange?: string | null;
+  locale: "ar" | "en";
+  referenceCode: string;
 }) {
   const webhook = process.env.TURRIVA_LEAD_WEBHOOK_URL?.trim();
   const body = {
@@ -39,6 +44,8 @@ export async function notifyLeadRouting(payload: {
   };
 
   console.info("[marketplace-lead]", JSON.stringify(body));
+
+  await sendRuwaqOpsLeadEmail(payload);
 
   if (payload.status === "ASSIGNED_TO_TURRIVA") {
     await sendTurrivaLeadEmail(payload);

@@ -422,3 +422,80 @@ export function buildRuwaqSampleExportData(
 ): ProposalExportData {
   return buildSampleExportData(locale, "ruwaq-classic", baseUrl);
 }
+
+const STRESS_LINE_LABELS_AR = [
+  "تكسيات ودهانات داخلية — صالات ومجالس",
+  "أرضيات بورسلان — مناطق رطبة",
+  "باركيه خشبي — غرف نوم",
+  "أعمال جبس بورد — أسقف مستعارة",
+  "إضاءة LED ديكورية — جميع الغرف",
+  "تمديدات كهربائية — لوحات وقواطع",
+  "نقاط شبكة وكاميرات مراقبة",
+  "تمديدات سباكة — حمامات رئيسية",
+  "خزائن مطبخ — MDF مطلي",
+  "رخام طبيعي — واجهات ومداخل",
+  "عزل حراري وصوتي — جدران خارجية",
+  "أبواب خشبية — داخلية ومدخل رئيسي",
+  "نوافذ ألومنيوم — حرارية",
+  "تكييف مخفي — VRF",
+  "تهوية وشفط — مطابخ وحمامات",
+  "أعمال حدائق — ري وتشجير",
+  "أسوار وبوابات — حديد مشغول",
+  "مصاعد منزلية — توريد وتركيب",
+  "نظام منزل ذكي — تحكم إضاءة وتكييف",
+  "تنظيف نهائي وتسليم — محضر استلام",
+  "إشراف هندسي — زيارات دورية",
+  "تراخيص بلدية — تنسيق (على العميل)",
+] as const;
+
+const STRESS_LINE_LABELS_EN = [
+  "Interior finishes & paint — living areas",
+  "Porcelain flooring — wet areas",
+  "Wood parquet — bedrooms",
+  "Gypsum board — suspended ceilings",
+  "Decorative LED lighting — all rooms",
+  "Electrical wiring — panels & breakers",
+  "Network & CCTV points",
+  "Plumbing — master bathrooms",
+  "Kitchen cabinets — coated MDF",
+  "Natural marble — facades & entries",
+  "Thermal & acoustic insulation — external walls",
+  "Wood doors — internal & main entry",
+  "Thermal break aluminum windows",
+  "Concealed VRF HVAC",
+  "Ventilation & exhaust — kitchens & baths",
+  "Landscaping — irrigation & planting",
+  "Gates & fences — wrought iron",
+  "Home elevator — supply & install",
+  "Smart home — lighting & HVAC control",
+  "Final cleaning & handover",
+  "Engineering supervision — periodic visits",
+  "Municipality permits — coordination (client)",
+] as const;
+
+/** Stress-test BOQ for PDF pagination / RTL QA (default 22 lines). */
+export function buildStressTestExportData(
+  locale: Locale,
+  lineCount = 22,
+  baseUrl?: string
+): ProposalExportData {
+  const base = buildRuwaqClassicSample(locale, (baseUrl ?? appBaseUrlFromEnv()).replace(/\/$/, ""));
+  const labels = locale === "ar" ? STRESS_LINE_LABELS_AR : STRESS_LINE_LABELS_EN;
+  const count = Math.min(Math.max(lineCount, 3), labels.length);
+  const unit = Math.round(base.budget / count);
+
+  return {
+    ...base,
+    projectName:
+      locale === "ar"
+        ? `تشطيب فيلا — اختبار PDF (${count} بند)`
+        : `Villa fit-out — PDF stress test (${count} lines)`,
+    boqLines: labels.slice(0, count).map((label, index) => ({
+      label,
+      amount: unit + (index % 3) * 1500,
+      percent: Math.round(100 / count),
+      category: "finishing",
+      isEstimated: index % 7 === 0,
+    })),
+  };
+}

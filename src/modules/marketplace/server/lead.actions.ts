@@ -14,6 +14,7 @@ import {
   notifyLeadRouting,
   resolveLeadStatus,
 } from "@/modules/marketplace/server/lead-routing";
+import { sendClientLeadConfirmationEmail } from "@/modules/marketplace/server/lead-notify-email";
 import {
   buildClientFollowUpWhatsAppMessage,
   buildWhatsAppUrl,
@@ -52,6 +53,7 @@ const submitLeadSchema = z.object({
   categorySlug: z.enum(categorySlugs),
   projectDetails: z.string().trim().min(10, { message: "validation" }).max(4000),
   budgetRange: z.string().trim().max(80).optional(),
+  clientEmail: z.string().trim().email().max(160).optional().or(z.literal("")),
   locale: z.enum(["ar", "en"]).default("ar"),
 });
 
@@ -124,6 +126,7 @@ async function persistAndRouteLead(
   const categoryLabel =
     data.locale === "ar" ? categoryMeta.nameAr : categoryMeta.nameEn;
   const cityLabel = data.locale === "ar" ? cityMeta.nameAr : cityMeta.nameEn;
+  const referenceCode = leadReferenceCode(lead.id);
 
   try {
     await notifyLeadRouting({
@@ -136,12 +139,29 @@ async function persistAndRouteLead(
       categoryLabel,
       projectDetails: lead.projectDetails,
       budgetRange: lead.budgetRange,
+      locale: data.locale,
+      referenceCode,
     });
   } catch (err) {
     console.error("[submitLead] notifyLeadRouting failed (lead saved)", err);
   }
 
-  const referenceCode = leadReferenceCode(lead.id);
+  const clientEmail = data.clientEmail?.trim();
+  if (clientEmail) {
+    try {
+      await sendClientLeadConfirmationEmail({
+        locale: data.locale,
+        clientName: lead.clientName,
+        clientEmail,
+        referenceCode,
+        cityLabel,
+        categoryLabel,
+      });
+    } catch (err) {
+      console.error("[submitLead] client confirmation email failed", err);
+    }
+  }
+
   const supportPhone = supportWhatsAppE164();
   const whatsAppUrl = supportPhone
     ? buildWhatsAppUrl(

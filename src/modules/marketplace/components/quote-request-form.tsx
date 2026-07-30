@@ -56,6 +56,7 @@ export function QuoteRequestForm({
   const [intent, setIntent] = useState<QuoteIntent>(initialIntent);
   const [clientName, setClientName] = useState("");
   const [clientPhone, setClientPhone] = useState("");
+  const [clientEmail, setClientEmail] = useState("");
   const [companyName, setCompanyName] = useState("");
   const [citySlug, setCitySlug] = useState(resolvedCity);
   const [categorySlug, setCategorySlug] = useState(resolvedCategory);
@@ -120,6 +121,7 @@ export function QuoteRequestForm({
     const result = await submitLead({
       clientName,
       clientPhone,
+      clientEmail: !isCompactModal && clientEmail.trim() ? clientEmail.trim() : undefined,
       citySlug,
       categorySlug,
       projectDetails: isCompactModal ? buildCompactProjectDetails() : projectDetails,
@@ -356,6 +358,23 @@ export function QuoteRequestForm({
           dir="ltr"
         />
       </div>
+
+      {!isCompactModal ? (
+        <div>
+          <label className={labelClass}>{copy.fields.email}</label>
+          <input
+            className={fieldClass}
+            type="email"
+            inputMode="email"
+            autoComplete="email"
+            placeholder={copy.fields.emailPlaceholder}
+            value={clientEmail}
+            onChange={(e) => setClientEmail(e.target.value)}
+            dir="ltr"
+          />
+          <p className="mt-1 text-xs text-neutral-500">{copy.fields.emailHint}</p>
+        </div>
+      ) : null}
 
       {!isCompactModal ? (
         <>

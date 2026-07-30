@@ -1,5 +1,6 @@
 import { Resend } from "resend";
 import type { MarketplaceLeadStatus } from "@prisma/client";
+import { RUWQ_PUBLIC_EMAIL, RUWQ_PUBLIC_URL } from "@/shared/constants/brand";
 
 type TurrivaEmailPayload = {
   leadId: string;
@@ -11,6 +12,41 @@ type TurrivaEmailPayload = {
   projectDetails: string;
   budgetRange?: string | null;
   status: MarketplaceLeadStatus;
+};
+
+type MarketplaceOpsEmailPayload = TurrivaEmailPayload & {
+  locale: "ar" | "en";
+  referenceCode: string;
+};
+
+type ClientConfirmationEmailPayload = {
+  locale: "ar" | "en";
+  clientName: string;
+  clientEmail: string;
+  referenceCode: string;
+  cityLabel: string;
+  categoryLabel: string;
+};
+
+type JoinApplicationOpsPayload = {
+  applicationId: string;
+  companyName: string;
+  contactName: string;
+  contactPhone: string;
+  contactEmail?: string | null;
+  cityLabel: string;
+  categoryLabel: string;
+  crNumber?: string | null;
+  portfolioUrl?: string | null;
+  message?: string | null;
+  locale: "ar" | "en";
+};
+
+type JoinApplicationConfirmationPayload = {
+  locale: "ar" | "en";
+  contactName: string;
+  contactEmail: string;
+  companyName: string;
 };
 
 type GraphicsHouseEmailPayload = {
@@ -25,19 +61,56 @@ type GraphicsHouseEmailPayload = {
   locale: string;
 };
 
-export async function sendTurrivaLeadEmail(payload: TurrivaEmailPayload): Promise<void> {
-  const apiKey = process.env.RESEND_API_KEY?.trim();
-  const toRaw = process.env.TURRIVA_LEAD_EMAIL?.trim();
-  if (!apiKey || !toRaw) return;
+function resolveResendFrom(): string {
+  return process.env.RESEND_FROM?.trim() || "Ruwaq Leads <onboarding@resend.dev>";
+}
 
-  const to = toRaw.split(",").map((e) => e.trim()).filter(Boolean);
+function resolveResendRecipients(raw: string | undefined): string[] {
+  if (!raw?.trim()) return [];
+  return raw
+    .split(",")
+    .map((e) => e.trim())
+    .filter(Boolean);
+}
+
+function resolveRuwaqOpsEmails(): string[] {
+  const fromEnv = resolveResendRecipients(process.env.RUWQ_LEAD_EMAIL?.trim());
+  if (fromEnv.length > 0) return fromEnv;
+  return [RUWQ_PUBLIC_EMAIL];
+}
+
+function adminLeadsUrl(): string {
+  return `${process.env.NEXT_PUBLIC_APP_URL ?? RUWQ_PUBLIC_URL}/workspace/admin/leads`;
+}
+
+async function sendPlainEmail(opts: {
+  to: string[];
+  subject: string;
+  text: string;
+}): Promise<void> {
+  const apiKey = process.env.RESEND_API_KEY?.trim();
+  if (!apiKey || opts.to.length === 0) return;
+
+  const resend = new Resend(apiKey);
+  try {
+    await resend.emails.send({
+      from: resolveResendFrom(),
+      to: opts.to,
+      subject: opts.subject,
+      text: opts.text,
+    });
+  } catch (err) {
+    console.error("[marketplace-lead] Resend email failed", err);
+  }
+}
+
+export async function sendTurrivaLeadEmail(payload: TurrivaEmailPayload): Promise<void> {
+  const to = resolveResendRecipients(process.env.TURRIVA_LEAD_EMAIL?.trim());
   if (to.length === 0) return;
 
-  const from = process.env.RESEND_FROM?.trim() || "Ruwaq Leads <onboarding@resend.dev>";
-  const subject = `[Ruwaq] ${payload.categoryLabel} — ${payload.clientName} (${payload.city})`;
-
+  const subject = `[Ruwaq → Turriva] ${payload.categoryLabel} — ${payload.clientName} (${payload.city})`;
   const text = [
-    `New marketplace lead (${payload.status})`,
+    `New Turriva-routed marketplace lead (${payload.status})`,
     `Lead ID: ${payload.leadId}`,
     `Client: ${payload.clientName}`,
     `Phone: ${payload.clientPhone}`,
@@ -48,31 +121,146 @@ export async function sendTurrivaLeadEmail(payload: TurrivaEmailPayload): Promis
     "Project details:",
     payload.projectDetails,
     "",
-    `Admin: ${process.env.NEXT_PUBLIC_APP_URL ?? "https://ruwaq.co"}/workspace/admin/leads`,
+    `Admin: ${adminLeadsUrl()}`,
   ]
     .filter(Boolean)
     .join("\n");
 
-  const resend = new Resend(apiKey);
-  try {
-    await resend.emails.send({ from, to, subject, text });
-  } catch (err) {
-    console.error("[marketplace-lead] Resend email failed", err);
-  }
+  await sendPlainEmail({ to, subject, text });
+}
+
+/** Ops inbox — every marketplace quote request (all categories). */
+export async function sendRuwaqOpsLeadEmail(payload: MarketplaceOpsEmailPayload): Promise<void> {
+  const to = resolveRuwaqOpsEmails();
+  const routing =
+    payload.status === "ASSIGNED_TO_TURRIVA" ? "Turriva capture" : "Partner broadcast";
+
+  const subject = `[Ruwaq Ops] ${payload.referenceCode} — ${payload.categoryLabel} (${payload.city})`;
+  const text = [
+    `New marketplace lead — ${routing}`,
+    `Reference: ${payload.referenceCode}`,
+    `Lead ID: ${payload.leadId}`,
+    `Status: ${payload.status}`,
+    `Locale: ${payload.locale}`,
+    `Client: ${payload.clientName}`,
+    `Phone: ${payload.clientPhone}`,
+    `City: ${payload.city}`,
+    `Category: ${payload.categorySlug} — ${payload.categoryLabel}`,
+    payload.budgetRange ? `Budget: ${payload.budgetRange}` : null,
+    "",
+    "Project details:",
+    payload.projectDetails,
+    "",
+    `Admin: ${adminLeadsUrl()}`,
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  await sendPlainEmail({ to, subject, text });
+}
+
+/** Optional — when the client provided an email on /request-quote. */
+export async function sendClientLeadConfirmationEmail(
+  payload: ClientConfirmationEmailPayload
+): Promise<void> {
+  const isAr = payload.locale === "ar";
+  const subject = isAr
+    ? `رواق — استلمنا طلبك (${payload.referenceCode})`
+    : `Ruwaq — we received your request (${payload.referenceCode})`;
+
+  const text = isAr
+    ? [
+        `مرحباً ${payload.clientName}،`,
+        "",
+        "تم استلام طلب عرض السعر بنجاح.",
+        `رقم المرجع: ${payload.referenceCode}`,
+        `المدينة: ${payload.cityLabel}`,
+        `القطاع: ${payload.categoryLabel}`,
+        "",
+        "سيتواصل فريق رواق معك على الواتساب خلال 24 ساعة.",
+        "",
+        RUWQ_PUBLIC_URL,
+      ].join("\n")
+    : [
+        `Hello ${payload.clientName},`,
+        "",
+        "Your quote request was received successfully.",
+        `Reference: ${payload.referenceCode}`,
+        `City: ${payload.cityLabel}`,
+        `Category: ${payload.categoryLabel}`,
+        "",
+        "The Ruwaq team will reach out on WhatsApp within 24 hours.",
+        "",
+        RUWQ_PUBLIC_URL,
+      ].join("\n");
+
+  await sendPlainEmail({ to: [payload.clientEmail], subject, text });
+}
+
+export async function sendJoinApplicationOpsEmail(
+  payload: JoinApplicationOpsPayload
+): Promise<void> {
+  const to = resolveRuwaqOpsEmails();
+  const subject = `[Ruwaq Join] ${payload.companyName} — ${payload.categoryLabel}`;
+  const text = [
+    "New directory join application",
+    `Application ID: ${payload.applicationId}`,
+    `Company: ${payload.companyName}`,
+    `Contact: ${payload.contactName}`,
+    `Phone: ${payload.contactPhone}`,
+    payload.contactEmail ? `Email: ${payload.contactEmail}` : null,
+    `City: ${payload.cityLabel}`,
+    `Category: ${payload.categoryLabel}`,
+    payload.crNumber ? `CR: ${payload.crNumber}` : null,
+    payload.portfolioUrl ? `Portfolio: ${payload.portfolioUrl}` : null,
+    payload.message ? `\nMessage:\n${payload.message}` : null,
+    "",
+    `Locale: ${payload.locale}`,
+    `Admin: ${adminLeadsUrl()}`,
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  await sendPlainEmail({ to, subject, text });
+}
+
+export async function sendJoinApplicationConfirmationEmail(
+  payload: JoinApplicationConfirmationPayload
+): Promise<void> {
+  const isAr = payload.locale === "ar";
+  const subject = isAr
+    ? `رواق — استلمنا طلب انضمام ${payload.companyName}`
+    : `Ruwaq — we received your join request (${payload.companyName})`;
+
+  const text = isAr
+    ? [
+        `مرحباً ${payload.contactName}،`,
+        "",
+        `استلمنا طلب انضمام «${payload.companyName}» إلى دليل Ruwaq PRO.`,
+        "سنراجع السجل التجاري والملف خلال 3–5 أيام عمل ونتواصل معك بالخطوات التالية.",
+        "",
+        RUWQ_PUBLIC_URL,
+      ].join("\n")
+    : [
+        `Hello ${payload.contactName},`,
+        "",
+        `We received your application for "${payload.companyName}" to join the Ruwaq PRO directory.`,
+        "We will review your commercial registration and portfolio within 3–5 business days.",
+        "",
+        RUWQ_PUBLIC_URL,
+      ].join("\n");
+
+  await sendPlainEmail({ to: [payload.contactEmail], subject, text });
 }
 
 export async function sendGraphicsHouseLeadEmail(
   payload: GraphicsHouseEmailPayload
 ): Promise<void> {
-  const apiKey = process.env.RESEND_API_KEY?.trim();
-  const toRaw =
-    process.env.GRAPHICS_HOUSE_LEAD_EMAIL?.trim() || process.env.TURRIVA_LEAD_EMAIL?.trim();
-  if (!apiKey || !toRaw) return;
-
-  const to = toRaw.split(",").map((e) => e.trim()).filter(Boolean);
+  const to = resolveResendRecipients(
+    process.env.GRAPHICS_HOUSE_LEAD_EMAIL?.trim() || process.env.TURRIVA_LEAD_EMAIL?.trim()
+  );
   if (to.length === 0) return;
 
-  const from = process.env.RESEND_FROM?.trim() || "Ruwaq Leads <onboarding@resend.dev>";
   const cityPart = payload.citySlug ? ` (${payload.citySlug})` : "";
   const subject = `[Ruwaq → GH] ${payload.projectType} — ${payload.clientName}${cityPart}`;
 
@@ -90,15 +278,10 @@ export async function sendGraphicsHouseLeadEmail(
     "Project details:",
     payload.projectDetails,
     "",
-    `Admin: ${process.env.NEXT_PUBLIC_APP_URL ?? "https://ruwaq.co"}/workspace/admin/leads`,
+    `Admin: ${adminLeadsUrl()}`,
   ]
     .filter(Boolean)
     .join("\n");
 
-  const resend = new Resend(apiKey);
-  try {
-    await resend.emails.send({ from, to, subject, text });
-  } catch (err) {
-    console.error("[partner-lead] Resend email failed", err);
-  }
+  await sendPlainEmail({ to, subject, text });
 }

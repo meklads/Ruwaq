@@ -14,6 +14,10 @@ import {
   parseCitySlug,
 } from "@/modules/marketplace/lib/marketplace-slugs";
 import type { MarketplaceCitySlug } from "@/shared/constants/marketplace-taxonomy";
+import {
+  sendJoinApplicationConfirmationEmail,
+  sendJoinApplicationOpsEmail,
+} from "@/modules/marketplace/server/lead-notify-email";
 
 const categorySlugs = MARKETPLACE_CATEGORIES.map((c) => c.slug) as [
   MarketplaceCategorySlug,
@@ -92,6 +96,41 @@ export async function submitDirectoryApplication(
       locale: data.locale,
     },
   });
+
+  const cityLabel = data.locale === "ar" ? cityMeta.nameAr : cityMeta.nameEn;
+  const categoryLabel = data.locale === "ar" ? categoryMeta.nameAr : categoryMeta.nameEn;
+
+  try {
+    await sendJoinApplicationOpsEmail({
+      applicationId: application.id,
+      companyName: data.companyName,
+      contactName: data.contactName,
+      contactPhone: data.contactPhone,
+      contactEmail: data.contactEmail?.trim() || null,
+      cityLabel,
+      categoryLabel,
+      crNumber: data.crNumber?.trim() || null,
+      portfolioUrl: data.portfolioUrl?.trim() || null,
+      message: data.message?.trim() || null,
+      locale: data.locale,
+    });
+  } catch (err) {
+    console.error("[submitDirectoryApplication] ops email failed", err);
+  }
+
+  const applicantEmail = data.contactEmail?.trim();
+  if (applicantEmail) {
+    try {
+      await sendJoinApplicationConfirmationEmail({
+        locale: data.locale,
+        contactName: data.contactName,
+        contactEmail: applicantEmail,
+        companyName: data.companyName,
+      });
+    } catch (err) {
+      console.error("[submitDirectoryApplication] confirmation email failed", err);
+    }
+  }
 
   return { success: true, applicationId: application.id };
 }

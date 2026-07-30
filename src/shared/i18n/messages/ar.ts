@@ -290,6 +290,9 @@ export const ar = {
     details: "تفاصيل المشروع / الطلب",
     budget: "نطاق الميزانية (اختياري)",
     projectType: "نوع المشروع",
+    email: "البريد الإلكتروني (اختياري)",
+    emailPlaceholder: "name@example.com",
+    emailHint: "لإرسال تأكيد الطلب — اختياري.",
    },
   },
   listing: {

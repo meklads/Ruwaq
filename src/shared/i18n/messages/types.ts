@@ -185,6 +185,9 @@ export type Messages = {
         details: string;
         budget: string;
         projectType: string;
+        email: string;
+        emailPlaceholder: string;
+        emailHint: string;
       };
       modalTitle: string;
       modalSubtitle: string;
