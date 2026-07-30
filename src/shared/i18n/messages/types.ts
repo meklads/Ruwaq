@@ -197,6 +197,14 @@ export type Messages = {
       trustTitle: string;
       trustBody: string;
     };
+    homeMagazine: {
+      todaysDirectoryEyebrow: string;
+      todaysDirectoryTitle: string;
+      viewAllFeatured: string;
+      trendingEyebrow: string;
+      trendingTitle: string;
+      allSectors: string;
+    };
     footerCta: {
       title: string;
       subtitle: string;
@@ -483,6 +491,14 @@ export type Messages = {
     };
   };
   site: {
+    header: {
+      applyNow: string;
+      directory: string;
+      featured: string;
+      howItWorks: string;
+      forContractors: string;
+      mainNavLabel: string;
+    };
     nav: {
       howItWorks: string;
       about: string;

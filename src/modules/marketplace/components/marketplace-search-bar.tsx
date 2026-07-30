@@ -18,7 +18,7 @@ export function MarketplaceSearchBar({ copy, locale }: Props) {
   const router = useRouter();
   const [city, setCity] = useState<string>("jeddah");
   const [category, setCategory] = useState<string>(
-    MARKETPLACE_CATEGORIES[0]?.slug ?? "hvac"
+    MARKETPLACE_CATEGORIES[0]?.slug ?? "fit-out"
   );
   const [q, setQ] = useState("");
 
@@ -31,17 +31,17 @@ export function MarketplaceSearchBar({ copy, locale }: Props) {
   };
 
   return (
-    <section className="relative z-10 -mt-10 px-4 sm:px-6 lg:-mt-12">
+    <section className="relative z-10 -mt-8 px-4 sm:-mt-10 sm:px-6">
       <form
         onSubmit={onSubmit}
-        className="ruwaq-form-card mx-auto flex max-w-5xl flex-col gap-4 shadow-ruwaq-lg ring-1 ring-ruwaq-stone/40 sm:flex-row sm:flex-wrap sm:items-end"
+        className="mx-auto flex max-w-4xl flex-col gap-3 border border-neutral-200 bg-white p-4 shadow-sm sm:flex-row sm:items-end sm:gap-4 sm:p-5"
       >
-        <div className="min-w-[140px] flex-1">
-          <label className="ruwaq-label">{copy.cityLabel}</label>
+        <div className="min-w-[120px] flex-1">
+          <label className="ruwaq-ad-field-label">{copy.cityLabel}</label>
           <select
             value={city}
             onChange={(e) => setCity(e.target.value)}
-            className="ruwaq-field"
+            className="ruwaq-ad-field mt-1"
           >
             {MARKETPLACE_CITIES.map((c) => (
               <option key={c.slug} value={c.slug}>
@@ -50,12 +50,12 @@ export function MarketplaceSearchBar({ copy, locale }: Props) {
             ))}
           </select>
         </div>
-        <div className="min-w-[180px] flex-[1.2]">
-          <label className="ruwaq-label">{copy.categoryLabel}</label>
+        <div className="min-w-[140px] flex-[1.2]">
+          <label className="ruwaq-ad-field-label">{copy.categoryLabel}</label>
           <select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            className="ruwaq-field"
+            className="ruwaq-ad-field mt-1"
           >
             {MARKETPLACE_CATEGORIES.map((c) => (
               <option key={c.slug} value={c.slug}>
@@ -64,18 +64,18 @@ export function MarketplaceSearchBar({ copy, locale }: Props) {
             ))}
           </select>
         </div>
-        <div className="min-w-[200px] flex-[2]">
-          <label className="ruwaq-label sr-only">{copy.queryPlaceholder}</label>
+        <div className="min-w-[160px] flex-[2]">
+          <label className="ruwaq-ad-field-label sr-only">{copy.queryPlaceholder}</label>
           <input
             type="search"
             value={q}
             onChange={(e) => setQ(e.target.value)}
             placeholder={copy.queryPlaceholder}
-            className="ruwaq-field"
+            className="ruwaq-ad-field mt-1"
             dir={locale === "ar" ? "rtl" : "ltr"}
           />
         </div>
-        <button type="submit" className="btn-ruwaq-primary w-full sm:w-auto sm:shrink-0">
+        <button type="submit" className="ruwaq-pro-btn-solid w-full px-6 py-3 sm:w-auto sm:shrink-0">
           {copy.submit}
         </button>
       </form>

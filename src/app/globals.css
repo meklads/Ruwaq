@@ -66,7 +66,7 @@
 
   html[lang="en"] body,
   html[data-lang="en"] body {
-    font-family: var(--font-latin), var(--font-latin-fallback);
+    font-family: var(--font-inter), var(--font-latin-fallback);
   }
 
   html[lang="ar"] h1,
@@ -1840,5 +1840,137 @@
 
   .ruwaq-pro-listing-gallery-thumb.is-active {
     @apply border-neutral-900 opacity-100;
+  }
+
+  /* AD PRO editorial lockup — B&W serif, no gold */
+  .ruwaq-brand-lockup--editorial .ruwaq-brand-ar {
+    @apply font-serif text-[2rem] font-medium tracking-tight text-neutral-950 sm:text-[2.25rem];
+    font-family: var(--font-ar-display), serif;
+  }
+
+  .ruwaq-brand-lockup--editorial .ruwaq-brand-en {
+    @apply mt-1 font-serif text-[0.65rem] font-normal uppercase tracking-[0.38em] text-neutral-950 sm:text-xs;
+    font-family: var(--font-latin-display), Georgia, serif;
+  }
+
+  html[lang="ar"] .ruwaq-brand-lockup--editorial .ruwaq-brand-en {
+    @apply normal-case tracking-[0.2em];
+  }
+
+  /* —— AD PRO site shell (Architectural Digest inspired) —— */
+  .ruwaq-ad-header {
+    @apply sticky top-0 z-50;
+  }
+
+  .ruwaq-ad-pro-bar {
+    @apply bg-neutral-950 text-white;
+  }
+
+  .ruwaq-ad-pro-bar-label {
+    @apply text-[10px] font-semibold uppercase tracking-[0.28em] text-white/85 transition-colors hover:text-white;
+  }
+
+  html[lang="ar"] .ruwaq-ad-pro-bar-label {
+    @apply normal-case tracking-wide text-xs;
+  }
+
+  .ruwaq-ad-pro-bar-cta {
+    @apply text-[10px] font-semibold uppercase tracking-[0.28em] text-white underline-offset-4 transition-colors hover:underline;
+  }
+
+  html[lang="ar"] .ruwaq-ad-pro-bar-cta {
+    @apply normal-case tracking-wide text-xs;
+  }
+
+  .ruwaq-ad-nav-link {
+    @apply text-[10px] font-semibold uppercase tracking-[0.22em] text-neutral-700 transition-colors hover:text-neutral-950;
+  }
+
+  html[lang="ar"] .ruwaq-ad-nav-link {
+    @apply normal-case tracking-wide text-xs;
+  }
+
+  .ruwaq-ad-mobile-nav-link {
+    @apply shrink-0 border-e border-neutral-200 px-4 py-3 text-[10px] font-semibold uppercase tracking-widest text-neutral-700 transition-colors hover:bg-neutral-50 hover:text-neutral-950;
+  }
+
+  html[lang="ar"] .ruwaq-ad-mobile-nav-link {
+    @apply normal-case tracking-wide text-xs;
+  }
+
+  .ruwaq-ad-footer {
+    @apply border-t border-neutral-200 bg-white;
+  }
+
+  .ruwaq-ad-footer-heading {
+    @apply text-[10px] font-semibold uppercase tracking-[0.28em] text-neutral-950;
+  }
+
+  html[lang="ar"] .ruwaq-ad-footer-heading {
+    @apply normal-case tracking-wide text-xs;
+  }
+
+  .ruwaq-ad-footer-link {
+    @apply text-sm text-neutral-600 transition-colors hover:text-neutral-950;
+  }
+
+  .ruwaq-ad-section {
+    @apply px-4 py-16 sm:px-6 sm:py-20;
+  }
+
+  .ruwaq-ad-section-header {
+    @apply flex flex-col gap-4 border-b border-neutral-950 pb-6 sm:flex-row sm:items-end sm:justify-between;
+  }
+
+  .ruwaq-ad-eyebrow {
+    @apply text-[10px] font-semibold uppercase tracking-[0.28em] text-neutral-500;
+  }
+
+  html[lang="ar"] .ruwaq-ad-eyebrow {
+    @apply normal-case tracking-wide text-xs;
+  }
+
+  .ruwaq-ad-section-title {
+    @apply mt-2 font-serif text-3xl font-medium tracking-tight text-neutral-950 md:text-4xl;
+    font-family: var(--font-latin-display), Georgia, serif;
+  }
+
+  html[lang="ar"] .ruwaq-ad-section-title,
+  html[data-lang="ar"] .ruwaq-ad-section-title {
+    font-family: var(--font-ar-display), serif;
+  }
+
+  .ruwaq-ad-section-lead {
+    @apply mt-3 max-w-2xl text-sm leading-relaxed text-neutral-600;
+  }
+
+  .ruwaq-ad-card-title {
+    @apply font-serif text-lg font-medium tracking-tight text-neutral-950;
+    font-family: var(--font-latin-display), Georgia, serif;
+  }
+
+  html[lang="ar"] .ruwaq-ad-card-title,
+  html[data-lang="ar"] .ruwaq-ad-card-title {
+    font-family: var(--font-ar-display), serif;
+  }
+
+  .ruwaq-ad-field-label {
+    @apply text-[10px] font-semibold uppercase tracking-[0.22em] text-neutral-500;
+  }
+
+  html[lang="ar"] .ruwaq-ad-field-label {
+    @apply normal-case tracking-wide text-xs;
+  }
+
+  .ruwaq-ad-field {
+    @apply w-full border border-neutral-300 bg-white px-3 py-2.5 text-sm text-neutral-950 outline-none transition-colors focus:border-neutral-950;
+  }
+
+  .ruwaq-ad-page {
+    @apply ruwaq-pro-directory;
+  }
+
+  .ruwaq-ad-page-inner {
+    @apply mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16;
   }
 }

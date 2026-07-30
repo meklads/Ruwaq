@@ -292,6 +292,14 @@ export const ar = {
    trustBody:
     "سجل تجاري ساري، اعتماد مهني، ومراجعة رواق لمعرض الأعمال — انقر الشارة في أي ملف للمعايير الكاملة.",
   },
+  homeMagazine: {
+   todaysDirectoryEyebrow: "دليل اليوم",
+   todaysDirectoryTitle: "محترفون مميزون معتمدون",
+   viewAllFeatured: "عرض كل المميزين",
+   trendingEyebrow: "قطاعات رائجة",
+   trendingTitle: "تصفّح حسب التخصص",
+   allSectors: "جميع القطاعات",
+  },
   footerCta: {
    title: "استكشف القطاعات المعتمدة",
    subtitle: "سبعة مجالات هندسية في ثلاث مدن — اختر قطاعك وشاهد الشركات أو ابدأ البحث من الصفحة الرئيسية.",
@@ -858,6 +866,14 @@ export const ar = {
   },
  },
  site: {
+  header: {
+   applyNow: "قدّم طلبك",
+   directory: "الدليل",
+   featured: "المميزون",
+   howItWorks: "كيف يعمل",
+   forContractors: "للمقاولين",
+   mainNavLabel: "التنقل الرئيسي",
+  },
   nav: {
    howItWorks: "كيف يعمل",
    about: "عن رواق",

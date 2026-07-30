@@ -1,14 +1,18 @@
 import { getMessages } from "@/shared/i18n";
 import { getLocale } from "@/shared/i18n/server";
-import { MarketplaceCategoryGrid } from "@/modules/marketplace/components/marketplace-category-grid";
+import { EditorialCategoryGrid } from "@/modules/marketplace/components/editorial-category-grid";
 
 export default async function CategoriesPage() {
   const locale = await getLocale();
   const t = getMessages(locale);
 
   return (
-    <div className="py-6 sm:py-10">
-      <MarketplaceCategoryGrid copy={t.marketplace.categories} locale={locale} />
+    <div className="ruwaq-ad-page">
+      <EditorialCategoryGrid
+        copy={t.marketplace.categories}
+        magazineCopy={t.marketplace.homeMagazine}
+        locale={locale}
+      />
     </div>
   );
 }

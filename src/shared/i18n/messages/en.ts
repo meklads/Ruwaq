@@ -295,6 +295,14 @@ export const en: Messages = {
    trustBody:
     "Active CR, professional accreditation, and Ruwaq portfolio review — click the badge on any listing for full standards.",
   },
+  homeMagazine: {
+   todaysDirectoryEyebrow: "Today's Directory",
+   todaysDirectoryTitle: "Featured verified professionals",
+   viewAllFeatured: "View all featured",
+   trendingEyebrow: "Trending sectors",
+   trendingTitle: "Browse by trade",
+   allSectors: "All sectors",
+  },
   footerCta: {
    title: "Explore approved sectors",
    subtitle: "Seven engineering categories across three cities — pick yours or search from the homepage.",
@@ -864,6 +872,14 @@ export const en: Messages = {
   },
  },
  site: {
+  header: {
+   applyNow: "Apply now",
+   directory: "Directory",
+   featured: "Featured",
+   howItWorks: "How it works",
+   forContractors: "For contractors",
+   mainNavLabel: "Main navigation",
+  },
   nav: {
    howItWorks: "How it works",
    about: "About Ruwaq",

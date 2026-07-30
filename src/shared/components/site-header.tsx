@@ -3,80 +3,79 @@ import { getMessages } from "@/shared/i18n";
 import { getLocale } from "@/shared/i18n/server";
 import { RuwaqLogo } from "@/shared/components/ruwaq-logo";
 import { LocaleSwitcher } from "@/shared/i18n/locale-switcher";
-import { QuoteRequestCtaButton } from "@/modules/marketplace/components/quote-request-cta-button";
 
 export async function SiteHeader() {
   const locale = await getLocale();
   const t = getMessages(locale);
+  const nav = t.site.header;
 
-  const b2cLinks = [
-    { href: "/categories", label: t.nav.browseCategories },
-    { href: "/about", label: t.nav.aboutPlatform },
+  const mainLinks = [
+    { href: "/categories", label: nav.directory },
+    { href: "/pro", label: nav.featured },
+    { href: "/how-it-works", label: nav.howItWorks },
+    { href: "/proposals", label: nav.forContractors },
   ];
 
   return (
-    <header className="ruwaq-header">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="flex min-h-[6.25rem] items-center justify-between gap-4 py-3 sm:min-h-[6.75rem] sm:py-4 lg:min-h-[7.25rem]">
-          <div className="shrink-0">
-            <RuwaqLogo href="/" />
+    <header className="ruwaq-ad-header">
+      {/* AD-style PRO bar */}
+      <div className="ruwaq-ad-pro-bar">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2.5 sm:px-6">
+          <Link href="/" className="ruwaq-ad-pro-bar-label">
+            {t.marketplace.proDirectory.directoryLabel}
+          </Link>
+          <Link href="/join" className="ruwaq-ad-pro-bar-cta">
+            {nav.applyNow}
+          </Link>
+        </div>
+      </div>
+
+      {/* Main chrome */}
+      <div className="relative border-b border-neutral-200 bg-white">
+        <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-8">
+          <div className="flex items-start justify-between gap-4">
+            <div className="w-20 shrink-0 sm:w-24" aria-hidden />
+            <div className="flex flex-1 flex-col items-center gap-5">
+              <RuwaqLogo href="/" variant="editorial" size="chrome" />
+              <nav
+                className="hidden flex-wrap items-center justify-center gap-x-1 lg:flex"
+                aria-label={nav.mainNavLabel}
+              >
+                {mainLinks.map((link, i) => (
+                  <span key={link.href} className="flex items-center">
+                    {i > 0 ? (
+                      <span className="mx-3 text-neutral-300" aria-hidden>
+                        ·
+                      </span>
+                    ) : null}
+                    <Link href={link.href} className="ruwaq-ad-nav-link">
+                      {link.label}
+                    </Link>
+                  </span>
+                ))}
+              </nav>
+            </div>
+            <div className="flex w-20 shrink-0 flex-col items-end gap-2 sm:w-24">
+              <LocaleSwitcher />
+            </div>
           </div>
-
-          <nav
-            className="hidden flex-1 items-center justify-center gap-1 lg:flex"
-            aria-label={locale === "ar" ? "خدمات العملاء" : "For clients"}
-          >
-            {b2cLinks.map((link) => (
-              <Link key={link.href} href={link.href} className="ruwaq-nav-link">
-                {link.label}
-              </Link>
-            ))}
-          </nav>
-
-          <div className="flex shrink-0 items-center justify-end gap-2 sm:gap-2.5">
-            <QuoteRequestCtaButton
-              triggerLabel={t.nav.requestQuote}
-              closeLabel={t.nav.closeModal}
-              copy={t.marketplace.quote}
-              locale={locale}
-              className="btn-ruwaq-header-cta hidden px-4 py-2.5 text-xs sm:inline-flex sm:px-5 sm:text-sm"
-            />
-            <Link
-              href="/proposals"
-              className="btn-ruwaq-gold-link hidden px-3.5 py-2 text-[11px] lg:inline-flex lg:px-4 lg:text-xs"
-            >
-              {t.nav.contractorHub}
+          <p className="mt-4 text-center sm:hidden">
+            <Link href="/request-quote" className="ruwaq-ad-nav-link">
+              {t.nav.requestQuote}
             </Link>
-            <LocaleSwitcher />
-          </div>
+          </p>
         </div>
 
+        {/* Mobile nav */}
         <nav
-          className="flex gap-2 overflow-x-auto border-t border-slate-100 py-3 lg:hidden"
-          aria-label="Mobile"
+          className="flex gap-0 overflow-x-auto border-t border-neutral-200 lg:hidden"
+          aria-label={nav.mainNavLabel}
         >
-          {b2cLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="flex shrink-0 rounded-full border border-slate-200 bg-white px-3.5 py-1.5 text-xs font-semibold text-ruwaq-ink-soft transition-colors hover:border-slate-300 hover:text-ruwaq-ink"
-            >
+          {mainLinks.map((link) => (
+            <Link key={link.href} href={link.href} className="ruwaq-ad-mobile-nav-link">
               {link.label}
             </Link>
           ))}
-          <QuoteRequestCtaButton
-            triggerLabel={t.nav.requestQuote}
-            closeLabel={t.nav.closeModal}
-            copy={t.marketplace.quote}
-            locale={locale}
-            className="btn-ruwaq-header-cta shrink-0 px-3.5 py-1.5 text-xs"
-          />
-          <Link
-            href="/proposals"
-            className="btn-ruwaq-gold-link shrink-0 px-3.5 py-1.5 text-xs"
-          >
-            {t.nav.contractorHub}
-          </Link>
         </nav>
       </div>
     </header>

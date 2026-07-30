@@ -15,13 +15,15 @@ export default async function RequestQuotePage({ searchParams }: Props) {
   const t = getMessages(locale);
 
   return (
-    <div className="app-content-area py-10 sm:py-14">
-      <QuoteRequestForm
-        copy={t.marketplace.quote}
-        locale={locale}
-        initialCity={parseCitySlug(searchParams.city)}
-        initialCategory={parseCategorySlug(searchParams.category)}
-      />
+    <div className="ruwaq-ad-page">
+      <div className="ruwaq-ad-page-inner">
+        <QuoteRequestForm
+          copy={t.marketplace.quote}
+          locale={locale}
+          initialCity={parseCitySlug(searchParams.city)}
+          initialCategory={parseCategorySlug(searchParams.category)}
+        />
+      </div>
     </div>
   );
 }

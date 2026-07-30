@@ -3,12 +3,12 @@ import Link from "next/link";
 type Props = {
   href?: string;
   className?: string;
-  variant?: "light" | "dark";
+  variant?: "light" | "dark" | "editorial";
   /** Larger lockup for footer band (same typography, slightly more spacing). */
   size?: "chrome" | "footer";
 };
 
-/** Classic text lockup — Arabic + gold English wordmark (no motif icon). */
+/** Classic text lockup — Arabic + English wordmark */
 export const SITE_LOGO_SIZE_CLASS = "ruwaq-brand-lockup--chrome";
 
 export function RuwaqLogo({
@@ -18,10 +18,16 @@ export function RuwaqLogo({
   size = "chrome",
 }: Props) {
   const sizeClass = size === "footer" ? "ruwaq-brand-lockup--footer" : "ruwaq-brand-lockup--chrome";
+  const variantClass =
+    variant === "editorial"
+      ? "ruwaq-brand-lockup--editorial"
+      : variant === "dark"
+        ? "ruwaq-brand-lockup--dark"
+        : "";
 
   const logo = (
     <span
-      className={`ruwaq-brand-lockup ${sizeClass} ${variant === "dark" ? "ruwaq-brand-lockup--dark" : ""} ${className}`.trim()}
+      className={`ruwaq-brand-lockup ${sizeClass} ${variantClass} ${className}`.trim()}
     >
       <span className="ruwaq-brand-wordmark">
         <span className="ruwaq-brand-ar">رواق</span>

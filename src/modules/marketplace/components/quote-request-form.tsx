@@ -93,22 +93,31 @@ export function QuoteRequestForm({
   const formClass =
     variant === "modal"
       ? "ruwaq-form-card mx-auto max-w-xl space-y-5 border-0 shadow-none"
-      : "ruwaq-form-card mx-auto max-w-xl space-y-5";
+      : "mx-auto max-w-xl space-y-5";
+
+  const labelClass = variant === "page" ? "ruwaq-ad-field-label" : "ruwaq-label";
+  const fieldClass = variant === "page" ? "ruwaq-ad-field" : "ruwaq-field";
+  const titleClass =
+    variant === "page" ? "ruwaq-ad-section-title text-center" : "ruwaq-app-title pt-2 text-center text-xl";
+  const submitClass =
+    variant === "page"
+      ? "ruwaq-pro-btn-solid w-full px-8 py-3 disabled:opacity-50"
+      : "btn-ruwaq-primary w-full disabled:opacity-50";
 
   return (
     <form onSubmit={onSubmit} className={formClass}>
       {variant === "page" ? (
-        <h1 className="ruwaq-app-title text-center">{copy.title}</h1>
+        <h1 className={titleClass}>{copy.title}</h1>
       ) : (
-        <h2 className="ruwaq-app-title pt-2 text-center text-xl">{copy.title}</h2>
+        <h2 className={titleClass}>{copy.title}</h2>
       )}
       {error && (
         <div className="rounded-xl bg-red-50 px-4 py-3 text-sm text-red-600">{error}</div>
       )}
       <div>
-        <label className="ruwaq-label">{copy.fields.name}</label>
+        <label className={labelClass}>{copy.fields.name}</label>
         <input
-          className="ruwaq-field"
+          className={fieldClass}
           value={clientName}
           onChange={(e) => setClientName(e.target.value)}
           required
@@ -116,9 +125,9 @@ export function QuoteRequestForm({
         />
       </div>
       <div>
-        <label className="ruwaq-label">{copy.fields.phone}</label>
+        <label className={labelClass}>{copy.fields.phone}</label>
         <input
-          className="ruwaq-field"
+          className={fieldClass}
           type="tel"
           inputMode="tel"
           placeholder={copy.fields.phonePlaceholder}
@@ -130,9 +139,9 @@ export function QuoteRequestForm({
       </div>
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
-          <label className="ruwaq-label">{copy.fields.city}</label>
+          <label className={labelClass}>{copy.fields.city}</label>
           <select
-            className="ruwaq-field"
+            className={fieldClass}
             value={citySlug}
             onChange={(e) => setCitySlug(parseCitySlug(e.target.value))}
           >
@@ -144,9 +153,9 @@ export function QuoteRequestForm({
           </select>
         </div>
         <div>
-          <label className="ruwaq-label">{copy.fields.category}</label>
+          <label className={labelClass}>{copy.fields.category}</label>
           <select
-            className="ruwaq-field"
+            className={fieldClass}
             value={categorySlug}
             onChange={(e) => setCategorySlug(parseCategorySlug(e.target.value))}
           >
@@ -159,9 +168,9 @@ export function QuoteRequestForm({
         </div>
       </div>
       <div>
-        <label className="ruwaq-label">{copy.fields.details}</label>
+        <label className={labelClass}>{copy.fields.details}</label>
         <textarea
-          className="ruwaq-field"
+          className={fieldClass}
           rows={5}
           value={projectDetails}
           onChange={(e) => setProjectDetails(e.target.value)}
@@ -171,15 +180,15 @@ export function QuoteRequestForm({
         />
       </div>
       <div>
-        <label className="ruwaq-label">{copy.fields.budget}</label>
+        <label className={labelClass}>{copy.fields.budget}</label>
         <input
-          className="ruwaq-field"
+          className={fieldClass}
           value={budgetRange}
           onChange={(e) => setBudgetRange(e.target.value)}
           dir={locale === "ar" ? "rtl" : "ltr"}
         />
       </div>
-      <button type="submit" disabled={pending} className="btn-ruwaq-primary w-full disabled:opacity-50">
+      <button type="submit" disabled={pending} className={submitClass}>
         {pending ? copy.submitting : copy.submit}
       </button>
     </form>
