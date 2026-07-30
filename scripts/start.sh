@@ -11,8 +11,8 @@ echo "=========================================="
   echo "→ Database schema setup..."
   if ./node_modules/.bin/prisma db push --skip-generate 2>&1; then
     echo "→ Database schema ready ✓"
-    echo "→ Seeding categories, marketplace listings (126 companies), and clause packs..."
-    # Legacy production DBs have 21 listings (1 per sector×city). Upgrade to 63 automatically.
+    echo "→ Seeding categories, marketplace listings (144 companies), and clause packs..."
+    # Legacy production DBs may have fewer than 144 listings — upgrade automatically.
     if [ -z "$SEED_RESET" ]; then
       LISTING_COUNT=$(npx tsx -e '
         import { PrismaClient } from "@prisma/client";
@@ -28,8 +28,8 @@ echo "=========================================="
             await prisma.$disconnect();
           });
       ' 2>/dev/null | tail -1)
-      if [ -n "$LISTING_COUNT" ] && [ "$LISTING_COUNT" != "126" ]; then
-        echo "→ Found ${LISTING_COUNT} listings (expected 126) — enabling SEED_RESET for marketplace"
+      if [ -n "$LISTING_COUNT" ] && [ "$LISTING_COUNT" != "144" ]; then
+        echo "→ Found ${LISTING_COUNT} listings (expected 144) — enabling SEED_RESET for marketplace"
         export SEED_RESET=true
       fi
     fi

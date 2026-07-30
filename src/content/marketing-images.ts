@@ -41,6 +41,74 @@ export const CATEGORY_IMAGES: Record<string, string> = {
   maintenance: MARKETING_IMAGES.keysNewHome,
 };
 
+/** Six unique local images per directory sector for seed listings (no Unsplash). */
+export const LISTING_SEED_IMAGE_POOLS: Record<string, readonly string[]> = {
+  "fit-out": [
+    MARKETING_IMAGES.interiorLounge,
+    MARKETING_IMAGES.familyLiving,
+    MARKETING_IMAGES.kitchenFamily,
+    MARKETING_IMAGES.familyDining,
+    MARKETING_IMAGES.proposalDesk,
+    MARKETING_IMAGES.ghStudio,
+  ],
+  contracting: [
+    MARKETING_IMAGES.modelHousePlanning,
+    MARKETING_IMAGES.architecturalModel,
+    MARKETING_IMAGES.keysNewHome,
+    MARKETING_IMAGES.hero,
+    MARKETING_IMAGES.familySavings,
+    MARKETING_IMAGES.ghStudio,
+  ],
+  supervision: [
+    MARKETING_IMAGES.familyDining,
+    MARKETING_IMAGES.keysNewHome,
+    MARKETING_IMAGES.proposalDesk,
+    MARKETING_IMAGES.modelHousePlanning,
+    MARKETING_IMAGES.familySavings,
+    MARKETING_IMAGES.familyLiving,
+  ],
+  hvac: [
+    MARKETING_IMAGES.keysNewHome,
+    MARKETING_IMAGES.modelHousePlanning,
+    MARKETING_IMAGES.familySavings,
+    MARKETING_IMAGES.ghStudio,
+    MARKETING_IMAGES.hero,
+    MARKETING_IMAGES.architecturalModel,
+  ],
+  kitchens: [
+    MARKETING_IMAGES.kitchenFamily,
+    MARKETING_IMAGES.familyDining,
+    MARKETING_IMAGES.interiorLounge,
+    MARKETING_IMAGES.familyLiving,
+    MARKETING_IMAGES.proposalDesk,
+    MARKETING_IMAGES.hero,
+  ],
+  "luxury-materials": [
+    MARKETING_IMAGES.architecturalModel,
+    MARKETING_IMAGES.ghStudio,
+    MARKETING_IMAGES.interiorLounge,
+    MARKETING_IMAGES.hero,
+    MARKETING_IMAGES.familyLiving,
+    MARKETING_IMAGES.kitchenFamily,
+  ],
+  outdoor: [
+    MARKETING_IMAGES.hero,
+    MARKETING_IMAGES.familyLiving,
+    MARKETING_IMAGES.architecturalModel,
+    MARKETING_IMAGES.keysNewHome,
+    MARKETING_IMAGES.familySavings,
+    MARKETING_IMAGES.ghStudio,
+  ],
+  maintenance: [
+    MARKETING_IMAGES.keysNewHome,
+    MARKETING_IMAGES.familySavings,
+    MARKETING_IMAGES.modelHousePlanning,
+    MARKETING_IMAGES.proposalDesk,
+    MARKETING_IMAGES.familyDining,
+    MARKETING_IMAGES.interiorLounge,
+  ],
+};
+
 export const FEATURED_AD_IMAGES = {
   visualization: MARKETING_IMAGES.ghStudio,
   proposals: MARKETING_IMAGES.proposalDesk,

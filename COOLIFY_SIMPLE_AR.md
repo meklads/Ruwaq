@@ -27,6 +27,25 @@
 
 ---
 
+## الخطوة 2ب — تسجيل Google (اختياري لكن مُستحسن)
+
+1. افتح [Google Cloud Console](https://console.cloud.google.com/) → **APIs & Services** → **Credentials**
+2. أنشئ **OAuth 2.0 Client ID** (نوع: Web application)
+3. **Authorized JavaScript origins:** `https://ruwaq.co`
+4. **Authorized redirect URIs:** `https://ruwaq.co/api/auth/callback/google`
+5. في Coolify → **Environment Variables** أضف:
+
+| الاسم | القيمة |
+|--------|--------|
+| `AUTH_GOOGLE_ID` | Client ID من Google |
+| `AUTH_GOOGLE_SECRET` | Client Secret من Google |
+
+6. **Redeploy** ثم تحقق: `https://ruwaq.co/api/health` → يجب `"googleAuth": true`
+
+إذا ظهر **Missing required parameter: client_id** → المتغيران غير مضبوطين في Coolify.
+
+---
+
 ## الخطوة 3 — إعدادات التطبيق في Coolify
 
 | الإعداد | القيمة |

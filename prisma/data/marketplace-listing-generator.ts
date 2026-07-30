@@ -4,6 +4,10 @@ import {
   type MarketplaceCategorySlug,
   type ProviderType,
 } from "../../src/shared/constants/marketplace-taxonomy";
+import {
+  DEFAULT_MARKETING_HERO,
+  LISTING_SEED_IMAGE_POOLS,
+} from "../../src/content/marketing-images";
 
 export type ListingSeed = {
   categorySlug: string;
@@ -23,79 +27,10 @@ export type ListingSeed = {
   images: string[];
 };
 
-const DEFAULT_IMAGE =
-  "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=800&auto=format&fit=crop";
-
-/** Category-specific editorial images (Unsplash) — 6 per sector */
-const CATEGORY_IMAGE_POOLS: Record<string, string[]> = {
-  "fit-out": [
-    "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&q=80&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=800&q=80&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=800&q=80&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800&q=80&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&q=80&auto=format&fit=crop",
-  ],
-  contracting: [
-    "https://images.unsplash.com/photo-1541888946425-d0fbb186a5b3?w=800&q=80&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1590644365607-1c4a519a7941?w=800&q=80&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&q=80&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&q=80&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=800&q=80&auto=format&fit=crop",
-  ],
-  supervision: [
-    "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&q=80&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=800&q=80&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80&auto=format&fit=crop",
-  ],
-  hvac: [
-    "https://images.unsplash.com/photo-1631545806606-4119a794c1a1?w=800&q=80&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=800&q=80&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1585771723494-4415b9a06693?w=800&q=80&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1504328345606-9bf4fd024175?w=800&q=80&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&q=80&auto=format&fit=crop",
-  ],
-  kitchens: [
-    "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=800&q=80&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1600489000022-208129d76867?w=800&q=80&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800&q=80&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1600607687644-c7171b42498f?w=800&q=80&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1556909114-f6e7ad7d4046?w=800&q=80&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=800&q=80&auto=format&fit=crop",
-  ],
-  "luxury-materials": [
-    "https://images.unsplash.com/photo-1615874959477-df969457a1eb?w=800&q=80&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800&q=80&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1618221464805-90fb5752181a?w=800&q=80&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1524484482392-a971492386af?w=800&q=80&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1565814329452-e1efa11c5b89?w=800&q=80&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1615529328331-f8917597711f?w=800&q=80&auto=format&fit=crop",
-  ],
-  outdoor: [
-    "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1600566753376-12c8ab7fb165?w=800&q=80&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1600047509807-ba8f99d2cd09?w=800&q=80&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1598902108854-10e335adac99?w=800&q=80&auto=format&fit=crop",
-  ],
-  maintenance: [
-    "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=800&q=80&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&q=80&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&q=80&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&q=80&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80&auto=format&fit=crop",
-  ],
-};
+const DEFAULT_IMAGE = DEFAULT_MARKETING_HERO;
 
 function listingImagesFor(categorySlug: string, index: number): string[] {
-  const pool = CATEGORY_IMAGE_POOLS[categorySlug];
+  const pool = LISTING_SEED_IMAGE_POOLS[categorySlug];
   if (!pool?.length) return [DEFAULT_IMAGE];
   return [pool[index % pool.length]!];
 }
