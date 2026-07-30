@@ -39,6 +39,7 @@ const submitVisualizationLeadSchema = z.object({
   projectDetails: z.string().trim().min(10, { message: "validation" }).max(4000),
   budgetRange: z.string().trim().max(80).optional(),
   locale: z.enum(["ar", "en"]).default("ar"),
+  referrer: z.enum(["visualization_page", "request_quote"]).optional(),
 });
 
 export type SubmitVisualizationLeadInput = z.infer<typeof submitVisualizationLeadSchema>;
@@ -61,6 +62,10 @@ export async function submitVisualizationLead(
   const data = parsed.data;
   const citySlug = data.citySlug ? parseCitySlug(data.citySlug) : null;
   const cityMeta = citySlug ? getCityBySlug(citySlug) : null;
+  const projectDetails =
+    data.referrer === "request_quote"
+      ? `${data.projectDetails}\n\n— Submitted via Ruwaq /request-quote`
+      : data.projectDetails;
 
   try {
     const lead = await db.partnerLead.create({
@@ -71,7 +76,7 @@ export async function submitVisualizationLead(
         companyName: data.companyName || null,
         city: cityMeta?.enum ?? null,
         projectType: data.projectType,
-        projectDetails: data.projectDetails,
+        projectDetails,
         budgetRange: data.budgetRange || null,
         locale: data.locale,
       },
@@ -88,6 +93,7 @@ export async function submitVisualizationLead(
         projectDetails: lead.projectDetails,
         budgetRange: lead.budgetRange,
         locale: data.locale,
+        referrer: data.referrer,
       });
     } catch (err) {
       console.error("[submitVisualizationLead] notify failed (lead saved)", err);

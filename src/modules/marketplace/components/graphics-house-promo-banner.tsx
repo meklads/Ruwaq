@@ -46,7 +46,7 @@ export function GraphicsHousePromoBanner({ copy }: Props) {
         <div className="mt-8 flex flex-col items-center gap-4">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
             <Link
-              href="/visualization"
+              href="/request-quote?category=visualization"
               className="ruwaq-pro-chip inline-flex border-neutral-950 bg-neutral-950 text-white hover:bg-neutral-800"
             >
               {copy.cta}

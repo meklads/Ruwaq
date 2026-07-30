@@ -139,6 +139,21 @@ export type Messages = {
     };
     quote: {
       title: string;
+      requestTypeLabel: string;
+      requestTypes: {
+        marketplace: string;
+        visualization: string;
+      };
+      visualizationTitle: string;
+      visualizationSubtitle: string;
+      visualizationHint: string;
+      visualizationPageLink: string;
+      visualizationSubmit: string;
+      visualizationSuccess: {
+        title: string;
+        subtitle: string;
+        externalCta: string;
+      };
       submit: string;
       submitting: string;
       success: string;

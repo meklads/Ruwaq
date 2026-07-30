@@ -11,6 +11,7 @@ type GraphicsHouseLeadPayload = {
   projectDetails: string;
   budgetRange?: string | null;
   locale: string;
+  referrer?: "visualization_page" | "request_quote";
 };
 
 export async function notifyGraphicsHouseLead(payload: GraphicsHouseLeadPayload): Promise<void> {

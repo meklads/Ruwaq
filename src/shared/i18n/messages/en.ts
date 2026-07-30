@@ -253,6 +253,21 @@ export const en: Messages = {
   },
   quote: {
    title: "Get competitive quotes within 24 hours",
+   requestTypeLabel: "What do you need?",
+   requestTypes: {
+    marketplace: "Engineering & contracting quote",
+    visualization: "Architectural visualization (Graphics House)",
+   },
+   visualizationTitle: "Register for visualization services",
+   visualizationSubtitle: "Your enquiry is routed to Graphics House — response within 24 hours.",
+   visualizationHint: "Prefer the full visualization page?",
+   visualizationPageLink: "Open dedicated form",
+   visualizationSubmit: "Send to Graphics House — free",
+   visualizationSuccess: {
+    title: "Enquiry sent to Graphics House",
+    subtitle: "A coordinator will contact you within 24 hours on the number you provided.",
+    externalCta: "Explore Graphics House portfolio",
+   },
    submit: "Send request — free",
    submitting: "Sending...",
    success: "Request received. We will contact you soon.",

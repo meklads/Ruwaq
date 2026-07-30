@@ -250,6 +250,21 @@ export const ar = {
   },
   quote: {
    title: "احصل على أفضل عروض الأسعار خلال 24 ساعة",
+   requestTypeLabel: "ماذا تحتاج؟",
+   requestTypes: {
+    marketplace: "عرض سعر هندسي / مقاولات",
+    visualization: "تصوير معماري (جرافيكس هاوس)",
+   },
+   visualizationTitle: "تسجيل لخدمات التصوير المعماري",
+   visualizationSubtitle: "يُوجَّه طلبك إلى جرافيكس هاوس — الرد خلال 24 ساعة.",
+   visualizationHint: "تفضّل الصفحة المخصصة؟",
+   visualizationPageLink: "افتح النموذج الكامل",
+   visualizationSubmit: "إرسال إلى جرافيكس هاوس — مجاناً",
+   visualizationSuccess: {
+    title: "تم إرسال طلبك إلى جرافيكس هاوس",
+    subtitle: "سيتواصل معك منسق خلال 24 ساعة على الرقم الذي أدخلته.",
+    externalCta: "استكشف أعمال جرافيكس هاوس",
+   },
    submit: "إرسال الطلب مجاناً",
    submitting: "جاري الإرسال...",
    success: "تم استلام طلبك. سنتواصل معك قريباً.",

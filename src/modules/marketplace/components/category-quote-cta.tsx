@@ -8,6 +8,7 @@ type Props = {
   label: string;
   closeLabel: string;
   copy: Messages["marketplace"]["quote"];
+  visualizationCopy: Messages["marketplace"]["visualization"];
   locale: Locale;
   citySlug: string;
   categorySlug: string;
@@ -17,6 +18,7 @@ export function CategoryQuoteCta({
   label,
   closeLabel,
   copy,
+  visualizationCopy,
   locale,
   citySlug,
   categorySlug,
@@ -26,6 +28,7 @@ export function CategoryQuoteCta({
       triggerLabel={label}
       closeLabel={closeLabel}
       copy={copy}
+      visualizationCopy={visualizationCopy}
       locale={locale}
       initialCity={citySlug}
       initialCategory={categorySlug}

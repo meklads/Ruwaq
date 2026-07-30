@@ -9,20 +9,24 @@ type Props = {
   triggerLabel: string;
   closeLabel: string;
   copy: Messages["marketplace"]["quote"];
+  visualizationCopy: Messages["marketplace"]["visualization"];
   locale: Locale;
   className?: string;
   initialCity?: string;
   initialCategory?: string;
+  initialIntent?: "marketplace" | "visualization";
 };
 
 export function QuoteRequestModal({
   triggerLabel,
   closeLabel,
   copy,
+  visualizationCopy,
   locale,
   className = "",
   initialCity,
   initialCategory,
+  initialIntent = "marketplace",
 }: Props) {
   const [open, setOpen] = useState(false);
   const dialogRef = useRef<HTMLDialogElement>(null);
@@ -64,11 +68,13 @@ export function QuoteRequestModal({
             ✕
           </button>
           <QuoteRequestForm
-            key={`${initialCity ?? "jeddah"}-${initialCategory ?? "fit-out"}`}
+            key={`${initialCity ?? "jeddah"}-${initialCategory ?? "fit-out"}-${initialIntent}`}
             copy={copy}
+            visualizationCopy={visualizationCopy}
             locale={locale}
             initialCity={initialCity}
             initialCategory={initialCategory}
+            initialIntent={initialIntent}
             variant="modal"
             onSuccessClose={() => setOpen(false)}
           />

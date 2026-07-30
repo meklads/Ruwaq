@@ -8,11 +8,18 @@ import type { Locale } from "@/shared/i18n/locale";
 type Props = {
   copy: Messages["marketplace"]["hero"];
   quoteCopy: Messages["marketplace"]["quote"];
+  visualizationCopy: Messages["marketplace"]["visualization"];
   closeModalLabel: string;
   locale: Locale;
 };
 
-export function MarketplaceHomeHero({ copy, quoteCopy, closeModalLabel, locale }: Props) {
+export function MarketplaceHomeHero({
+  copy,
+  quoteCopy,
+  visualizationCopy,
+  closeModalLabel,
+  locale,
+}: Props) {
   const arrow = locale === "ar" ? "←" : "→";
 
   return (
@@ -30,6 +37,7 @@ export function MarketplaceHomeHero({ copy, quoteCopy, closeModalLabel, locale }
             triggerLabel={`${copy.ctaPrimary} ${arrow}`}
             closeLabel={closeModalLabel}
             copy={quoteCopy}
+            visualizationCopy={visualizationCopy}
             locale={locale}
             className="btn-ruwaq-hero-gold px-10 py-4 text-base"
           />

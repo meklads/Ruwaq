@@ -49,6 +49,7 @@ export function VisualizationLeadForm({ copy, locale }: Props) {
       projectDetails,
       budgetRange: budgetRange || undefined,
       locale,
+      referrer: "visualization_page",
     });
     setPending(false);
     if (!result.success) {

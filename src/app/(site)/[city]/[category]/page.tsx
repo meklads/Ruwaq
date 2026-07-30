@@ -165,6 +165,7 @@ export default async function CategoryListingPage({ params, searchParams }: Prop
             label={t.marketplace.listing.requestCta}
             closeLabel={t.nav.closeModal}
             copy={t.marketplace.quote}
+            visualizationCopy={t.marketplace.visualization}
             locale={locale}
             citySlug={city.slug}
             categorySlug={catMeta.slug}

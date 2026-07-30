@@ -31,3 +31,15 @@ export function legacyCategoryRedirectTarget(
 ): MarketplaceCategorySlug | null {
   return LEGACY_CATEGORY_REDIRECTS[slug] ?? null;
 }
+
+/** Special `/request-quote?category=visualization` — routes to Graphics House, not marketplace. */
+export const VISUALIZATION_QUOTE_SLUG = "visualization";
+
+export function parseQuoteIntent(
+  categoryParam: string | undefined
+): "marketplace" | "visualization" {
+  if (categoryParam?.trim() === VISUALIZATION_QUOTE_SLUG) {
+    return "visualization";
+  }
+  return "marketplace";
+}
