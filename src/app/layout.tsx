@@ -12,6 +12,7 @@ import "./globals.css";
 import { Providers } from "./providers";
 import { getLocale } from "@/shared/i18n/server";
 import { localeDir } from "@/shared/i18n/locale";
+import { RUWQ_PUBLIC_URL } from "@/shared/constants/brand";
 
 /** Graphics House ProjectLaunch™ — Tajawal primary, IBM Plex Sans Arabic fallback */
 const tajawal = Tajawal({
@@ -66,15 +67,32 @@ const plusJakarta = Plus_Jakarta_Sans({
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
+  const title =
+    locale === "ar"
+      ? "رواق | منصة الهندسة والعقار — المنطقة الغربية"
+      : "Ruwaq | Engineering & property marketplace — Western Region";
+  const description =
+    locale === "ar"
+      ? "دليل مقاولات وتكييف وتشطيبات معتمد في جدة ومكة والمدينة — مع أداة عروض احترافية للمقاولين."
+      : "Verified contractors directory in Jeddah, Makkah, and Madinah — plus AI proposal builder.";
+
   return {
-    title:
-      locale === "ar"
-        ? "رواق | منصة الهندسة والعقار — المنطقة الغربية"
-        : "Ruwaq | Engineering & property marketplace — Western Region",
-    description:
-      locale === "ar"
-        ? "دليل مقاولات وتكييف وتشطيبات معتمد في جدة ومكة والمدينة — مع أداة عروض احترافية للمقاولين."
-        : "Verified contractors directory in Jeddah, Makkah, and Madinah — plus AI proposal builder.",
+    title,
+    description,
+    metadataBase: new URL(RUWQ_PUBLIC_URL),
+    openGraph: {
+      title,
+      description,
+      url: RUWQ_PUBLIC_URL,
+      siteName: "Ruwaq",
+      locale: locale === "ar" ? "ar_SA" : "en_US",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
   };
 }
 

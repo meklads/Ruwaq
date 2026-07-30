@@ -42,7 +42,7 @@ export const en: Messages = {
   },
   categories: {
    title: "Approved categories",
-   subtitle: "7 high-ticket sectors across Western Region cities",
+   subtitle: "8 high-ticket sectors across Western Region cities",
   },
   contractorSection: {
    title: "Proposal tool for contractors",
@@ -224,7 +224,7 @@ export const en: Messages = {
    eyebrow: "Ruwaq · Western Region",
    title: "About Ruwaq",
    intro:
-    "Ruwaq is an engineering and property directory for Western Region cities — seven verified sectors and matching in Jeddah, Makkah, and Madinah.",
+    "Ruwaq is an engineering and property directory for Western Region cities — eight verified sectors and matching in Jeddah, Makkah, and Madinah.",
    businessNote:
     "Quote requests are 100% free for owners. We work transparently with verified companies and contractors to deliver quality execution.",
    closingHint: "To request a quote, use the button in the site header — or browse sectors below.",

@@ -1595,25 +1595,25 @@
 
   .ruwaq-pro-hero-bg {
     @apply absolute inset-0 scale-[1.03] bg-cover bg-center;
-    filter: saturate(0.92) contrast(1.05);
+    filter: saturate(1.02) contrast(1.02) brightness(1.06);
   }
 
   .ruwaq-pro-hero-overlay {
     @apply absolute inset-0;
     background: linear-gradient(
       165deg,
-      rgba(0, 0, 0, 0.52) 0%,
-      rgba(0, 0, 0, 0.68) 42%,
-      rgba(0, 0, 0, 0.88) 100%
+      rgba(8, 8, 8, 0.22) 0%,
+      rgba(8, 8, 8, 0.38) 48%,
+      rgba(8, 8, 8, 0.52) 100%
     );
   }
 
   .ruwaq-pro-hero-vignette {
     @apply pointer-events-none absolute inset-0;
     background: radial-gradient(
-      ellipse 85% 70% at 50% 45%,
+      ellipse 90% 75% at 50% 42%,
       transparent 0%,
-      rgba(0, 0, 0, 0.35) 100%
+      rgba(0, 0, 0, 0.18) 100%
     );
   }
 
@@ -1691,15 +1691,19 @@
 
   .ruwaq-pro-display {
     @apply font-display font-semibold tracking-tight text-white;
+    color: #ffffff;
     font-family: var(--font-marketing-latin), system-ui, sans-serif;
-    text-shadow: 0 2px 24px rgba(0, 0, 0, 0.45);
+    text-shadow: 0 2px 28px rgba(0, 0, 0, 0.35);
   }
 
   html[lang="ar"] .ruwaq-pro-display,
-  html[data-lang="ar"] .ruwaq-pro-display {
+  html[data-lang="ar"] .ruwaq-pro-display,
+  html[lang="ar"] .ruwaq-pro-hero h1.ruwaq-pro-display,
+  html[data-lang="ar"] .ruwaq-pro-hero h1.ruwaq-pro-display {
     font-family: var(--font-ar), var(--font-ar-fallback);
     line-height: 1.25;
     font-weight: 300;
+    color: #ffffff;
   }
 
   .ruwaq-pro-display-accent {
@@ -1710,11 +1714,13 @@
   html[lang="ar"] .ruwaq-pro-display-accent,
   html[data-lang="ar"] .ruwaq-pro-display-accent {
     font-weight: 500;
+    color: #d4b47a;
   }
 
   .ruwaq-pro-subtitle {
-    @apply mt-5 max-w-2xl text-sm font-normal leading-relaxed text-white/90 md:text-base;
-    text-shadow: 0 1px 12px rgba(0, 0, 0, 0.35);
+    @apply mt-5 max-w-2xl text-sm font-normal leading-relaxed text-white md:text-base;
+    color: rgba(255, 255, 255, 0.92);
+    text-shadow: 0 1px 16px rgba(0, 0, 0, 0.28);
   }
 
   .ruwaq-pro-chip {

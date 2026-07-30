@@ -26,7 +26,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: "/tours", priority: 0.85, changeFrequency: "weekly" as const },
     { path: "/guides", priority: 0.85, changeFrequency: "weekly" as const },
     { path: "/visualization", priority: 0.88, changeFrequency: "weekly" as const },
+    { path: "/join", priority: 0.85, changeFrequency: "monthly" as const },
     { path: "/about", priority: 0.75, changeFrequency: "monthly" as const },
+    { path: "/privacy", priority: 0.4, changeFrequency: "monthly" as const },
+    { path: "/terms", priority: 0.4, changeFrequency: "monthly" as const },
   ];
 
   const tourRoutes: RouteEntry[] = PROJECT_TOURS.map((t) => ({
