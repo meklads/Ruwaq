@@ -22,29 +22,16 @@ export const MARKETPLACE_CITIES = [
 
 export type MarketplaceCitySlug = (typeof MARKETPLACE_CITIES)[number]["slug"];
 
+export type ProviderType = "EXECUTOR" | "SUPPLIER" | "CONSULTANT";
+
+/** AD editorial directory — 8 core sectors */
 export const MARKETPLACE_CATEGORIES = [
-  {
-    slug: "hvac",
-    nameAr: "التكييف والتبريد",
-    nameEn: "HVAC & Cooling",
-    icon: "❄️",
-    subcategoriesAr: [
-      "تكييف مركزي ودكت",
-      "صيانة تكييف فنادق وعمائر",
-      "أنظمة كاسيت وسبليت للمشاريع",
-    ],
-    subcategoriesEn: [
-      "Central AC & ducting",
-      "Hotel & tower maintenance",
-      "Cassette & split for projects",
-    ],
-    turrivaCapture: false,
-  },
   {
     slug: "fit-out",
     nameAr: "التشطيبات والتصميم الداخلي",
     nameEn: "Fit-Out & Interior",
     icon: "✨",
+    providerType: "EXECUTOR" as ProviderType,
     subcategoriesAr: [
       "تصميم داخلي فاخر",
       "تشطيب فلل ومقرات تجارية",
@@ -59,9 +46,10 @@ export const MARKETPLACE_CATEGORIES = [
   },
   {
     slug: "contracting",
-    nameAr: "المقاولات العامة والترميم",
+    nameAr: "المقاولات والبناء",
     nameEn: "General Contracting",
     icon: "🏗️",
+    providerType: "EXECUTOR" as ProviderType,
     subcategoriesAr: [
       "ترميم وتأهيل المباني والفنادق",
       "بناء الملاحق والتوسعات",
@@ -75,54 +63,135 @@ export const MARKETPLACE_CATEGORIES = [
     turrivaCapture: true,
   },
   {
-    slug: "elevators",
-    nameAr: "المصاعد والأنظمة الميكانيكية",
-    nameEn: "Elevators & Mechanical",
-    icon: "🛗",
+    slug: "supervision",
+    nameAr: "الإشراف الهندسي والاستشارات",
+    nameEn: "Engineering Supervision",
+    icon: "📐",
+    providerType: "CONSULTANT" as ProviderType,
     subcategoriesAr: [
-      "توريد وتركيب مصاعد",
-      "صيانة مصاعد واعتمادات الدفاع المدني",
+      "إشراف ميداني للمشاريع السكنية",
+      "تقارير جودة واستلام مراحل",
+      "استشارات هندسية وإدارة مشروع",
     ],
-    subcategoriesEn: ["Supply & install elevators", "Maintenance & civil defense approvals"],
+    subcategoriesEn: [
+      "Residential site supervision",
+      "Quality reports & phase sign-off",
+      "Engineering consultancy & PM",
+    ],
     turrivaCapture: false,
   },
   {
-    slug: "waterproofing",
-    nameAr: "العزل المائي والحراري",
-    nameEn: "Waterproofing",
-    icon: "💧",
-    subcategoriesAr: ["عزل أسطح وفوم", "عزل خزانات ومسابح", "معالجة التسربات"],
-    subcategoriesEn: ["Roof & foam insulation", "Tanks & pools", "Leak treatment"],
+    slug: "hvac",
+    nameAr: "التكييف والتهوية",
+    nameEn: "HVAC & Ventilation",
+    icon: "❄️",
+    providerType: "EXECUTOR" as ProviderType,
+    subcategoriesAr: [
+      "تكييف مركزي ودكت",
+      "صيانة تكييف فنادق وعمائر",
+      "أنظمة كاسيت وVRF للمشاريع",
+    ],
+    subcategoriesEn: [
+      "Central AC & ducting",
+      "Hotel & tower maintenance",
+      "VRF & cassette for projects",
+    ],
     turrivaCapture: false,
   },
   {
-    slug: "furnishing",
-    nameAr: "الفرش والتأثيث الفندقي والسكني",
-    nameEn: "FF&E & Furnishing",
-    icon: "🛋️",
+    slug: "kitchens",
+    nameAr: "المطابخ والخزائن التخصصية",
+    nameEn: "Kitchens & Custom Joinery",
+    icon: "🍳",
+    providerType: "EXECUTOR" as ProviderType,
     subcategoriesAr: [
-      "تأثيث فنادق وإسكان حجاج",
-      "تجهيز شقق الإيجار اليومي والفلل",
+      "مطابخ فاخرة حسب الطلب",
+      "خزائن walk-in وdressing rooms",
+      "أعمال خشبية للفلل والقصور",
     ],
-    subcategoriesEn: ["Hotels & pilgrim housing", "Serviced apartments & villas"],
+    subcategoriesEn: [
+      "Bespoke luxury kitchens",
+      "Walk-in closets & dressing rooms",
+      "Villa & palace custom woodwork",
+    ],
     turrivaCapture: false,
   },
   {
-    slug: "facades",
-    nameAr: "تنظيف وجلي الواجهات والرخام",
-    nameEn: "Facades & Marble",
-    icon: "🏢",
+    slug: "luxury-materials",
+    nameAr: "المواد الفاخرة والإضاءة",
+    nameEn: "Luxury Materials & Lighting",
+    icon: "💎",
+    providerType: "SUPPLIER" as ProviderType,
     subcategoriesAr: [
-      "جلي وتلميع رخام",
-      "غسيل واجهات مرتفعات (زجاج وكلادينج)",
+      "رخام وجرانيت فاخر",
+      "إضاءة معمارية وديكور",
+      "تجهيزات Sanitary ومواد تشطيب",
     ],
-    subcategoriesEn: ["Marble polish & grind", "High-rise facade cleaning"],
+    subcategoriesEn: [
+      "Premium marble & stone",
+      "Architectural & decorative lighting",
+      "Sanitary ware & finish materials",
+    ],
+    turrivaCapture: false,
+  },
+  {
+    slug: "outdoor",
+    nameAr: "الحدائق واللاندسكيب",
+    nameEn: "Landscaping & Outdoor",
+    icon: "🌿",
+    providerType: "EXECUTOR" as ProviderType,
+    subcategoriesAr: [
+      "تنسيق حدائق فلل وقصور",
+      "مسابح وشلالات خارجية",
+      "إضاءة خارجية وزراعة",
+    ],
+    subcategoriesEn: [
+      "Villa & palace landscaping",
+      "Outdoor pools & water features",
+      "Exterior lighting & planting",
+    ],
+    turrivaCapture: false,
+  },
+  {
+    slug: "maintenance",
+    nameAr: "الصيانة وتشغيل المباني",
+    nameEn: "Maintenance & FM",
+    icon: "🔧",
+    providerType: "EXECUTOR" as ProviderType,
+    subcategoriesAr: [
+      "عقود صيانة سنوية للفلل",
+      "عزل أسطح وخزانات",
+      "تشغيل وصيانة مباني تجارية",
+    ],
+    subcategoriesEn: [
+      "Annual villa maintenance contracts",
+      "Roof & tank waterproofing",
+      "Commercial building O&M",
+    ],
     turrivaCapture: false,
   },
 ] as const;
 
 export type MarketplaceCategorySlug =
   (typeof MARKETPLACE_CATEGORIES)[number]["slug"];
+
+/** Retired slugs → canonical AD sector (301 redirects) */
+export const LEGACY_CATEGORY_REDIRECTS: Record<string, MarketplaceCategorySlug> = {
+  elevators: "contracting",
+  waterproofing: "maintenance",
+  furnishing: "fit-out",
+  facades: "luxury-materials",
+};
+
+export function resolveCategorySlug(
+  slug: string | undefined
+): MarketplaceCategorySlug | null {
+  if (!slug) return null;
+  const legacy = LEGACY_CATEGORY_REDIRECTS[slug];
+  if (legacy) return legacy;
+  const found = getCategoryBySlug(slug);
+  return found?.slug ?? null;
+}
 
 export function getCityBySlug(slug: string) {
   return MARKETPLACE_CITIES.find((c) => c.slug === slug);
@@ -137,4 +206,10 @@ export function citySlugFromEnum(
 ): MarketplaceCitySlug {
   const found = MARKETPLACE_CITIES.find((c) => c.enum === city);
   return found?.slug ?? "jeddah";
+}
+
+export function defaultProviderTypeForCategory(
+  slug: MarketplaceCategorySlug
+): ProviderType {
+  return getCategoryBySlug(slug)?.providerType ?? "EXECUTOR";
 }

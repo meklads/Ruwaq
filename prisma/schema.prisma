@@ -542,6 +542,12 @@ enum DirectoryApplicationStatus {
   REJECTED
 }
 
+enum ProviderType {
+  EXECUTOR
+  SUPPLIER
+  CONSULTANT
+}
+
 model ServiceCategory {
   id            String   @id @default(cuid())
   slug          String   @unique
@@ -578,6 +584,8 @@ model ProviderListing {
   /// Mirrors owner subscription tier for directory badges & sort (0=PRO … 2=STARTER).
   directoryTier RuwaqTier       @default(STARTER)
   directorySortRank Int         @default(2)
+  /// EXECUTOR = contractor/installer, SUPPLIER = trade supplier, CONSULTANT = supervision/design office
+  providerType  ProviderType    @default(EXECUTOR)
   images        Json            @default("[]")
   createdAt     DateTime        @default(now())
   updatedAt     DateTime        @updatedAt

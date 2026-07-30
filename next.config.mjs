@@ -45,6 +45,26 @@ const nextConfig = {
         destination: "/workspace/admin/:path*",
         permanent: false,
       },
+      {
+        source: "/:city/elevators",
+        destination: "/:city/contracting",
+        permanent: true,
+      },
+      {
+        source: "/:city/waterproofing",
+        destination: "/:city/maintenance",
+        permanent: true,
+      },
+      {
+        source: "/:city/furnishing",
+        destination: "/:city/fit-out",
+        permanent: true,
+      },
+      {
+        source: "/:city/facades",
+        destination: "/:city/luxury-materials",
+        permanent: true,
+      },
     ];
   },
 };

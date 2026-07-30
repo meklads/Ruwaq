@@ -1,29 +1,26 @@
 /**
  * Ruwaq database seed — aligned with prisma/schema.prisma
  *
- * Model mapping (there is NO Category / Listing model):
- * - User              → prisma.user           (marketplaceRole, not role; no password field)
- * - ServiceCategory   → prisma.serviceCategory
- * - ProviderListing   → prisma.providerListing (categoryId, ownerUserId — NOT serviceCategoryId / userId)
- *
- * Enum: MarketplaceCity (JEDDAH | MAKKAH | MADINAH) — NOT "City"
- *
  * Set SEED_RESET=true to wipe marketplace tables before seeding (dev only; never deletes User rows).
  */
 import {
   Prisma,
   PrismaClient,
   type MarketplaceCity,
+  type ProviderType,
   type ServiceCategory,
   type User,
 } from "@prisma/client";
 import { CLAUSE_PACKS, PLACEHOLDER_DEFAULTS } from "../src/shared/constants/clause-pack-seed";
+import { MARKETPLACE_CATEGORIES } from "../src/shared/constants/marketplace-taxonomy";
 import { directoryFlagsForTier } from "../src/modules/billing/lib/tiers";
 import { MARKETPLACE_LISTING_SEEDS } from "./data/marketplace-listings.seed";
 
 const prisma = new PrismaClient();
 
 const ADMIN_EMAIL = "admin@ruwaq.co";
+const EXPECTED_CATEGORIES = MARKETPLACE_CATEGORIES.length;
+const EXPECTED_LISTINGS = MARKETPLACE_LISTING_SEEDS.length;
 
 function assertDatabaseUrl(): void {
   if (process.env.DATABASE_URL?.trim()) return;
@@ -36,51 +33,6 @@ function assertDatabaseUrl(): void {
     ].join("\n")
   );
 }
-
-const SERVICE_CATEGORIES = [
-  {
-    slug: "hvac",
-    nameAr: "التكييف والتبريد",
-    nameEn: "HVAC & Cooling",
-    icon: "Snowflake",
-  },
-  {
-    slug: "fit-out",
-    nameAr: "التشطيبات والتصميم الداخلي",
-    nameEn: "Fit-Out & Interior Decor",
-    icon: "Sparkles",
-  },
-  {
-    slug: "contracting",
-    nameAr: "المقاولات العامة والترميم",
-    nameEn: "General Contracting & Renovations",
-    icon: "Building2",
-  },
-  {
-    slug: "elevators",
-    nameAr: "المصاعد والأنظمة الميكانيكية",
-    nameEn: "Elevators & Mechanical Systems",
-    icon: "ArrowUpDown",
-  },
-  {
-    slug: "waterproofing",
-    nameAr: "العزل المائي والحراري",
-    nameEn: "Waterproofing & Insulation",
-    icon: "Droplet",
-  },
-  {
-    slug: "furnishing",
-    nameAr: "الفرش والتأثيث الفندقي والسكني",
-    nameEn: "FF&E & Furnishing",
-    icon: "Armchair",
-  },
-  {
-    slug: "facades",
-    nameAr: "تنظيف وجلي الواجهات والرخام",
-    nameEn: "Facade & Marble Restoration",
-    icon: "Sparkle",
-  },
-] as const;
 
 const ADMIN_USER_CREATE: Prisma.UserCreateInput = {
   email: ADMIN_EMAIL,
@@ -99,8 +51,8 @@ async function maybeResetMarketplace(): Promise<void> {
   if (process.env.SEED_RESET !== "true") return;
 
   console.log("🧹 SEED_RESET=true — clearing marketplace data (User rows preserved)…");
-  // Delete order respects foreign keys: leads & listings → categories
   await prisma.marketplaceLead.deleteMany();
+  await prisma.directoryApplication.deleteMany();
   await prisma.providerListing.deleteMany();
   await prisma.serviceCategory.deleteMany();
   console.log("  ✓ MarketplaceLead, ProviderListing, ServiceCategory cleared");
@@ -126,19 +78,22 @@ async function seedAdminUser(): Promise<User> {
   return user;
 }
 
-/** ServiceCategory — required: slug, nameAr, nameEn */
 async function seedMarketplaceCategories(): Promise<Map<string, ServiceCategory>> {
-  console.log("🌱 Seeding ServiceCategory (7 sectors)…");
+  console.log(`🌱 Seeding ServiceCategory (${EXPECTED_CATEGORIES} sectors)…`);
   const bySlug = new Map<string, ServiceCategory>();
   const reset = process.env.SEED_RESET === "true";
 
-  for (const [i, cat] of SERVICE_CATEGORIES.entries()) {
+  for (const [i, cat] of MARKETPLACE_CATEGORIES.entries()) {
     const payload = {
       slug: cat.slug,
       nameAr: cat.nameAr,
       nameEn: cat.nameEn,
-      icon: cat.icon,
+      icon: cat.icon.replace(/[^\w]/g, "") || "Building",
       sortOrder: i,
+      subcategories: {
+        ar: cat.subcategoriesAr,
+        en: cat.subcategoriesEn,
+      } as Prisma.InputJsonValue,
     };
 
     const row = reset
@@ -156,17 +111,59 @@ async function seedMarketplaceCategories(): Promise<Map<string, ServiceCategory>
   return bySlug;
 }
 
-/** ProviderListing — required: titleAr, slug, descriptionAr, city, categoryId, phone, whatsapp */
+async function cleanupStaleMarketplaceData(
+  categoriesBySlug: Map<string, ServiceCategory>
+): Promise<void> {
+  if (process.env.SEED_RESET === "true") return;
+
+  const validCategorySlugs = [...categoriesBySlug.keys()];
+  const seedSlugs = MARKETPLACE_LISTING_SEEDS.map((row) => row.slug);
+
+  const removedListings = await prisma.providerListing.deleteMany({
+    where: { slug: { notIn: seedSlugs } },
+  });
+  if (removedListings.count > 0) {
+    console.log(`  ✓ Removed ${removedListings.count} stale listing(s)`);
+  }
+
+  const retiredCategories = await prisma.serviceCategory.findMany({
+    where: { slug: { notIn: validCategorySlugs } },
+    select: { id: true, slug: true },
+  });
+
+  if (retiredCategories.length > 0) {
+    const retiredIds = retiredCategories.map((c) => c.id);
+    const removedLeads = await prisma.marketplaceLead.deleteMany({
+      where: { categoryId: { in: retiredIds } },
+    });
+    if (removedLeads.count > 0) {
+      console.log(`  ✓ Removed ${removedLeads.count} lead(s) on retired sectors`);
+    }
+
+    const removedApps = await prisma.directoryApplication.deleteMany({
+      where: { categoryId: { in: retiredIds } },
+    });
+    if (removedApps.count > 0) {
+      console.log(`  ✓ Removed ${removedApps.count} directory application(s) on retired sectors`);
+    }
+
+    const removedCategories = await prisma.serviceCategory.deleteMany({
+      where: { id: { in: retiredIds } },
+    });
+    console.log(`  ✓ Removed ${removedCategories.count} retired category sector(s)`);
+  }
+}
+
+function tierFlagsForSeed(row: (typeof MARKETPLACE_LISTING_SEEDS)[number]) {
+  return directoryFlagsForTier(row.directoryTier);
+}
+
 function toProviderListingCreateInput(
   row: (typeof MARKETPLACE_LISTING_SEEDS)[number],
   categoryId: string,
   ownerUserId: string
 ): Prisma.ProviderListingCreateInput {
-  const tierFlags = row.isFeatured
-    ? directoryFlagsForTier("PRO")
-    : row.isVerified
-      ? directoryFlagsForTier("VERIFIED")
-      : directoryFlagsForTier("STARTER");
+  const tierFlags = tierFlagsForSeed(row);
 
   return {
     slug: row.slug,
@@ -184,6 +181,7 @@ function toProviderListingCreateInput(
     isFeatured: tierFlags.isFeatured,
     directoryTier: tierFlags.directoryTier,
     directorySortRank: tierFlags.directorySortRank,
+    providerType: row.providerType as ProviderType,
     images: row.images as Prisma.InputJsonValue,
   };
 }
@@ -192,7 +190,7 @@ async function seedMarketplaceListings(
   categoriesBySlug: Map<string, ServiceCategory>,
   admin: User
 ): Promise<void> {
-  console.log("🌱 Seeding ProviderListing (126 companies)…");
+  console.log(`🌱 Seeding ProviderListing (${EXPECTED_LISTINGS} companies)…`);
 
   let created = 0;
   let updated = 0;
@@ -220,11 +218,7 @@ async function seedMarketplaceListings(
       select: { id: true },
     });
 
-    const tierFlags = row.isFeatured
-      ? directoryFlagsForTier("PRO")
-      : row.isVerified
-        ? directoryFlagsForTier("VERIFIED")
-        : directoryFlagsForTier("STARTER");
+    const tierFlags = tierFlagsForSeed(row);
 
     const data = {
       titleAr: row.titleAr,
@@ -241,6 +235,7 @@ async function seedMarketplaceListings(
       isFeatured: tierFlags.isFeatured,
       directoryTier: tierFlags.directoryTier,
       directorySortRank: tierFlags.directorySortRank,
+      providerType: row.providerType as ProviderType,
       images: row.images as Prisma.InputJsonValue,
     };
 
@@ -254,17 +249,7 @@ async function seedMarketplaceListings(
     else created += 1;
   }
 
-  if (!reset) {
-    const seedSlugs = MARKETPLACE_LISTING_SEEDS.map((row) => row.slug);
-    const removed = await prisma.providerListing.deleteMany({
-      where: { slug: { notIn: seedSlugs } },
-    });
-    if (removed.count > 0) {
-      console.log(
-        `  ✓ Removed ${removed.count} stale listing(s) not in the 126-company catalog`
-      );
-    }
-  }
+  await cleanupStaleMarketplaceData(categoriesBySlug);
 
   const total = await prisma.providerListing.count();
   console.log(
@@ -297,7 +282,7 @@ async function verifyMarketplaceListingCounts(
       `  ⚠ ${problems} city×category cells have wrong counts — run: SEED_RESET=true npx prisma db seed`
     );
   } else {
-    console.log("  ✓ 6 verified listings per city×category (126 total)");
+    console.log(`  ✓ 6 verified listings per city×category (${EXPECTED_LISTINGS} total)`);
   }
 }
 

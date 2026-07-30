@@ -71,6 +71,14 @@ export function ListingCard({
     listing.directoryTier ??
     (listing.isFeatured ? "PRO" : listing.isVerified ? "VERIFIED" : "STARTER");
 
+  const providerType = listing.providerType ?? "EXECUTOR";
+  const providerLabel =
+    providerType === "SUPPLIER"
+      ? labels.providerSupplier
+      : providerType === "CONSULTANT"
+        ? labels.providerConsultant
+        : labels.providerExecutor;
+
   return (
     <article className="group ruwaq-pro-card">
       <div className="ruwaq-pro-card-image">
@@ -85,6 +93,7 @@ export function ListingCard({
           />
         </Link>
         <div className="ruwaq-pro-card-badges-overlay">
+          <span className="ruwaq-pro-badge ruwaq-pro-badge--type">{providerLabel}</span>
           {tier === "PRO" ? (
             <span className="ruwaq-pro-badge ruwaq-pro-badge--featured">{labels.featuredPro}</span>
           ) : null}

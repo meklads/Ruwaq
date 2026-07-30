@@ -120,6 +120,9 @@ export type Messages = {
       verifiedPro: string;
       featured: string;
       featuredPro: string;
+      providerExecutor: string;
+      providerSupplier: string;
+      providerConsultant: string;
       whatsapp: string;
       viewProfile: string;
       empty: string;

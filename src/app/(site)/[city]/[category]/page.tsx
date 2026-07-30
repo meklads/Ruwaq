@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { getMessages } from "@/shared/i18n";
@@ -9,6 +9,7 @@ import {
   type MarketplaceCategorySlug,
   type MarketplaceCitySlug,
 } from "@/shared/constants/marketplace-taxonomy";
+import { legacyCategoryRedirectTarget } from "@/modules/marketplace/lib/marketplace-slugs";
 import { getListingsForCityCategory } from "@/modules/marketplace/server/listings.service";
 import { ListingCard } from "@/modules/marketplace/components/directory/ListingCard";
 import { DirectoryFilters } from "@/modules/marketplace/components/directory-filters";
@@ -70,6 +71,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function CategoryListingPage({ params, searchParams }: Props) {
   const city = getCityBySlug(params.city);
+  const redirectTarget = legacyCategoryRedirectTarget(params.category);
+  if (city && redirectTarget) {
+    redirect(`/${city.slug}/${redirectTarget}`);
+  }
+
   const catMeta = getCategoryBySlug(params.category);
   if (!city || !catMeta) notFound();
 

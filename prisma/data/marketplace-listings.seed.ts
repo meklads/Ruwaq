@@ -3,5 +3,5 @@ export { buildMarketplaceListingSeeds } from "./marketplace-listing-catalog";
 
 import { buildMarketplaceListingSeeds } from "./marketplace-listing-catalog";
 
-/** 7 categories × 3 cities × 6 companies = 126 verified provider listings */
+/** 8 categories × 3 cities × 6 companies = 144 verified provider listings */
 export const MARKETPLACE_LISTING_SEEDS = buildMarketplaceListingSeeds();

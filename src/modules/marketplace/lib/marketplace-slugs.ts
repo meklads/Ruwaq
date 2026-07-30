@@ -1,6 +1,7 @@
 import {
-  getCategoryBySlug,
   getCityBySlug,
+  LEGACY_CATEGORY_REDIRECTS,
+  resolveCategorySlug,
   type MarketplaceCategorySlug,
   type MarketplaceCitySlug,
 } from "@/shared/constants/marketplace-taxonomy";
@@ -17,6 +18,16 @@ export function parseCategorySlug(
   value: string | undefined,
   fallback: MarketplaceCategorySlug = "fit-out"
 ): MarketplaceCategorySlug {
-  const found = getCategoryBySlug(value ?? "");
-  return found?.slug ?? fallback;
+  const resolved = resolveCategorySlug(value ?? "");
+  return resolved ?? fallback;
+}
+
+export function isLegacyCategorySlug(slug: string): boolean {
+  return slug in LEGACY_CATEGORY_REDIRECTS;
+}
+
+export function legacyCategoryRedirectTarget(
+  slug: string
+): MarketplaceCategorySlug | null {
+  return LEGACY_CATEGORY_REDIRECTS[slug] ?? null;
 }

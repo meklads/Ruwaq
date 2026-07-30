@@ -1732,6 +1732,10 @@
     @apply border border-neutral-300 bg-white/95 text-neutral-900 backdrop-blur-sm;
   }
 
+  .ruwaq-pro-badge--type {
+    @apply border border-neutral-700 bg-neutral-900/90 text-white backdrop-blur-sm;
+  }
+
   .ruwaq-pro-badge--muted {
     @apply border-neutral-300 text-neutral-600;
   }

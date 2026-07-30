@@ -9,7 +9,7 @@ import type { Locale } from "@/shared/i18n/locale";
 const HERO_IMAGE =
   "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1920&auto=format&fit=crop";
 
-const QUICK_CATEGORY_SLUGS = ["fit-out", "contracting", "hvac"] as const;
+const QUICK_CATEGORY_SLUGS = ["fit-out", "kitchens", "luxury-materials"] as const;
 
 type Props = {
   copy: Messages["marketplace"]["proDirectory"];

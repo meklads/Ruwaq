@@ -26,8 +26,8 @@ export const en: Messages = {
    title: "Engineering & property directory",
    titleHighlight: "for Jeddah, Makkah & Madinah",
    subtitle:
-    "Verified contractors, HVAC, fit-out, and elevators — or request quotes within 24 hours.",
-   trustLine: "7 sectors · 3 cities · Free quote requests",
+    "Verified contractors, suppliers, and consultants — request quotes within 24 hours.",
+   trustLine: "8 sectors · 3 cities · Free quote requests",
    ctaPrimary: "Get verified quotes",
    ctaSecondary: "Browse verified companies",
    ctaContractor: "Contractor proposal tool",
@@ -63,7 +63,7 @@ export const en: Messages = {
    ownersSteps: [
     {
      title: "Pick sector and city",
-     body: "Jeddah, Makkah, or Madinah — choose your trade (fit-out, HVAC, elevators, and more).",
+     body: "Jeddah, Makkah, or Madinah — choose your sector (fit-out, kitchens, materials, HVAC, and more).",
     },
     {
      title: "Describe your project",
@@ -213,6 +213,9 @@ export const en: Messages = {
    verifiedPro: "Verified",
    featured: "Featured",
    featuredPro: "Featured • PRO",
+   providerExecutor: "Contractor",
+   providerSupplier: "Trade supplier",
+   providerConsultant: "Consultant",
    whatsapp: "WhatsApp",
    viewProfile: "Profile",
    empty: "No verified providers yet. Request a quote and we will match you.",
@@ -222,7 +225,7 @@ export const en: Messages = {
    eyebrow: "RUWAQ PRO · Western Region",
    title: "Ruwaq PRO Directory",
    subtitle:
-    "A trusted registry for professionals — fit-out, contracting, HVAC, and elevators across Jeddah, Makkah, and Madinah.",
+    "A trusted registry for fit-out, contracting, kitchens, luxury materials, and engineering supervision across Jeddah, Makkah, and Madinah.",
    allCategories: "All sectors",
    applyCta: "Trade professional? Apply to the directory",
    applyHint: "We review commercial registration and licenses before listing any company.",
