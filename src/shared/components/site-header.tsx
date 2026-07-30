@@ -15,8 +15,9 @@ export async function SiteHeader() {
     { href: "/guides", label: nav.guides },
     { href: "/pro", label: nav.featured },
     { href: "/how-it-works", label: nav.howItWorks },
-    { href: "/proposals", label: nav.forContractors },
   ];
+
+  const proNavLink = { href: "/proposals", label: nav.forContractors };
 
   return (
     <header className="ruwaq-ad-header">
@@ -49,6 +50,9 @@ export async function SiteHeader() {
                 {link.label}
               </Link>
             ))}
+            <Link href={proNavLink.href} className="ruwaq-ad-nav-link ruwaq-ad-nav-link--pro">
+              {proNavLink.label}
+            </Link>
           </nav>
 
           <div className="flex shrink-0 items-center gap-3">
@@ -65,6 +69,9 @@ export async function SiteHeader() {
               {link.label}
             </Link>
           ))}
+          <Link href={proNavLink.href} className="ruwaq-ad-mobile-nav-link ruwaq-ad-mobile-nav-link--pro">
+            {proNavLink.label}
+          </Link>
         </nav>
       </div>
     </header>

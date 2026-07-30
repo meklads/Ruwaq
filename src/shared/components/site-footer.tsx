@@ -87,7 +87,7 @@ export async function SiteFooter() {
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20">
           <div className="grid gap-12 lg:grid-cols-[1.35fr_1fr_1fr_1fr]">
             <div>
-              <RuwaqLogo href="/" variant="dark" size="footer" />
+              <RuwaqLogo href="/" variant="dark" />
               <p className="mt-6 max-w-sm text-sm leading-relaxed text-white/75">{footer.tagline}</p>
               <p className="mt-4 text-xs text-white/50">{footer.address}</p>
               <div className="mt-6">

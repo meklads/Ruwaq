@@ -34,15 +34,17 @@ export function RuwaqLogo({
         : "";
 
   const logo =
-    variant === "editorial" ? (
-      <span className={`ruwaq-brand-lockup ruwaq-brand-lockup--header-img ${className}`.trim()}>
+    variant === "editorial" || variant === "dark" ? (
+      <span
+        className={`ruwaq-brand-lockup ruwaq-brand-lockup--header-img ${variant === "dark" ? "ruwaq-brand-lockup--footer-img" : ""} ${className}`.trim()}
+      >
         <Image
           src={RUWQ_HEADER_LOCKUP.src}
           alt="رواق RUWAQ"
           width={RUWQ_HEADER_LOCKUP.width}
           height={RUWQ_HEADER_LOCKUP.height}
           className="ruwaq-brand-lockup__img"
-          priority
+          priority={variant === "editorial"}
         />
       </span>
     ) : (
