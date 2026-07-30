@@ -34,6 +34,7 @@ export default function OpenGraphImage() {
           style={{
             fontSize: 28,
             letterSpacing: "0.38em",
+            paddingLeft: "0.38em",
             color: "#d4b47a",
             marginBottom: 40,
           }}

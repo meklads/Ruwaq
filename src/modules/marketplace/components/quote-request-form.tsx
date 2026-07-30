@@ -12,6 +12,7 @@ import {
 } from "@/modules/marketplace/lib/marketplace-slugs";
 import { submitLead } from "@/modules/marketplace/server/lead.actions";
 import { submitVisualizationLead } from "@/modules/marketplace/server/visualization-lead.actions";
+import { trackEvent } from "@/shared/lib/analytics";
 import { QuoteRequestSuccessModal } from "@/modules/marketplace/components/quote-request-success-modal";
 import { graphicsHouseReferralUrl } from "@/shared/constants/brand";
 import type { Messages } from "@/shared/i18n/messages/types";
@@ -106,6 +107,7 @@ export function QuoteRequestForm({
         return;
       }
       setVisualizationSuccess(true);
+      trackEvent("visualization_lead", { referrer: "request_quote", locale });
       return;
     }
 
@@ -128,6 +130,7 @@ export function QuoteRequestForm({
       referenceCode: result.referenceCode,
       whatsAppUrl: result.whatsAppUrl,
     });
+    trackEvent("quote_submit", { category: categorySlug, city: citySlug, locale });
   };
 
   if (visualizationSuccess) {

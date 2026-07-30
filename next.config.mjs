@@ -21,13 +21,13 @@ const nextConfig = {
   async redirects() {
     return [
       {
-        source: "/proposals",
-        destination: "/workspace/proposals",
+        source: "/proposals/new",
+        destination: "/workspace/proposals/new",
         permanent: false,
       },
       {
-        source: "/proposals/:path*",
-        destination: "/workspace/proposals/:path*",
+        source: "/proposals/:id",
+        destination: "/workspace/proposals/:id",
         permanent: false,
       },
       {

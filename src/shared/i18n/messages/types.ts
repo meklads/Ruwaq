@@ -695,6 +695,33 @@ export type Messages = {
       ctaButton: string;
       ctaSecondary: string;
     };
+    contact: {
+      eyebrow: string;
+      title: string;
+      intro: string;
+      emailLabel: string;
+      whatsappLabel: string;
+      responseTitle: string;
+      responseBody: string;
+      channels: readonly { title: string; body: string }[];
+      ctaQuote: string;
+      ctaProposal: string;
+      ctaFaq: string;
+    };
+    proposalsLanding: {
+      eyebrow: string;
+      title: string;
+      titleHighlight: string;
+      intro: string;
+      signedInHint: string;
+      myProposals: string;
+      featuresTitle: string;
+      samplesTitle: string;
+      samplesIntro: string;
+      ctaPrimary: string;
+      ctaSecondary: string;
+      ctaPricing: string;
+    };
   };
   templates: {
     title: string;

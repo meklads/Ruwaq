@@ -10,6 +10,7 @@ import {
 } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
+import { GoogleAnalytics } from "@/shared/components/google-analytics";
 import { getLocale } from "@/shared/i18n/server";
 import { localeDir } from "@/shared/i18n/locale";
 import { RUWQ_PUBLIC_URL } from "@/shared/constants/brand";
@@ -114,6 +115,7 @@ export default async function RootLayout({
       <body
         className={`min-h-screen bg-white ${locale === "ar" ? tajawal.className : plusJakarta.className}`}
       >
+        <GoogleAnalytics />
         <Providers locale={locale}>{children}</Providers>
       </body>
     </html>

@@ -1287,6 +1287,49 @@ export const en: Messages = {
    ctaButton: "Start a free proposal",
    ctaSecondary: "View pricing",
   },
+  contact: {
+   eyebrow: "Contact Ruwaq",
+   title: "We're here to help",
+   intro:
+    "Whether you're a property owner looking for a verified provider, or a contractor who needs a professional proposal tool — reach out and we'll respond within one business day.",
+   emailLabel: "Email",
+   whatsappLabel: "Support WhatsApp",
+   responseTitle: "Response times",
+   responseBody:
+    "Quote requests and general enquiries: within 24 hours. Contractor tool questions: within one business day. For urgent operational issues, use WhatsApp.",
+   channels: [
+    {
+     title: "Engineering quote request",
+     body: "Use the request-a-quote form — we review it and match you with the right provider in Jeddah, Makkah, or Madinah.",
+    },
+    {
+     title: "Architectural visualization (Graphics House)",
+     body: "For 3D renders and visualization — use the visualization page or the dual-intent quote form.",
+    },
+    {
+     title: "Proposal studio for contractors",
+     body: "Start a free proposal with no account, or read the FAQ and pricing page before signing in.",
+    },
+   ],
+   ctaQuote: "Request a quote",
+   ctaProposal: "Proposals for contractors",
+   ctaFaq: "FAQ",
+  },
+  proposalsLanding: {
+   eyebrow: "Ruwaq · Proposal studio",
+   title: "Professional proposals in minutes",
+   titleHighlight: "with your branding",
+   intro:
+    "Three inputs only — Ruwaq writes full scope, approved clauses, payment schedule, and an export-ready PDF. Try free, no card required.",
+   signedInHint: "You're signed in — continue from your dashboard.",
+   myProposals: "My proposals",
+   featuresTitle: "Why contractors choose Ruwaq",
+   samplesTitle: "Explore ready samples",
+   samplesIntro: "Three templates to preview: fit-out, engineering supervision, and architectural visualization — demo data only.",
+   ctaPrimary: "Start a free proposal",
+   ctaSecondary: "Preview a sample",
+   ctaPricing: "Plans & pricing",
+  },
  },
  templates: {
   title: "Proposal sample gallery",

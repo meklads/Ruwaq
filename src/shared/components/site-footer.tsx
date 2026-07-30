@@ -40,7 +40,8 @@ export async function SiteFooter() {
 
   const companyLinks = [
     { href: "/about", label: t.nav.aboutPlatform },
-    { href: `mailto:${RUWQ_PUBLIC_EMAIL}`, label: footer.contact },
+    { href: "/faq", label: t.site.nav.faq },
+    { href: "/contact", label: footer.contact },
   ];
 
   const legalLinks = [

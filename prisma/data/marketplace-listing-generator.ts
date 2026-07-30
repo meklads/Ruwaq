@@ -446,13 +446,13 @@ const CATEGORY_CATALOG: CategoryCatalog[] = [
     providerType: "SUPPLIER",
     companies: [
       {
-        slugKey: "rowad-lighting",
-        titleAr: "شركة الرواد للإضاءة المعمارية",
-        titleEn: "Al-Rowad Architectural Lighting",
+        slugKey: "graphics-house-visualization",
+        titleAr: "جرافيكس هاوس — التصوير المعماري والتصور ثلاثي الأبعاد",
+        titleEn: "Graphics House — Architectural Visualization & 3D",
         descriptionAr: (c) =>
-          `توريد إضاءة معمارية وديكورية في ${c} — LED، track lights، وثريات فاخرة للفلل والفنادق.`,
+          `تصوير معماري وتصور ثلاثي الأبعاد للمشاريع السكنية والتجارية في ${c} — renders، فيديو، ومواد تسويق للمطورين والمكاتب الهندسية.`,
         descriptionEn: (c) =>
-          `Architectural and decorative lighting supply in ${c} — LED, track lights, and luxury chandeliers.`,
+          `Architectural visualization and 3D renders for residential and commercial projects in ${c} — marketing assets for developers and engineering firms.`,
       },
       {
         slugKey: "marble-crown",
@@ -699,7 +699,10 @@ export function buildMarketplaceListingSeeds(): ListingSeed[] {
           whatsapp: phone,
           address: `${meta.nameAr} - ${meta.districts[index]}`,
           isVerified: true,
-          isFeatured: tier === "PRO",
+          isFeatured:
+            tier === "PRO" ||
+            company.slugKey.startsWith("turriva") ||
+            company.slugKey.startsWith("graphics-house"),
           directoryTier: tier,
           providerType: catalog.providerType,
           images: listingImagesFor(catalog.slug, index),

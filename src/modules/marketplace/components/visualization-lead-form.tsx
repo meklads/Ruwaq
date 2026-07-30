@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { MARKETPLACE_CITIES } from "@/shared/constants/marketplace-taxonomy";
 import { submitVisualizationLead } from "@/modules/marketplace/server/visualization-lead.actions";
+import { trackEvent } from "@/shared/lib/analytics";
 import { graphicsHouseReferralUrl } from "@/shared/constants/brand";
 import type { Messages } from "@/shared/i18n/messages/types";
 import type { Locale } from "@/shared/i18n/locale";
@@ -58,6 +59,7 @@ export function VisualizationLeadForm({ copy, locale }: Props) {
       return;
     }
     setSuccess(true);
+    trackEvent("visualization_lead", { referrer: "visualization_page", locale });
   };
 
   if (success) {

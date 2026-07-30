@@ -1278,11 +1278,16 @@
   }
 
   .ruwaq-brand-lockup {
-    @apply inline-flex max-w-none items-center;
+    @apply inline-flex max-w-none flex-col items-center;
   }
 
   .ruwaq-brand-wordmark {
-    @apply flex flex-col items-start justify-center leading-none;
+    @apply flex flex-col items-center justify-center text-center leading-none;
+  }
+
+  .ruwaq-brand-ar,
+  .ruwaq-brand-en {
+    @apply block text-center;
   }
 
   /* Classic lockup — 2.5× previous chrome sizes, vector text (crisp at any DPI) */
@@ -1293,6 +1298,7 @@
 
   .ruwaq-brand-lockup--chrome .ruwaq-brand-en {
     @apply mt-1.5 font-display-en text-[1.55rem] font-normal uppercase tracking-[0.32em] text-ruwaq-gold sm:text-[1.7rem];
+    padding-inline-start: 0.32em;
     -webkit-font-smoothing: antialiased;
   }
 
@@ -1302,6 +1308,7 @@
 
   .ruwaq-brand-lockup--footer .ruwaq-brand-en {
     @apply mt-1 font-display-en text-[1.35rem] font-normal uppercase tracking-[0.32em] text-ruwaq-gold sm:text-[1.45rem];
+    padding-inline-start: 0.32em;
   }
 
   .ruwaq-brand-lockup--dark .ruwaq-brand-ar {
@@ -1967,11 +1974,13 @@
 
   .ruwaq-brand-lockup--editorial .ruwaq-brand-en {
     @apply mt-1 text-[0.65rem] font-medium uppercase tracking-[0.38em] text-neutral-950 sm:text-xs;
+    padding-inline-start: 0.38em;
     font-family: var(--font-marketing-latin), system-ui, sans-serif;
   }
 
   html[lang="ar"] .ruwaq-brand-lockup--editorial .ruwaq-brand-en {
     @apply normal-case tracking-[0.2em];
+    padding-inline-start: 0.2em;
   }
 
   /* —— AD PRO site shell (Architectural Digest inspired) —— */

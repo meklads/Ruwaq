@@ -41,7 +41,7 @@ export function RuwaqLogo({
   return (
     <Link
       href={href}
-      className="inline-flex shrink-0 items-center bg-transparent p-0 leading-none"
+      className="inline-flex shrink-0 items-center justify-center bg-transparent p-0 leading-none"
       aria-label="رواق — الصفحة الرئيسية"
     >
       {logo}

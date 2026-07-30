@@ -16,6 +16,7 @@ import {
 } from "@/modules/proposal/components/optional-details-fields";
 import Link from "next/link";
 import { AppPageHero } from "@/shared/components/app-page-hero";
+import { trackEvent } from "@/shared/lib/analytics";
 
 type Step = "project" | "details" | "generating";
 
@@ -178,6 +179,8 @@ export function NewProposalForm({ variant = "embedded" }: Props) {
       if (!created.success) {
         throw new Error(created.error ?? t.form.errors.generic);
       }
+
+      trackEvent("proposal_start", { locale, mode: form.commercialMode });
 
       setProgress(60);
       const keyQuery = created.editKey
