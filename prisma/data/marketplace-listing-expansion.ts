@@ -208,13 +208,13 @@ export const MARKETPLACE_LISTING_EXPANSION: Record<
   ],
   "contracting:JEDDAH": [
     {
-      slug: "namazij-mqawlat-jeddah",
-      titleAr: "مؤسسة نماذج الإعمار للمقاولات",
-      titleEn: "Namazij Al-Emaar Contracting",
+      slug: "alrawasi-contracting-jeddah",
+      titleAr: "مؤسسة الرواسي الغربية للمقاولات العامة",
+      titleEn: "Al-Rawasi Western General Contracting",
       descriptionAr:
-        "مقاولات بناء عظم للفلل والعمائر في جدة، هيكل خرساني مسلح وإشراف هندسي متكامل.",
+        "مقاولات بناء عظم، ترميم الملاحق والمباني، وتأهيل المنشآت التجارية تحت إشراف هندسي متكامل.",
       descriptionEn:
-        "Structural construction for Jeddah villas and towers — reinforced concrete and full engineering supervision.",
+        "Structural shell works, annex renovation, and commercial building rehabilitation under full engineering supervision.",
       address: "جدة - حي السلامة، طريق المدينة",
     },
     {

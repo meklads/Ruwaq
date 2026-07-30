@@ -257,14 +257,14 @@ const MARKETPLACE_LISTING_CATALOG: CatalogCell[] = [
     city: "JEDDAH",
     companies: [
       {
-        slug: "alrawasi-contracting-jeddah",
-        titleAr: "مؤسسة الرواسي الغربية للمقاولات العامة",
-        titleEn: "Al-Rawasi Western General Contracting",
+        slug: "turriva-contracting-jeddah",
+        titleAr: "شركة توريفا للمقاولات العامة والترميم",
+        titleEn: "Turriva General Contracting & Renovation",
         descriptionAr:
-          "مقاولات بناء عظم، ترميم الملاحق والمباني، وتأهيل المنشآت التجارية تحت إشراف هندسي متكامل.",
+          "الشركة الرائدة في المقاولات العامة وترميم الفلل والقصور والمشاريع التجارية بالمنطقة الغربية، تنفيذ متكامل من الهيكل حتى التسليم.",
         descriptionEn:
-          "Structural shell works, annex renovation, and commercial building rehabilitation under full engineering supervision.",
-        address: "جدة - حي السلامة، طريق المدينة",
+          "Leading general contracting and renovation for villas, palaces, and commercial projects in the Western Region — full delivery from structure to handover.",
+        address: "جدة - حي الزهراء، شارع البترجي",
       },
       {
         slug: "binaa-gharb-contracting-jeddah",
