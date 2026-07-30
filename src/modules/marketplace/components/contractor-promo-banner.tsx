@@ -11,10 +11,7 @@ export function ContractorPromoBanner({ copy }: Props) {
     <EditorialFeaturedAd
       id="contractor-promo"
       titleId="contractor-featured-title"
-      variant="stone"
-      headlineBefore={copy.headlineBefore}
-      headlineEmphasis={copy.headlineEmphasis}
-      offerLine={copy.offerLine}
+      copy={copy}
       cta={{ href: "/proposals/new", label: copy.cta }}
       visual={<ProposalAdMockup />}
     />

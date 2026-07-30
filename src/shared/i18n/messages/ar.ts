@@ -50,13 +50,18 @@ export const ar = {
   contractorPromo: {
    headlineBefore: "اكتب عروضاً",
    headlineEmphasis: "كالمحترفين",
-   offerLine: "3 معلومات → PDF كامل بهوية شركتك. مجاناً · بدون بطاقة · جاهز في دقائق.",
+   offerBefore: "أول PDF جاهز مقابل",
+   offerStrike: "ساعات في Word",
+   offerHighlight: "3 معلومات في دقائق",
+   offerAfter: ".",
    cta: "ابدأ عرضاً مجاناً",
   },
   graphicsHousePromo: {
    headlineBefore: "ادخل إلى عالم",
    headlineEmphasis: "التصوير المعماري",
-   offerLine: "أفلام CGI · مجسمات ذكية · معارض مبيعات — عبر شريك رواق جرافيكس هاوس.",
+   offerBefore: "CGI · مجسمات · معارض —",
+   offerHighlight: "سجّل مشروعك عبر رواق",
+   offerAfter: ".",
    cta: "سجّل مشروعك",
   },
   visualization: {

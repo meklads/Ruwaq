@@ -7,48 +7,44 @@ type Cta = {
   external?: boolean;
 };
 
+export type FeaturedAdCopy = {
+  headlineBefore: string;
+  headlineEmphasis: string;
+  offerBefore?: string;
+  offerStrike?: string;
+  offerHighlight: string;
+  offerAfter?: string;
+  cta: string;
+};
+
 type Props = {
   id: string;
   titleId: string;
-  variant?: "greige" | "stone";
-  headlineBefore: string;
-  headlineEmphasis: string;
-  offerLine: string;
+  copy: FeaturedAdCopy;
   cta: Cta;
   visual: ReactNode;
-  partnerMark?: ReactNode;
 };
 
-export function EditorialFeaturedAd({
-  id,
-  titleId,
-  variant = "greige",
-  headlineBefore,
-  headlineEmphasis,
-  offerLine,
-  cta,
-  visual,
-  partnerMark,
-}: Props) {
-  const bandClass =
-    variant === "stone" ? "ruwaq-ad-band-stone" : "ruwaq-ad-band-greige";
-
-  const ctaClass = "ruwaq-ad-featured-cta";
-
+export function EditorialFeaturedAd({ id, titleId, copy, cta, visual }: Props) {
   return (
     <section
       id={id}
-      className={`ruwaq-ad-featured-banner ${bandClass} scroll-mt-28`}
+      className="ruwaq-ad-featured-banner scroll-mt-28"
       aria-labelledby={titleId}
     >
       <div className="ruwaq-ad-featured-banner__inner">
         <div className="ruwaq-ad-featured-banner__copy">
-          {partnerMark ? <div className="mb-4">{partnerMark}</div> : null}
           <h2 id={titleId} className="ruwaq-ad-featured-headline">
-            {headlineBefore}{" "}
-            <em className="ruwaq-ad-featured-headline-em">{headlineEmphasis}</em>
+            {copy.headlineBefore}{" "}
+            <em className="ruwaq-ad-featured-headline-em">{copy.headlineEmphasis}</em>
           </h2>
-          <p className="ruwaq-ad-featured-offer">{offerLine}</p>
+          <p className="ruwaq-ad-featured-offer">
+            {copy.offerBefore ? <span>{copy.offerBefore} </span> : null}
+            {copy.offerStrike ? <s className="ruwaq-ad-featured-offer-strike">{copy.offerStrike}</s> : null}
+            {copy.offerStrike ? " " : null}
+            <span className="ruwaq-ad-featured-offer-highlight">{copy.offerHighlight}</span>
+            {copy.offerAfter ? <span>{copy.offerAfter}</span> : null}
+          </p>
         </div>
 
         <div className="ruwaq-ad-featured-banner__visual">{visual}</div>
@@ -59,12 +55,12 @@ export function EditorialFeaturedAd({
               href={cta.href}
               target="_blank"
               rel="noopener noreferrer"
-              className={ctaClass}
+              className="ruwaq-ad-featured-cta"
             >
               {cta.label}
             </a>
           ) : (
-            <Link href={cta.href} className={ctaClass}>
+            <Link href={cta.href} className="ruwaq-ad-featured-cta">
               {cta.label}
             </Link>
           )}

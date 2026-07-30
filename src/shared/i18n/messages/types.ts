@@ -46,13 +46,19 @@ export type Messages = {
     contractorPromo: {
       headlineBefore: string;
       headlineEmphasis: string;
-      offerLine: string;
+      offerBefore?: string;
+      offerStrike?: string;
+      offerHighlight: string;
+      offerAfter?: string;
       cta: string;
     };
     graphicsHousePromo: {
       headlineBefore: string;
       headlineEmphasis: string;
-      offerLine: string;
+      offerBefore?: string;
+      offerStrike?: string;
+      offerHighlight: string;
+      offerAfter?: string;
       cta: string;
     };
     visualization: {
