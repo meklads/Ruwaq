@@ -15,45 +15,120 @@ const navy = "#0f2c59";
 const gold = "#c9a227";
 const muted = "#5c6470";
 
+const HEADER_H = 72;
+const FOOTER_H = 52;
+
 const styles = StyleSheet.create({
   page: {
     fontFamily: PDF_FONT_FAMILY,
     fontSize: 10,
-    paddingTop: 36,
-    paddingBottom: 48,
+    paddingTop: HEADER_H + 20,
+    paddingBottom: FOOTER_H + 16,
     paddingHorizontal: 40,
     color: "#1a1a1a",
     lineHeight: 1.45,
   },
-  headerRow: {
+  fixedHeader: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    height: HEADER_H,
+    backgroundColor: navy,
+    paddingHorizontal: 40,
+    paddingVertical: 10,
+    flexDirection: "row-reverse",
+    justifyContent: "space-between",
+    alignItems: "center",
+    borderBottomWidth: 3,
+    borderBottomColor: gold,
+  },
+  headerLogo: {
+    width: 48,
+    height: 48,
+    objectFit: "contain",
+    backgroundColor: "rgba(255,255,255,0.08)",
+    borderRadius: 4,
+  },
+  headerLogoPlaceholder: {
+    width: 48,
+    height: 48,
+    borderRadius: 4,
+    backgroundColor: "rgba(255,255,255,0.12)",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  headerLogoText: {
+    fontSize: 7,
+    color: "rgba(255,255,255,0.7)",
+    textAlign: "center",
+  },
+  headerTextCol: {
+    flex: 1,
+    paddingHorizontal: 12,
+    textAlign: "right",
+  },
+  headerCompany: {
+    fontSize: 11,
+    fontWeight: 700,
+    color: "#ffffff",
+  },
+  headerProject: {
+    fontSize: 9,
+    color: gold,
+    marginTop: 2,
+  },
+  headerMeta: {
+    fontSize: 7.5,
+    color: "rgba(255,255,255,0.75)",
+    marginTop: 3,
+    textAlign: "left",
+    maxWidth: 140,
+  },
+  fixedFooter: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: FOOTER_H,
+    paddingHorizontal: 40,
+    paddingTop: 8,
+    borderTopWidth: 1,
+    borderTopColor: "#e0ddd4",
+    backgroundColor: "#faf9f6",
     flexDirection: "row-reverse",
     justifyContent: "space-between",
     alignItems: "flex-start",
-    marginBottom: 20,
-    borderBottomWidth: 1,
-    borderBottomColor: "#e8e4dc",
-    paddingBottom: 14,
   },
-  headerMeta: {
+  footerLeft: {
     flex: 1,
     textAlign: "right",
+    paddingEnd: 8,
   },
-  companyName: {
-    fontSize: 16,
+  footerRight: {
+    textAlign: "left",
+    minWidth: 72,
+  },
+  footerCompanyLine: {
+    fontSize: 8,
     fontWeight: 700,
     color: navy,
-    marginBottom: 4,
   },
-  metaLine: {
-    fontSize: 9,
+  footerContact: {
+    fontSize: 7,
     color: muted,
-    textAlign: "right",
-    marginBottom: 2,
+    marginTop: 2,
   },
-  logo: {
-    width: 72,
-    height: 72,
-    objectFit: "contain",
+  footerDisclaimer: {
+    fontSize: 7,
+    color: muted,
+    marginTop: 3,
+    lineHeight: 1.35,
+  },
+  footerPage: {
+    fontSize: 8,
+    fontWeight: 700,
+    color: navy,
   },
   title: {
     fontSize: 14,
@@ -66,7 +141,13 @@ const styles = StyleSheet.create({
     fontSize: 10,
     color: muted,
     textAlign: "right",
-    marginBottom: 16,
+    marginBottom: 12,
+  },
+  metaLine: {
+    fontSize: 9,
+    color: muted,
+    textAlign: "right",
+    marginBottom: 2,
   },
   table: {
     marginTop: 8,
@@ -146,18 +227,6 @@ const styles = StyleSheet.create({
     color: "#333",
     lineHeight: 1.5,
   },
-  footer: {
-    position: "absolute",
-    bottom: 24,
-    left: 40,
-    right: 40,
-    fontSize: 8,
-    color: muted,
-    textAlign: "center",
-    borderTopWidth: 1,
-    borderTopColor: "#eee",
-    paddingTop: 8,
-  },
   estimateNote: {
     fontSize: 8,
     color: "#92400e",
@@ -170,8 +239,81 @@ type Props = {
   payload: QuotePdfPayload;
 };
 
+function PdfFixedHeader({
+  payload,
+}: {
+  payload: QuotePdfPayload;
+}) {
+  const { labels, data, logoSrc } = payload;
+  const company = data.companyName?.trim() || labels.logoPlaceholder;
+  const metaParts = [
+    data.proposalNumber ? `${labels.proposalNumber} ${data.proposalNumber}` : null,
+    `${labels.date} ${data.date}`,
+  ].filter(Boolean);
+
+  return (
+    <View fixed style={styles.fixedHeader}>
+      <View style={styles.headerTextCol}>
+        <Text style={styles.headerCompany}>{company}</Text>
+        <Text style={styles.headerProject}>{data.projectName}</Text>
+      </View>
+      {logoSrc ? (
+        <Image src={logoSrc} style={styles.headerLogo} />
+      ) : (
+        <View style={styles.headerLogoPlaceholder}>
+          <Text style={styles.headerLogoText}>{labels.logoPlaceholder}</Text>
+        </View>
+      )}
+      <View>
+        <Text style={styles.headerMeta}>{metaParts.join(" · ")}</Text>
+        {data.clientName ? (
+          <Text style={styles.headerMeta}>
+            {labels.preparedFor} {data.clientName}
+          </Text>
+        ) : null}
+      </View>
+    </View>
+  );
+}
+
+function PdfFixedFooter({ payload }: { payload: QuotePdfPayload }) {
+  const { labels, pdfLabels, data } = payload;
+  const contactParts = [
+    data.companyPhone,
+    data.companyEmail,
+    data.crNumber ? `${labels.crNumber} ${data.crNumber}` : null,
+    data.vatNumber ? `${labels.vatNumber} ${data.vatNumber}` : null,
+  ].filter(Boolean);
+
+  return (
+    <View fixed style={styles.fixedFooter}>
+      <View style={styles.footerLeft}>
+        <Text style={styles.footerCompanyLine}>{data.companyName ?? labels.logoPlaceholder}</Text>
+        {contactParts.length > 0 ? (
+          <Text style={styles.footerContact}>{contactParts.join(" · ")}</Text>
+        ) : null}
+        {data.address ? <Text style={styles.footerContact}>{data.address}</Text> : null}
+        <Text style={styles.footerDisclaimer}>{labels.footer}</Text>
+        {data.poweredByRuwaqFooter ? (
+          <Text style={[styles.footerContact, { marginTop: 4, color: muted }]}>
+            Powered by Ruwaq
+          </Text>
+        ) : null}
+      </View>
+      <View style={styles.footerRight}>
+        <Text
+          style={styles.footerPage}
+          render={({ pageNumber, totalPages }) =>
+            pdfLabels.pageOf(pageNumber, totalPages)
+          }
+        />
+      </View>
+    </View>
+  );
+}
+
 export function ProposalQuotePdfDocument({ payload }: Props) {
-  const { locale, labels, pdfLabels, data, lines, subtotal, vatRate, vatAmount, grandTotal, logoSrc } =
+  const { locale, labels, pdfLabels, data, lines, subtotal, vatRate, vatAmount, grandTotal } =
     payload;
   const money = (n: number) => formatPdfMoney(n, locale);
 
@@ -189,33 +331,8 @@ export function ProposalQuotePdfDocument({ payload }: Props) {
   return (
     <Document title={data.projectName} author={data.companyName ?? "Ruwaq"}>
       <Page size="A4" style={styles.page} wrap>
-        <View style={styles.headerRow}>
-          <View style={styles.headerMeta}>
-            <Text style={styles.companyName}>{data.companyName ?? labels.logoPlaceholder}</Text>
-            {data.crNumber ? (
-              <Text style={styles.metaLine}>
-                {labels.crNumber} {data.crNumber}
-              </Text>
-            ) : null}
-            {data.vatNumber ? (
-              <Text style={styles.metaLine}>
-                {labels.vatNumber} {data.vatNumber}
-              </Text>
-            ) : null}
-            {data.address ? <Text style={styles.metaLine}>{data.address}</Text> : null}
-            {data.companyPhone ? (
-              <Text style={styles.metaLine}>
-                {labels.phone} {data.companyPhone}
-              </Text>
-            ) : null}
-            {data.companyEmail ? (
-              <Text style={styles.metaLine}>
-                {labels.email} {data.companyEmail}
-              </Text>
-            ) : null}
-          </View>
-          {logoSrc ? <Image src={logoSrc} style={styles.logo} /> : null}
-        </View>
+        <PdfFixedHeader payload={payload} />
+        <PdfFixedFooter payload={payload} />
 
         <Text style={styles.title}>{data.projectName}</Text>
         {data.introduction ? <Text style={styles.intro}>{data.introduction}</Text> : null}
@@ -242,7 +359,7 @@ export function ProposalQuotePdfDocument({ payload }: Props) {
         ) : null}
 
         <View style={styles.table}>
-          <View style={styles.tableHeader}>
+          <View style={styles.tableHeader} wrap={false}>
             <Text style={styles.colDesc}>{pdfLabels.description}</Text>
             <Text style={styles.colQty}>{pdfLabels.qty}</Text>
             <Text style={styles.colUnit}>{pdfLabels.unitPrice}</Text>
@@ -252,6 +369,7 @@ export function ProposalQuotePdfDocument({ payload }: Props) {
             <View
               key={`${line.description}-${i}`}
               style={i % 2 === 1 ? [styles.tableRow, styles.tableRowAlt] : styles.tableRow}
+              wrap={false}
             >
               <Text style={styles.colDesc}>
                 {line.description}
@@ -264,7 +382,7 @@ export function ProposalQuotePdfDocument({ payload }: Props) {
           ))}
         </View>
 
-        <View style={styles.totalsBox}>
+        <View style={styles.totalsBox} wrap={false}>
           <View style={styles.totalRow}>
             <Text>{money(subtotal)}</Text>
             <Text>{pdfLabels.subtotal}</Text>
@@ -288,8 +406,6 @@ export function ProposalQuotePdfDocument({ payload }: Props) {
             <Text style={styles.clauseText}>{block.body}</Text>
           </View>
         ))}
-
-        <Text style={styles.footer}>{labels.footer}</Text>
       </Page>
     </Document>
   );

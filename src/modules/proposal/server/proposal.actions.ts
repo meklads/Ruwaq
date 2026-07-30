@@ -13,6 +13,9 @@ import {
 import type { CreateProposalInput } from "@/shared/types";
 import { getSession } from "@/modules/auth/server/session";
 import { ProposalAccessError } from "./proposal-auth";
+import { assertProposalGenerationAllowed } from "@/modules/billing/server/entitlements.service";
+import { isCompanyProfileReadyForGeneration } from "@/modules/company/lib/profile-completeness";
+import { db } from "@/shared/lib/db";
 
 function actionError(error: unknown, fallback: string) {
   let message = error instanceof Error ? error.message : fallback;
@@ -88,6 +91,19 @@ export async function createAndGenerateProposalAction(
   input: CreateProposalInput
 ) {
   try {
+    const session = await getSession();
+    const userId = session?.user?.id;
+    if (userId) {
+      const gate = await assertProposalGenerationAllowed(userId);
+      if (!gate.allowed && gate.code === "QUOTA_EXCEEDED") {
+        return {
+          success: false as const,
+          error: "وصلت للحد الشهري لباقتك.",
+          code: "QUOTA_EXCEEDED" as const,
+        };
+      }
+    }
+
     const result = await createProposalSvc(input);
     if (result.editKey) {
       const { setProposalEditCookie } = await import("./proposal-edit-access");
@@ -116,6 +132,32 @@ export async function generateWithAI(proposalId: string, editKey?: string) {
       }
     }
     await assertCanMutate(proposalId);
+
+    const session = await getSession();
+    const userId = session?.user?.id;
+    if (userId) {
+      const profile = await db.companyProfile.findUnique({
+        where: { userId },
+        select: { companyName: true, logoUrl: true, crNumber: true, about: true, tier: true, planId: true },
+      });
+      if (!isCompanyProfileReadyForGeneration(profile)) {
+        return {
+          success: false as const,
+          error: "أكمل بيانات شركتك وشعارها أولاً من ملف الشركة.",
+          code: "PROFILE_INCOMPLETE" as const,
+        };
+      }
+      const gate = await assertProposalGenerationAllowed(userId);
+      if (!gate.allowed && gate.code === "QUOTA_EXCEEDED") {
+        return {
+          success: false as const,
+          error: "وصلت للحد الشهري لباقتك.",
+          code: "QUOTA_EXCEEDED" as const,
+          entitlements: gate.entitlements,
+        };
+      }
+    }
+
     const { generateProposalContent } = await import("./proposal-ai.service");
     await generateProposalContent(proposalId);
     return { success: true as const, id: proposalId };

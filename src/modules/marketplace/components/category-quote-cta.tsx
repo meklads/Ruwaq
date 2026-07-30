@@ -29,7 +29,7 @@ export function CategoryQuoteCta({
       locale={locale}
       initialCity={citySlug}
       initialCategory={categorySlug}
-      className="btn-ruwaq-primary mt-8 inline-flex"
+      className="ruwaq-pro-btn-solid mt-8 inline-flex px-6 py-3"
     />
   );
 }

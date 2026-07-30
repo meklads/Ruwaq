@@ -1,3 +1,4 @@
+import type { Prisma } from "@prisma/client";
 import { db } from "@/shared/lib/db";
 import { CLAUSE_PACKS } from "@/shared/constants/clause-pack-seed";
 
@@ -44,7 +45,7 @@ async function runClausePackSeed(): Promise<void> {
             riskSide: c.riskSide,
             textAr: c.textAr,
             textEn: c.textEn,
-            placeholders: c.placeholders,
+            placeholders: c.placeholders as Prisma.InputJsonValue,
             sortOrder: c.sortOrder,
             isMandatory: c.isMandatory,
             alternativeGroup: c.alternativeGroup ?? null,

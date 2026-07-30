@@ -49,10 +49,39 @@ export type Messages = {
       subtitle: string;
       cta: string;
     };
+    howItWorks: {
+      title: string;
+      subtitle: string;
+      ownersTitle: string;
+      ownersSteps: readonly { title: string; body: string }[];
+      contractorsTitle: string;
+      contractorsSteps: readonly { title: string; body: string }[];
+      learnMore: string;
+    };
+    trustStandards: {
+      modalTitle: string;
+      intro: string;
+      levels: readonly { title: string; body: string }[];
+      assurance: string;
+      close: string;
+    };
+    socialProof: {
+      title: string;
+      subtitle: string;
+      items: readonly { quote: string; role: string; city: string }[];
+    };
+    proposalsPreview: {
+      title: string;
+      subtitle: string;
+      button: string;
+    };
+    businessTransparency: string;
+    footerTransparency: string;
     aboutPage: {
       eyebrow: string;
       title: string;
       intro: string;
+      businessNote: string;
       closingHint: string;
       sections: readonly { title: string; body: string }[];
     };
@@ -88,10 +117,85 @@ export type Messages = {
     };
     listing: {
       verified: string;
+      verifiedPro: string;
       featured: string;
+      featuredPro: string;
       whatsapp: string;
+      viewProfile: string;
       empty: string;
       requestCta: string;
+    };
+    proDirectory: {
+      eyebrow: string;
+      title: string;
+      subtitle: string;
+      allCategories: string;
+      applyCta: string;
+      applyHint: string;
+      applyHref: string;
+      directoryLabel: string;
+      featuredLink: string;
+      clientsSection: string;
+      providersSection: string;
+    };
+    join: {
+      eyebrow: string;
+      title: string;
+      subtitle: string;
+      submit: string;
+      submitting: string;
+      successTitle: string;
+      successBody: string;
+      errors: {
+        validation: string;
+        invalid_phone: string;
+        category_missing: string;
+        server: string;
+      };
+      fields: {
+        companyName: string;
+        contactName: string;
+        contactPhone: string;
+        contactEmail: string;
+        crNumber: string;
+        city: string;
+        category: string;
+        portfolioUrl: string;
+        message: string;
+        phonePlaceholder: string;
+      };
+    };
+    filters: {
+      searchPlaceholder: string;
+      featuredOnly: string;
+      sortLabel: string;
+      sortFeatured: string;
+      sortNewest: string;
+      sortName: string;
+      apply: string;
+    };
+    proShowcase: {
+      eyebrow: string;
+      title: string;
+      subtitle: string;
+      allCities: string;
+      filterCity: string;
+      empty: string;
+    };
+    listingDetail: {
+      galleryTitle: string;
+      aboutTitle: string;
+      contactTitle: string;
+      backToDirectory: string;
+    };
+    howItWorksPage: {
+      eyebrow: string;
+      intro: string;
+      ctaOwners: string;
+      ctaContractors: string;
+      ctaProposals: string;
+      trustTitle: string;
+      trustBody: string;
     };
     footerCta: {
       title: string;
@@ -691,6 +795,7 @@ export type Messages = {
       grandTotal: string;
       termsTitle: string;
       paymentTermsTitle: string;
+      pageOf: (page: number, total: number) => string;
     };
   };
   share: {

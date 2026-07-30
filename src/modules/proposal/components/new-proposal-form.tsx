@@ -1,11 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { createProposalAction } from "@/modules/proposal/server/proposal.actions";
 import type { CommercialMode, PaymentType, PropertyType } from "@/shared/types";
 import { useLocale, useT } from "@/shared/i18n/context";
-import { validateProposalFields } from "@/shared/i18n/locale";
+import {
+  validateLocaleText,
+  validateProposalFields,
+  type ProposalTextField,
+} from "@/shared/i18n/locale";
 import {
   OptionalDetailsFields,
   type OptionalDetailsValues,
@@ -28,7 +32,21 @@ const EMPTY_OPTIONAL: OptionalDetailsValues = {
   specifications: "",
 };
 
+const INITIAL_FORM = {
+  projectName: "",
+  clientName: "",
+  description: "",
+  budget: 0,
+  paymentType: "milestone_30_40_30" as PaymentType,
+  commercialMode: "fixed_price" as CommercialMode,
+  ...EMPTY_OPTIONAL,
+};
+
 const TOOL_SECTION_ID = "create-proposal";
+
+function stepForField(field: ProposalTextField): Step {
+  return field === "description" ? "details" : "project";
+}
 
 export function NewProposalForm({ variant = "embedded" }: Props) {
   const t = useT();
@@ -38,15 +56,17 @@ export function NewProposalForm({ variant = "embedded" }: Props) {
   const [error, setError] = useState<string | null>(null);
   const [progress, setProgress] = useState(0);
   const [optionalOpen, setOptionalOpen] = useState(false);
-  const [form, setForm] = useState({
-    projectName: "",
-    clientName: "",
-    description: "",
-    budget: 0,
-    paymentType: "milestone_30_40_30" as PaymentType,
-    commercialMode: "fixed_price" as CommercialMode,
-    ...EMPTY_OPTIONAL,
-  });
+  const [form, setForm] = useState(INITIAL_FORM);
+  const prevLocale = useRef(locale);
+
+  useEffect(() => {
+    if (prevLocale.current === locale) return;
+    prevLocale.current = locale;
+    setForm(INITIAL_FORM);
+    setStep("project");
+    setOptionalOpen(false);
+    setError(null);
+  }, [locale]);
 
   const forward = locale === "ar" ? "←" : "→";
   const backward = locale === "ar" ? "→" : "←";
@@ -59,12 +79,19 @@ export function NewProposalForm({ variant = "embedded" }: Props) {
     setError(null);
   };
 
+  const showLocaleError = (result: NonNullable<ReturnType<typeof validateProposalFields>>) => {
+    setStep(stepForField(result.field));
+    setError(t.form.errors[result.error]);
+  };
+
   const validateForm = (): boolean => {
     if (!form.projectName.trim() || !form.clientName.trim()) {
+      setStep("project");
       setError(t.form.errors.projectRequired);
       return false;
     }
     if (!form.description.trim()) {
+      setStep("details");
       setError(t.form.errors.descriptionRequired);
       return false;
     }
@@ -77,17 +104,54 @@ export function NewProposalForm({ variant = "embedded" }: Props) {
       locale
     );
     if (localeError) {
-      setError(t.form.errors[localeError]);
+      showLocaleError(localeError);
       return false;
     }
+
+    for (const [, value] of [
+      ["projectLocation", form.projectLocation],
+      ["durationHint", form.durationHint],
+      ["specifications", form.specifications],
+    ] as const) {
+      const optError = validateLocaleText(value, locale);
+      if (optError) {
+        setStep("details");
+        setOptionalOpen(true);
+        setError(t.form.errors[optError]);
+        return false;
+      }
+    }
+
     if (
       form.commercialMode === "fixed_price" &&
       (!form.budget || form.budget <= 0)
     ) {
+      setStep("details");
       setError(t.form.errors.budgetRequired);
       return false;
     }
     return true;
+  };
+
+  const continueToDetails = () => {
+    if (!form.projectName.trim() || !form.clientName.trim()) {
+      setError(t.form.errors.projectRequired);
+      return;
+    }
+    const localeError = validateProposalFields(
+      {
+        projectName: form.projectName,
+        clientName: form.clientName,
+        description: "",
+      },
+      locale
+    );
+    if (localeError) {
+      showLocaleError(localeError);
+      return;
+    }
+    setError(null);
+    setStep("details");
   };
 
   const handleGenerate = async () => {
@@ -231,7 +295,7 @@ export function NewProposalForm({ variant = "embedded" }: Props) {
             <div className="pt-2">
               <button
                 type="button"
-                onClick={() => setStep("details")}
+                onClick={continueToDetails}
                 disabled={!form.projectName.trim() || !form.clientName.trim()}
                 className="btn-ruwaq-primary disabled:opacity-50"
               >

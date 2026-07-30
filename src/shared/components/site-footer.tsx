@@ -12,6 +12,9 @@ export async function SiteFooter() {
 
   const productLinks = [
     { href: "/categories", label: t.nav.browseCategories },
+    { href: "/pro", label: t.marketplace.proDirectory.featuredLink },
+    { href: "/join", label: t.marketplace.proDirectory.applyCta },
+    { href: "/how-it-works", label: t.site.nav.howItWorks },
     { href: "/about", label: t.nav.aboutPlatform },
   ];
 
@@ -74,6 +77,9 @@ export async function SiteFooter() {
             <RuwaqLogo href="/" size="footer" />
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-ruwaq-ink-soft">
               {t.marketplace.footerTagline}
+            </p>
+            <p className="mt-4 max-w-md text-xs leading-relaxed text-ruwaq-ink-muted">
+              {t.marketplace.footerTransparency}
             </p>
             <p className="mt-4 text-xs text-ruwaq-ink-muted">{t.site.footer.address}</p>
             <p className="mt-4 flex flex-wrap items-center gap-x-2 gap-y-2 text-xs text-ruwaq-ink-muted">

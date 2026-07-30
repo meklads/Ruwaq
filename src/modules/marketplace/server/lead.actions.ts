@@ -25,11 +25,6 @@ import {
   parseCategorySlug,
   parseCitySlug,
 } from "@/modules/marketplace/lib/marketplace-slugs";
-import {
-  MARKETPLACE_LISTINGS_PAGE_SIZE,
-  marketplaceListingsSkip,
-} from "@/modules/marketplace/lib/listings-query";
-import type { MarketplaceCity, Prisma } from "@prisma/client";
 
 const categorySlugs = MARKETPLACE_CATEGORIES.map((c) => c.slug) as [
   MarketplaceCategorySlug,
@@ -92,6 +87,21 @@ async function persistAndRouteLead(
 
   const status = resolveLeadStatus(categorySlug);
   const assignedTo = status === "ASSIGNED_TO_TURRIVA" ? "TURRIVA" : null;
+  const baseRoutingNote = buildRoutingNote(categorySlug);
+
+  const proPartners =
+    status === "BROADCASTED_TO_PARTNERS"
+      ? await db.providerListing.findMany({
+          where: {
+            city: cityMeta.enum,
+            categoryId: category.id,
+            directoryTier: "PRO",
+            isVerified: true,
+          },
+          select: { titleAr: true },
+          take: 5,
+        })
+      : [];
 
   const lead = await db.marketplaceLead.create({
     data: {
@@ -104,7 +114,10 @@ async function persistAndRouteLead(
       status,
       assignedTo,
       locale: data.locale,
-      routingNote: buildRoutingNote(categorySlug),
+      routingNote:
+        proPartners.length > 0
+          ? `${baseRoutingNote} · PRO priority: ${proPartners.map((p) => p.titleAr).join(", ")}`
+          : baseRoutingNote,
     },
   });
 
@@ -176,66 +189,4 @@ export async function submitMarketplaceLeadAction(
   input: SubmitLeadInput
 ): Promise<SubmitLeadResult> {
   return submitLead(input);
-}
-
-export type ListingsQueryOptions = {
-  query?: string;
-  page?: number;
-  pageSize?: number;
-};
-
-export async function getListingsForCityCategory(
-  citySlug: MarketplaceCitySlug,
-  categorySlug: MarketplaceCategorySlug,
-  options: ListingsQueryOptions = {}
-) {
-  const city = getCityBySlug(citySlug);
-  const category = await db.serviceCategory.findUnique({
-    where: { slug: categorySlug },
-  });
-  if (!city || !category) {
-    return {
-      category: null,
-      listings: [],
-      total: 0,
-      page: 1,
-      pageSize: MARKETPLACE_LISTINGS_PAGE_SIZE,
-      totalPages: 0,
-    };
-  }
-
-  const pageSize = options.pageSize ?? MARKETPLACE_LISTINGS_PAGE_SIZE;
-  const page = options.page && options.page > 0 ? Math.floor(options.page) : 1;
-  const skip = marketplaceListingsSkip(page, pageSize);
-  const q = options.query?.trim();
-
-  const where: Prisma.ProviderListingWhereInput = {
-    city: city.enum as MarketplaceCity,
-    categoryId: category.id,
-    isVerified: true,
-    ...(q
-      ? {
-          OR: [
-            { titleAr: { contains: q, mode: "insensitive" } },
-            { descriptionAr: { contains: q, mode: "insensitive" } },
-            { titleEn: { contains: q, mode: "insensitive" } },
-            { descriptionEn: { contains: q, mode: "insensitive" } },
-          ],
-        }
-      : {}),
-  };
-
-  const [listings, total] = await Promise.all([
-    db.providerListing.findMany({
-      where,
-      orderBy: [{ isFeatured: "desc" }, { createdAt: "desc" }],
-      skip,
-      take: pageSize,
-    }),
-    db.providerListing.count({ where }),
-  ]);
-
-  const totalPages = total === 0 ? 0 : Math.ceil(total / pageSize);
-
-  return { category, listings, total, page, pageSize, totalPages };
 }

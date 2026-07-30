@@ -1,10 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   MARKETPLACE_CATEGORIES,
   MARKETPLACE_CITIES,
 } from "@/shared/constants/marketplace-taxonomy";
+import {
+  parseCategorySlug,
+  parseCitySlug,
+} from "@/modules/marketplace/lib/marketplace-slugs";
 import { submitLead } from "@/modules/marketplace/server/lead.actions";
 import { QuoteRequestSuccessModal } from "@/modules/marketplace/components/quote-request-success-modal";
 import type { Messages } from "@/shared/i18n/messages/types";
@@ -27,10 +31,13 @@ export function QuoteRequestForm({
   variant = "page",
   onSuccessClose,
 }: Props) {
+  const resolvedCity = parseCitySlug(initialCity);
+  const resolvedCategory = parseCategorySlug(initialCategory);
+
   const [clientName, setClientName] = useState("");
   const [clientPhone, setClientPhone] = useState("");
-  const [citySlug, setCitySlug] = useState(initialCity);
-  const [categorySlug, setCategorySlug] = useState(initialCategory);
+  const [citySlug, setCitySlug] = useState(resolvedCity);
+  const [categorySlug, setCategorySlug] = useState(resolvedCategory);
   const [projectDetails, setProjectDetails] = useState("");
   const [budgetRange, setBudgetRange] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -40,6 +47,11 @@ export function QuoteRequestForm({
     whatsAppUrl: string | null;
   } | null>(null);
 
+  useEffect(() => {
+    setCitySlug(parseCitySlug(initialCity));
+    setCategorySlug(parseCategorySlug(initialCategory));
+  }, [initialCity, initialCategory]);
+
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
@@ -47,8 +59,8 @@ export function QuoteRequestForm({
     const result = await submitLead({
       clientName,
       clientPhone,
-      citySlug: citySlug as "jeddah" | "makkah" | "madinah",
-      categorySlug: categorySlug as (typeof MARKETPLACE_CATEGORIES)[number]["slug"],
+      citySlug,
+      categorySlug,
       projectDetails,
       budgetRange: budgetRange || undefined,
       locale,
@@ -122,7 +134,7 @@ export function QuoteRequestForm({
           <select
             className="ruwaq-field"
             value={citySlug}
-            onChange={(e) => setCitySlug(e.target.value)}
+            onChange={(e) => setCitySlug(parseCitySlug(e.target.value))}
           >
             {MARKETPLACE_CITIES.map((c) => (
               <option key={c.slug} value={c.slug}>
@@ -136,7 +148,7 @@ export function QuoteRequestForm({
           <select
             className="ruwaq-field"
             value={categorySlug}
-            onChange={(e) => setCategorySlug(e.target.value)}
+            onChange={(e) => setCategorySlug(parseCategorySlug(e.target.value))}
           >
             {MARKETPLACE_CATEGORIES.map((c) => (
               <option key={c.slug} value={c.slug}>

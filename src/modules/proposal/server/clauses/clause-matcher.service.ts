@@ -38,6 +38,7 @@ import {
 } from "./clause.types";
 import { TrustLayerValidationError } from "@/shared/types/trust-layer.types";
 import { ensureClausePacksSeeded } from "./clause-pack-seed.service";
+import { getCompanyEntitlements } from "@/modules/billing/server/entitlements.service";
 
 function proposalCommercialMode(raw: string | null | undefined): CommercialMode {
   return raw === "estimate_only" ? "estimate_only" : "fixed_price";
@@ -269,7 +270,15 @@ export async function matchClausesForProposal(
       specifications: proposal.specifications,
     });
 
-  const packSlug = packSlugForArchetype(archetype);
+  let packSlug = packSlugForArchetype(archetype);
+
+  if (proposal.userId) {
+    const entitlements = await getCompanyEntitlements(proposal.userId);
+    if (entitlements && !entitlements.fullClausePacks) {
+      packSlug = "fit_out_v1";
+    }
+  }
+
   await ensureClausePacksSeeded();
   const pack = await loadClausePackBySlug(packSlug);
 

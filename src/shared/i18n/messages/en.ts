@@ -28,7 +28,7 @@ export const en: Messages = {
    subtitle:
     "Verified contractors, HVAC, fit-out, and elevators — or request quotes within 24 hours.",
    trustLine: "7 sectors · 3 cities · Free quote requests",
-   ctaPrimary: "Get a quote",
+   ctaPrimary: "Get verified quotes",
    ctaSecondary: "Browse verified companies",
    ctaContractor: "Contractor proposal tool",
   },
@@ -54,13 +54,106 @@ export const en: Messages = {
    title: "Run a contracting or engineering company?",
    subtitle:
     "Create professional engineering quotes for your clients with AI in about two minutes — free to start.",
-   cta: "Try the proposal tool",
+   cta: "Create your free quote now",
   },
+  howItWorks: {
+   title: "How Ruwaq works",
+   subtitle: "A clear path for owners and contractors — from request to direct contact.",
+   ownersTitle: "For property owners",
+   ownersSteps: [
+    {
+     title: "Pick sector and city",
+     body: "Jeddah, Makkah, or Madinah — choose your trade (fit-out, HVAC, elevators, and more).",
+    },
+    {
+     title: "Describe your project",
+     body: "Request a quote 100% free — no hidden fees for the client.",
+    },
+    {
+     title: "Receive verified offers",
+     body: "Verified companies contact you directly on WhatsApp — full transparency.",
+    },
+   ],
+   contractorsTitle: "For contractors",
+   contractorsSteps: [
+    {
+     title: "Sign up and verify CR",
+     body: "Upload your commercial registration and trade license to join the directory.",
+    },
+    {
+     title: "Build AI PDF quotes",
+     body: "BOQ table, 15% VAT, terms, and your branding — in about two minutes.",
+    },
+    {
+     title: "Receive project leads",
+     body: "Matching requests land in your dashboard — unlock client contact when ready.",
+    },
+   ],
+   learnMore: "Read full guide",
+  },
+  trustStandards: {
+   modalTitle: "Ruwaq “Verified company” standards",
+   intro:
+    "The verified badge is not empty marketing — we apply a three-step validation before listing any provider.",
+   levels: [
+    {
+     title: "Level 1: Commercial registration",
+     body: "Active Saudi CR and a verified contact number.",
+    },
+    {
+     title: "Level 2: Professional accreditation",
+     body: "SCA membership or classification, or a valid municipal license.",
+    },
+    {
+     title: "Level 3: Ruwaq field verification",
+     body: "Portfolio review and client ratings on the platform (minimum 4.5/5).",
+    },
+   ],
+   assurance:
+    "Ruwaq assurance: listed companies are reviewed periodically. Serious complaints trigger immediate badge removal.",
+   close: "Got it",
+  },
+  socialProof: {
+   title: "Stories from the market",
+   subtitle: "Real-world examples from owners and contractors in the Western Region.",
+   items: [
+    {
+     quote:
+      "I needed hotel fit-out in Makkah — three structured quotes within two days, all via WhatsApp.",
+     role: "Hotel operations manager",
+     city: "Makkah",
+    },
+    {
+     quote:
+      "The proposal tool saved hours — branded PDF with VAT ready for my client.",
+     role: "Fit-out contractor",
+     city: "Jeddah",
+    },
+    {
+     quote:
+      "Knowing what “verified” means gave me confidence before reaching out — CR was checked.",
+     role: "Villa owner",
+     city: "Madina",
+    },
+   ],
+  },
+  proposalsPreview: {
+   title: "Sample proposal PDF preview",
+   subtitle:
+    "See a professional quote: itemized BOQ, 15% VAT, terms, and company branding — before you create yours.",
+   button: "Preview sample proposal PDF",
+  },
+  businessTransparency:
+   "Quote requests are 100% free for owners. We sustain via contractor subscriptions and lead unlock fees in select sectors — never by charging the end client.",
+  footerTransparency:
+   "Quote requests are free for owners. We work transparently with verified partners to deliver quality execution.",
   aboutPage: {
    eyebrow: "Ruwaq · Western Region",
-   title: "About the platform",
+   title: "About Ruwaq",
    intro:
     "Ruwaq is an engineering and property directory for Western Region cities — seven verified sectors and matching in Jeddah, Makkah, and Madinah.",
+   businessNote:
+    "Quote requests are 100% free for owners. We work transparently with verified companies and contractors to deliver quality execution.",
    closingHint: "To request a quote, use the button in the site header — or browse sectors below.",
    sections: [
     {
@@ -68,12 +161,20 @@ export const en: Messages = {
      body: "Villa and hotel owners and project managers looking for trusted contractors without random outreach.",
     },
     {
-     title: "How providers are listed",
-     body: "Lists by city and sector. Major fit-out and contracting requests are coordinated with Turriva.",
+     title: "What does “verified” mean?",
+     body: "Triple validation: active CR, professional accreditation (SCA or municipal), and Ruwaq portfolio review. Tap the verified badge on any listing for full criteria.",
     },
     {
-     title: "Is Ruwaq a proposal SaaS?",
-     body: "Yes — in a separate portal (/proposals). The public site is client-first; AI proposals are for contractors only.",
+     title: "How does Ruwaq make money?",
+     body: "Client requests are free. Revenue from: Turriva coordination on fit-out/contracting, Ruwaq Pro for contractors (SAR 199/mo), and nominal lead unlock fees in sectors like HVAC and elevators.",
+    },
+    {
+     title: "How we build trust",
+     body: "Transparent pricing, direct WhatsApp contact, and Ruwaq assurance: periodic reviews and immediate badge removal on serious complaints.",
+    },
+    {
+     title: "Proposal tool for contractors",
+     body: "Separate portal at /proposals — AI PDF quotes, deal tracking, and sector-matched leads.",
     },
    ],
   },
@@ -109,10 +210,90 @@ export const en: Messages = {
   },
   listing: {
    verified: "Verified",
+   verifiedPro: "Verified",
    featured: "Featured",
+   featuredPro: "Featured • PRO",
    whatsapp: "WhatsApp",
+   viewProfile: "Profile",
    empty: "No verified providers yet. Request a quote and we will match you.",
    requestCta: "Request a quote for this category",
+  },
+  proDirectory: {
+   eyebrow: "RUWAQ PRO · Western Region",
+   title: "Ruwaq PRO Directory",
+   subtitle:
+    "A trusted registry for professionals — fit-out, contracting, HVAC, and elevators across Jeddah, Makkah, and Madinah.",
+   allCategories: "All sectors",
+   applyCta: "Trade professional? Apply to the directory",
+   applyHint: "We review commercial registration and licenses before listing any company.",
+   applyHref: "/join",
+   directoryLabel: "RUWAQ PRO DIRECTORY",
+   featuredLink: "Featured PRO",
+   clientsSection: "For property owners",
+   providersSection: "For contractors & companies",
+  },
+  join: {
+   eyebrow: "RUWAQ PRO · Directory application",
+   title: "Apply to the verified directory",
+   subtitle:
+    "Submit your company details — we review commercial registration, licenses, and portfolio before listing.",
+   submit: "Submit application",
+   submitting: "Submitting…",
+   successTitle: "Application received",
+   successBody:
+    "Our team will review your commercial registration and contact you within 3–5 business days.",
+   errors: {
+    validation: "Please fill in all required fields correctly.",
+    invalid_phone: "Enter a valid Saudi mobile number (05xxxxxxxx or +9665xxxxxxxx).",
+    category_missing: "This sector is unavailable. Try again later.",
+    server: "Something went wrong. Please try again.",
+   },
+   fields: {
+    companyName: "Company name",
+    contactName: "Contact person",
+    contactPhone: "Mobile number",
+    contactEmail: "Email (optional)",
+    crNumber: "Commercial registration (optional)",
+    city: "Primary city",
+    category: "Trade / sector",
+    portfolioUrl: "Portfolio or website (optional)",
+    message: "Tell us about your projects (optional)",
+    phonePlaceholder: "+966 5xxxxxxxx",
+   },
+  },
+  filters: {
+   searchPlaceholder: "Search companies…",
+   featuredOnly: "Featured PRO only",
+   sortLabel: "Sort by",
+   sortFeatured: "Featured first",
+   sortNewest: "Newest",
+   sortName: "Name A–Z",
+   apply: "Search",
+  },
+  proShowcase: {
+   eyebrow: "RUWAQ PRO · Showcase",
+   title: "Featured professionals",
+   subtitle: "Editorial picks from our verified directory — fit-out, contracting, HVAC, and more.",
+   allCities: "All cities",
+   filterCity: "Filter by city",
+   empty: "No featured listings yet. Check back soon or apply to join the directory.",
+  },
+  listingDetail: {
+   galleryTitle: "Project gallery",
+   aboutTitle: "About",
+   contactTitle: "Contact",
+   backToDirectory: "← Back to directory",
+  },
+  howItWorksPage: {
+   eyebrow: "Guide",
+   intro:
+    "Ruwaq connects property owners with verified contractors across the Western Region — transparent, direct, and free for clients.",
+   ctaOwners: "Request a free quote",
+   ctaContractors: "Apply to the directory",
+   ctaProposals: "Contractor proposal tool",
+   trustTitle: "What “verified” means",
+   trustBody:
+    "Active CR, professional accreditation, and Ruwaq portfolio review — click the badge on any listing for full standards.",
   },
   footerCta: {
    title: "Explore approved sectors",
@@ -1214,6 +1395,7 @@ export const en: Messages = {
    grandTotal: "Grand total (incl. VAT)",
    termsTitle: "Terms & conditions",
    paymentTermsTitle: "Payment & acceptance",
+   pageOf: (page: number, total: number) => `Page ${page} of ${total}`,
   },
  },
  share: {

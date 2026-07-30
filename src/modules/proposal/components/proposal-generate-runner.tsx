@@ -3,6 +3,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useT } from "@/shared/i18n/context";
+import { TierUpgradeModal } from "@/modules/billing/components/tier-upgrade-modal";
+import type { CompanyEntitlements } from "@/modules/billing/server/entitlements.service";
 
 type Props = {
   proposalId: string;
@@ -34,12 +36,16 @@ export function ProposalGenerateRunner({ proposalId, editKey }: Props) {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
   const [gate, setGate] = useState<GateCode | null>(null);
+  const [quotaEntitlements, setQuotaEntitlements] = useState<CompanyEntitlements | null>(
+    null
+  );
   const [progress, setProgress] = useState(15);
   const started = useRef(false);
 
   const runGenerate = useCallback(async () => {
     setError(null);
     setGate(null);
+    setQuotaEntitlements(null);
     setProgress(25);
 
     const timer = window.setInterval(() => {
@@ -58,6 +64,7 @@ export function ProposalGenerateRunner({ proposalId, editKey }: Props) {
         success?: boolean;
         error?: string;
         code?: GateCode;
+        entitlements?: CompanyEntitlements;
       };
 
       if (!res.ok || !data.success) {
@@ -67,6 +74,9 @@ export function ProposalGenerateRunner({ proposalId, editKey }: Props) {
           data.code === "QUOTA_EXCEEDED"
         ) {
           setGate(data.code);
+          if (data.code === "QUOTA_EXCEEDED" && data.entitlements) {
+            setQuotaEntitlements(data.entitlements);
+          }
           setProgress(0);
           return;
         }
@@ -94,6 +104,22 @@ export function ProposalGenerateRunner({ proposalId, editKey }: Props) {
     void runGenerate();
   }, [runGenerate]);
 
+  if (gate === "QUOTA_EXCEEDED") {
+    return (
+      <>
+        <TierUpgradeModal
+          open
+          onClose={() => setGate(null)}
+          entitlements={quotaEntitlements}
+          upgradeHref="/pricing"
+        />
+        <div className="app-content-area max-w-xl py-16 text-center">
+          <p className="text-sm text-neutral-500">{t.gates.quotaExceeded}</p>
+        </div>
+      </>
+    );
+  }
+
   if (gate) {
     const gateContent: Record<
       GateCode,
@@ -109,7 +135,7 @@ export function ProposalGenerateRunner({ proposalId, editKey }: Props) {
       PROFILE_INCOMPLETE: {
         message: t.gates.profileIncomplete,
         ctaLabel: t.gates.profileIncompleteCta,
-        href: "/settings/company",
+        href: "/workspace/settings/company",
       },
       QUOTA_EXCEEDED: {
         message: t.gates.quotaExceeded,
@@ -120,9 +146,9 @@ export function ProposalGenerateRunner({ proposalId, editKey }: Props) {
     const content = gateContent[gate];
     return (
       <div className="app-content-area max-w-xl">
-        <div className="ruwaq-form-card">
-          <p className="text-sm leading-relaxed text-ruwaq-ink">{content.message}</p>
-          <a href={content.href} className="btn-ruwaq-primary mt-4 inline-block">
+        <div className="ruwaq-pro-join-form border-neutral-200">
+          <p className="text-sm leading-relaxed text-neutral-700">{content.message}</p>
+          <a href={content.href} className="ruwaq-pro-btn-solid mt-6 inline-block px-6 py-3">
             {content.ctaLabel}
           </a>
         </div>
@@ -133,12 +159,12 @@ export function ProposalGenerateRunner({ proposalId, editKey }: Props) {
   if (error) {
     return (
       <div className="app-content-area max-w-xl">
-        <div className="ruwaq-form-card">
-          <p className="text-sm leading-relaxed text-red-600">{error}</p>
+        <div className="ruwaq-pro-join-form border-neutral-200">
+          <p className="text-sm leading-relaxed text-red-700">{error}</p>
           <button
             type="button"
             onClick={() => void runGenerate()}
-            className="btn-ruwaq-primary mt-4"
+            className="ruwaq-pro-btn-solid mt-4 px-6 py-2"
           >
             {t.errors.retry}
           </button>
@@ -149,16 +175,16 @@ export function ProposalGenerateRunner({ proposalId, editKey }: Props) {
 
   return (
     <div className="app-content-area flex flex-col items-center justify-center py-16">
-      <div className="h-2 w-full max-w-md overflow-hidden rounded-full bg-ruwaq-cream">
+      <div className="h-0.5 w-full max-w-md overflow-hidden bg-neutral-200">
         <div
-          className="h-full rounded-full bg-ruwaq-gold transition-all duration-500"
+          className="h-full bg-neutral-950 transition-all duration-500"
           style={{ width: `${progress}%` }}
         />
       </div>
-      <p className="mt-4 text-sm text-ruwaq-navy-soft">
+      <p className="mt-4 text-sm text-neutral-600">
         {progress < 50 ? t.form.generatingAnalyze : t.form.generatingWrite}
       </p>
-      <p className="mt-2 text-xs text-ruwaq-navy-soft/70">
+      <p className="mt-2 text-[10px] uppercase tracking-widest text-neutral-400">
         {t.form.generatingWaitHint}
       </p>
     </div>

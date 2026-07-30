@@ -64,6 +64,7 @@ export function QuoteRequestModal({
             ✕
           </button>
           <QuoteRequestForm
+            key={`${initialCity ?? "jeddah"}-${initialCategory ?? "fit-out"}`}
             copy={copy}
             locale={locale}
             initialCity={initialCity}

@@ -6,9 +6,10 @@ import {
 import { generateProposalContent } from "@/modules/proposal/server/proposal-ai.service";
 import { getSession } from "@/modules/auth/server/session";
 import { db } from "@/shared/lib/db";
-import { isBillingEnabled } from "@/shared/lib/env";
 import { isCompanyProfileReadyForGeneration } from "@/modules/company/lib/profile-completeness";
-import { planAllowsAnotherProposal } from "@/modules/billing/lib/plans";
+import {
+  assertProposalGenerationAllowed,
+} from "@/modules/billing/server/entitlements.service";
 import {
   guestHasFreeGenerationLeft,
   recordGuestGeneration,
@@ -61,7 +62,7 @@ export async function POST(
       // proposal before we spend AI credits on it.
       const profile = await db.companyProfile.findUnique({
         where: { userId },
-        select: { companyName: true, logoUrl: true, crNumber: true, about: true, planId: true },
+        select: { companyName: true, logoUrl: true, crNumber: true, about: true, tier: true, planId: true },
       });
 
       if (!isCompanyProfileReadyForGeneration(profile)) {
@@ -74,29 +75,25 @@ export async function POST(
         );
       }
 
-      if (isBillingEnabled()) {
-        const startOfMonth = new Date();
-        startOfMonth.setDate(1);
-        startOfMonth.setHours(0, 0, 0, 0);
-
-        const usedThisMonth = await db.usageEvent.count({
-          where: {
-            type: "proposal_generated",
-            userId,
-            createdAt: { gte: startOfMonth },
+      const gate = await assertProposalGenerationAllowed(userId);
+      if (!gate.allowed && gate.code === "QUOTA_EXCEEDED") {
+        logUsageEvent("quota_blocked", {
+          userId,
+          proposalId: params.id,
+          metadata: {
+            tier: gate.entitlements.tier,
+            usedThisMonth: gate.entitlements.usedThisMonth,
+            limit: gate.entitlements.monthlyLimit,
           },
         });
-
-        if (!planAllowsAnotherProposal(profile?.planId, usedThisMonth)) {
-          logUsageEvent("quota_blocked", { userId, proposalId: params.id, metadata: { planId: profile?.planId ?? "free", usedThisMonth } });
-          return NextResponse.json(
-            {
-              error: "وصلت للحد الشهري لباقتك. راجع صفحة الباقات للترقية.",
-              code: "QUOTA_EXCEEDED",
-            },
-            { status: 402 }
-          );
-        }
+        return NextResponse.json(
+          {
+            error: "وصلت للحد الشهري لباقتك. رقِّ حسابك لفتح المزيد من العروض.",
+            code: "QUOTA_EXCEEDED",
+            entitlements: gate.entitlements,
+          },
+          { status: 402 }
+        );
       }
     }
 

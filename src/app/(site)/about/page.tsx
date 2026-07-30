@@ -13,6 +13,10 @@ export default async function AboutPage() {
       <h1 className="ruwaq-app-title mt-3">{content.title}</h1>
       <p className="mt-6 text-lg leading-relaxed text-ruwaq-ink-soft">{content.intro}</p>
 
+      <p className="mt-8 rounded-xl border border-ruwaq-gold/25 bg-ruwaq-linen/50 p-5 text-sm leading-relaxed text-ruwaq-ink-soft">
+        {content.businessNote}
+      </p>
+
       <div className="mt-12 space-y-10">
         {content.sections.map((section) => (
           <section key={section.title}>
@@ -27,7 +31,10 @@ export default async function AboutPage() {
         <Link href="/categories" className="btn-ruwaq-primary px-8 py-3.5">
           {t.nav.browseCategories}
         </Link>
-        <Link href="/proposals" className="btn-ruwaq-secondary px-8 py-3.5">
+        <Link href="/how-it-works" className="btn-ruwaq-secondary px-8 py-3.5">
+          {t.site.nav.howItWorks}
+        </Link>
+        <Link href="/proposals" className="btn-ruwaq-gold-link px-8 py-3.5">
           {t.nav.contractorHub}
         </Link>
       </div>

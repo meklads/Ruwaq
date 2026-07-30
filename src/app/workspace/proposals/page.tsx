@@ -8,6 +8,7 @@ import { getMessages } from "@/shared/i18n";
 import { getLocale } from "@/shared/i18n/server";
 import { formatDate } from "@/shared/lib/format";
 import { ProposalListActions } from "@/modules/proposal/components/proposal-list-actions";
+import { ProposalsSamplePreviewBanner } from "@/modules/proposal/components/proposals-sample-preview-banner";
 import { AppPageHero } from "@/shared/components/app-page-hero";
 
 export const dynamic = "force-dynamic";
@@ -68,8 +69,14 @@ export default async function ProposalsListPage() {
       </AppPageHero>
 
       <div className="app-content-area max-w-3xl">
+        <ProposalsSamplePreviewBanner
+          copy={t.marketplace.proposalsPreview}
+          closeLabel={t.nav.closeModal}
+          locale={locale}
+        />
+
         {proposals.length === 0 ? (
-          <div className="ruwaq-form-card border-dashed text-center">
+          <div className="ruwaq-form-card mt-8 border-dashed text-center">
             <p className="text-ruwaq-ink-muted">{t.list.empty}</p>
             <Link
               href="/proposals/new"
@@ -79,7 +86,7 @@ export default async function ProposalsListPage() {
             </Link>
           </div>
         ) : (
-          <div className="space-y-10">
+          <div className="mt-8 space-y-10">
             {PROPOSAL_LIST_GROUP_ORDER.map((group) => {
               const items = grouped[group];
               return (

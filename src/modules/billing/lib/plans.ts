@@ -1,12 +1,13 @@
 /**
- * Monthly proposal-count plans — matches PRD_Saudi_Proposal_OS.md §9
- * ("Pricing Strategy"). Enforcement is gated by `isBillingEnabled()`
- * (env BILLING_ENABLED): while the free-trial launch month is running,
- * nothing here blocks anyone — it just sits ready. The moment billing is
- * flipped on, these limits apply automatically, no code change needed.
- *
- * `null` monthlyProposalLimit = unlimited.
+ * Monthly proposal-count plans — legacy `planId` on CompanyProfile.
+ * Primary tier model: see `tiers.ts` (STARTER | VERIFIED | PRO).
  */
+
+import {
+  tierFromPlanId,
+  tierAllowsAnotherProposal as tierAllows,
+  type RuwaqTier,
+} from "@/modules/billing/lib/tiers";
 
 export type PlanId = "free" | "starter" | "professional" | "business";
 
@@ -106,7 +107,6 @@ export function planAllowsAnotherProposal(
   planId: string | null | undefined,
   usedThisMonth: number
 ): boolean {
-  const plan = getPlan(planId);
-  if (plan.monthlyProposalLimit === null) return true;
-  return usedThisMonth < plan.monthlyProposalLimit;
+  const tier: RuwaqTier = tierFromPlanId(planId);
+  return tierAllows(tier, usedThisMonth);
 }

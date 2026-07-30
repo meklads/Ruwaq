@@ -46,6 +46,8 @@ export type ProposalExportData = {
   /** Hard watermark — client name + issue date on every page. */
   watermarkClientName?: string;
   watermarkDate?: string;
+  /** Starter tier footer — "Powered by Ruwaq" on PDF exports. */
+  poweredByRuwaqFooter?: boolean;
 };
 
 export type ProposalExportBoqLine = {

@@ -70,6 +70,12 @@ model VerificationToken {
 }
 
 /// Company branding profile — one per user
+enum RuwaqTier {
+  STARTER
+  VERIFIED
+  PRO
+}
+
 model CompanyProfile {
   id          String @id @default(cuid())
   userId      String @unique
@@ -101,6 +107,10 @@ model CompanyProfile {
   /// BILLING_ENABLED env switch is on.
   planId          String    @default("free")
   planActivatedAt DateTime?
+
+  /// Subscription tier — proposal limits, PDF branding, directory badges.
+  tier            RuwaqTier @default(STARTER)
+  tierActivatedAt DateTime?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
@@ -525,6 +535,13 @@ enum MarketplaceLeadStatus {
   CLOSED
 }
 
+enum DirectoryApplicationStatus {
+  PENDING
+  REVIEWING
+  APPROVED
+  REJECTED
+}
+
 model ServiceCategory {
   id            String   @id @default(cuid())
   slug          String   @unique
@@ -535,6 +552,7 @@ model ServiceCategory {
   subcategories Json?
   listings      ProviderListing[]
   leads         MarketplaceLead[]
+  directoryApplications DirectoryApplication[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -557,12 +575,16 @@ model ProviderListing {
   address       String?
   isVerified    Boolean         @default(false)
   isFeatured    Boolean         @default(false)
+  /// Mirrors owner subscription tier for directory badges & sort (0=PRO … 2=STARTER).
+  directoryTier RuwaqTier       @default(STARTER)
+  directorySortRank Int         @default(2)
   images        Json            @default("[]")
   createdAt     DateTime        @default(now())
   updatedAt     DateTime        @updatedAt
 
   @@index([city, categoryId, isVerified])
   @@index([categoryId, isFeatured])
+  @@index([city, categoryId, directorySortRank])
 }
 
 model MarketplaceLead {
@@ -583,4 +605,25 @@ model MarketplaceLead {
 
   @@index([status, createdAt])
   @@index([city, categoryId])
+}
+
+model DirectoryApplication {
+  id           String                     @id @default(cuid())
+  companyName  String
+  contactName  String
+  contactPhone String
+  contactEmail String?
+  crNumber     String?
+  city         MarketplaceCity
+  categoryId   String
+  category     ServiceCategory            @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  portfolioUrl String?
+  message      String?                    @db.Text
+  status       DirectoryApplicationStatus @default(PENDING)
+  locale       String                     @default("ar")
+  createdAt    DateTime                   @default(now())
+  updatedAt    DateTime                   @updatedAt
+
+  @@index([status, createdAt])
+  @@index([categoryId, city])
 }

@@ -18,6 +18,7 @@ import {
   type User,
 } from "@prisma/client";
 import { CLAUSE_PACKS, PLACEHOLDER_DEFAULTS } from "../src/shared/constants/clause-pack-seed";
+import { directoryFlagsForTier } from "../src/modules/billing/lib/tiers";
 import { MARKETPLACE_LISTING_SEEDS } from "./data/marketplace-listings.seed";
 
 const prisma = new PrismaClient();
@@ -161,6 +162,12 @@ function toProviderListingCreateInput(
   categoryId: string,
   ownerUserId: string
 ): Prisma.ProviderListingCreateInput {
+  const tierFlags = row.isFeatured
+    ? directoryFlagsForTier("PRO")
+    : row.isVerified
+      ? directoryFlagsForTier("VERIFIED")
+      : directoryFlagsForTier("STARTER");
+
   return {
     slug: row.slug,
     titleAr: row.titleAr,
@@ -173,8 +180,10 @@ function toProviderListingCreateInput(
     phone: row.phone,
     whatsapp: row.whatsapp,
     address: row.address,
-    isVerified: row.isVerified,
-    isFeatured: row.isFeatured,
+    isVerified: tierFlags.isVerified,
+    isFeatured: tierFlags.isFeatured,
+    directoryTier: tierFlags.directoryTier,
+    directorySortRank: tierFlags.directorySortRank,
     images: row.images as Prisma.InputJsonValue,
   };
 }
@@ -211,6 +220,12 @@ async function seedMarketplaceListings(
       select: { id: true },
     });
 
+    const tierFlags = row.isFeatured
+      ? directoryFlagsForTier("PRO")
+      : row.isVerified
+        ? directoryFlagsForTier("VERIFIED")
+        : directoryFlagsForTier("STARTER");
+
     const data = {
       titleAr: row.titleAr,
       titleEn: row.titleEn,
@@ -222,8 +237,10 @@ async function seedMarketplaceListings(
       phone: row.phone,
       whatsapp: row.whatsapp,
       address: row.address,
-      isVerified: row.isVerified,
-      isFeatured: row.isFeatured,
+      isVerified: tierFlags.isVerified,
+      isFeatured: tierFlags.isFeatured,
+      directoryTier: tierFlags.directoryTier,
+      directorySortRank: tierFlags.directorySortRank,
       images: row.images as Prisma.InputJsonValue,
     };
 

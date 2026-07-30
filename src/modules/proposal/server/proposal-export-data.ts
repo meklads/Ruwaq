@@ -6,6 +6,10 @@ import { getMessages } from "@/shared/i18n";
 import { isBillingEnabled } from "@/shared/lib/env";
 import { resolveEntitledExportTemplateId } from "@/modules/company/lib/export-template-ids";
 import {
+  resolveCompanyTier,
+  getTierConfig,
+} from "@/modules/billing/lib/tiers";
+import {
   asObjectList,
   asStringList,
   buildProposalExportHtml,
@@ -21,8 +25,6 @@ export async function loadProposalExportContext(
   proposalId: string,
   options: BuildProposalExportOptions = {}
 ) {
-  const watermarked = options.watermarked !== false;
-
   const proposal = await db.proposal.findUnique({
     where: { id: proposalId },
     include: {
@@ -42,6 +44,11 @@ export async function loadProposalExportContext(
         where: { userId: proposal.userId },
       })
     : null;
+
+  const tier = company ? resolveCompanyTier(company) : "STARTER";
+  const tierConfig = getTierConfig(tier);
+  const applyTierWatermark = tierConfig.pdfWatermark && options.watermarked !== false;
+  const applyClientWatermark = applyTierWatermark && options.watermarked !== false;
 
   const locale: Locale = proposal.locale === "en" ? "en" : "ar";
   const messages = getMessages(locale);
@@ -133,11 +140,12 @@ export async function loadProposalExportContext(
     clausePackName,
     clausePackVersion: proposal.clausePackVersion,
     estimateVariancePercent: proposal.estimateVariancePercent,
-    watermarkClientName: watermarked ? proposal.clientName : undefined,
-    watermarkDate: watermarked ? issueDate : undefined,
+    watermarkClientName: applyClientWatermark ? proposal.clientName : undefined,
+    watermarkDate: applyClientWatermark ? issueDate : undefined,
+    poweredByRuwaqFooter: applyTierWatermark,
     templateId: resolveEntitledExportTemplateId(
       company?.exportTemplateId,
-      (company?.isPaid ?? false) || !isBillingEnabled()
+      tierConfig.whiteLabelPdf || (company?.isPaid ?? false) || !isBillingEnabled()
     ),
     headerFooterStyleId: company?.headerFooterStyleId ?? undefined,
   };

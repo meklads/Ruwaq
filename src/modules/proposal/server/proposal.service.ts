@@ -48,7 +48,7 @@ export async function createProposal(
   );
   if (localeError) {
     const t = getMessages(locale);
-    throw new Error(t.form.errors[localeError]);
+    throw new Error(t.form.errors[localeError.error]);
   }
 
   const optionalTexts = [
