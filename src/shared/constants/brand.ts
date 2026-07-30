@@ -8,6 +8,7 @@ export const GRAPHICS_HOUSE_URL = "https://3dgraphicshouse.com";
 export const GRAPHICS_HOUSE_PROJECT_LAUNCH_URL =
   "https://3dgraphicshouse.com/solutions/project-launch.html";
 export const TURRIVA_URL = "https://turriva.com";
+export const BEESMOTION_URL = "https://beesmotion.com";
 
 export function graphicsHouseReferralUrl(campaign: string, path = "/"): string {
   const url = new URL(path, GRAPHICS_HOUSE_URL);
@@ -23,6 +24,14 @@ export function graphicsHouseProjectLaunchReferralUrl(campaign: string): string 
 
 export function turrivaReferralUrl(campaign: string): string {
   const url = new URL(TURRIVA_URL);
+  url.searchParams.set("utm_source", "ruwaq");
+  url.searchParams.set("utm_medium", "referral");
+  url.searchParams.set("utm_campaign", campaign);
+  return url.toString();
+}
+
+export function beesmotionReferralUrl(campaign: string): string {
+  const url = new URL(BEESMOTION_URL);
   url.searchParams.set("utm_source", "ruwaq");
   url.searchParams.set("utm_medium", "referral");
   url.searchParams.set("utm_campaign", campaign);

@@ -23,6 +23,7 @@ export const MARKETING_IMAGES = {
   graphicsHouseAd: "/images/marketing/ad2En2.png",
   proposalsAdAr: "/images/marketing/ad3Ar.png",
   proposalsAdEn: "/images/marketing/ad3En.png",
+  beesmotionAd: "/images/marketing/ad4.png",
 } as const;
 
 /** Default social / listing fallback when no upload exists. */
