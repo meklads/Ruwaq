@@ -15,8 +15,8 @@ export function GraphicsHousePromoBanner() {
           <Image
             src={MARKETING_IMAGES.graphicsHouseAd}
             alt="Graphics House — We Build Visual Sales Systems"
-            width={1844}
-            height={853}
+            width={1749}
+            height={899}
             className="ruwaq-ad-featured-image-banner"
             sizes="(max-width: 768px) 100vw, 1140px"
           />
