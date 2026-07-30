@@ -38,11 +38,14 @@ export default async function AdminLeadsPage() {
         subtitle="Turriva capture, partner broadcast, and Graphics House visualization"
       />
       <div className="app-content-area space-y-12">
-        <p className="text-sm text-ruwaq-ink-soft">
+        <div className="flex flex-wrap items-center gap-4 text-sm">
           <Link href="/workspace/admin/metrics" className="text-ruwaq-gold hover:underline">
             ← Metrics
           </Link>
-        </p>
+          <Link href="/workspace/admin/applications" className="text-ruwaq-ink-soft hover:underline">
+            Join applications
+          </Link>
+        </div>
 
         <section>
           <h2 className="mb-4 text-sm font-semibold uppercase tracking-widest text-ruwaq-ink-muted">

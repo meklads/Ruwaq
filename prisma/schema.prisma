@@ -591,6 +591,7 @@ model ProviderListing {
   /// EXECUTOR = contractor/installer, SUPPLIER = trade supplier, CONSULTANT = supervision/design office
   providerType  ProviderType    @default(EXECUTOR)
   images        Json            @default("[]")
+  directoryApplication DirectoryApplication?
   createdAt     DateTime        @default(now())
   updatedAt     DateTime        @updatedAt
 
@@ -649,6 +650,10 @@ model DirectoryApplication {
   portfolioUrl String?
   message      String?                    @db.Text
   status       DirectoryApplicationStatus @default(PENDING)
+  reviewNote   String?                    @db.Text
+  listingId    String?                    @unique
+  listing      ProviderListing?           @relation(fields: [listingId], references: [id], onDelete: SetNull)
+  reviewedAt   DateTime?
   locale       String                     @default("ar")
   createdAt    DateTime                   @default(now())
   updatedAt    DateTime                   @updatedAt

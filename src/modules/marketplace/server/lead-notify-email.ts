@@ -49,6 +49,23 @@ type JoinApplicationConfirmationPayload = {
   companyName: string;
 };
 
+type JoinApplicationApprovedPayload = {
+  locale: "ar" | "en";
+  contactName: string;
+  contactEmail: string;
+  companyName: string;
+  listingUrl: string;
+  tier: "VERIFIED" | "PRO";
+};
+
+type JoinApplicationRejectedPayload = {
+  locale: "ar" | "en";
+  contactName: string;
+  contactEmail: string;
+  companyName: string;
+  reviewNote: string;
+};
+
 type GraphicsHouseEmailPayload = {
   leadId: string;
   clientName: string;
@@ -81,6 +98,10 @@ function resolveRuwaqOpsEmails(): string[] {
 
 function adminLeadsUrl(): string {
   return `${process.env.NEXT_PUBLIC_APP_URL ?? RUWQ_PUBLIC_URL}/workspace/admin/leads`;
+}
+
+function adminApplicationsUrl(): string {
+  return `${process.env.NEXT_PUBLIC_APP_URL ?? RUWQ_PUBLIC_URL}/workspace/admin/applications`;
 }
 
 async function sendPlainEmail(opts: {
@@ -216,7 +237,7 @@ export async function sendJoinApplicationOpsEmail(
     payload.message ? `\nMessage:\n${payload.message}` : null,
     "",
     `Locale: ${payload.locale}`,
-    `Admin: ${adminLeadsUrl()}`,
+    `Review: ${adminApplicationsUrl()}`,
   ]
     .filter(Boolean)
     .join("\n");
@@ -248,6 +269,86 @@ export async function sendJoinApplicationConfirmationEmail(
         "We will review your commercial registration and portfolio within 3–5 business days.",
         "",
         RUWQ_PUBLIC_URL,
+      ].join("\n");
+
+  await sendPlainEmail({ to: [payload.contactEmail], subject, text });
+}
+
+export async function sendJoinApplicationApprovedEmail(
+  payload: JoinApplicationApprovedPayload
+): Promise<void> {
+  const isAr = payload.locale === "ar";
+  const tierLabel = isAr
+    ? payload.tier === "PRO"
+      ? "مميز · PRO"
+      : "معتمد"
+    : payload.tier === "PRO"
+      ? "Featured · PRO"
+      : "Verified";
+
+  const subject = isAr
+    ? `رواق — تمت الموافقة على «${payload.companyName}»`
+    : `Ruwaq — "${payload.companyName}" is now live in the directory`;
+
+  const text = isAr
+    ? [
+        `مرحباً ${payload.contactName}،`,
+        "",
+        `تمت الموافقة على انضمام «${payload.companyName}» إلى دليل Ruwaq PRO.`,
+        `الباقة: ${tierLabel}`,
+        "",
+        "رابط ملفكم:",
+        payload.listingUrl,
+        "",
+        "يمكن للعملاء الآن التواصل معكم عبر الدليل.",
+        RUWQ_PUBLIC_URL,
+      ].join("\n")
+    : [
+        `Hello ${payload.contactName},`,
+        "",
+        `Your application for "${payload.companyName}" has been approved.`,
+        `Tier: ${tierLabel}`,
+        "",
+        "Your public profile:",
+        payload.listingUrl,
+        "",
+        "Clients can now reach you through the Ruwaq directory.",
+        RUWQ_PUBLIC_URL,
+      ].join("\n");
+
+  await sendPlainEmail({ to: [payload.contactEmail], subject, text });
+}
+
+export async function sendJoinApplicationRejectedEmail(
+  payload: JoinApplicationRejectedPayload
+): Promise<void> {
+  const isAr = payload.locale === "ar";
+  const subject = isAr
+    ? `رواق — تحديث بخصوص طلب انضمام «${payload.companyName}»`
+    : `Ruwaq — update on your join request (${payload.companyName})`;
+
+  const text = isAr
+    ? [
+        `مرحباً ${payload.contactName}،`,
+        "",
+        `بعد مراجعة طلب انضمام «${payload.companyName}»، لم نتمكن من الموافقة في الوقت الحالي.`,
+        "",
+        "ملاحظة الفريق:",
+        payload.reviewNote,
+        "",
+        "يمكنكم تقديم طلب جديد بعد استكمال المتطلبات عبر:",
+        `${RUWQ_PUBLIC_URL}/join`,
+      ].join("\n")
+    : [
+        `Hello ${payload.contactName},`,
+        "",
+        `After reviewing your application for "${payload.companyName}", we cannot approve it at this time.`,
+        "",
+        "Team note:",
+        payload.reviewNote,
+        "",
+        "You may submit a new application once requirements are met:",
+        `${RUWQ_PUBLIC_URL}/join`,
       ].join("\n");
 
   await sendPlainEmail({ to: [payload.contactEmail], subject, text });
