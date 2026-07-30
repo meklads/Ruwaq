@@ -22,15 +22,9 @@ const TURRIVA_AD = {
 
 const GRAPHICS_HOUSE_AD = {
   ar: {
-    src: MARKETING_IMAGES.graphicsHouseAdAr,
-    width: 1749,
-    height: 899,
     alt: "جرافيكس هاوس، أنظمة المبيعات البصرية",
   },
   en: {
-    src: MARKETING_IMAGES.graphicsHouseAdEn,
-    width: 1749,
-    height: 899,
     alt: "Graphics House, We Build Visual Sales Systems",
   },
 } as const;
@@ -73,10 +67,10 @@ export function PartnerPromoRow({ locale }: Props) {
           className="ruwaq-ad-partner-row__item"
         >
           <Image
-            src={gh.src}
+            src={MARKETING_IMAGES.graphicsHouseAd}
             alt={gh.alt}
-            width={gh.width}
-            height={gh.height}
+            width={1774}
+            height={887}
             className="ruwaq-ad-partner-row__image"
             sizes="(max-width: 640px) 100vw, 50vw"
           />

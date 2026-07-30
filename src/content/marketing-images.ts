@@ -20,8 +20,7 @@ export const MARKETING_IMAGES = {
   proposalDesk: "/images/marketing/proposal-desk.jpg",
   familySavings: "/images/marketing/family-savings-home.jpg",
   turrivaAd: "/images/marketing/ad1.png",
-  graphicsHouseAdAr: "/images/marketing/ad2Ar.png",
-  graphicsHouseAdEn: "/images/marketing/ad2En.png",
+  graphicsHouseAd: "/images/marketing/ad2En2.png",
   proposalsAdAr: "/images/marketing/ad3Ar.png",
   proposalsAdEn: "/images/marketing/ad3En.png",
 } as const;

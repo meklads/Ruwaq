@@ -6,15 +6,9 @@ import type { Locale } from "@/shared/i18n/locale";
 
 const GRAPHICS_HOUSE_AD = {
   ar: {
-    src: MARKETING_IMAGES.graphicsHouseAdAr,
-    width: 1749,
-    height: 899,
     alt: "جرافيكس هاوس، أنظمة المبيعات البصرية",
   },
   en: {
-    src: MARKETING_IMAGES.graphicsHouseAdEn,
-    width: 1749,
-    height: 899,
     alt: "Graphics House, We Build Visual Sales Systems",
   },
 } as const;
@@ -23,7 +17,7 @@ type Props = {
   locale: Locale;
 };
 
-/** Graphics House banner, locale-specific asset (ad2Ar / ad2En). */
+/** Graphics House banner (shared ad2En2 asset for all locales). */
 export function GraphicsHousePromoBanner({ locale }: Props) {
   const ad = GRAPHICS_HOUSE_AD[locale];
 
@@ -41,10 +35,10 @@ export function GraphicsHousePromoBanner({ locale }: Props) {
           className="ruwaq-ad-featured-image-link"
         >
           <Image
-            src={ad.src}
+            src={MARKETING_IMAGES.graphicsHouseAd}
             alt={ad.alt}
-            width={ad.width}
-            height={ad.height}
+            width={1774}
+            height={887}
             className="ruwaq-ad-featured-image-banner"
             sizes="(max-width: 768px) 100vw, 1140px"
           />
