@@ -15,7 +15,7 @@ import { getLocale } from "@/shared/i18n/server";
 import { localeDir } from "@/shared/i18n/locale";
 import { RUWQ_PUBLIC_URL } from "@/shared/constants/brand";
 
-/** Graphics House ProjectLaunch™ — Tajawal primary, IBM Plex Sans Arabic fallback */
+/** Graphics House ProjectLaunch™, Tajawal primary, IBM Plex Sans Arabic fallback */
 const tajawal = Tajawal({
   subsets: ["arabic"],
   weight: ["200", "300", "400", "500", "700"],
@@ -58,7 +58,7 @@ const playfair = Playfair_Display({
   display: "swap",
 });
 
-/** Marketing site — matches Graphics House ProjectLaunch™ stack (Inter on GH; Plus Jakarta on Ruwaq EN) */
+/** Marketing site, matches Graphics House ProjectLaunch™ stack (Inter on GH; Plus Jakarta on Ruwaq EN) */
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700", "800"],
@@ -70,12 +70,12 @@ export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
   const title =
     locale === "ar"
-      ? "رواق | منصة الهندسة والعقار — المنطقة الغربية"
-      : "Ruwaq | Engineering & property marketplace — Western Region";
+      ? "رواق | منصة الهندسة والعقار، المنطقة الغربية"
+      : "Ruwaq | Engineering & property marketplace, Western Region";
   const description =
     locale === "ar"
-      ? "دليل مقاولات وتكييف وتشطيبات معتمد في جدة ومكة والمدينة — مع أداة عروض احترافية للمقاولين."
-      : "Verified contractors directory in Jeddah, Makkah, and Madinah — plus AI proposal builder.";
+      ? "دليل مقاولات وتكييف وتشطيبات معتمد في جدة ومكة والمدينة، مع أداة عروض احترافية للمقاولين."
+      : "Verified contractors directory in Jeddah, Makkah, and Madinah, plus AI proposal builder.";
 
   return {
     title,

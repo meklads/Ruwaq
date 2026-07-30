@@ -9,7 +9,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const t = getMessages(locale);
   const copy = t.pages.proposalsLanding;
   return {
-    title: `${copy.title} — ${copy.titleHighlight}`,
+    title: `${copy.title}, ${copy.titleHighlight}`,
     description: copy.intro,
   };
 }

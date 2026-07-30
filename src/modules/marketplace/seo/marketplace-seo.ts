@@ -43,14 +43,14 @@ export function marketplaceCategoryDescription(
         ? `${listingCount} ${listingCount === 1 ? "شركة معتمدة" : "شركات معتمدة"}`
         : "شركات معتمدة";
     return (
-      `دليل ${cat.nameAr} في ${city.nameAr} — ${countPhrase} للفلل والفنادق والمشاريع العقارية. ` +
+      `دليل ${cat.nameAr} في ${city.nameAr}، ${countPhrase} للفلل والفنادق والمشاريع العقارية. ` +
       `قارن المزودين واطلب عرض سعر مجاناً خلال 24 ساعة عبر منصة رواق في المنطقة الغربية.`
     );
   }
   const countPhrase =
     listingCount > 0 ? `${listingCount} verified provider(s)` : "verified providers";
   return (
-    `Ruwaq directory for ${cat.nameEn} in ${city.nameEn} — ${countPhrase} for villas, hotels, and property projects. ` +
+    `Ruwaq directory for ${cat.nameEn} in ${city.nameEn}, ${countPhrase} for villas, hotels, and property projects. ` +
     `Compare providers and request a free quote within 24 hours across Western Region KSA.`
   );
 }
@@ -184,9 +184,9 @@ export function marketplaceListingTitle(
 ): string {
   const name = locale === "ar" ? listing.titleAr : listing.titleEn ?? listing.titleAr;
   if (locale === "ar") {
-    return `${name} — ${cat.nameAr} في ${city.nameAr} | رواق`;
+    return `${name}، ${cat.nameAr} في ${city.nameAr} | رواق`;
   }
-  return `${name} — ${cat.nameEn} in ${city.nameEn} | Ruwaq`;
+  return `${name}, ${cat.nameEn} in ${city.nameEn} | Ruwaq`;
 }
 
 export function marketplaceListingDescription(

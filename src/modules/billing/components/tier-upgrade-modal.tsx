@@ -39,7 +39,7 @@ export function TierUpgradeModal({
           ترقية حسابك لإنشاء المزيد من العروض
         </h2>
         <p className="mt-4 text-sm leading-relaxed text-neutral-600">
-          لقد استنفدت الحد المجاني ({limit} عروض — استخدمت {used}). اشترك في باقة{" "}
+          لقد استنفدت الحد المجاني ({limit} عروض، استخدمت {used}). اشترك في باقة{" "}
           <strong className="font-semibold text-neutral-950">Ruwaq Verified</strong> لفتح 30
           عرضاً شهرياً والحصول على شارة التوثيق في الدليل.
         </p>

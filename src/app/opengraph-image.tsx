@@ -51,7 +51,7 @@ export default function OpenGraphImage() {
             color: "rgba(255,255,255,0.92)",
           }}
         >
-          Engineering directory + AI proposal studio · Western Region KSA
+          Engineering directory + AI proposal studio, Western Region KSA
         </div>
       </div>
     ),

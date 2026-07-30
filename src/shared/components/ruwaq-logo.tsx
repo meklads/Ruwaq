@@ -8,7 +8,7 @@ type Props = {
   size?: "chrome" | "footer";
 };
 
-/** Classic text lockup — Arabic + English wordmark */
+/** Classic text lockup, Arabic + English wordmark */
 export const SITE_LOGO_SIZE_CLASS = "ruwaq-brand-lockup--chrome";
 
 export function RuwaqLogo({
@@ -42,7 +42,7 @@ export function RuwaqLogo({
     <Link
       href={href}
       className="inline-flex shrink-0 items-center justify-center bg-transparent p-0 leading-none"
-      aria-label="رواق — الصفحة الرئيسية"
+      aria-label="رواق، الصفحة الرئيسية"
     >
       {logo}
     </Link>

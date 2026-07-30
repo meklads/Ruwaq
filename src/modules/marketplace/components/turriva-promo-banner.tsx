@@ -3,7 +3,7 @@ import Link from "next/link";
 import { MARKETING_IMAGES } from "@/content/marketing-images";
 import { turrivaReferralUrl } from "@/shared/constants/brand";
 
-/** Turriva partner banner — pre-designed asset (ad1.png). */
+/** Turriva partner banner, pre-designed asset (ad1.png). */
 export function TurrivaPromoBanner() {
   const href = turrivaReferralUrl("homepage_featured_ad");
 
@@ -22,7 +22,7 @@ export function TurrivaPromoBanner() {
         >
           <Image
             src={MARKETING_IMAGES.turrivaAd}
-            alt="Turriva — Architecture, Interior, Construction"
+            alt="Turriva, Architecture, Interior, Construction"
             width={1749}
             height={899}
             className="ruwaq-ad-featured-image-banner"

@@ -30,7 +30,7 @@ function actionError(error: unknown, fallback: string) {
       "Database is not connected. Add DATABASE_URL in Coolify Environment Variables, then Redeploy.";
   } else if (message.includes("Invalid environment variables")) {
     message =
-      "Server configuration incomplete. In Coolify add: DATABASE_URL, AUTH_SECRET, AUTH_URL=https://turriva.co — then Redeploy.";
+      "Server configuration incomplete. In Coolify add: DATABASE_URL, AUTH_SECRET, AUTH_URL=https://turriva.co, then Redeploy.";
   } else if (message.includes("Can't reach database server")) {
     message =
       "Cannot reach the database server. Check DATABASE_URL and that PostgreSQL is running.";
@@ -39,14 +39,14 @@ function actionError(error: unknown, fallback: string) {
     message.includes("CLAUSE_PACK_NOT_FOUND")
   ) {
     message =
-      "Legal clause library is still initializing. Wait a moment and try again — if this persists, redeploy or run: npm run db:seed";
+      "Legal clause library is still initializing. Wait a moment and try again, if this persists, redeploy or run: npm run db:seed";
   } else if (
     message.includes("editToken") ||
     message.includes("exportTemplateId") ||
     message.includes("does not exist in the current database")
   ) {
     message =
-      "قاعدة البيانات تحتاج تحديث. في Coolify اضغط Redeploy — أو شغّل: npx prisma db push";
+      "قاعدة البيانات تحتاج تحديث. في Coolify اضغط Redeploy، أو شغّل: npx prisma db push";
   } else if (
     message.includes("fetch failed") ||
     message.includes("ETIMEDOUT") ||
@@ -54,7 +54,7 @@ function actionError(error: unknown, fallback: string) {
     message.includes("socket hang up")
   ) {
     message =
-      "انتهت مهلة التوليد أو انقطع الاتصال. انتظر قليلاً ثم أعد المحاولة — التوليد قد يستغرق دقيقة أو دقيقتين.";
+      "انتهت مهلة التوليد أو انقطع الاتصال. انتظر قليلاً ثم أعد المحاولة، التوليد قد يستغرق دقيقة أو دقيقتين.";
   } else if (
     message.includes("Incorrect API key") ||
     message.includes("invalid_api_key") ||
@@ -86,7 +86,7 @@ export async function createProposalAction(input: CreateProposalInput) {
   }
 }
 
-// SA1b — create + AI in one request (guest cookie + DB stay in sync)
+// SA1b, create + AI in one request (guest cookie + DB stay in sync)
 export async function createAndGenerateProposalAction(
   input: CreateProposalInput
 ) {

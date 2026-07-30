@@ -43,7 +43,7 @@ function resolveMetaLine(
   if (locale === "en") {
     return [category, city].filter(Boolean).join(" • ").toUpperCase();
   }
-  return [category, city].filter(Boolean).join(" · ");
+  return [category, city].filter(Boolean).join(", ");
 }
 
 export function ListingCard({

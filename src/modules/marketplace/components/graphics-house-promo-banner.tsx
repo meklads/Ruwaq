@@ -12,17 +12,17 @@ const GRAPHICS_HOUSE_AD = {
     src: MARKETING_IMAGES.graphicsHouseAdAr,
     width: 1749,
     height: 899,
-    alt: "جرافيكس هاوس — أنظمة المبيعات البصرية",
+    alt: "جرافيكس هاوس، أنظمة المبيعات البصرية",
   },
   en: {
     src: MARKETING_IMAGES.graphicsHouseAdEn,
     width: 1749,
     height: 899,
-    alt: "Graphics House — We Build Visual Sales Systems",
+    alt: "Graphics House, We Build Visual Sales Systems",
   },
 } as const;
 
-/** Graphics House banner — locale-specific asset (ad2Ar / ad2En). */
+/** Graphics House banner, locale-specific asset (ad2Ar / ad2En). */
 export function GraphicsHousePromoBanner({ locale }: Props) {
   const ad = GRAPHICS_HOUSE_AD[locale];
 

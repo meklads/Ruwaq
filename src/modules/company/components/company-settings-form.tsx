@@ -289,7 +289,7 @@ export function CompanySettingsForm({ initial, billingEnabled, preferredStyleId 
               return (
                 <option key={id} value={id} disabled={locked}>
                   {t.company.exportTemplateOptions[id]}
-                  {locked ? ` — ${t.upgrade.lockedSuffix}` : ""}
+                  {locked ? `، ${t.upgrade.lockedSuffix}` : ""}
                 </option>
               );
             })}

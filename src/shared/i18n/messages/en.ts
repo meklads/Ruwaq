@@ -22,12 +22,12 @@ export const en: Messages = {
  },
  marketplace: {
   hero: {
-   eyebrow: "Ruwaq · Western Region",
+   eyebrow: "Ruwaq, Western Region",
    title: "Engineering & property directory",
    titleHighlight: "for Jeddah, Makkah & Madinah",
    subtitle:
-    "Verified contractors, suppliers, and consultants — request quotes within 24 hours.",
-   trustLine: "8 sectors · 3 cities · Free quote requests",
+    "Verified contractors, suppliers, and consultants, request quotes within 24 hours.",
+   trustLine: "8 sectors, 3 cities, Free quote requests",
    ctaPrimary: "Get verified quotes",
    ctaSecondary: "Browse verified companies",
    ctaContractor: "Contractor proposal tool",
@@ -61,19 +61,19 @@ export const en: Messages = {
   graphicsHousePromo: {
    headlineBefore: "Step inside the world of",
    headlineEmphasis: "architectural media",
-   offerBefore: "CGI films · maquettes · galleries —",
+   offerBefore: "CGI films, maquettes, galleries , ",
    offerHighlight: "register via Ruwaq",
    offerAfter: ".",
    cta: "REGISTER PROJECT",
   },
   visualization: {
-   metaTitle: "Architectural visualization — Graphics House via Ruwaq",
+   metaTitle: "Architectural visualization, Graphics House via Ruwaq",
    metaDescription:
     "Register your development for cinematic CGI, smart maquettes, and immersive sales experiences. Graphics House responds within 24 hours.",
-   eyebrow: "Graphics House · via Ruwaq",
+   eyebrow: "Graphics House, via Ruwaq",
    title: "Visualize your project before construction",
    subtitle:
-    "For developers, architects, and investment groups — register interest and our visualization studio will contact you within 24 hours.",
+    "For developers, architects, and investment groups, register interest and our visualization studio will contact you within 24 hours.",
    formLabel: "Register interest",
    services: [
     "Cinematic CGI",
@@ -84,16 +84,16 @@ export const en: Messages = {
    ],
    trustTitle: "Why register through Ruwaq",
    trustItems: [
-    "Direct routing to Graphics House — no middlemen",
+    "Direct routing to Graphics House, no middlemen",
     "15+ years on giga-projects across KSA, Oman, and Bahrain",
     "End-to-end: CGI, maquettes, interactive platforms, and spatial design",
-    "Built for pre-sales — before ground breaks",
+    "Built for pre-sales, before ground breaks",
    ],
    partnerNote:
     "Graphics House is Ruwaq’s visualization partner. Ruwaq remains your free directory for engineering quotes; this form is for design & visualization only.",
    submit: "Submit enquiry",
    submitting: "Sending…",
-   successTitle: "Thank you — we received your enquiry",
+   successTitle: "Thank you, we received your enquiry",
    successBody:
     "A Graphics House coordinator will contact you within 24 hours on the number you provided.",
    externalCta: "Explore Graphics House portfolio",
@@ -127,20 +127,20 @@ export const en: Messages = {
   },
   howItWorks: {
    title: "How Ruwaq works",
-   subtitle: "A clear path for owners and contractors — from request to direct contact.",
+   subtitle: "A clear path for owners and contractors, from request to direct contact.",
    ownersTitle: "For property owners",
    ownersSteps: [
     {
      title: "Pick sector and city",
-     body: "Jeddah, Makkah, or Madinah — choose your sector (fit-out, kitchens, materials, HVAC, and more).",
+     body: "Jeddah, Makkah, or Madinah, choose your sector (fit-out, kitchens, materials, HVAC, and more).",
     },
     {
      title: "Describe your project",
-     body: "Request a quote 100% free — no hidden fees for the client.",
+     body: "Request a quote 100% free, no hidden fees for the client.",
     },
     {
      title: "Receive verified offers",
-     body: "Verified companies contact you directly on WhatsApp — full transparency.",
+     body: "Verified companies contact you directly on WhatsApp, full transparency.",
     },
    ],
    contractorsTitle: "For contractors",
@@ -151,11 +151,11 @@ export const en: Messages = {
     },
     {
      title: "Build AI PDF quotes",
-     body: "BOQ table, 15% VAT, terms, and your branding — in about two minutes.",
+     body: "BOQ table, 15% VAT, terms, and your branding, in about two minutes.",
     },
     {
      title: "Receive project leads",
-     body: "Matching requests land in your dashboard — unlock client contact when ready.",
+     body: "Matching requests land in your dashboard, unlock client contact when ready.",
     },
    ],
    learnMore: "Read full guide",
@@ -163,7 +163,7 @@ export const en: Messages = {
   trustStandards: {
    modalTitle: "Ruwaq “Verified company” standards",
    intro:
-    "The verified badge is not empty marketing — we apply a three-step validation before listing any provider.",
+    "The verified badge is not empty marketing, we apply a three-step validation before listing any provider.",
    levels: [
     {
      title: "Level 1: Commercial registration",
@@ -188,19 +188,19 @@ export const en: Messages = {
    items: [
     {
      quote:
-      "I needed hotel fit-out in Makkah — three structured quotes within two days, all via WhatsApp.",
+      "I needed hotel fit-out in Makkah, three structured quotes within two days, all via WhatsApp.",
      role: "Hotel operations manager",
      city: "Makkah",
     },
     {
      quote:
-      "The proposal tool saved hours — branded PDF with VAT ready for my client.",
+      "The proposal tool saved hours, branded PDF with VAT ready for my client.",
      role: "Fit-out contractor",
      city: "Jeddah",
     },
     {
      quote:
-      "Knowing what “verified” means gave me confidence before reaching out — CR was checked.",
+      "Knowing what “verified” means gave me confidence before reaching out, CR was checked.",
      role: "Villa owner",
      city: "Madina",
     },
@@ -209,21 +209,21 @@ export const en: Messages = {
   proposalsPreview: {
    title: "Sample proposal PDF preview",
    subtitle:
-    "See a professional quote: itemized BOQ, 15% VAT, terms, and company branding — before you create yours.",
+    "See a professional quote: itemized BOQ, 15% VAT, terms, and company branding, before you create yours.",
    button: "Preview sample proposal PDF",
   },
   businessTransparency:
-   "Quote requests are 100% free for owners. We sustain via contractor subscriptions and lead unlock fees in select sectors — never by charging the end client.",
+   "Quote requests are 100% free for owners. We sustain via contractor subscriptions and lead unlock fees in select sectors, never by charging the end client.",
   footerTransparency:
    "Quote requests are free for owners. We work transparently with verified partners to deliver quality execution.",
   aboutPage: {
-   eyebrow: "Ruwaq · Western Region",
+   eyebrow: "Ruwaq, Western Region",
    title: "About Ruwaq",
    intro:
-    "Ruwaq is an engineering and property directory for Western Region cities — eight verified sectors and matching in Jeddah, Makkah, and Madinah.",
+    "Ruwaq is an engineering and property directory for Western Region cities, eight verified sectors and matching in Jeddah, Makkah, and Madinah.",
    businessNote:
     "Quote requests are 100% free for owners. We work transparently with verified companies and contractors to deliver quality execution.",
-   closingHint: "To request a quote, use the button in the site header — or browse sectors below.",
+   closingHint: "To request a quote, use the button in the site header, or browse sectors below.",
    sections: [
     {
      title: "Who is this for?",
@@ -243,7 +243,7 @@ export const en: Messages = {
     },
     {
      title: "Proposal tool for contractors",
-     body: "Separate portal at /proposals — AI PDF quotes, deal tracking, and sector-matched leads.",
+     body: "Separate portal at /proposals, AI PDF quotes, deal tracking, and sector-matched leads.",
     },
    ],
   },
@@ -255,16 +255,16 @@ export const en: Messages = {
     visualization: "Architectural visualization (Graphics House)",
    },
    visualizationTitle: "Register for visualization services",
-   visualizationSubtitle: "Your enquiry is routed to Graphics House — response within 24 hours.",
+   visualizationSubtitle: "Your enquiry is routed to Graphics House, response within 24 hours.",
    visualizationHint: "Prefer the full visualization page?",
    visualizationPageLink: "Open dedicated form",
-   visualizationSubmit: "Send to Graphics House — free",
+   visualizationSubmit: "Send to Graphics House, free",
    visualizationSuccess: {
     title: "Enquiry sent to Graphics House",
     subtitle: "A coordinator will contact you within 24 hours on the number you provided.",
     externalCta: "Explore Graphics House portfolio",
    },
-   submit: "Send request — free",
+   submit: "Send request, free",
    submitting: "Sending...",
    success: "Request received. We will contact you soon.",
    successModal: {
@@ -306,14 +306,14 @@ export const en: Messages = {
    requestCta: "Request a quote for this category",
   },
   proDirectory: {
-   eyebrow: "RUWAQ PRO · Western Region",
+   eyebrow: "RUWAQ PRO, Western Region",
    titleBefore: "Ruwaq",
    titleAccent: "PRO",
    titleAfter: "Directory",
    title: "Ruwaq PRO Directory",
    subtitle:
-    "Find verified contractors and suppliers in Jeddah, Makkah, and Madinah — free quotes for owners, AI proposal studio for professionals.",
-   trustLine: "8 sectors · 3 cities · Free quote requests",
+    "Find verified contractors and suppliers in Jeddah, Makkah, and Madinah, free quotes for owners, AI proposal studio for professionals.",
+   trustLine: "8 sectors, 3 cities, Free quote requests",
    allCategories: "All sectors",
    applyCta: "Join the directory",
    applyHint: "We review CR and licenses before listing.",
@@ -326,15 +326,15 @@ export const en: Messages = {
    proposalStudioLink: "Open proposal studio",
   },
   join: {
-   eyebrow: "RUWAQ PRO · Directory application",
+   eyebrow: "RUWAQ PRO, Directory application",
    title: "Apply to the verified directory",
    subtitle:
-    "Submit your company details — we review commercial registration, licenses, and portfolio before listing.",
+    "Submit your company details, we review commercial registration, licenses, and portfolio before listing.",
    submit: "Submit application",
    submitting: "Submitting…",
    successTitle: "Application received",
    successBody:
-    "Our team will review your commercial registration and contact you within 3–5 business days.",
+    "Our team will review your commercial registration and contact you within 3 to 5 business days.",
    stepCompany: "Company profile",
    stepVerification: "Verification",
    stepPortfolio: "Portfolio & submit",
@@ -370,13 +370,13 @@ export const en: Messages = {
    sortLabel: "Sort by",
    sortFeatured: "Featured first",
    sortNewest: "Newest",
-   sortName: "Name A–Z",
+   sortName: "Name A, Z",
    apply: "Search",
   },
   proShowcase: {
-   eyebrow: "RUWAQ PRO · Showcase",
+   eyebrow: "RUWAQ PRO, Showcase",
    title: "Featured professionals",
-   subtitle: "Editorial picks from our verified directory — fit-out, contracting, HVAC, and more.",
+   subtitle: "Editorial picks from our verified directory, fit-out, contracting, HVAC, and more.",
    allCities: "All cities",
    filterCity: "Filter by city",
    empty: "No featured listings yet. Check back soon or apply to join the directory.",
@@ -390,13 +390,13 @@ export const en: Messages = {
   howItWorksPage: {
    eyebrow: "Guide",
    intro:
-    "Ruwaq connects property owners with verified contractors across the Western Region — transparent, direct, and free for clients.",
+    "Ruwaq connects property owners with verified contractors across the Western Region, transparent, direct, and free for clients.",
    ctaOwners: "Request a free quote",
    ctaContractors: "Apply to the directory",
    ctaProposals: "Contractor proposal tool",
    trustTitle: "What “verified” means",
    trustBody:
-    "Active CR, professional accreditation, and Ruwaq portfolio review — click the badge on any listing for full standards.",
+    "Active CR, professional accreditation, and Ruwaq portfolio review, click the badge on any listing for full standards.",
   },
   homeMagazine: {
    todaysDirectoryEyebrow: "Today's Directory",
@@ -410,7 +410,7 @@ export const en: Messages = {
    eyebrow: "Project tour",
    title: "Ruwaq project tours",
    subtitle:
-    "Completed villas and hospitality projects — meet the verified teams behind each delivery.",
+    "Completed villas and hospitality projects, meet the verified teams behind each delivery.",
    viewAll: "All tours",
    readTour: "View tour",
    metaTitle: "Project tours | Ruwaq PRO",
@@ -426,7 +426,7 @@ export const en: Messages = {
    eyebrow: "Ruwaq guides",
    title: "Practical guides for owners",
    subtitle:
-    "Short reads on marble, HVAC, kitchens, and supervision — with links to verified companies.",
+    "Short reads on marble, HVAC, kitchens, and supervision, with links to verified companies.",
    viewAll: "All guides",
    readGuide: "Read guide",
    minRead: "min read",
@@ -438,11 +438,11 @@ export const en: Messages = {
   },
   footerCta: {
    title: "Explore approved sectors",
-   subtitle: "Seven engineering categories across three cities — pick yours or search from the homepage.",
+   subtitle: "Seven engineering categories across three cities, pick yours or search from the homepage.",
    button: "Browse sectors",
   },
   footerTagline:
-   "Engineering & property directory for Western Region — verified companies and quote requests in one place.",
+   "Engineering & property directory for Western Region, verified companies and quote requests in one place.",
  },
  form: {
   title: "Create a professional real estate proposal",
@@ -469,7 +469,7 @@ export const en: Messages = {
    areaSqm: "Area (sqm)",
    areaSqmPlaceholder: "300",
    duration: "Expected duration",
-   durationPlaceholder: "e.g. 6–8 weeks",
+   durationPlaceholder: "e.g. 6 to 8 weeks",
    specifications: "Additional technical specs",
    specificationsPlaceholder:
     "e.g. porcelain flooring, Jotun paints, IKEA kitchens...",
@@ -500,7 +500,7 @@ export const en: Messages = {
   generate: "Generate proposal",
   generatingAnalyze: "Analyzing your project...",
   generatingWrite: "Writing your proposal...",
-  generatingWaitHint: "This usually takes 1–2 minutes. Please keep this tab open.",
+  generatingWaitHint: "This usually takes 1 to 2 minutes. Please keep this tab open.",
   errors: {
    projectRequired: "Project name and client name are required.",
    descriptionRequired: "Please describe the work briefly.",
@@ -636,9 +636,9 @@ export const en: Messages = {
   cta: "Start a proposal",
   ctaSecondary: "My proposals",
   feature1: "3 inputs only",
-  feature2: "Approved SBC · ZATCA clauses",
+  feature2: "Approved SBC, ZATCA clauses",
   feature3: "Arabic/EN + CR/VAT",
-  trustLine: "Start without an account · company profile · support & help included",
+  trustLine: "Start without an account, company profile, support & help included",
  },
  sales: {
   hero: {
@@ -652,9 +652,9 @@ export const en: Messages = {
    subtitleOutcomeAfter: ", then exports a PDF under your brand.",
    cta: "Start a proposal now",
    ctaSecondary: "View a sample",
-   microcopy: "No account · No card · Ready in under 10 minutes",
+   microcopy: "No account, No card, Ready in under 10 minutes",
    imageBadgeTitle: "Your partner in the field",
-   imageBadge: "Approved clauses · SBC · ZATCA",
+   imageBadge: "Approved clauses, SBC, ZATCA",
   },
   heroSteps: {
    title: "Three steps, your proposal ready",
@@ -866,22 +866,22 @@ export const en: Messages = {
    eyebrow: "See for yourself",
    title: "Proposal sample gallery",
    body:
-    "Three live samples: villa fit-out, engineering supervision, and 3D visualization — Ruwaq and Graphics House designs.",
+    "Three live samples: villa fit-out, engineering supervision, and 3D visualization, Ruwaq and Graphics House designs.",
    cta: "Browse all three samples",
    comingSoon: "Coming soon",
    items: [
     {
-     title: "Villa fit-out — Ruwaq",
+     title: "Villa fit-out, Ruwaq",
      body: "Scope, BOQ, payments, and approved clause pack.",
      live: true,
     },
     {
-     title: "Engineering supervision — Ruwaq executive",
+     title: "Engineering supervision, Ruwaq executive",
      body: "Formal layout for engineering firms and site supervision.",
      live: true,
     },
     {
-     title: "3D visualization — Graphics House",
+     title: "3D visualization, Graphics House",
      body: "Design studio identity for architectural visualization.",
      live: true,
     },
@@ -939,35 +939,35 @@ export const en: Messages = {
     },
    ],
    packTitle: "Approved clause pack",
-   packMeta: "Interior fit-out pack · v1.0 · 9 approved clauses",
+   packMeta: "Interior fit-out pack, v1.0, 9 approved clauses",
    clauses: [
     {
      category: "SBC Building Code",
      title: "Compliance with SBC 1101 for residential buildings",
      excerpt:
       "The client ensures works comply with Saudi Building Code. The contractor is not liable for violations from client requests that breach the code.",
-     source: "SBC 1101 — Residential Buildings",
+     source: "SBC 1101, Residential Buildings",
     },
     {
      category: "Permits & municipality",
      title: "Balady permits are the client's responsibility",
      excerpt:
       "Building and renovation permits sit with the client unless explicitly stated otherwise. Municipal delay is not contractor delay.",
-     source: "Balady — Municipal Permits",
+     source: "Balady, Municipal Permits",
     },
     {
      category: "Waste management",
      title: "Construction debris and municipal delays",
      excerpt:
       "Debris removal is on the client unless explicitly in scope. Municipal stops extend the schedule without penalties on the contractor.",
-     source: "Balady — Waste Management",
+     source: "Balady, Waste Management",
     },
     {
      category: "Soil & geotechnical",
      title: "Rock and unforeseen ground conditions excluded",
      excerpt:
       "Excavation assumes normal soil. Rock or groundwater discovery requires a change order and new pricing agreement.",
-     source: "Industry Standard — Geotechnical",
+     source: "Industry Standard, Geotechnical",
     },
     {
      category: "Materials",
@@ -981,14 +981,14 @@ export const en: Messages = {
      title: "VAT per Zakat, Tax and Customs Authority rules",
      excerpt:
       "Prices subject to VAT where applicable. Contractor issues tax invoices per ZATCA requirements.",
-     source: "ZATCA — VAT Regulations",
+     source: "ZATCA, VAT Regulations",
     },
     {
      category: "Change order",
      title: "Every change goes through a formal change order",
      excerpt:
       "No out-of-scope work without a written change order defining cost and time. Verbal extras are not binding.",
-     source: "FIDIC-inspired — Change Order",
+     source: "FIDIC-inspired, Change Order",
     },
    ],
    disclaimer:
@@ -1001,7 +1001,7 @@ export const en: Messages = {
     "3 inputs. Smart review. PDF under your brand. Start now without an account, see the difference on your first proposal.",
    primary: "Create your first proposal",
    secondary: "View sample",
-   microcopy: "Free to start · No card · Support available",
+   microcopy: "Free to start, No card, Support available",
   },
  },
  site: {
@@ -1059,15 +1059,15 @@ export const en: Messages = {
    sponsoredByLink: "Graphics House",
    ctaTitle: "Step inside the Ruwaq directory",
    ctaSubtitle:
-    "Request free quotes from verified companies — or start a professional proposal in minutes.",
+    "Request free quotes from verified companies, or start a professional proposal in minutes.",
    ctaOwner: "Request a free quote",
    ctaButton: "Start a proposal",
    ecosystem: "Ecosystem",
-   graphicsHouse: "Graphics House — visualization",
+   graphicsHouse: "Graphics House, visualization",
    graphicsHouseVisualization: "Register visualization project",
-   turriva: "Turriva — decor & contracting",
+   turriva: "Turriva, decor & contracting",
    followUs: "Follow us",
-   regionLabel: "Saudi Arabia · Western Region",
+   regionLabel: "Saudi Arabia, Western Region",
    affiliateNote:
     "Ruwaq is part of the Graphics House ecosystem. Visualization leads may be referred to Graphics House; fit-out and contracting leads may route to Turriva.",
   },
@@ -1169,7 +1169,7 @@ export const en: Messages = {
    sections: [
     {
      title: "Service description",
-     body: "Ruwaq helps contractors and firms draft, review, and export professional proposals. AI-generated content is a starting point — you are responsible for reviewing accuracy before client delivery.",
+     body: "Ruwaq helps contractors and firms draft, review, and export professional proposals. AI-generated content is a starting point, you are responsible for reviewing accuracy before client delivery.",
     },
     {
      title: "Accounts & guest access",
@@ -1198,12 +1198,12 @@ export const en: Messages = {
    eyebrow: "Ruwaq guide",
    title: "Everything you need to know before you start",
    intro:
-    "Why Ruwaq is different, and exactly how the free trial and subscription work — no ambiguity, no surprises later.",
+    "Why Ruwaq is different, and exactly how the free trial and subscription work, no ambiguity, no surprises later.",
    differentiatorsTitle: "Why Ruwaq?",
    differentiators: [
     {
      title: "From idea to a ready proposal in minutes, not hours",
-     body: "Instead of drafting scope, commercial terms, and a timeline from scratch every time, AI writes a full draft in minutes — you review and edit before sending.",
+     body: "Instead of drafting scope, commercial terms, and a timeline from scratch every time, AI writes a full draft in minutes, you review and edit before sending.",
     },
     {
      title: "Built specifically for Saudi real estate & contracting",
@@ -1211,11 +1211,11 @@ export const en: Messages = {
     },
     {
      title: "Your full company identity on every proposal",
-     body: "Your logo, details, and commercial registration appear automatically on every exported document — giving even a solo operator the look of a large consultancy.",
+     body: "Your logo, details, and commercial registration appear automatically on every exported document, giving even a solo operator the look of a large consultancy.",
     },
     {
      title: "A live link your client can actually interact with",
-     body: "Your client opens a link, reviews the proposal section by section, and can approve or request a change directly — not a static PDF that gets lost in an inbox.",
+     body: "Your client opens a link, reviews the proposal section by section, and can approve or request a change directly, not a static PDF that gets lost in an inbox.",
     },
    ],
    subscriptionTitle: "How the trial and subscription work",
@@ -1228,22 +1228,22 @@ export const en: Messages = {
     },
     {
      title: "Sign in with Google (one step)",
-     body: "To create more proposals, sign in with Google — no new password to remember, just seconds.",
+     body: "To create more proposals, sign in with Google, no new password to remember, just seconds.",
     },
     {
      title: "Complete your company profile once",
-     body: "Your company name, logo, and contact details — filled in once, then applied automatically to every proposal after that.",
+     body: "Your company name, logo, and contact details, filled in once, then applied automatically to every proposal after that.",
     },
     {
      title: "Stay free or upgrade as you grow",
-     body: "The free plan covers occasional use. If your monthly volume grows, pick a plan that fits from the pricing page — no annual lock-in required.",
+     body: "The free plan covers occasional use. If your monthly volume grows, pick a plan that fits from the pricing page, no annual lock-in required.",
     },
    ],
    questionsTitle: "Frequently asked questions",
    questions: [
     {
      q: "Is Ruwaq really free?",
-     a: "Yes. The platform is currently in a fully free launch trial with no limits. Even after that trial ends, a permanent free plan covers a limited number of proposals per month — no card needed to start.",
+     a: "Yes. The platform is currently in a fully free launch trial with no limits. Even after that trial ends, a permanent free plan covers a limited number of proposals per month, no card needed to start.",
     },
     {
      q: "Do I need a credit card to sign up?",
@@ -1251,7 +1251,7 @@ export const en: Messages = {
     },
     {
      q: "Can I use my own company logo and details?",
-     a: "Absolutely — that's the whole point. Fill in your logo, company name, and commercial registration once in Company Profile, and they appear automatically on every proposal you export.",
+     a: "Absolutely, that's the whole point. Fill in your logo, company name, and commercial registration once in Company Profile, and they appear automatically on every proposal you export.",
     },
     {
      q: "Are the generated proposals legally binding contracts?",
@@ -1259,15 +1259,15 @@ export const en: Messages = {
     },
     {
      q: "How is this different from writing it myself in Word or using ChatGPT directly?",
-     a: "ChatGPT gives you generic text you have to format yourself from scratch every time. Ruwaq builds a structured, export-ready proposal — scope, timeline, payment terms, and your branding — with no manual formatting or copy-pasting.",
+     a: "ChatGPT gives you generic text you have to format yourself from scratch every time. Ruwaq builds a structured, export-ready proposal, scope, timeline, payment terms, and your branding, with no manual formatting or copy-pasting.",
     },
     {
      q: "Is there a limit on how many proposals I can create?",
-     a: "During the current launch trial: no limit at all. Afterward, the free plan includes a set number per month, and paid plans offer higher or unlimited volume — see the pricing page for details.",
+     a: "During the current launch trial: no limit at all. Afterward, the free plan includes a set number per month, and paid plans offer higher or unlimited volume, see the pricing page for details.",
     },
     {
      q: "How does my client view the final proposal?",
-     a: "You send them a direct link (or an exported PDF) — they open it on any device without needing to sign in, and can approve or request changes from the same page.",
+     a: "You send them a direct link (or an exported PDF), they open it on any device without needing to sign in, and can approve or request changes from the same page.",
     },
     {
      q: "Is my data or my clients' data shared or sold?",
@@ -1275,11 +1275,11 @@ export const en: Messages = {
     },
     {
      q: "Does the platform support both Arabic and English?",
-     a: "Yes, fully — you choose the language for each proposal when creating it, and the platform interface itself is available in both Arabic and English.",
+     a: "Yes, fully, you choose the language for each proposal when creating it, and the platform interface itself is available in both Arabic and English.",
     },
    ],
    ctaTitle: "Ready to try it yourself?",
-   ctaSubtitle: "Your first professional proposal is ready in minutes — no sign-up, no credit card.",
+   ctaSubtitle: "Your first professional proposal is ready in minutes, no sign-up, no credit card.",
    ctaButton: "Start a free proposal",
    ctaSecondary: "View pricing",
   },
@@ -1287,7 +1287,7 @@ export const en: Messages = {
    eyebrow: "Contact Ruwaq",
    title: "We're here to help",
    intro:
-    "Whether you're a property owner looking for a verified provider, or a contractor who needs a professional proposal tool — reach out and we'll respond within one business day.",
+    "Whether you're a property owner looking for a verified provider, or a contractor who needs a professional proposal tool, reach out and we'll respond within one business day.",
    emailLabel: "Email",
    whatsappLabel: "Support WhatsApp",
    responseTitle: "Response times",
@@ -1296,11 +1296,11 @@ export const en: Messages = {
    channels: [
     {
      title: "Engineering quote request",
-     body: "Use the request-a-quote form — we review it and match you with the right provider in Jeddah, Makkah, or Madinah.",
+     body: "Use the request-a-quote form, we review it and match you with the right provider in Jeddah, Makkah, or Madinah.",
     },
     {
      title: "Architectural visualization (Graphics House)",
-     body: "For 3D renders and visualization — use the visualization page or the dual-intent quote form.",
+     body: "For 3D renders and visualization, use the visualization page or the dual-intent quote form.",
     },
     {
      title: "Proposal studio for contractors",
@@ -1312,16 +1312,16 @@ export const en: Messages = {
    ctaFaq: "FAQ",
   },
   proposalsLanding: {
-   eyebrow: "Ruwaq · Proposal studio",
+   eyebrow: "Ruwaq, Proposal studio",
    title: "Professional proposals in minutes",
    titleHighlight: "with your branding",
    intro:
-    "Three inputs only — Ruwaq writes full scope, approved clauses, payment schedule, and an export-ready PDF. Try free, no card required.",
-   signedInHint: "You're signed in — continue from your dashboard.",
+    "Three inputs only, Ruwaq writes full scope, approved clauses, payment schedule, and an export-ready PDF. Try free, no card required.",
+   signedInHint: "You're signed in, continue from your dashboard.",
    myProposals: "My proposals",
    featuresTitle: "Why contractors choose Ruwaq",
    samplesTitle: "Explore ready samples",
-   samplesIntro: "Three templates to preview: fit-out, engineering supervision, and architectural visualization — demo data only.",
+   samplesIntro: "Three templates to preview: fit-out, engineering supervision, and architectural visualization, demo data only.",
    ctaPrimary: "Start a free proposal",
    ctaSecondary: "Preview a sample",
    ctaPricing: "Plans & pricing",
@@ -1346,8 +1346,8 @@ export const en: Messages = {
    },
    {
     slug: "ruwaq-executive",
-    brand: "Ruwaq — Executive",
-    title: "Engineering supervision — office tower",
+    brand: "Ruwaq, Executive",
+    title: "Engineering supervision, office tower",
     body: "A more formal layout for engineering firms: supervision, reports, timeline.",
     badge: "Ruwaq sample 2",
    },
@@ -1360,8 +1360,8 @@ export const en: Messages = {
    },
   ],
   headerFooterShowcase: {
-   title: "Customize your proposal look — 10 ready-made color styles",
-   subtitle: "Pick a style from the list and see a full real proposal in it — header, body, and footer.",
+   title: "Customize your proposal look, 10 ready-made color styles",
+   subtitle: "Pick a style from the list and see a full real proposal in it, header, body, and footer.",
    selectCta: "Start my proposal in this style",
    premiumBadge: "Subscription",
    premiumNote: "3 styles are free for everyone; the other 7 unlock automatically with any paid plan.",
@@ -1453,9 +1453,9 @@ export const en: Messages = {
   marketingHint:
    "Optional links enrich your proposal and market your business, no ads inside client documents.",
   errors: {
-   invalidPhone: "Invalid phone number — digits only, with or without a country code (e.g. 0501234567).",
+   invalidPhone: "Invalid phone number, digits only, with or without a country code (e.g. 0501234567).",
    invalidEmail: "Invalid email address.",
-   invalidUrl: "Invalid link — must start with https:// or http://.",
+   invalidUrl: "Invalid link, must start with https:// or http://.",
   },
   companyName: "Company name",
   logoUrl: "Logo URL",
@@ -1464,21 +1464,21 @@ export const en: Messages = {
   logoUpload: "Upload logo",
   logoUploading: "Uploading...",
   logoUploadFailed: "Logo upload failed. Use PNG, JPEG, WebP, or SVG under 2 MB.",
-  logoStorageWarning: "Heads up: cloud storage isn't enabled yet — this logo is saved temporarily and may be lost on the next deploy.",
+  logoStorageWarning: "Heads up: cloud storage isn't enabled yet, this logo is saved temporarily and may be lost on the next deploy.",
   headerFooter: {
    title: "Header & footer style",
-   hint: "Pick the color scheme shown at the top and bottom of your proposal — the preview updates live with your real details.",
+   hint: "Pick the color scheme shown at the top and bottom of your proposal, the preview updates live with your real details.",
    previewBadge: "Proposal",
    previewCompanyFallback: "Your company name",
-   prefilledNotice: "This is the style you picked on the template gallery — adjust it or save as-is.",
+   prefilledNotice: "This is the style you picked on the template gallery, adjust it or save as-is.",
   },
   exportTemplate: "Proposal template",
   exportTemplateHint:
    "Choose the layout used when you export proposals. Preview samples in the template gallery.",
   exportTemplateOptions: {
-   ruwaq: "Ruwaq Classic — fit-out & general contracting",
-   ruwaq_executive: "Ruwaq Executive — engineering & supervision",
-   graphics_house: "Graphics House — visualization & creative",
+   ruwaq: "Ruwaq Classic, fit-out & general contracting",
+   ruwaq_executive: "Ruwaq Executive, engineering & supervision",
+   graphics_house: "Graphics House, visualization & creative",
   },
   address: "Address",
   addressPlaceholder: "e.g. Riyadh, Al Malqa",
@@ -1501,7 +1501,7 @@ export const en: Messages = {
  },
  upgrade: {
   title: "Unlock premium templates",
-  subtitle: "Ruwaq Executive and Graphics House templates — a higher-end look for your proposals.",
+  subtitle: "Ruwaq Executive and Graphics House templates, a higher-end look for your proposals.",
   price: "$15 one-time",
   priceNote: "Paid via PayPal for now (a Saudi payment gateway is coming soon). The base template stays free forever.",
   cta: "Upgrade now",
@@ -1519,9 +1519,9 @@ export const en: Messages = {
   cta: "See Graphics House services",
  },
  gates: {
-  signInRequired: "You tried Ruwaq for free — nice! Sign in with Google (one click) to create more proposals.",
+  signInRequired: "You tried Ruwaq for free, nice! Sign in with Google (one click) to create more proposals.",
   signInCta: "Sign in with Google",
-  profileIncomplete: "Complete your company name and logo in Company Profile first — they appear on every exported proposal.",
+  profileIncomplete: "Complete your company name and logo in Company Profile first, they appear on every exported proposal.",
   profileIncompleteCta: "Complete company profile",
   quotaExceeded: "You've reached this month's proposal limit for your current plan.",
   quotaExceededCta: "View plans",
@@ -1535,7 +1535,7 @@ export const en: Messages = {
   unlimitedLabel: "Unlimited",
   proposalsPerMonth: "proposals / month",
   currentPlanNote: "Your current plan",
-  trialActiveNote: "The launch trial is live right now — everything is free and unlimited for a limited time.",
+  trialActiveNote: "The launch trial is live right now, everything is free and unlimited for a limited time.",
   contactCta: "Contact us to subscribe",
   mostPopular: "Most popular",
  },

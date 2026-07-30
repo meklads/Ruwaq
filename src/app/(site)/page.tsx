@@ -6,7 +6,6 @@ import { ProjectToursSection } from "@/modules/marketplace/components/project-to
 import { GuidesSection } from "@/modules/marketplace/components/guides-section";
 import { EditorialCategoryGrid } from "@/modules/marketplace/components/editorial-category-grid";
 import { HowItWorksSection } from "@/modules/marketplace/components/how-it-works-section";
-import { SocialProofSection } from "@/modules/marketplace/components/social-proof-section";
 import { ContractorPromoBanner } from "@/modules/marketplace/components/contractor-promo-banner";
 import { GraphicsHousePromoBanner } from "@/modules/marketplace/components/graphics-house-promo-banner";
 import { TurrivaPromoBanner } from "@/modules/marketplace/components/turriva-promo-banner";
@@ -42,7 +41,6 @@ export default async function HomePage() {
       />
       <GuidesSection />
       <HowItWorksSection copy={t.marketplace.howItWorks} locale={locale} />
-      <SocialProofSection copy={t.marketplace.socialProof} />
       <TurrivaPromoBanner />
       <GraphicsHousePromoBanner locale={locale} />
       <ContractorPromoBanner locale={locale} />

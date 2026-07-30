@@ -79,7 +79,7 @@ export default async function ListingDetailPage({ params }: Props) {
               <>
                 <span className="mx-2 text-neutral-300">/</span>
                 <Link href={`/${city.slug}/${catMeta.slug}`}>
-                  {catName} · {cityName}
+                  {catName}, {cityName}
                 </Link>
               </>
             ) : null}

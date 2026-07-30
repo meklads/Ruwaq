@@ -43,7 +43,7 @@ export default async function GuideArticlePage({ params }: Props) {
       <header className="ruwaq-ad-section border-b border-neutral-200">
         <div className="mx-auto max-w-3xl">
           <p className="ruwaq-ad-eyebrow">
-            {copy.eyebrow} · {guide.readMinutes} {copy.minRead}
+            {copy.eyebrow}, {guide.readMinutes} {copy.minRead}
           </p>
           <h1 className="ruwaq-ad-section-title">{title}</h1>
           <p className="ruwaq-ad-section-lead">{excerpt}</p>
