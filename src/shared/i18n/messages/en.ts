@@ -452,8 +452,7 @@ export const en: Messages = {
     luxury: "Marble, bespoke joinery, and lighting — villas, palaces, and hospitality.",
    },
    resultLabel: "Indicative range (non-binding)",
-   resultMeta: (areaSqm: number, tierLabel: string) =>
-    `For ${areaSqm.toLocaleString("en-SA")} m² — ${tierLabel}`,
+   resultMeta: "For {area} m² — {tier}",
    placeholder: "Adjust area or finish level to see a range.",
    invalidArea: "Enter an area between 50 and 20,000 m².",
    disclaimer:

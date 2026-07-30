@@ -448,8 +448,7 @@ export const ar = {
     luxury: "رخام، خشب، وإضاءة مخصصة — فلل وقصور وضيافة فاخرة.",
    },
    resultLabel: "النطاق التقديري (غير ملزم)",
-   resultMeta: (areaSqm: number, tierLabel: string) =>
-    `لـ ${areaSqm.toLocaleString("ar-SA")} م² — ${tierLabel}`,
+   resultMeta: "لـ {area} م² — {tier}",
    placeholder: "عدّل المساحة أو نوع التشطيب لعرض النطاق.",
    invalidArea: "أدخل مساحة بين 50 و 20,000 م².",
    disclaimer:

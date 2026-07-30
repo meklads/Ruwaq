@@ -14,6 +14,16 @@ import type { Locale } from "@/shared/i18n/locale";
 
 const TIERS: FitOutTier[] = ["standard", "premium", "luxury"];
 
+function formatResultMeta(
+  template: string,
+  areaSqm: number,
+  tierLabel: string,
+  locale: Locale
+): string {
+  const area = areaSqm.toLocaleString(locale === "ar" ? "ar-SA" : "en-SA");
+  return template.replace("{area}", area).replace("{tier}", tierLabel);
+}
+
 type Props = {
   copy: Messages["marketplace"]["budgetEstimator"];
   quoteCopy: Messages["marketplace"]["quote"];
@@ -129,7 +139,7 @@ export function BudgetEstimatorSection({
                 <p className="ruwaq-budget-estimator__result-label">{copy.resultLabel}</p>
                 <p className="ruwaq-budget-estimator__result-value">{rangeLabel}</p>
                 <p className="ruwaq-budget-estimator__result-meta">
-                  {copy.resultMeta(estimate.areaSqm, tierLabel)}
+                  {formatResultMeta(copy.resultMeta, estimate.areaSqm, tierLabel, locale)}
                 </p>
               </>
             ) : (

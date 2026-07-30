@@ -335,7 +335,7 @@ export type Messages = {
         luxury: string;
       };
       resultLabel: string;
-      resultMeta: (areaSqm: number, tierLabel: string) => string;
+      resultMeta: string;
       placeholder: string;
       invalidArea: string;
       disclaimer: string;
