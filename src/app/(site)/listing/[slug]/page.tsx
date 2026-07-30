@@ -11,6 +11,12 @@ import {
   type MarketplaceCategorySlug,
 } from "@/shared/constants/marketplace-taxonomy";
 import { JsonLdScript } from "@/modules/marketplace/components/json-ld-script";
+import { getShowcaseListingProfile } from "@/content/showcase-listings";
+import {
+  ListingShowcaseProfile,
+  ListingShowcaseWebsiteLink,
+} from "@/modules/marketplace/components/listing-showcase-profile";
+import { VerifiedBadgeTooltip } from "@/modules/marketplace/components/verified-badge-tooltip";
 import { RuwaqProBadge } from "@/modules/marketplace/components/ruwaq-pro-badge";
 import { ListingGallery } from "@/modules/marketplace/components/listing-gallery";
 import { listingGalleryWithFallback } from "@/modules/marketplace/lib/listing-image";
@@ -59,6 +65,7 @@ export default async function ListingDetailPage({ params }: Props) {
 
   const jsonLd = buildProviderListingJsonLdGraph(listing, locale);
   const gallery = listingGalleryWithFallback(listing);
+  const showcase = getShowcaseListingProfile(listing.slug);
 
   const digits = listing.whatsapp.replace(/\D/g, "");
   const waIntl = digits.startsWith("966") ? digits : `966${digits.replace(/^0/, "")}`;
@@ -87,11 +94,21 @@ export default async function ListingDetailPage({ params }: Props) {
 
           <header className="mt-6 border-b border-neutral-200 pb-8">
             <div className="flex flex-wrap gap-2">
+              {showcase?.isBenchmark ? (
+                <span className="ruwaq-listing-showcase__benchmark ruwaq-listing-showcase__benchmark--inline">
+                  {detail.benchmarkBadge}
+                </span>
+              ) : null}
               {listing.isFeatured ? (
                 <RuwaqProBadge label={labels.featuredPro} variant="featured" />
               ) : null}
               {listing.isVerified ? (
-                <RuwaqProBadge label={labels.verifiedPro} />
+                <VerifiedBadgeTooltip
+                  label={labels.verifiedPro}
+                  title={labels.verifiedTooltip.title}
+                  body={labels.verifiedTooltip.body}
+                  variant="verified"
+                />
               ) : null}
             </div>
             <h1 className="ruwaq-pro-directory-title mt-4">{title}</h1>
@@ -101,6 +118,10 @@ export default async function ListingDetailPage({ params }: Props) {
           </header>
 
           <ListingGallery images={gallery} title={title} copy={detail} />
+
+          {showcase ? (
+            <ListingShowcaseProfile profile={showcase} copy={detail} locale={locale} />
+          ) : null}
 
           <div className="mt-10 grid gap-10 md:grid-cols-[1fr_280px]">
             <article>
@@ -131,6 +152,13 @@ export default async function ListingDetailPage({ params }: Props) {
                 >
                   {labels.whatsapp}
                 </a>
+                {showcase ? (
+                  <ListingShowcaseWebsiteLink
+                    profile={showcase}
+                    copy={detail}
+                    locale={locale}
+                  />
+                ) : null}
                 {city && catMeta ? (
                   <Link
                     href={`/${city.slug}/${catMeta.slug}`}

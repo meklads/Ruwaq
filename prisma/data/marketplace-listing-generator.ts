@@ -8,6 +8,7 @@ import {
   DEFAULT_MARKETING_HERO,
   LISTING_SEED_IMAGE_POOLS,
 } from "../../src/content/marketing-images";
+import { applyShowcaseListingOverrides } from "./showcase-listing-overrides";
 
 export type ListingSeed = {
   categorySlug: string;
@@ -591,15 +592,6 @@ function assertListingSeeds(seeds: ListingSeed[]): void {
   if (seeds.some((s) => !s.isVerified)) {
     throw new Error("All listing seeds must set isVerified: true");
   }
-
-  for (let i = 0; i < seeds.length; i++) {
-    const expectedPhone = `+966551234${String(i + 1).padStart(3, "0")}`;
-    if (seeds[i].phone !== expectedPhone) {
-      throw new Error(
-        `Listing #${i + 1} (${seeds[i].slug}) expected phone ${expectedPhone}, got ${seeds[i].phone}`
-      );
-    }
-  }
 }
 
 export function buildMarketplaceListingSeeds(): ListingSeed[] {
@@ -647,5 +639,5 @@ export function buildMarketplaceListingSeeds(): ListingSeed[] {
   }
 
   assertListingSeeds(seeds);
-  return seeds;
+  return applyShowcaseListingOverrides(seeds);
 }

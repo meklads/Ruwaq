@@ -1996,6 +1996,82 @@
     @apply mt-6 flex justify-center;
   }
 
+  .ruwaq-listing-showcase__benchmark {
+    @apply mb-6 inline-flex border border-neutral-950 bg-neutral-950 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-white;
+  }
+
+  html[lang="ar"] .ruwaq-listing-showcase__benchmark {
+    @apply normal-case tracking-wide text-xs;
+  }
+
+  .ruwaq-listing-showcase__benchmark--inline {
+    @apply mb-0;
+  }
+
+  .ruwaq-listing-showcase__stats {
+    @apply grid gap-4 sm:grid-cols-3;
+  }
+
+  .ruwaq-listing-showcase__stat {
+    @apply border border-neutral-200 bg-neutral-50 p-4 text-center;
+  }
+
+  .ruwaq-listing-showcase__stat-label {
+    @apply text-[10px] font-semibold uppercase tracking-[0.16em] text-neutral-500;
+  }
+
+  html[lang="ar"] .ruwaq-listing-showcase__stat-label {
+    @apply normal-case tracking-wide text-xs;
+  }
+
+  .ruwaq-listing-showcase__stat-value {
+    @apply mt-2 text-lg font-semibold text-neutral-950;
+  }
+
+  .ruwaq-listing-showcase__section-title {
+    @apply text-xs font-semibold uppercase tracking-widest text-neutral-500;
+  }
+
+  html[lang="ar"] .ruwaq-listing-showcase__section-title {
+    @apply normal-case tracking-wide;
+  }
+
+  .ruwaq-listing-showcase__chips {
+    @apply mt-3 flex flex-wrap gap-2;
+  }
+
+  .ruwaq-listing-showcase__chip {
+    @apply border border-neutral-300 bg-white px-3 py-1.5 text-xs text-neutral-800;
+  }
+
+  .ruwaq-listing-showcase__highlights {
+    @apply space-y-2 text-sm leading-relaxed text-neutral-600;
+  }
+
+  .ruwaq-listing-showcase__projects {
+    @apply mt-3 divide-y divide-neutral-200 border border-neutral-200;
+  }
+
+  .ruwaq-listing-showcase__project-link {
+    @apply flex flex-wrap items-center justify-between gap-2 px-4 py-3 transition-colors hover:bg-neutral-50;
+  }
+
+  .ruwaq-listing-showcase__project-title {
+    @apply block font-medium text-neutral-950;
+  }
+
+  .ruwaq-listing-showcase__project-meta {
+    @apply block text-xs text-neutral-500;
+  }
+
+  .ruwaq-listing-showcase__project-cta {
+    @apply text-[10px] font-semibold uppercase tracking-[0.14em] text-neutral-900;
+  }
+
+  html[lang="ar"] .ruwaq-listing-showcase__project-cta {
+    @apply normal-case tracking-wide text-xs;
+  }
+
   .ruwaq-pro-card-title {
     @apply mt-2 font-display text-xl font-semibold leading-snug tracking-tight text-neutral-950;
     font-family: var(--font-marketing-latin), system-ui, sans-serif;

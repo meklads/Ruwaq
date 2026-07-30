@@ -403,6 +403,12 @@ export const ar = {
    aboutTitle: "نبذة",
    contactTitle: "التواصل",
    backToDirectory: "← العودة للدليل",
+   benchmarkBadge: "ملف مرجعي · Ruwaq PRO",
+   specialtiesTitle: "التخصصات",
+   projectsTitle: "مشاريع موثّقة",
+   viewTour: "شاهد الجولة ←",
+   visitWebsite: "زيارة الموقع",
+   crLabel: "السجل التجاري",
   },
   howItWorksPage: {
    eyebrow: "دليل",

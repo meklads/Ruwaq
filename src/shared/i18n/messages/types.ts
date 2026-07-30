@@ -293,6 +293,12 @@ export type Messages = {
       aboutTitle: string;
       contactTitle: string;
       backToDirectory: string;
+      benchmarkBadge: string;
+      specialtiesTitle: string;
+      projectsTitle: string;
+      viewTour: string;
+      visitWebsite: string;
+      crLabel: string;
     };
     howItWorksPage: {
       eyebrow: string;

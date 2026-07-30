@@ -407,6 +407,12 @@ export const en: Messages = {
    aboutTitle: "About",
    contactTitle: "Contact",
    backToDirectory: "← Back to directory",
+   benchmarkBadge: "Benchmark profile · Ruwaq PRO",
+   specialtiesTitle: "Specialties",
+   projectsTitle: "Verified projects",
+   viewTour: "View tour →",
+   visitWebsite: "Visit website",
+   crLabel: "CR number",
   },
   howItWorksPage: {
    eyebrow: "Guide",
