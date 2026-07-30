@@ -50,25 +50,16 @@ export const en: Messages = {
    cta: "Start a proposal",
   },
   contractorPromo: {
-   eyebrow: "For contractors only",
-   title: "Run a contracting or engineering company?",
-   subtitle:
-    "Create professional engineering quotes for your clients with AI in about two minutes — free to start.",
-   cta: "Create your free quote now",
+   headlineBefore: "Create proposals",
+   headlineEmphasis: "like the pros",
+   offerLine: "3 inputs → full PDF with your branding. Free · no card · ready in minutes.",
+   cta: "Start free proposal",
   },
   graphicsHousePromo: {
-   eyebrow: "Design & visualization",
-   title: "Sell the vision before ground breaks",
-   subtitle:
-    "Graphics House builds cinematic CGI, smart maquettes, and immersive sales galleries for developers and large-scale projects across the Gulf.",
-   services: [
-    "Cinematic CGI",
-    "Smart maquettes",
-    "Interactive experiences",
-    "Sales galleries",
-   ],
+   headlineBefore: "Step inside",
+   headlineEmphasis: "architectural media",
+   offerLine: "Cinematic CGI · smart maquettes · sales galleries — via Ruwaq partner Graphics House.",
    cta: "Register your project",
-   secondaryCta: "Visit Graphics House",
   },
   visualization: {
    metaTitle: "Architectural visualization — Graphics House via Ruwaq",

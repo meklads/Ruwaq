@@ -44,18 +44,16 @@ export type Messages = {
       cta: string;
     };
     contractorPromo: {
-      eyebrow?: string;
-      title: string;
-      subtitle: string;
+      headlineBefore: string;
+      headlineEmphasis: string;
+      offerLine: string;
       cta: string;
     };
     graphicsHousePromo: {
-      eyebrow?: string;
-      title: string;
-      subtitle: string;
-      services: readonly string[];
+      headlineBefore: string;
+      headlineEmphasis: string;
+      offerLine: string;
       cta: string;
-      secondaryCta: string;
     };
     visualization: {
       metaTitle: string;

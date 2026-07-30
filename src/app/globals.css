@@ -2047,6 +2047,142 @@
     color: var(--ruwaq-pro-black);
   }
 
+  /* —— AD-style horizontal featured ads (homepage partner + proposals) —— */
+  .ruwaq-ad-featured-banner {
+    @apply border-t border-neutral-950/10;
+  }
+
+  .ruwaq-ad-featured-banner__inner {
+    @apply mx-auto flex min-h-[17.5rem] max-w-7xl flex-col items-center justify-center gap-8 px-4 py-10 sm:px-6 lg:min-h-[18.5rem] lg:flex-row lg:gap-10 lg:py-12;
+  }
+
+  .ruwaq-ad-featured-banner__copy {
+    @apply w-full shrink-0 text-center lg:max-w-[17rem] lg:text-start xl:max-w-[19rem];
+  }
+
+  html[lang="ar"] .ruwaq-ad-featured-banner__copy {
+    @apply lg:text-start;
+  }
+
+  .ruwaq-ad-featured-headline {
+    font-family: var(--font-latin-display), Georgia, "Times New Roman", serif;
+    @apply text-[1.65rem] font-normal leading-[1.15] tracking-tight text-neutral-950 sm:text-[1.85rem] lg:text-[2rem];
+  }
+
+  html[lang="ar"] .ruwaq-ad-featured-headline,
+  html[data-lang="ar"] .ruwaq-ad-featured-headline {
+    font-family: var(--font-ar), var(--font-ar-fallback);
+    font-weight: 300;
+    letter-spacing: 0;
+    @apply text-[1.55rem] sm:text-[1.75rem] lg:text-[1.9rem];
+  }
+
+  .ruwaq-ad-featured-headline-em {
+    @apply font-normal not-italic;
+    font-style: italic;
+  }
+
+  html[lang="ar"] .ruwaq-ad-featured-headline-em {
+    font-style: normal;
+    font-weight: 500;
+  }
+
+  .ruwaq-ad-featured-offer {
+    @apply mt-3 text-sm leading-relaxed text-neutral-700 sm:text-[0.9375rem];
+  }
+
+  .ruwaq-ad-featured-banner__visual {
+    @apply flex shrink-0 items-center justify-center;
+  }
+
+  .ruwaq-ad-featured-banner__cta {
+    @apply shrink-0;
+  }
+
+  .ruwaq-ad-featured-cta {
+    @apply inline-flex min-w-[11rem] items-center justify-center bg-neutral-950 px-6 py-4 text-center text-[10px] font-bold uppercase tracking-[0.22em] text-white transition-colors hover:bg-black sm:min-w-[12.5rem] sm:px-8 sm:text-[11px];
+  }
+
+  html[lang="ar"] .ruwaq-ad-featured-cta {
+    @apply normal-case tracking-wide text-xs font-semibold;
+  }
+
+  .ruwaq-ad-featured-devices {
+    @apply relative h-[9.5rem] w-[15.5rem] sm:h-[10.5rem] sm:w-[17.5rem];
+  }
+
+  .ruwaq-ad-featured-device {
+    @apply absolute overflow-hidden border border-neutral-900/15 bg-neutral-900 shadow-lg;
+  }
+
+  .ruwaq-ad-featured-device--tablet {
+    @apply end-0 top-0 h-[7.75rem] w-[11.5rem] rounded-sm sm:h-[8.5rem] sm:w-[12.75rem];
+  }
+
+  .ruwaq-ad-featured-device--phone {
+    @apply bottom-0 start-0 z-10 h-[6.75rem] w-[3.65rem] rounded-[0.65rem] sm:h-[7.25rem] sm:w-[3.9rem];
+  }
+
+  .ruwaq-ad-featured-screen {
+    @apply relative h-full w-full overflow-hidden bg-neutral-100;
+  }
+
+  .ruwaq-ad-featured-screen--viz {
+    background: linear-gradient(180deg, #87aecf 0%, #c9d8e8 42%, #e8e4dc 100%);
+  }
+
+  .ruwaq-ad-featured-viz-sky {
+    @apply absolute inset-x-0 top-0 h-[45%];
+    background: linear-gradient(180deg, #6b93b8 0%, #a8c4dc 100%);
+  }
+
+  .ruwaq-ad-featured-viz-tower {
+    @apply absolute bottom-[18%] start-1/2 h-[52%] w-[38%] -translate-x-1/2 rounded-t-sm;
+    background: linear-gradient(145deg, #2a3442 0%, #4a5568 55%, #718096 100%);
+    clip-path: polygon(8% 100%, 0 0, 100% 0, 92% 100%);
+  }
+
+  .ruwaq-ad-featured-viz-tower--sm {
+    @apply bottom-[15%] h-[48%] w-[42%];
+  }
+
+  .ruwaq-ad-featured-viz-ground {
+    @apply absolute inset-x-0 bottom-0 h-[20%];
+    background: linear-gradient(180deg, #b8a998 0%, #8f8174 100%);
+  }
+
+  .ruwaq-ad-featured-screen--pdf {
+    @apply bg-white p-2 sm:p-2.5;
+  }
+
+  .ruwaq-ad-featured-pdf-header {
+    @apply mb-2 border-b border-neutral-200 pb-1.5;
+  }
+
+  .ruwaq-ad-featured-pdf-logo {
+    @apply text-[7px] font-bold uppercase tracking-[0.35em] text-ruwaq-gold sm:text-[8px];
+  }
+
+  .ruwaq-ad-featured-pdf-logo--sm {
+    @apply tracking-[0.2em];
+  }
+
+  .ruwaq-ad-featured-pdf-line {
+    @apply mb-1.5 h-[3px] rounded-full bg-neutral-200;
+  }
+
+  .ruwaq-ad-featured-pdf-line--title {
+    @apply mb-2 h-[5px] w-[70%] bg-neutral-800;
+  }
+
+  .ruwaq-ad-featured-pdf-line--short {
+    @apply w-[55%];
+  }
+
+  .ruwaq-ad-featured-pdf-block {
+    @apply mt-2 h-[2.25rem] rounded-sm bg-neutral-100 sm:h-[2.75rem];
+  }
+
   .ruwaq-ad-ghost-title {
     color: var(--ruwaq-ad-ghost-ink);
   }

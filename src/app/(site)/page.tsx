@@ -43,7 +43,7 @@ export default async function HomePage() {
       <HowItWorksSection copy={t.marketplace.howItWorks} locale={locale} />
       <SocialProofSection copy={t.marketplace.socialProof} />
       <GraphicsHousePromoBanner copy={t.marketplace.graphicsHousePromo} />
-      <ContractorPromoBanner copy={t.marketplace.contractorPromo} locale={locale} />
+      <ContractorPromoBanner copy={t.marketplace.contractorPromo} />
     </>
   );
 }
