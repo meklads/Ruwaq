@@ -1967,7 +1967,18 @@
     @apply border-neutral-900 opacity-100;
   }
 
-  /* AD PRO editorial lockup — B&W with marketing heading stack */
+  /* AD PRO editorial lockup — official black band asset (207×112) */
+  .ruwaq-brand-lockup--header-img {
+    @apply inline-flex shrink-0 items-center justify-center;
+  }
+
+  .ruwaq-brand-lockup__img {
+    display: block;
+    width: 207px;
+    height: 112px;
+    max-width: none;
+  }
+
   .ruwaq-brand-lockup--editorial .ruwaq-brand-ar {
     @apply text-[2rem] font-semibold tracking-tight text-neutral-950 sm:text-[2.25rem];
     font-family: var(--font-ar), var(--font-ar-fallback);

@@ -1,4 +1,12 @@
+import Image from "next/image";
 import Link from "next/link";
+
+/** Official header lockup — black band, white Arabic + gold English (207×112). */
+export const RUWQ_HEADER_LOCKUP = {
+  src: "/brand/ruwaq-header-lockup.png",
+  width: 207,
+  height: 112,
+} as const;
 
 type Props = {
   href?: string;
@@ -25,16 +33,28 @@ export function RuwaqLogo({
         ? "ruwaq-brand-lockup--dark"
         : "";
 
-  const logo = (
-    <span
-      className={`ruwaq-brand-lockup ${sizeClass} ${variantClass} ${className}`.trim()}
-    >
-      <span className="ruwaq-brand-wordmark">
-        <span className="ruwaq-brand-ar">رواق</span>
-        <span className="ruwaq-brand-en">RUWAQ</span>
+  const logo =
+    variant === "editorial" ? (
+      <span className={`ruwaq-brand-lockup ruwaq-brand-lockup--header-img ${className}`.trim()}>
+        <Image
+          src={RUWQ_HEADER_LOCKUP.src}
+          alt="رواق RUWAQ"
+          width={RUWQ_HEADER_LOCKUP.width}
+          height={RUWQ_HEADER_LOCKUP.height}
+          className="ruwaq-brand-lockup__img"
+          priority
+        />
       </span>
-    </span>
-  );
+    ) : (
+      <span
+        className={`ruwaq-brand-lockup ${sizeClass} ${variantClass} ${className}`.trim()}
+      >
+        <span className="ruwaq-brand-wordmark">
+          <span className="ruwaq-brand-ar">رواق</span>
+          <span className="ruwaq-brand-en">RUWAQ</span>
+        </span>
+      </span>
+    );
 
   if (!href) return logo;
 
