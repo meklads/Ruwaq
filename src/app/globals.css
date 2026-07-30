@@ -1967,16 +1967,23 @@
     @apply border-neutral-900 opacity-100;
   }
 
-  /* AD PRO editorial lockup — official black band asset (207×112) */
+  /* AD PRO editorial lockup — official brand asset */
   .ruwaq-brand-lockup--header-img {
     @apply inline-flex shrink-0 items-center justify-center;
   }
 
   .ruwaq-brand-lockup__img {
     display: block;
-    width: 207px;
-    height: 112px;
+    width: 175px;
+    height: auto;
+    aspect-ratio: 793 / 506;
     max-width: none;
+  }
+
+  @media (min-width: 640px) {
+    .ruwaq-brand-lockup__img {
+      width: 207px;
+    }
   }
 
   .ruwaq-brand-lockup--editorial .ruwaq-brand-ar {

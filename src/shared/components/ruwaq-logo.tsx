@@ -1,11 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 
-/** Official header lockup — black band, white Arabic + gold English (207×112). */
+/** Official header lockup — gold wordmark on black (793×506 source). */
 export const RUWQ_HEADER_LOCKUP = {
-  src: "/brand/ruwaq-header-lockup.png",
-  width: 207,
-  height: 112,
+  src: "/brand/ruwaq-logo2.png",
+  width: 793,
+  height: 506,
 } as const;
 
 type Props = {
