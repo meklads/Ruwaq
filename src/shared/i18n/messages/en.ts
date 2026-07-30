@@ -312,7 +312,7 @@ export const en: Messages = {
    titleAfter: "Directory",
    title: "Ruwaq PRO Directory",
    subtitle:
-    "Find verified contractors and suppliers in Jeddah, Makkah, and Madinah, free quotes for owners, AI proposal studio for professionals.",
+    "Verified contractors and suppliers in Jeddah, Makkah, and Madinah.",
    trustLine: "8 sectors, 3 cities, Free quote requests",
    allCategories: "All sectors",
    applyCta: "Join the directory",
@@ -324,6 +324,7 @@ export const en: Messages = {
    providersSection: "For professionals",
    requestQuoteLink: "Request a free quote",
    proposalStudioLink: "Open proposal studio",
+   tradeApplyBar: "Trade professional? Apply now",
   },
   join: {
    eyebrow: "RUWAQ PRO, Directory application",

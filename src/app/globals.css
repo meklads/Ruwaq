@@ -1598,43 +1598,62 @@
 
   /* —— Ruwaq PRO · AD PRO editorial luxury —— */
   .ruwaq-pro-hero {
-    @apply relative flex min-h-[620px] w-full flex-col items-center justify-center overflow-hidden border-b border-neutral-950 bg-neutral-950 px-4 pb-16 pt-20 text-center md:min-h-[720px] md:pb-20 md:pt-24;
+    @apply relative flex min-h-[560px] w-full flex-col items-center justify-center overflow-hidden border-b border-neutral-950 bg-neutral-950 px-4 pb-14 pt-16 text-center md:min-h-[640px] md:pb-16 md:pt-20;
   }
 
   .ruwaq-pro-hero-bg {
-    @apply absolute inset-0 scale-[1.03] bg-cover bg-center;
-    filter: saturate(1.02) contrast(1.02) brightness(1.06);
+    @apply absolute inset-0 bg-cover bg-center;
+    filter: saturate(0.95) contrast(1.04) brightness(0.92);
   }
 
   .ruwaq-pro-hero-overlay {
     @apply absolute inset-0;
     background: linear-gradient(
-      165deg,
-      rgba(8, 8, 8, 0.22) 0%,
-      rgba(8, 8, 8, 0.38) 48%,
-      rgba(8, 8, 8, 0.52) 100%
-    );
-  }
-
-  .ruwaq-pro-hero-vignette {
-    @apply pointer-events-none absolute inset-0;
-    background: radial-gradient(
-      ellipse 90% 75% at 50% 42%,
-      transparent 0%,
-      rgba(0, 0, 0, 0.18) 100%
+      180deg,
+      rgba(8, 8, 8, 0.55) 0%,
+      rgba(8, 8, 8, 0.45) 45%,
+      rgba(8, 8, 8, 0.62) 100%
     );
   }
 
   .ruwaq-pro-hero-inner {
-    @apply relative z-10 mx-auto flex w-full max-w-5xl flex-col items-center;
+    @apply relative z-10 mx-auto flex w-full max-w-4xl flex-col items-center;
   }
 
   .ruwaq-pro-hero-search {
-    @apply mt-8 w-full max-w-4xl px-0;
+    @apply mt-7 w-full max-w-3xl px-0;
   }
 
   .ruwaq-pro-hero-search-form {
-    @apply flex w-full flex-col gap-3 border border-white/20 bg-white/[0.97] p-4 shadow-[0_24px_64px_rgba(0,0,0,0.35)] backdrop-blur-md sm:flex-row sm:items-end sm:gap-4 sm:p-5;
+    @apply flex w-full flex-col gap-3 border-0 bg-white p-4 shadow-[0_16px_48px_rgba(0,0,0,0.28)] sm:flex-row sm:items-end sm:gap-3 sm:p-4;
+  }
+
+  .ruwaq-pro-display--hero {
+    @apply text-3xl md:text-[2.75rem] md:leading-[1.15];
+  }
+
+  .ruwaq-pro-subtitle {
+    @apply text-white/85;
+  }
+
+  .ruwaq-pro-hero-category-row {
+    @apply flex w-full max-w-3xl flex-wrap items-stretch justify-center gap-2;
+  }
+
+  .ruwaq-pro-hero-category-box {
+    @apply flex min-h-[2.75rem] flex-1 items-center justify-center border border-white/90 bg-white px-3 py-2.5 text-center text-[10px] font-semibold uppercase leading-snug tracking-[0.14em] text-neutral-950 transition-colors hover:bg-neutral-100 sm:min-w-[9rem] sm:max-w-[12rem] sm:flex-none sm:text-[11px];
+  }
+
+  html[lang="ar"] .ruwaq-pro-hero-category-box {
+    @apply normal-case tracking-normal text-xs font-medium;
+  }
+
+  .ruwaq-pro-hero-trade-bar {
+    @apply inline-flex w-full max-w-3xl items-center justify-center bg-neutral-950/90 px-5 py-3.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-white transition-colors hover:bg-black;
+  }
+
+  html[lang="ar"] .ruwaq-pro-hero-trade-bar {
+    @apply normal-case tracking-wide text-sm font-medium;
   }
 
   .ruwaq-pro-hero-trust {
@@ -1892,7 +1911,7 @@
   }
 
   .ruwaq-pro-btn-solid {
-    @apply inline-flex items-center justify-center bg-neutral-950 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-white transition-colors hover:bg-black;
+    @apply inline-flex items-center justify-center bg-neutral-950 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-black;
   }
 
   html[lang="ar"] .ruwaq-pro-btn-solid {
@@ -2027,8 +2046,18 @@
     @apply normal-case tracking-wide text-xs;
   }
 
+  .ruwaq-ad-header .ruwaq-brand-lockup__img {
+    width: 132px;
+  }
+
+  @media (min-width: 640px) {
+    .ruwaq-ad-header .ruwaq-brand-lockup__img {
+      width: 148px;
+    }
+  }
+
   .ruwaq-ad-nav-link {
-    @apply text-[10px] font-semibold uppercase tracking-[0.22em] text-neutral-700 transition-colors hover:text-neutral-950;
+    @apply border-b-2 border-transparent pb-0.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-neutral-600 transition-colors hover:border-neutral-950 hover:text-neutral-950;
   }
 
   html[lang="ar"] .ruwaq-ad-nav-link {
@@ -2036,7 +2065,7 @@
   }
 
   .ruwaq-ad-mobile-nav-link {
-    @apply shrink-0 border-e border-neutral-200 px-4 py-3 text-[10px] font-semibold uppercase tracking-widest text-neutral-700 transition-colors hover:bg-neutral-50 hover:text-neutral-950;
+    @apply shrink-0 border-e border-neutral-100 px-4 py-2.5 text-[10px] font-semibold uppercase tracking-widest text-neutral-600 transition-colors hover:bg-neutral-50 hover:text-neutral-950;
   }
 
   html[lang="ar"] .ruwaq-ad-mobile-nav-link {

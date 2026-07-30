@@ -217,6 +217,7 @@ export type Messages = {
       providersSection: string;
       requestQuoteLink: string;
       proposalStudioLink: string;
+      tradeApplyBar: string;
     };
     join: {
       eyebrow: string;
