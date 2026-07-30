@@ -15,6 +15,9 @@ type Props = {
   initialCity?: string;
   initialCategory?: string;
   initialIntent?: "marketplace" | "visualization";
+  initialProjectDetails?: string;
+  initialBudgetRange?: string;
+  disabled?: boolean;
 };
 
 export function QuoteRequestModal({
@@ -27,6 +30,9 @@ export function QuoteRequestModal({
   initialCity,
   initialCategory,
   initialIntent = "marketplace",
+  initialProjectDetails,
+  initialBudgetRange,
+  disabled = false,
 }: Props) {
   const [open, setOpen] = useState(false);
   const dialogRef = useRef<HTMLDialogElement>(null);
@@ -44,6 +50,7 @@ export function QuoteRequestModal({
         type="button"
         className={className}
         onClick={() => setOpen(true)}
+        disabled={disabled}
       >
         {triggerLabel}
       </button>
@@ -68,13 +75,15 @@ export function QuoteRequestModal({
             ✕
           </button>
           <QuoteRequestForm
-            key={`${initialCity ?? "jeddah"}-${initialCategory ?? "fit-out"}-${initialIntent}`}
+            key={`${initialCity ?? "jeddah"}-${initialCategory ?? "fit-out"}-${initialIntent}-${initialProjectDetails ?? ""}`}
             copy={copy}
             visualizationCopy={visualizationCopy}
             locale={locale}
             initialCity={initialCity}
             initialCategory={initialCategory}
             initialIntent={initialIntent}
+            initialProjectDetails={initialProjectDetails}
+            initialBudgetRange={initialBudgetRange}
             variant="modal"
             onSuccessClose={() => setOpen(false)}
           />

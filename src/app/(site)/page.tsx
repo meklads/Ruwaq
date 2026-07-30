@@ -1,6 +1,7 @@
 import { getMessages } from "@/shared/i18n";
 import { getLocale } from "@/shared/i18n/server";
 import { RuwaqProHero } from "@/modules/marketplace/components/directory/RuwaqProHero";
+import { BudgetEstimatorSection } from "@/modules/marketplace/components/budget-estimator-section";
 import { TodaysDirectorySection } from "@/modules/marketplace/components/todays-directory-section";
 import { ProjectToursSection } from "@/modules/marketplace/components/project-tours-section";
 import { GuidesSection } from "@/modules/marketplace/components/guides-section";
@@ -28,6 +29,13 @@ export default async function HomePage() {
       <RuwaqProHero
         copy={t.marketplace.proDirectory}
         searchCopy={t.marketplace.search}
+        locale={locale}
+      />
+      <BudgetEstimatorSection
+        copy={t.marketplace.budgetEstimator}
+        quoteCopy={t.marketplace.quote}
+        visualizationCopy={t.marketplace.visualization}
+        closeLabel={t.nav.closeModal}
         locale={locale}
       />
       <TodaysDirectorySection />

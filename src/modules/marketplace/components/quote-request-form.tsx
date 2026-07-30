@@ -36,6 +36,8 @@ type Props = {
   initialCity?: string;
   initialCategory?: string;
   initialIntent?: QuoteIntent;
+  initialProjectDetails?: string;
+  initialBudgetRange?: string;
   variant?: "page" | "modal";
   onSuccessClose?: () => void;
 };
@@ -47,6 +49,8 @@ export function QuoteRequestForm({
   initialCity = "jeddah",
   initialCategory = "fit-out",
   initialIntent = "marketplace",
+  initialProjectDetails = "",
+  initialBudgetRange = "",
   variant = "page",
   onSuccessClose,
 }: Props) {
@@ -62,8 +66,8 @@ export function QuoteRequestForm({
   const [categorySlug, setCategorySlug] = useState(resolvedCategory);
   const [projectType, setProjectType] =
     useState<(typeof PROJECT_TYPE_KEYS)[number]>("residential");
-  const [projectDetails, setProjectDetails] = useState("");
-  const [budgetRange, setBudgetRange] = useState("");
+  const [projectDetails, setProjectDetails] = useState(initialProjectDetails);
+  const [budgetRange, setBudgetRange] = useState(initialBudgetRange);
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
   const [marketplaceSuccess, setMarketplaceSuccess] = useState<{
@@ -80,6 +84,14 @@ export function QuoteRequestForm({
   useEffect(() => {
     setIntent(initialIntent);
   }, [initialIntent]);
+
+  useEffect(() => {
+    if (initialProjectDetails) setProjectDetails(initialProjectDetails);
+  }, [initialProjectDetails]);
+
+  useEffect(() => {
+    if (initialBudgetRange) setBudgetRange(initialBudgetRange);
+  }, [initialBudgetRange]);
 
   const isVisualization = intent === "visualization";
   const isCompactModal = variant === "modal" && !isVisualization;
@@ -124,8 +136,12 @@ export function QuoteRequestForm({
       clientEmail: !isCompactModal && clientEmail.trim() ? clientEmail.trim() : undefined,
       citySlug,
       categorySlug,
-      projectDetails: isCompactModal ? buildCompactProjectDetails() : projectDetails,
-      budgetRange: isCompactModal ? undefined : budgetRange || undefined,
+      projectDetails: isCompactModal
+        ? projectDetails.trim().length >= 10
+          ? projectDetails
+          : buildCompactProjectDetails()
+        : projectDetails,
+      budgetRange: budgetRange.trim() || undefined,
       locale,
     });
     setPending(false);

@@ -14,6 +14,9 @@ type Props = {
   initialCity?: string;
   initialCategory?: string;
   initialIntent?: "marketplace" | "visualization";
+  initialProjectDetails?: string;
+  initialBudgetRange?: string;
+  disabled?: boolean;
 };
 
 /** Single quote action — reuse in header, hero, and contextual pages (not duplicated in footer/about). */

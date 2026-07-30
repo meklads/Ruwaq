@@ -427,6 +427,33 @@ export const en: Messages = {
    trendingTitle: "Browse by trade",
    allSectors: "All sectors",
   },
+  budgetEstimator: {
+   eyebrow: "Budget estimator",
+   title: "What might your fit-out cost?",
+   subtitle:
+    "Enter area and finish level for an indicative range — then request an accurate quote from verified firms.",
+   areaLabel: "Project area (m²)",
+   areaHint: "50–20,000 m² — villas, apartments, or commercial units.",
+   tierLabel: "Finish level",
+   tiers: {
+    standard: "Practical finish",
+    premium: "Premium finish",
+    luxury: "Luxury finish",
+   },
+   tierDescriptions: {
+    standard: "Solid materials and clean execution — rentals and fast-track projects.",
+    premium: "Hotel-grade finishes and curated specs — most common for villas.",
+    luxury: "Marble, bespoke joinery, and lighting — villas, palaces, and hospitality.",
+   },
+   resultLabel: "Indicative range (non-binding)",
+   resultMeta: (areaSqm: number, tierLabel: string) =>
+    `For ${areaSqm.toLocaleString("en-SA")} m² — ${tierLabel}`,
+   placeholder: "Adjust area or finish level to see a range.",
+   invalidArea: "Enter an area between 50 and 20,000 m².",
+   disclaimer:
+    "Guide only — final price depends on materials, drawings, and site survey. ±15% variance is common.",
+   cta: "Request an accurate quote",
+  },
   projectTours: {
    eyebrow: "Project tour",
    title: "Ruwaq project tours",

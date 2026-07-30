@@ -10,7 +10,8 @@ declare global {
 export type AnalyticsEvent =
   | "quote_submit"
   | "visualization_lead"
-  | "proposal_start";
+  | "proposal_start"
+  | "budget_estimate";
 
 type EventParams = Record<string, string | number | boolean | undefined>;
 

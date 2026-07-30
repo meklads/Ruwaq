@@ -311,6 +311,30 @@ export type Messages = {
       trendingTitle: string;
       allSectors: string;
     };
+    budgetEstimator: {
+      eyebrow: string;
+      title: string;
+      subtitle: string;
+      areaLabel: string;
+      areaHint: string;
+      tierLabel: string;
+      tiers: {
+        standard: string;
+        premium: string;
+        luxury: string;
+      };
+      tierDescriptions: {
+        standard: string;
+        premium: string;
+        luxury: string;
+      };
+      resultLabel: string;
+      resultMeta: (areaSqm: number, tierLabel: string) => string;
+      placeholder: string;
+      invalidArea: string;
+      disclaimer: string;
+      cta: string;
+    };
     projectTours: {
       eyebrow: string;
       title: string;
