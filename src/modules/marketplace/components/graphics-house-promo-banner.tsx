@@ -1,11 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { MARKETING_IMAGES } from "@/content/marketing-images";
+import { graphicsHouseProjectLaunchReferralUrl } from "@/shared/constants/brand";
 import type { Locale } from "@/shared/i18n/locale";
-
-type Props = {
-  locale: Locale;
-};
 
 const GRAPHICS_HOUSE_AD = {
   ar: {
@@ -22,6 +19,10 @@ const GRAPHICS_HOUSE_AD = {
   },
 } as const;
 
+type Props = {
+  locale: Locale;
+};
+
 /** Graphics House banner, locale-specific asset (ad2Ar / ad2En). */
 export function GraphicsHousePromoBanner({ locale }: Props) {
   const ad = GRAPHICS_HOUSE_AD[locale];
@@ -33,7 +34,12 @@ export function GraphicsHousePromoBanner({ locale }: Props) {
       aria-label={ad.alt}
     >
       <div className="ruwaq-ad-featured-section__frame">
-        <Link href="/visualization" className="ruwaq-ad-featured-image-link">
+        <Link
+          href={graphicsHouseProjectLaunchReferralUrl("homepage_featured_ad")}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="ruwaq-ad-featured-image-link"
+        >
           <Image
             src={ad.src}
             alt={ad.alt}

@@ -1,7 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { MARKETING_IMAGES } from "@/content/marketing-images";
-import { turrivaReferralUrl } from "@/shared/constants/brand";
+import {
+  graphicsHouseProjectLaunchReferralUrl,
+  turrivaReferralUrl,
+} from "@/shared/constants/brand";
 import type { Locale } from "@/shared/i18n/locale";
 
 type Props = {
@@ -27,6 +30,7 @@ const GRAPHICS_HOUSE_AD = {
 export function PartnerPromoRow({ locale }: Props) {
   const gh = GRAPHICS_HOUSE_AD[locale];
   const turrivaHref = turrivaReferralUrl("homepage_featured_ad");
+  const ghHref = graphicsHouseProjectLaunchReferralUrl("homepage_featured_ad");
 
   return (
     <section
@@ -51,7 +55,13 @@ export function PartnerPromoRow({ locale }: Props) {
           />
         </Link>
 
-        <Link id="visualization" href="/visualization" className="ruwaq-ad-partner-row__item">
+        <Link
+          id="visualization"
+          href={ghHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="ruwaq-ad-partner-row__item"
+        >
           <Image
             src={gh.src}
             alt={gh.alt}
