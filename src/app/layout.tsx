@@ -86,9 +86,17 @@ export async function generateMetadata(): Promise<Metadata> {
       title,
       description,
       url: RUWQ_PUBLIC_URL,
-      siteName: "Ruwaq",
+      siteName: locale === "ar" ? "رواق" : "Ruwaq",
       locale: locale === "ar" ? "ar_SA" : "en_US",
       type: "website",
+      images: [
+        {
+          url: DEFAULT_MARKETING_HERO,
+          width: 1749,
+          height: 899,
+          alt: title,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
