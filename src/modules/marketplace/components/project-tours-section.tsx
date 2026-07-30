@@ -10,7 +10,7 @@ export async function ProjectToursSection() {
   const copy = t.marketplace.projectTours;
 
   return (
-    <section className="ruwaq-ad-section border-t border-neutral-200 bg-neutral-50" id="tours">
+    <section className="ruwaq-ad-band-stone ruwaq-ad-section border-t border-neutral-200" id="tours">
       <div className="mx-auto max-w-7xl">
         <header className="ruwaq-ad-section-header">
           <div>

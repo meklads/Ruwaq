@@ -49,6 +49,58 @@ export type Messages = {
       subtitle: string;
       cta: string;
     };
+    graphicsHousePromo: {
+      eyebrow?: string;
+      title: string;
+      subtitle: string;
+      services: readonly string[];
+      cta: string;
+      secondaryCta: string;
+    };
+    visualization: {
+      metaTitle: string;
+      metaDescription: string;
+      eyebrow: string;
+      title: string;
+      subtitle: string;
+      formLabel: string;
+      services: readonly string[];
+      trustTitle: string;
+      trustItems: readonly string[];
+      partnerNote: string;
+      submit: string;
+      submitting: string;
+      successTitle: string;
+      successBody: string;
+      externalCta: string;
+      privacyNote: string;
+      privacyLink: string;
+      fields: {
+        name: string;
+        company: string;
+        companyPlaceholder: string;
+        phone: string;
+        phonePlaceholder: string;
+        projectType: string;
+        city: string;
+        cityOptional: string;
+        details: string;
+        budget: string;
+      };
+      projectTypes: {
+        residential: string;
+        commercial: string;
+        hospitality: string;
+        mixed_use: string;
+        government: string;
+        other: string;
+      };
+      errors: {
+        validation: string;
+        invalid_phone: string;
+        server: string;
+      };
+    };
     howItWorks: {
       title: string;
       subtitle: string;
@@ -564,7 +616,15 @@ export type Messages = {
       sponsoredByLink: string;
       ctaTitle: string;
       ctaSubtitle: string;
+      ctaOwner: string;
       ctaButton: string;
+      ecosystem: string;
+      graphicsHouse: string;
+      graphicsHouseVisualization: string;
+      turriva: string;
+      followUs: string;
+      regionLabel: string;
+      affiliateNote: string;
     };
   };
   pages: {

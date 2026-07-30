@@ -535,6 +535,10 @@ enum MarketplaceLeadStatus {
   CLOSED
 }
 
+enum PartnerLeadSource {
+  GRAPHICS_HOUSE
+}
+
 enum DirectoryApplicationStatus {
   PENDING
   REVIEWING
@@ -613,6 +617,23 @@ model MarketplaceLead {
 
   @@index([status, createdAt])
   @@index([city, categoryId])
+}
+
+model PartnerLead {
+  id             String            @id @default(cuid())
+  source         PartnerLeadSource @default(GRAPHICS_HOUSE)
+  clientName     String
+  clientPhone    String
+  companyName    String?
+  city           MarketplaceCity?
+  projectType    String
+  projectDetails String            @db.Text
+  budgetRange    String?
+  locale         String            @default("ar")
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+
+  @@index([source, createdAt])
 }
 
 model DirectoryApplication {

@@ -29,6 +29,11 @@
     --ruwaq-pro-black: #0a0a0a;
     --ruwaq-pro-offwhite: #ffffff;
     --ruwaq-pro-border: #e5e5e5;
+    /* Editorial third tones — charcoal bands, AD greige CTAs, warm stone sections */
+    --ruwaq-ad-charcoal: #0c0c0c;
+    --ruwaq-ad-greige: #e4dfd6;
+    --ruwaq-ad-stone: #f3f0eb;
+    --ruwaq-ad-ghost-ink: #1a1a1a;
     --ruwaq-cream: var(--ruwaq-stone);
     --ruwaq-cream-bg: var(--ruwaq-linen);
     --background: 0 0% 100%;
@@ -1937,12 +1942,39 @@
     @apply normal-case tracking-wide text-xs;
   }
 
+  .ruwaq-ad-band-charcoal {
+    background-color: var(--ruwaq-ad-charcoal);
+    color: #ffffff;
+  }
+
+  .ruwaq-ad-band-greige {
+    background-color: var(--ruwaq-ad-greige);
+    color: var(--ruwaq-pro-black);
+  }
+
+  .ruwaq-ad-band-stone {
+    background-color: var(--ruwaq-ad-stone);
+    color: var(--ruwaq-pro-black);
+  }
+
+  .ruwaq-ad-ghost-title {
+    color: var(--ruwaq-ad-ghost-ink);
+  }
+
   .ruwaq-ad-footer {
-    @apply border-t border-neutral-200 bg-white;
+    @apply border-t border-neutral-950;
   }
 
   .ruwaq-ad-footer-heading {
-    @apply text-[10px] font-semibold uppercase tracking-[0.28em] text-neutral-950;
+    @apply text-[10px] font-semibold uppercase tracking-[0.28em];
+  }
+
+  .ruwaq-ad-footer--dark .ruwaq-ad-footer-heading {
+    @apply text-white/70;
+  }
+
+  .ruwaq-ad-footer--light .ruwaq-ad-footer-heading {
+    @apply text-neutral-950;
   }
 
   html[lang="ar"] .ruwaq-ad-footer-heading {
@@ -1950,7 +1982,34 @@
   }
 
   .ruwaq-ad-footer-link {
-    @apply text-sm text-neutral-600 transition-colors hover:text-neutral-950;
+    @apply text-sm transition-colors;
+  }
+
+  .ruwaq-ad-footer--dark .ruwaq-ad-footer-link {
+    @apply text-white/80 hover:text-white;
+  }
+
+  .ruwaq-ad-footer--light .ruwaq-ad-footer-link {
+    @apply text-neutral-600 hover:text-neutral-950;
+  }
+
+  .ruwaq-ad-footer-legal-link {
+    @apply text-[10px] uppercase tracking-widest transition-colors;
+  }
+
+  .ruwaq-ad-footer--dark .ruwaq-ad-footer-legal-link {
+    @apply text-white/60 hover:text-white;
+  }
+
+  .ruwaq-ad-footer-newsletter-title {
+    @apply font-display text-3xl font-semibold tracking-tight md:text-4xl;
+    font-family: var(--font-marketing-latin), system-ui, sans-serif;
+    letter-spacing: -0.02em;
+  }
+
+  html[lang="ar"] .ruwaq-ad-footer-newsletter-title,
+  html[data-lang="ar"] .ruwaq-ad-footer-newsletter-title {
+    font-family: var(--font-marketing-ar), var(--font-ar), sans-serif;
   }
 
   .ruwaq-ad-section {
