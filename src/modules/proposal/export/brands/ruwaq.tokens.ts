@@ -20,7 +20,7 @@ export const ruwaqBrand = {
     budgetMatchText: "#2D6A4F",
   },
   fonts: {
-    arabic: "'Almarai', 'Tajawal', 'Cairo', 'Noto Sans Arabic', Tahoma, sans-serif",
+    arabic: "'Tajawal', 'IBM Plex Sans Arabic', 'Noto Sans Arabic', Tahoma, sans-serif",
     latin: "'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif",
   },
   footer: {

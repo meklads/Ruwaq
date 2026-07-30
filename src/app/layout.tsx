@@ -1,15 +1,30 @@
 import type { Metadata } from "next";
-import { Almarai, Amiri, IBM_Plex_Sans_Arabic, Inter, Montserrat, Playfair_Display, Plus_Jakarta_Sans } from "next/font/google";
+import {
+  Amiri,
+  IBM_Plex_Sans_Arabic,
+  Inter,
+  Montserrat,
+  Playfair_Display,
+  Plus_Jakarta_Sans,
+  Tajawal,
+} from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
 import { getLocale } from "@/shared/i18n/server";
 import { localeDir } from "@/shared/i18n/locale";
 
-/** Same Arabic stack as dotforlife.com — Almarai 300/400/700 */
-const almarai = Almarai({
+/** Graphics House ProjectLaunch™ — Tajawal primary, IBM Plex Sans Arabic fallback */
+const tajawal = Tajawal({
   subsets: ["arabic"],
-  weight: ["300", "400", "700"],
+  weight: ["200", "300", "400", "500", "700"],
   variable: "--font-ar",
+  display: "swap",
+});
+
+const ibmPlexArabic = IBM_Plex_Sans_Arabic({
+  subsets: ["arabic"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-ar-alt",
   display: "swap",
 });
 
@@ -41,18 +56,11 @@ const playfair = Playfair_Display({
   display: "swap",
 });
 
-/** Marketing site — matches Graphics House ProjectLaunch™ stack */
+/** Marketing site — matches Graphics House ProjectLaunch™ stack (Inter on GH; Plus Jakarta on Ruwaq EN) */
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700", "800"],
   variable: "--font-marketing-latin",
-  display: "swap",
-});
-
-const ibmPlexArabic = IBM_Plex_Sans_Arabic({
-  subsets: ["arabic"],
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-marketing-ar",
   display: "swap",
 });
 
@@ -83,10 +91,10 @@ export default async function RootLayout({
       lang={locale}
       dir={dir}
       data-lang={locale}
-      className={`${almarai.variable} ${amiri.variable} ${inter.variable} ${montserrat.variable} ${playfair.variable} ${plusJakarta.variable} ${ibmPlexArabic.variable}`}
+      className={`${tajawal.variable} ${ibmPlexArabic.variable} ${amiri.variable} ${inter.variable} ${montserrat.variable} ${playfair.variable} ${plusJakarta.variable}`}
     >
       <body
-        className={`min-h-screen bg-white ${locale === "ar" ? almarai.className : plusJakarta.className}`}
+        className={`min-h-screen bg-white ${locale === "ar" ? tajawal.className : plusJakarta.className}`}
       >
         <Providers locale={locale}>{children}</Providers>
       </body>

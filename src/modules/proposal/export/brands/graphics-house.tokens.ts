@@ -18,7 +18,7 @@ export const graphicsHouseBrand = {
     printBorder: "#E5E7EB",
   },
   fonts: {
-    arabic: "'Almarai', 'Tajawal', 'Cairo', 'Noto Sans Arabic', Tahoma, sans-serif",
+    arabic: "'Tajawal', 'IBM Plex Sans Arabic', 'Noto Sans Arabic', Tahoma, sans-serif",
     latin: "'Montserrat', Georgia, 'Times New Roman', serif",
   },
   footer: {

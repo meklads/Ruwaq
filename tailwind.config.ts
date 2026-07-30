@@ -68,11 +68,11 @@ const config: Config = {
         },
       },
       fontFamily: {
-        ar: ["var(--font-ar)", "Segoe UI", "sans-serif"],
-        "ar-heading": ["var(--font-marketing-ar)", "var(--font-ar)", "sans-serif"],
+        ar: ["var(--font-ar)", "var(--font-ar-alt)", "IBM Plex Sans Arabic", "Segoe UI", "sans-serif"],
+        "ar-heading": ["var(--font-ar)", "var(--font-ar-alt)", "IBM Plex Sans Arabic", "sans-serif"],
         latin: ["var(--font-marketing-latin)", "system-ui", "sans-serif"],
-        sans: ["var(--font-ar)", "Segoe UI", "sans-serif"],
-        display: ["var(--font-marketing-ar)", "var(--font-ar)", "sans-serif"],
+        sans: ["var(--font-ar)", "var(--font-ar-alt)", "Segoe UI", "sans-serif"],
+        display: ["var(--font-ar)", "var(--font-ar-alt)", "IBM Plex Sans Arabic", "sans-serif"],
         "display-en": ["var(--font-marketing-latin)", "system-ui", "sans-serif"],
       },
       boxShadow: {
