@@ -21,7 +21,15 @@ import {
   normalizeKsaPhone,
   supportWhatsAppE164,
 } from "@/modules/marketplace/lib/lead-phone";
-import type { MarketplaceCity } from "@prisma/client";
+import {
+  parseCategorySlug,
+  parseCitySlug,
+} from "@/modules/marketplace/lib/marketplace-slugs";
+import {
+  MARKETPLACE_LISTINGS_PAGE_SIZE,
+  marketplaceListingsSkip,
+} from "@/modules/marketplace/lib/listings-query";
+import type { MarketplaceCity, Prisma } from "@prisma/client";
 
 const categorySlugs = MARKETPLACE_CATEGORIES.map((c) => c.slug) as [
   MarketplaceCategorySlug,
@@ -67,34 +75,36 @@ export type SubmitLeadResult =
 async function persistAndRouteLead(
   data: SubmitLeadInput
 ): Promise<SubmitLeadResult> {
-  const cityMeta = getCityBySlug(data.citySlug);
-  const categoryMeta = getCategoryBySlug(data.categorySlug);
+  const citySlug = parseCitySlug(data.citySlug);
+  const categorySlug = parseCategorySlug(data.categorySlug);
+  const cityMeta = getCityBySlug(citySlug);
+  const categoryMeta = getCategoryBySlug(categorySlug);
   if (!cityMeta || !categoryMeta) {
     return { success: false, error: "validation" };
   }
 
   const category = await db.serviceCategory.findUnique({
-    where: { slug: data.categorySlug },
+    where: { slug: categorySlug },
   });
   if (!category) {
     return { success: false, error: "category_missing" };
   }
 
-  const status = resolveLeadStatus(data.categorySlug);
+  const status = resolveLeadStatus(categorySlug);
   const assignedTo = status === "ASSIGNED_TO_TURRIVA" ? "TURRIVA" : null;
 
   const lead = await db.marketplaceLead.create({
     data: {
       clientName: data.clientName,
       clientPhone: data.clientPhone,
-      city: cityMeta.enum as MarketplaceCity,
+      city: cityMeta.enum,
       categoryId: category.id,
       projectDetails: data.projectDetails,
       budgetRange: data.budgetRange || null,
       status,
       assignedTo,
       locale: data.locale,
-      routingNote: buildRoutingNote(data.categorySlug),
+      routingNote: buildRoutingNote(categorySlug),
     },
   });
 
@@ -102,17 +112,21 @@ async function persistAndRouteLead(
     data.locale === "ar" ? categoryMeta.nameAr : categoryMeta.nameEn;
   const cityLabel = data.locale === "ar" ? cityMeta.nameAr : cityMeta.nameEn;
 
-  await notifyLeadRouting({
-    leadId: lead.id,
-    status,
-    clientName: lead.clientName,
-    clientPhone: lead.clientPhone,
-    city: data.citySlug,
-    categorySlug: data.categorySlug,
-    categoryLabel,
-    projectDetails: lead.projectDetails,
-    budgetRange: lead.budgetRange,
-  });
+  try {
+    await notifyLeadRouting({
+      leadId: lead.id,
+      status,
+      clientName: lead.clientName,
+      clientPhone: lead.clientPhone,
+      city: citySlug,
+      categorySlug,
+      categoryLabel,
+      projectDetails: lead.projectDetails,
+      budgetRange: lead.budgetRange,
+    });
+  } catch (err) {
+    console.error("[submitLead] notifyLeadRouting failed (lead saved)", err);
+  }
 
   const referenceCode = leadReferenceCode(lead.id);
   const supportPhone = supportWhatsAppE164();
@@ -164,25 +178,64 @@ export async function submitMarketplaceLeadAction(
   return submitLead(input);
 }
 
+export type ListingsQueryOptions = {
+  query?: string;
+  page?: number;
+  pageSize?: number;
+};
+
 export async function getListingsForCityCategory(
   citySlug: MarketplaceCitySlug,
-  categorySlug: MarketplaceCategorySlug
+  categorySlug: MarketplaceCategorySlug,
+  options: ListingsQueryOptions = {}
 ) {
   const city = getCityBySlug(citySlug);
   const category = await db.serviceCategory.findUnique({
     where: { slug: categorySlug },
   });
-  if (!city || !category) return { category: null, listings: [] };
+  if (!city || !category) {
+    return {
+      category: null,
+      listings: [],
+      total: 0,
+      page: 1,
+      pageSize: MARKETPLACE_LISTINGS_PAGE_SIZE,
+      totalPages: 0,
+    };
+  }
 
-  const listings = await db.providerListing.findMany({
-    where: {
-      city: city.enum,
-      categoryId: category.id,
-      isVerified: true,
-    },
-    orderBy: [{ isFeatured: "desc" }, { createdAt: "desc" }],
-    take: 48,
-  });
+  const pageSize = options.pageSize ?? MARKETPLACE_LISTINGS_PAGE_SIZE;
+  const page = options.page && options.page > 0 ? Math.floor(options.page) : 1;
+  const skip = marketplaceListingsSkip(page, pageSize);
+  const q = options.query?.trim();
 
-  return { category, listings };
+  const where: Prisma.ProviderListingWhereInput = {
+    city: city.enum as MarketplaceCity,
+    categoryId: category.id,
+    isVerified: true,
+    ...(q
+      ? {
+          OR: [
+            { titleAr: { contains: q, mode: "insensitive" } },
+            { descriptionAr: { contains: q, mode: "insensitive" } },
+            { titleEn: { contains: q, mode: "insensitive" } },
+            { descriptionEn: { contains: q, mode: "insensitive" } },
+          ],
+        }
+      : {}),
+  };
+
+  const [listings, total] = await Promise.all([
+    db.providerListing.findMany({
+      where,
+      orderBy: [{ isFeatured: "desc" }, { createdAt: "desc" }],
+      skip,
+      take: pageSize,
+    }),
+    db.providerListing.count({ where }),
+  ]);
+
+  const totalPages = total === 0 ? 0 : Math.ceil(total / pageSize);
+
+  return { category, listings, total, page, pageSize, totalPages };
 }

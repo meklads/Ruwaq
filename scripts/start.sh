@@ -11,7 +11,28 @@ echo "=========================================="
   echo "→ Database schema setup..."
   if ./node_modules/.bin/prisma db push --skip-generate 2>&1; then
     echo "→ Database schema ready ✓"
-    echo "→ Seeding categories, marketplace listings, and clause packs..."
+    echo "→ Seeding categories, marketplace listings (63 companies), and clause packs..."
+    # Legacy production DBs have 21 listings (1 per sector×city). Upgrade to 63 automatically.
+    if [ -z "$SEED_RESET" ]; then
+      LISTING_COUNT=$(npx tsx -e '
+        import { PrismaClient } from "@prisma/client";
+        const prisma = new PrismaClient();
+        prisma.providerListing
+          .count()
+          .then((count) => {
+            console.log(count);
+            return prisma.$disconnect();
+          })
+          .catch(async () => {
+            console.log("0");
+            await prisma.$disconnect();
+          });
+      ' 2>/dev/null | tail -1)
+      if [ -n "$LISTING_COUNT" ] && [ "$LISTING_COUNT" != "63" ]; then
+        echo "→ Found ${LISTING_COUNT} listings (expected 63) — enabling SEED_RESET for marketplace"
+        export SEED_RESET=true
+      fi
+    fi
     if npx tsx prisma/seed.ts 2>&1; then
       echo "→ Clause packs seeded ✓"
     else
