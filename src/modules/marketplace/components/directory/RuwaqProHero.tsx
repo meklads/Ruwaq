@@ -54,7 +54,7 @@ export function RuwaqProHero({
 
         <MarketplaceSearchBar copy={searchCopy} locale={locale} variant="hero" />
 
-        <div className="ruwaq-pro-hero-category-row mt-8">
+        <div className="ruwaq-pro-hero-category-row">
           {quickCategories.map((cat) => (
             <Link key={cat.href} href={cat.href} className="ruwaq-pro-hero-category-box">
               {cat.label}
@@ -65,9 +65,11 @@ export function RuwaqProHero({
           </Link>
         </div>
 
-        <Link href={copy.applyHref} className="ruwaq-pro-hero-trade-bar mt-5">
-          {copy.tradeApplyBar}
-        </Link>
+        <div className="ruwaq-pro-hero-trade-wrap">
+          <Link href={copy.applyHref} className="ruwaq-pro-hero-trade-bar">
+            {copy.tradeApplyBar}
+          </Link>
+        </div>
       </div>
     </section>
   );
