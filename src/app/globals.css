@@ -1633,7 +1633,15 @@
   }
 
   .ruwaq-pro-display--hero {
-    @apply text-3xl md:text-[2.75rem] md:leading-[1.15];
+    @apply text-3xl text-white md:text-[2.75rem] md:leading-[1.15];
+    color: #ffffff;
+  }
+
+  html[lang="en"] .ruwaq-pro-hero h1.ruwaq-pro-display,
+  html[data-lang="en"] .ruwaq-pro-hero h1.ruwaq-pro-display,
+  html[lang="ar"] .ruwaq-pro-hero h1.ruwaq-pro-display,
+  html[data-lang="ar"] .ruwaq-pro-hero h1.ruwaq-pro-display {
+    color: #ffffff;
   }
 
   .ruwaq-pro-subtitle {
@@ -1641,11 +1649,11 @@
   }
 
   .ruwaq-pro-hero-category-row {
-    @apply flex w-full max-w-3xl flex-wrap items-stretch justify-center gap-2;
+    @apply flex w-full max-w-6xl flex-nowrap items-stretch justify-center gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden;
   }
 
   .ruwaq-pro-hero-category-box {
-    @apply flex min-h-[2.75rem] flex-1 items-center justify-center border border-white/90 bg-white px-3 py-2.5 text-center text-[10px] font-semibold uppercase leading-snug tracking-[0.14em] text-neutral-950 transition-colors hover:bg-neutral-100 sm:min-w-[9rem] sm:max-w-[12rem] sm:flex-none sm:text-[11px];
+    @apply flex min-h-[2.75rem] shrink-0 items-center justify-center border border-white/90 bg-white px-2.5 py-2 text-center text-[9px] font-semibold uppercase leading-snug tracking-[0.1em] text-neutral-950 transition-colors hover:bg-neutral-100 sm:px-3 sm:text-[10px] md:text-[11px];
   }
 
   html[lang="ar"] .ruwaq-pro-hero-category-box {
@@ -2824,6 +2832,173 @@
 
   .ruwaq-guide-body {
     @apply text-sm leading-relaxed text-neutral-700 md:text-base;
+  }
+
+  .ruwaq-guide-body > * + * {
+    @apply mt-5;
+  }
+
+  .ruwaq-guide-h2 {
+    @apply mt-10 font-display text-xl font-semibold tracking-tight text-neutral-950 first:mt-0 md:text-2xl;
+    font-family: var(--font-marketing-latin), system-ui, sans-serif;
+  }
+
+  html[lang="ar"] .ruwaq-guide-h2,
+  html[data-lang="ar"] .ruwaq-guide-h2 {
+    font-family: var(--font-ar), var(--font-ar-fallback);
+    font-weight: 500;
+  }
+
+  .ruwaq-guide-h3 {
+    @apply mt-8 text-base font-semibold text-neutral-950 md:text-lg;
+  }
+
+  html[lang="ar"] .ruwaq-guide-h3 {
+    font-weight: 500;
+  }
+
+  .ruwaq-guide-list {
+    @apply list-disc space-y-2 ps-5 text-neutral-700;
+  }
+
+  .ruwaq-guide-list--ordered {
+    @apply list-decimal;
+  }
+
+  .ruwaq-guide-figure {
+    @apply my-8;
+  }
+
+  .ruwaq-guide-figure__frame {
+    @apply relative aspect-[16/10] overflow-hidden bg-neutral-100;
+  }
+
+  .ruwaq-guide-figure__img {
+    @apply h-full w-full object-cover;
+  }
+
+  .ruwaq-guide-figure__caption {
+    @apply mt-2 text-center text-xs leading-relaxed text-neutral-500;
+  }
+
+  .ruwaq-guide-table-wrap {
+    @apply my-8;
+  }
+
+  .ruwaq-guide-table-scroll {
+    @apply overflow-x-auto border border-neutral-200;
+  }
+
+  .ruwaq-guide-table {
+    @apply w-full min-w-[32rem] text-left text-sm;
+  }
+
+  html[lang="ar"] .ruwaq-guide-table {
+    @apply text-right;
+  }
+
+  .ruwaq-guide-table th {
+    @apply border-b border-neutral-200 bg-neutral-50 px-4 py-3 text-[10px] font-semibold uppercase tracking-widest text-neutral-600;
+  }
+
+  html[lang="ar"] .ruwaq-guide-table th {
+    @apply normal-case tracking-wide text-xs;
+  }
+
+  .ruwaq-guide-table td {
+    @apply border-b border-neutral-100 px-4 py-3 text-neutral-700;
+  }
+
+  .ruwaq-guide-table tr:last-child td {
+    @apply border-b-0;
+  }
+
+  .ruwaq-guide-table__caption {
+    @apply mt-2 text-xs leading-relaxed text-neutral-500;
+  }
+
+  .ruwaq-guide-chart {
+    @apply my-8 border border-neutral-200 bg-neutral-50 p-5 sm:p-6;
+  }
+
+  .ruwaq-guide-chart__row {
+    @apply grid grid-cols-[minmax(0,1.2fr)_minmax(0,2fr)_auto] items-center gap-3 py-2;
+  }
+
+  .ruwaq-guide-chart__label {
+    @apply text-xs font-medium text-neutral-700 sm:text-sm;
+  }
+
+  .ruwaq-guide-chart__track {
+    @apply h-2 overflow-hidden bg-neutral-200;
+  }
+
+  .ruwaq-guide-chart__bar {
+    @apply h-full bg-neutral-950 transition-all;
+  }
+
+  .ruwaq-guide-chart__value {
+    @apply text-xs font-semibold tabular-nums text-neutral-950 sm:text-sm;
+  }
+
+  .ruwaq-guide-chart__caption {
+    @apply mt-4 border-t border-neutral-200 pt-3 text-xs leading-relaxed text-neutral-500;
+  }
+
+  .ruwaq-guide-callout {
+    @apply my-8 border-s-4 px-5 py-4;
+  }
+
+  .ruwaq-guide-callout--tip {
+    @apply border-emerald-600 bg-emerald-50/60;
+  }
+
+  .ruwaq-guide-callout--warning {
+    @apply border-amber-600 bg-amber-50/70;
+  }
+
+  .ruwaq-guide-callout--fact {
+    @apply border-neutral-950 bg-neutral-50;
+  }
+
+  .ruwaq-guide-callout__title {
+    @apply text-xs font-semibold uppercase tracking-widest text-neutral-950;
+  }
+
+  html[lang="ar"] .ruwaq-guide-callout__title {
+    @apply normal-case tracking-wide;
+  }
+
+  .ruwaq-guide-callout__text {
+    @apply mt-2 text-sm leading-relaxed text-neutral-700;
+  }
+
+  .ruwaq-guide-cta {
+    @apply my-10 border border-neutral-950 bg-neutral-950 p-8 text-center text-white;
+  }
+
+  .ruwaq-guide-cta__lead {
+    @apply text-sm leading-relaxed text-white/80;
+  }
+
+  .ruwaq-guide-sources {
+    @apply mt-12 border-t border-neutral-200 pt-8;
+  }
+
+  .ruwaq-guide-sources__list {
+    @apply mt-3 space-y-2 text-sm text-neutral-600;
+  }
+
+  .ruwaq-guide-sources__list a {
+    @apply underline-offset-4 transition-colors hover:text-neutral-950 hover:underline;
+  }
+
+  .ruwaq-guide-article__header {
+    @apply max-w-4xl;
+  }
+
+  .ruwaq-guide-article__body {
+    @apply max-w-4xl py-12 sm:py-16;
   }
 
   .ruwaq-guide-body p:first-of-type::first-letter {

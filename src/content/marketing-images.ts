@@ -114,14 +114,21 @@ export const FEATURED_AD_IMAGES = {
   proposals: MARKETING_IMAGES.proposalDesk,
 } as const;
 
-/** Guide heroes — aligned with each article topic. */
+/** Guide heroes & inline illustrations — topic-aligned. */
 export const GUIDE_IMAGES = {
   marble: MARKETING_IMAGES.architecturalModel,
+  marbleInterior: MARKETING_IMAGES.interiorLounge,
+  marbleFacade: MARKETING_IMAGES.ghStudio,
   hvac: U("photo-1621905251189-08b45d6a269e"),
+  hvacDuct: U("photo-1631679706909-d082507cbce0"),
   kitchen: MARKETING_IMAGES.kitchenFamily,
+  kitchenPlan: MARKETING_IMAGES.familyDining,
   supervision: MARKETING_IMAGES.keysNewHome,
+  supervisionSite: MARKETING_IMAGES.modelHousePlanning,
   maintenance: MARKETING_IMAGES.familySavings,
+  maintenanceRoof: MARKETING_IMAGES.proposalDesk,
   landscape: MARKETING_IMAGES.hero,
+  landscapeGarden: U("photo-1585320806290-979417b93370"),
 } as const;
 
 /** Project tour heroes & galleries (local assets). */
