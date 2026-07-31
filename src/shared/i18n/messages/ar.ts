@@ -424,6 +424,8 @@ export const ar = {
   homeMagazine: {
    todaysDirectoryEyebrow: "دليل اليوم",
    todaysDirectoryTitle: "محترفون مميزون معتمدون",
+   todaysDirectoryLead:
+    "تواصل مع فرق تشطيب ومقاولات وتصميم معتمدة، مختارة لمشاريع المنطقة الغربية.",
    viewAllFeatured: "عرض كل المميزين",
    trendingEyebrow: "قطاعات رائجة",
    trendingTitle: "تصفّح حسب التخصص",

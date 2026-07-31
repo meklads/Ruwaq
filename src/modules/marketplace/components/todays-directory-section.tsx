@@ -9,6 +9,7 @@ import {
   type MarketplaceCategorySlug,
 } from "@/shared/constants/marketplace-taxonomy";
 import { ListingCard } from "@/modules/marketplace/components/directory/ListingCard";
+import { FeaturedDirectoryRail } from "@/modules/marketplace/components/featured-directory-rail";
 
 export async function TodaysDirectorySection() {
   const locale = await getLocale();
@@ -18,24 +19,27 @@ export async function TodaysDirectorySection() {
 
   if (listings.length === 0) return null;
 
-  const featured = listings.slice(0, 6);
+  const featured = listings.slice(0, 10);
+  const prevLabel = locale === "ar" ? "السابق" : "Previous";
+  const nextLabel = locale === "ar" ? "التالي" : "Next";
 
   return (
-    <section className="ruwaq-ad-section" aria-labelledby="todays-directory-title">
+    <section
+      className="ruwaq-ad-section ruwaq-ad-section--featured"
+      aria-labelledby="todays-directory-title"
+    >
       <div className="ruwaq-ad-content">
-        <header className="ruwaq-ad-section-header">
-          <div>
+        <header className="ruwaq-ad-section-header ruwaq-ad-section-header--featured">
+          <div className="ruwaq-ad-section-header__copy">
             <p className="ruwaq-ad-eyebrow">{copy.todaysDirectoryEyebrow}</p>
             <h2 id="todays-directory-title" className="ruwaq-ad-section-title">
               {copy.todaysDirectoryTitle}
             </h2>
+            <p className="ruwaq-ad-section-lead mx-auto">{copy.todaysDirectoryLead}</p>
           </div>
-          <Link href="/pro" className="ruwaq-pro-btn-outline hidden px-5 py-2 sm:inline-flex">
-            {copy.viewAllFeatured}
-          </Link>
         </header>
 
-        <div className="ruwaq-pro-editorial-grid">
+        <FeaturedDirectoryRail prevLabel={prevLabel} nextLabel={nextLabel}>
           {featured.map((listing) => {
             const cityMeta = getCityBySlug(citySlugFromEnum(listing.city));
             const catMeta = getCategoryBySlug(listing.category.slug as MarketplaceCategorySlug);
@@ -51,19 +55,20 @@ export async function TodaysDirectorySection() {
               : undefined;
 
             return (
-              <ListingCard
-                key={listing.id}
-                listing={listing}
-                labels={t.marketplace.listing}
-                locale={locale}
-                categoryLabel={categoryLabel}
-                cityLabel={cityLabel}
-              />
+              <div key={listing.id} className="ruwaq-ad-featured-rail__item">
+                <ListingCard
+                  listing={listing}
+                  labels={t.marketplace.listing}
+                  locale={locale}
+                  categoryLabel={categoryLabel}
+                  cityLabel={cityLabel}
+                />
+              </div>
             );
           })}
-        </div>
+        </FeaturedDirectoryRail>
 
-        <p className="mt-8 text-center sm:hidden">
+        <p className="mt-8 text-center">
           <Link href="/pro" className="ruwaq-pro-btn-outline px-6 py-2.5">
             {copy.viewAllFeatured}
           </Link>

@@ -428,6 +428,8 @@ export const en: Messages = {
   homeMagazine: {
    todaysDirectoryEyebrow: "Today's Directory",
    todaysDirectoryTitle: "Featured verified professionals",
+   todaysDirectoryLead:
+    "Connect with verified fit-out, contracting, and design teams curated for Western Region projects.",
    viewAllFeatured: "View all featured",
    trendingEyebrow: "Trending sectors",
    trendingTitle: "Browse by trade",

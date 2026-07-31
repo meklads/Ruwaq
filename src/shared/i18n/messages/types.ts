@@ -312,6 +312,7 @@ export type Messages = {
     homeMagazine: {
       todaysDirectoryEyebrow: string;
       todaysDirectoryTitle: string;
+      todaysDirectoryLead: string;
       viewAllFeatured: string;
       trendingEyebrow: string;
       trendingTitle: string;

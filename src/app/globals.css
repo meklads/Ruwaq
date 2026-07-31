@@ -35,9 +35,10 @@
     --ruwaq-ad-featured-bg: #c2c5ba;
     --ruwaq-ad-stone: #f3f0eb;
     --ruwaq-ad-ghost-ink: #1a1a1a;
-    /* AD PRO Directory layout — outer shell 1280px, editorial column 1140px */
-    --ruwaq-ad-frame-max: 80rem;
-    --ruwaq-ad-content-max: 71.25rem;
+    /* AD PRO Directory layout — wide editorial shell matching archdigest.com/adpro */
+    --ruwaq-ad-frame-max: 100rem;
+    --ruwaq-ad-content-max: 96rem;
+    --ruwaq-ad-gutter: clamp(1rem, 2.5vw, 2.75rem);
     --ruwaq-cream: var(--ruwaq-stone);
     --ruwaq-cream-bg: var(--ruwaq-linen);
     --background: 0 0% 100%;
@@ -1774,7 +1775,9 @@
   }
 
   .ruwaq-pro-directory-header {
-    @apply mx-auto w-full max-w-[var(--ruwaq-ad-content-max)] border-b border-neutral-200 px-4 pb-10 sm:px-6 lg:px-8;
+    @apply mx-auto w-full border-b border-neutral-200 pb-10;
+    max-width: var(--ruwaq-ad-content-max);
+    padding-inline: var(--ruwaq-ad-gutter);
   }
 
   .ruwaq-pro-directory-heading {
@@ -1830,7 +1833,9 @@
   }
 
   .ruwaq-pro-editorial-grid {
-    @apply mx-auto mt-10 grid w-full max-w-[var(--ruwaq-ad-content-max)] grid-cols-1 gap-8 px-4 sm:px-6 md:grid-cols-2 lg:grid-cols-3 lg:px-8;
+    @apply mx-auto mt-10 grid w-full grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 lg:gap-6;
+    max-width: var(--ruwaq-ad-content-max);
+    padding-inline: var(--ruwaq-ad-gutter);
   }
 
   .ruwaq-ad-content .ruwaq-pro-editorial-grid {
@@ -2268,11 +2273,15 @@
 
   /* —— AD PRO site shell (Architectural Digest inspired) —— */
   .ruwaq-ad-container {
-    @apply mx-auto w-full max-w-[var(--ruwaq-ad-frame-max)] px-4 sm:px-6 lg:px-8;
+    @apply mx-auto w-full;
+    max-width: var(--ruwaq-ad-frame-max);
+    padding-inline: var(--ruwaq-ad-gutter);
   }
 
   .ruwaq-ad-content {
-    @apply mx-auto w-full max-w-[var(--ruwaq-ad-content-max)] px-4 sm:px-6 lg:px-8;
+    @apply mx-auto w-full;
+    max-width: var(--ruwaq-ad-content-max);
+    padding-inline: var(--ruwaq-ad-gutter);
   }
 
   .ruwaq-ad-header {
@@ -2390,7 +2399,7 @@
   }
 
   .ruwaq-ad-featured-image-link {
-    @apply mx-auto block w-full max-w-[71.25rem] transition-opacity hover:opacity-95;
+    @apply mx-auto block w-full max-w-[var(--ruwaq-ad-content-max)] transition-opacity hover:opacity-95;
   }
 
   .ruwaq-ad-featured-image-banner {
@@ -2456,7 +2465,7 @@
   .ruwaq-ad-featured-banner {
     background-color: var(--ruwaq-ad-featured-bg);
     color: #000000;
-    @apply mx-auto w-full max-w-[71.25rem];
+    @apply mx-auto w-full max-w-[var(--ruwaq-ad-content-max)];
   }
 
   .ruwaq-ad-featured-banner__inner {
@@ -2688,6 +2697,72 @@
     @apply flex flex-col gap-4 border-b border-neutral-950 pb-6 sm:flex-row sm:items-end sm:justify-between;
   }
 
+  .ruwaq-ad-section-header--featured {
+    @apply flex-col items-center border-b border-neutral-950 pb-8 text-center;
+  }
+
+  .ruwaq-ad-section-header--featured .ruwaq-ad-section-header__copy {
+    @apply mx-auto w-full max-w-3xl text-center;
+  }
+
+  .ruwaq-ad-section-header--featured .ruwaq-ad-section-lead {
+    @apply mx-auto;
+  }
+
+  .ruwaq-ad-section--featured {
+    @apply border-t border-neutral-950 pt-12 sm:pt-14;
+  }
+
+  .ruwaq-ad-featured-rail-wrap {
+    @apply relative mt-8;
+  }
+
+  .ruwaq-ad-featured-rail-nav {
+    @apply absolute end-0 top-[-4.25rem] hidden items-center gap-1 sm:flex;
+  }
+
+  html[lang="ar"] .ruwaq-ad-featured-rail-nav {
+    @apply start-0 end-auto;
+  }
+
+  .ruwaq-ad-featured-rail-nav__btn {
+    @apply inline-flex h-9 w-9 items-center justify-center border border-neutral-300 bg-white text-lg leading-none text-neutral-700 transition-colors hover:border-neutral-950 hover:text-neutral-950;
+  }
+
+  .ruwaq-ad-featured-rail {
+    @apply flex gap-4 overflow-x-auto pb-1;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .ruwaq-ad-featured-rail::-webkit-scrollbar {
+    display: none;
+  }
+
+  .ruwaq-ad-featured-rail__item {
+    flex: 0 0 min(88vw, 22rem);
+    scroll-snap-align: start;
+  }
+
+  @media (min-width: 640px) {
+    .ruwaq-ad-featured-rail__item {
+      flex: 0 0 calc((100% - 1rem) / 2.15);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .ruwaq-ad-featured-rail__item {
+      flex: 0 0 calc((100% - 3rem) / 3.15);
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .ruwaq-ad-featured-rail__item {
+      flex: 0 0 calc((100% - 3rem) / 3.35);
+    }
+  }
+
   .ruwaq-ad-eyebrow {
     @apply text-[10px] font-semibold uppercase tracking-[0.28em] text-neutral-500;
   }
@@ -2765,7 +2840,9 @@
   }
 
   .ruwaq-join-editorial {
-    @apply mx-auto grid w-full max-w-[var(--ruwaq-ad-content-max)] gap-12 px-4 py-12 sm:px-6 lg:grid-cols-[1fr_1.1fr] lg:gap-16 lg:px-8 lg:py-20;
+    @apply mx-auto grid w-full gap-12 py-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16 lg:py-20;
+    max-width: var(--ruwaq-ad-content-max);
+    padding-inline: var(--ruwaq-ad-gutter);
   }
 
   .ruwaq-join-editorial-aside {
