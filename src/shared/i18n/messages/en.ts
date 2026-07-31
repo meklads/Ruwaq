@@ -332,7 +332,7 @@ export const en: Messages = {
    titleAfter: "Directory",
    title: "Ruwaq PRO Directory",
    subtitle:
-    "Verified contractors and suppliers in Jeddah, Makkah, and Madinah.",
+    "Verified fit-out, contracting, and supply companies in Jeddah, Makkah, and Madinah.",
    trustLine: "8 sectors, 3 cities, Free quote requests",
    allCategories: "All sectors",
    applyCta: "Join the directory",
