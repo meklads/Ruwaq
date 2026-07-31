@@ -22,7 +22,7 @@ export async function SiteHeader() {
   return (
     <header className="ruwaq-ad-header">
       <div className="ruwaq-ad-pro-bar">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-2 sm:px-6">
+        <div className="ruwaq-ad-container flex items-center justify-between gap-4 py-2">
           <Link href="/" className="ruwaq-ad-pro-bar-label">
             {t.marketplace.proDirectory.directoryLabel}
           </Link>
@@ -38,7 +38,7 @@ export async function SiteHeader() {
       </div>
 
       <div className="border-b border-neutral-200 bg-white">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:py-4">
+        <div className="ruwaq-ad-container flex items-center justify-between gap-4 py-3 lg:py-4">
           <RuwaqLogo href="/" variant="editorial" />
 
           <nav

@@ -12,7 +12,7 @@ export async function GuidesSection() {
 
   return (
     <section className="ruwaq-ad-section border-t border-neutral-200" id="guides">
-      <div className="mx-auto max-w-7xl">
+      <div className="ruwaq-ad-content">
         <header className="ruwaq-ad-section-header">
           <div>
             <p className="ruwaq-ad-eyebrow">{copy.eyebrow}</p>

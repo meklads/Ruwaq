@@ -21,7 +21,7 @@ export function MarketplaceCategoryGrid({
 
   return (
     <section id="categories" className="ruwaq-category-section scroll-mt-28">
-      <div className="mx-auto max-w-6xl">
+      <div className="ruwaq-ad-content">
         <h2 className="ruwaq-section-title text-center">
           {locale === "ar" ? (
             <>

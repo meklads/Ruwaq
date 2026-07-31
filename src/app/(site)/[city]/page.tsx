@@ -36,7 +36,7 @@ export default async function CityHubPage({ params }: Props) {
 
   return (
     <div className="ruwaq-ad-page">
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:py-16">
+      <div className="ruwaq-ad-content py-12 lg:py-16">
         <header className="ruwaq-ad-section-header max-w-3xl">
           <p className="ruwaq-ad-eyebrow">{t.marketplace.homeMagazine.trendingEyebrow}</p>
           <h1 className="ruwaq-ad-section-title">{cityName}</h1>

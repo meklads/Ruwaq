@@ -41,7 +41,7 @@ export default async function GuideArticlePage({ params }: Props) {
   return (
     <article className="ruwaq-ad-page">
       <header className="ruwaq-ad-section border-b border-neutral-200">
-        <div className="mx-auto max-w-3xl">
+        <div className="ruwaq-ad-content max-w-3xl">
           <p className="ruwaq-ad-eyebrow">
             {copy.eyebrow}, {guide.readMinutes} {copy.minRead}
           </p>

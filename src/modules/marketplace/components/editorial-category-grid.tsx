@@ -26,7 +26,7 @@ export function EditorialCategoryGrid({
 
   return (
     <section id="categories" className="ruwaq-ad-section scroll-mt-28 border-t border-neutral-200">
-      <div className="mx-auto max-w-7xl">
+      <div className="ruwaq-ad-content">
         <header className="ruwaq-ad-section-header">
           <div>
             <p className="ruwaq-ad-eyebrow">{magazineCopy.trendingEyebrow}</p>

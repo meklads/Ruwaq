@@ -82,7 +82,7 @@ export default async function ProShowcasePage({ searchParams }: Props) {
         </div>
       )}
 
-      <p className="mx-auto mt-12 max-w-6xl text-center">
+      <p className="ruwaq-ad-content mt-12 text-center">
         <Link href="/join" className="ruwaq-pro-btn-solid px-8 py-3">
           {t.marketplace.proDirectory.applyCta}
         </Link>

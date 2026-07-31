@@ -11,7 +11,7 @@ export async function ProjectToursSection() {
 
   return (
     <section className="ruwaq-ad-band-stone ruwaq-ad-section border-t border-neutral-200" id="tours">
-      <div className="mx-auto max-w-7xl">
+      <div className="ruwaq-ad-content">
         <header className="ruwaq-ad-section-header">
           <div>
             <p className="ruwaq-ad-eyebrow">{copy.eyebrow}</p>

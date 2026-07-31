@@ -10,7 +10,7 @@ type Props = {
 export function HowItWorksSection({ copy, locale }: Props) {
   return (
     <section className="border-t border-neutral-200 bg-white px-4 py-16 sm:px-6">
-      <div className="mx-auto max-w-6xl">
+      <div className="ruwaq-ad-content">
         <h2 className="ruwaq-pro-directory-title text-center text-2xl md:text-3xl">
           {copy.title}
         </h2>

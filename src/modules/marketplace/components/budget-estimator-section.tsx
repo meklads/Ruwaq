@@ -77,20 +77,20 @@ export function BudgetEstimatorSection({
 
   return (
     <section
-      className="ruwaq-budget-estimator ruwaq-ad-band-stone ruwaq-ad-section border-t border-neutral-200"
+      className="ruwaq-budget-estimator"
       id="budget-estimator"
       aria-labelledby="budget-estimator-title"
     >
-      <div className="mx-auto max-w-6xl">
-        <header className="text-center">
+      <div className="ruwaq-ad-content">
+        <header className="ruwaq-budget-estimator__header">
           <p className="ruwaq-ad-eyebrow">{copy.eyebrow}</p>
-          <h2 id="budget-estimator-title" className="ruwaq-ad-section-title">
+          <h2 id="budget-estimator-title" className="ruwaq-budget-estimator__title">
             {copy.title}
           </h2>
-          <p className="ruwaq-ad-section-lead mx-auto max-w-2xl">{copy.subtitle}</p>
+          <p className="ruwaq-budget-estimator__lead">{copy.subtitle}</p>
         </header>
 
-        <div className="ruwaq-budget-estimator__panel mx-auto mt-10 max-w-3xl">
+        <div className="ruwaq-budget-estimator__panel">
           <div className="ruwaq-budget-estimator__fields">
             <div>
               <label className="ruwaq-ad-field-label" htmlFor="budget-estimator-area">
@@ -98,7 +98,7 @@ export function BudgetEstimatorSection({
               </label>
               <input
                 id="budget-estimator-area"
-                className="ruwaq-ad-field mt-1"
+                className="ruwaq-ad-field mt-1.5"
                 type="number"
                 inputMode="numeric"
                 min={50}
@@ -117,7 +117,7 @@ export function BudgetEstimatorSection({
               </label>
               <select
                 id="budget-estimator-tier"
-                className="ruwaq-ad-field mt-1"
+                className="ruwaq-ad-field mt-1.5"
                 value={tier}
                 onChange={(e) => onTierChange(e.target.value as FitOutTier)}
               >
@@ -147,23 +147,25 @@ export function BudgetEstimatorSection({
             )}
           </div>
 
-          <p className="ruwaq-budget-estimator__disclaimer">{copy.disclaimer}</p>
-
-          <div className="ruwaq-budget-estimator__actions">
-            <QuoteRequestCtaButton
-              triggerLabel={copy.cta}
-              closeLabel={closeLabel}
-              copy={quoteCopy}
-              visualizationCopy={visualizationCopy}
-              locale={locale}
-              initialCity="jeddah"
-              initialCategory="fit-out"
-              initialIntent="marketplace"
-              initialProjectDetails={initialProjectDetails}
-              initialBudgetRange={rangeLabel ?? undefined}
-              className="ruwaq-pro-btn-solid px-8 py-3 disabled:opacity-50"
-              disabled={!estimate}
-            />
+          <div className="ruwaq-budget-estimator__footer">
+            <p className="ruwaq-budget-estimator__disclaimer">{copy.disclaimer}</p>
+            <div className="ruwaq-budget-estimator__actions">
+              <QuoteRequestCtaButton
+                triggerLabel={copy.cta}
+                closeLabel={closeLabel}
+                copy={quoteCopy}
+                visualizationCopy={visualizationCopy}
+                locale={locale}
+                initialCity="jeddah"
+                initialCategory="fit-out"
+                initialIntent="marketplace"
+                initialProjectDetails={initialProjectDetails}
+                initialBudgetRange={rangeLabel ?? undefined}
+                className="ruwaq-pro-btn-solid px-7 py-2.5 text-[11px] disabled:opacity-50"
+                disabled={!estimate}
+              />
+            </div>
+            <p className="ruwaq-budget-estimator__bridge">{copy.ctaBridge}</p>
           </div>
         </div>
       </div>

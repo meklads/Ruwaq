@@ -22,7 +22,7 @@ export async function TodaysDirectorySection() {
 
   return (
     <section className="ruwaq-ad-section" aria-labelledby="todays-directory-title">
-      <div className="mx-auto max-w-7xl">
+      <div className="ruwaq-ad-content">
         <header className="ruwaq-ad-section-header">
           <div>
             <p className="ruwaq-ad-eyebrow">{copy.todaysDirectoryEyebrow}</p>

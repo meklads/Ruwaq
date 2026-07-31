@@ -22,14 +22,14 @@ export default async function GuidesIndexPage() {
   return (
     <div className="ruwaq-ad-page">
       <header className="ruwaq-ad-section border-b border-neutral-200 pb-10">
-        <div className="mx-auto max-w-7xl">
+        <div className="ruwaq-ad-content">
           <p className="ruwaq-ad-eyebrow">{copy.eyebrow}</p>
           <h1 className="ruwaq-ad-section-title">{copy.title}</h1>
           <p className="ruwaq-ad-section-lead">{copy.subtitle}</p>
         </div>
       </header>
       <div className="ruwaq-ad-section">
-        <div className="mx-auto max-w-7xl">
+        <div className="ruwaq-ad-content">
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {RUWQ_GUIDES.map((guide) => (
               <GuideCard

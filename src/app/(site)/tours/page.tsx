@@ -22,14 +22,14 @@ export default async function ProjectToursIndexPage() {
   return (
     <div className="ruwaq-ad-page">
       <header className="ruwaq-ad-section border-b border-neutral-200 pb-10">
-        <div className="mx-auto max-w-7xl">
+        <div className="ruwaq-ad-content">
           <p className="ruwaq-ad-eyebrow">{copy.eyebrow}</p>
           <h1 className="ruwaq-ad-section-title">{copy.title}</h1>
           <p className="ruwaq-ad-section-lead">{copy.subtitle}</p>
         </div>
       </header>
       <div className="ruwaq-ad-section">
-        <div className="mx-auto max-w-7xl">
+        <div className="ruwaq-ad-content">
           <div className="ruwaq-pro-editorial-grid">
             {PROJECT_TOURS.map((tour) => (
               <ProjectTourCard

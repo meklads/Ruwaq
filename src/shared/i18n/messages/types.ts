@@ -340,6 +340,7 @@ export type Messages = {
       invalidArea: string;
       disclaimer: string;
       cta: string;
+      ctaBridge: string;
     };
     projectTours: {
       eyebrow: string;

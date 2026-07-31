@@ -437,7 +437,7 @@ export const en: Messages = {
    eyebrow: "Budget estimator",
    title: "What might your fit-out cost?",
    subtitle:
-    "Enter area and finish level for an indicative range — then request an accurate quote from verified firms.",
+    "Enter area and finish level for an indicative range — then request a precise quote from the featured firms above.",
    areaLabel: "Project area (m²)",
    areaHint: "50–20,000 m² — villas, apartments, or commercial units.",
    tierLabel: "Finish level",
@@ -457,7 +457,8 @@ export const en: Messages = {
    invalidArea: "Enter an area between 50 and 20,000 m².",
    disclaimer:
     "Guide only — final price depends on materials, drawings, and site survey. ±15% variance is common.",
-   cta: "Request an accurate quote",
+   cta: "Request quote from verified firms",
+   ctaBridge: "Matched to Ruwaq PRO directory members",
   },
   projectTours: {
    eyebrow: "Project tour",

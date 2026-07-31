@@ -17,7 +17,7 @@ export default async function HowItWorksPage() {
         <p className="mx-auto mt-6 max-w-2xl text-sm leading-relaxed text-neutral-600">{page.intro}</p>
       </header>
 
-      <div className="mx-auto mt-12 grid max-w-6xl gap-12 md:grid-cols-2">
+      <div className="ruwaq-ad-content mt-12 grid gap-12 md:grid-cols-2">
         <section>
           <h2 className="text-sm font-semibold uppercase tracking-widest text-neutral-900">
             {copy.ownersTitle}

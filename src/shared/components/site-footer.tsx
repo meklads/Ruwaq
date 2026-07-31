@@ -59,7 +59,7 @@ export async function SiteFooter() {
   return (
     <footer className="ruwaq-ad-footer">
       <div className="ruwaq-ad-band-greige border-b border-neutral-950/10">
-        <div className="mx-auto grid max-w-7xl gap-8 px-4 py-14 sm:px-6 lg:grid-cols-[1.4fr_auto] lg:items-center lg:gap-12 lg:py-16">
+        <div className="ruwaq-ad-container grid gap-8 py-14 lg:grid-cols-[1.4fr_auto] lg:items-center lg:gap-12 lg:py-16">
           <div>
             <h2 className="ruwaq-ad-footer-newsletter-title text-neutral-950">{footer.ctaTitle}</h2>
             <p className="mt-3 max-w-xl text-sm leading-relaxed text-neutral-700">
@@ -84,7 +84,7 @@ export async function SiteFooter() {
       </div>
 
       <div className="ruwaq-ad-band-charcoal ruwaq-ad-footer--dark">
-        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20">
+        <div className="ruwaq-ad-container py-16 sm:py-20">
           <div className="grid gap-12 lg:grid-cols-[1.35fr_1fr_1fr_1fr]">
             <div>
               <RuwaqLogo href="/" variant="dark" />

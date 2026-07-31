@@ -31,6 +31,7 @@ export default async function HomePage() {
         searchCopy={t.marketplace.search}
         locale={locale}
       />
+      <TodaysDirectorySection />
       <BudgetEstimatorSection
         copy={t.marketplace.budgetEstimator}
         quoteCopy={t.marketplace.quote}
@@ -38,7 +39,6 @@ export default async function HomePage() {
         closeLabel={t.nav.closeModal}
         locale={locale}
       />
-      <TodaysDirectorySection />
       <ProjectToursSection />
       <EditorialCategoryGrid
         copy={t.marketplace.categories}

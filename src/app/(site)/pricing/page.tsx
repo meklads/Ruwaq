@@ -21,7 +21,7 @@ export default async function PricingPage() {
         </p>
       </header>
 
-      <div className="mx-auto mt-12 grid max-w-6xl grid-cols-1 gap-8 md:grid-cols-3">
+      <div className="ruwaq-ad-content mt-12 grid grid-cols-1 gap-8 md:grid-cols-3">
         {TIER_ORDER.map((tierId) => {
           const tier = TIERS[tierId];
           const highlighted = tierId === "VERIFIED";

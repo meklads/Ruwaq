@@ -7,7 +7,7 @@ type Props = {
 export function SocialProofSection({ copy }: Props) {
   return (
     <section className="border-t border-neutral-200 bg-[var(--ruwaq-pro-offwhite)] px-4 py-16 sm:px-6">
-      <div className="mx-auto max-w-6xl text-center">
+      <div className="ruwaq-ad-content text-center">
         <h2 className="ruwaq-pro-directory-title text-2xl md:text-3xl">{copy.title}</h2>
         <p className="ruwaq-pro-directory-meta mt-3">{copy.subtitle}</p>
         <div className="mt-12 grid gap-6 md:grid-cols-3">
