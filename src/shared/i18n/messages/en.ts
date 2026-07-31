@@ -348,7 +348,7 @@ export const en: Messages = {
   },
   join: {
    eyebrow: "RUWAQ PRO, Directory application",
-   title: "Apply to the verified directory",
+   title: "Apply to Ruwaq PRO Directory",
    subtitle:
     "Submit your company details, we review commercial registration, licenses, and portfolio before listing.",
    submit: "Submit application",
