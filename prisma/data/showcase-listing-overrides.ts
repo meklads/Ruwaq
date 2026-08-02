@@ -3,6 +3,7 @@ import {
   MARKETING_IMAGES,
   TOUR_IMAGES,
 } from "../../src/content/marketing-images";
+import { CURATED_PRO_SLUGS } from "../../src/content/curated-pro-listings";
 import type { ListingSeed } from "./marketplace-listing-generator";
 
 type ListingOverride = Partial<
@@ -230,7 +231,7 @@ The reference profile other directory listings are measured against.`,
   },
 };
 
-export const SHOWCASE_LISTING_SLUGS = Object.keys(OVERRIDES);
+export const SHOWCASE_LISTING_SLUGS = [...CURATED_PRO_SLUGS];
 
 export function applyShowcaseListingOverrides(seeds: ListingSeed[]): ListingSeed[] {
   return seeds.map((seed) => {

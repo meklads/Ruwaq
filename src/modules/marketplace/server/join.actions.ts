@@ -13,6 +13,7 @@ import {
   parseCategorySlug,
   parseCitySlug,
 } from "@/modules/marketplace/lib/marketplace-slugs";
+import { CURATED_PRO_SLUGS, sortByCuratedProOrder } from "@/content/curated-pro-listings";
 import type { MarketplaceCitySlug } from "@/shared/constants/marketplace-taxonomy";
 import {
   sendJoinApplicationConfirmationEmail,
@@ -138,14 +139,15 @@ export async function submitDirectoryApplication(
 export async function getProShowcaseListings(citySlug?: MarketplaceCitySlug) {
   const city = citySlug ? getCityBySlug(citySlug) : null;
 
-  return db.providerListing.findMany({
+  const listings = await db.providerListing.findMany({
     where: {
+      slug: { in: [...CURATED_PRO_SLUGS] },
       isVerified: true,
       directoryTier: "PRO",
       ...(city ? { city: city.enum } : {}),
     },
     include: { category: true },
-    orderBy: [{ directorySortRank: "asc" }, { updatedAt: "desc" }],
-    take: 18,
   });
+
+  return sortByCuratedProOrder(listings);
 }

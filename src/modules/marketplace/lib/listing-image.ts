@@ -3,6 +3,7 @@ import {
   DEFAULT_MARKETING_HERO,
   categoryImageForSlug,
 } from "@/content/marketing-images";
+import { getShowcaseListingProfile } from "@/content/showcase-listings";
 
 type ListingWithCategory = ProviderListing & { category?: ServiceCategory };
 
@@ -13,12 +14,18 @@ export function listingGalleryImages(listing: ProviderListing): string[] {
 }
 
 export function listingHeroImage(listing: ListingWithCategory): string {
+  const showcase = getShowcaseListingProfile(listing.slug);
+  if (showcase?.portfolioImages[0]) return showcase.portfolioImages[0]!;
+
   const gallery = listingGalleryImages(listing);
   if (gallery.length > 0) return gallery[0]!;
   return categoryImageForSlug(listing.category?.slug) ?? DEFAULT_MARKETING_HERO;
 }
 
 export function listingGalleryWithFallback(listing: ListingWithCategory): string[] {
+  const showcase = getShowcaseListingProfile(listing.slug);
+  if (showcase && showcase.portfolioImages.length > 0) return showcase.portfolioImages;
+
   const gallery = listingGalleryImages(listing);
   if (gallery.length > 0) return gallery;
   return [listingHeroImage(listing)];

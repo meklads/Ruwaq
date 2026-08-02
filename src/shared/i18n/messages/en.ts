@@ -397,7 +397,8 @@ export const en: Messages = {
   proShowcase: {
    eyebrow: "RUWAQ PRO, Showcase",
    title: "Featured professionals",
-   subtitle: "Editorial picks from our verified directory, fit-out, contracting, HVAC, and more.",
+   subtitle:
+    "10 curated partners — verified profiles with project galleries across fit-out, contracting, HVAC, and suppliers.",
    allCities: "All cities",
    filterCity: "Filter by city",
    empty: "No featured listings yet. Check back soon or apply to join the directory.",
@@ -429,7 +430,7 @@ export const en: Messages = {
    todaysDirectoryEyebrow: "Today's Directory",
    todaysDirectoryTitle: "Featured verified professionals",
    todaysDirectoryLead:
-    "Connect with verified fit-out, contracting, and design teams curated for Western Region projects.",
+    "10 curated Ruwaq PRO partners — fit-out, contracting, and design teams with documented project galleries.",
    viewAllFeatured: "View all featured",
    trendingEyebrow: "Trending sectors",
    trendingTitle: "Browse by trade",
