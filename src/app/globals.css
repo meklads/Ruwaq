@@ -3551,6 +3551,10 @@
     @apply mt-3 max-w-3xl text-sm leading-relaxed text-neutral-600 sm:text-base;
   }
 
+  .ruwaq-pf-project-summary--editorial {
+    @apply text-base leading-relaxed text-neutral-700 sm:text-lg;
+  }
+
   .ruwaq-pf-project-highlights {
     @apply mt-4 flex flex-wrap gap-2;
   }

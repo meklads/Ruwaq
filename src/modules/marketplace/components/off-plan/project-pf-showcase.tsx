@@ -58,6 +58,13 @@ type Copy = {
   viewOtherProjects: string;
   contactSoon: string;
   requestQuoteCta: string;
+  completedCompletionLabel: string;
+  completedScopeLabel: string;
+  completedAreaLabel: string;
+  requestSimilarCta: string;
+  livingRoomLabel: string;
+  kitchenLabel: string;
+  homeTourStoryLabel: string;
 };
 
 type Props = {
@@ -132,16 +139,31 @@ export function ProjectPfShowcase({ project, locale, copy }: Props) {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  const keyInfo = [
-    { label: copy.deliveryDate, value: delivery },
-    { label: copy.locationLabel, value: location },
-    ...(project.unitsCount
-      ? [{ label: copy.unitsCountLabel, value: String(project.unitsCount) }]
-      : []),
-    { label: copy.propertyTypesLabel, value: types },
-    { label: copy.ownershipLabel, value: ownership },
-    { label: copy.paymentPlanLabel, value: payment },
-  ];
+  const keyInfo = isLaunch
+    ? [
+        { label: copy.deliveryDate, value: delivery },
+        { label: copy.locationLabel, value: location },
+        ...(project.unitsCount
+          ? [{ label: copy.unitsCountLabel, value: String(project.unitsCount) }]
+          : []),
+        { label: copy.propertyTypesLabel, value: types },
+        { label: copy.ownershipLabel, value: ownership },
+        { label: copy.paymentPlanLabel, value: payment },
+      ]
+    : [
+        { label: copy.completedCompletionLabel, value: delivery },
+        { label: copy.locationLabel, value: location },
+        ...(project.unitsCount
+          ? [
+              {
+                label: copy.completedAreaLabel,
+                value: locale === "ar" ? `${project.unitsCount} م²` : `${project.unitsCount} m²`,
+              },
+            ]
+          : []),
+        { label: copy.propertyTypesLabel, value: types },
+        { label: copy.completedScopeLabel, value: payment },
+      ];
 
   const developerLink = project.developerUrl ? (
     <a href={project.developerUrl} target="_blank" rel="noopener noreferrer" className="ruwaq-pf-developer-strip__link">
@@ -187,22 +209,22 @@ export function ProjectPfShowcase({ project, locale, copy }: Props) {
             <button type="button" className="ruwaq-pf-hero-side-item" onClick={() => openLightbox(1)}>
               <Image
                 src={gallery[1] ?? project.images.masterPlan}
-                alt={copy.masterPlan}
+                alt={isLaunch ? copy.masterPlan : copy.livingRoomLabel}
                 fill
                 className="object-cover"
                 sizes="400px"
               />
-              <span>{copy.masterPlan}</span>
+              <span>{isLaunch ? copy.masterPlan : copy.livingRoomLabel}</span>
             </button>
             <button type="button" className="ruwaq-pf-hero-side-item" onClick={() => openLightbox(2)}>
               <Image
                 src={gallery[2] ?? project.images.interior}
-                alt={copy.sitePlan}
+                alt={isLaunch ? copy.sitePlan : copy.kitchenLabel}
                 fill
                 className="object-cover"
                 sizes="400px"
               />
-              <span>{copy.sitePlan}</span>
+              <span>{isLaunch ? copy.sitePlan : copy.kitchenLabel}</span>
             </button>
           </div>
 
@@ -271,7 +293,9 @@ export function ProjectPfShowcase({ project, locale, copy }: Props) {
       <div className="ruwaq-pf-detail-layout ruwaq-pf-detail-layout--pf">
         <aside className="ruwaq-pf-detail-sidebar">
           <div className="ruwaq-pf-sidebar-card ruwaq-pf-sidebar-card--cta">
-            <p className="ruwaq-pf-sidebar-contact-soon">{copy.contactSoon}</p>
+            <p className="ruwaq-pf-sidebar-contact-soon">
+              {isLaunch ? copy.contactSoon : copy.requestSimilarCta}
+            </p>
             <Link href="/request-quote" className="ruwaq-pro-btn-solid w-full justify-center px-4 py-3 text-sm">
               {copy.requestQuoteCta}
             </Link>
@@ -304,6 +328,9 @@ export function ProjectPfShowcase({ project, locale, copy }: Props) {
           <header className="ruwaq-pf-project-header ruwaq-pf-project-header--inline">
             <span className="ruwaq-pf-badge">{badgeLabel}</span>
             <h1 className="ruwaq-pf-project-title">{title}</h1>
+            {!isLaunch && summary ? (
+              <p className="ruwaq-pf-project-summary ruwaq-pf-project-summary--editorial">{summary}</p>
+            ) : null}
             {isLaunch ? (
               <>
                 <p className="ruwaq-pf-launch-price">
@@ -339,7 +366,7 @@ export function ProjectPfShowcase({ project, locale, copy }: Props) {
               {copy.gallery}
             </button>
             <button type="button" className="ruwaq-pf-section-nav__link" onClick={() => scrollTo("pf-about")}>
-              {copy.aboutProject}
+              {isLaunch ? copy.aboutProject : copy.homeTourStoryLabel}
             </button>
             {hasPlansSection ? (
               <button type="button" className="ruwaq-pf-section-nav__link" onClick={() => scrollTo("pf-plans")}>
@@ -367,8 +394,10 @@ export function ProjectPfShowcase({ project, locale, copy }: Props) {
 
           {(summary || aboutParagraphs.length > 0 || highlights.length > 0) ? (
             <section id="pf-about" className="ruwaq-pf-about scroll-mt-24">
-              <h2 className="ruwaq-pf-section-heading">{copy.aboutProject}</h2>
-              {summary ? <p className="ruwaq-pf-about-text">{summary}</p> : null}
+              <h2 className="ruwaq-pf-section-heading">
+                {isLaunch ? copy.aboutProject : copy.homeTourStoryLabel}
+              </h2>
+              {isLaunch && summary ? <p className="ruwaq-pf-about-text">{summary}</p> : null}
               {aboutParagraphs.map((paragraph) => (
                 <p key={paragraph.slice(0, 24)} className="ruwaq-pf-about-text">
                   {paragraph}

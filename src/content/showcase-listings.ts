@@ -65,9 +65,9 @@ const PROFILES: ShowcaseListingProfile[] = [
       {
         titleAr: "فيلا شمال جدة — تشطيب فاخر",
         titleEn: "North Jeddah villa — luxury fit-out",
-        metaAr: "2025 · 850 م²",
-        metaEn: "2025 · 850 m²",
-        tourSlug: "dar-wa-emaar-saraya-al-ruba",
+        metaAr: "2025 · 420 م²",
+        metaEn: "2025 · 420 m²",
+        tourSlug: "north-jeddah-villa-fitout",
       },
     ],
   },

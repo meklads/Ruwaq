@@ -408,6 +408,13 @@ export type Messages = {
       paymentPlanLabel: string;
       propertyTypesLabel: string;
       ownershipLabel: string;
+      completedCompletionLabel: string;
+      completedScopeLabel: string;
+      completedAreaLabel: string;
+      requestSimilarCta: string;
+      livingRoomLabel: string;
+      kitchenLabel: string;
+      homeTourStoryLabel: string;
       sidebarTitle: string;
       sidebarSubtitle: string;
       tabFloorPlans: string;

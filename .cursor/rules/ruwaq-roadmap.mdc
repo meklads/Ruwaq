@@ -1,0 +1,66 @@
+---
+description: Ruwaq platform audit, AD north-star, and prioritized development roadmap. Retrieve next step when user asks to continue development.
+alwaysApply: true
+---
+
+# Ruwaq Development Roadmap
+
+North star: **Architectural Digest of Saudi real estate** — editorial first, Ruwaq PRO directory second, proposal SaaS as secret weapon.
+
+## Current maturity (baseline audit)
+
+| Area | Score | Notes |
+|------|-------|-------|
+| Editorial vision | 6/10 | Structure exists; content cadence weak |
+| Home Tours | 7/10 | Off-plan strong; completed tours were empty |
+| Magazine rhythm | 3/10 | No daily/weekly stories feed |
+| PRO Directory | 5/10 | Built; mostly seed data |
+| Proposal SaaS | 8/10 | Strong MVP |
+| Revenue | 2/10 | BILLING_ENABLED=false; manual ops |
+
+## Prioritized steps (execute in order)
+
+### Phase A — Editorial & brand (AD model)
+
+| # | Step | Status |
+|---|------|--------|
+| 1 | **First completed Home Tour** — story-first editorial page (Turriva/GH project, `/tours/[slug]`) | done |
+| 2 | **Reorder homepage** — Stories/Tours → Guides → Directory last (AD pacing) | pending |
+| 3 | **Today's Stories section** — 3–5 weekly editorial cards on homepage | pending |
+| 4 | **10 curated PRO profiles** — real contractors with portfolio photos (replace seed feel) | pending |
+| 5 | **AD PRO-style apply bar** — prominent, separate from consumer content | pending |
+| 6 | **Weekly content cadence** — 1 guide or story per week | pending |
+| 7 | **Completed tours pipeline** — 2–3 more Home Tours from Turriva/GH | pending |
+
+### Phase B — Revenue & ops
+
+| # | Step | Status |
+|---|------|--------|
+| 8 | Saudi payment gateway (Moyasar/Tap) for Verified + PRO tiers | pending |
+| 9 | Enable `BILLING_ENABLED=true` with quota enforcement | pending |
+| 10 | Lead pipeline hardening (Resend + webhooks + WhatsApp) | pending |
+| 11 | R2/S3 production file storage for logos | pending |
+| 12 | Self-serve join → pay → activate (reduce manual admin) | pending |
+
+### Phase C — Scale & quality
+
+| # | Step | Status |
+|---|------|--------|
+| 13 | GitHub Actions CI (build + lint) | pending |
+| 14 | Expand cities (Riyadh, Dammam landing pages) | pending |
+| 15 | Shop the Tour affiliate layer (materials → Turriva/GH) | pending |
+| 16 | Sponsored developer launch packages | pending |
+| 17 | Product analytics beyond UsageEvent | pending |
+
+## When user says "next step"
+
+1. Find the first `pending` step in Phase A, then B, then C.
+2. Implement it fully.
+3. Update this table (`in_progress` → `done`).
+4. Commit + push to `origin` on current branch.
+5. Report what was done; wait for user signal for following step.
+
+## Do NOT prioritize
+
+- Google AdSense (hurts premium brand; low B2B yield)
+- Horizontal expansion before Jeddah PMF (10 real PRO + 50 leads/month)

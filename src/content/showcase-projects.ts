@@ -11,8 +11,9 @@ export type ShowcaseProject = OffPlanProject & {
 
 function tourToShowcase(tour: ProjectTour): ShowcaseProject {
   const city = getCityBySlug(tour.citySlug);
-  const locationAr = city ? `${city.nameAr}` : tour.citySlug;
+  const locationAr = city ? city.nameAr : tour.citySlug;
   const locationEn = city ? city.nameEn : tour.citySlug;
+  const developer = tour.developer ?? { nameAr: "Ruwaq PRO", nameEn: "Ruwaq PRO" };
 
   return {
     id: `tour-${tour.slug}`,
@@ -21,24 +22,25 @@ function tourToShowcase(tour: ProjectTour): ShowcaseProject {
     titleEn: tour.titleEn,
     summaryAr: tour.subtitleAr,
     summaryEn: tour.subtitleEn,
-    developer: {
-      nameAr: "Ruwaq PRO",
-      nameEn: "Ruwaq PRO",
-    },
+    aboutParagraphsAr: tour.storyAr,
+    aboutParagraphsEn: tour.storyEn,
+    highlightsAr: tour.highlightsAr,
+    highlightsEn: tour.highlightsEn,
+    developer,
     citySlug: tour.citySlug,
-    locationAr,
-    locationEn,
+    locationAr: `${locationAr} — شمال المدينة`,
+    locationEn: `${locationEn} — North district`,
     startingPrice: 0,
-    deliveryDateAr: tour.publishedAt,
-    deliveryDateEn: tour.publishedAt,
+    deliveryDateAr: tour.completionDateAr,
+    deliveryDateEn: tour.completionDateEn,
     deliveryQuarter: "",
-    paymentPlanAr: "—",
-    paymentPlanEn: "—",
-    propertyTypesAr: ["مشروع مكتمل"],
-    propertyTypesEn: ["Completed project"],
-    propertyTypeSlugs: [],
-    ownershipAr: "—",
-    ownershipEn: "—",
+    paymentPlanAr: tour.scopeAr,
+    paymentPlanEn: tour.scopeEn,
+    propertyTypesAr: ["فيلا · تشطيب داخلي فاخر"],
+    propertyTypesEn: ["Villa · Luxury interior fit-out"],
+    propertyTypeSlugs: ["villa"],
+    ownershipAr: "تملك حر",
+    ownershipEn: "Freehold",
     status: "under_construction",
     badge: "under_construction",
     showcaseKind: "completed",
@@ -52,7 +54,8 @@ function tourToShowcase(tour: ProjectTour): ShowcaseProject {
     gallery: [tour.heroImage, ...tour.gallery],
     floorPlans: [],
     paymentSchedule: [],
-    featured: false,
+    featured: true,
+    unitsCount: tour.areaSqm,
   };
 }
 

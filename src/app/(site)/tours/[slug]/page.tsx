@@ -73,7 +73,11 @@ export default async function ProjectTourDetailPage({ params }: Props) {
             priceDisclaimer: offPlanCopy.priceDisclaimer,
             delivery: offPlanCopy.deliveryLabel,
             paymentPlanLabel: offPlanCopy.paymentPlanLabel,
-            developer: offPlanCopy.developer,
+            developer: isLaunch
+              ? offPlanCopy.developer
+              : locale === "ar"
+                ? "فريق التنفيذ"
+                : "Delivery team",
             tabFloorPlans: offPlanCopy.tabFloorPlans,
             tabPayment: offPlanCopy.tabPayment,
             view2d: offPlanCopy.view2d,
@@ -104,6 +108,13 @@ export default async function ProjectTourDetailPage({ params }: Props) {
             viewOtherProjects: offPlanCopy.viewOtherProjects,
             contactSoon: offPlanCopy.contactSoon,
             requestQuoteCta: offPlanCopy.requestQuoteCta,
+            completedCompletionLabel: offPlanCopy.completedCompletionLabel,
+            completedScopeLabel: offPlanCopy.completedScopeLabel,
+            completedAreaLabel: offPlanCopy.completedAreaLabel,
+            requestSimilarCta: offPlanCopy.requestSimilarCta,
+            livingRoomLabel: offPlanCopy.livingRoomLabel,
+            kitchenLabel: offPlanCopy.kitchenLabel,
+            homeTourStoryLabel: offPlanCopy.homeTourStoryLabel,
           }}
         />
 
