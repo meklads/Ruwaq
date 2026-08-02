@@ -150,7 +150,7 @@
       "badge": "under_construction",
       "heroVideoYoutubeId": "GqoKtM4KQhY",
       "heroVideoPoster": "/images/projects/sumou-anara/main.jpg",
-      "brochurePdf": "/images/projects/sumou-anara/brochure-official.pdf",
+      "brochurePdf": "https://sumou.com.sa/wp-content/uploads/2024/09/Sumou-RE-Profile-AR.pdf",
       "images": {
         "main": "/images/projects/sumou-anara/main.jpg",
         "masterPlan": "/images/projects/sumou-anara/gallery-2.png",
@@ -293,7 +293,7 @@
       "badge": "exclusive_3d",
       "heroVideoYoutubeId": "3VcnAisB3Ws",
       "heroVideoPoster": "/images/projects/makkiyoon-mayan-al-fursan/main.png",
-      "brochurePdf": "/images/projects/makkiyoon-mayan-al-fursan/brochure-official.pdf",
+      "brochurePdf": "https://makkiyoon.com/wp-content/uploads/2025/12/MAYAN-ALFURSAN.pdf",
       "images": {
         "main": "/images/projects/makkiyoon-mayan-al-fursan/main.png",
         "masterPlan": "/images/projects/makkiyoon-mayan-al-fursan/gallery-2.jpg",
@@ -454,7 +454,7 @@
       "badge": "exclusive_3d",
       "heroVideoYoutubeId": "S3KjNqMcxhI",
       "heroVideoPoster": "/images/projects/thakher-makkah/main.jpg",
-      "brochurePdf": "/images/projects/thakher-makkah/brochure-official.pdf",
+      "brochurePdf": "https://thakher.com.sa/wp-content/uploads/2024/10/THAKHER-BROCHURE-1.pdf",
       "images": {
         "main": "/images/projects/thakher-makkah/main.jpg",
         "masterPlan": "/images/projects/thakher-makkah/gallery-1.jpg",
@@ -525,7 +525,7 @@
       "badge": "under_construction",
       "heroVideoYoutubeId": "pypnXs9pz7A",
       "heroVideoPoster": "/images/projects/dar-wa-emaar-saraya-al-ruba/main.jpg",
-      "brochurePdf": "/images/projects/dar-wa-emaar-saraya-al-ruba/brochure-official.pdf",
+      "brochurePdf": "https://darwaemaar.com/wp-content/uploads/2025/08/Saraya-Al-Ruba-Brochure-Mobile-Version.pdf",
       "images": {
         "main": "/images/projects/dar-wa-emaar-saraya-al-ruba/main.jpg",
         "masterPlan": "/images/projects/dar-wa-emaar-saraya-al-ruba/gallery-2.png",
@@ -685,7 +685,7 @@
       "badge": "exclusive_3d",
       "heroVideoYoutubeId": "7RQ5SxBfm78",
       "heroVideoPoster": "/images/projects/roshn-sedra/main.jpg",
-      "brochurePdf": "/images/projects/roshn-sedra/brochure-official.pdf",
+      "brochurePdf": "https://alb-home.roshn.sa/docs/pdf/448/Sedra_Residence_Brochure_19112025_fb163b3d81/Sedra_Residence_Brochure_19112025_fb163b3d81.pdf",
       "images": {
         "main": "/images/projects/roshn-sedra/main.jpg",
         "masterPlan": "/images/projects/roshn-sedra/gallery-3.png",

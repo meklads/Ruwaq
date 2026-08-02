@@ -52,9 +52,9 @@
 |---------|--------|
 | **Port** | `3000` |
 | **Start Command** | `npm start` |
-| **Build Pack** | **Dockerfile** (مهم بعد آخر تحديث) |
+| **Build Pack** | **Dockerfile** (مهم — لا تستخدم Nixpacks) |
 
-إذا وجدت **Nixpacks** وفشل البناء: غيّر إلى **Dockerfile** واحفظ.
+إذا ظهر في السجل `nixpacks` أو `ghcr.io/railwayapp/nixpacks` والبناء فشل: غيّر **Build Pack** إلى **Dockerfile** واحفظ ثم **Redeploy**.
 
 ---
 

@@ -14,6 +14,7 @@ FROM base AS builder
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1 \
+  NODE_OPTIONS="--max-old-space-size=4096" \
   DATABASE_URL="postgresql://build:build@127.0.0.1:5432/build?schema=public" \
   AUTH_SECRET="build-placeholder-secret-min-32-characters" \
   AUTH_URL="https://ruwaq.co" \
