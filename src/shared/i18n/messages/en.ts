@@ -441,6 +441,10 @@ export const en: Messages = {
    heroExploreTours: "Explore tours",
    heroReadGuides: "Guides",
    heroDirectoryLink: "Browse the PRO directory",
+   todaysStoriesEyebrow: "Today's Stories",
+   todaysStoriesTitle: "Today's Stories",
+   todaysStoriesLead:
+    "Curated home tours, guides, and launches — refreshed weekly with what matters in property and design.",
   },
   budgetEstimator: {
    eyebrow: "Budget estimator",

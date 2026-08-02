@@ -437,6 +437,10 @@ export const ar = {
    heroExploreTours: "استكشف الجولات",
    heroReadGuides: "الأدلة",
    heroDirectoryLink: "تصفّح دليل المحترفين",
+   todaysStoriesEyebrow: "رواق · تحريري",
+   todaysStoriesTitle: "قصص اليوم",
+   todaysStoriesLead:
+    "جولات، أدلة، وإطلاقات مختارة — حدّثناها أسبوعياً لإبقائك على اطلاع بما يهم في العقار والتصميم.",
   },
   budgetEstimator: {
    eyebrow: "حاسبة تقديرية",

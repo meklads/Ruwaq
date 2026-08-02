@@ -2827,6 +2827,74 @@
     letter-spacing: 0;
   }
 
+  /* Today's Stories — AD editorial grid */
+  .ruwaq-todays-stories-grid {
+    @apply grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:grid-rows-2 lg:gap-5;
+  }
+
+  .ruwaq-story-card {
+    @apply flex min-h-0 flex-col overflow-hidden border border-neutral-200 bg-white transition-colors hover:border-neutral-950;
+  }
+
+  .ruwaq-story-card--featured {
+    @apply relative min-h-[420px] lg:col-span-2 lg:row-span-2 lg:min-h-[520px];
+  }
+
+  .ruwaq-story-card__media {
+    @apply relative aspect-[16/10] overflow-hidden bg-neutral-100;
+  }
+
+  .ruwaq-story-card__media--featured {
+    @apply absolute inset-0 aspect-auto min-h-full;
+  }
+
+  .ruwaq-story-card__overlay {
+    @apply absolute inset-0;
+    background: linear-gradient(
+      180deg,
+      rgba(8, 8, 8, 0.05) 0%,
+      rgba(8, 8, 8, 0.15) 45%,
+      rgba(8, 8, 8, 0.78) 100%
+    );
+  }
+
+  .ruwaq-story-card__body {
+    @apply flex flex-col p-4 sm:p-5;
+  }
+
+  .ruwaq-story-card__body--overlay {
+    @apply absolute inset-x-0 bottom-0 z-10 p-5 sm:p-7;
+  }
+
+  .ruwaq-story-card__category {
+    @apply text-[10px] font-semibold uppercase tracking-[0.22em] text-neutral-500;
+  }
+
+  .ruwaq-story-card--featured .ruwaq-story-card__body--overlay .ruwaq-story-card__category {
+    @apply text-white/80;
+  }
+
+  html[lang="ar"] .ruwaq-story-card__category {
+    @apply normal-case tracking-wide text-xs;
+  }
+
+  .ruwaq-story-card__title {
+    @apply mt-2 font-serif text-base font-medium leading-snug tracking-tight text-neutral-950 sm:text-lg;
+  }
+
+  .ruwaq-story-card__title--featured {
+    @apply mt-2 text-xl text-white sm:text-2xl md:text-[1.65rem];
+  }
+
+  html[lang="ar"] .ruwaq-story-card__title,
+  html[lang="ar"] .ruwaq-story-card__title--featured {
+    @apply font-bold leading-snug;
+  }
+
+  .ruwaq-story-card__excerpt {
+    @apply mt-2 line-clamp-2 text-sm leading-relaxed text-white/85;
+  }
+
   .ruwaq-category-photo {
     @apply relative aspect-[4/3] overflow-hidden bg-neutral-100;
   }
