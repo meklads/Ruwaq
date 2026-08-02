@@ -1,7 +1,7 @@
 /**
  * Central marketing image registry — no duplicate URLs across homepage sections.
  * Dot For Life assets live in /public/images/marketing (optimized JPEG).
- * HVAC uses one topic-specific Unsplash; everything else is local.
+ * Sector hero photos live in /public/images/marketing/categories (Pexels/Unsplash, local).
  */
 
 const U = (id: string, w = 1200) =>
@@ -29,16 +29,19 @@ export const MARKETING_IMAGES = {
 /** Default social / listing fallback when no upload exists. */
 export const DEFAULT_MARKETING_HERO = MARKETING_IMAGES.hero;
 
-/** One unique, topic-relevant image per directory sector. */
+const CATEGORY_PHOTO = (slug: string) =>
+  `/images/marketing/categories/${slug}.jpg` as const;
+
+/** One unique, topic-relevant stock photo per directory sector (local assets). */
 export const CATEGORY_IMAGES: Record<string, string> = {
-  "fit-out": MARKETING_IMAGES.interiorLounge,
-  contracting: MARKETING_IMAGES.modelHousePlanning,
-  supervision: MARKETING_IMAGES.familyDining,
-  hvac: U("photo-1631679706909-d082507cbce0"),
-  kitchens: MARKETING_IMAGES.kitchenFamily,
-  "luxury-materials": MARKETING_IMAGES.architecturalModel,
-  outdoor: MARKETING_IMAGES.hero,
-  maintenance: MARKETING_IMAGES.keysNewHome,
+  "fit-out": CATEGORY_PHOTO("fit-out"),
+  contracting: CATEGORY_PHOTO("contracting"),
+  supervision: CATEGORY_PHOTO("supervision"),
+  hvac: CATEGORY_PHOTO("hvac"),
+  kitchens: CATEGORY_PHOTO("kitchens"),
+  "luxury-materials": CATEGORY_PHOTO("luxury-materials"),
+  outdoor: CATEGORY_PHOTO("outdoor"),
+  maintenance: CATEGORY_PHOTO("maintenance"),
 };
 
 /** Six unique local images per directory sector for seed listings (no Unsplash). */
@@ -120,7 +123,7 @@ export const GUIDE_IMAGES = {
   marbleInterior: MARKETING_IMAGES.interiorLounge,
   marbleFacade: MARKETING_IMAGES.ghStudio,
   hvac: U("photo-1621905251189-08b45d6a269e"),
-  hvacDuct: U("photo-1631679706909-d082507cbce0"),
+  hvacDuct: CATEGORY_PHOTO("hvac"),
   kitchen: MARKETING_IMAGES.kitchenFamily,
   kitchenPlan: MARKETING_IMAGES.familyDining,
   supervision: MARKETING_IMAGES.keysNewHome,

@@ -3,7 +3,7 @@ import {
   MARKETPLACE_CATEGORIES,
   MARKETPLACE_CITIES,
 } from "@/shared/constants/marketplace-taxonomy";
-import { CategoryIllustration } from "@/modules/marketplace/components/category-illustration";
+import { CategorySectorPhoto } from "@/modules/marketplace/components/category-sector-photo";
 import type { Messages } from "@/shared/i18n/messages/types";
 import type { Locale } from "@/shared/i18n/locale";
 
@@ -47,7 +47,7 @@ export function EditorialCategoryGrid({
                 href={`/${defaultCitySlug}/${cat.slug}`}
                 className="group flex min-h-[180px] flex-col bg-white transition-colors hover:bg-neutral-50"
               >
-                <CategoryIllustration slug={cat.slug} className="transition-transform duration-500 group-hover:scale-[1.03]" />
+                <CategorySectorPhoto slug={cat.slug} alt={catName} />
                 <div className="flex flex-1 flex-col p-6">
                   <p className="ruwaq-ad-eyebrow">
                     {locale === "en" ? cityName.toUpperCase() : cityName}

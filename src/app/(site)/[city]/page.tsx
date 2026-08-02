@@ -3,7 +3,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { getMessages } from "@/shared/i18n";
 import { getLocale } from "@/shared/i18n/server";
-import { CategoryIllustration } from "@/modules/marketplace/components/category-illustration";
+import { CategorySectorPhoto } from "@/modules/marketplace/components/category-sector-photo";
 import {
   getCityBySlug,
   MARKETPLACE_CATEGORIES,
@@ -52,10 +52,7 @@ export default async function CityHubPage({ params }: Props) {
                   href={`/${city.slug}/${cat.slug}`}
                   className="group flex h-full flex-col bg-white transition-colors hover:bg-neutral-50"
                 >
-                  <CategoryIllustration
-                    slug={cat.slug}
-                    className="transition-transform duration-500 group-hover:scale-[1.03]"
-                  />
+                  <CategorySectorPhoto slug={cat.slug} alt={catName} />
                   <div className="flex flex-1 flex-col p-5">
                     <h2 className="ruwaq-ad-card-title">{catName}</h2>
                     <p className="mt-auto pt-3 text-[10px] font-semibold uppercase tracking-widest text-neutral-500 group-hover:text-neutral-950">
