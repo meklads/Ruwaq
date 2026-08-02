@@ -3061,4 +3061,309 @@
   .ruwaq-join-editorial-success {
     @apply border border-neutral-200 bg-neutral-50 p-8 text-center;
   }
+
+  /* Off-plan launchpad */
+  .ruwaq-offplan-home-grid {
+    @apply grid gap-6 sm:grid-cols-2 lg:grid-cols-3;
+  }
+
+  .ruwaq-offplan-card-actions {
+    @apply flex flex-wrap gap-2;
+  }
+
+  .ruwaq-offplan-badge {
+    @apply inline-flex rounded-full bg-neutral-950/85 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-white backdrop-blur-sm;
+  }
+
+  html[lang="ar"] .ruwaq-offplan-badge {
+    @apply normal-case tracking-wide text-xs;
+  }
+
+  .ruwaq-offplan-price {
+    @apply mt-2 text-sm font-semibold text-neutral-900;
+  }
+
+  .ruwaq-offplan-filter-bar {
+    @apply mb-6 grid gap-3 sm:grid-cols-3;
+  }
+
+  .ruwaq-offplan-filter {
+    @apply flex flex-col gap-1.5 text-sm;
+  }
+
+  .ruwaq-offplan-filter select {
+    @apply rounded-lg border border-neutral-200 bg-white px-3 py-2.5 text-neutral-900;
+  }
+
+  .ruwaq-offplan-results-meta {
+    @apply mb-6 text-sm text-neutral-600;
+  }
+
+  .ruwaq-offplan-empty {
+    @apply rounded-xl border border-dashed border-neutral-300 bg-neutral-50 px-6 py-12 text-center text-neutral-600;
+  }
+
+  .ruwaq-offplan-pagination {
+    @apply mt-10 flex items-center justify-center gap-4 text-sm;
+  }
+
+  .ruwaq-offplan-dialog {
+    @apply fixed inset-0 z-[100] m-0 h-full max-h-none w-full max-w-none border-0 bg-black/50 p-4 backdrop:bg-black/50 open:flex open:items-center open:justify-center;
+  }
+
+  .ruwaq-offplan-dialog-panel {
+    @apply relative max-h-[90vh] w-full max-w-md overflow-y-auto rounded-3xl bg-white p-6 shadow-ruwaq-lg sm:p-8;
+  }
+
+  .ruwaq-offplan-video-panel {
+    @apply relative w-full max-w-4xl rounded-2xl bg-black p-2;
+  }
+
+  .ruwaq-offplan-dialog-close {
+    @apply absolute end-4 top-4 z-10 rounded-full p-2 text-neutral-500 transition hover:bg-neutral-100 hover:text-neutral-900;
+  }
+
+  .ruwaq-offplan-dialog-header {
+    @apply mb-6 pe-8;
+  }
+
+  .ruwaq-offplan-dialog-title {
+    @apply text-xl font-semibold text-neutral-950 sm:text-2xl;
+  }
+
+  .ruwaq-offplan-dialog-subtitle {
+    @apply mt-2 text-sm text-neutral-600;
+  }
+
+  .ruwaq-offplan-lead-form {
+    @apply space-y-4;
+  }
+
+  .ruwaq-offplan-field span,
+  .ruwaq-offplan-field legend {
+    @apply mb-1.5 block text-sm font-medium text-neutral-800;
+  }
+
+  .ruwaq-offplan-field input[type="text"],
+  .ruwaq-offplan-field input[type="tel"],
+  .ruwaq-offplan-field input[type="email"] {
+    @apply w-full rounded-lg border border-neutral-200 px-3 py-2.5 text-neutral-900;
+  }
+
+  .ruwaq-offplan-role-grid {
+    @apply grid gap-2;
+  }
+
+  .ruwaq-offplan-role-option {
+    @apply flex cursor-pointer items-center gap-2 rounded-lg border border-neutral-200 px-3 py-2.5 text-sm transition hover:border-neutral-400;
+  }
+
+  .ruwaq-offplan-role-option:has(input:checked) {
+    @apply border-neutral-950 bg-neutral-50;
+  }
+
+  .ruwaq-offplan-error {
+    @apply text-sm text-red-600;
+  }
+
+  .ruwaq-offplan-success {
+    @apply rounded-xl bg-emerald-50 px-4 py-6 text-center text-sm font-medium text-emerald-800;
+  }
+
+  .ruwaq-offplan-ghost-btn {
+    @apply inline-flex items-center justify-center rounded-full border border-white/30 bg-white/10 px-4 py-2 text-sm font-medium text-white backdrop-blur-sm transition hover:bg-white/20;
+  }
+
+  .ruwaq-offplan-hero-grid {
+    @apply grid gap-3 lg:grid-cols-[1.6fr_1fr];
+  }
+
+  .ruwaq-offplan-hero-main {
+    @apply relative min-h-[280px] overflow-hidden rounded-2xl bg-neutral-900 sm:min-h-[360px] lg:min-h-[480px];
+  }
+
+  .ruwaq-offplan-hero-side {
+    @apply grid gap-3 sm:grid-cols-2 lg:grid-cols-1;
+  }
+
+  .ruwaq-offplan-hero-thumb {
+    @apply relative min-h-[140px] overflow-hidden rounded-xl bg-neutral-100 sm:min-h-[160px] lg:min-h-[232px];
+  }
+
+  .ruwaq-offplan-hero-thumb figcaption {
+    @apply absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent px-3 py-2 text-xs font-medium text-white;
+  }
+
+  .ruwaq-offplan-hero-badges {
+    @apply absolute start-4 top-4 z-10;
+  }
+
+  .ruwaq-offplan-status-pill {
+    @apply inline-flex rounded-full bg-neutral-950/80 px-3 py-1.5 text-xs font-medium text-white backdrop-blur-sm;
+  }
+
+  .ruwaq-offplan-hero-actions {
+    @apply absolute inset-x-4 bottom-4 z-10 flex flex-wrap gap-2;
+  }
+
+  .ruwaq-offplan-hero-action-btn {
+    @apply inline-flex items-center rounded-full bg-white/90 px-4 py-2 text-sm font-medium text-neutral-950 backdrop-blur-sm transition hover:bg-white;
+  }
+
+  .ruwaq-offplan-play-btn {
+    @apply absolute start-1/2 top-1/2 z-10 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white/95 text-2xl text-neutral-950 shadow-lg transition hover:scale-105;
+  }
+
+  .ruwaq-offplan-quick-bar {
+    @apply my-8 grid gap-6 border-b border-neutral-200 pb-8 lg:grid-cols-[1fr_320px] lg:items-start;
+  }
+
+  .ruwaq-offplan-project-title {
+    @apply text-3xl font-semibold tracking-tight text-neutral-950 sm:text-4xl;
+  }
+
+  html[lang="ar"] .ruwaq-offplan-project-title {
+    @apply font-bold leading-snug;
+  }
+
+  .ruwaq-offplan-launch-price {
+    @apply mt-3 text-lg font-semibold text-neutral-900 sm:text-xl;
+  }
+
+  .ruwaq-offplan-price-asterisk {
+    @apply text-neutral-500;
+  }
+
+  .ruwaq-offplan-price-note {
+    @apply mt-1 text-xs text-neutral-500;
+  }
+
+  .ruwaq-offplan-developer-card {
+    @apply flex flex-col gap-3 rounded-2xl border border-neutral-200 bg-neutral-50 p-5;
+  }
+
+  .ruwaq-offplan-developer-logo {
+    @apply h-14 w-14 rounded-lg object-cover;
+  }
+
+  .ruwaq-offplan-developer-label {
+    @apply text-[10px] font-semibold uppercase tracking-[0.2em] text-neutral-500;
+  }
+
+  .ruwaq-offplan-developer-name {
+    @apply text-base font-semibold text-neutral-950;
+  }
+
+  .ruwaq-offplan-detail-grid {
+    @apply grid gap-8 lg:grid-cols-[1fr_300px];
+  }
+
+  .ruwaq-offplan-detail-main {
+    @apply space-y-10;
+  }
+
+  .ruwaq-offplan-specs-grid {
+    @apply grid gap-4 sm:grid-cols-2 lg:grid-cols-3;
+  }
+
+  .ruwaq-offplan-spec-item {
+    @apply flex gap-3 rounded-xl border border-neutral-200 bg-white p-4;
+  }
+
+  .ruwaq-offplan-spec-icon {
+    @apply text-xl;
+  }
+
+  .ruwaq-offplan-spec-label {
+    @apply text-xs font-medium uppercase tracking-wider text-neutral-500;
+  }
+
+  html[lang="ar"] .ruwaq-offplan-spec-label {
+    @apply normal-case tracking-normal;
+  }
+
+  .ruwaq-offplan-spec-value {
+    @apply mt-1 text-sm font-semibold text-neutral-950;
+  }
+
+  .ruwaq-offplan-lead-sidebar {
+    @apply h-fit rounded-2xl border border-neutral-200 bg-neutral-950 p-6 text-white lg:sticky lg:top-28;
+  }
+
+  .ruwaq-offplan-sidebar-title {
+    @apply mt-2 text-xl font-semibold;
+  }
+
+  .ruwaq-offplan-sidebar-subtitle {
+    @apply mt-2 mb-5 text-sm text-white/75;
+  }
+
+  .ruwaq-offplan-plans-section {
+    @apply rounded-2xl border border-neutral-200 bg-white p-4 sm:p-6;
+  }
+
+  .ruwaq-offplan-tabs {
+    @apply mb-6 flex gap-2 border-b border-neutral-200 pb-4;
+  }
+
+  .ruwaq-offplan-tab {
+    @apply rounded-full px-4 py-2 text-sm font-medium text-neutral-600 transition hover:bg-neutral-100;
+  }
+
+  .ruwaq-offplan-tab.is-active {
+    @apply bg-neutral-950 text-white hover:bg-neutral-950;
+  }
+
+  .ruwaq-offplan-plan-nav {
+    @apply mb-4 flex flex-wrap gap-2;
+  }
+
+  .ruwaq-offplan-plan-chip {
+    @apply rounded-full border border-neutral-200 px-3 py-1.5 text-sm transition hover:border-neutral-400;
+  }
+
+  .ruwaq-offplan-plan-chip.is-active {
+    @apply border-neutral-950 bg-neutral-950 text-white;
+  }
+
+  .ruwaq-offplan-plan-toolbar {
+    @apply mb-4 flex gap-2;
+  }
+
+  .ruwaq-offplan-view-toggle {
+    @apply rounded-lg border border-neutral-200 px-3 py-1.5 text-sm;
+  }
+
+  .ruwaq-offplan-view-toggle.is-active {
+    @apply border-neutral-950 bg-neutral-950 text-white;
+  }
+
+  .ruwaq-offplan-plan-viewer {
+    @apply overflow-hidden rounded-xl bg-neutral-100 p-2;
+  }
+
+  .ruwaq-offplan-payment-intro {
+    @apply mb-4 text-sm text-neutral-600;
+  }
+
+  .ruwaq-offplan-payment-table {
+    @apply w-full text-sm;
+  }
+
+  .ruwaq-offplan-payment-table th,
+  .ruwaq-offplan-payment-table td {
+    @apply border-b border-neutral-200 px-3 py-3 text-start;
+  }
+
+  .ruwaq-offplan-cobrand {
+    @apply mt-12 border-t border-neutral-200 pt-8 text-center;
+  }
+
+  .ruwaq-offplan-cobrand-text {
+    @apply text-sm font-medium text-neutral-800 sm:text-base;
+  }
+
+  .ruwaq-offplan-cobrand-disclaimer {
+    @apply mt-3 text-xs text-neutral-500;
+  }
 }

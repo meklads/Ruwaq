@@ -40,6 +40,7 @@ export function isPublicAppPath(pathname: string): boolean {
     "/request-quote",
     "/categories",
     "/tours",
+    "/projects",
     "/guides",
     "/pro",
     "/pricing",
@@ -69,6 +70,7 @@ export function isPublicApiPath(pathname: string): boolean {
   if (pathname.startsWith("/api/templates/")) return true;
   if (pathname.startsWith("/api/share/")) return true;
   if (pathname.startsWith("/api/design/")) return true;
+  if (pathname.startsWith("/api/projects/")) return true;
   if (pathname.startsWith("/api/auth/")) return true;
   return false;
 }

@@ -3,7 +3,7 @@ import { getLocale } from "@/shared/i18n/server";
 import { RuwaqProHero } from "@/modules/marketplace/components/directory/RuwaqProHero";
 import { BudgetEstimatorSection } from "@/modules/marketplace/components/budget-estimator-section";
 import { TodaysDirectorySection } from "@/modules/marketplace/components/todays-directory-section";
-import { ProjectToursSection } from "@/modules/marketplace/components/project-tours-section";
+import { OffPlanLaunchesSection } from "@/modules/marketplace/components/off-plan/off-plan-launches-section";
 import { GuidesSection } from "@/modules/marketplace/components/guides-section";
 import { EditorialCategoryGrid } from "@/modules/marketplace/components/editorial-category-grid";
 import { HowItWorksSection } from "@/modules/marketplace/components/how-it-works-section";
@@ -39,7 +39,7 @@ export default async function HomePage() {
         closeLabel={t.nav.closeModal}
         locale={locale}
       />
-      <ProjectToursSection />
+      <OffPlanLaunchesSection />
       <EditorialCategoryGrid
         copy={t.marketplace.categories}
         magazineCopy={t.marketplace.homeMagazine}

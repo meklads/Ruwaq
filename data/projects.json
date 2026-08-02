@@ -1,0 +1,111 @@
+{
+  "projects": [
+    {
+      "id": "project-01",
+      "slug": "al-sahar-villas",
+      "titleAr": "فيلل السحر السكني",
+      "titleEn": "Al Sahar Residential Villas",
+      "developer": {
+        "nameAr": "الماجدية للعقارات",
+        "nameEn": "Al Majdiah Real Estate",
+        "logo": "/images/marketing/architectural-model-3d.jpg"
+      },
+      "citySlug": "jeddah",
+      "locationAr": "جدة، حي الشاطئ",
+      "locationEn": "Jeddah, Al Shati District",
+      "startingPrice": 3200000,
+      "deliveryDateAr": "ديسمبر 2027",
+      "deliveryDateEn": "December 2027",
+      "deliveryQuarter": "Q4 2027",
+      "paymentPlanAr": "10% مقدم — 4 سنوات",
+      "paymentPlanEn": "10% down — 4 years",
+      "propertyTypesAr": ["فيلل", "دوبلكس"],
+      "propertyTypesEn": ["Villas", "Duplex"],
+      "propertyTypeSlugs": ["villa", "duplex"],
+      "ownershipAr": "تملك حر",
+      "ownershipEn": "Freehold",
+      "status": "under_construction",
+      "badge": "exclusive_3d",
+      "heroVideo": "https://videos.pexels.com/video-files/3571264/3571264-sd_640_360_30fps.mp4",
+      "heroVideoPoster": "/images/marketing/hero-villa-family.jpg",
+      "brochurePdf": "/api/projects/al-sahar-villas/brochure",
+      "images": {
+        "main": "/images/marketing/hero-villa-family.jpg",
+        "masterPlan": "/images/marketing/model-house-planning.jpg",
+        "interior": "/images/marketing/interior-lounge.jpg"
+      },
+      "floorPlans": [
+        {
+          "slug": "villa-a",
+          "labelAr": "فيلا A — 450 م²",
+          "labelEn": "Villa A — 450 sqm",
+          "image": "/images/marketing/family-living-room.jpg",
+          "view3d": "/images/marketing/gh-studio-visualization.jpg"
+        },
+        {
+          "slug": "duplex-b",
+          "labelAr": "دوبلكس B — 380 م²",
+          "labelEn": "Duplex B — 380 sqm",
+          "image": "/images/marketing/family-dining-planning.jpg",
+          "view3d": "/images/marketing/architectural-model-3d.jpg"
+        }
+      ],
+      "paymentSchedule": [
+        { "labelAr": "دفعة الحجز", "labelEn": "Booking", "percentage": 10 },
+        { "labelAr": "أثناء الإنشاء", "labelEn": "During construction", "percentage": 50 },
+        { "labelAr": "عند التسليم", "labelEn": "On handover", "percentage": 40 }
+      ],
+      "featured": true
+    },
+    {
+      "id": "project-02",
+      "slug": "de-gioia-2",
+      "titleAr": "دي جويا 2",
+      "titleEn": "De Gioia 2",
+      "developer": {
+        "nameAr": "روشن",
+        "nameEn": "ROSHN",
+        "logo": "/images/marketing/keys-new-home.jpg"
+      },
+      "citySlug": "makkah",
+      "locationAr": "مكة، حي العزيزية",
+      "locationEn": "Makkah, Al Aziziyah",
+      "startingPrice": 1850000,
+      "deliveryDateAr": "يونيو 2028",
+      "deliveryDateEn": "June 2028",
+      "deliveryQuarter": "Q2 2028",
+      "paymentPlanAr": "5% مقدم — 5 سنوات",
+      "paymentPlanEn": "5% down — 5 years",
+      "propertyTypesAr": ["تاون هاوس", "شقق"],
+      "propertyTypesEn": ["Townhouse", "Apartments"],
+      "propertyTypeSlugs": ["townhouse", "apartment"],
+      "ownershipAr": "تملك حر",
+      "ownershipEn": "Freehold",
+      "status": "under_construction",
+      "badge": "under_construction",
+      "heroVideo": "https://videos.pexels.com/video-files/3129671/3129671-sd_640_360_24fps.mp4",
+      "heroVideoPoster": "/images/marketing/architectural-model-3d.jpg",
+      "brochurePdf": "/api/projects/de-gioia-2/brochure",
+      "images": {
+        "main": "/images/marketing/architectural-model-3d.jpg",
+        "masterPlan": "/images/marketing/model-house-planning.jpg",
+        "interior": "/images/marketing/kitchen-family.jpg"
+      },
+      "floorPlans": [
+        {
+          "slug": "townhouse",
+          "labelAr": "تاون هاوس — 280 م²",
+          "labelEn": "Townhouse — 280 sqm",
+          "image": "/images/marketing/family-savings-home.jpg",
+          "view3d": "/images/marketing/gh-studio-visualization.jpg"
+        }
+      ],
+      "paymentSchedule": [
+        { "labelAr": "دفعة الحجز", "labelEn": "Booking", "percentage": 5 },
+        { "labelAr": "أثناء الإنشاء", "labelEn": "During construction", "percentage": 55 },
+        { "labelAr": "عند التسليم", "labelEn": "On handover", "percentage": 40 }
+      ],
+      "featured": true
+    }
+  ]
+}

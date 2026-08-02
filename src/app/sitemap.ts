@@ -5,6 +5,7 @@ import {
   MARKETPLACE_CATEGORIES,
   MARKETPLACE_CITIES,
 } from "@/shared/constants/marketplace-taxonomy";
+import { OFF_PLAN_PROJECTS } from "@/content/off-plan-projects";
 import { PROJECT_TOURS } from "@/content/project-tours";
 import { RUWQ_GUIDES } from "@/content/guides";
 
@@ -24,6 +25,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: "/request-quote", priority: 0.9, changeFrequency: "weekly" as const },
     { path: "/categories", priority: 0.9, changeFrequency: "weekly" as const },
     { path: "/tours", priority: 0.85, changeFrequency: "weekly" as const },
+    { path: "/projects", priority: 0.88, changeFrequency: "weekly" as const },
     { path: "/guides", priority: 0.85, changeFrequency: "weekly" as const },
     { path: "/visualization", priority: 0.88, changeFrequency: "weekly" as const },
     { path: "/join", priority: 0.85, changeFrequency: "monthly" as const },
@@ -41,6 +43,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     path: `/tours/${t.slug}`,
     priority: 0.8,
     changeFrequency: "monthly" as const,
+  }));
+
+  const projectRoutes: RouteEntry[] = OFF_PLAN_PROJECTS.map((p) => ({
+    path: `/projects/${p.slug}`,
+    priority: 0.86,
+    changeFrequency: "weekly" as const,
   }));
 
   const guideRoutes: RouteEntry[] = RUWQ_GUIDES.map((g) => ({
@@ -85,6 +93,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...cityRoutes,
     ...seoRoutes,
     ...tourRoutes,
+    ...projectRoutes,
     ...guideRoutes,
     ...listingRoutes,
   ];
