@@ -1,12 +1,24 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { GuideBlock } from "@/content/guides/types";
+import type { Messages } from "@/shared/i18n/messages/types";
 
 type Props = {
   blocks: GuideBlock[];
+  copy: Messages["marketplace"]["guides"];
 };
 
-export function GuideArticleBody({ blocks }: Props) {
+function directoryHrefFromQuote(href: string): string | null {
+  const match = href.match(/\/request-quote\?([^#]+)/);
+  if (!match) return null;
+  const params = new URLSearchParams(match[1]);
+  const city = params.get("city") ?? "jeddah";
+  const category = params.get("category");
+  if (!category) return null;
+  return `/${city}/${category}`;
+}
+
+export function GuideArticleBody({ blocks, copy }: Props) {
   return (
     <div className="ruwaq-guide-body">
       {blocks.map((block, index) => {
@@ -120,18 +132,26 @@ export function GuideArticleBody({ blocks }: Props) {
                 <p className="ruwaq-guide-callout__text">{block.text}</p>
               </aside>
             );
-          case "cta":
+          case "cta": {
+            const secondaryHref =
+              block.secondaryHref ?? directoryHrefFromQuote(block.href) ?? undefined;
+            const secondaryLabel = block.secondaryLabel ?? copy.ctaDirectory;
             return (
               <div key={key} className="ruwaq-guide-cta">
                 {block.lead ? <p className="ruwaq-guide-cta__lead">{block.lead}</p> : null}
-                <Link
-                  href={block.href}
-                  className="ruwaq-pro-btn-solid mt-4 inline-flex bg-white px-8 py-3 text-neutral-950 hover:bg-neutral-100"
-                >
-                  {block.label}
-                </Link>
+                <div className="ruwaq-guide-cta__actions">
+                  <Link href={block.href} className="ruwaq-guide-cta__btn">
+                    {block.label || copy.ctaQuote}
+                  </Link>
+                  {secondaryHref ? (
+                    <Link href={secondaryHref} className="ruwaq-guide-cta__btn-secondary">
+                      {secondaryLabel}
+                    </Link>
+                  ) : null}
+                </div>
               </div>
             );
+          }
           case "sources":
             return (
               <section key={key} className="ruwaq-guide-sources" aria-label={block.title}>

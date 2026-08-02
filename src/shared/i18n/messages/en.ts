@@ -606,6 +606,8 @@ export const en: Messages = {
    metaDescription:
     "Expert guides for fit-out, materials, and maintenance in Saudi Arabia's Western Region.",
    ctaLead: "Ready to talk to verified companies in this sector?",
+   ctaQuote: "Request a free quote",
+   ctaDirectory: "Browse directory",
    allGuides: "← All guides",
   },
   footerCta: {

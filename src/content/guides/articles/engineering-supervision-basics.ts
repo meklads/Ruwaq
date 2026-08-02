@@ -95,7 +95,7 @@ export const engineeringSupervisionBasicsGuide: RuwaqGuide = {
       type: "cta",
       lead: "تبحث عن مكتب إشراف معتمد يتحدث لغة العقود والمحاضر نفسها؟",
       label: "تصفّح مكاتب الإشراف في جدة",
-      href: "/jeddah/supervision",
+      href: "/request-quote?city=jeddah&category=supervision",
     },
     {
       type: "h2",
@@ -158,7 +158,7 @@ export const engineeringSupervisionBasicsGuide: RuwaqGuide = {
       type: "cta",
       lead: "جاهز لمقارنة عروض إشراف مع نطاق واضح ومحاضر موحّدة؟",
       label: "اطلب عروضاً من مكاتب الإشراف",
-      href: "/jeddah/supervision",
+      href: "/request-quote?city=jeddah&category=supervision",
     },
     {
       type: "sources",
@@ -232,7 +232,7 @@ export const engineeringSupervisionBasicsGuide: RuwaqGuide = {
       type: "cta",
       lead: "Looking for a verified supervision office that speaks the same contract language?",
       label: "Browse supervision firms in Jeddah",
-      href: "/jeddah/supervision",
+      href: "/request-quote?city=jeddah&category=supervision",
     },
     {
       type: "h2",
@@ -295,7 +295,7 @@ export const engineeringSupervisionBasicsGuide: RuwaqGuide = {
       type: "cta",
       lead: "Ready to compare supervision proposals with clear scope and unified minutes?",
       label: "Request quotes from supervision firms",
-      href: "/jeddah/supervision",
+      href: "/request-quote?city=jeddah&category=supervision",
     },
     {
       type: "sources",

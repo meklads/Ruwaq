@@ -8,7 +8,7 @@ import { gypsumCeilingJeddahGuide } from "@/content/guides/articles/gypsum-ceili
 import { countGuideWords, type RuwaqGuide } from "@/content/guides/types";
 
 export type { GuideBlock, RuwaqGuide } from "@/content/guides/types";
-export { guideCtaHref } from "@/content/guides/types";
+export { guideCtaHref, guideDirectoryHref } from "@/content/guides/types";
 
 const RAW_GUIDES: RuwaqGuide[] = [
   marbleJeddahClimateGuide,
@@ -23,7 +23,7 @@ const RAW_GUIDES: RuwaqGuide[] = [
 function withReadMinutes(guide: RuwaqGuide): RuwaqGuide {
   const wordsEn = countGuideWords(guide.blocksEn);
   const wordsAr = countGuideWords(guide.blocksAr);
-  const minutes = Math.max(8, Math.ceil(Math.max(wordsEn, wordsAr) / 180));
+  const minutes = Math.max(1, Math.ceil(Math.max(wordsEn, wordsAr) / 180));
   return { ...guide, readMinutes: minutes };
 }
 

@@ -74,7 +74,7 @@ export default async function GuideArticlePage({ params }: Props) {
       </div>
 
       <div className="ruwaq-ad-content ruwaq-guide-article__body">
-        <GuideArticleBody blocks={blocks} />
+        <GuideArticleBody blocks={blocks} copy={copy} />
 
         <p className="ruwaq-guide-back mt-14 text-center">
           <Link href="/guides" className="ruwaq-pro-btn-outline px-6 py-2.5">

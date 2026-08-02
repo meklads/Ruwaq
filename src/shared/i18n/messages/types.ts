@@ -474,6 +474,8 @@ export type Messages = {
       metaTitle: string;
       metaDescription: string;
       ctaLead: string;
+      ctaQuote: string;
+      ctaDirectory: string;
       allGuides: string;
     };
     footerCta: {

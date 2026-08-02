@@ -94,7 +94,7 @@ export const villaMaintenanceContractGuide: RuwaqGuide = {
       type: "cta",
       lead: "تريد مقارنة عروض AMC من شركات صيانة معتمدة في جدة؟",
       label: "تصفّح شركات الصيانة في جدة",
-      href: "/jeddah/maintenance",
+      href: "/request-quote?city=jeddah&category=maintenance",
     },
     {
       type: "h2",
@@ -159,7 +159,7 @@ export const villaMaintenanceContractGuide: RuwaqGuide = {
       type: "cta",
       lead: "جاهز لعقد AMC يحمي فيلتك قبل موسم الأمطار القادم؟",
       label: "اطلب عروض صيانة من شركات معتمدة",
-      href: "/jeddah/maintenance",
+      href: "/request-quote?city=jeddah&category=maintenance",
     },
     {
       type: "sources",
@@ -231,7 +231,7 @@ export const villaMaintenanceContractGuide: RuwaqGuide = {
       type: "cta",
       lead: "Want to compare AMC quotes from verified maintenance firms in Jeddah?",
       label: "Browse maintenance companies in Jeddah",
-      href: "/jeddah/maintenance",
+      href: "/request-quote?city=jeddah&category=maintenance",
     },
     {
       type: "h2",
@@ -296,7 +296,7 @@ export const villaMaintenanceContractGuide: RuwaqGuide = {
       type: "cta",
       lead: "Ready for an AMC that protects your villa before the next rain season?",
       label: "Request maintenance quotes from verified firms",
-      href: "/jeddah/maintenance",
+      href: "/request-quote?city=jeddah&category=maintenance",
     },
     {
       type: "sources",

@@ -3215,6 +3215,23 @@
     @apply text-sm leading-relaxed text-white/80;
   }
 
+  .ruwaq-guide-cta__actions {
+    @apply mt-5 flex flex-col items-center justify-center gap-3 sm:flex-row;
+  }
+
+  .ruwaq-guide-cta__btn {
+    @apply inline-flex items-center justify-center bg-white px-8 py-3 text-sm font-semibold text-neutral-950 transition-colors hover:bg-neutral-100;
+  }
+
+  .ruwaq-guide-cta__btn-secondary {
+    @apply inline-flex items-center justify-center border border-white/40 px-8 py-3 text-sm font-medium text-white transition-colors hover:border-white hover:bg-white/10;
+  }
+
+  html[lang="ar"] .ruwaq-guide-cta__btn,
+  html[lang="ar"] .ruwaq-guide-cta__btn-secondary {
+    @apply text-sm font-bold;
+  }
+
   .ruwaq-guide-sources {
     @apply mt-12 border-t border-neutral-200 pt-8;
   }

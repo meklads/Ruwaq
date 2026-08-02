@@ -98,7 +98,7 @@ export const landscapeMadinahVillasGuide: RuwaqGuide = {
       type: "cta",
       lead: "تبحث عن شركة لاندسكيب في المدينة تفهم zones الري والhardscape؟",
       label: "تصفّح شركات اللاندسكيب في المدينة",
-      href: "/madinah/outdoor",
+      href: "/request-quote?city=madinah&category=outdoor",
     },
     {
       type: "h2",
@@ -163,7 +163,7 @@ export const landscapeMadinahVillasGuide: RuwaqGuide = {
       type: "cta",
       lead: "جاهز لمشروع landscape يتحمل صيف المدينة ويوفر المياه؟",
       label: "اطلب عروضاً من شركات outdoor في المدينة",
-      href: "/madinah/outdoor",
+      href: "/request-quote?city=madinah&category=outdoor",
     },
     {
       type: "sources",
@@ -239,7 +239,7 @@ export const landscapeMadinahVillasGuide: RuwaqGuide = {
       type: "cta",
       lead: "Looking for a Madinah landscaper who understands irrigation zones and hardscape?",
       label: "Browse landscaping firms in Madinah",
-      href: "/madinah/outdoor",
+      href: "/request-quote?city=madinah&category=outdoor",
     },
     {
       type: "h2",
@@ -304,7 +304,7 @@ export const landscapeMadinahVillasGuide: RuwaqGuide = {
       type: "cta",
       lead: "Ready for a landscape that survives Madinah summer and saves water?",
       label: "Request quotes from outdoor firms in Madinah",
-      href: "/madinah/outdoor",
+      href: "/request-quote?city=madinah&category=outdoor",
     },
     {
       type: "sources",

@@ -602,6 +602,8 @@ export const ar = {
    metaDescription:
     "أدلة تشطيب ومواد وصيانة للمنطقة الغربية، رواق PRO Directory.",
    ctaLead: "جاهز للتواصل مع شركات معتمدة في هذا القطاع؟",
+   ctaQuote: "اطلب عرض سعر مجاني",
+   ctaDirectory: "تصفّح الدليل",
    allGuides: "← كل الأدلة",
   },
   footerCta: {

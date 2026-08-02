@@ -21,7 +21,14 @@ export type GuideBlock =
   | { type: "table"; caption?: string; headers: string[]; rows: string[][] }
   | { type: "chart"; caption?: string; unit?: string; items: GuideChartItem[] }
   | { type: "callout"; variant: "tip" | "warning" | "fact"; title: string; text: string }
-  | { type: "cta"; lead?: string; label: string; href: string }
+  | {
+      type: "cta";
+      lead?: string;
+      label: string;
+      href: string;
+      secondaryLabel?: string;
+      secondaryHref?: string;
+    }
   | { type: "sources"; title: string; items: GuideSource[] };
 
 export type RuwaqGuide = {
@@ -43,7 +50,13 @@ export type RuwaqGuide = {
 };
 
 export function guideCtaHref(guide: Pick<RuwaqGuide, "citySlug" | "categorySlug">): string {
-  return guide.citySlug ? `/${guide.citySlug}/${guide.categorySlug}` : `/jeddah/${guide.categorySlug}`;
+  const city = guide.citySlug ?? "jeddah";
+  return `/request-quote?city=${city}&category=${guide.categorySlug}`;
+}
+
+export function guideDirectoryHref(guide: Pick<RuwaqGuide, "citySlug" | "categorySlug">): string {
+  const city = guide.citySlug ?? "jeddah";
+  return `/${city}/${guide.categorySlug}`;
 }
 
 export function countGuideWords(blocks: GuideBlock[]): number {

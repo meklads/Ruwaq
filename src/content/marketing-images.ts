@@ -132,6 +132,8 @@ export const GUIDE_IMAGES = {
   maintenanceRoof: MARKETING_IMAGES.proposalDesk,
   landscape: MARKETING_IMAGES.hero,
   landscapeGarden: U("photo-1585320806290-979417b93370"),
+  gypsumCeiling: MARKETING_IMAGES.interiorLounge,
+  gypsumLighting: MARKETING_IMAGES.familyLiving,
 } as const;
 
 /** Project tour heroes & galleries (local assets). */
