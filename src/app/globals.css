@@ -3366,4 +3366,275 @@
   .ruwaq-offplan-cobrand-disclaimer {
     @apply mt-3 text-xs text-neutral-500;
   }
+
+  /* Off-plan spotlight — homepage & tours */
+  .ruwaq-offplan-spotlight {
+    @apply border-y border-neutral-900 bg-neutral-950 text-white;
+  }
+
+  .ruwaq-offplan-spotlight--compact {
+    @apply border-y-0 border-b border-neutral-200 bg-neutral-50 text-neutral-950;
+  }
+
+  .ruwaq-offplan-spotlight-header {
+    @apply mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between;
+  }
+
+  .ruwaq-offplan-spotlight-eyebrow {
+    @apply text-amber-300/90;
+  }
+
+  .ruwaq-offplan-spotlight--compact .ruwaq-offplan-spotlight-eyebrow {
+    @apply text-neutral-600;
+  }
+
+  .ruwaq-offplan-spotlight-title {
+    @apply text-white;
+  }
+
+  .ruwaq-offplan-spotlight--compact .ruwaq-offplan-spotlight-title {
+    @apply text-neutral-950;
+  }
+
+  .ruwaq-offplan-spotlight-lead {
+    @apply text-white/70;
+  }
+
+  .ruwaq-offplan-spotlight--compact .ruwaq-offplan-spotlight-lead {
+    @apply text-neutral-600;
+  }
+
+  .ruwaq-offplan-flagship {
+    @apply grid overflow-hidden rounded-2xl border border-white/10 bg-neutral-900 lg:grid-cols-[1.15fr_0.85fr];
+  }
+
+  .ruwaq-offplan-spotlight--compact .ruwaq-offplan-flagship {
+    @apply border-neutral-200 bg-white;
+  }
+
+  .ruwaq-offplan-flagship-media {
+    @apply relative min-h-[260px] sm:min-h-[320px] lg:min-h-[420px];
+  }
+
+  .ruwaq-offplan-flagship-overlay {
+    @apply absolute inset-0 flex flex-col justify-between p-5;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.55), transparent 45%);
+  }
+
+  .ruwaq-offplan-flagship-play {
+    @apply self-start rounded-full bg-white/90 px-4 py-2 text-sm font-medium text-neutral-950;
+  }
+
+  .ruwaq-offplan-flagship-body {
+    @apply flex flex-col justify-center p-6 sm:p-8 lg:p-10;
+  }
+
+  .ruwaq-offplan-flagship-label {
+    @apply text-[10px] font-semibold uppercase tracking-[0.24em] text-amber-300;
+  }
+
+  .ruwaq-offplan-spotlight--compact .ruwaq-offplan-flagship-label {
+    @apply text-neutral-500;
+  }
+
+  .ruwaq-offplan-flagship-title {
+    @apply mt-2 text-2xl font-semibold tracking-tight sm:text-3xl;
+  }
+
+  .ruwaq-offplan-flagship-location {
+    @apply mt-2 text-sm text-white/70;
+  }
+
+  .ruwaq-offplan-spotlight--compact .ruwaq-offplan-flagship-location {
+    @apply text-neutral-600;
+  }
+
+  .ruwaq-offplan-flagship-price {
+    @apply mt-4 text-base font-semibold text-amber-200;
+  }
+
+  .ruwaq-offplan-spotlight--compact .ruwaq-offplan-flagship-price {
+    @apply text-neutral-900;
+  }
+
+  .ruwaq-offplan-flagship-cta {
+    @apply mt-6 w-fit;
+  }
+
+  .ruwaq-offplan-mini-card {
+    @apply overflow-hidden rounded-xl border border-white/10 bg-neutral-900;
+  }
+
+  .ruwaq-offplan-mini-card-media {
+    @apply relative aspect-[16/10];
+  }
+
+  .ruwaq-offplan-mini-card-body {
+    @apply p-4;
+  }
+
+  .ruwaq-offplan-mini-card-title {
+    @apply text-base font-semibold;
+  }
+
+  .ruwaq-offplan-mini-card-meta {
+    @apply mt-1 text-xs text-white/60;
+  }
+
+  .ruwaq-offplan-mini-card-price {
+    @apply mt-2 text-sm font-medium text-amber-200/90;
+  }
+
+  /* Property Finder style landing — display only */
+  .ruwaq-pf-landing-inner {
+    @apply max-w-[1120px];
+  }
+
+  .ruwaq-pf-breadcrumb {
+    @apply mb-5 flex flex-wrap items-center gap-2 text-sm text-neutral-500;
+  }
+
+  .ruwaq-pf-breadcrumb a {
+    @apply transition hover:text-neutral-950;
+  }
+
+  .ruwaq-pf-project-header {
+    @apply mb-4 border-b border-neutral-200 pb-6;
+  }
+
+  .ruwaq-pf-project-header__badges {
+    @apply mb-3 flex flex-wrap gap-2;
+  }
+
+  .ruwaq-pf-badge {
+    @apply inline-flex rounded-md bg-neutral-100 px-2.5 py-1 text-xs font-medium text-neutral-800;
+  }
+
+  .ruwaq-pf-badge--offplan {
+    @apply bg-emerald-50 text-emerald-800;
+  }
+
+  .ruwaq-pf-badge--muted {
+    @apply bg-neutral-50 text-neutral-600;
+  }
+
+  .ruwaq-pf-project-title {
+    @apply text-3xl font-semibold tracking-tight text-neutral-950 sm:text-4xl;
+  }
+
+  html[lang="ar"] .ruwaq-pf-project-title {
+    @apply font-bold leading-snug;
+  }
+
+  .ruwaq-pf-project-meta {
+    @apply mt-3 flex flex-wrap gap-x-6 gap-y-1 text-sm text-neutral-600;
+  }
+
+  .ruwaq-pf-project-price strong {
+    @apply font-semibold text-neutral-950;
+  }
+
+  .ruwaq-pf-project-developer span {
+    @apply font-medium text-neutral-900;
+  }
+
+  .ruwaq-pf-section-nav {
+    @apply sticky top-0 z-20 -mx-1 mb-6 flex gap-1 overflow-x-auto border-b border-neutral-200 bg-white/95 py-2 backdrop-blur-sm;
+  }
+
+  .ruwaq-pf-section-nav__link {
+    @apply shrink-0 rounded-full px-4 py-2 text-sm font-medium text-neutral-600 transition hover:bg-neutral-100 hover:text-neutral-950;
+  }
+
+  .ruwaq-pf-gallery-section {
+    @apply scroll-mt-24;
+  }
+
+  .ruwaq-pf-hero-grid {
+    @apply grid gap-2 lg:grid-cols-[1.65fr_1fr];
+  }
+
+  .ruwaq-pf-hero-main {
+    @apply relative min-h-[240px] overflow-hidden rounded-xl bg-neutral-100 sm:min-h-[320px] lg:min-h-[460px];
+  }
+
+  .ruwaq-pf-hero-video-chip {
+    @apply absolute bottom-4 start-4 z-10 inline-flex items-center gap-1 rounded-full bg-neutral-950/80 px-4 py-2 text-sm font-medium text-white backdrop-blur-sm transition hover:bg-neutral-950;
+  }
+
+  .ruwaq-pf-hero-side {
+    @apply grid gap-2 sm:grid-cols-2 lg:grid-cols-1;
+  }
+
+  .ruwaq-pf-hero-side-item {
+    @apply relative min-h-[120px] overflow-hidden rounded-xl bg-neutral-100 sm:min-h-[150px] lg:min-h-[226px];
+  }
+
+  .ruwaq-pf-hero-side-item span {
+    @apply absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent px-3 py-2 text-start text-xs font-medium text-white;
+  }
+
+  .ruwaq-pf-thumb-strip {
+    @apply mt-2 flex gap-2 overflow-x-auto pb-1;
+  }
+
+  .ruwaq-pf-thumb {
+    @apply relative h-16 w-24 shrink-0 overflow-hidden rounded-lg border-2 border-transparent opacity-80 transition hover:opacity-100;
+  }
+
+  .ruwaq-pf-thumb--active {
+    @apply border-neutral-950 opacity-100;
+  }
+
+  .ruwaq-pf-gallery-grid {
+    @apply mt-8 grid grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-4;
+  }
+
+  .ruwaq-pf-gallery-item {
+    @apply relative aspect-[4/3] overflow-hidden rounded-lg bg-neutral-100;
+  }
+
+  .ruwaq-pf-video-section {
+    @apply mt-12 scroll-mt-24;
+  }
+
+  .ruwaq-pf-video-wrap {
+    @apply overflow-hidden rounded-2xl bg-neutral-950;
+  }
+
+  .ruwaq-pf-video-player {
+    @apply aspect-video w-full object-cover;
+  }
+
+  .ruwaq-pf-lightbox {
+    @apply fixed inset-0 z-[110] m-0 flex h-full max-h-none w-full max-w-none items-center justify-center border-0 bg-black/90 p-4;
+  }
+
+  .ruwaq-pf-lightbox-inner {
+    @apply relative flex w-full max-w-6xl items-center justify-center;
+  }
+
+  .ruwaq-pf-lightbox-close {
+    @apply absolute end-2 top-2 z-10 rounded-full bg-white/10 p-3 text-white transition hover:bg-white/20;
+  }
+
+  .ruwaq-pf-lightbox-nav {
+    @apply absolute z-10 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-3xl text-white transition hover:bg-white/20;
+  }
+
+  .ruwaq-pf-lightbox-nav--prev {
+    @apply start-0 sm:-start-4;
+  }
+
+  .ruwaq-pf-lightbox-nav--next {
+    @apply end-0 sm:-end-4;
+  }
+
+  .ruwaq-pf-lightbox-image {
+    @apply flex max-h-[85vh] items-center justify-center px-12;
+  }
+
+  .ruwaq-pf-lightbox-counter {
+    @apply absolute -bottom-8 start-1/2 -translate-x-1/2 text-sm text-white/70;
+  }
 }

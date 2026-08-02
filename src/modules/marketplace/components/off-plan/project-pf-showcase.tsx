@@ -1,0 +1,314 @@
+"use client";
+
+import { useCallback, useEffect, useMemo, useState } from "react";
+import Image from "next/image";
+import type { OffPlanProject } from "@/content/off-plan-projects";
+import {
+  formatOffPlanPrice,
+  getOffPlanGallery,
+  projectDeveloperName,
+  projectLocation,
+  projectTitle,
+} from "@/content/off-plan-projects";
+import type { Locale } from "@/shared/i18n/locale";
+
+type Copy = {
+  offPlan: string;
+  startingFrom: string;
+  delivery: string;
+  developer: string;
+  gallery: string;
+  video: string;
+  watchFilm: string;
+  photos: string;
+  viewAllPhotos: string;
+  masterPlan: string;
+  interior: string;
+  closeModal: string;
+  badgeUnderConstruction: string;
+  badgeExclusive: string;
+};
+
+type Props = {
+  project: OffPlanProject;
+  locale: Locale;
+  copy: Copy;
+};
+
+export function ProjectPfShowcase({ project, locale, copy }: Props) {
+  const title = projectTitle(project, locale);
+  const location = projectLocation(project, locale);
+  const developer = projectDeveloperName(project, locale);
+  const price = formatOffPlanPrice(project.startingPrice, locale);
+  const gallery = useMemo(() => getOffPlanGallery(project), [project]);
+  const badgeLabel =
+    project.badge === "exclusive_3d" ? copy.badgeExclusive : copy.badgeUnderConstruction;
+
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [videoOpen, setVideoOpen] = useState(false);
+  const activeImage = gallery[activeIndex] ?? project.images.main;
+
+  const openLightbox = (index: number) => {
+    setActiveIndex(index);
+    setLightboxOpen(true);
+  };
+
+  const stepLightbox = useCallback(
+    (delta: number) => {
+      setActiveIndex((current) => {
+        const next = current + delta;
+        if (next < 0) return gallery.length - 1;
+        if (next >= gallery.length) return 0;
+        return next;
+      });
+    },
+    [gallery.length]
+  );
+
+  useEffect(() => {
+    if (!lightboxOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setLightboxOpen(false);
+      if (e.key === "ArrowRight") stepLightbox(locale === "ar" ? -1 : 1);
+      if (e.key === "ArrowLeft") stepLightbox(locale === "ar" ? 1 : -1);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [lightboxOpen, locale, stepLightbox]);
+
+  const scrollTo = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+  return (
+    <>
+      {/* PF-style compact header bar */}
+      <header className="ruwaq-pf-project-header">
+        <div className="ruwaq-pf-project-header__badges">
+          <span className="ruwaq-pf-badge ruwaq-pf-badge--offplan">{copy.offPlan}</span>
+          <span className="ruwaq-pf-badge">{badgeLabel}</span>
+          <span className="ruwaq-pf-badge ruwaq-pf-badge--muted">
+            {copy.delivery}: {project.deliveryQuarter}
+          </span>
+        </div>
+        <h1 className="ruwaq-pf-project-title">{title}</h1>
+        <div className="ruwaq-pf-project-meta">
+          <p className="ruwaq-pf-project-price">
+            {copy.startingFrom} <strong>{price}</strong>
+          </p>
+          <p className="ruwaq-pf-project-location">{location}</p>
+          <p className="ruwaq-pf-project-developer">
+            {copy.developer}: <span>{developer}</span>
+          </p>
+        </div>
+      </header>
+
+      {/* Sticky section nav — Gallery | Video only */}
+      <nav className="ruwaq-pf-section-nav" aria-label="Project sections">
+        <button type="button" className="ruwaq-pf-section-nav__link" onClick={() => scrollTo("pf-gallery")}>
+          {copy.gallery}
+        </button>
+        {project.heroVideo ? (
+          <button type="button" className="ruwaq-pf-section-nav__link" onClick={() => scrollTo("pf-video")}>
+            {copy.video}
+          </button>
+        ) : null}
+      </nav>
+
+      {/* Hero media grid — Property Finder layout */}
+      <section id="pf-gallery" className="ruwaq-pf-gallery-section">
+        <div className="ruwaq-pf-hero-grid">
+          <button
+            type="button"
+            className="ruwaq-pf-hero-main"
+            onClick={() => openLightbox(activeIndex)}
+            aria-label={copy.viewAllPhotos}
+          >
+            <Image
+              src={activeImage}
+              alt={title}
+              fill
+              priority
+              className="object-cover transition-opacity duration-300"
+              sizes="(max-width: 1024px) 100vw, 65vw"
+            />
+            {project.heroVideo ? (
+              <span
+                className="ruwaq-pf-hero-video-chip"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setVideoOpen(true);
+                }}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    e.stopPropagation();
+                    setVideoOpen(true);
+                  }
+                }}
+              >
+                ▶ {copy.watchFilm}
+              </span>
+            ) : null}
+          </button>
+
+          <div className="ruwaq-pf-hero-side">
+            <button
+              type="button"
+              className="ruwaq-pf-hero-side-item"
+              onClick={() => openLightbox(1)}
+            >
+              <Image
+                src={gallery[1] ?? project.images.masterPlan}
+                alt={copy.masterPlan}
+                fill
+                className="object-cover"
+                sizes="400px"
+              />
+              <span>{copy.masterPlan}</span>
+            </button>
+            <button
+              type="button"
+              className="ruwaq-pf-hero-side-item"
+              onClick={() => openLightbox(2)}
+            >
+              <Image
+                src={gallery[2] ?? project.images.interior}
+                alt={copy.interior}
+                fill
+                className="object-cover"
+                sizes="400px"
+              />
+              <span>{copy.interior}</span>
+            </button>
+          </div>
+        </div>
+
+        {/* Thumbnail strip */}
+        <div className="ruwaq-pf-thumb-strip" aria-label={copy.photos}>
+          {gallery.map((src, index) => (
+            <button
+              key={`${src}-${index}`}
+              type="button"
+              className={
+                index === activeIndex
+                  ? "ruwaq-pf-thumb ruwaq-pf-thumb--active"
+                  : "ruwaq-pf-thumb"
+              }
+              onClick={() => setActiveIndex(index)}
+              aria-label={`${copy.photos} ${index + 1}`}
+            >
+              <Image src={src} alt="" fill className="object-cover" sizes="120px" />
+            </button>
+          ))}
+        </div>
+
+        {/* Full gallery grid */}
+        <div className="ruwaq-pf-gallery-grid">
+          {gallery.map((src, index) => (
+            <button
+              key={`grid-${src}-${index}`}
+              type="button"
+              className="ruwaq-pf-gallery-item"
+              onClick={() => openLightbox(index)}
+            >
+              <Image
+                src={src}
+                alt={`${title} — ${index + 1}`}
+                fill
+                className="object-cover transition-transform duration-500 hover:scale-105"
+                sizes="(max-width: 768px) 50vw, 25vw"
+              />
+            </button>
+          ))}
+        </div>
+      </section>
+
+      {/* Cinematic video block */}
+      {project.heroVideo ? (
+        <section id="pf-video" className="ruwaq-pf-video-section">
+          <div className="ruwaq-pf-video-wrap">
+            <video
+              src={project.heroVideo}
+              poster={project.heroVideoPoster}
+              controls
+              playsInline
+              preload="metadata"
+              className="ruwaq-pf-video-player"
+            />
+          </div>
+        </section>
+      ) : null}
+
+      {/* Lightbox */}
+      {lightboxOpen ? (
+        <dialog open className="ruwaq-pf-lightbox" onClick={() => setLightboxOpen(false)}>
+          <div className="ruwaq-pf-lightbox-inner" onClick={(e) => e.stopPropagation()}>
+            <button
+              type="button"
+              className="ruwaq-pf-lightbox-close"
+              onClick={() => setLightboxOpen(false)}
+              aria-label={copy.closeModal}
+            >
+              ✕
+            </button>
+            <button
+              type="button"
+              className="ruwaq-pf-lightbox-nav ruwaq-pf-lightbox-nav--prev"
+              onClick={() => stepLightbox(-1)}
+              aria-label="Previous"
+            >
+              ‹
+            </button>
+            <div className="ruwaq-pf-lightbox-image">
+              <Image
+                src={gallery[activeIndex] ?? project.images.main}
+                alt={title}
+                width={1600}
+                height={1000}
+                className="max-h-[85vh] w-auto max-w-full object-contain"
+              />
+            </div>
+            <button
+              type="button"
+              className="ruwaq-pf-lightbox-nav ruwaq-pf-lightbox-nav--next"
+              onClick={() => stepLightbox(1)}
+              aria-label="Next"
+            >
+              ›
+            </button>
+            <p className="ruwaq-pf-lightbox-counter">
+              {activeIndex + 1} / {gallery.length}
+            </p>
+          </div>
+        </dialog>
+      ) : null}
+
+      {/* Video modal from hero chip */}
+      {videoOpen && project.heroVideo ? (
+        <dialog open className="ruwaq-offplan-dialog" onClick={() => setVideoOpen(false)}>
+          <div className="ruwaq-offplan-video-panel" onClick={(e) => e.stopPropagation()}>
+            <button
+              type="button"
+              className="ruwaq-offplan-dialog-close"
+              onClick={() => setVideoOpen(false)}
+              aria-label={copy.closeModal}
+            >
+              ✕
+            </button>
+            <video
+              src={project.heroVideo}
+              poster={project.heroVideoPoster}
+              controls
+              autoPlay
+              playsInline
+              className="w-full rounded-xl"
+            />
+          </div>
+        </dialog>
+      ) : null}
+    </>
+  );
+}

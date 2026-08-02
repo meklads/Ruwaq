@@ -4,11 +4,7 @@ import { notFound } from "next/navigation";
 import { getMessages } from "@/shared/i18n";
 import { getLocale } from "@/shared/i18n/server";
 import { getOffPlanProject, OFF_PLAN_PROJECTS, projectTitle } from "@/content/off-plan-projects";
-import { ProjectHeroMedia } from "@/modules/marketplace/components/off-plan/project-hero-media";
-import { ProjectQuickBar } from "@/modules/marketplace/components/off-plan/project-quick-bar";
-import { ProjectSpecsGrid } from "@/modules/marketplace/components/off-plan/project-specs-grid";
-import { ProjectLeadSidebar } from "@/modules/marketplace/components/off-plan/project-lead-sidebar";
-import { ProjectPlansTabs } from "@/modules/marketplace/components/off-plan/project-plans-tabs";
+import { ProjectPfShowcase } from "@/modules/marketplace/components/off-plan/project-pf-showcase";
 import { ProjectCoBrandFooter } from "@/modules/marketplace/components/off-plan/project-co-brand-footer";
 
 type Props = { params: { slug: string } };
@@ -38,78 +34,34 @@ export default async function OffPlanProjectPage({ params }: Props) {
   const copy = t.marketplace.offPlan;
 
   return (
-    <article className="ruwaq-ad-page ruwaq-offplan-landing">
-      <div className="ruwaq-ad-content">
-        <nav className="mb-4 text-sm text-neutral-500">
-          <Link href="/projects" className="hover:text-neutral-900">
-            {copy.allProjects}
-          </Link>
+    <article className="ruwaq-ad-page ruwaq-offplan-landing ruwaq-pf-landing">
+      <div className="ruwaq-ad-content ruwaq-pf-landing-inner">
+        <nav className="ruwaq-pf-breadcrumb">
+          <Link href="/projects">{copy.allProjects}</Link>
+          <span aria-hidden>/</span>
+          <span>{projectTitle(project, locale)}</span>
         </nav>
 
-        <ProjectHeroMedia
+        <ProjectPfShowcase
           project={project}
           locale={locale}
           copy={{
-            underConstruction: copy.badgeUnderConstruction,
+            offPlan: copy.offPlanLabel,
+            startingFrom: copy.startingFrom,
             delivery: copy.deliveryLabel,
+            developer: copy.developer,
+            gallery: copy.galleryTab,
+            video: copy.videoTab,
             watchFilm: copy.watchFilm,
-            downloadBrochure: copy.downloadBrochure,
+            photos: copy.photosLabel,
+            viewAllPhotos: copy.viewAllPhotos,
             masterPlan: copy.masterPlan,
             interior: copy.interior,
             closeModal: t.nav.closeModal,
-            leadForm: copy.leadForm,
+            badgeUnderConstruction: copy.badgeUnderConstruction,
+            badgeExclusive: copy.badgeExclusive,
           }}
         />
-
-        <ProjectQuickBar
-          project={project}
-          locale={locale}
-          copy={{
-            startingFrom: copy.startingFrom,
-            priceDisclaimer: copy.priceDisclaimer,
-            developer: copy.developer,
-            viewDeveloperProjects: copy.viewDeveloperProjects,
-          }}
-        />
-
-        <div className="ruwaq-offplan-detail-grid">
-          <div className="ruwaq-offplan-detail-main">
-            <ProjectSpecsGrid
-              project={project}
-              locale={locale}
-              copy={{
-                delivery: copy.deliveryLabel,
-                location: copy.locationLabel,
-                paymentPlan: copy.paymentPlanLabel,
-                propertyTypes: copy.propertyTypesLabel,
-                ownership: copy.ownershipLabel,
-              }}
-            />
-            <ProjectPlansTabs
-              project={project}
-              locale={locale}
-              copy={{
-                tabFloorPlans: copy.tabFloorPlans,
-                tabPayment: copy.tabPayment,
-                view2d: copy.view2d,
-                view3d: copy.view3d,
-                paymentIntro: copy.paymentIntro,
-                installment: copy.installment,
-              }}
-            />
-          </div>
-          <ProjectLeadSidebar
-            project={project}
-            locale={locale}
-            copy={{
-              sidebarTitle: copy.sidebarTitle,
-              sidebarSubtitle: copy.sidebarSubtitle,
-              downloadBrochure: copy.downloadBrochure,
-              closeModal: t.nav.closeModal,
-              leadForm: copy.leadForm,
-            }}
-          />
-        </div>
 
         <ProjectCoBrandFooter
           locale={locale}

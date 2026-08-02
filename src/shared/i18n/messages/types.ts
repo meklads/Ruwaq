@@ -365,6 +365,14 @@ export type Messages = {
       indexSubtitle: string;
       viewAll: string;
       explore: string;
+      exploreFlagship: string;
+      spotlightLabel: string;
+      offPlanLabel: string;
+      galleryTab: string;
+      videoTab: string;
+      photosLabel: string;
+      viewAllPhotos: string;
+      toursBridge: string;
       downloadBrochure: string;
       startingFrom: string;
       badgeExclusive: string;

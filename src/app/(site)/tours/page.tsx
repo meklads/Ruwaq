@@ -4,6 +4,7 @@ import { getMessages } from "@/shared/i18n";
 import { getLocale } from "@/shared/i18n/server";
 import { PROJECT_TOURS } from "@/content/project-tours";
 import { ProjectTourCard } from "@/modules/marketplace/components/project-tour-card";
+import { OffPlanLaunchesSection } from "@/modules/marketplace/components/off-plan/off-plan-launches-section";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
@@ -18,16 +19,21 @@ export default async function ProjectToursIndexPage() {
   const locale = await getLocale();
   const t = getMessages(locale);
   const copy = t.marketplace.projectTours;
+  const offPlanCopy = t.marketplace.offPlan;
 
   return (
     <div className="ruwaq-ad-page">
-      <header className="ruwaq-ad-section border-b border-neutral-200 pb-10">
+      <OffPlanLaunchesSection variant="tours" />
+
+      <header className="ruwaq-ad-section border-b border-neutral-200 pb-10 pt-4">
         <div className="ruwaq-ad-content">
           <p className="ruwaq-ad-eyebrow">{copy.eyebrow}</p>
           <h1 className="ruwaq-ad-section-title">{copy.title}</h1>
           <p className="ruwaq-ad-section-lead">{copy.subtitle}</p>
+          <p className="mt-4 text-sm text-neutral-600">{offPlanCopy.toursBridge}</p>
         </div>
       </header>
+
       <div className="ruwaq-ad-section">
         <div className="ruwaq-ad-content">
           <div className="ruwaq-pro-editorial-grid">

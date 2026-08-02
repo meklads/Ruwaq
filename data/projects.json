@@ -1,53 +1,57 @@
 {
   "projects": [
     {
-      "id": "project-01",
-      "slug": "al-sahar-villas",
-      "titleAr": "فيلل السحر السكني",
-      "titleEn": "Al Sahar Residential Villas",
+      "id": "project-flagship",
+      "slug": "rafaal-pavilions",
+      "titleAr": "رفal Pavilions",
+      "titleEn": "Rafaal Pavilions",
       "developer": {
-        "nameAr": "الماجدية للعقارات",
-        "nameEn": "Al Majdiah Real Estate",
+        "nameAr": "رفal العقارية",
+        "nameEn": "Rafaal Real Estate",
         "logo": "/images/marketing/architectural-model-3d.jpg"
       },
       "citySlug": "jeddah",
-      "locationAr": "جدة، حي الشاطئ",
-      "locationEn": "Jeddah, Al Shati District",
-      "startingPrice": 3200000,
+      "locationAr": "جدة، حي الشاطئ — North Obhur",
+      "locationEn": "Jeddah, Al Shati — North Obhur",
+      "startingPrice": 4500000,
       "deliveryDateAr": "ديسمبر 2027",
       "deliveryDateEn": "December 2027",
       "deliveryQuarter": "Q4 2027",
       "paymentPlanAr": "10% مقدم — 4 سنوات",
       "paymentPlanEn": "10% down — 4 years",
-      "propertyTypesAr": ["فيلل", "دوبلكس"],
-      "propertyTypesEn": ["Villas", "Duplex"],
-      "propertyTypeSlugs": ["villa", "duplex"],
+      "propertyTypesAr": ["فيلل", "قصور"],
+      "propertyTypesEn": ["Villas", "Mansions"],
+      "propertyTypeSlugs": ["villa"],
       "ownershipAr": "تملك حر",
       "ownershipEn": "Freehold",
       "status": "under_construction",
       "badge": "exclusive_3d",
+      "flagship": true,
       "heroVideo": "https://videos.pexels.com/video-files/3571264/3571264-sd_640_360_30fps.mp4",
       "heroVideoPoster": "/images/marketing/hero-villa-family.jpg",
-      "brochurePdf": "/api/projects/al-sahar-villas/brochure",
+      "brochurePdf": "/api/projects/rafaal-pavilions/brochure",
       "images": {
         "main": "/images/marketing/hero-villa-family.jpg",
         "masterPlan": "/images/marketing/model-house-planning.jpg",
         "interior": "/images/marketing/interior-lounge.jpg"
       },
+      "gallery": [
+        "/images/marketing/hero-villa-family.jpg",
+        "/images/marketing/gh-studio-visualization.jpg",
+        "/images/marketing/interior-lounge.jpg",
+        "/images/marketing/family-living-room.jpg",
+        "/images/marketing/architectural-model-3d.jpg",
+        "/images/marketing/kitchen-family.jpg",
+        "/images/marketing/model-house-planning.jpg",
+        "/images/marketing/family-dining-planning.jpg"
+      ],
       "floorPlans": [
         {
-          "slug": "villa-a",
-          "labelAr": "فيلا A — 450 م²",
-          "labelEn": "Villa A — 450 sqm",
+          "slug": "pavilion-a",
+          "labelAr": "Pavilion A — 520 م²",
+          "labelEn": "Pavilion A — 520 sqm",
           "image": "/images/marketing/family-living-room.jpg",
           "view3d": "/images/marketing/gh-studio-visualization.jpg"
-        },
-        {
-          "slug": "duplex-b",
-          "labelAr": "دوبلكس B — 380 م²",
-          "labelEn": "Duplex B — 380 sqm",
-          "image": "/images/marketing/family-dining-planning.jpg",
-          "view3d": "/images/marketing/architectural-model-3d.jpg"
         }
       ],
       "paymentSchedule": [
@@ -59,45 +63,105 @@
     },
     {
       "id": "project-02",
-      "slug": "de-gioia-2",
-      "titleAr": "دي جويا 2",
-      "titleEn": "De Gioia 2",
+      "slug": "central-market-jeddah",
+      "titleAr": "السوق المركزي — جدة",
+      "titleEn": "Central Market Jeddah",
       "developer": {
-        "nameAr": "روشن",
-        "nameEn": "ROSHN",
+        "nameAr": "مركز جدة للتجارة",
+        "nameEn": "Jeddah Central Development",
         "logo": "/images/marketing/keys-new-home.jpg"
       },
-      "citySlug": "makkah",
-      "locationAr": "مكة، حي العزيزية",
-      "locationEn": "Makkah, Al Aziziyah",
-      "startingPrice": 1850000,
-      "deliveryDateAr": "يونيو 2028",
-      "deliveryDateEn": "June 2028",
-      "deliveryQuarter": "Q2 2028",
-      "paymentPlanAr": "5% مقدم — 5 سنوات",
-      "paymentPlanEn": "5% down — 5 years",
-      "propertyTypesAr": ["تاون هاوس", "شقق"],
-      "propertyTypesEn": ["Townhouse", "Apartments"],
-      "propertyTypeSlugs": ["townhouse", "apartment"],
+      "citySlug": "jeddah",
+      "locationAr": "جدة، وسط المدينة",
+      "locationEn": "Jeddah, City Center",
+      "startingPrice": 2800000,
+      "deliveryDateAr": "مارس 2028",
+      "deliveryDateEn": "March 2028",
+      "deliveryQuarter": "Q1 2028",
+      "paymentPlanAr": "15% مقدم — 3 سنوات",
+      "paymentPlanEn": "15% down — 3 years",
+      "propertyTypesAr": ["شقق", "دوبلكس"],
+      "propertyTypesEn": ["Apartments", "Duplex"],
+      "propertyTypeSlugs": ["apartment", "duplex"],
       "ownershipAr": "تملك حر",
       "ownershipEn": "Freehold",
       "status": "under_construction",
       "badge": "under_construction",
       "heroVideo": "https://videos.pexels.com/video-files/3129671/3129671-sd_640_360_24fps.mp4",
       "heroVideoPoster": "/images/marketing/architectural-model-3d.jpg",
-      "brochurePdf": "/api/projects/de-gioia-2/brochure",
+      "brochurePdf": "/api/projects/central-market-jeddah/brochure",
       "images": {
         "main": "/images/marketing/architectural-model-3d.jpg",
         "masterPlan": "/images/marketing/model-house-planning.jpg",
         "interior": "/images/marketing/kitchen-family.jpg"
       },
+      "gallery": [
+        "/images/marketing/architectural-model-3d.jpg",
+        "/images/marketing/gh-studio-visualization.jpg",
+        "/images/marketing/kitchen-family.jpg",
+        "/images/marketing/family-savings-home.jpg"
+      ],
       "floorPlans": [
         {
-          "slug": "townhouse",
-          "labelAr": "تاون هاوس — 280 م²",
-          "labelEn": "Townhouse — 280 sqm",
-          "image": "/images/marketing/family-savings-home.jpg",
-          "view3d": "/images/marketing/gh-studio-visualization.jpg"
+          "slug": "apartment-a",
+          "labelAr": "شقة A — 180 م²",
+          "labelEn": "Apartment A — 180 sqm",
+          "image": "/images/marketing/family-dining-planning.jpg"
+        }
+      ],
+      "paymentSchedule": [
+        { "labelAr": "دفعة الحجز", "labelEn": "Booking", "percentage": 15 },
+        { "labelAr": "أثناء الإنشاء", "labelEn": "During construction", "percentage": 45 },
+        { "labelAr": "عند التسليم", "labelEn": "On handover", "percentage": 40 }
+      ],
+      "featured": true
+    },
+    {
+      "id": "project-03",
+      "slug": "al-rajhi-gardens",
+      "titleAr": "حدائق الراجحي السكنية",
+      "titleEn": "Al Rajhi Residential Gardens",
+      "developer": {
+        "nameAr": "مجموعة الراجحي",
+        "nameEn": "Al Rajhi Group",
+        "logo": "/images/marketing/family-savings-home.jpg"
+      },
+      "citySlug": "riyadh",
+      "locationAr": "الرياض، شمال المدينة",
+      "locationEn": "Riyadh, North Riyadh",
+      "startingPrice": 1950000,
+      "deliveryDateAr": "يونيو 2028",
+      "deliveryDateEn": "June 2028",
+      "deliveryQuarter": "Q2 2028",
+      "paymentPlanAr": "5% مقدم — 5 سنوات",
+      "paymentPlanEn": "5% down — 5 years",
+      "propertyTypesAr": ["فيلل", "تاون هاوس"],
+      "propertyTypesEn": ["Villas", "Townhouse"],
+      "propertyTypeSlugs": ["villa", "townhouse"],
+      "ownershipAr": "تملك حر",
+      "ownershipEn": "Freehold",
+      "status": "under_construction",
+      "badge": "under_construction",
+      "heroVideo": "https://videos.pexels.com/video-files/2711306/2711306-sd_640_360_30fps.mp4",
+      "heroVideoPoster": "/images/marketing/family-living-room.jpg",
+      "brochurePdf": "/api/projects/al-rajhi-gardens/brochure",
+      "images": {
+        "main": "/images/marketing/family-living-room.jpg",
+        "masterPlan": "/images/marketing/model-house-planning.jpg",
+        "interior": "/images/marketing/interior-lounge.jpg"
+      },
+      "gallery": [
+        "/images/marketing/family-living-room.jpg",
+        "/images/marketing/hero-villa-family.jpg",
+        "/images/marketing/interior-lounge.jpg",
+        "/images/marketing/proposal-desk.jpg"
+      ],
+      "floorPlans": [
+        {
+          "slug": "villa-standard",
+          "labelAr": "فيلا — 350 م²",
+          "labelEn": "Villa — 350 sqm",
+          "image": "/images/marketing/family-living-room.jpg"
         }
       ],
       "paymentSchedule": [

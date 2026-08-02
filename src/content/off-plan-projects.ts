@@ -57,9 +57,11 @@ export type OffPlanProject = {
     masterPlan: string;
     interior: string;
   };
+  gallery: string[];
   floorPlans: OffPlanFloorPlan[];
   paymentSchedule: OffPlanPaymentMilestone[];
   featured: boolean;
+  flagship?: boolean;
 };
 
 export const OFF_PLAN_PROJECTS: OffPlanProject[] = projectsData.projects as OffPlanProject[];
@@ -89,6 +91,29 @@ export function getOffPlanProject(slug: string): OffPlanProject | undefined {
 
 export function getFeaturedOffPlanProjects(): OffPlanProject[] {
   return OFF_PLAN_PROJECTS.filter((p) => p.featured);
+}
+
+export function getFlagshipOffPlanProject(): OffPlanProject {
+  return (
+    OFF_PLAN_PROJECTS.find((p) => p.flagship) ??
+    OFF_PLAN_PROJECTS.find((p) => p.featured) ??
+    OFF_PLAN_PROJECTS[0]!
+  );
+}
+
+export function getOffPlanGallery(project: OffPlanProject): string[] {
+  const seen = new Set<string>();
+  const ordered = [
+    project.images.main,
+    project.images.masterPlan,
+    project.images.interior,
+    ...project.gallery,
+  ];
+  return ordered.filter((src) => {
+    if (seen.has(src)) return false;
+    seen.add(src);
+    return true;
+  });
 }
 
 export function formatOffPlanPrice(amount: number, locale: "ar" | "en"): string {
