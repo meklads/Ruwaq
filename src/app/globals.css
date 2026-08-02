@@ -3658,6 +3658,14 @@
     @apply absolute bottom-3 start-3 rounded-md bg-neutral-950/75 px-2.5 py-1 text-xs font-medium text-white backdrop-blur-sm;
   }
 
+  .ruwaq-pf-list-card__badge--completed {
+    @apply bg-neutral-800;
+  }
+
+  .ruwaq-pf-badge--completed {
+    @apply bg-neutral-800 text-white;
+  }
+
   .ruwaq-pf-list-card__body {
     @apply flex flex-1 flex-col p-5;
   }

@@ -349,6 +349,10 @@ export type Messages = {
       subtitle: string;
       viewAll: string;
       readTour: string;
+      homeTitle: string;
+      homeSubtitle: string;
+      featuredLabel: string;
+      completedBadge: string;
       metaTitle: string;
       metaDescription: string;
       creditsTitle: string;
