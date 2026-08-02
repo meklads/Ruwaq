@@ -55,7 +55,7 @@ export default async function ProjectTourDetailPage({ params }: Props) {
 
   return (
     <article className="ruwaq-ad-page ruwaq-pf-landing">
-      <div className="ruwaq-ad-content ruwaq-pf-landing-inner">
+      <div className="ruwaq-ad-content">
         <nav className="ruwaq-pf-breadcrumb">
           <Link href="/tours">{toursCopy.allTours}</Link>
           <span aria-hidden>/</span>
