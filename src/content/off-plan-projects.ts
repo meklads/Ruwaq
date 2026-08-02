@@ -54,7 +54,15 @@ export type OffPlanProject = {
   status: "under_construction";
   badge: OffPlanProjectBadge;
   heroVideo?: string;
+  heroVideoYoutubeId?: string;
+  heroVideoStartSeconds?: number;
   heroVideoPoster: string;
+  developerUrl?: string;
+  aboutParagraphsAr?: string[];
+  aboutParagraphsEn?: string[];
+  launchPriceNoteAr?: string;
+  launchPriceNoteEn?: string;
+  unitsCount?: number;
   brochurePdf: string;
   images: {
     main: string;
@@ -125,6 +133,31 @@ export function formatOffPlanPrice(amount: number, locale: "ar" | "en"): string 
     maximumFractionDigits: 0,
   }).format(amount);
   return locale === "ar" ? `${formatted} ر.س` : `SAR ${formatted}`;
+}
+
+export function formatLaunchPrice(project: OffPlanProject, locale: "ar" | "en"): string {
+  if (project.startingPrice > 0) return formatOffPlanPrice(project.startingPrice, locale);
+  const note = locale === "ar" ? project.launchPriceNoteAr : project.launchPriceNoteEn;
+  return note ?? (locale === "ar" ? "استفسار عن السعر" : "Price on request");
+}
+
+export function projectHasVideo(project: OffPlanProject): boolean {
+  return Boolean(project.heroVideoYoutubeId || project.heroVideo);
+}
+
+export function projectAboutParagraphs(project: OffPlanProject, locale: "ar" | "en"): string[] {
+  return locale === "ar" ? (project.aboutParagraphsAr ?? []) : (project.aboutParagraphsEn ?? []);
+}
+
+export function getProjectYoutubeEmbedUrl(project: OffPlanProject): string | undefined {
+  if (!project.heroVideoYoutubeId) return undefined;
+  const start = project.heroVideoStartSeconds ?? 0;
+  const params = new URLSearchParams({
+    rel: "0",
+    modestbranding: "1",
+    ...(start > 0 ? { start: String(start) } : {}),
+  });
+  return `https://www.youtube.com/embed/${project.heroVideoYoutubeId}?${params.toString()}`;
 }
 
 export function projectTitle(project: OffPlanProject, locale: "ar" | "en"): string {

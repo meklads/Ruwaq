@@ -2,11 +2,15 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import type { ShowcaseProject } from "@/content/showcase-projects";
 import {
-  formatOffPlanPrice,
+  formatLaunchPrice,
   getOffPlanGallery,
+  getProjectYoutubeEmbedUrl,
+  projectAboutParagraphs,
   projectDeveloperName,
+  projectHasVideo,
   projectHighlights,
   projectLocation,
   projectSummary,
@@ -24,10 +28,12 @@ type Copy = {
   developer: string;
   gallery: string;
   video: string;
+  videoButton: string;
   watchFilm: string;
   photos: string;
   viewAllPhotos: string;
   masterPlan: string;
+  sitePlan: string;
   interior: string;
   closeModal: string;
   badgeUnderConstruction: string;
@@ -37,8 +43,13 @@ type Copy = {
   locationLabel: string;
   propertyTypesLabel: string;
   ownershipLabel: string;
+  unitsCountLabel: string;
   aboutProject: string;
   downloadBrochure: string;
+  viewDeveloperProjects: string;
+  viewOtherProjects: string;
+  contactSoon: string;
+  requestQuoteCta: string;
 };
 
 type Props = {
@@ -54,8 +65,15 @@ export function ProjectPfShowcase({ project, locale, copy }: Props) {
   const developer = projectDeveloperName(project, locale);
   const summary = projectSummary(project, locale);
   const highlights = projectHighlights(project, locale);
-  const price = formatOffPlanPrice(project.startingPrice, locale);
+  const aboutParagraphs = projectAboutParagraphs(project, locale);
+  const price = formatLaunchPrice(project, locale);
   const gallery = useMemo(() => getOffPlanGallery(project), [project]);
+  const hasVideo = projectHasVideo(project);
+  const youtubeEmbedUrl = getProjectYoutubeEmbedUrl(project);
+  const youtubeThumb = project.heroVideoYoutubeId
+    ? `https://img.youtube.com/vi/${project.heroVideoYoutubeId}/hqdefault.jpg`
+    : null;
+
   const badgeLabel = isLaunch
     ? project.badge === "exclusive_3d"
       ? copy.badgeExclusive
@@ -106,16 +124,77 @@ export function ProjectPfShowcase({ project, locale, copy }: Props) {
   const keyInfo = [
     { label: copy.deliveryDate, value: delivery },
     { label: copy.locationLabel, value: location },
+    ...(project.unitsCount
+      ? [{ label: copy.unitsCountLabel, value: String(project.unitsCount) }]
+      : []),
     { label: copy.propertyTypesLabel, value: types },
     { label: copy.ownershipLabel, value: ownership },
     { label: copy.delivery, value: payment },
   ];
 
+  const developerLink = project.developerUrl ? (
+    <a href={project.developerUrl} target="_blank" rel="noopener noreferrer" className="ruwaq-pf-developer-strip__link">
+      {copy.viewDeveloperProjects}
+    </a>
+  ) : (
+    <Link href="/tours" className="ruwaq-pf-developer-strip__link">
+      {copy.viewOtherProjects}
+    </Link>
+  );
+
   return (
     <>
-      {/* PF: gallery first — full width */}
+      {/* PF hero — side column (video + plans) + main render with overlay CTAs */}
       <section id="pf-gallery" className="ruwaq-pf-gallery-section ruwaq-pf-gallery-section--lead">
-        <div className="ruwaq-pf-hero-grid">
+        <div className="ruwaq-pf-hero-grid ruwaq-pf-hero-grid--pf">
+          <div className="ruwaq-pf-hero-side">
+            {hasVideo ? (
+              <button
+                type="button"
+                className="ruwaq-pf-hero-side-item ruwaq-pf-hero-side-item--video"
+                onClick={() => setVideoOpen(true)}
+                aria-label={copy.watchFilm}
+              >
+                {youtubeThumb ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={youtubeThumb} alt="" className="ruwaq-pf-hero-video-thumb" />
+                ) : (
+                  <Image
+                    src={project.heroVideoPoster}
+                    alt=""
+                    fill
+                    className="object-cover opacity-50"
+                    sizes="400px"
+                  />
+                )}
+                <span className="ruwaq-pf-hero-play" aria-hidden>
+                  ▶
+                </span>
+                <span>{copy.videoButton}</span>
+              </button>
+            ) : null}
+            <button type="button" className="ruwaq-pf-hero-side-item" onClick={() => openLightbox(1)}>
+              <Image
+                src={gallery[1] ?? project.images.masterPlan}
+                alt={copy.masterPlan}
+                fill
+                className="object-cover"
+                sizes="400px"
+              />
+              <span>{copy.masterPlan}</span>
+            </button>
+            <button type="button" className="ruwaq-pf-hero-side-item" onClick={() => openLightbox(2)}>
+              <Image
+                src={gallery[2] ?? project.images.interior}
+                alt={copy.sitePlan}
+                fill
+                className="object-cover"
+                sizes="400px"
+              />
+              <span>{copy.sitePlan}</span>
+            </button>
+          </div>
+
           <button
             type="button"
             className="ruwaq-pf-hero-main"
@@ -134,55 +213,32 @@ export function ProjectPfShowcase({ project, locale, copy }: Props) {
               <span className={`ruwaq-pf-badge ${isLaunch ? "ruwaq-pf-badge--offplan" : "ruwaq-pf-badge--completed"}`}>
                 {isLaunch ? copy.offPlan : copy.completedLabel}
               </span>
-              {isLaunch ? (
+              {isLaunch && project.deliveryQuarter ? (
                 <span className="ruwaq-pf-badge ruwaq-pf-badge--muted">
                   {copy.delivery}: {project.deliveryQuarter}
                 </span>
               ) : null}
             </div>
-            {isLaunch && project.heroVideo ? (
-              <span
-                className="ruwaq-pf-hero-video-chip"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setVideoOpen(true);
-                }}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    e.stopPropagation();
-                    setVideoOpen(true);
-                  }
-                }}
-              >
-                ▶ {copy.watchFilm}
-              </span>
+            {isLaunch ? (
+              <div className="ruwaq-pf-hero-actions" onClick={(e) => e.stopPropagation()} role="presentation">
+                {project.brochurePdf ? (
+                  <a
+                    href={project.brochurePdf}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="ruwaq-pf-hero-action-btn"
+                  >
+                    ↓ {copy.downloadBrochure}
+                  </a>
+                ) : null}
+                {hasVideo ? (
+                  <button type="button" className="ruwaq-pf-hero-action-btn" onClick={() => setVideoOpen(true)}>
+                    ▶ {copy.videoButton}
+                  </button>
+                ) : null}
+              </div>
             ) : null}
           </button>
-
-          <div className="ruwaq-pf-hero-side">
-            <button type="button" className="ruwaq-pf-hero-side-item" onClick={() => openLightbox(1)}>
-              <Image
-                src={gallery[1] ?? project.images.masterPlan}
-                alt={copy.masterPlan}
-                fill
-                className="object-cover"
-                sizes="400px"
-              />
-              <span>{copy.masterPlan}</span>
-            </button>
-            <button type="button" className="ruwaq-pf-hero-side-item" onClick={() => openLightbox(2)}>
-              <Image
-                src={gallery[2] ?? project.images.interior}
-                alt={copy.interior}
-                fill
-                className="object-cover"
-                sizes="400px"
-              />
-              <span>{copy.interior}</span>
-            </button>
-          </div>
         </div>
 
         <div className="ruwaq-pf-thumb-strip" aria-label={copy.photos}>
@@ -200,23 +256,39 @@ export function ProjectPfShowcase({ project, locale, copy }: Props) {
         </div>
       </section>
 
-      {/* PF: sticky section nav */}
-      <nav className="ruwaq-pf-section-nav" aria-label="Project sections">
-        <button type="button" className="ruwaq-pf-section-nav__link is-active" onClick={() => scrollTo("pf-gallery")}>
-          {copy.gallery}
-        </button>
-        <button type="button" className="ruwaq-pf-section-nav__link" onClick={() => scrollTo("pf-about")}>
-          {copy.aboutProject}
-        </button>
-        {project.heroVideo ? (
-          <button type="button" className="ruwaq-pf-section-nav__link" onClick={() => scrollTo("pf-video")}>
-            {copy.video}
-          </button>
-        ) : null}
-      </nav>
+      {/* PF: sidebar + main — title, developer strip, key info, gallery */}
+      <div className="ruwaq-pf-detail-layout ruwaq-pf-detail-layout--pf">
+        <aside className="ruwaq-pf-detail-sidebar">
+          <div className="ruwaq-pf-sidebar-card ruwaq-pf-sidebar-card--cta">
+            <p className="ruwaq-pf-sidebar-contact-soon">{copy.contactSoon}</p>
+            <Link href="/request-quote" className="ruwaq-pro-btn-solid w-full justify-center px-4 py-3 text-sm">
+              {copy.requestQuoteCta}
+            </Link>
+            {isLaunch && project.brochurePdf ? (
+              <a
+                href={project.brochurePdf}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ruwaq-pro-btn-outline mt-3 w-full justify-center px-4 py-3 text-sm"
+              >
+                {copy.downloadBrochure}
+              </a>
+            ) : null}
+            {hasVideo ? (
+              <button
+                type="button"
+                className="ruwaq-pro-btn-outline mt-3 w-full justify-center px-4 py-3 text-sm"
+                onClick={() => setVideoOpen(true)}
+              >
+                ▶ {copy.videoButton}
+              </button>
+            ) : null}
+            <Link href="/tours" className="ruwaq-pf-sidebar-other-projects mt-4 inline-block text-sm">
+              {copy.viewOtherProjects}
+            </Link>
+          </div>
+        </aside>
 
-      {/* PF: two-column — content + sticky sidebar */}
-      <div className="ruwaq-pf-detail-layout">
         <div className="ruwaq-pf-detail-main">
           <header className="ruwaq-pf-project-header ruwaq-pf-project-header--inline">
             <span className="ruwaq-pf-badge">{badgeLabel}</span>
@@ -225,12 +297,45 @@ export function ProjectPfShowcase({ project, locale, copy }: Props) {
               <>
                 <p className="ruwaq-pf-launch-price">
                   {copy.launchPrice} <strong>{price}</strong>
-                  <span className="ruwaq-pf-price-asterisk">*</span>
+                  {project.startingPrice > 0 ? <span className="ruwaq-pf-price-asterisk">*</span> : null}
                 </p>
                 <p className="ruwaq-pf-price-disclaimer">{copy.priceDisclaimer}</p>
               </>
             ) : null}
           </header>
+
+          <div className="ruwaq-pf-developer-strip">
+            <div className="ruwaq-pf-developer-strip__brand">
+              {project.developer.logo ? (
+                <Image
+                  src={project.developer.logo}
+                  alt={developer}
+                  width={56}
+                  height={56}
+                  className="ruwaq-pf-developer-strip__logo"
+                />
+              ) : null}
+              <div>
+                <p className="ruwaq-pf-developer-strip__label">{copy.developer}</p>
+                <p className="ruwaq-pf-developer-strip__name">{developer}</p>
+              </div>
+            </div>
+            {developerLink}
+          </div>
+
+          <nav className="ruwaq-pf-section-nav" aria-label="Project sections">
+            <button type="button" className="ruwaq-pf-section-nav__link is-active" onClick={() => scrollTo("pf-gallery")}>
+              {copy.gallery}
+            </button>
+            <button type="button" className="ruwaq-pf-section-nav__link" onClick={() => scrollTo("pf-about")}>
+              {copy.aboutProject}
+            </button>
+            {hasVideo ? (
+              <button type="button" className="ruwaq-pf-section-nav__link" onClick={() => scrollTo("pf-video")}>
+                {copy.video}
+              </button>
+            ) : null}
+          </nav>
 
           <section className="ruwaq-pf-key-info">
             <h2 className="ruwaq-pf-section-heading">{copy.keyInformation}</h2>
@@ -244,10 +349,15 @@ export function ProjectPfShowcase({ project, locale, copy }: Props) {
             </dl>
           </section>
 
-          {summary ? (
+          {(summary || aboutParagraphs.length > 0 || highlights.length > 0) ? (
             <section id="pf-about" className="ruwaq-pf-about scroll-mt-24">
               <h2 className="ruwaq-pf-section-heading">{copy.aboutProject}</h2>
-              <p className="ruwaq-pf-about-text">{summary}</p>
+              {summary ? <p className="ruwaq-pf-about-text">{summary}</p> : null}
+              {aboutParagraphs.map((paragraph) => (
+                <p key={paragraph.slice(0, 24)} className="ruwaq-pf-about-text">
+                  {paragraph}
+                </p>
+              ))}
               {highlights.length > 0 ? (
                 <ul className="ruwaq-pf-project-highlights">
                   {highlights.map((item) => (
@@ -277,65 +387,32 @@ export function ProjectPfShowcase({ project, locale, copy }: Props) {
             ))}
           </div>
 
-          {project.heroVideo ? (
+          {hasVideo ? (
             <section id="pf-video" className="ruwaq-pf-video-section scroll-mt-24">
               <h2 className="ruwaq-pf-section-heading">{copy.video}</h2>
               <div className="ruwaq-pf-video-wrap">
-                <video
-                  src={project.heroVideo}
-                  poster={project.heroVideoPoster}
-                  controls
-                  playsInline
-                  preload="metadata"
-                  className="ruwaq-pf-video-player"
-                />
+                {youtubeEmbedUrl ? (
+                  <iframe
+                    src={youtubeEmbedUrl}
+                    title={title}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="ruwaq-pf-video-embed"
+                  />
+                ) : project.heroVideo ? (
+                  <video
+                    src={project.heroVideo}
+                    poster={project.heroVideoPoster}
+                    controls
+                    playsInline
+                    preload="metadata"
+                    className="ruwaq-pf-video-player"
+                  />
+                ) : null}
               </div>
             </section>
           ) : null}
         </div>
-
-        <aside className="ruwaq-pf-detail-sidebar">
-          <div className="ruwaq-pf-sidebar-card">
-            <p className="ruwaq-pf-sidebar-label">{copy.developer}</p>
-            {project.developer.logo ? (
-              <Image
-                src={project.developer.logo}
-                alt={developer}
-                width={72}
-                height={72}
-                className="ruwaq-pf-sidebar-logo"
-              />
-            ) : null}
-            <p className="ruwaq-pf-sidebar-developer">{developer}</p>
-            <p className="ruwaq-pf-sidebar-location">{location}</p>
-            {isLaunch ? (
-              <>
-                <p className="ruwaq-pf-sidebar-price">
-                  {copy.startingFrom} <strong>{price}</strong>
-                </p>
-                {project.brochurePdf ? (
-                  <a
-                    href={project.brochurePdf}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="ruwaq-pro-btn-outline w-full justify-center px-4 py-3 text-sm"
-                  >
-                    {copy.downloadBrochure}
-                  </a>
-                ) : null}
-              </>
-            ) : null}
-            {project.heroVideo ? (
-              <button
-                type="button"
-                className="ruwaq-pro-btn-solid mt-3 w-full px-4 py-3 text-sm"
-                onClick={() => setVideoOpen(true)}
-              >
-                ▶ {copy.watchFilm}
-              </button>
-            ) : null}
-          </div>
-        </aside>
       </div>
 
       {lightboxOpen ? (
@@ -366,13 +443,23 @@ export function ProjectPfShowcase({ project, locale, copy }: Props) {
         </dialog>
       ) : null}
 
-      {videoOpen && project.heroVideo ? (
+      {videoOpen && hasVideo ? (
         <dialog open className="ruwaq-offplan-dialog" onClick={() => setVideoOpen(false)}>
-          <div className="ruwaq-offplan-video-panel" onClick={(e) => e.stopPropagation()}>
+          <div className="ruwaq-offplan-video-panel ruwaq-offplan-video-panel--wide" onClick={(e) => e.stopPropagation()}>
             <button type="button" className="ruwaq-offplan-dialog-close" onClick={() => setVideoOpen(false)} aria-label={copy.closeModal}>
               ✕
             </button>
-            <video src={project.heroVideo} poster={project.heroVideoPoster} controls autoPlay playsInline className="w-full rounded-xl" />
+            {youtubeEmbedUrl ? (
+              <iframe
+                src={`${youtubeEmbedUrl}&autoplay=1`}
+                title={title}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="ruwaq-pf-video-embed w-full rounded-xl"
+              />
+            ) : project.heroVideo ? (
+              <video src={project.heroVideo} poster={project.heroVideoPoster} controls autoPlay playsInline className="w-full rounded-xl" />
+            ) : null}
           </div>
         </dialog>
       ) : null}

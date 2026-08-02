@@ -75,10 +75,12 @@ export default async function ProjectTourDetailPage({ params }: Props) {
             developer: offPlanCopy.developer,
             gallery: offPlanCopy.galleryTab,
             video: offPlanCopy.videoTab,
+            videoButton: offPlanCopy.videoButton,
             watchFilm: offPlanCopy.watchFilm,
             photos: offPlanCopy.photosLabel,
             viewAllPhotos: offPlanCopy.viewAllPhotos,
             masterPlan: offPlanCopy.masterPlan,
+            sitePlan: offPlanCopy.sitePlan,
             interior: offPlanCopy.interior,
             closeModal: t.nav.closeModal,
             badgeUnderConstruction: offPlanCopy.badgeUnderConstruction,
@@ -88,8 +90,13 @@ export default async function ProjectTourDetailPage({ params }: Props) {
             locationLabel: offPlanCopy.locationLabel,
             propertyTypesLabel: offPlanCopy.propertyTypesLabel,
             ownershipLabel: offPlanCopy.ownershipLabel,
+            unitsCountLabel: offPlanCopy.unitsCountLabel,
             aboutProject: offPlanCopy.aboutProjectLabel,
             downloadBrochure: offPlanCopy.downloadBrochure,
+            viewDeveloperProjects: offPlanCopy.viewDeveloperProjects,
+            viewOtherProjects: offPlanCopy.viewOtherProjects,
+            contactSoon: offPlanCopy.contactSoon,
+            requestQuoteCta: offPlanCopy.requestQuoteCta,
           }}
         />
 

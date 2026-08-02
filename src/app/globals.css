@@ -3529,6 +3529,10 @@
     @apply grid gap-8 lg:grid-cols-[1fr_320px] lg:items-start;
   }
 
+  .ruwaq-pf-detail-layout--pf {
+    @apply lg:grid-cols-[minmax(260px,320px)_1fr];
+  }
+
   .ruwaq-pf-detail-main {
     @apply min-w-0;
   }
@@ -3704,6 +3708,74 @@
 
   .ruwaq-pf-hero-grid {
     @apply grid gap-2 lg:grid-cols-[1.65fr_1fr];
+  }
+
+  .ruwaq-pf-hero-grid--pf {
+    @apply lg:grid-cols-[1fr_1.65fr];
+  }
+
+  .ruwaq-pf-hero-actions {
+    @apply absolute inset-x-0 bottom-0 z-10 flex flex-wrap gap-2 bg-gradient-to-t from-black/75 via-black/40 to-transparent p-4 pt-12;
+  }
+
+  .ruwaq-pf-hero-action-btn {
+    @apply inline-flex items-center gap-1.5 rounded-lg bg-white px-4 py-2.5 text-sm font-medium text-neutral-950 shadow-sm transition hover:bg-neutral-100;
+  }
+
+  .ruwaq-pf-hero-side-item--video {
+    @apply bg-neutral-950;
+  }
+
+  .ruwaq-pf-hero-video-thumb {
+    @apply absolute inset-0 h-full w-full object-cover opacity-40;
+  }
+
+  .ruwaq-pf-hero-play {
+    @apply absolute left-1/2 top-1/2 z-[1] flex h-14 w-14 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-xl text-neutral-950 shadow-lg;
+  }
+
+  .ruwaq-pf-developer-strip {
+    @apply mt-6 flex flex-col gap-4 rounded-xl bg-neutral-100 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6;
+  }
+
+  .ruwaq-pf-developer-strip__brand {
+    @apply flex items-center gap-4;
+  }
+
+  .ruwaq-pf-developer-strip__logo {
+    @apply rounded-lg object-cover;
+  }
+
+  .ruwaq-pf-developer-strip__label {
+    @apply text-xs text-neutral-500;
+  }
+
+  .ruwaq-pf-developer-strip__name {
+    @apply text-base font-semibold text-neutral-950;
+  }
+
+  .ruwaq-pf-developer-strip__link {
+    @apply shrink-0 text-sm font-medium text-blue-700 transition hover:text-blue-900;
+  }
+
+  .ruwaq-pf-sidebar-card--cta {
+    @apply text-center;
+  }
+
+  .ruwaq-pf-sidebar-contact-soon {
+    @apply mb-4 text-sm text-neutral-600;
+  }
+
+  .ruwaq-pf-sidebar-other-projects {
+    @apply font-medium text-blue-700 hover:text-blue-900;
+  }
+
+  .ruwaq-pf-video-embed {
+    @apply aspect-video w-full border-0;
+  }
+
+  .ruwaq-offplan-video-panel--wide {
+    @apply w-full max-w-4xl;
   }
 
   .ruwaq-pf-hero-main {

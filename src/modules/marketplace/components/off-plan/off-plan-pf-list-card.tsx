@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { ShowcaseProject } from "@/content/showcase-projects";
 import {
-  formatOffPlanPrice,
+  formatLaunchPrice,
   projectLocation,
   projectTitle,
 } from "@/content/off-plan-projects";
@@ -27,7 +27,7 @@ export function OffPlanPfListCard({ project, locale, copy }: Props) {
   const title = projectTitle(project, locale);
   const location = projectLocation(project, locale);
   const isLaunch = project.showcaseKind === "launch";
-  const price = isLaunch ? formatOffPlanPrice(project.startingPrice, locale) : null;
+  const price = isLaunch ? formatLaunchPrice(project, locale) : null;
   const types = locale === "ar" ? project.propertyTypesAr.join(" · ") : project.propertyTypesEn.join(" · ");
   const badge = isLaunch ? copy.offPlanLabel : copy.completedLabel;
 

@@ -3,8 +3,9 @@ import Link from "next/link";
 import { getMessages } from "@/shared/i18n";
 import { getLocale } from "@/shared/i18n/server";
 import {
-  formatOffPlanPrice,
+  formatLaunchPrice,
   projectLocation,
+  projectHasVideo,
   projectTitle,
 } from "@/content/off-plan-projects";
 import { getFlagshipShowcaseProject } from "@/content/showcase-projects";
@@ -18,7 +19,7 @@ export async function ProjectToursHomeSection() {
 
   const projectName = projectTitle(project, locale);
   const location = projectLocation(project, locale);
-  const price = formatOffPlanPrice(project.startingPrice, locale);
+  const price = formatLaunchPrice(project, locale);
   const badgeLabel =
     project.badge === "exclusive_3d" ? offPlanCopy.badgeExclusive : offPlanCopy.badgeUnderConstruction;
 
@@ -52,7 +53,7 @@ export async function ProjectToursHomeSection() {
             <div className="ruwaq-offplan-feature__media-top">
               <span className="ruwaq-offplan-feature__badge">{badgeLabel}</span>
             </div>
-            {project.heroVideo ? (
+            {projectHasVideo(project) ? (
               <span className="ruwaq-offplan-feature__video">▶ {offPlanCopy.watchFilm}</span>
             ) : null}
           </div>

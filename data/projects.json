@@ -3,41 +3,68 @@
     {
       "id": "project-flagship",
       "slug": "rafaal-pavilions",
-      "titleAr": "رفal Pavilions",
-      "titleEn": "Rafaal Pavilions",
+      "titleAr": "بافيلونز — الرابية",
+      "titleEn": "Pavilions — Al Rabia",
+      "summaryAr": "مجتمع فلل مكتبية حصري في الدرعية الجديدة شمال غرب الرياض، على مقربة من وادي حنيفة — يجمع بين الخضرة والماء والهدوء لبيئة عمل ملهمة.",
+      "summaryEn": "An exclusive office-pavilion community in New Ad Diriyah, northwest Riyadh, near Wadi Hanifa — blending greenery, water, and calm for an inspiring work environment.",
+      "highlightsAr": [
+        "30 وحدة — 3 أنواع (A / B / C)",
+        "مساحات من 473 م² حتى 1,495 م²",
+        "بين الدائري الشمالي وطريق الملك سلمان",
+        "تصميم يركز على الإنتاجية والطبيعة"
+      ],
+      "highlightsEn": [
+        "30 units across 3 pavilion types (A / B / C)",
+        "473 sqm up to 1,495 sqm",
+        "Between North Ring Road & King Salman Road",
+        "Landscape-led design for productivity & wellbeing"
+      ],
+      "aboutParagraphsAr": [
+        "«بافيلونز» موقع هادئ ومتميز في الدرعية الجديدة شمال غرب الرياض، قريب من وادي حنيفة — يرمز لنمو الرياض ويوفر اتصالاً سريعاً بأهم المناطق عبر الدائري الشمالي وطريق الملك سلمان.",
+        "ابتُكرت «بافيلونز الرابية» كحل لبيئة عمل هادئة وحصرية، تجمع عناصر الطبيعة — الخضرة والماء والسكينة — في فلل مكتبية مستقلة لتحفيز الإبداع خلال ساعات العمل."
+      ],
+      "aboutParagraphsEn": [
+        "Pavilions is a quiet, aspirational address in New Ad Diriyah, northwest Riyadh, near Wadi Hanifa — minutes from key districts via the North Ring Road and King Salman Road.",
+        "The Pavilions of AlRabia concept delivers an exclusive calm workspace, combining greenery, water, and serenity in standalone office pavilions designed to boost focus and wellbeing."
+      ],
       "developer": {
-        "nameAr": "رفal العقارية",
-        "nameEn": "Rafaal Real Estate",
+        "nameAr": "رافـال للتطوير العقاري",
+        "nameEn": "RAFAL Real Estate Development",
         "logo": "/images/marketing/architectural-model-3d.jpg"
       },
-      "citySlug": "jeddah",
-      "locationAr": "جدة، حي الشاطئ — North Obhur",
-      "locationEn": "Jeddah, Al Shati — North Obhur",
-      "startingPrice": 4500000,
-      "deliveryDateAr": "ديسمبر 2027",
-      "deliveryDateEn": "December 2027",
-      "deliveryQuarter": "Q4 2027",
-      "paymentPlanAr": "10% مقدم — 4 سنوات",
-      "paymentPlanEn": "10% down — 4 years",
-      "propertyTypesAr": ["فيلل", "قصور"],
-      "propertyTypesEn": ["Villas", "Mansions"],
-      "propertyTypeSlugs": ["villa"],
-      "ownershipAr": "تملك حر",
-      "ownershipEn": "Freehold",
+      "developerUrl": "https://rafal.com.sa/our-communities/pavilions/",
+      "citySlug": "riyadh",
+      "locationAr": "الرياض، الدرعية الجديدة — بين الدائري الشمالي وطريق الملك سلمان",
+      "locationEn": "Riyadh, New Ad Diriyah — between North Ring Road & King Salman Road",
+      "startingPrice": 0,
+      "launchPriceNoteAr": "الأسعار حسب نوع البافيليون والمساحة — تواصل للتفاصيل",
+      "launchPriceNoteEn": "Pricing varies by pavilion type & size — contact for details",
+      "unitsCount": 30,
+      "deliveryDateAr": "متاح للاستفسار",
+      "deliveryDateEn": "Enquire for availability",
+      "deliveryQuarter": "2025",
+      "paymentPlanAr": "شراء أو استثمار — حسب المطور",
+      "paymentPlanEn": "Purchase or invest — per developer terms",
+      "propertyTypesAr": ["فلل مكتبية", "مكاتب مستقلة"],
+      "propertyTypesEn": ["Office pavilions", "Standalone offices"],
+      "propertyTypeSlugs": [],
+      "ownershipAr": "حسب اتفاقية المطور",
+      "ownershipEn": "Per developer agreement",
       "status": "under_construction",
       "badge": "exclusive_3d",
       "flagship": true,
-      "heroVideo": "https://videos.pexels.com/video-files/3571264/3571264-sd_640_360_30fps.mp4",
-      "heroVideoPoster": "/images/marketing/hero-villa-family.jpg",
+      "heroVideoYoutubeId": "ilWeCush3ew",
+      "heroVideoStartSeconds": 32,
+      "heroVideoPoster": "/images/marketing/gh-studio-visualization.jpg",
       "brochurePdf": "/api/projects/rafaal-pavilions/brochure",
       "images": {
-        "main": "/images/marketing/hero-villa-family.jpg",
+        "main": "/images/marketing/gh-studio-visualization.jpg",
         "masterPlan": "/images/marketing/model-house-planning.jpg",
-        "interior": "/images/marketing/interior-lounge.jpg"
+        "interior": "/images/marketing/architectural-model-3d.jpg"
       },
       "gallery": [
-        "/images/marketing/hero-villa-family.jpg",
         "/images/marketing/gh-studio-visualization.jpg",
+        "/images/marketing/hero-villa-family.jpg",
         "/images/marketing/interior-lounge.jpg",
         "/images/marketing/family-living-room.jpg",
         "/images/marketing/architectural-model-3d.jpg",
@@ -48,10 +75,22 @@
       "floorPlans": [
         {
           "slug": "pavilion-a",
-          "labelAr": "Pavilion A — 520 م²",
-          "labelEn": "Pavilion A — 520 sqm",
+          "labelAr": "Pavilion A — 1,495 م² (وحدتان)",
+          "labelEn": "Pavilion A — 1,495 sqm (2 units)",
           "image": "/images/marketing/family-living-room.jpg",
           "view3d": "/images/marketing/gh-studio-visualization.jpg"
+        },
+        {
+          "slug": "pavilion-b",
+          "labelAr": "Pavilion B — 789–947 م² (10 وحدات)",
+          "labelEn": "Pavilion B — 789–947 sqm (10 units)",
+          "image": "/images/marketing/interior-lounge.jpg"
+        },
+        {
+          "slug": "pavilion-c",
+          "labelAr": "Pavilion C — 473–726 م² (18 وحدة)",
+          "labelEn": "Pavilion C — 473–726 sqm (18 units)",
+          "image": "/images/marketing/kitchen-family.jpg"
         }
       ],
       "paymentSchedule": [

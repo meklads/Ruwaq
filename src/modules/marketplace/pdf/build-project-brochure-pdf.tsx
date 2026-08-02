@@ -2,7 +2,7 @@ import React from "react";
 import { Document, Page, Text, View, StyleSheet, renderToBuffer } from "@react-pdf/renderer";
 import type { OffPlanProject } from "@/content/off-plan-projects";
 import {
-  formatOffPlanPrice,
+  formatLaunchPrice,
   projectDeveloperName,
   projectLocation,
   projectTitle,
@@ -76,7 +76,7 @@ function BrochureDocument({ project, locale }: { project: OffPlanProject; locale
   const title = projectTitle(project, locale);
   const developer = projectDeveloperName(project, locale);
   const location = projectLocation(project, locale);
-  const price = formatOffPlanPrice(project.startingPrice, locale);
+  const price = formatLaunchPrice(project, locale);
   const delivery = locale === "ar" ? project.deliveryDateAr : project.deliveryDateEn;
   const payment = locale === "ar" ? project.paymentPlanAr : project.paymentPlanEn;
   const types = locale === "ar" ? project.propertyTypesAr.join(" · ") : project.propertyTypesEn.join(" · ");

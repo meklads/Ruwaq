@@ -398,6 +398,12 @@ export type Messages = {
       priceDisclaimer: string;
       developer: string;
       viewDeveloperProjects: string;
+      viewOtherProjects: string;
+      contactSoon: string;
+      requestQuoteCta: string;
+      videoButton: string;
+      sitePlan: string;
+      unitsCountLabel: string;
       locationLabel: string;
       paymentPlanLabel: string;
       propertyTypesLabel: string;
