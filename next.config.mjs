@@ -22,12 +22,27 @@ const nextConfig = {
     return [
       {
         source: "/projects/al-rajhi-gardens",
-        destination: "/tours/al-rajhi-makkah",
+        destination: "/tours/abraj-omar-makkah",
         permanent: true,
       },
       {
         source: "/projects/al-rajhi-makkah",
-        destination: "/tours/al-rajhi-makkah",
+        destination: "/tours/abraj-omar-makkah",
+        permanent: true,
+      },
+      {
+        source: "/tours/al-rajhi-makkah",
+        destination: "/tours/abraj-omar-makkah",
+        permanent: true,
+      },
+      {
+        source: "/tours/central-market-jeddah",
+        destination: "/tours/al-oula-jeddah-gate",
+        permanent: true,
+      },
+      {
+        source: "/projects/central-market-jeddah",
+        destination: "/tours/al-oula-jeddah-gate",
         permanent: true,
       },
       {

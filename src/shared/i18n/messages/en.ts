@@ -490,7 +490,7 @@ export const en: Messages = {
     "Premium projects on the map with 3D visualization, payment plans, and instant brochure downloads.",
    indexTitle: "Explore the latest launches available on the map",
    indexSubtitle:
-    "Villas, townhouses, and apartments in Jeddah and Makkah — quick filters and rich project pages.",
+    "Five launches from leading developers — RAFAL, Sumou, AlOula, Makkiyoon, Alesayi — across Riyadh, Jeddah, and Makkah.",
    viewAll: "All projects",
    explore: "Explore project",
    exploreFlagship: "Explore launch",

@@ -30,7 +30,7 @@
       "developer": {
         "nameAr": "رافـال للتطوير العقاري",
         "nameEn": "RAFAL Real Estate Development",
-        "logo": "/images/marketing/architectural-model-3d.jpg"
+        "logo": "/images/projects/rafaal-pavilions/developer-logo.png"
       },
       "developerUrl": "https://rafal.com.sa/our-communities/pavilions/",
       "citySlug": "riyadh",
@@ -55,42 +55,38 @@
       "flagship": true,
       "heroVideoYoutubeId": "ilWeCush3ew",
       "heroVideoStartSeconds": 32,
-      "heroVideoPoster": "/images/marketing/gh-studio-visualization.jpg",
-      "brochurePdf": "/api/projects/rafaal-pavilions/brochure",
+      "heroVideoPoster": "/images/projects/rafaal-pavilions/main.png",
+      "brochurePdf": "/images/projects/rafaal-pavilions/brochure-official.pdf",
       "images": {
-        "main": "/images/marketing/gh-studio-visualization.jpg",
-        "masterPlan": "/images/marketing/model-house-planning.jpg",
-        "interior": "/images/marketing/architectural-model-3d.jpg"
+        "main": "/images/projects/rafaal-pavilions/main.png",
+        "masterPlan": "/images/projects/rafaal-pavilions/gallery-3.webp",
+        "interior": "/images/projects/rafaal-pavilions/gallery-4.webp"
       },
       "gallery": [
-        "/images/marketing/gh-studio-visualization.jpg",
-        "/images/marketing/hero-villa-family.jpg",
-        "/images/marketing/interior-lounge.jpg",
-        "/images/marketing/family-living-room.jpg",
-        "/images/marketing/architectural-model-3d.jpg",
-        "/images/marketing/kitchen-family.jpg",
-        "/images/marketing/model-house-planning.jpg",
-        "/images/marketing/family-dining-planning.jpg"
+        "/images/projects/rafaal-pavilions/main.png",
+        "/images/projects/rafaal-pavilions/gallery-1.webp",
+        "/images/projects/rafaal-pavilions/gallery-2.webp",
+        "/images/projects/rafaal-pavilions/gallery-3.webp",
+        "/images/projects/rafaal-pavilions/gallery-4.webp"
       ],
       "floorPlans": [
         {
           "slug": "pavilion-a",
           "labelAr": "Pavilion A — 1,495 م² (وحدتان)",
           "labelEn": "Pavilion A — 1,495 sqm (2 units)",
-          "image": "/images/marketing/family-living-room.jpg",
-          "view3d": "/images/marketing/gh-studio-visualization.jpg"
+          "image": "/images/projects/rafaal-pavilions/gallery-1.webp"
         },
         {
           "slug": "pavilion-b",
           "labelAr": "Pavilion B — 789–947 م² (10 وحدات)",
           "labelEn": "Pavilion B — 789–947 sqm (10 units)",
-          "image": "/images/marketing/interior-lounge.jpg"
+          "image": "/images/projects/rafaal-pavilions/gallery-2.webp"
         },
         {
           "slug": "pavilion-c",
           "labelAr": "Pavilion C — 473–726 م² (18 وحدة)",
           "labelEn": "Pavilion C — 473–726 sqm (18 units)",
-          "image": "/images/marketing/kitchen-family.jpg"
+          "image": "/images/projects/rafaal-pavilions/gallery-3.webp"
         }
       ],
       "paymentSchedule": [
@@ -101,53 +97,144 @@
       "featured": true
     },
     {
-      "id": "project-02",
-      "slug": "central-market-jeddah",
-      "titleAr": "السوق المركزي — جدة",
-      "titleEn": "Central Market Jeddah",
+      "id": "project-sumou-anara",
+      "slug": "sumou-anara",
+      "titleAr": "أنارا — حي السحاب",
+      "titleEn": "Anara — Al Sahab",
+      "summaryAr": "مشروع سكني ضخم في شمال الرياض على مساحة 748 ألف م² — 758 وحدة سكنية بإدارة وتطوير سمو العقارية برخصة بيع على الخارطة (وافي).",
+      "summaryEn": "A large residential development in north Riyadh spanning 748,000 sqm — 758 homes developed by Sumou Real Estate with an active Wafi off-plan sales license.",
+      "highlightsAr": [
+        "758 وحدة سكنية",
+        "748,022 م² — حي السحاب",
+        "قيمة المشروع 766 مليون ريال",
+        "رخصة وافي صادرة نوفمبر 2025"
+      ],
+      "highlightsEn": [
+        "758 residential units",
+        "748,022 sqm — Al Sahab district",
+        "SAR 766M project scope",
+        "Wafi off-plan license issued Nov 2025"
+      ],
+      "aboutParagraphsAr": [
+        "وقعت سمو العقارية اتفاقية تطوير وتنفيذ وتسويق مشروع أنارا في حي السحاب بالرياض — أحد أكبر إطلاقات الشركة المدرجة في تداول.",
+        "يمتد المشروع على أكثر من 748 ألف م² ويستهدف بناء مجتمع سكني متكامل خلال 48 شهراً من بدء العمل، بما يتماشى مع رؤية المملكة 2030."
+      ],
+      "aboutParagraphsEn": [
+        "Sumou Real Estate signed to develop, execute, and market Anara in Riyadh's Al Sahab district — one of the listed developer's largest launches.",
+        "The 748,000+ sqm masterplan targets an integrated residential community over a 48-month delivery horizon aligned with Vision 2030."
+      ],
       "developer": {
-        "nameAr": "مركز جدة للتجارة",
-        "nameEn": "Jeddah Central Development",
-        "logo": "/images/marketing/keys-new-home.jpg"
+        "nameAr": "سمو العقارية",
+        "nameEn": "Sumou Real Estate",
+        "logo": "/images/projects/sumou-anara/developer-logo.png"
       },
-      "citySlug": "jeddah",
-      "locationAr": "جدة، وسط المدينة",
-      "locationEn": "Jeddah, City Center",
-      "startingPrice": 2800000,
-      "deliveryDateAr": "مارس 2028",
-      "deliveryDateEn": "March 2028",
-      "deliveryQuarter": "Q1 2028",
-      "paymentPlanAr": "15% مقدم — 3 سنوات",
-      "paymentPlanEn": "15% down — 3 years",
-      "propertyTypesAr": ["شقق", "دوبلكس"],
-      "propertyTypesEn": ["Apartments", "Duplex"],
-      "propertyTypeSlugs": ["apartment", "duplex"],
-      "ownershipAr": "تملك حر",
-      "ownershipEn": "Freehold",
+      "developerUrl": "https://sumou.com.sa/",
+      "citySlug": "riyadh",
+      "locationAr": "الرياض، حي السحاب — شمال المدينة",
+      "locationEn": "Riyadh, Al Sahab district — North Riyadh",
+      "startingPrice": 0,
+      "launchPriceNoteAr": "الأسعار عند الإطلاق — تواصل مع سمو للوحدات المتاحة",
+      "launchPriceNoteEn": "Launch pricing — contact Sumou for available units",
+      "unitsCount": 758,
+      "deliveryDateAr": "48 شهراً من بدء العمل",
+      "deliveryDateEn": "48 months from project start",
+      "deliveryQuarter": "Q4 2029",
+      "paymentPlanAr": "حسب خطة المطور — رخصة وافي",
+      "paymentPlanEn": "Per developer plan — Wafi licensed",
+      "propertyTypesAr": ["فلل", "تاون هاوس", "شقق"],
+      "propertyTypesEn": ["Villas", "Townhouses", "Apartments"],
+      "propertyTypeSlugs": ["villa", "townhouse", "apartment"],
+      "ownershipAr": "تملك حر — حسب اتفاقية المطور",
+      "ownershipEn": "Freehold — per developer agreement",
       "status": "under_construction",
       "badge": "under_construction",
-      "heroVideo": "https://videos.pexels.com/video-files/3129671/3129671-sd_640_360_24fps.mp4",
-      "heroVideoPoster": "/images/marketing/architectural-model-3d.jpg",
-      "brochurePdf": "/api/projects/central-market-jeddah/brochure",
+      "heroVideoYoutubeId": "GqoKtM4KQhY",
+      "heroVideoPoster": "/images/projects/sumou-anara/main.jpg",
+      "brochurePdf": "/images/projects/sumou-anara/brochure-official.pdf",
       "images": {
-        "main": "/images/marketing/architectural-model-3d.jpg",
-        "masterPlan": "/images/marketing/model-house-planning.jpg",
-        "interior": "/images/marketing/kitchen-family.jpg"
+        "main": "/images/projects/sumou-anara/main.jpg",
+        "masterPlan": "/images/projects/sumou-anara/gallery-2.png",
+        "interior": "/images/projects/sumou-anara/gallery-1.jpg"
       },
       "gallery": [
-        "/images/marketing/architectural-model-3d.jpg",
-        "/images/marketing/gh-studio-visualization.jpg",
-        "/images/marketing/kitchen-family.jpg",
-        "/images/marketing/family-savings-home.jpg"
+        "/images/projects/sumou-anara/main.jpg",
+        "/images/projects/sumou-anara/gallery-1.jpg",
+        "/images/projects/sumou-anara/gallery-2.png"
       ],
-      "floorPlans": [
-        {
-          "slug": "apartment-a",
-          "labelAr": "شقة A — 180 م²",
-          "labelEn": "Apartment A — 180 sqm",
-          "image": "/images/marketing/family-dining-planning.jpg"
-        }
+      "floorPlans": [],
+      "paymentSchedule": [
+        { "labelAr": "دفعة الحجز", "labelEn": "Booking", "percentage": 10 },
+        { "labelAr": "أثناء الإنشاء", "labelEn": "During construction", "percentage": 50 },
+        { "labelAr": "عند التسليم", "labelEn": "On handover", "percentage": 40 }
       ],
+      "featured": true
+    },
+    {
+      "id": "project-al-oula-jeddah-gate",
+      "slug": "al-oula-jeddah-gate",
+      "titleAr": "جدة جيت",
+      "titleEn": "Jeddah Gate",
+      "summaryAr": "وجهة متعددة الاستخدامات في جدة: 5,000 وحدة سكنية، 230,000 م² مكاتب، 75,000 م² تجاري — مساحة الموقع 413,060 م².",
+      "summaryEn": "A mixed-use district in Jeddah: 5,000 homes, 230,000 sqm offices, 75,000 sqm retail — 413,060 sqm land area (Site 1).",
+      "highlightsAr": [
+        "5,000 وحدة سكنية",
+        "230,000 م² مكاتب · 75,000 م² تجاري",
+        "فندق · شقق فندقية · مسجد · مدرسة",
+        "تكلفة المشروع 735 مليون ريال"
+      ],
+      "highlightsEn": [
+        "5,000 residential units",
+        "230,000 sqm offices · 75,000 sqm retail",
+        "Hotel · serviced apartments · mosque · school",
+        "SAR 735M project cost"
+      ],
+      "aboutParagraphsAr": [
+        "جدة جيت مشروع الأولى للتطوير العقاري — وجهة متكاملة تجمع السكن والمكاتب والتجزئة والضيافة في موقع استراتيجي بجدة.",
+        "يتضمن المشروع مسارات مشاة وحدائق ومكونات مجتمعية لخدمة أكثر من 5,000 وحدة سكنية ضمن الموقع الأول قيد التطوير."
+      ],
+      "aboutParagraphsEn": [
+        "Jeddah Gate by AlOula Real Estate is an integrated district combining residential, office, retail, and hospitality components in a strategic Jeddah location.",
+        "The masterplan includes pedestrian walkways, landscaped plazas, and community facilities serving 5,000+ homes across Site 1 currently under development."
+      ],
+      "developer": {
+        "nameAr": "الأولى للتطوير العقاري",
+        "nameEn": "AlOula Real Estate Development",
+        "logo": "/images/projects/al-oula-jeddah-gate/developer-logo.jpg"
+      },
+      "developerUrl": "https://www.aloula.com/portfolio-item/jeddah-gate/",
+      "citySlug": "jeddah",
+      "locationAr": "جدة — الموقع الأول (413,060 م²)",
+      "locationEn": "Jeddah — Site 1 (413,060 sqm)",
+      "startingPrice": 0,
+      "launchPriceNoteAr": "أسعار الوحدات حسب النوع والمرحلة — تواصل مع الأولى",
+      "launchPriceNoteEn": "Unit pricing by type & phase — contact AlOula",
+      "unitsCount": 5000,
+      "deliveryDateAr": "مراحل متعددة — Site 1 قيد التطوير",
+      "deliveryDateEn": "Phased — Site 1 in progress",
+      "deliveryQuarter": "2027",
+      "paymentPlanAr": "حسب المرحلة ونوع الأصل",
+      "paymentPlanEn": "By phase and asset type",
+      "propertyTypesAr": ["شقق", "مكاتب", "تجاري", "ضيافة"],
+      "propertyTypesEn": ["Apartments", "Offices", "Retail", "Hospitality"],
+      "propertyTypeSlugs": ["apartment", "townhouse"],
+      "ownershipAr": "تملك حر / استثمار — حسب الوحدة",
+      "ownershipEn": "Freehold / investment — per unit",
+      "status": "under_construction",
+      "badge": "under_construction",
+      "heroVideoYoutubeId": "X1eefv8b5QA",
+      "heroVideoPoster": "/images/projects/al-oula-jeddah-gate/main.jpg",
+      "brochurePdf": "/api/projects/al-oula-jeddah-gate/brochure",
+      "images": {
+        "main": "/images/projects/al-oula-jeddah-gate/main.jpg",
+        "masterPlan": "/images/projects/al-oula-jeddah-gate/gallery-1.jpg",
+        "interior": "/images/projects/al-oula-jeddah-gate/gallery-2.jpg"
+      },
+      "gallery": [
+        "/images/projects/al-oula-jeddah-gate/main.jpg",
+        "/images/projects/al-oula-jeddah-gate/gallery-1.jpg",
+        "/images/projects/al-oula-jeddah-gate/gallery-2.jpg"
+      ],
+      "floorPlans": [],
       "paymentSchedule": [
         { "labelAr": "دفعة الحجز", "labelEn": "Booking", "percentage": 15 },
         { "labelAr": "أثناء الإنشاء", "labelEn": "During construction", "percentage": 45 },
@@ -156,76 +243,159 @@
       "featured": true
     },
     {
-      "id": "project-03",
-      "slug": "al-rajhi-makkah",
-      "titleAr": "مشروع الراجحي — مكة",
-      "titleEn": "Al Rajhi Development — Makkah",
-      "summaryAr": "مجمع تجاري سكني متكامل على طريق الطائف: ٩٦ عمارة، ٥ فنادق، مسجد، شقق مفروشة، لاندسكيب، ومتحف عالمي.",
-      "summaryEn": "A large mixed-use destination on Taif Road: 96 towers, 5 hotels, a mosque, furnished apartments, landscaped grounds, and a world-class museum.",
+      "id": "project-makkiyoon-mayan-al-fursan",
+      "slug": "makkiyoon-mayan-al-fursan",
+      "titleAr": "ميان الفرسان",
+      "titleEn": "Mayan Al Fursan",
+      "summaryAr": "222 فيلا في ضاحية الفرسان شمال شرق الرياض — 60,379 م² بالشراكة مع الشركة الوطنية للإسكان، تجمع الطراز السلماني بالعصري.",
+      "summaryEn": "222 villas in Al Fursan, northeast Riyadh — 60,379 sqm in partnership with NHC, blending Salmani and contemporary architecture.",
       "highlightsAr": [
-        "٥ فنادق كبرى",
-        "مسجد",
-        "٩٦ عمارة",
-        "شقق مفروشة",
-        "لاندسكيب واسع",
-        "متحف عالمي"
+        "222 فيلا — نماذج Tulip و Acacia",
+        "60,379 م² — شمال شرق الرياض",
+        "شراكة مع الشركة الوطنية للإسكان",
+        "مساجد · مدارس · مراكز ترفيه وتسوق"
       ],
       "highlightsEn": [
-        "5 major hotels",
-        "Mosque",
-        "96 buildings",
-        "Furnished apartments",
-        "Extensive landscaping",
-        "World-class museum"
+        "222 villas — Tulip & Acacia models",
+        "60,379 sqm — Northeast Riyadh",
+        "Partnership with National Housing Company",
+        "Mosques · schools · entertainment & retail"
+      ],
+      "aboutParagraphsAr": [
+        "يبرز مشروع ميان الفرسان كنموذج فريد للمجمعات المعمارية في ضاحية الفرسان، وبالشراكة مع NHC يجمع أصالة الطراز السلماني وجمالية الطراز العصري.",
+        "أعلنت مكيون عن فيلل العرض للمشروع — مجتمع سكني متكامل يخدم أسر المملكة بمعايير جودة حائزة على جوائز أفضل مطور عقاري."
+      ],
+      "aboutParagraphsEn": [
+        "Mayan Al Fursan is a distinctive architectural community in Al Fursan suburb, developed with NHC to harmonize authentic Salmani design with contemporary living.",
+        "Makkiyoon unveiled display villas for the project — an integrated neighborhood built to award-winning quality standards for Saudi families."
       ],
       "developer": {
-        "nameAr": "وقف الراجحي",
-        "nameEn": "Al Rajhi Endowment",
-        "logo": "/images/marketing/architectural-model-3d.jpg"
+        "nameAr": "مكيون مطورون عمرانيون",
+        "nameEn": "Makkiyoon Urban Developers",
+        "logo": "/images/projects/makkiyoon-mayan-al-fursan/developer-logo.png"
       },
-      "citySlug": "makkah",
-      "locationAr": "مكة المكرمة، طريق الطائف",
-      "locationEn": "Makkah, Taif Road",
-      "startingPrice": 890000,
-      "deliveryDateAr": "مراحل متعددة — 2028",
-      "deliveryDateEn": "Phased delivery — 2028",
-      "deliveryQuarter": "Q4 2028",
-      "paymentPlanAr": "مرونة حسب المرحلة",
-      "paymentPlanEn": "Flexible by phase",
-      "propertyTypesAr": ["شقق مفروشة", "ضيافة", "تجاري"],
-      "propertyTypesEn": ["Furnished apartments", "Hospitality", "Retail"],
-      "propertyTypeSlugs": ["apartment"],
-      "ownershipAr": "صكوك / أوقاف",
-      "ownershipEn": "Endowment / Waqf structure",
+      "developerUrl": "https://makkiyoon.com/en/projects/mayan-al-fursan/",
+      "citySlug": "riyadh",
+      "locationAr": "الرياض، ضاحية الفرسان — شمال شرق الرياض",
+      "locationEn": "Riyadh, Al Fursan suburb — Northeast Riyadh",
+      "startingPrice": 1680000,
+      "deliveryDateAr": "مراحل متعددة — متاح للبيع",
+      "deliveryDateEn": "Phased delivery — available",
+      "deliveryQuarter": "Q2 2027",
+      "paymentPlanAr": "10% مقدم — حسب NHC والمطور",
+      "paymentPlanEn": "10% down — per NHC & developer",
+      "propertyTypesAr": ["فلل"],
+      "propertyTypesEn": ["Villas"],
+      "propertyTypeSlugs": ["villa"],
+      "ownershipAr": "تملك حر",
+      "ownershipEn": "Freehold",
       "status": "under_construction",
-      "badge": "under_construction",
-      "heroVideo": "https://videos.pexels.com/video-files/2711306/2711306-sd_640_360_30fps.mp4",
-      "heroVideoPoster": "/images/marketing/architectural-model-3d.jpg",
-      "brochurePdf": "/api/projects/al-rajhi-makkah/brochure",
+      "badge": "exclusive_3d",
+      "heroVideoYoutubeId": "3VcnAisB3Ws",
+      "heroVideoPoster": "/images/projects/makkiyoon-mayan-al-fursan/main.png",
+      "brochurePdf": "/api/projects/makkiyoon-mayan-al-fursan/brochure",
       "images": {
-        "main": "/images/marketing/architectural-model-3d.jpg",
-        "masterPlan": "/images/marketing/model-house-planning.jpg",
-        "interior": "/images/marketing/gh-studio-visualization.jpg"
+        "main": "/images/projects/makkiyoon-mayan-al-fursan/main.png",
+        "masterPlan": "/images/projects/makkiyoon-mayan-al-fursan/gallery-2.jpg",
+        "interior": "/images/projects/makkiyoon-mayan-al-fursan/gallery-3.jpg"
       },
       "gallery": [
-        "/images/marketing/architectural-model-3d.jpg",
-        "/images/marketing/model-house-planning.jpg",
-        "/images/marketing/gh-studio-visualization.jpg",
-        "/images/marketing/hero-villa-family.jpg",
-        "/images/marketing/interior-lounge.jpg",
-        "/images/marketing/family-living-room.jpg"
+        "/images/projects/makkiyoon-mayan-al-fursan/main.png",
+        "/images/projects/makkiyoon-mayan-al-fursan/gallery-1.jpg",
+        "/images/projects/makkiyoon-mayan-al-fursan/gallery-2.jpg",
+        "/images/projects/makkiyoon-mayan-al-fursan/gallery-3.jpg",
+        "/images/projects/makkiyoon-mayan-al-fursan/gallery-4.png"
       ],
       "floorPlans": [
         {
-          "slug": "furnished-apartment",
-          "labelAr": "شقة مفروشة — 120 م²",
-          "labelEn": "Furnished apartment — 120 sqm",
-          "image": "/images/marketing/interior-lounge.jpg"
+          "slug": "tulip",
+          "labelAr": "Tulip — فيلا سلمانية",
+          "labelEn": "Tulip — Salmani villa",
+          "image": "/images/projects/makkiyoon-mayan-al-fursan/gallery-2.jpg"
+        },
+        {
+          "slug": "acacia",
+          "labelAr": "Acacia — فيلا عصرية",
+          "labelEn": "Acacia — Contemporary villa",
+          "image": "/images/projects/makkiyoon-mayan-al-fursan/gallery-3.jpg"
         }
       ],
       "paymentSchedule": [
         { "labelAr": "دفعة الحجز", "labelEn": "Booking", "percentage": 10 },
         { "labelAr": "أثناء الإنشاء", "labelEn": "During construction", "percentage": 50 },
+        { "labelAr": "عند التسليم", "labelEn": "On handover", "percentage": 40 }
+      ],
+      "featured": true
+    },
+    {
+      "id": "project-abraj-omar-makkah",
+      "slug": "abraj-omar-makkah",
+      "titleAr": "أبراج عمر — M Gallery",
+      "titleEn": "Abraj Omar — M Gallery",
+      "summaryAr": "فندق وريزيدنسز فاخر على بُعد 300 متر من الحرم المكي — 200 وحدة سكنية و280 غرفة فندقية، استثمار يتجاوز 2 مليار ريال، افتتاح 2028.",
+      "summaryEn": "A luxury hotel & residences 300m from the Holy Mosque — 200 homes and 280 hotel keys, SAR 2B+ investment, opening 2028.",
+      "highlightsAr": [
+        "300 متر من صحن الحرم المكي",
+        "200 ريزيدنس · 280 غرفة فندقية",
+        "M Gallery by Accor · العيسائي × أكور",
+        "استثمار +2 مليار ريال"
+      ],
+      "highlightsEn": [
+        "300m from the Holy Mosque courtyard",
+        "200 residences · 280 hotel keys",
+        "M Gallery by Accor · Alesayi × Accor",
+        "SAR 2B+ investment"
+      ],
+      "aboutParagraphsAr": [
+        "أُعلن عن المشروع في Cityscape Global 2024 — شراكة بين مجموعة العيسائي القابضة وأكور لإطلاق «أبراج عمر فندق وريزيدنسز من M Gallery» في قلب مكة.",
+        "يمتد المشروع على نحو 60,000 م² ويضم مركز أعمال، منتجعاً صحياً، مطاعم، ومناطق أطفال — وجهة روحانية فاخرة لضيوف الرحمن."
+      ],
+      "aboutParagraphsEn": [
+        "Unveiled at Cityscape Global 2024 — Alesayi Holding and Accor partner on Abraj Omar Hotel & Residences by M Gallery in the heart of Makkah.",
+        "The ~60,000 sqm development includes a business center, spa, dining, and children's areas — a premium spiritual hospitality destination."
+      ],
+      "developer": {
+        "nameAr": "مجموعة العيسائي القابضة",
+        "nameEn": "Alesayi Holding",
+        "logo": "/images/projects/abraj-omar-makkah/developer-logo.png"
+      },
+      "developerUrl": "https://alesayi.com/business/real-estate/",
+      "citySlug": "makkah",
+      "locationAr": "مكة المكرمة — 300 متر من الحرم المكي",
+      "locationEn": "Makkah — 300m from the Holy Mosque",
+      "startingPrice": 0,
+      "launchPriceNoteAr": "ريزيدنس فاخر — الأسعار عند الإطلاق قريباً",
+      "launchPriceNoteEn": "Premium residences — launch pricing coming soon",
+      "unitsCount": 480,
+      "deliveryDateAr": "2028 — Cityscape 2024",
+      "deliveryDateEn": "2028 — announced Cityscape 2024",
+      "deliveryQuarter": "Q4 2028",
+      "paymentPlanAr": "حسب خطة المطور والريزيدنس",
+      "paymentPlanEn": "Per developer & residence plan",
+      "propertyTypesAr": ["ريزيدنس", "فندق", "ضيافة"],
+      "propertyTypesEn": ["Residences", "Hotel", "Hospitality"],
+      "propertyTypeSlugs": ["apartment"],
+      "ownershipAr": "حسب اتفاقية المطور",
+      "ownershipEn": "Per developer agreement",
+      "status": "under_construction",
+      "badge": "exclusive_3d",
+      "heroVideoYoutubeId": "XoWSmdEojkg",
+      "heroVideoPoster": "/images/projects/abraj-omar-makkah/main.jpg",
+      "brochurePdf": "/api/projects/abraj-omar-makkah/brochure",
+      "images": {
+        "main": "/images/projects/abraj-omar-makkah/main.jpg",
+        "masterPlan": "/images/projects/abraj-omar-makkah/gallery-1.jpg",
+        "interior": "/images/projects/abraj-omar-makkah/gallery-2.jpg"
+      },
+      "gallery": [
+        "/images/projects/abraj-omar-makkah/main.jpg",
+        "/images/projects/abraj-omar-makkah/gallery-1.jpg",
+        "/images/projects/abraj-omar-makkah/gallery-2.jpg"
+      ],
+      "floorPlans": [],
+      "paymentSchedule": [
+        { "labelAr": "دفعة الحجز", "labelEn": "Booking", "percentage": 20 },
+        { "labelAr": "أثناء الإنشاء", "labelEn": "During construction", "percentage": 40 },
         { "labelAr": "عند التسليم", "labelEn": "On handover", "percentage": 40 }
       ],
       "featured": true
