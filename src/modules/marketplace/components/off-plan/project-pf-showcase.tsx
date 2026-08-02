@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import Image from "next/image";
-import type { OffPlanProject } from "@/content/off-plan-projects";
+import type { ShowcaseProject } from "@/content/showcase-projects";
 import {
   formatOffPlanPrice,
   getOffPlanGallery,
@@ -15,6 +15,7 @@ import {
 import type { Locale } from "@/shared/i18n/locale";
 
 type Copy = {
+  completedLabel: string;
   offPlan: string;
   startingFrom: string;
   launchPrice: string;
@@ -41,12 +42,13 @@ type Copy = {
 };
 
 type Props = {
-  project: OffPlanProject;
+  project: ShowcaseProject;
   locale: Locale;
   copy: Copy;
 };
 
 export function ProjectPfShowcase({ project, locale, copy }: Props) {
+  const isLaunch = project.showcaseKind === "launch";
   const title = projectTitle(project, locale);
   const location = projectLocation(project, locale);
   const developer = projectDeveloperName(project, locale);
@@ -54,8 +56,11 @@ export function ProjectPfShowcase({ project, locale, copy }: Props) {
   const highlights = projectHighlights(project, locale);
   const price = formatOffPlanPrice(project.startingPrice, locale);
   const gallery = useMemo(() => getOffPlanGallery(project), [project]);
-  const badgeLabel =
-    project.badge === "exclusive_3d" ? copy.badgeExclusive : copy.badgeUnderConstruction;
+  const badgeLabel = isLaunch
+    ? project.badge === "exclusive_3d"
+      ? copy.badgeExclusive
+      : copy.badgeUnderConstruction
+    : copy.completedLabel;
   const types = locale === "ar" ? project.propertyTypesAr.join(" · ") : project.propertyTypesEn.join(" · ");
   const ownership = locale === "ar" ? project.ownershipAr : project.ownershipEn;
   const delivery = locale === "ar" ? project.deliveryDateAr : project.deliveryDateEn;
@@ -126,12 +131,16 @@ export function ProjectPfShowcase({ project, locale, copy }: Props) {
               sizes="(max-width: 1024px) 100vw, 65vw"
             />
             <div className="ruwaq-pf-hero-main-badges">
-              <span className="ruwaq-pf-badge ruwaq-pf-badge--offplan">{copy.offPlan}</span>
-              <span className="ruwaq-pf-badge ruwaq-pf-badge--muted">
-                {copy.delivery}: {project.deliveryQuarter}
+              <span className={`ruwaq-pf-badge ${isLaunch ? "ruwaq-pf-badge--offplan" : "ruwaq-pf-badge--completed"}`}>
+                {isLaunch ? copy.offPlan : copy.completedLabel}
               </span>
+              {isLaunch ? (
+                <span className="ruwaq-pf-badge ruwaq-pf-badge--muted">
+                  {copy.delivery}: {project.deliveryQuarter}
+                </span>
+              ) : null}
             </div>
-            {project.heroVideo ? (
+            {isLaunch && project.heroVideo ? (
               <span
                 className="ruwaq-pf-hero-video-chip"
                 onClick={(e) => {
@@ -212,11 +221,15 @@ export function ProjectPfShowcase({ project, locale, copy }: Props) {
           <header className="ruwaq-pf-project-header ruwaq-pf-project-header--inline">
             <span className="ruwaq-pf-badge">{badgeLabel}</span>
             <h1 className="ruwaq-pf-project-title">{title}</h1>
-            <p className="ruwaq-pf-launch-price">
-              {copy.launchPrice} <strong>{price}</strong>
-              <span className="ruwaq-pf-price-asterisk">*</span>
-            </p>
-            <p className="ruwaq-pf-price-disclaimer">{copy.priceDisclaimer}</p>
+            {isLaunch ? (
+              <>
+                <p className="ruwaq-pf-launch-price">
+                  {copy.launchPrice} <strong>{price}</strong>
+                  <span className="ruwaq-pf-price-asterisk">*</span>
+                </p>
+                <p className="ruwaq-pf-price-disclaimer">{copy.priceDisclaimer}</p>
+              </>
+            ) : null}
           </header>
 
           <section className="ruwaq-pf-key-info">
@@ -295,17 +308,23 @@ export function ProjectPfShowcase({ project, locale, copy }: Props) {
             ) : null}
             <p className="ruwaq-pf-sidebar-developer">{developer}</p>
             <p className="ruwaq-pf-sidebar-location">{location}</p>
-            <p className="ruwaq-pf-sidebar-price">
-              {copy.startingFrom} <strong>{price}</strong>
-            </p>
-            <a
-              href={project.brochurePdf}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="ruwaq-pro-btn-outline w-full justify-center px-4 py-3 text-sm"
-            >
-              {copy.downloadBrochure}
-            </a>
+            {isLaunch ? (
+              <>
+                <p className="ruwaq-pf-sidebar-price">
+                  {copy.startingFrom} <strong>{price}</strong>
+                </p>
+                {project.brochurePdf ? (
+                  <a
+                    href={project.brochurePdf}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="ruwaq-pro-btn-outline w-full justify-center px-4 py-3 text-sm"
+                  >
+                    {copy.downloadBrochure}
+                  </a>
+                ) : null}
+              </>
+            ) : null}
             {project.heroVideo ? (
               <button
                 type="button"

@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import type { OffPlanProject } from "@/content/off-plan-projects";
+import type { ShowcaseProject } from "@/content/showcase-projects";
 import {
   matchesOffPlanFilters,
   OFF_PLAN_FILTER_CITIES,
@@ -21,6 +21,7 @@ type Copy = {
     showing: string;
   };
   offPlanLabel: string;
+  completedLabel: string;
   startingFrom: string;
   launchPrice: string;
   explore: string;
@@ -28,7 +29,7 @@ type Copy = {
 };
 
 type Props = {
-  projects: OffPlanProject[];
+  projects: ShowcaseProject[];
   locale: Locale;
   copy: Copy;
 };
@@ -45,6 +46,7 @@ export function OffPlanPfListing({ projects, locale, copy }: Props) {
 
   const cardCopy = {
     offPlanLabel: copy.offPlanLabel,
+    completedLabel: copy.completedLabel,
     startingFrom: copy.startingFrom,
     launchPrice: copy.launchPrice,
     explore: copy.explore,
