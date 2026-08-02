@@ -373,6 +373,11 @@ export type Messages = {
       photosLabel: string;
       viewAllPhotos: string;
       toursBridge: string;
+      launchPriceLabel: string;
+      keyInformationLabel: string;
+      deliveryDateLabel: string;
+      aboutProjectLabel: string;
+      toursHubLabel: string;
       downloadBrochure: string;
       startingFrom: string;
       badgeExclusive: string;

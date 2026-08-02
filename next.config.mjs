@@ -22,7 +22,22 @@ const nextConfig = {
     return [
       {
         source: "/projects/al-rajhi-gardens",
-        destination: "/projects/al-rajhi-makkah",
+        destination: "/tours/al-rajhi-makkah",
+        permanent: true,
+      },
+      {
+        source: "/projects/al-rajhi-makkah",
+        destination: "/tours/al-rajhi-makkah",
+        permanent: true,
+      },
+      {
+        source: "/projects",
+        destination: "/tours",
+        permanent: true,
+      },
+      {
+        source: "/projects/:slug",
+        destination: "/tours/:slug",
         permanent: true,
       },
       {

@@ -93,7 +93,7 @@ function BrochureDocument({ project, locale }: { project: OffPlanProject; locale
           payment: "خطة السداد",
           types: "أنواع العقارات",
           ownership: "نوع الملكية",
-          footer: "Ruwaq · ruwaq.co/projects",
+          footer: "Ruwaq · ruwaq.co/tours",
           disclaimer:
             "هذا الكتيب لأغراض تسويقية. الأسعار والمواصفات قابلة للتغيير. يرجى التحقق من المطور قبل أي التزام.",
         }
@@ -106,7 +106,7 @@ function BrochureDocument({ project, locale }: { project: OffPlanProject; locale
           payment: "Payment plan",
           types: "Property types",
           ownership: "Ownership",
-          footer: "Ruwaq · ruwaq.co/projects",
+          footer: "Ruwaq · ruwaq.co/tours",
           disclaimer:
             "Marketing brochure only. Prices and specifications subject to change. Verify with the developer before commitment.",
         };

@@ -50,7 +50,7 @@ export function OffPlanProjectCard({ project, locale, copy }: Props) {
   return (
     <article className="group ruwaq-pro-card ruwaq-offplan-card">
       <div className="ruwaq-pro-card-image">
-        <Link href={`/projects/${project.slug}`} className="block h-full w-full">
+        <Link href={`/tours/${project.slug}`} className="block h-full w-full">
           <Image
             src={project.images.main}
             alt={title}
@@ -67,13 +67,13 @@ export function OffPlanProjectCard({ project, locale, copy }: Props) {
       <div className="ruwaq-pro-card-body">
         <p className="ruwaq-pro-card-meta">{location}</p>
         <h3 className="ruwaq-pro-card-title">
-          <Link href={`/projects/${project.slug}`}>{title}</Link>
+          <Link href={`/tours/${project.slug}`}>{title}</Link>
         </h3>
         <p className="ruwaq-offplan-price">
           {copy.startingFrom} {price}
         </p>
         <div className="ruwaq-pro-card-actions ruwaq-offplan-card-actions">
-          <Link href={`/projects/${project.slug}`} className="ruwaq-pro-btn-solid">
+          <Link href={`/tours/${project.slug}`} className="ruwaq-pro-btn-solid">
             {copy.explore}
           </Link>
           <BrochureLeadTrigger

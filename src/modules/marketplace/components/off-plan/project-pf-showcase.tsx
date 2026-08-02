@@ -17,6 +17,8 @@ import type { Locale } from "@/shared/i18n/locale";
 type Copy = {
   offPlan: string;
   startingFrom: string;
+  launchPrice: string;
+  priceDisclaimer: string;
   delivery: string;
   developer: string;
   gallery: string;
@@ -29,6 +31,13 @@ type Copy = {
   closeModal: string;
   badgeUnderConstruction: string;
   badgeExclusive: string;
+  keyInformation: string;
+  deliveryDate: string;
+  locationLabel: string;
+  propertyTypesLabel: string;
+  ownershipLabel: string;
+  aboutProject: string;
+  downloadBrochure: string;
 };
 
 type Props = {
@@ -47,6 +56,10 @@ export function ProjectPfShowcase({ project, locale, copy }: Props) {
   const gallery = useMemo(() => getOffPlanGallery(project), [project]);
   const badgeLabel =
     project.badge === "exclusive_3d" ? copy.badgeExclusive : copy.badgeUnderConstruction;
+  const types = locale === "ar" ? project.propertyTypesAr.join(" · ") : project.propertyTypesEn.join(" · ");
+  const ownership = locale === "ar" ? project.ownershipAr : project.ownershipEn;
+  const delivery = locale === "ar" ? project.deliveryDateAr : project.deliveryDateEn;
+  const payment = locale === "ar" ? project.paymentPlanAr : project.paymentPlanEn;
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
@@ -85,51 +98,18 @@ export function ProjectPfShowcase({ project, locale, copy }: Props) {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
+  const keyInfo = [
+    { label: copy.deliveryDate, value: delivery },
+    { label: copy.locationLabel, value: location },
+    { label: copy.propertyTypesLabel, value: types },
+    { label: copy.ownershipLabel, value: ownership },
+    { label: copy.delivery, value: payment },
+  ];
+
   return (
     <>
-      {/* PF-style compact header bar */}
-      <header className="ruwaq-pf-project-header">
-        <div className="ruwaq-pf-project-header__badges">
-          <span className="ruwaq-pf-badge ruwaq-pf-badge--offplan">{copy.offPlan}</span>
-          <span className="ruwaq-pf-badge">{badgeLabel}</span>
-          <span className="ruwaq-pf-badge ruwaq-pf-badge--muted">
-            {copy.delivery}: {project.deliveryQuarter}
-          </span>
-        </div>
-        <h1 className="ruwaq-pf-project-title">{title}</h1>
-        {summary ? <p className="ruwaq-pf-project-summary">{summary}</p> : null}
-        {highlights.length > 0 ? (
-          <ul className="ruwaq-pf-project-highlights">
-            {highlights.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        ) : null}
-        <div className="ruwaq-pf-project-meta">
-          <p className="ruwaq-pf-project-price">
-            {copy.startingFrom} <strong>{price}</strong>
-          </p>
-          <p className="ruwaq-pf-project-location">{location}</p>
-          <p className="ruwaq-pf-project-developer">
-            {copy.developer}: <span>{developer}</span>
-          </p>
-        </div>
-      </header>
-
-      {/* Sticky section nav — Gallery | Video only */}
-      <nav className="ruwaq-pf-section-nav" aria-label="Project sections">
-        <button type="button" className="ruwaq-pf-section-nav__link" onClick={() => scrollTo("pf-gallery")}>
-          {copy.gallery}
-        </button>
-        {project.heroVideo ? (
-          <button type="button" className="ruwaq-pf-section-nav__link" onClick={() => scrollTo("pf-video")}>
-            {copy.video}
-          </button>
-        ) : null}
-      </nav>
-
-      {/* Hero media grid — Property Finder layout */}
-      <section id="pf-gallery" className="ruwaq-pf-gallery-section">
+      {/* PF: gallery first — full width */}
+      <section id="pf-gallery" className="ruwaq-pf-gallery-section ruwaq-pf-gallery-section--lead">
         <div className="ruwaq-pf-hero-grid">
           <button
             type="button"
@@ -142,9 +122,15 @@ export function ProjectPfShowcase({ project, locale, copy }: Props) {
               alt={title}
               fill
               priority
-              className="object-cover transition-opacity duration-300"
+              className="object-cover"
               sizes="(max-width: 1024px) 100vw, 65vw"
             />
+            <div className="ruwaq-pf-hero-main-badges">
+              <span className="ruwaq-pf-badge ruwaq-pf-badge--offplan">{copy.offPlan}</span>
+              <span className="ruwaq-pf-badge ruwaq-pf-badge--muted">
+                {copy.delivery}: {project.deliveryQuarter}
+              </span>
+            </div>
             {project.heroVideo ? (
               <span
                 className="ruwaq-pf-hero-video-chip"
@@ -167,11 +153,7 @@ export function ProjectPfShowcase({ project, locale, copy }: Props) {
           </button>
 
           <div className="ruwaq-pf-hero-side">
-            <button
-              type="button"
-              className="ruwaq-pf-hero-side-item"
-              onClick={() => openLightbox(1)}
-            >
+            <button type="button" className="ruwaq-pf-hero-side-item" onClick={() => openLightbox(1)}>
               <Image
                 src={gallery[1] ?? project.images.masterPlan}
                 alt={copy.masterPlan}
@@ -181,11 +163,7 @@ export function ProjectPfShowcase({ project, locale, copy }: Props) {
               />
               <span>{copy.masterPlan}</span>
             </button>
-            <button
-              type="button"
-              className="ruwaq-pf-hero-side-item"
-              onClick={() => openLightbox(2)}
-            >
+            <button type="button" className="ruwaq-pf-hero-side-item" onClick={() => openLightbox(2)}>
               <Image
                 src={gallery[2] ?? project.images.interior}
                 alt={copy.interior}
@@ -198,17 +176,12 @@ export function ProjectPfShowcase({ project, locale, copy }: Props) {
           </div>
         </div>
 
-        {/* Thumbnail strip */}
         <div className="ruwaq-pf-thumb-strip" aria-label={copy.photos}>
           {gallery.map((src, index) => (
             <button
               key={`${src}-${index}`}
               type="button"
-              className={
-                index === activeIndex
-                  ? "ruwaq-pf-thumb ruwaq-pf-thumb--active"
-                  : "ruwaq-pf-thumb"
-              }
+              className={index === activeIndex ? "ruwaq-pf-thumb ruwaq-pf-thumb--active" : "ruwaq-pf-thumb"}
               onClick={() => setActiveIndex(index)}
               aria-label={`${copy.photos} ${index + 1}`}
             >
@@ -216,62 +189,143 @@ export function ProjectPfShowcase({ project, locale, copy }: Props) {
             </button>
           ))}
         </div>
-
-        {/* Full gallery grid */}
-        <div className="ruwaq-pf-gallery-grid">
-          {gallery.map((src, index) => (
-            <button
-              key={`grid-${src}-${index}`}
-              type="button"
-              className="ruwaq-pf-gallery-item"
-              onClick={() => openLightbox(index)}
-            >
-              <Image
-                src={src}
-                alt={`${title} — ${index + 1}`}
-                fill
-                className="object-cover transition-transform duration-500 hover:scale-105"
-                sizes="(max-width: 768px) 50vw, 25vw"
-              />
-            </button>
-          ))}
-        </div>
       </section>
 
-      {/* Cinematic video block */}
-      {project.heroVideo ? (
-        <section id="pf-video" className="ruwaq-pf-video-section">
-          <div className="ruwaq-pf-video-wrap">
-            <video
-              src={project.heroVideo}
-              poster={project.heroVideoPoster}
-              controls
-              playsInline
-              preload="metadata"
-              className="ruwaq-pf-video-player"
-            />
-          </div>
-        </section>
-      ) : null}
+      {/* PF: sticky section nav */}
+      <nav className="ruwaq-pf-section-nav" aria-label="Project sections">
+        <button type="button" className="ruwaq-pf-section-nav__link is-active" onClick={() => scrollTo("pf-gallery")}>
+          {copy.gallery}
+        </button>
+        <button type="button" className="ruwaq-pf-section-nav__link" onClick={() => scrollTo("pf-about")}>
+          {copy.aboutProject}
+        </button>
+        {project.heroVideo ? (
+          <button type="button" className="ruwaq-pf-section-nav__link" onClick={() => scrollTo("pf-video")}>
+            {copy.video}
+          </button>
+        ) : null}
+      </nav>
 
-      {/* Lightbox */}
+      {/* PF: two-column — content + sticky sidebar */}
+      <div className="ruwaq-pf-detail-layout">
+        <div className="ruwaq-pf-detail-main">
+          <header className="ruwaq-pf-project-header ruwaq-pf-project-header--inline">
+            <span className="ruwaq-pf-badge">{badgeLabel}</span>
+            <h1 className="ruwaq-pf-project-title">{title}</h1>
+            <p className="ruwaq-pf-launch-price">
+              {copy.launchPrice} <strong>{price}</strong>
+              <span className="ruwaq-pf-price-asterisk">*</span>
+            </p>
+            <p className="ruwaq-pf-price-disclaimer">{copy.priceDisclaimer}</p>
+          </header>
+
+          <section className="ruwaq-pf-key-info">
+            <h2 className="ruwaq-pf-section-heading">{copy.keyInformation}</h2>
+            <dl className="ruwaq-pf-key-info-grid">
+              {keyInfo.map((item) => (
+                <div key={item.label} className="ruwaq-pf-key-info-item">
+                  <dt>{item.label}</dt>
+                  <dd>{item.value}</dd>
+                </div>
+              ))}
+            </dl>
+          </section>
+
+          {summary ? (
+            <section id="pf-about" className="ruwaq-pf-about scroll-mt-24">
+              <h2 className="ruwaq-pf-section-heading">{copy.aboutProject}</h2>
+              <p className="ruwaq-pf-about-text">{summary}</p>
+              {highlights.length > 0 ? (
+                <ul className="ruwaq-pf-project-highlights">
+                  {highlights.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              ) : null}
+            </section>
+          ) : null}
+
+          <div className="ruwaq-pf-gallery-grid ruwaq-pf-gallery-grid--compact">
+            {gallery.slice(3).map((src, index) => (
+              <button
+                key={`grid-${src}-${index}`}
+                type="button"
+                className="ruwaq-pf-gallery-item"
+                onClick={() => openLightbox(index + 3)}
+              >
+                <Image
+                  src={src}
+                  alt={`${title} — ${index + 4}`}
+                  fill
+                  className="object-cover"
+                  sizes="25vw"
+                />
+              </button>
+            ))}
+          </div>
+
+          {project.heroVideo ? (
+            <section id="pf-video" className="ruwaq-pf-video-section scroll-mt-24">
+              <h2 className="ruwaq-pf-section-heading">{copy.video}</h2>
+              <div className="ruwaq-pf-video-wrap">
+                <video
+                  src={project.heroVideo}
+                  poster={project.heroVideoPoster}
+                  controls
+                  playsInline
+                  preload="metadata"
+                  className="ruwaq-pf-video-player"
+                />
+              </div>
+            </section>
+          ) : null}
+        </div>
+
+        <aside className="ruwaq-pf-detail-sidebar">
+          <div className="ruwaq-pf-sidebar-card">
+            <p className="ruwaq-pf-sidebar-label">{copy.developer}</p>
+            {project.developer.logo ? (
+              <Image
+                src={project.developer.logo}
+                alt={developer}
+                width={72}
+                height={72}
+                className="ruwaq-pf-sidebar-logo"
+              />
+            ) : null}
+            <p className="ruwaq-pf-sidebar-developer">{developer}</p>
+            <p className="ruwaq-pf-sidebar-location">{location}</p>
+            <p className="ruwaq-pf-sidebar-price">
+              {copy.startingFrom} <strong>{price}</strong>
+            </p>
+            <a
+              href={project.brochurePdf}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ruwaq-pro-btn-outline w-full justify-center px-4 py-3 text-sm"
+            >
+              {copy.downloadBrochure}
+            </a>
+            {project.heroVideo ? (
+              <button
+                type="button"
+                className="ruwaq-pro-btn-solid mt-3 w-full px-4 py-3 text-sm"
+                onClick={() => setVideoOpen(true)}
+              >
+                ▶ {copy.watchFilm}
+              </button>
+            ) : null}
+          </div>
+        </aside>
+      </div>
+
       {lightboxOpen ? (
         <dialog open className="ruwaq-pf-lightbox" onClick={() => setLightboxOpen(false)}>
           <div className="ruwaq-pf-lightbox-inner" onClick={(e) => e.stopPropagation()}>
-            <button
-              type="button"
-              className="ruwaq-pf-lightbox-close"
-              onClick={() => setLightboxOpen(false)}
-              aria-label={copy.closeModal}
-            >
+            <button type="button" className="ruwaq-pf-lightbox-close" onClick={() => setLightboxOpen(false)} aria-label={copy.closeModal}>
               ✕
             </button>
-            <button
-              type="button"
-              className="ruwaq-pf-lightbox-nav ruwaq-pf-lightbox-nav--prev"
-              onClick={() => stepLightbox(-1)}
-              aria-label="Previous"
-            >
+            <button type="button" className="ruwaq-pf-lightbox-nav ruwaq-pf-lightbox-nav--prev" onClick={() => stepLightbox(-1)} aria-label="Previous">
               ‹
             </button>
             <div className="ruwaq-pf-lightbox-image">
@@ -283,12 +337,7 @@ export function ProjectPfShowcase({ project, locale, copy }: Props) {
                 className="max-h-[85vh] w-auto max-w-full object-contain"
               />
             </div>
-            <button
-              type="button"
-              className="ruwaq-pf-lightbox-nav ruwaq-pf-lightbox-nav--next"
-              onClick={() => stepLightbox(1)}
-              aria-label="Next"
-            >
+            <button type="button" className="ruwaq-pf-lightbox-nav ruwaq-pf-lightbox-nav--next" onClick={() => stepLightbox(1)} aria-label="Next">
               ›
             </button>
             <p className="ruwaq-pf-lightbox-counter">
@@ -298,26 +347,13 @@ export function ProjectPfShowcase({ project, locale, copy }: Props) {
         </dialog>
       ) : null}
 
-      {/* Video modal from hero chip */}
       {videoOpen && project.heroVideo ? (
         <dialog open className="ruwaq-offplan-dialog" onClick={() => setVideoOpen(false)}>
           <div className="ruwaq-offplan-video-panel" onClick={(e) => e.stopPropagation()}>
-            <button
-              type="button"
-              className="ruwaq-offplan-dialog-close"
-              onClick={() => setVideoOpen(false)}
-              aria-label={copy.closeModal}
-            >
+            <button type="button" className="ruwaq-offplan-dialog-close" onClick={() => setVideoOpen(false)} aria-label={copy.closeModal}>
               ✕
             </button>
-            <video
-              src={project.heroVideo}
-              poster={project.heroVideoPoster}
-              controls
-              autoPlay
-              playsInline
-              className="w-full rounded-xl"
-            />
+            <video src={project.heroVideo} poster={project.heroVideoPoster} controls autoPlay playsInline className="w-full rounded-xl" />
           </div>
         </dialog>
       ) : null}

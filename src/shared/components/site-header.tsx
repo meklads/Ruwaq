@@ -3,7 +3,6 @@ import { getMessages } from "@/shared/i18n";
 import { getLocale } from "@/shared/i18n/server";
 import { RuwaqLogo } from "@/shared/components/ruwaq-logo";
 import { LocaleSwitcher } from "@/shared/i18n/locale-switcher";
-import { ProjectsNavLink } from "@/modules/marketplace/components/off-plan/projects-nav-link";
 
 export async function SiteHeader() {
   const locale = await getLocale();
@@ -12,7 +11,6 @@ export async function SiteHeader() {
 
   const mainLinks = [
     { href: "/categories", label: nav.directory },
-    { type: "projects" as const, label: nav.newProjects },
     { href: "/tours", label: nav.tours },
     { href: "/guides", label: nav.guides },
     { href: "/pro", label: nav.featured },
@@ -47,15 +45,11 @@ export async function SiteHeader() {
             className="hidden flex-1 items-center justify-center gap-6 lg:flex"
             aria-label={nav.mainNavLabel}
           >
-            {mainLinks.map((link) =>
-              "type" in link && link.type === "projects" ? (
-                <ProjectsNavLink key="projects" label={link.label} />
-              ) : (
-                <Link key={link.href} href={link.href!} className="ruwaq-ad-nav-link">
-                  {link.label}
-                </Link>
-              )
-            )}
+            {mainLinks.map((link) => (
+              <Link key={link.href} href={link.href} className="ruwaq-ad-nav-link">
+                {link.label}
+              </Link>
+            ))}
             <Link href={proNavLink.href} className="ruwaq-ad-nav-link ruwaq-ad-nav-link--pro">
               {proNavLink.label}
             </Link>
@@ -70,15 +64,11 @@ export async function SiteHeader() {
           className="flex gap-0 overflow-x-auto border-t border-neutral-100 lg:hidden"
           aria-label={nav.mainNavLabel}
         >
-          {mainLinks.map((link) =>
-            "type" in link && link.type === "projects" ? (
-              <ProjectsNavLink key="projects" label={link.label} mobile />
-            ) : (
-              <Link key={link.href} href={link.href!} className="ruwaq-ad-mobile-nav-link">
-                {link.label}
-              </Link>
-            )
-          )}
+          {mainLinks.map((link) => (
+            <Link key={link.href} href={link.href} className="ruwaq-ad-mobile-nav-link">
+              {link.label}
+            </Link>
+          ))}
           <Link href={proNavLink.href} className="ruwaq-ad-mobile-nav-link ruwaq-ad-mobile-nav-link--pro">
             {proNavLink.label}
           </Link>

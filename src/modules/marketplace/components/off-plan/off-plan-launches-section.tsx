@@ -48,13 +48,13 @@ export async function OffPlanLaunchesSection({ variant = "homepage" }: Props) {
             </h2>
             <p className="ruwaq-ad-section-lead ruwaq-offplan-section-lead">{copy.subtitle}</p>
           </div>
-          <Link href={`/projects/${project.slug}`} className="ruwaq-pro-btn-outline hidden shrink-0 px-5 py-2.5 sm:inline-flex">
-            {copy.exploreFlagship}
-          </Link>
+        <Link href={`/tours/${project.slug}`} className="ruwaq-pro-btn-outline hidden shrink-0 px-5 py-2.5 sm:inline-flex">
+          {copy.exploreFlagship}
+        </Link>
         </header>
 
         <Link
-          href={`/projects/${project.slug}`}
+          href={`/tours/${project.slug}`}
           className="ruwaq-offplan-feature group mt-10"
         >
           <div className="ruwaq-offplan-feature__media">
@@ -91,7 +91,7 @@ export async function OffPlanLaunchesSection({ variant = "homepage" }: Props) {
         </Link>
 
         <p className="mt-8 text-center sm:hidden">
-          <Link href={`/projects/${project.slug}`} className="ruwaq-pro-btn-solid px-8 py-3">
+          <Link href={`/tours/${project.slug}`} className="ruwaq-pro-btn-solid px-8 py-3">
             {copy.exploreFlagship}
           </Link>
         </p>
