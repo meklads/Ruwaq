@@ -22,16 +22,19 @@ export async function SiteHeader() {
   return (
     <header className="ruwaq-ad-header">
       <div className="ruwaq-ad-pro-bar">
-        <div className="ruwaq-ad-container flex items-center justify-between gap-4 py-2">
-          <Link href="/" className="ruwaq-ad-pro-bar-label">
-            {t.marketplace.proDirectory.directoryLabel}
-          </Link>
-          <div className="flex items-center gap-5">
-            <Link href="/join" className="ruwaq-ad-pro-bar-cta">
-              {nav.applyNow}
+        <div className="ruwaq-ad-container flex flex-wrap items-center justify-between gap-3 py-2.5 sm:gap-4">
+          <div className="flex min-w-0 flex-col gap-0.5 sm:flex-row sm:items-center sm:gap-4">
+            <Link href="/pro" className="ruwaq-ad-pro-bar-label">
+              {t.marketplace.proDirectory.directoryLabel}
             </Link>
-            <Link href="/request-quote" className="ruwaq-ad-pro-bar-cta">
+            <span className="ruwaq-ad-pro-bar-tagline">{nav.proBarTagline}</span>
+          </div>
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+            <Link href="/request-quote" className="ruwaq-ad-pro-bar-link">
               {t.nav.requestQuote}
+            </Link>
+            <Link href="/join" className="ruwaq-ad-pro-bar-apply">
+              {nav.applyNow}
             </Link>
           </div>
         </div>

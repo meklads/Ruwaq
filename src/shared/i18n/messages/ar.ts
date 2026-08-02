@@ -556,6 +556,10 @@ export const ar = {
    view3d: "3D",
    paymentIntro: "جدول الدفعات التقديري — قد يختلف حسب المطور والوحدة.",
    installment: "الدفعة",
+   shopTheTourTitle: "مواد وتنفيذ من هذه الجولة",
+   shopTheTourLead: "شركاء Ruwaq PRO الموثّقون — تواصل مباشرة للحصول على نفس المواد أو مستوى التشطيب.",
+   sponsoredRibbonLabel: "إطلاق برعاية Ruwaq",
+   sponsoredRibbonCta: "باقات المطورين ←",
    coBrandLine:
     "تم الإظهار والتصميم ثلاثي الأبعاد بواسطة Graphics House | التوريد والتنفيذ الهندسي بواسطة Turriva | إدارة التسويق بواسطة BeesMotion",
    coBrandDisclaimer:
@@ -1176,6 +1180,29 @@ export const ar = {
    newProjects: "المشاريع الجديدة",
    guides: "الأدلة",
    mainNavLabel: "التنقل الرئيسي",
+   proBarTagline: "للمقاولين والموردين المعتمدين",
+  },
+  proApplyBand: {
+   eyebrow: "RUWAQ PRO",
+   title: "انضم إلى دليل المحترفين المعتمدين",
+   lead: "ملف معتمد، معرض مشاريع، أولوية في طلبات العملاء، وأداة عروض AI — للشركات الجادة في التشطيب والمقاولات.",
+   applyCta: "قدّم طلب انضمام",
+   pricingCta: "الباقات والأسعار",
+   proposalsCta: "أداة العروض",
+   developersCta: "باقات المطورين",
+  },
+  developers: {
+   metaTitle: "باقات إطلاق المطورين | Ruwaq",
+   metaDescription:
+    "Spotlight وFeatured Launch وPremier Tour — حزم editorial + leads لمشاريع off-plan في السعودية.",
+   eyebrow: "Ruwaq · Developers",
+   title: "باقات إطلاق المطورين",
+   lead: "نفس نموذج Architectural Digest: جولة PF سينمائية، Today's Stories، leads مؤهّلة — بدون AdSense.",
+   contactTitle: "احجز مكالمة استكشافية",
+   contactLead:
+    "شاركنا slug المشروع، المدينة، وتاريخ الإطلاق — يرد فريق Ruwaq خلال يوم عمل مع عرض مخصّص.",
+   contactCta: "سجّل مشروعك (CGI + Launch)",
+   contactAlt: "تواصل معنا",
   },
   nav: {
    howItWorks: "كيف يعمل",

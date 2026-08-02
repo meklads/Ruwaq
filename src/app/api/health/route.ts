@@ -25,6 +25,9 @@ function buildIntegrations() {
     graphicsHouseLeadEmail: envSet("GRAPHICS_HOUSE_LEAD_EMAIL"),
     supportWhatsApp:
       envSet("RUWQ_SUPPORT_WHATSAPP") || envSet("NEXT_PUBLIC_RUWQ_SUPPORT_WHATSAPP"),
+    partnerWebhook: envSet("PARTNER_LEAD_WEBHOOK_URL"),
+    turrivaWebhook: envSet("TURRIVA_LEAD_WEBHOOK_URL"),
+    storage: envSet("STORAGE_ACCESS_KEY") && envSet("STORAGE_BUCKET"),
     ga4: envSet("NEXT_PUBLIC_GA_MEASUREMENT_ID"),
   };
 }

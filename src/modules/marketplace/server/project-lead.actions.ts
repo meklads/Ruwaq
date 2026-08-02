@@ -4,6 +4,7 @@ import { z } from "zod";
 import { db } from "@/shared/lib/db";
 import { getOffPlanProject } from "@/content/off-plan-projects";
 import { normalizeKsaPhone } from "@/modules/marketplace/lib/lead-phone";
+import { logUsageEvent } from "@/shared/lib/usage-events";
 
 const roleKeys = ["end_buyer", "investor", "broker"] as const;
 
@@ -79,6 +80,15 @@ export async function submitProjectBrochureLead(
         source: "off_plan_brochure",
         locale: data.locale,
         projectType: "off_plan",
+      },
+    });
+
+    logUsageEvent("off_plan_brochure_lead", {
+      metadata: {
+        leadId: lead.id,
+        projectSlug: project.slug,
+        role: data.role,
+        locale: data.locale,
       },
     });
 

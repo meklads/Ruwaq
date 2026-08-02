@@ -560,6 +560,10 @@ export const en: Messages = {
    view3d: "3D",
    paymentIntro: "Indicative payment schedule — may vary by developer and unit.",
    installment: "Installment",
+   shopTheTourTitle: "Materials & delivery from this tour",
+   shopTheTourLead: "Verified Ruwaq PRO partners — contact them for the same materials or fit-out standard.",
+   sponsoredRibbonLabel: "Ruwaq sponsored launch",
+   sponsoredRibbonCta: "Developer packages →",
    coBrandLine:
     "3D visualization by Graphics House | Engineering supply & execution by Turriva | Marketing by BeesMotion",
    coBrandDisclaimer:
@@ -1183,6 +1187,29 @@ export const en: Messages = {
    newProjects: "New launches",
    guides: "Guides",
    mainNavLabel: "Main navigation",
+   proBarTagline: "For verified contractors & suppliers",
+  },
+  proApplyBand: {
+   eyebrow: "RUWAQ PRO",
+   title: "Apply to the verified PRO directory",
+   lead: "Curated profile, project gallery, client lead priority, and AI proposals — for serious fit-out and contracting firms.",
+   applyCta: "Apply to join",
+   pricingCta: "Plans & pricing",
+   proposalsCta: "Proposal tool",
+   developersCta: "Developer packages",
+  },
+  developers: {
+   metaTitle: "Developer launch packages | Ruwaq",
+   metaDescription:
+    "Spotlight, Featured Launch, and Premier Tour — editorial + lead bundles for Saudi off-plan projects.",
+   eyebrow: "Ruwaq · Developers",
+   title: "Developer launch packages",
+   lead: "Architectural Digest-style PF tours, Today's Stories, and qualified leads — no AdSense.",
+   contactTitle: "Book a discovery call",
+   contactLead:
+    "Share your project slug, city, and launch date — Ruwaq replies within one business day with a tailored quote.",
+   contactCta: "Register your project (CGI + Launch)",
+   contactAlt: "Contact us",
   },
   nav: {
    howItWorks: "How it works",

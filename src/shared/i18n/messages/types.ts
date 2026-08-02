@@ -432,6 +432,10 @@ export type Messages = {
       view3d: string;
       paymentIntro: string;
       installment: string;
+      shopTheTourTitle: string;
+      shopTheTourLead: string;
+      sponsoredRibbonLabel: string;
+      sponsoredRibbonCta: string;
       coBrandLine: string;
       coBrandDisclaimer: string;
       filters: {
@@ -768,6 +772,27 @@ export type Messages = {
       newProjects: string;
       guides: string;
       mainNavLabel: string;
+      proBarTagline: string;
+    };
+    proApplyBand: {
+      eyebrow: string;
+      title: string;
+      lead: string;
+      applyCta: string;
+      pricingCta: string;
+      proposalsCta: string;
+      developersCta: string;
+    };
+    developers: {
+      metaTitle: string;
+      metaDescription: string;
+      eyebrow: string;
+      title: string;
+      lead: string;
+      contactTitle: string;
+      contactLead: string;
+      contactCta: string;
+      contactAlt: string;
     };
     nav: {
       howItWorks: string;

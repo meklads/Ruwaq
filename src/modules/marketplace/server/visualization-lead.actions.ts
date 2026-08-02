@@ -6,6 +6,7 @@ import { getCityBySlug } from "@/shared/constants/marketplace-taxonomy";
 import { parseCitySlug } from "@/modules/marketplace/lib/marketplace-slugs";
 import { normalizeKsaPhone } from "@/modules/marketplace/lib/lead-phone";
 import { notifyGraphicsHouseLead } from "@/modules/marketplace/server/partner-lead-notify";
+import { logUsageEvent } from "@/shared/lib/usage-events";
 
 const projectTypeKeys = [
   "residential",
@@ -98,6 +99,15 @@ export async function submitVisualizationLead(
     } catch (err) {
       console.error("[submitVisualizationLead] notify failed (lead saved)", err);
     }
+
+    logUsageEvent("visualization_lead_submitted", {
+      metadata: {
+        leadId: lead.id,
+        projectType: data.projectType,
+        referrer: data.referrer ?? "visualization_page",
+        locale: data.locale,
+      },
+    });
 
     return { success: true, leadId: lead.id };
   } catch (err) {

@@ -9,6 +9,8 @@ import { getProjectTour } from "@/content/project-tours";
 import { getListingBySlug } from "@/modules/marketplace/server/listings.service";
 import { ProjectPfShowcase } from "@/modules/marketplace/components/off-plan/project-pf-showcase";
 import { ProjectCoBrandFooter } from "@/modules/marketplace/components/off-plan/project-co-brand-footer";
+import { TourShopStrip } from "@/modules/marketplace/components/tour-shop-strip";
+import { SponsoredLaunchRibbon } from "@/modules/marketplace/components/sponsored-launch-ribbon";
 
 type Props = { params: { slug: string } };
 
@@ -61,6 +63,17 @@ export default async function ProjectTourDetailPage({ params }: Props) {
           <span aria-hidden>/</span>
           <span>{projectTitle(project, locale)}</span>
         </nav>
+
+        {isLaunch && project.sponsoredTier ? (
+          <SponsoredLaunchRibbon
+            tier={project.sponsoredTier}
+            locale={locale}
+            copy={{
+              label: offPlanCopy.sponsoredRibbonLabel,
+              cta: offPlanCopy.sponsoredRibbonCta,
+            }}
+          />
+        ) : null}
 
         <ProjectPfShowcase
           project={project}
@@ -117,6 +130,17 @@ export default async function ProjectTourDetailPage({ params }: Props) {
             homeTourStoryLabel: offPlanCopy.homeTourStoryLabel,
           }}
         />
+
+        {!isLaunch ? (
+          <TourShopStrip
+            tourSlug={params.slug}
+            locale={locale}
+            copy={{
+              title: offPlanCopy.shopTheTourTitle,
+              lead: offPlanCopy.shopTheTourLead,
+            }}
+          />
+        ) : null}
 
         {tour && credits ? (
           <section className="ruwaq-pf-credits mt-12 border-t border-neutral-200 pt-10">

@@ -74,6 +74,8 @@ export type OffPlanProject = {
   paymentSchedule: OffPlanPaymentMilestone[];
   featured: boolean;
   flagship?: boolean;
+  /** Paid launch sponsorship tier — shows ribbon + hub priority. */
+  sponsoredTier?: "spotlight" | "featured" | "premier";
 };
 
 export const OFF_PLAN_PROJECTS: OffPlanProject[] = projectsData.projects as OffPlanProject[];

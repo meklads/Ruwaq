@@ -12,6 +12,12 @@ const EVENT_TYPES: { type: UsageEventType; label: string }[] = [
   { type: "proposal_generated", label: "عروض ولّدها الذكاء الاصطناعي" },
   { type: "pdf_exported", label: "ملفات PDF صُدّرت" },
   { type: "guest_claimed", label: "زوار سجّلوا حساباً بعد عرض ضيف" },
+  { type: "marketplace_lead_submitted", label: "طلبات عرض سعر (marketplace)" },
+  { type: "off_plan_brochure_lead", label: "تحميل brochure off-plan" },
+  { type: "visualization_lead_submitted", label: "تسجيل CGI / visualization" },
+  { type: "pro_apply_click", label: "نقرات انضمام PRO" },
+  { type: "tour_shop_click", label: "Shop the Tour" },
+  { type: "developer_inquiry", label: "استفسارات المطورين" },
   { type: "server_error", label: "أخطاء سيرفر" },
   { type: "quota_blocked", label: "طلبات مرفوضة (تجاوز الباقة)" },
 ];
@@ -79,6 +85,9 @@ export default async function AdminMetricsPage() {
   const created = rows.find((r) => r.type === "proposal_created");
   const generated = rows.find((r) => r.type === "proposal_generated");
   const exported = rows.find((r) => r.type === "pdf_exported");
+  const marketplaceLeads = rows.find((r) => r.type === "marketplace_lead_submitted");
+  const brochureLeads = rows.find((r) => r.type === "off_plan_brochure_lead");
+  const vizLeads = rows.find((r) => r.type === "visualization_lead_submitted");
 
   const genRate7d =
     created && created.d7 > 0 && generated
@@ -148,6 +157,32 @@ export default async function AdminMetricsPage() {
               <div className="text-xs text-ruwaq-ink-muted">معدل تصدير PDF بعد التوليد</div>
               <div className="mt-1 text-2xl font-bold text-ruwaq-ink">
                 {exportRate7d !== null ? `${exportRate7d}%` : "—"}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2 className="mb-3 text-sm font-semibold text-ruwaq-ink">
+            قمع السوق (آخر 7 أيام)
+          </h2>
+          <div className="flex flex-wrap gap-4 text-sm">
+            <div className="rounded-2xl border border-ruwaq-stone/50 px-5 py-4">
+              <div className="text-xs text-ruwaq-ink-muted">طلبات عرض سعر</div>
+              <div className="mt-1 text-2xl font-bold text-ruwaq-ink">
+                {marketplaceLeads?.d7 ?? 0}
+              </div>
+            </div>
+            <div className="rounded-2xl border border-ruwaq-stone/50 px-5 py-4">
+              <div className="text-xs text-ruwaq-ink-muted">brochure off-plan</div>
+              <div className="mt-1 text-2xl font-bold text-ruwaq-ink">
+                {brochureLeads?.d7 ?? 0}
+              </div>
+            </div>
+            <div className="rounded-2xl border border-ruwaq-stone/50 px-5 py-4">
+              <div className="text-xs text-ruwaq-ink-muted">تسجيل CGI</div>
+              <div className="mt-1 text-2xl font-bold text-ruwaq-ink">
+                {vizLeads?.d7 ?? 0}
               </div>
             </div>
           </div>

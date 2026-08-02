@@ -18,6 +18,20 @@ export type TodaysStory = {
 /** Curated weekly editorial feed — update slots when publishing new guides or tours. */
 export const TODAYS_STORIES: TodaysStory[] = [
   {
+    id: "story-gypsum-ceiling",
+    kind: "guide",
+    href: "/guides/gypsum-ceiling-jeddah-villas",
+    image: "/images/marketing/family-living-room.jpg",
+    titleAr: "أسقف الجبس في فلل جدة: إضاءة مخفية ومقاومة الرطوبة",
+    titleEn: "Gypsum Ceilings in Jeddah Villas: Hidden Lighting & Humidity",
+    excerptAr: "دليل جديد — ارتفاع السقف المعلق، zones الإضاءة، ونوع الجبس قبل التشطيب.",
+    excerptEn: "New guide — drop height, lighting zones, and board type before fit-out.",
+    categoryAr: "تشطيب",
+    categoryEn: "Fit-out",
+    featured: true,
+    publishedAt: "2026-08-02",
+  },
+  {
     id: "story-north-jeddah-villa",
     kind: "home-tour",
     href: "/tours/north-jeddah-villa-fitout",
@@ -28,7 +42,6 @@ export const TODAYS_STORIES: TodaysStory[] = [
     excerptEn: "420 m² fit-out from 3D visualization through handover — a full Home Tour walkthrough.",
     categoryAr: "Home Tour",
     categoryEn: "Home Tour",
-    featured: true,
     publishedAt: "2025-03-15",
   },
   {

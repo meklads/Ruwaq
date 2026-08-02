@@ -2315,15 +2315,91 @@
   }
 
   .ruwaq-ad-pro-bar {
-    @apply bg-neutral-950 text-white;
+    @apply border-b border-neutral-800 bg-neutral-950 text-white;
   }
 
   .ruwaq-ad-pro-bar-label {
-    @apply text-[10px] font-semibold uppercase tracking-[0.28em] text-white/85 transition-colors hover:text-white;
+    @apply shrink-0 text-[10px] font-semibold uppercase tracking-[0.28em] text-[#d4b47a] transition-colors hover:text-[#f5e6cc];
   }
 
   html[lang="ar"] .ruwaq-ad-pro-bar-label {
     @apply normal-case tracking-wide text-xs;
+  }
+
+  .ruwaq-ad-pro-bar-tagline {
+    @apply text-[10px] font-medium uppercase tracking-[0.18em] text-white/55;
+  }
+
+  html[lang="ar"] .ruwaq-ad-pro-bar-tagline {
+    @apply normal-case tracking-wide text-xs text-white/60;
+  }
+
+  .ruwaq-ad-pro-bar-link {
+    @apply px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/80 underline-offset-4 transition-colors hover:text-white hover:underline;
+  }
+
+  html[lang="ar"] .ruwaq-ad-pro-bar-link {
+    @apply normal-case tracking-wide text-xs;
+  }
+
+  .ruwaq-ad-pro-bar-apply {
+    @apply inline-flex items-center justify-center bg-[#c9a063] px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-950 transition-colors hover:bg-[#d4b47a];
+  }
+
+  html[lang="ar"] .ruwaq-ad-pro-bar-apply {
+    @apply normal-case tracking-wide text-xs font-bold;
+  }
+
+  .ruwaq-pro-apply-band {
+    @apply border-t border-neutral-950 bg-neutral-950 py-12 text-white sm:py-14;
+  }
+
+  .ruwaq-pro-apply-band__inner {
+    @apply flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between;
+  }
+
+  .ruwaq-pro-apply-band__copy {
+    @apply max-w-2xl;
+  }
+
+  .ruwaq-pro-apply-band__eyebrow {
+    @apply text-[10px] font-semibold uppercase tracking-[0.28em] text-[#d4b47a];
+  }
+
+  html[lang="ar"] .ruwaq-pro-apply-band__eyebrow {
+    @apply normal-case tracking-wide text-xs;
+  }
+
+  .ruwaq-pro-apply-band__title {
+    @apply mt-3 font-serif text-2xl font-medium tracking-tight text-white sm:text-3xl;
+  }
+
+  html[lang="ar"] .ruwaq-pro-apply-band__title {
+    @apply font-bold leading-snug;
+  }
+
+  .ruwaq-pro-apply-band__lead {
+    @apply mt-3 text-sm leading-relaxed text-white/75 sm:text-base;
+  }
+
+  .ruwaq-pro-apply-band__actions {
+    @apply flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center;
+  }
+
+  .ruwaq-pro-apply-band__cta-primary {
+    @apply inline-flex items-center justify-center bg-[#c9a063] px-6 py-3 text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-950 transition-colors hover:bg-[#d4b47a];
+  }
+
+  html[lang="ar"] .ruwaq-pro-apply-band__cta-primary {
+    @apply normal-case tracking-wide text-sm font-bold;
+  }
+
+  .ruwaq-pro-apply-band__cta-secondary {
+    @apply inline-flex items-center justify-center border border-white/25 px-5 py-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-white transition-colors hover:border-white hover:bg-white/10;
+  }
+
+  html[lang="ar"] .ruwaq-pro-apply-band__cta-secondary {
+    @apply normal-case tracking-wide text-sm;
   }
 
   .ruwaq-ad-pro-bar-cta {
@@ -2893,6 +2969,70 @@
 
   .ruwaq-story-card__excerpt {
     @apply mt-2 line-clamp-2 text-sm leading-relaxed text-white/85;
+  }
+
+  .ruwaq-tour-shop__grid {
+    @apply grid gap-3 sm:grid-cols-2;
+  }
+
+  .ruwaq-tour-shop__card {
+    @apply flex items-center justify-between gap-3 border border-neutral-200 bg-neutral-50 px-4 py-4 transition-colors hover:border-neutral-950 hover:bg-white;
+  }
+
+  .ruwaq-tour-shop__label {
+    @apply text-sm font-medium text-neutral-900;
+  }
+
+  .ruwaq-tour-shop__arrow {
+    @apply shrink-0 text-neutral-400 transition-transform group-hover:translate-x-0.5 group-hover:text-neutral-950;
+  }
+
+  .ruwaq-sponsored-launch-ribbon {
+    @apply mb-8 border border-amber-200/80 bg-gradient-to-r from-amber-50 to-white px-5 py-4;
+  }
+
+  .ruwaq-sponsored-launch-ribbon__inner {
+    @apply flex flex-wrap items-center gap-x-4 gap-y-2;
+  }
+
+  .ruwaq-sponsored-launch-ribbon__badge {
+    @apply text-[10px] font-semibold uppercase tracking-[0.2em] text-amber-800;
+  }
+
+  .ruwaq-sponsored-launch-ribbon__tier {
+    @apply text-sm font-medium text-neutral-900;
+  }
+
+  .ruwaq-sponsored-launch-ribbon__link {
+    @apply ms-auto text-sm font-medium text-neutral-700 underline-offset-4 hover:text-neutral-950 hover:underline;
+  }
+
+  .ruwaq-dev-package {
+    @apply flex flex-col border border-neutral-200 bg-white p-6;
+  }
+
+  .ruwaq-dev-package--highlight {
+    @apply border-neutral-950 ring-1 ring-neutral-950;
+  }
+
+  .ruwaq-dev-package__tier {
+    @apply text-xs font-semibold uppercase tracking-widest text-neutral-500;
+  }
+
+  .ruwaq-dev-package__price {
+    @apply mt-2 text-lg font-semibold text-neutral-950;
+  }
+
+  .ruwaq-dev-package__summary {
+    @apply mt-3 text-sm leading-relaxed text-neutral-600;
+  }
+
+  .ruwaq-dev-package__includes {
+    @apply mt-4 space-y-2 text-sm text-neutral-800;
+  }
+
+  .ruwaq-dev-package__includes li {
+    @apply relative ps-4 before:absolute before:start-0 before:content-['·'];
   }
 
   .ruwaq-category-photo {

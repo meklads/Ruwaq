@@ -69,11 +69,14 @@ export async function notifyLeadRouting(payload: {
   const partnerWebhook = process.env.PARTNER_LEAD_WEBHOOK_URL?.trim();
   if (partnerWebhook && payload.status === "BROADCASTED_TO_PARTNERS") {
     try {
-      await fetch(partnerWebhook, {
+      const res = await fetch(partnerWebhook, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
+      if (!res.ok) {
+        console.error("[marketplace-lead] partner webhook HTTP", res.status, await res.text());
+      }
     } catch (err) {
       console.error("[marketplace-lead] partner webhook failed", err);
     }

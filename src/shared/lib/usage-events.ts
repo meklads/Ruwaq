@@ -13,7 +13,13 @@ export type UsageEventType =
   | "pdf_exported"
   | "guest_claimed"
   | "server_error"
-  | "quota_blocked";
+  | "quota_blocked"
+  | "marketplace_lead_submitted"
+  | "off_plan_brochure_lead"
+  | "visualization_lead_submitted"
+  | "pro_apply_click"
+  | "tour_shop_click"
+  | "developer_inquiry";
 
 export function logUsageEvent(
   type: UsageEventType,

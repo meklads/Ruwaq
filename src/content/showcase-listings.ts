@@ -259,7 +259,7 @@ const PROFILES: ShowcaseListingProfile[] = [
         titleEn: "Serviced tower — Makkah",
         metaAr: "120+ وحدة",
         metaEn: "120+ units",
-        tourSlug: "thakher-makkah",
+        tourSlug: "makkah-serviced-tower-fitout",
       },
     ],
   },

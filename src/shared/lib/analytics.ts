@@ -11,7 +11,11 @@ export type AnalyticsEvent =
   | "quote_submit"
   | "visualization_lead"
   | "proposal_start"
-  | "budget_estimate";
+  | "budget_estimate"
+  | "pro_apply_click"
+  | "tour_shop_click"
+  | "developer_inquiry"
+  | "off_plan_brochure";
 
 type EventParams = Record<string, string | number | boolean | undefined>;
 

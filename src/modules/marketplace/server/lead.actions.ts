@@ -15,6 +15,7 @@ import {
   resolveLeadStatus,
 } from "@/modules/marketplace/server/lead-routing";
 import { sendClientLeadConfirmationEmail } from "@/modules/marketplace/server/lead-notify-email";
+import { logUsageEvent } from "@/shared/lib/usage-events";
 import {
   buildClientFollowUpWhatsAppMessage,
   buildWhatsAppUrl,
@@ -175,6 +176,16 @@ async function persistAndRouteLead(
         })
       )
     : null;
+
+  logUsageEvent("marketplace_lead_submitted", {
+    metadata: {
+      leadId: lead.id,
+      citySlug,
+      categorySlug,
+      status,
+      locale: data.locale,
+    },
+  });
 
   return {
     success: true,

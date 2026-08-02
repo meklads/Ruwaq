@@ -101,6 +101,104 @@ export const PROJECT_TOURS: ProjectTour[] = [
     ],
     publishedAt: "2025-03-15",
   },
+  {
+    slug: "makkah-serviced-tower-fitout",
+    citySlug: "makkah",
+    categorySlug: "fit-out",
+    heroImage: "/images/projects/thakher-makkah/main.jpg",
+    gallery: [
+      "/images/projects/thakher-makkah/gallery-1.jpg",
+      "/images/projects/thakher-makkah/gallery-2.jpg",
+      "/images/marketing/interior-lounge.jpg",
+      "/images/marketing/family-living-room.jpg",
+    ],
+    titleAr: "عمارة فندقية مكة — تشطيب 120+ وحدة ضيافة",
+    titleEn: "Makkah Serviced Tower — 120+ Hospitality Unit Fit-Out",
+    subtitleAr:
+      "تشطيب فندقي على 12 طابقاً — مواد مقاومة للرطوبة، جبس acoustic، وبورسلان للمناطق الرطبة.",
+    subtitleEn:
+      "Hotel-grade fit-out across 12 floors — moisture-resistant finishes, acoustic gypsum, and porcelain in wet zones.",
+    storyAr: [
+      "مشروع عمارة فندقية في مكة يتطلب معايير مختلفة عن الفيلا السكنية: دوام تشغيل، رطوبة، وكثافة استخدام. بدأنا بجدول مراحل يربط كل طابق بمحضر استلام مستقل.",
+      "المواد: بورسلان R10 في الحمامات، جبس acoustic في الممرات، وMDF مقاوم للرطوبة في الوحدات المفروشة. التكييف VRF مركزي مع zoning لكل وحدة.",
+      "120+ وحدة سُلّمت على 3 دفعات — مع فريق Ruwaq PRO (نمط المعمار) وضمان سنة على التشطيبات.",
+    ],
+    storyEn: [
+      "A Makkah serviced tower demands different standards from a villa: uptime, humidity, and heavy use. We built a phase schedule tying each floor to its own sign-off minutes.",
+      "Materials: R10 porcelain in bathrooms, acoustic gypsum in corridors, and moisture-resistant MDF in furnished units. Central VRF with zoning per unit.",
+      "120+ units delivered in three batches — with Ruwaq PRO partner Namat Al-Mi'mar and a one-year finish warranty.",
+    ],
+    highlightsAr: ["120+ وحدة", "12 طابق", "معايير ضيافة", "VRF مركزي"],
+    highlightsEn: ["120+ units", "12 floors", "Hospitality grade", "Central VRF"],
+    developer: { nameAr: "نمط المعمار", nameEn: "Namat Al-Mi'mar" },
+    completionDateAr: "يناير 2025",
+    completionDateEn: "January 2025",
+    scopeAr: "تشطيب وحدات ضيافة — حمامات، مطابخ، غرف نوم",
+    scopeEn: "Hospitality unit fit-out — bathrooms, kitchens, bedrooms",
+    areaSqm: 8400,
+    credits: [
+      {
+        roleAr: "التشطيب والتنفيذ",
+        roleEn: "Fit-out & delivery",
+        listingSlug: "namat-mimar-makkah",
+      },
+      {
+        roleAr: "التكييف",
+        roleEn: "HVAC",
+        listingSlug: "haram-breeze-hvac-makkah",
+      },
+    ],
+    publishedAt: "2025-01-20",
+  },
+  {
+    slug: "jeddah-coastal-apartment-renovation",
+    citySlug: "jeddah",
+    categorySlug: "fit-out",
+    heroImage: "/images/marketing/family-living-room.jpg",
+    gallery: [
+      "/images/marketing/kitchen-family.jpg",
+      "/images/marketing/interior-lounge.jpg",
+      "/images/marketing/gh-studio-visualization.jpg",
+      "/images/marketing/family-dining-planning.jpg",
+    ],
+    titleAr: "شقة ساحلية جدة — تجديد كامل بروح Minimal Coastal",
+    titleEn: "Jeddah Coastal Apartment — Full Renewal in Minimal Coastal Style",
+    subtitleAr:
+      "185 م² على الواجهة البحرية — أرضيات بورسلان، مطبخ مفتوح، وإضاءة طبيعية بإدارة توريفا.",
+    subtitleEn:
+      "185 m² on the waterfront — porcelain floors, open kitchen, and daylight-first layout by Turriva.",
+    storyAr: [
+      "المالكان طلبا شقةً تستقبل الضوء دون فوضى بصرية. أزلنا الحواجز غير الإنشائية، ومددنا البورسلان من المدخل إلى الشرفة بانسياب واحد.",
+      "المطبخ: جزيرة quartz، خزائن مطفية، وشفاط بقدرة عالية للبخار الساحلي. الحمامات: travertine مع sealant مخصص للملوحة.",
+      "التسليم في 90 يوماً — قبل موسم العودة للمدينة.",
+    ],
+    storyEn: [
+      "The owners wanted light without visual clutter. We removed non-structural walls and ran porcelain from entry to balcony in one continuous plane.",
+      "Kitchen: quartz island, matte joinery, and a high-capacity hood for coastal steam. Bathrooms: travertine with a salt-air sealant spec.",
+      "Handover in 90 days — ahead of the city return season.",
+    ],
+    highlightsAr: ["185 م²", "90 يوماً", "Minimal coastal", "مطبخ مفتوح"],
+    highlightsEn: ["185 m²", "90 days", "Minimal coastal", "Open kitchen"],
+    developer: { nameAr: "توريفا", nameEn: "Turriva" },
+    completionDateAr: "يونيو 2024",
+    completionDateEn: "June 2024",
+    scopeAr: "تجديد تشطيب داخلي كامل",
+    scopeEn: "Full interior renovation",
+    areaSqm: 185,
+    credits: [
+      {
+        roleAr: "التشطيب",
+        roleEn: "Fit-out",
+        listingSlug: "turriva-fitout-jeddah",
+      },
+      {
+        roleAr: "المطبخ",
+        roleEn: "Kitchen",
+        listingSlug: "arkan-kitchens-jeddah",
+      },
+    ],
+    publishedAt: "2024-06-10",
+  },
 ];
 
 export function getProjectTour(slug: string): ProjectTour | undefined {
