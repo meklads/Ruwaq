@@ -12,7 +12,8 @@ import {
   getFlagshipShowcaseProject,
   getMarketingShowcaseProjects,
 } from "@/content/showcase-projects";
-import { OffPlanPfListCard } from "@/modules/marketplace/components/off-plan/off-plan-pf-list-card";
+import { FeaturedDirectoryRail } from "@/modules/marketplace/components/featured-directory-rail";
+import { ShowcaseProjectRailCard } from "@/modules/marketplace/components/showcase-project-rail-card";
 
 export async function ProjectToursHomeSection() {
   const locale = await getLocale();
@@ -21,21 +22,14 @@ export async function ProjectToursHomeSection() {
   const offPlanCopy = t.marketplace.offPlan;
   const project = getFlagshipShowcaseProject();
   const otherLaunches = getMarketingShowcaseProjects().filter((p) => p.slug !== project.slug);
-
-  const projectName = projectTitle(project, locale);
+  const prevLabel = locale === "ar" ? "المشروع السابق" : "Previous project";
+  const nextLabel = locale === "ar" ? "المشروع التالي" : "Next project";
   const location = projectLocation(project, locale);
   const price = formatLaunchPrice(project, locale);
   const badgeLabel =
     project.badge === "exclusive_3d" ? offPlanCopy.badgeExclusive : offPlanCopy.badgeUnderConstruction;
 
-  const cardCopy = {
-    offPlanLabel: offPlanCopy.offPlanLabel,
-    completedLabel: copy.completedBadge,
-    startingFrom: offPlanCopy.startingFrom,
-    launchPrice: offPlanCopy.launchPriceLabel,
-    explore: offPlanCopy.explore,
-    deliveryLabel: offPlanCopy.deliveryLabel,
-  };
+  const projectName = projectTitle(project, locale);
 
   return (
     <section
@@ -84,15 +78,19 @@ export async function ProjectToursHomeSection() {
         </Link>
 
         {otherLaunches.length > 0 ? (
-          <div className="ruwaq-pf-listing-grid mt-12">
-            {otherLaunches.map((launch) => (
-              <OffPlanPfListCard key={launch.id} project={launch} locale={locale} copy={cardCopy} />
-            ))}
+          <div className="ruwaq-showcase-projects-rail">
+            <FeaturedDirectoryRail prevLabel={prevLabel} nextLabel={nextLabel}>
+              {otherLaunches.map((launch) => (
+                <div key={launch.id} className="ruwaq-ad-featured-rail__item">
+                  <ShowcaseProjectRailCard project={launch} locale={locale} />
+                </div>
+              ))}
+            </FeaturedDirectoryRail>
           </div>
         ) : null}
 
-        <p className="mt-8 text-center sm:hidden">
-          <Link href="/tours" className="ruwaq-pro-btn-solid px-8 py-3">
+        <p className="mt-10 text-center">
+          <Link href="/tours" className="ruwaq-pro-btn-outline px-7 py-2.5 sm:hidden">
             {copy.viewAll}
           </Link>
         </p>
