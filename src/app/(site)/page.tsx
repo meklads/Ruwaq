@@ -30,6 +30,8 @@ export default async function HomePage() {
       <RuwaqProHero
         magazineCopy={t.marketplace.homeMagazine}
         proCopy={t.marketplace.proDirectory}
+        searchCopy={t.marketplace.search}
+        locale={locale}
       />
       <TodaysStoriesSection />
       <ProjectToursHomeSection />

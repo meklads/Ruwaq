@@ -436,9 +436,10 @@ export const en: Messages = {
    trendingTitle: "Browse by trade",
    allSectors: "All sectors",
    heroEyebrow: "Ruwaq · Property & design",
-   heroTitle: "Tours, guides, and inspiration for your project",
+   heroTitle: "PRO directory, tours, and inspiration",
    heroSubtitle:
-    "Explore completed home tours and new launches, read practical guides, then connect with verified pros when you are ready.",
+    "Search Ruwaq PRO for verified contractors and suppliers in Jeddah, Makkah, and Madinah — then explore tours and guides for inspiration.",
+   heroDirectoryCta: "Directory",
    heroExploreTours: "Explore tours",
    heroReadGuides: "Guides",
    heroDirectoryLink: "Browse the PRO directory",

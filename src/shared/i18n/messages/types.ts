@@ -322,6 +322,7 @@ export type Messages = {
       heroSubtitle: string;
       heroExploreTours: string;
       heroReadGuides: string;
+      heroDirectoryCta: string;
       heroDirectoryLink: string;
       todaysStoriesEyebrow: string;
       todaysStoriesTitle: string;
