@@ -11,6 +11,7 @@ import {
 import {
   getFlagshipShowcaseProject,
   getMarketingShowcaseProjects,
+  getAllShowcaseProjects,
 } from "@/content/showcase-projects";
 import { FeaturedDirectoryRail } from "@/modules/marketplace/components/featured-directory-rail";
 import { ShowcaseProjectRailCard } from "@/modules/marketplace/components/showcase-project-rail-card";
@@ -21,7 +22,9 @@ export async function ProjectToursHomeSection() {
   const copy = t.marketplace.projectTours;
   const offPlanCopy = t.marketplace.offPlan;
   const project = getFlagshipShowcaseProject();
+  const completedTours = getAllShowcaseProjects().filter((p) => p.showcaseKind === "completed");
   const otherLaunches = getMarketingShowcaseProjects().filter((p) => p.slug !== project.slug);
+  const railProjects = [...completedTours, ...otherLaunches];
   const prevLabel = locale === "ar" ? "المشروع السابق" : "Previous project";
   const nextLabel = locale === "ar" ? "المشروع التالي" : "Next project";
   const location = projectLocation(project, locale);
@@ -77,12 +80,12 @@ export async function ProjectToursHomeSection() {
           </div>
         </Link>
 
-        {otherLaunches.length > 0 ? (
+        {railProjects.length > 0 ? (
           <div className="ruwaq-showcase-projects-rail">
             <FeaturedDirectoryRail prevLabel={prevLabel} nextLabel={nextLabel}>
-              {otherLaunches.map((launch) => (
-                <div key={launch.id} className="ruwaq-ad-featured-rail__item">
-                  <ShowcaseProjectRailCard project={launch} locale={locale} />
+              {railProjects.map((item) => (
+                <div key={item.id} className="ruwaq-ad-featured-rail__item">
+                  <ShowcaseProjectRailCard project={item} locale={locale} />
                 </div>
               ))}
             </FeaturedDirectoryRail>

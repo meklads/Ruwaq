@@ -317,6 +317,12 @@ export type Messages = {
       trendingEyebrow: string;
       trendingTitle: string;
       allSectors: string;
+      heroEyebrow: string;
+      heroTitle: string;
+      heroSubtitle: string;
+      heroExploreTours: string;
+      heroReadGuides: string;
+      heroDirectoryLink: string;
     };
     budgetEstimator: {
       eyebrow: string;

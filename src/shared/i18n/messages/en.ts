@@ -434,12 +434,19 @@ export const en: Messages = {
    trendingEyebrow: "Trending sectors",
    trendingTitle: "Browse by trade",
    allSectors: "All sectors",
+   heroEyebrow: "Ruwaq · Property & design",
+   heroTitle: "Tours, guides, and inspiration for your project",
+   heroSubtitle:
+    "Explore completed home tours and new launches, read practical guides, then connect with verified pros when you are ready.",
+   heroExploreTours: "Explore tours",
+   heroReadGuides: "Guides",
+   heroDirectoryLink: "Browse the PRO directory",
   },
   budgetEstimator: {
    eyebrow: "Budget estimator",
    title: "What might your fit-out cost?",
    subtitle:
-    "Enter area and finish level for an indicative range — then request a precise quote from the featured firms above.",
+    "Enter area and finish level for an indicative range — then request a precise quote from verified pros in the directory below.",
    areaLabel: "Project area (m²)",
    areaHint: "50–20,000 m² — villas, apartments, or commercial units.",
    tierLabel: "Finish level",
@@ -467,9 +474,9 @@ export const en: Messages = {
    title: "Ruwaq project tours",
    subtitle:
     "Marketing-ready projects — photo gallery, video, and a dedicated Property Finder–style page for each launch.",
-   homeTitle: "Ruwaq project tours",
+   homeTitle: "Project tours",
    homeSubtitle:
-    "Explore our showcased projects — cinematic video and a standalone page for every launch.",
+    "Home Tours of completed work and off-plan launches with photo and film — start with inspiration before requesting a quote.",
    featuredLabel: "Featured project",
    completedBadge: "Completed project",
    viewAll: "All tours",

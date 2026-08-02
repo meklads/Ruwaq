@@ -27,12 +27,16 @@ export default async function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(siteJsonLd) }}
       />
       <RuwaqProHero
-        copy={t.marketplace.proDirectory}
-        searchCopy={t.marketplace.search}
-        locale={locale}
+        magazineCopy={t.marketplace.homeMagazine}
+        proCopy={t.marketplace.proDirectory}
       />
       <ProjectToursHomeSection />
-      <TodaysDirectorySection />
+      <GuidesSection />
+      <EditorialCategoryGrid
+        copy={t.marketplace.categories}
+        magazineCopy={t.marketplace.homeMagazine}
+        locale={locale}
+      />
       <BudgetEstimatorSection
         copy={t.marketplace.budgetEstimator}
         quoteCopy={t.marketplace.quote}
@@ -40,12 +44,7 @@ export default async function HomePage() {
         closeLabel={t.nav.closeModal}
         locale={locale}
       />
-      <EditorialCategoryGrid
-        copy={t.marketplace.categories}
-        magazineCopy={t.marketplace.homeMagazine}
-        locale={locale}
-      />
-      <GuidesSection />
+      <TodaysDirectorySection />
       <HowItWorksSection copy={t.marketplace.howItWorks} locale={locale} />
       <HomepagePromoBands locale={locale} />
     </>

@@ -26,6 +26,7 @@ export async function TodaysDirectorySection() {
   return (
     <section
       className="ruwaq-ad-section ruwaq-ad-section--featured"
+      id="directory"
       aria-labelledby="todays-directory-title"
     >
       <div className="ruwaq-ad-content">
