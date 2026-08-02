@@ -35,7 +35,7 @@ North star: **Architectural Digest of Saudi real estate** — editorial first, R
 
 | # | Step | Status |
 |---|------|--------|
-| 13 | GitHub Actions CI | partial — workflow file local; push needs GitHub `workflow` scope |
+| 13 | GitHub Actions CI | done |
 | 14 | Expand cities (Riyadh, Dammam hubs) | done |
 | 15 | Shop the Tour affiliate layer | done |
 | 16 | Sponsored developer launch packages | done |
