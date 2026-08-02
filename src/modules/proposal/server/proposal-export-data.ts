@@ -3,11 +3,13 @@ import type { CommercialMode } from "@/shared/types";
 import type { Locale } from "@/shared/i18n/locale";
 import { localeToBcp47 } from "@/shared/i18n/locale";
 import { getMessages } from "@/shared/i18n";
-import { isBillingEnabled } from "@/shared/lib/env";
+import {
+  hasPremiumExportAccess,
+  shouldApplyRuwaqBranding,
+} from "@/modules/billing/lib/product-access";
 import { resolveEntitledExportTemplateId } from "@/modules/company/lib/export-template-ids";
 import {
   resolveCompanyTier,
-  getTierConfig,
 } from "@/modules/billing/lib/tiers";
 import {
   asObjectList,
@@ -46,9 +48,11 @@ export async function loadProposalExportContext(
     : null;
 
   const tier = company ? resolveCompanyTier(company) : "STARTER";
-  const tierConfig = getTierConfig(tier);
-  const applyTierWatermark = tierConfig.pdfWatermark && options.watermarked !== false;
-  const applyClientWatermark = applyTierWatermark && options.watermarked !== false;
+  const applyBranding = company
+    ? shouldApplyRuwaqBranding(company)
+    : options.watermarked !== false;
+  const applyClientWatermark = applyBranding && options.watermarked !== false;
+  const premiumExport = company ? hasPremiumExportAccess(company) : false;
 
   const locale: Locale = proposal.locale === "en" ? "en" : "ar";
   const messages = getMessages(locale);
@@ -142,10 +146,10 @@ export async function loadProposalExportContext(
     estimateVariancePercent: proposal.estimateVariancePercent,
     watermarkClientName: applyClientWatermark ? proposal.clientName : undefined,
     watermarkDate: applyClientWatermark ? issueDate : undefined,
-    poweredByRuwaqFooter: applyTierWatermark,
+    poweredByRuwaqFooter: applyBranding,
     templateId: resolveEntitledExportTemplateId(
       company?.exportTemplateId,
-      tierConfig.whiteLabelPdf || (company?.isPaid ?? false) || !isBillingEnabled()
+      premiumExport
     ),
     headerFooterStyleId: company?.headerFooterStyleId ?? undefined,
   };

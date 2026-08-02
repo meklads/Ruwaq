@@ -1055,6 +1055,7 @@ export type Messages = {
     close: string;
     error: string;
     trialNotice: string;
+    launchPhaseNotice: string;
   };
   graphicsHouseUpsell: {
     title: string;

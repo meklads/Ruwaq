@@ -16,8 +16,8 @@ export default async function PricingPage() {
         </h1>
         <p className="ruwaq-pro-directory-meta mt-4 normal-case tracking-normal">
           {locale === "ar"
-            ? "اربط محرك العروض بدليل Ruwaq PRO، من 3 عروض مجانية إلى غير محدود."
-            : "Connect the proposal engine to the Ruwaq PRO directory, from 3 free to unlimited."}
+            ? "مرحلة الإطلاق: المحتوى والدليل مجانيان. أداة العروض — 3 شهرياً بعد إكمال ملف الشركة (شعار + إيميل) مع شعار Ruwaq. الدفع الإلكتروني لاحقاً."
+            : "Launch phase: editorial & directory are free. Proposal tool — 3/month after company profile (logo + email) with Ruwaq branding. Online billing later."}
         </p>
       </header>
 
@@ -80,8 +80,8 @@ export default async function PricingPage() {
 
       <p className="mx-auto mt-12 max-w-2xl text-center text-sm text-neutral-500">
         {locale === "ar"
-          ? "للترقية الفورية تواصل مع فريق رواق، الدفع الإلكتروني قريباً."
-          : "Contact Ruwaq team to upgrade, online checkout coming soon."}
+          ? "الترقية إلى Verified أو PRO عبر /join — بدون دفع إلكتروني حالياً. بوابة Moyasar عند النمو."
+          : "Upgrade to Verified or PRO via /join — no online checkout yet. Moyasar when we scale."}
       </p>
       <p className="mt-6 text-center">
         <Link href="/proposals" className="ruwaq-pro-btn-outline px-8 py-3">

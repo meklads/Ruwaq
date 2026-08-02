@@ -25,11 +25,12 @@ North star: **Architectural Digest of Saudi real estate** — editorial first, R
 
 | # | Step | Status |
 |---|------|--------|
-| 8 | Saudi payment gateway (Moyasar/Tap) | blocked — needs API keys |
-| 9 | Enable BILLING_ENABLED=true | blocked — depends on #8 |
+| 8 | Saudi payment gateway (Moyasar/Tap) | deferred — after subscriber growth + CR ready |
+| 9 | Enable BILLING_ENABLED=true | deferred — depends on #8 + traffic milestone |
 | 10 | Lead pipeline hardening | done |
 | 11 | R2/S3 production file storage | partial — env + health check; needs Coolify secrets |
-| 12 | Self-serve join → pay → activate | blocked — depends on #8–9 |
+| 12 | Self-serve join → pay → activate | partial — /join manual; paywall when #8–9 |
+| **—** | **Freemium access model** | **done** — see `.cursor/rules/product-access.mdc` |
 
 ### Phase C — Scale & quality
 
@@ -43,7 +44,7 @@ North star: **Architectural Digest of Saudi real estate** — editorial first, R
 
 ## When user says "next step"
 
-1. Find first `pending` or `blocked` step (skip blocked unless user provides keys).
+1. Find first `pending` or `deferred` step (skip payment until user provides keys/milestone).
 2. Implement fully.
 3. Update this table.
 4. Commit + push to `origin`.
@@ -59,3 +60,4 @@ North star: **Architectural Digest of Saudi real estate** — editorial first, R
 
 - Google AdSense
 - Horizontal DB city expansion before Jeddah PMF
+- Online payment before active subscriber base exists

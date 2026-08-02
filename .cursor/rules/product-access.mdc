@@ -1,0 +1,63 @@
+---
+description: Ruwaq freemium access model — what is free, what requires identity, watermark rules, and when billing activates.
+alwaysApply: true
+---
+
+# Ruwaq Product Access Model
+
+## Launch strategy (current)
+
+Grow active subscriber data first. **No online payment** until traffic proves PMF.
+`BILLING_ENABLED=false` keeps checkout hidden; **freemium gates always apply**.
+
+## Service tiers
+
+### PUBLIC (no account)
+
+- Homepage, tours, guides, Today's Stories, hubs
+- Browse directory, request quote, budget estimator
+- **1 guest AI proposal** (cookie) → then Google sign-in
+
+### STARTER (signed in + company identity)
+
+**Required before AI generation:** company name, logo, **email**, CR or about.
+
+- **3 proposals / month**
+- Basic export template (`ruwaq`) + 1 free header style
+- **PDF watermark** (client name + date) + **Powered by Ruwaq** footer
+- Limited clause pack (`fit_out_v1`)
+
+### VERIFIED (manual `/join` approval)
+
+- 30 proposals / month, full clause packs, directory badge
+- **Watermark stays** until `CompanyProfile.isPaid` (future Moyasar)
+
+### PRO (curated directory partners)
+
+- Unlimited proposals, white-label PDF, featured directory, lead priority
+- No watermark
+
+### PAID (future — Moyasar/Tap)
+
+- Set `CompanyProfile.isPaid` via checkout
+- Removes watermark for VERIFIED; unlocks premium templates
+
+## Code references
+
+- Access helpers: `src/modules/billing/lib/product-access.ts`
+- Entitlements: `src/modules/billing/server/entitlements.service.ts`
+- Profile gate: `src/modules/company/lib/profile-completeness.ts`
+- Generate gate: `src/app/api/proposals/[id]/generate/route.ts`
+
+## Do NOT
+
+- Bypass freemium when `BILLING_ENABLED=false` (old "everything unlocked" behavior)
+- Enable Moyasar Live without CR + company bank account
+- Gate editorial/marketing pages behind login
+
+## Payment activation checklist (later)
+
+1. 30+ companies with complete profiles
+2. 15+ marketplace leads / month
+3. Moyasar Live under Saudi CR
+4. `BILLING_ENABLED=true` + webhook keys in Coolify

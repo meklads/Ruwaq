@@ -62,7 +62,7 @@ export async function POST(
       // proposal before we spend AI credits on it.
       const profile = await db.companyProfile.findUnique({
         where: { userId },
-        select: { companyName: true, logoUrl: true, crNumber: true, about: true, tier: true, planId: true },
+        select: { companyName: true, logoUrl: true, email: true, crNumber: true, about: true, tier: true, planId: true },
       });
 
       if (!isCompanyProfileReadyForGeneration(profile)) {

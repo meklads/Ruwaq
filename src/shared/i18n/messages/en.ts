@@ -1708,6 +1708,8 @@ export const en: Messages = {
   close: "Close",
   error: "Payment could not be completed. Try again or contact us.",
   trialNotice: "All templates are free for now during the trial period.",
+  launchPhaseNotice:
+   "3 proposals/month with Ruwaq branding and watermark — premium templates and clean PDFs unlock with a paid plan later.",
  },
  graphicsHouseUpsell: {
   title: "Make this proposal look top-tier",
@@ -1717,7 +1719,7 @@ export const en: Messages = {
  gates: {
   signInRequired: "You tried Ruwaq for free, nice! Sign in with Google (one click) to create more proposals.",
   signInCta: "Sign in with Google",
-  profileIncomplete: "Complete your company name and logo in Company Profile first, they appear on every exported proposal.",
+  profileIncomplete: "Complete company name, logo, and email in Company Profile — they appear on every PDF you export.",
   profileIncompleteCta: "Complete company profile",
   quotaExceeded: "You've reached this month's proposal limit for your current plan.",
   quotaExceededCta: "View plans",

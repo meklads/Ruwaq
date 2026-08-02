@@ -1,11 +1,14 @@
 import { db } from "@/shared/lib/db";
 import type { RuwaqTier } from "@prisma/client";
-import { isBillingEnabled } from "@/shared/lib/env";
 import {
   getTierConfig,
   resolveCompanyTier,
-  tierAllowsAnotherProposal,
 } from "@/modules/billing/lib/tiers";
+import {
+  allowsAnotherProposal,
+  hasFullClausePacks,
+  shouldApplyRuwaqBranding,
+} from "@/modules/billing/lib/product-access";
 import { syncDirectoryListingsForUser } from "@/modules/billing/server/directory-tier.service";
 
 export type CompanyEntitlements = {
@@ -52,15 +55,15 @@ export async function countProposalGenerationsThisMonth(userId: string): Promise
 export async function getCompanyEntitlements(userId: string): Promise<CompanyEntitlements | null> {
   const profile = await db.companyProfile.findUnique({
     where: { userId },
-    select: { tier: true, planId: true },
+    select: { tier: true, planId: true, isPaid: true },
   });
   if (!profile) return null;
 
   const tier = resolveCompanyTier(profile);
   const config = getTierConfig(tier);
   const usedThisMonth = await countProposalGenerationsThisMonth(userId);
-  const canGenerate =
-    !isBillingEnabled() || tierAllowsAnotherProposal(tier, usedThisMonth);
+  const canGenerate = allowsAnotherProposal(profile, usedThisMonth);
+  const branding = shouldApplyRuwaqBranding(profile);
 
   const remainingThisMonth =
     config.monthlyProposalLimit === null
@@ -75,9 +78,9 @@ export async function getCompanyEntitlements(userId: string): Promise<CompanyEnt
     usedThisMonth,
     remainingThisMonth,
     canGenerateProposal: canGenerate,
-    pdfWatermark: config.pdfWatermark,
-    fullClausePacks: config.fullClausePacks,
-    whiteLabelPdf: config.whiteLabelPdf,
+    pdfWatermark: branding,
+    fullClausePacks: hasFullClausePacks(profile),
+    whiteLabelPdf: config.whiteLabelPdf && !branding,
     directoryVerifiedBadge: config.directoryVerifiedBadge,
     directoryFeatured: config.directoryFeatured,
     leadPriority: config.leadPriority,
@@ -110,7 +113,7 @@ export async function assertProposalGenerationAllowed(
     };
   }
 
-  if (isBillingEnabled() && !entitlements.canGenerateProposal) {
+  if (!entitlements.canGenerateProposal) {
     return { allowed: false, code: "QUOTA_EXCEEDED", entitlements };
   }
 

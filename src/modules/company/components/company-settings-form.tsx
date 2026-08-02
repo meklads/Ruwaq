@@ -36,8 +36,9 @@ export function CompanySettingsForm({ initial, billingEnabled, preferredStyleId 
   const [saveStatus, setSaveStatus] = useState<"idle" | "success" | "error">("idle");
   const [logoWarning, setLogoWarning] = useState<string | null>(null);
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
-  // During the free trial every template is unlocked for everyone.
-  const isPaid = !billingEnabled || (initial?.isPaid ?? false);
+  // Premium templates: PRO tier or future online payment (isPaid).
+  const isPaid =
+    (initial?.isPaid ?? false) || initial?.tier === "PRO";
   const [form, setForm] = useState({
     companyName: initial?.companyName ?? "",
     logoUrl: initial?.logoUrl ?? "",
@@ -296,7 +297,7 @@ export function CompanySettingsForm({ initial, billingEnabled, preferredStyleId 
           </select>
           {!billingEnabled && (
             <p className="mt-2 text-xs font-medium text-ruwaq-gold">
-              {t.upgrade.trialNotice}
+              {t.upgrade.launchPhaseNotice}
             </p>
           )}
           {billingEnabled && !isPaid && (

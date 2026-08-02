@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/shared/lib/db";
 import { getSession } from "@/modules/auth/server/session";
-import { isBillingEnabled } from "@/shared/lib/env";
+import {
+  hasPremiumExportAccess,
+} from "@/modules/billing/lib/product-access";
 import {
   parseExportTemplateId,
   resolveEntitledExportTemplateId,
@@ -36,11 +38,9 @@ export async function PUT(req: NextRequest) {
 
     const existing = await db.companyProfile.findUnique({
       where: { userId: session.user.id },
-      select: { isPaid: true },
+      select: { isPaid: true, tier: true, planId: true },
     });
-    // During the free trial (BILLING_ENABLED=false) everyone is treated as
-    // entitled — no template is locked. Flip the env var when ready to charge.
-    const isPaid = (existing?.isPaid ?? false) || !isBillingEnabled();
+    const isPaid = hasPremiumExportAccess(existing);
 
     const body = await req.json();
     const requestedTemplateId = parseExportTemplateId(body.exportTemplateId);
