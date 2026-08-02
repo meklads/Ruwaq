@@ -21,6 +21,11 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: "/projects/al-rajhi-gardens",
+        destination: "/projects/al-rajhi-makkah",
+        permanent: true,
+      },
+      {
         source: "/proposals/new",
         destination: "/workspace/proposals/new",
         permanent: false,

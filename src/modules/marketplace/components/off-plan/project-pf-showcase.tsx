@@ -7,7 +7,9 @@ import {
   formatOffPlanPrice,
   getOffPlanGallery,
   projectDeveloperName,
+  projectHighlights,
   projectLocation,
+  projectSummary,
   projectTitle,
 } from "@/content/off-plan-projects";
 import type { Locale } from "@/shared/i18n/locale";
@@ -39,6 +41,8 @@ export function ProjectPfShowcase({ project, locale, copy }: Props) {
   const title = projectTitle(project, locale);
   const location = projectLocation(project, locale);
   const developer = projectDeveloperName(project, locale);
+  const summary = projectSummary(project, locale);
+  const highlights = projectHighlights(project, locale);
   const price = formatOffPlanPrice(project.startingPrice, locale);
   const gallery = useMemo(() => getOffPlanGallery(project), [project]);
   const badgeLabel =
@@ -93,6 +97,14 @@ export function ProjectPfShowcase({ project, locale, copy }: Props) {
           </span>
         </div>
         <h1 className="ruwaq-pf-project-title">{title}</h1>
+        {summary ? <p className="ruwaq-pf-project-summary">{summary}</p> : null}
+        {highlights.length > 0 ? (
+          <ul className="ruwaq-pf-project-highlights">
+            {highlights.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        ) : null}
         <div className="ruwaq-pf-project-meta">
           <p className="ruwaq-pf-project-price">
             {copy.startingFrom} <strong>{price}</strong>

@@ -28,6 +28,10 @@ export type OffPlanProject = {
   slug: string;
   titleAr: string;
   titleEn: string;
+  summaryAr?: string;
+  summaryEn?: string;
+  highlightsAr?: string[];
+  highlightsEn?: string[];
   developer: {
     nameAr: string;
     nameEn: string;
@@ -133,6 +137,14 @@ export function projectLocation(project: OffPlanProject, locale: "ar" | "en"): s
 
 export function projectDeveloperName(project: OffPlanProject, locale: "ar" | "en"): string {
   return locale === "ar" ? project.developer.nameAr : project.developer.nameEn;
+}
+
+export function projectSummary(project: OffPlanProject, locale: "ar" | "en"): string | undefined {
+  return locale === "ar" ? project.summaryAr : project.summaryEn;
+}
+
+export function projectHighlights(project: OffPlanProject, locale: "ar" | "en"): string[] {
+  return locale === "ar" ? (project.highlightsAr ?? []) : (project.highlightsEn ?? []);
 }
 
 export function matchesOffPlanFilters(

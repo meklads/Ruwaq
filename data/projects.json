@@ -118,55 +118,75 @@
     },
     {
       "id": "project-03",
-      "slug": "al-rajhi-gardens",
-      "titleAr": "حدائق الراجحي السكنية",
-      "titleEn": "Al Rajhi Residential Gardens",
+      "slug": "al-rajhi-makkah",
+      "titleAr": "مشروع الراجحي — مكة",
+      "titleEn": "Al Rajhi Development — Makkah",
+      "summaryAr": "مجمع تجاري سكني متكامل على طريق الطائف: ٩٦ عمارة، ٥ فنادق، مسجد، شقق مفروشة، لاندسكيب، ومتحف عالمي.",
+      "summaryEn": "A large mixed-use destination on Taif Road: 96 towers, 5 hotels, a mosque, furnished apartments, landscaped grounds, and a world-class museum.",
+      "highlightsAr": [
+        "٥ فنادق كبرى",
+        "مسجد",
+        "٩٦ عمارة",
+        "شقق مفروشة",
+        "لاندسكيب واسع",
+        "متحف عالمي"
+      ],
+      "highlightsEn": [
+        "5 major hotels",
+        "Mosque",
+        "96 buildings",
+        "Furnished apartments",
+        "Extensive landscaping",
+        "World-class museum"
+      ],
       "developer": {
-        "nameAr": "مجموعة الراجحي",
-        "nameEn": "Al Rajhi Group",
-        "logo": "/images/marketing/family-savings-home.jpg"
+        "nameAr": "وقف الراجحي",
+        "nameEn": "Al Rajhi Endowment",
+        "logo": "/images/marketing/architectural-model-3d.jpg"
       },
-      "citySlug": "riyadh",
-      "locationAr": "الرياض، شمال المدينة",
-      "locationEn": "Riyadh, North Riyadh",
-      "startingPrice": 1950000,
-      "deliveryDateAr": "يونيو 2028",
-      "deliveryDateEn": "June 2028",
-      "deliveryQuarter": "Q2 2028",
-      "paymentPlanAr": "5% مقدم — 5 سنوات",
-      "paymentPlanEn": "5% down — 5 years",
-      "propertyTypesAr": ["فيلل", "تاون هاوس"],
-      "propertyTypesEn": ["Villas", "Townhouse"],
-      "propertyTypeSlugs": ["villa", "townhouse"],
-      "ownershipAr": "تملك حر",
-      "ownershipEn": "Freehold",
+      "citySlug": "makkah",
+      "locationAr": "مكة المكرمة، طريق الطائف",
+      "locationEn": "Makkah, Taif Road",
+      "startingPrice": 890000,
+      "deliveryDateAr": "مراحل متعددة — 2028",
+      "deliveryDateEn": "Phased delivery — 2028",
+      "deliveryQuarter": "Q4 2028",
+      "paymentPlanAr": "مرونة حسب المرحلة",
+      "paymentPlanEn": "Flexible by phase",
+      "propertyTypesAr": ["شقق مفروشة", "ضيافة", "تجاري"],
+      "propertyTypesEn": ["Furnished apartments", "Hospitality", "Retail"],
+      "propertyTypeSlugs": ["apartment"],
+      "ownershipAr": "صكوك / أوقاف",
+      "ownershipEn": "Endowment / Waqf structure",
       "status": "under_construction",
       "badge": "under_construction",
       "heroVideo": "https://videos.pexels.com/video-files/2711306/2711306-sd_640_360_30fps.mp4",
-      "heroVideoPoster": "/images/marketing/family-living-room.jpg",
-      "brochurePdf": "/api/projects/al-rajhi-gardens/brochure",
+      "heroVideoPoster": "/images/marketing/architectural-model-3d.jpg",
+      "brochurePdf": "/api/projects/al-rajhi-makkah/brochure",
       "images": {
-        "main": "/images/marketing/family-living-room.jpg",
+        "main": "/images/marketing/architectural-model-3d.jpg",
         "masterPlan": "/images/marketing/model-house-planning.jpg",
-        "interior": "/images/marketing/interior-lounge.jpg"
+        "interior": "/images/marketing/gh-studio-visualization.jpg"
       },
       "gallery": [
-        "/images/marketing/family-living-room.jpg",
+        "/images/marketing/architectural-model-3d.jpg",
+        "/images/marketing/model-house-planning.jpg",
+        "/images/marketing/gh-studio-visualization.jpg",
         "/images/marketing/hero-villa-family.jpg",
         "/images/marketing/interior-lounge.jpg",
-        "/images/marketing/proposal-desk.jpg"
+        "/images/marketing/family-living-room.jpg"
       ],
       "floorPlans": [
         {
-          "slug": "villa-standard",
-          "labelAr": "فيلا — 350 م²",
-          "labelEn": "Villa — 350 sqm",
-          "image": "/images/marketing/family-living-room.jpg"
+          "slug": "furnished-apartment",
+          "labelAr": "شقة مفروشة — 120 م²",
+          "labelEn": "Furnished apartment — 120 sqm",
+          "image": "/images/marketing/interior-lounge.jpg"
         }
       ],
       "paymentSchedule": [
-        { "labelAr": "دفعة الحجز", "labelEn": "Booking", "percentage": 5 },
-        { "labelAr": "أثناء الإنشاء", "labelEn": "During construction", "percentage": 55 },
+        { "labelAr": "دفعة الحجز", "labelEn": "Booking", "percentage": 10 },
+        { "labelAr": "أثناء الإنشاء", "labelEn": "During construction", "percentage": 50 },
         { "labelAr": "عند التسليم", "labelEn": "On handover", "percentage": 40 }
       ],
       "featured": true

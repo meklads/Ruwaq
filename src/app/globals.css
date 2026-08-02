@@ -3526,6 +3526,18 @@
     @apply font-bold leading-snug;
   }
 
+  .ruwaq-pf-project-summary {
+    @apply mt-3 max-w-3xl text-sm leading-relaxed text-neutral-600 sm:text-base;
+  }
+
+  .ruwaq-pf-project-highlights {
+    @apply mt-4 flex flex-wrap gap-2;
+  }
+
+  .ruwaq-pf-project-highlights li {
+    @apply rounded-full border border-neutral-200 bg-neutral-50 px-3 py-1 text-xs font-medium text-neutral-700;
+  }
+
   .ruwaq-pf-project-meta {
     @apply mt-3 flex flex-wrap gap-x-6 gap-y-1 text-sm text-neutral-600;
   }
