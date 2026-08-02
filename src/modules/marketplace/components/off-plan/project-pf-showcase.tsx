@@ -17,6 +17,7 @@ import {
   projectTitle,
 } from "@/content/off-plan-projects";
 import type { Locale } from "@/shared/i18n/locale";
+import { ProjectPlansTabs } from "@/modules/marketplace/components/off-plan/project-plans-tabs";
 
 type Copy = {
   completedLabel: string;
@@ -25,7 +26,14 @@ type Copy = {
   launchPrice: string;
   priceDisclaimer: string;
   delivery: string;
+  paymentPlanLabel: string;
   developer: string;
+  tabFloorPlans: string;
+  tabPayment: string;
+  view2d: string;
+  view3d: string;
+  paymentIntro: string;
+  installment: string;
   gallery: string;
   video: string;
   videoButton: string;
@@ -83,6 +91,9 @@ export function ProjectPfShowcase({ project, locale, copy }: Props) {
   const ownership = locale === "ar" ? project.ownershipAr : project.ownershipEn;
   const delivery = locale === "ar" ? project.deliveryDateAr : project.deliveryDateEn;
   const payment = locale === "ar" ? project.paymentPlanAr : project.paymentPlanEn;
+  const hasPlans = isLaunch && project.floorPlans.length > 0;
+  const hasPaymentSchedule = isLaunch && project.paymentSchedule.length > 0;
+  const hasPlansSection = hasPlans || hasPaymentSchedule;
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
@@ -129,7 +140,7 @@ export function ProjectPfShowcase({ project, locale, copy }: Props) {
       : []),
     { label: copy.propertyTypesLabel, value: types },
     { label: copy.ownershipLabel, value: ownership },
-    { label: copy.delivery, value: payment },
+    { label: copy.paymentPlanLabel, value: payment },
   ];
 
   const developerLink = project.developerUrl ? (
@@ -330,6 +341,11 @@ export function ProjectPfShowcase({ project, locale, copy }: Props) {
             <button type="button" className="ruwaq-pf-section-nav__link" onClick={() => scrollTo("pf-about")}>
               {copy.aboutProject}
             </button>
+            {hasPlansSection ? (
+              <button type="button" className="ruwaq-pf-section-nav__link" onClick={() => scrollTo("pf-plans")}>
+                {hasPlans ? copy.tabFloorPlans : copy.tabPayment}
+              </button>
+            ) : null}
             {hasVideo ? (
               <button type="button" className="ruwaq-pf-section-nav__link" onClick={() => scrollTo("pf-video")}>
                 {copy.video}
@@ -386,6 +402,30 @@ export function ProjectPfShowcase({ project, locale, copy }: Props) {
               </button>
             ))}
           </div>
+
+          {hasPlansSection ? (
+            <section id="pf-plans" className="ruwaq-pf-plans-section scroll-mt-24">
+              <h2 className="ruwaq-pf-section-heading">
+                {hasPlans && hasPaymentSchedule
+                  ? `${copy.tabFloorPlans} · ${copy.tabPayment}`
+                  : hasPlans
+                    ? copy.tabFloorPlans
+                    : copy.tabPayment}
+              </h2>
+              <ProjectPlansTabs
+                project={project}
+                locale={locale}
+                copy={{
+                  tabFloorPlans: copy.tabFloorPlans,
+                  tabPayment: copy.tabPayment,
+                  view2d: copy.view2d,
+                  view3d: copy.view3d,
+                  paymentIntro: copy.paymentIntro,
+                  installment: copy.installment,
+                }}
+              />
+            </section>
+          ) : null}
 
           {hasVideo ? (
             <section id="pf-video" className="ruwaq-pf-video-section scroll-mt-24">

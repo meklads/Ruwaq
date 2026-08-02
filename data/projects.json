@@ -223,7 +223,7 @@
       "badge": "under_construction",
       "heroVideoYoutubeId": "X1eefv8b5QA",
       "heroVideoPoster": "/images/projects/al-oula-jeddah-gate/main.jpg",
-      "brochurePdf": "/api/projects/al-oula-jeddah-gate/brochure",
+      "brochurePdf": "",
       "images": {
         "main": "/images/projects/al-oula-jeddah-gate/main.jpg",
         "masterPlan": "/images/projects/al-oula-jeddah-gate/gallery-1.jpg",
@@ -293,7 +293,7 @@
       "badge": "exclusive_3d",
       "heroVideoYoutubeId": "3VcnAisB3Ws",
       "heroVideoPoster": "/images/projects/makkiyoon-mayan-al-fursan/main.png",
-      "brochurePdf": "/api/projects/makkiyoon-mayan-al-fursan/brochure",
+      "brochurePdf": "/images/projects/makkiyoon-mayan-al-fursan/brochure-official.pdf",
       "images": {
         "main": "/images/projects/makkiyoon-mayan-al-fursan/main.png",
         "masterPlan": "/images/projects/makkiyoon-mayan-al-fursan/gallery-2.jpg",
@@ -381,7 +381,7 @@
       "badge": "exclusive_3d",
       "heroVideoYoutubeId": "XoWSmdEojkg",
       "heroVideoPoster": "/images/projects/abraj-omar-makkah/main.jpg",
-      "brochurePdf": "/api/projects/abraj-omar-makkah/brochure",
+      "brochurePdf": "/images/projects/abraj-omar-makkah/brochure-official.pdf",
       "images": {
         "main": "/images/projects/abraj-omar-makkah/main.jpg",
         "masterPlan": "/images/projects/abraj-omar-makkah/gallery-1.jpg",
@@ -396,6 +396,318 @@
       "paymentSchedule": [
         { "labelAr": "دفعة الحجز", "labelEn": "Booking", "percentage": 20 },
         { "labelAr": "أثناء الإنشاء", "labelEn": "During construction", "percentage": 40 },
+        { "labelAr": "عند التسليم", "labelEn": "On handover", "percentage": 40 }
+      ],
+      "featured": true
+    },
+    {
+      "id": "project-thakher-makkah",
+      "slug": "thakher-makkah",
+      "titleAr": "ذاخر مكة",
+      "titleEn": "Thakher Makkah",
+      "summaryAr": "أحد أضخم المشاريع العقارية في المملكة — 320,000 م² على بُعد 1.3 كم من الحرم، بقيمة 26 مليار ريال وضيافة عالمية (نوفوتيل، رادisson، هيلتون).",
+      "summaryEn": "One of the Kingdom's largest developments — 320,000 sqm, 1.3 km from the Haram, SAR 26B with global hospitality brands (Novotel, Radisson, Hilton).",
+      "highlightsAr": [
+        "320,000 م² — 1.3 كم من الحرم المكي",
+        "100 قطعة أرض — فنادق وريزيدنس وتجاري",
+        "نوفوتيل · رادisson · بارك إن · هيلتون",
+        "15,000 وظيفة مباشرة · 18,000 غير مباشرة"
+      ],
+      "highlightsEn": [
+        "320,000 sqm — 1.3 km from the Holy Mosque",
+        "100 land plots — hotels, residences & retail",
+        "Novotel · Radisson · Park Inn · Hilton",
+        "15,000 direct · 18,000 indirect jobs"
+      ],
+      "aboutParagraphsAr": [
+        "ذاخر مكة مشروع شركة ذاخر للتطوير — وجهة متكاملة شمال الحرم تجمع الضيافة والسكن والتجزئة في بيئة آمنة وملهمة لضيوف الرحمن.",
+        "يضم المشروع أكبر نوفوتيل في العالم من حيث عدد الغرف، وريزيدنس نوفوتيل جاهز للتسليم، ومسجداً يتسع لـ 5,000 مصلٍ و10,000 موقف."
+      ],
+      "aboutParagraphsEn": [
+        "Thakher Makkah by Thakher Development is an integrated district north of the Haram combining hospitality, residences, and retail for pilgrims and investors.",
+        "The masterplan includes the world's largest Novotel by room count, delivered Novotel Residences, a 5,000-capacity mosque, and 10,000 parking spaces."
+      ],
+      "developer": {
+        "nameAr": "ذاخر للتطوير",
+        "nameEn": "Thakher Development",
+        "logo": "/images/projects/thakher-makkah/developer-logo.png"
+      },
+      "developerUrl": "https://thakher.com.sa/the-project/",
+      "citySlug": "makkah",
+      "locationAr": "مكة المكرمة — 1.3 كم شمال الحرم المكي",
+      "locationEn": "Makkah — 1.3 km north of the Holy Mosque",
+      "startingPrice": 0,
+      "launchPriceNoteAr": "شقق فندقية وريزيدنس — تواصل مع ذاخر للوحدات",
+      "launchPriceNoteEn": "Hotel apartments & residences — contact Thakher for units",
+      "unitsCount": 1100,
+      "deliveryDateAr": "مراحل متعددة — نوفوتيل ريزيدنس جاهز",
+      "deliveryDateEn": "Phased — Novotel Residences delivered",
+      "deliveryQuarter": "2026",
+      "paymentPlanAr": "تملك حر — حسب نوع الوحدة والمشروع",
+      "paymentPlanEn": "Freehold — per unit type & phase",
+      "propertyTypesAr": ["شقق فندقية", "ريزيدنس", "فندق"],
+      "propertyTypesEn": ["Serviced apartments", "Residences", "Hotel"],
+      "propertyTypeSlugs": ["apartment"],
+      "ownershipAr": "تملك حر",
+      "ownershipEn": "Freehold",
+      "status": "under_construction",
+      "badge": "exclusive_3d",
+      "heroVideoYoutubeId": "S3KjNqMcxhI",
+      "heroVideoPoster": "/images/projects/thakher-makkah/main.jpg",
+      "brochurePdf": "/images/projects/thakher-makkah/brochure-official.pdf",
+      "images": {
+        "main": "/images/projects/thakher-makkah/main.jpg",
+        "masterPlan": "/images/projects/thakher-makkah/gallery-1.jpg",
+        "interior": "/images/projects/thakher-makkah/gallery-3.jpg"
+      },
+      "gallery": [
+        "/images/projects/thakher-makkah/main.jpg",
+        "/images/projects/thakher-makkah/gallery-1.jpg",
+        "/images/projects/thakher-makkah/gallery-2.jpg",
+        "/images/projects/thakher-makkah/gallery-3.jpg"
+      ],
+      "floorPlans": [],
+      "paymentSchedule": [
+        { "labelAr": "دفعة الحجز", "labelEn": "Booking", "percentage": 20 },
+        { "labelAr": "أثناء الإنشاء", "labelEn": "During construction", "percentage": 40 },
+        { "labelAr": "عند التسليم", "labelEn": "On handover", "percentage": 40 }
+      ],
+      "featured": true
+    },
+    {
+      "id": "project-dar-wa-emaar-saraya-al-ruba",
+      "slug": "dar-wa-emaar-saraya-al-ruba",
+      "titleAr": "سرايا الربى",
+      "titleEn": "Saraya Al Ruba",
+      "summaryAr": "مجتمع سكني متكامل في شرق الرياض — 1,155 وحدة على مليون م² بالشراكة مع NHC، بقيمة 1.7 مليار ريال و8 نماذج سكنية.",
+      "summaryEn": "An integrated community in East Riyadh — 1,155 homes across ~1M sqm with NHC, SAR 1.7B and 8 housing models.",
+      "highlightsAr": [
+        "1,155 وحدة — 8 نماذج سكنية",
+        "~1,000,000 م² — حي الربى شرق الرياض",
+        "25% محجوز خلال 48 ساعة من الإطلاق",
+        "رخصة وافي أ/649"
+      ],
+      "highlightsEn": [
+        "1,155 units — 8 home models",
+        "~1,000,000 sqm — Al Ruba, East Riyadh",
+        "25% booked within 48 hours of launch",
+        "Wafi license A/649"
+      ],
+      "aboutParagraphsAr": [
+        "سرايا الربى من دار وإعمار — امتداد لسلسلة «سرايا» منذ 2007، يجمع بين التصميم العصري والتخطيط العائلي وقرب المستشفيات والجامعات.",
+        "يوفر المشروع حلول تمويل مرنة بما فيها قسط مخفّض يبدأ من 400 ريال شهرياً لمدة 36 شهراً للمستفيدين وغير المستفيدين."
+      ],
+      "aboutParagraphsEn": [
+        "Saraya Al Ruba by Dar wa Emaar extends the Saraya series since 2007 — contemporary design, family planning, and proximity to hospitals and universities.",
+        "Flexible financing includes a reduced installment from SAR 400/month for 36 months for beneficiaries and non-beneficiaries."
+      ],
+      "developer": {
+        "nameAr": "دار وإعمار",
+        "nameEn": "Dar wa Emaar",
+        "logo": "/images/projects/dar-wa-emaar-saraya-al-ruba/developer-logo.png"
+      },
+      "developerUrl": "https://darwaemaar.com/en/project/saraya-al-ruba-2/",
+      "citySlug": "riyadh",
+      "locationAr": "الرياض، حي الربى — شرق الرياض",
+      "locationEn": "Riyadh, Al Ruba district — East Riyadh",
+      "startingPrice": 1016000,
+      "deliveryDateAr": "مراحل متعددة — متاح للبيع على الخارطة",
+      "deliveryDateEn": "Phased — off-plan sales ongoing",
+      "deliveryQuarter": "Q4 2027",
+      "paymentPlanAr": "10% مقدم — قسط مخفّض 400 ريال/شهر",
+      "paymentPlanEn": "10% down — reduced installment from SAR 400/mo",
+      "propertyTypesAr": ["فلل", "دوبلكس", "تاون هاوس"],
+      "propertyTypesEn": ["Villas", "Duplexes", "Townhouses"],
+      "propertyTypeSlugs": ["villa", "duplex", "townhouse"],
+      "ownershipAr": "تملك حر — NHC",
+      "ownershipEn": "Freehold — NHC partnership",
+      "status": "under_construction",
+      "badge": "under_construction",
+      "heroVideoYoutubeId": "pypnXs9pz7A",
+      "heroVideoPoster": "/images/projects/dar-wa-emaar-saraya-al-ruba/main.jpg",
+      "brochurePdf": "/images/projects/dar-wa-emaar-saraya-al-ruba/brochure-official.pdf",
+      "images": {
+        "main": "/images/projects/dar-wa-emaar-saraya-al-ruba/main.jpg",
+        "masterPlan": "/images/projects/dar-wa-emaar-saraya-al-ruba/gallery-2.png",
+        "interior": "/images/projects/dar-wa-emaar-saraya-al-ruba/gallery-1.jpg"
+      },
+      "gallery": [
+        "/images/projects/dar-wa-emaar-saraya-al-ruba/main.jpg",
+        "/images/projects/dar-wa-emaar-saraya-al-ruba/gallery-1.jpg",
+        "/images/projects/dar-wa-emaar-saraya-al-ruba/gallery-2.png",
+        "/images/projects/dar-wa-emaar-saraya-al-ruba/gallery-3.jpg"
+      ],
+      "floorPlans": [
+        {
+          "slug": "villa-1",
+          "labelAr": "Villa 1 — واجهة أمامية",
+          "labelEn": "Villa 1 — Front elevation",
+          "image": "/images/projects/dar-wa-emaar-saraya-al-ruba/gallery-1.jpg"
+        },
+        {
+          "slug": "villa-night",
+          "labelAr": "Villa 1 — منظر ليلي",
+          "labelEn": "Villa 1 — Night view",
+          "image": "/images/projects/dar-wa-emaar-saraya-al-ruba/gallery-3.jpg"
+        }
+      ],
+      "paymentSchedule": [
+        { "labelAr": "دفعة الحجز", "labelEn": "Booking", "percentage": 10 },
+        { "labelAr": "أثناء الإنشاء", "labelEn": "During construction", "percentage": 50 },
+        { "labelAr": "عند التسليم", "labelEn": "On handover", "percentage": 40 }
+      ],
+      "featured": true
+    },
+    {
+      "id": "project-anan-iskan-village-makkah",
+      "slug": "anan-iskan-village-makkah",
+      "titleAr": "قرية عنان إسكان — مكة",
+      "titleEn": "Anan Iskan Village — Makkah",
+      "summaryAr": "مجمع سكني متكامل للعمالة في مكة — 84,832 م² وسعة 5,604 سرير بمعايير دولية للأمن والصحة والرعاية.",
+      "summaryEn": "An integrated workforce housing village in Makkah — 84,832 sqm with 5,604 beds to international safety and wellness standards.",
+      "highlightsAr": [
+        "84,832 م² — مكة المكرمة",
+        "5,604 سرير — قرية متكاملة",
+        "أمن · صحة · مطاعم · مساجد · ترفيه",
+        "رائدة في حلول الإسكان البديل منذ 2009"
+      ],
+      "highlightsEn": [
+        "84,832 sqm — Makkah",
+        "5,604 beds — integrated village",
+        "Security · healthcare · dining · mosques · recreation",
+        "Pioneer in alternative housing since 2009"
+      ],
+      "aboutParagraphsAr": [
+        "عنان إسكان شركة سعودية رائدة في تطوير وإدارة مجمعات الإسكان المتكاملة للعمالة في مكة والرياض وجدة ورأس الخير.",
+        "قرية مكة توفر بيئة معيشية آمنة ومريحة بخدمات أمنية على مدار الساعة، رعاية صحية، مطاعم، مغاسل، ومرافق ترفيهية وفق معايير وزارة الموارد البشرية."
+      ],
+      "aboutParagraphsEn": [
+        "Anan Iskan is a Saudi pioneer developing and operating integrated workforce housing across Makkah, Riyadh, Jeddah, and Ras Al Khair.",
+        "The Makkah village delivers a safe, comfortable environment with 24/7 security, healthcare, catering, laundry, and recreation aligned with HR ministry standards."
+      ],
+      "developer": {
+        "nameAr": "عنان إسكان",
+        "nameEn": "Anan Iskan",
+        "logo": "/images/projects/anan-iskan-village-makkah/developer-logo.png"
+      },
+      "developerUrl": "https://ananiskan.com/",
+      "citySlug": "makkah",
+      "locationAr": "مكة المكرمة — مجمع سكني متكامل",
+      "locationEn": "Makkah — integrated housing village",
+      "startingPrice": 0,
+      "launchPriceNoteAr": "حلول B2B للمطورين والمقاولين — تواصل للتفاصيل",
+      "launchPriceNoteEn": "B2B housing solutions — contact for details",
+      "unitsCount": 5604,
+      "deliveryDateAr": "تشغيل مستمر — قابل للتوسع",
+      "deliveryDateEn": "Operational — expandable",
+      "deliveryQuarter": "2025",
+      "paymentPlanAr": "عقود تشغيل وإدارة — حسب المشروع",
+      "paymentPlanEn": "O&M contracts — per project scope",
+      "propertyTypesAr": ["مجمع سكني", "سكن عمالة", "مرافق خدمية"],
+      "propertyTypesEn": ["Housing village", "Workforce accommodation", "Amenity facilities"],
+      "propertyTypeSlugs": [],
+      "ownershipAr": "حسب اتفاقية التشغيل",
+      "ownershipEn": "Per operating agreement",
+      "status": "under_construction",
+      "badge": "under_construction",
+      "heroVideoYoutubeId": "jP8vLnnRhb0",
+      "heroVideoPoster": "/images/projects/anan-iskan-village-makkah/main.webp",
+      "brochurePdf": "",
+      "images": {
+        "main": "/images/projects/anan-iskan-village-makkah/main.webp",
+        "masterPlan": "/images/projects/anan-iskan-village-makkah/gallery-1.webp",
+        "interior": "/images/projects/anan-iskan-village-makkah/gallery-2.webp"
+      },
+      "gallery": [
+        "/images/projects/anan-iskan-village-makkah/main.webp",
+        "/images/projects/anan-iskan-village-makkah/gallery-1.webp",
+        "/images/projects/anan-iskan-village-makkah/gallery-2.webp"
+      ],
+      "floorPlans": [],
+      "paymentSchedule": [
+        { "labelAr": "عقد التشغيل", "labelEn": "Operating contract", "percentage": 30 },
+        { "labelAr": "مرحلة التجهيز", "labelEn": "Fit-out phase", "percentage": 40 },
+        { "labelAr": "التسليم والتشغيل", "labelEn": "Handover & operations", "percentage": 30 }
+      ],
+      "featured": true
+    },
+    {
+      "id": "project-roshn-sedra",
+      "slug": "roshn-sedra",
+      "titleAr": "سدرة — ROSHN",
+      "titleEn": "SEDRA — ROSHN",
+      "summaryAr": "أحد أكثر مجتمعات ROSHN طلباً في شمال الرياض — 30,000+ منزل على 20 مليون م²، مراحل متعددة ومرافق رياضية ومدارس.",
+      "summaryEn": "One of ROSHN's most sought-after communities in north Riyadh — 30,000+ homes across 20M sqm with sports dome, schools, and phased delivery.",
+      "highlightsAr": [
+        "30,000+ منزل — 20 مليون م²",
+        "مجموعة روشن — صندوق الاستثمارات العامة",
+        "قبة الاتحاد السعودي للرياضة للجميع",
+        "15 دقيقة من مطار الملك خالد"
+      ],
+      "highlightsEn": [
+        "30,000+ homes — 20M sqm land",
+        "ROSHN Group — Public Investment Fund",
+        "Sports for All Federation dome",
+        "15 minutes from King Khalid Airport"
+      ],
+      "aboutParagraphsAr": [
+        "سدرة مجتمع ROSHN الرائد في شمال الرياض — شوارع مشجرة، مسارات مشي وركض، ومرافق يومية ضمن مفهوم «الشارع الحيوي».",
+        "المرحلة الخامسة تضم أكثر من 2,000 منزل على 1.3 مليون م²، مع أكثر من 44% مساحات مفتوحة ومسارات على الوادي."
+      ],
+      "aboutParagraphsEn": [
+        "SEDRA is ROSHN's flagship north Riyadh community — tree-lined streets, walkable paths, and daily amenities in a human-centric living-street concept.",
+        "Phase 5 adds 2,000+ homes across 1.3M sqm with 44%+ open space and wadi-side running and cycling routes."
+      ],
+      "developer": {
+        "nameAr": "مجموعة روشن",
+        "nameEn": "ROSHN Group",
+        "logo": "/images/projects/roshn-sedra/developer-logo.png"
+      },
+      "developerUrl": "https://www.roshn.sa/communities/sedra",
+      "citySlug": "riyadh",
+      "locationAr": "الرياض — شمال العاصمة، قرب ROSHN Front",
+      "locationEn": "Riyadh — North Riyadh, near ROSHN Front",
+      "startingPrice": 0,
+      "launchPriceNoteAr": "فلل · دوبلكس · تاون هاوس · شقق — الأسعار حسب المرحلة",
+      "launchPriceNoteEn": "Villas · duplexes · townhouses · apartments — pricing by phase",
+      "unitsCount": 30000,
+      "deliveryDateAr": "مراحل 1–5 — مبيعات مستمرة",
+      "deliveryDateEn": "Phases 1–5 — sales ongoing",
+      "deliveryQuarter": "2026",
+      "paymentPlanAr": "حسب خطة ROSHN والمرحلة",
+      "paymentPlanEn": "Per ROSHN phase plan",
+      "propertyTypesAr": ["فلل", "دوبلكس", "تاون هاوس", "شقق"],
+      "propertyTypesEn": ["Villas", "Duplexes", "Townhouses", "Apartments"],
+      "propertyTypeSlugs": ["villa", "duplex", "townhouse", "apartment"],
+      "ownershipAr": "تملك حر",
+      "ownershipEn": "Freehold",
+      "status": "under_construction",
+      "badge": "exclusive_3d",
+      "heroVideoYoutubeId": "7RQ5SxBfm78",
+      "heroVideoPoster": "/images/projects/roshn-sedra/main.jpg",
+      "brochurePdf": "/images/projects/roshn-sedra/brochure-official.pdf",
+      "images": {
+        "main": "/images/projects/roshn-sedra/main.jpg",
+        "masterPlan": "/images/projects/roshn-sedra/gallery-3.png",
+        "interior": "/images/projects/roshn-sedra/gallery-2.jpg"
+      },
+      "gallery": [
+        "/images/projects/roshn-sedra/main.jpg",
+        "/images/projects/roshn-sedra/gallery-1.jpg",
+        "/images/projects/roshn-sedra/gallery-2.jpg",
+        "/images/projects/roshn-sedra/gallery-3.png"
+      ],
+      "floorPlans": [
+        {
+          "slug": "sedra-masterplan",
+          "labelAr": "المخطط الرئيس — المرحلة 4",
+          "labelEn": "Masterplan — Phase 4",
+          "image": "/images/projects/roshn-sedra/gallery-3.png"
+        }
+      ],
+      "paymentSchedule": [
+        { "labelAr": "دفعة الحجز", "labelEn": "Booking", "percentage": 5 },
+        { "labelAr": "أثناء الإنشاء", "labelEn": "During construction", "percentage": 55 },
         { "labelAr": "عند التسليم", "labelEn": "On handover", "percentage": 40 }
       ],
       "featured": true

@@ -67,7 +67,7 @@ const PROFILES: ShowcaseListingProfile[] = [
         titleEn: "North Jeddah villa — luxury fit-out",
         metaAr: "2025 · 850 م²",
         metaEn: "2025 · 850 m²",
-        tourSlug: "north-jeddah-villa-fitout",
+        tourSlug: "dar-wa-emaar-saraya-al-ruba",
       },
     ],
   },
@@ -144,7 +144,7 @@ const PROFILES: ShowcaseListingProfile[] = [
       {
         titleAr: "مطبخ فيلا شمال جدة",
         titleEn: "North Jeddah villa kitchen",
-        tourSlug: "north-jeddah-villa-fitout",
+        tourSlug: "dar-wa-emaar-saraya-al-ruba",
       },
     ],
   },
@@ -160,7 +160,7 @@ const PROFILES: ShowcaseListingProfile[] = [
       {
         titleAr: "تكييف فيلا شمال جدة",
         titleEn: "North Jeddah villa HVAC",
-        tourSlug: "north-jeddah-villa-fitout",
+        tourSlug: "dar-wa-emaar-saraya-al-ruba",
       },
     ],
   },
@@ -182,7 +182,7 @@ const PROFILES: ShowcaseListingProfile[] = [
       {
         titleAr: "عمارة فندقية — مكة",
         titleEn: "Serviced tower — Makkah",
-        tourSlug: "makkah-serviced-residence",
+        tourSlug: "thakher-makkah",
       },
     ],
   },
@@ -198,7 +198,7 @@ const PROFILES: ShowcaseListingProfile[] = [
       {
         titleAr: "تكييف عمارة فندقية",
         titleEn: "Serviced tower HVAC",
-        tourSlug: "makkah-serviced-residence",
+        tourSlug: "thakher-makkah",
       },
     ],
   },
@@ -224,7 +224,7 @@ const PROFILES: ShowcaseListingProfile[] = [
       {
         titleAr: "فيلا المدينة — outdoor living",
         titleEn: "Madinah villa — outdoor living",
-        tourSlug: "madinah-villa-garden",
+        tourSlug: "roshn-sedra",
       },
     ],
   },
@@ -240,7 +240,7 @@ const PROFILES: ShowcaseListingProfile[] = [
       {
         titleAr: "حديقة فيلا المدينة",
         titleEn: "Madinah villa landscape",
-        tourSlug: "madinah-villa-garden",
+        tourSlug: "roshn-sedra",
       },
     ],
   },

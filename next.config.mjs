@@ -100,6 +100,21 @@ const nextConfig = {
         destination: "/:city/luxury-materials",
         permanent: true,
       },
+      {
+        source: "/tours/north-jeddah-villa-fitout",
+        destination: "/tours/al-oula-jeddah-gate",
+        permanent: true,
+      },
+      {
+        source: "/tours/makkah-serviced-residence",
+        destination: "/tours/thakher-makkah",
+        permanent: true,
+      },
+      {
+        source: "/tours/madinah-villa-garden",
+        destination: "/tours/roshn-sedra",
+        permanent: true,
+      },
     ];
   },
 };

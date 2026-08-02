@@ -8,7 +8,11 @@ import {
   projectHasVideo,
   projectTitle,
 } from "@/content/off-plan-projects";
-import { getFlagshipShowcaseProject } from "@/content/showcase-projects";
+import {
+  getFlagshipShowcaseProject,
+  getMarketingShowcaseProjects,
+} from "@/content/showcase-projects";
+import { OffPlanPfListCard } from "@/modules/marketplace/components/off-plan/off-plan-pf-list-card";
 
 export async function ProjectToursHomeSection() {
   const locale = await getLocale();
@@ -16,12 +20,22 @@ export async function ProjectToursHomeSection() {
   const copy = t.marketplace.projectTours;
   const offPlanCopy = t.marketplace.offPlan;
   const project = getFlagshipShowcaseProject();
+  const otherLaunches = getMarketingShowcaseProjects().filter((p) => p.slug !== project.slug);
 
   const projectName = projectTitle(project, locale);
   const location = projectLocation(project, locale);
   const price = formatLaunchPrice(project, locale);
   const badgeLabel =
     project.badge === "exclusive_3d" ? offPlanCopy.badgeExclusive : offPlanCopy.badgeUnderConstruction;
+
+  const cardCopy = {
+    offPlanLabel: offPlanCopy.offPlanLabel,
+    completedLabel: copy.completedBadge,
+    startingFrom: offPlanCopy.startingFrom,
+    launchPrice: offPlanCopy.launchPriceLabel,
+    explore: offPlanCopy.explore,
+    deliveryLabel: offPlanCopy.deliveryLabel,
+  };
 
   return (
     <section
@@ -68,6 +82,14 @@ export async function ProjectToursHomeSection() {
             <span className="ruwaq-pro-btn-solid ruwaq-offplan-feature__cta">{copy.readTour}</span>
           </div>
         </Link>
+
+        {otherLaunches.length > 0 ? (
+          <div className="ruwaq-pf-listing-grid mt-12">
+            {otherLaunches.map((launch) => (
+              <OffPlanPfListCard key={launch.id} project={launch} locale={locale} copy={cardCopy} />
+            ))}
+          </div>
+        ) : null}
 
         <p className="mt-8 text-center sm:hidden">
           <Link href="/tours" className="ruwaq-pro-btn-solid px-8 py-3">

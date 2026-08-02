@@ -5,8 +5,7 @@ import {
   MARKETPLACE_CATEGORIES,
   MARKETPLACE_CITIES,
 } from "@/shared/constants/marketplace-taxonomy";
-import { OFF_PLAN_PROJECTS } from "@/content/off-plan-projects";
-import { PROJECT_TOURS } from "@/content/project-tours";
+import { getAllShowcaseProjects } from "@/content/showcase-projects";
 import { RUWQ_GUIDES } from "@/content/guides";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -38,17 +37,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: "/terms", priority: 0.4, changeFrequency: "monthly" as const },
   ];
 
-  const tourRoutes: RouteEntry[] = PROJECT_TOURS.map((t) => ({
-    path: `/tours/${t.slug}`,
-    priority: 0.8,
-    changeFrequency: "monthly" as const,
-  }));
-
-  const projectRoutes: RouteEntry[] = OFF_PLAN_PROJECTS.map((p) => ({
+  const tourRoutes: RouteEntry[] = getAllShowcaseProjects().map((p) => ({
     path: `/tours/${p.slug}`,
     priority: 0.88,
     changeFrequency: "weekly" as const,
   }));
+
+  const projectRoutes: RouteEntry[] = [];
 
   const guideRoutes: RouteEntry[] = RUWQ_GUIDES.map((g) => ({
     path: `/guides/${g.slug}`,

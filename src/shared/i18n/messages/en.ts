@@ -490,7 +490,7 @@ export const en: Messages = {
     "Premium projects on the map with 3D visualization, payment plans, and instant brochure downloads.",
    indexTitle: "Explore the latest launches available on the map",
    indexSubtitle:
-    "Five launches from leading developers — RAFAL, Sumou, AlOula, Makkiyoon, Alesayi — across Riyadh, Jeddah, and Makkah.",
+    "Nine launches from leading developers — RAFAL, Sumou, AlOula, Makkiyoon, Alesayi, Thakher, Dar wa Emaar, Anan Iskan, and ROSHN.",
    viewAll: "All projects",
    explore: "Explore project",
    exploreFlagship: "Explore launch",
@@ -500,7 +500,7 @@ export const en: Messages = {
    videoTab: "Video",
    photosLabel: "Photo",
    viewAllPhotos: "View all photos",
-   toursBridge: "Above: new off-plan launches — below: completed project tours.",
+   toursBridge: "Explore nine flagship Saudi developer launches — real media, payment plans, and brochures.",
    launchPriceLabel: "Launch price",
    keyInformationLabel: "Key information",
    deliveryDateLabel: "Delivery date",
