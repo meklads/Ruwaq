@@ -1,9 +1,17 @@
 import type { RuwaqGuide } from "@/content/guides/types";
+import { guideCtaHref } from "@/content/guides/types";
 import { GUIDE_IMAGES } from "@/content/marketing-images";
 
-export const engineeringSupervisionBasicsGuide: RuwaqGuide = {
+const meta = {
   slug: "engineering-supervision-basics",
-  categorySlug: "supervision",
+  citySlug: "jeddah" as const,
+  categorySlug: "supervision" as const,
+};
+
+const ctaHref = guideCtaHref(meta);
+
+export const engineeringSupervisionBasicsGuide: RuwaqGuide = {
+  ...meta,
   titleAr: "أساسيات الإشراف الهندسي المستقل للفلل والمشاريع السكنية",
   titleEn: "Independent engineering supervision basics for villas and residential projects",
   excerptAr:
@@ -19,6 +27,9 @@ export const engineeringSupervisionBasicsGuide: RuwaqGuide = {
     "BOQ",
     "إشراف SGS",
     "مكاتب إشراف جدة",
+    "محاضر استلام MEP",
+    "شهادة دفع مقاول",
+    "إشراف تشطيب فلل",
   ],
   seoKeywordsEn: [
     "independent engineering supervision",
@@ -29,11 +40,13 @@ export const engineeringSupervisionBasicsGuide: RuwaqGuide = {
     "BOQ compliance",
     "third-party supervision Saudi Arabia",
     "construction quality control",
+    "MEP sign-off supervision",
+    "variation order BOQ",
   ],
   readMinutes: 14,
   heroImage: GUIDE_IMAGES.supervision,
   publishedAt: "2025-08-25",
-  updatedAt: "2026-07-31",
+  updatedAt: "2026-08-03",
   blocksAr: [
     {
       type: "p",
@@ -92,10 +105,63 @@ export const engineeringSupervisionBasicsGuide: RuwaqGuide = {
       ],
     },
     {
+      type: "h2",
+      text: "مراحل الإشراف في دورة بناء الفيلا — من الأساسات للتسليم",
+    },
+    {
+      type: "p",
+      text: "الإشراف الفعّال يتبع مراحل البناء لا تقويماً عاماً. في فلل جدة (400–800 م²)، الجدول التالي مرجع شائع لمكاتب الإشراف المعتمدة. اطلب مطابقة الجدول مع مشروعك قبل التوقيع.",
+    },
+    {
+      type: "table",
+      caption: "مراحل الإشراف ونقاط التوقف الحرجة",
+      headers: ["المرحلة", "ما يراجعه المهندس", "محضر استلام"],
+      rows: [
+        ["أساسات وخرسانة", "تسليح، cover، waterproofing membrane", "نعم — قبل backfill"],
+        ["هيكل (columns/slabs)", "مقاسات، curing، openings MEP", "نعم"],
+        ["MEP rough-in", "مسارات ducts، plumbing pressure test", "نعم — قبل إغلاق الجبس"],
+        ["عزل وأسطح", "slope، membrane، flashings", "نعم — قبل الأمطار"],
+        ["تشطيب", "مواد BOQ، RCP، sample rooms", "جزئي + نهائي"],
+        ["تسليم", "snag list، O&M manuals، warranties", "محضر نهائي"],
+      ],
+    },
+    {
+      type: "h2",
+      text: "Variation Orders و NCR — كيف تحمي ميزانيتك",
+    },
+    {
+      type: "p",
+      text: "أي تغيير عن BOQ المعتمد يجب أن يمر بـ Variation Order موقّع قبل التنفيذ. مكتب الإشراف يصدر NCR (Non-Conformance Report) عند مخالفة مواصفة — مثلاً sustitution رخام بدرجة أقل، أو تقليل سماكة العزل. بدون NCR موثّق، المقاول قد يدّعي أن التغيير «اتفاق شفهي». اربط Variation بمراجعة شهادة الدفع: لا دفعة على بند جديد دون VO معتمد.",
+    },
+    {
+      type: "callout",
+      variant: "tip",
+      title: "ITP و Checklists",
+      text: "اطلب Inspection Test Plan (ITP) لمراحل حرجة — خصوصاً waterproofing و pressure test للسباكة. ITP يحوّل الإشراف من «زيارة عابرة» إلى checklist قابل للتدقيق.",
+    },
+    {
+      type: "h2",
+      text: "تكلفة الإشراف الهندسي في جدة (2026)",
+    },
+    {
+      type: "p",
+      text: "رسوم الإشراف تُ priced إما كنسبة من قيمة المقاول (3–8%) أو retainer شهري + زيارات. في فلل التشطيب فقط (بدون عظم)، قد تكون packages شهرية. الأرقام التالية إرشادية لسوق جدة — قارن 3 عروض من مكاتب Ruwaq PRO.",
+    },
+    {
+      type: "chart",
+      caption: "نطاق رسوم الإشراف السنوي — فيلا 500 م² (SAR، مؤشر)",
+      unit: "ألف ر.س",
+      items: [
+        { label: "زيارات دورية فقط", value: 45, max: 80 },
+        { label: "إشراف تشطيب + MEP", value: 65, max: 80 },
+        { label: "مهندس مقيم + QA/QC", value: 80, max: 80 },
+      ],
+    },
+    {
       type: "cta",
       lead: "تبحث عن مكتب إشراف معتمد يتحدث لغة العقود والمحاضر نفسها؟",
-      label: "تصفّح مكاتب الإشراف في جدة",
-      href: "/request-quote?city=jeddah&category=supervision",
+      label: "اطلب عرض سعر مجاني",
+      href: ctaHref,
     },
     {
       type: "h2",
@@ -157,8 +223,8 @@ export const engineeringSupervisionBasicsGuide: RuwaqGuide = {
     {
       type: "cta",
       lead: "جاهز لمقارنة عروض إشراف مع نطاق واضح ومحاضر موحّدة؟",
-      label: "اطلب عروضاً من مكاتب الإشراف",
-      href: "/request-quote?city=jeddah&category=supervision",
+      label: "اطلب عرض سعر مجاني",
+      href: ctaHref,
     },
     {
       type: "sources",
@@ -229,10 +295,63 @@ export const engineeringSupervisionBasicsGuide: RuwaqGuide = {
       ],
     },
     {
+      type: "h2",
+      text: "Supervision phases across the villa build — foundations to handover",
+    },
+    {
+      type: "p",
+      text: "Effective oversight follows construction phases, not a generic calendar. For Jeddah villas (400–800 m²), the schedule below is a common benchmark used by verified supervision firms. Require alignment with your project before signing.",
+    },
+    {
+      type: "table",
+      caption: "Supervision phases and critical hold points",
+      headers: ["Phase", "Engineer review", "Sign-off minute"],
+      rows: [
+        ["Foundations & concrete", "Rebar, cover, waterproofing membrane", "Yes — before backfill"],
+        ["Structure (columns/slabs)", "Dimensions, curing, MEP openings", "Yes"],
+        ["MEP rough-in", "Duct routes, plumbing pressure test", "Yes — before closing gypsum"],
+        ["Waterproofing & roofs", "Slope, membrane, flashings", "Yes — before rain season"],
+        ["Fit-out", "BOQ materials, RCP, sample rooms", "Partial + final"],
+        ["Handover", "Snag list, O&M manuals, warranties", "Final minute"],
+      ],
+    },
+    {
+      type: "h2",
+      text: "Variation Orders and NCRs — protecting your budget",
+    },
+    {
+      type: "p",
+      text: "Any change from the approved BOQ must pass a signed Variation Order before execution. The supervision firm issues an NCR (Non-Conformance Report) when specs are violated — e.g. lower-grade marble substitution or reduced insulation thickness. Without a documented NCR, the contractor may claim a verbal agreement. Tie variations to payment certificate review: no payment on a new line item without an approved VO.",
+    },
+    {
+      type: "callout",
+      variant: "tip",
+      title: "ITP and checklists",
+      text: "Request an Inspection Test Plan (ITP) for critical stages — especially waterproofing and plumbing pressure tests. An ITP turns supervision from a drive-by visit into an auditable checklist.",
+    },
+    {
+      type: "h2",
+      text: "Supervision cost in Jeddah (2026)",
+    },
+    {
+      type: "p",
+      text: "Fees are priced either as a percentage of contractor value (3–8%) or a monthly retainer plus visits. Fit-out-only villas may use monthly packages. Figures below are indicative for the Jeddah market — compare three proposals from Ruwaq PRO offices.",
+    },
+    {
+      type: "chart",
+      caption: "Annual supervision fee range — 500 m² villa (SAR, index)",
+      unit: "k SAR",
+      items: [
+        { label: "Periodic visits only", value: 45, max: 80 },
+        { label: "Fit-out + MEP supervision", value: 65, max: 80 },
+        { label: "Resident engineer + QA/QC", value: 80, max: 80 },
+      ],
+    },
+    {
       type: "cta",
       lead: "Looking for a verified supervision office that speaks the same contract language?",
-      label: "Browse supervision firms in Jeddah",
-      href: "/request-quote?city=jeddah&category=supervision",
+      label: "Request a free quote",
+      href: ctaHref,
     },
     {
       type: "h2",
@@ -294,8 +413,8 @@ export const engineeringSupervisionBasicsGuide: RuwaqGuide = {
     {
       type: "cta",
       lead: "Ready to compare supervision proposals with clear scope and unified minutes?",
-      label: "Request quotes from supervision firms",
-      href: "/request-quote?city=jeddah&category=supervision",
+      label: "Request a free quote",
+      href: ctaHref,
     },
     {
       type: "sources",

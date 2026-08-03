@@ -1,10 +1,17 @@
 import type { RuwaqGuide } from "@/content/guides/types";
+import { guideCtaHref } from "@/content/guides/types";
 import { GUIDE_IMAGES } from "@/content/marketing-images";
 
-export const villaMaintenanceContractGuide: RuwaqGuide = {
+const meta = {
   slug: "villa-maintenance-contract",
-  citySlug: "jeddah",
-  categorySlug: "maintenance",
+  citySlug: "jeddah" as const,
+  categorySlug: "maintenance" as const,
+};
+
+const ctaHref = guideCtaHref(meta);
+
+export const villaMaintenanceContractGuide: RuwaqGuide = {
+  ...meta,
   titleAr: "عقد صيانة سنوي للفيلا في جدة: AMC، SLA، والصيانة الوقائية",
   titleEn: "Annual villa maintenance contract in Jeddah: AMC, SLA, and preventive care",
   excerptAr:
@@ -20,6 +27,9 @@ export const villaMaintenanceContractGuide: RuwaqGuide = {
     "صيانة تكييف مركزي",
     "Vision 2030 FM",
     "شركات صيانة فلل جدة",
+    "فحص أسطح قبل الأمطار جدة",
+    "صيانة VRF فلل",
+    "عقد FM سكني",
   ],
   seoKeywordsEn: [
     "villa maintenance contract Jeddah",
@@ -30,11 +40,13 @@ export const villaMaintenanceContractGuide: RuwaqGuide = {
     "HVAC maintenance Saudi Arabia",
     "Vision 2030 facilities management",
     "villa FM companies Jeddah",
+    "VRF maintenance AMC",
+    "pre-rain roof inspection Jeddah",
   ],
   readMinutes: 14,
   heroImage: GUIDE_IMAGES.maintenance,
   publishedAt: "2025-08-15",
-  updatedAt: "2026-07-31",
+  updatedAt: "2026-08-03",
   blocksAr: [
     {
       type: "p",
@@ -91,10 +103,74 @@ export const villaMaintenanceContractGuide: RuwaqGuide = {
       ],
     },
     {
+      type: "h2",
+      text: "موسم الأمطار في جدة — checklist أكتوبر–نوفمبر",
+    },
+    {
+      type: "p",
+      text: "أغلب تسربات فلل جدة تظهر في أول موسم أمطار بعد تشطيب أو تجاهل الأسطح. AMC الجيد يتضمن زيارة pre-rain إلزامية: فحص drains، scuppers، flashings، وخزانات علوية. اطلب تقرير مصوّر قبل 15 نوفمبر — لا «نظرة سريعة».",
+    },
+    {
+      type: "ol",
+      items: [
+        "تنظيف مجاري السطح و downpipes.",
+        "فحص membrane و sealants حول penetrations.",
+        "اختبار pumps sump إن وُجدت.",
+        "فحص تسربات خزان علوي و overflow.",
+        "تسجيل snags في PDF مع تاريخ المعالجة.",
+      ],
+    },
+    {
+      type: "h2",
+      text: "HVAC في الرطوبة الساحلية — ما يجب أن يشمله AMC",
+    },
+    {
+      type: "p",
+      text: "تكييف الفيلا في جدة يعمل تحت حمل رطوبة وملوحة. AMC ضعيف يقتصر على «تنظيف فلاتر». AMC قوي يشمل: فحص charge غاز، condensate drain flush، duct leakage visual، calibration thermostats، وfirmware updates لـ smart controllers. لأنظمة VRF، اطلب checklist OEM أو معادل — compressor failure خارج الضمان قد يكلف 15,000+ ر.س.",
+    },
+    {
+      type: "callout",
+      variant: "warning",
+      title: "Spare parts — من يدفع؟",
+      text: "حدّد في العقد: consumables (فلاتر، belts) مشمولة؟ major parts (compressor، motor) من يدفع؟ بدون بند spare parts، AMC رخيص قد يتحول لفواتير مفاجئة.",
+    },
+    {
+      type: "h2",
+      text: "تكلفة AMC تقريبية — فلل جدة 2026",
+    },
+    {
+      type: "table",
+      caption: "نطاق سنوي AMC (SAR) — فيلا 400–600 م²",
+      headers: ["المستوى", "نطاق سنوي", "ملاحظات"],
+      rows: [
+        ["أساسي", "8,000 – 14,000", "HVAC + سباكة، SLA 24h"],
+        ["متوسط", "15,000 – 25,000", "+ كهرباء + 12 visit"],
+        ["ممتاز", "26,000 – 40,000", "+ حريق + PDF + SLA 4h"],
+        ["+ عزل", "+20–40% مرة كل 5–7 سنوات", "waterproofing منفصل أو bundled"],
+      ],
+    },
+    {
+      type: "h2",
+      text: "اختيار شركة AMC — أسئلة قبل التوقيع",
+    },
+    {
+      type: "p",
+      text: "في جدة، عشرات شركات الصيانة تقدّم «عقداً سنوياً» بصفحة واحدة. قبل التوقيع، اسأل: هل الفريق resident أم on-call؟ هل التقارير PDF شهرية؟ هل يغطون inverter pools أو generators إن وُجدت؟ هل لديهم spare parts agreement مع موردي VRF؟ Ruwaq PRO يعرض شركات لديها CR نشط وتقييمات من مشاريع سكنية — قارن 3 عروض بنفس scope.",
+    },
+    {
+      type: "ol",
+      items: [
+        "زيارة site survey قبل التسعير — لا flat rate بدون معاينة.",
+        "عينة تقرير PDF من مشروع مشابه.",
+        "قائمة exclusions مكتوبة (misuse، تعديلات غير معلنة).",
+        "Escalation path: account manager + رقم طوارئ 24/7.",
+      ],
+    },
+    {
       type: "cta",
       lead: "تريد مقارنة عروض AMC من شركات صيانة معتمدة في جدة؟",
-      label: "تصفّح شركات الصيانة في جدة",
-      href: "/request-quote?city=jeddah&category=maintenance",
+      label: "اطلب عرض سعر مجاني",
+      href: ctaHref,
     },
     {
       type: "h2",
@@ -158,8 +234,8 @@ export const villaMaintenanceContractGuide: RuwaqGuide = {
     {
       type: "cta",
       lead: "جاهز لعقد AMC يحمي فيلتك قبل موسم الأمطار القادم؟",
-      label: "اطلب عروض صيانة من شركات معتمدة",
-      href: "/request-quote?city=jeddah&category=maintenance",
+      label: "اطلب عرض سعر مجاني",
+      href: ctaHref,
     },
     {
       type: "sources",
@@ -228,10 +304,74 @@ export const villaMaintenanceContractGuide: RuwaqGuide = {
       ],
     },
     {
+      type: "h2",
+      text: "Rain season in Jeddah — October–November checklist",
+    },
+    {
+      type: "p",
+      text: "Most villa leaks in Jeddah appear in the first rain season after fit-out or neglected roofs. A solid AMC includes a mandatory pre-rain visit: drains, scuppers, flashings, and upper tanks. Demand a photo report before 15 November — not a drive-by glance.",
+    },
+    {
+      type: "ol",
+      items: [
+        "Clear roof gutters and downpipes.",
+        "Inspect membrane and sealants around penetrations.",
+        "Test sump pumps if installed.",
+        "Check upper tank leaks and overflow.",
+        "Log snags in PDF with remediation dates.",
+      ],
+    },
+    {
+      type: "h2",
+      text: "HVAC in coastal humidity — what AMC must cover",
+    },
+    {
+      type: "p",
+      text: "Villa AC in Jeddah runs under humidity and salt load. Weak AMC stops at filter cleaning. Strong AMC includes refrigerant charge check, condensate drain flush, duct leak visual, thermostat calibration, and smart controller firmware updates. For VRF systems, request an OEM-equivalent checklist — compressor failure outside warranty can exceed SAR 15,000.",
+    },
+    {
+      type: "callout",
+      variant: "warning",
+      title: "Spare parts — who pays?",
+      text: "Define in the contract: are consumables (filters, belts) included? Who pays for major parts (compressor, motor)? Without a spare-parts clause, a cheap AMC can turn into surprise invoices.",
+    },
+    {
+      type: "h2",
+      text: "Approximate AMC cost — Jeddah 2026",
+    },
+    {
+      type: "table",
+      caption: "Annual AMC range (SAR) — 400–600 m² villa",
+      headers: ["Tier", "Annual range", "Notes"],
+      rows: [
+        ["Basic", "8,000 – 14,000", "HVAC + plumbing, 24h SLA"],
+        ["Standard", "15,000 – 25,000", "+ electrical + 12 visits"],
+        ["Premium", "26,000 – 40,000", "+ fire + PDF + 4h SLA"],
+        ["+ waterproofing", "+20–40% every 5–7 years", "Separate or bundled"],
+      ],
+    },
+    {
+      type: "h2",
+      text: "Choosing an AMC provider — questions before signing",
+    },
+    {
+      type: "p",
+      text: "In Jeddah, dozens of maintenance firms offer a one-page “annual contract.” Before signing, ask: is the team resident or on-call? Are monthly PDF reports included? Do they cover pool inverters or generators if present? Do they have spare-parts agreements with VRF suppliers? Ruwaq PRO lists firms with active CR and residential track records — compare three proposals on identical scope.",
+    },
+    {
+      type: "ol",
+      items: [
+        "Site survey before pricing — no flat rate without inspection.",
+        "Sample PDF report from a similar project.",
+        "Written exclusions list (misuse, unreported modifications).",
+        "Escalation path: account manager + 24/7 emergency number.",
+      ],
+    },
+    {
       type: "cta",
       lead: "Want to compare AMC quotes from verified maintenance firms in Jeddah?",
-      label: "Browse maintenance companies in Jeddah",
-      href: "/request-quote?city=jeddah&category=maintenance",
+      label: "Request a free quote",
+      href: ctaHref,
     },
     {
       type: "h2",
@@ -295,8 +435,8 @@ export const villaMaintenanceContractGuide: RuwaqGuide = {
     {
       type: "cta",
       lead: "Ready for an AMC that protects your villa before the next rain season?",
-      label: "Request maintenance quotes from verified firms",
-      href: "/request-quote?city=jeddah&category=maintenance",
+      label: "Request a free quote",
+      href: ctaHref,
     },
     {
       type: "sources",
