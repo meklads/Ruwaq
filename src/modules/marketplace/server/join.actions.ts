@@ -1,12 +1,15 @@
 "use server";
 
 import { z } from "zod";
+import type { DirectoryApplicationStatus } from "@prisma/client";
 import { db } from "@/shared/lib/db";
 import {
+  citySlugFromEnum,
   getCategoryBySlug,
   getCityBySlug,
   MARKETPLACE_CATEGORIES,
   type MarketplaceCategorySlug,
+  type MarketplaceCitySlug,
 } from "@/shared/constants/marketplace-taxonomy";
 import { normalizeKsaPhone } from "@/modules/marketplace/lib/lead-phone";
 import {
@@ -14,7 +17,7 @@ import {
   parseCitySlug,
 } from "@/modules/marketplace/lib/marketplace-slugs";
 import { CURATED_PRO_SLUGS, sortByCuratedProOrder } from "@/content/curated-pro-listings";
-import type { MarketplaceCitySlug } from "@/shared/constants/marketplace-taxonomy";
+import { joinStatusUrl } from "@/modules/marketplace/lib/join-status";
 import {
   sendJoinApplicationConfirmationEmail,
   sendJoinApplicationOpsEmail,
@@ -43,7 +46,7 @@ const joinDirectorySchema = z.object({
   companyName: z.string().trim().min(2).max(160),
   contactName: z.string().trim().min(2).max(120),
   contactPhone: ksaPhone,
-  contactEmail: z.string().trim().email().max(160).optional().or(z.literal("")),
+  contactEmail: z.string().trim().email().max(160),
   crNumber: z.string().trim().max(40).optional(),
   citySlug: z.enum(["jeddah", "makkah", "madinah"]),
   categorySlug: z.enum(categorySlugs),
@@ -57,6 +60,69 @@ export type JoinDirectoryInput = z.infer<typeof joinDirectorySchema>;
 export type JoinDirectoryResult =
   | { success: true; applicationId: string }
   | { success: false; error: string };
+
+function isPlausibleApplicationId(id: string): boolean {
+  return /^[a-z][a-z0-9]{20,32}$/i.test(id.trim());
+}
+
+export type PublicJoinApplication = {
+  id: string;
+  companyName: string;
+  status: DirectoryApplicationStatus;
+  createdAt: Date;
+  citySlug: MarketplaceCitySlug;
+  cityNameAr: string;
+  cityNameEn: string;
+  categoryNameAr: string;
+  categoryNameEn: string;
+  listingSlug: string | null;
+  reviewNote: string | null;
+};
+
+export async function getPublicJoinApplication(
+  id: string
+): Promise<PublicJoinApplication | null> {
+  if (!isPlausibleApplicationId(id)) return null;
+
+  const application = await db.directoryApplication.findUnique({
+    where: { id: id.trim() },
+    include: {
+      category: { select: { slug: true } },
+      listing: { select: { slug: true } },
+    },
+  });
+
+  if (!application) return null;
+
+  const citySlug = citySlugFromEnum(application.city);
+  const cityMeta = getCityBySlug(citySlug);
+  const categoryMeta = getCategoryBySlug(application.category.slug);
+
+  return {
+    id: application.id,
+    companyName: application.companyName,
+    status: application.status,
+    createdAt: application.createdAt,
+    citySlug,
+    cityNameAr: cityMeta?.nameAr ?? citySlug,
+    cityNameEn: cityMeta?.nameEn ?? citySlug,
+    categoryNameAr: categoryMeta?.nameAr ?? application.category.slug,
+    categoryNameEn: categoryMeta?.nameEn ?? application.category.slug,
+    listingSlug: application.listing?.slug ?? null,
+    reviewNote: application.status === "REJECTED" ? application.reviewNote : null,
+  };
+}
+
+export async function getLatestJoinApplicationForEmail(email: string) {
+  const normalized = email.trim().toLowerCase();
+  if (!normalized) return null;
+
+  return db.directoryApplication.findFirst({
+    where: { contactEmail: { equals: normalized, mode: "insensitive" } },
+    orderBy: { createdAt: "desc" },
+    select: { id: true, status: true, companyName: true },
+  });
+}
 
 export async function submitDirectoryApplication(
   input: JoinDirectoryInput
@@ -83,12 +149,14 @@ export async function submitDirectoryApplication(
     return { success: false, error: "category_missing" };
   }
 
+  const contactEmail = data.contactEmail.trim();
+
   const application = await db.directoryApplication.create({
     data: {
       companyName: data.companyName,
       contactName: data.contactName,
       contactPhone: data.contactPhone,
-      contactEmail: data.contactEmail?.trim() || null,
+      contactEmail,
       crNumber: data.crNumber?.trim() || null,
       city: cityMeta.enum,
       categoryId: category.id,
@@ -100,6 +168,7 @@ export async function submitDirectoryApplication(
 
   const cityLabel = data.locale === "ar" ? cityMeta.nameAr : cityMeta.nameEn;
   const categoryLabel = data.locale === "ar" ? categoryMeta.nameAr : categoryMeta.nameEn;
+  const statusUrl = joinStatusUrl(application.id);
 
   try {
     await sendJoinApplicationOpsEmail({
@@ -107,7 +176,7 @@ export async function submitDirectoryApplication(
       companyName: data.companyName,
       contactName: data.contactName,
       contactPhone: data.contactPhone,
-      contactEmail: data.contactEmail?.trim() || null,
+      contactEmail,
       cityLabel,
       categoryLabel,
       crNumber: data.crNumber?.trim() || null,
@@ -119,18 +188,16 @@ export async function submitDirectoryApplication(
     console.error("[submitDirectoryApplication] ops email failed", err);
   }
 
-  const applicantEmail = data.contactEmail?.trim();
-  if (applicantEmail) {
-    try {
-      await sendJoinApplicationConfirmationEmail({
-        locale: data.locale,
-        contactName: data.contactName,
-        contactEmail: applicantEmail,
-        companyName: data.companyName,
-      });
-    } catch (err) {
-      console.error("[submitDirectoryApplication] confirmation email failed", err);
-    }
+  try {
+    await sendJoinApplicationConfirmationEmail({
+      locale: data.locale,
+      contactName: data.contactName,
+      contactEmail,
+      companyName: data.companyName,
+      statusUrl,
+    });
+  } catch (err) {
+    console.error("[submitDirectoryApplication] confirmation email failed", err);
   }
 
   return { success: true, applicationId: application.id };

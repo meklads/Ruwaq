@@ -252,6 +252,9 @@ export type Messages = {
       stepPortfolio: string;
       trustTitle: string;
       trustItems: readonly string[];
+      existingTitle: string;
+      existingBody: string;
+      existingCta: string;
       errors: {
         validation: string;
         invalid_phone: string;
@@ -269,6 +272,30 @@ export type Messages = {
         portfolioUrl: string;
         message: string;
         phonePlaceholder: string;
+      };
+      status: {
+        metaTitle: string;
+        metaDescription: string;
+        eyebrow: string;
+        notFoundTitle: string;
+        notFoundBody: string;
+        submittedOn: string;
+        nextTitle: string;
+        nextPending: string;
+        nextReviewing: string;
+        nextApproved: string;
+        nextRejected: string;
+        viewListing: string;
+        applyAgain: string;
+        completeProfile: string;
+        backToJoin: string;
+        bookmarkHint: string;
+        labels: {
+          PENDING: string;
+          REVIEWING: string;
+          APPROVED: string;
+          REJECTED: string;
+        };
       };
     };
     filters: {

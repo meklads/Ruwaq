@@ -15,6 +15,7 @@ export default function robots(): MetadataRoute.Robots {
           "/settings/",
           "/admin/",
           "/login",
+          "/join/status/",
         ],
       },
     ],

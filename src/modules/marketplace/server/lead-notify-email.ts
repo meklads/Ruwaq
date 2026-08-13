@@ -47,6 +47,7 @@ type JoinApplicationConfirmationPayload = {
   contactName: string;
   contactEmail: string;
   companyName: string;
+  statusUrl: string;
 };
 
 type JoinApplicationApprovedPayload = {
@@ -260,6 +261,9 @@ export async function sendJoinApplicationConfirmationEmail(
         `استلمنا طلب انضمام «${payload.companyName}» إلى دليل Ruwaq PRO.`,
         "سنراجع السجل التجاري والملف خلال 3–5 أيام عمل ونتواصل معك بالخطوات التالية.",
         "",
+        "تابع حالة الطلب من هنا:",
+        payload.statusUrl,
+        "",
         RUWQ_PUBLIC_URL,
       ].join("\n")
     : [
@@ -267,6 +271,9 @@ export async function sendJoinApplicationConfirmationEmail(
         "",
         `We received your application for "${payload.companyName}" to join the Ruwaq PRO directory.`,
         "We will review your commercial registration and portfolio within 3–5 business days.",
+        "",
+        "Track your application here:",
+        payload.statusUrl,
         "",
         RUWQ_PUBLIC_URL,
       ].join("\n");

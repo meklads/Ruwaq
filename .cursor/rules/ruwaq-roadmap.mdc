@@ -29,7 +29,7 @@ North star: **Architectural Digest of Saudi real estate** — editorial first, R
 | 9 | Enable BILLING_ENABLED=true | deferred — depends on #8 + traffic milestone |
 | 10 | Lead pipeline hardening | done |
 | 11 | R2/S3 production file storage | partial — env + health check; needs Coolify secrets |
-| 12 | Self-serve join → pay → activate | partial — /join manual; paywall when #8–9 |
+| 12 | Self-serve join → pay → activate | partial — `/join` + public status page; paywall when #8–9 |
 | **—** | **Freemium access model** | **done** — see `.cursor/rules/product-access.mdc` |
 
 ### Phase C — Scale & quality

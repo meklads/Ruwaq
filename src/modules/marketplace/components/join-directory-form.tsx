@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import {
   MARKETPLACE_CATEGORIES,
   MARKETPLACE_CITIES,
@@ -9,9 +10,20 @@ import {
   parseCategorySlug,
   parseCitySlug,
 } from "@/modules/marketplace/lib/marketplace-slugs";
+import { joinStatusPath } from "@/modules/marketplace/lib/join-status";
 import { submitDirectoryApplication } from "@/modules/marketplace/server/join.actions";
 import type { Messages } from "@/shared/i18n/messages/types";
 import type { Locale } from "@/shared/i18n/locale";
+
+export type JoinFormPrefill = {
+  companyName?: string;
+  contactName?: string;
+  contactPhone?: string;
+  contactEmail?: string;
+  crNumber?: string;
+  portfolioUrl?: string;
+  message?: string;
+};
 
 type Props = {
   copy: Messages["marketplace"]["join"];
@@ -19,6 +31,7 @@ type Props = {
   initialCity?: string;
   initialCategory?: string;
   variant?: "default" | "editorial";
+  prefill?: JoinFormPrefill;
 };
 
 export function JoinDirectoryForm({
@@ -27,19 +40,20 @@ export function JoinDirectoryForm({
   initialCity = "jeddah",
   initialCategory = "fit-out",
   variant = "default",
+  prefill,
 }: Props) {
-  const [companyName, setCompanyName] = useState("");
-  const [contactName, setContactName] = useState("");
-  const [contactPhone, setContactPhone] = useState("");
-  const [contactEmail, setContactEmail] = useState("");
-  const [crNumber, setCrNumber] = useState("");
+  const router = useRouter();
+  const [companyName, setCompanyName] = useState(prefill?.companyName ?? "");
+  const [contactName, setContactName] = useState(prefill?.contactName ?? "");
+  const [contactPhone, setContactPhone] = useState(prefill?.contactPhone ?? "");
+  const [contactEmail, setContactEmail] = useState(prefill?.contactEmail ?? "");
+  const [crNumber, setCrNumber] = useState(prefill?.crNumber ?? "");
   const [citySlug, setCitySlug] = useState(parseCitySlug(initialCity));
   const [categorySlug, setCategorySlug] = useState(parseCategorySlug(initialCategory));
-  const [portfolioUrl, setPortfolioUrl] = useState("");
-  const [message, setMessage] = useState("");
+  const [portfolioUrl, setPortfolioUrl] = useState(prefill?.portfolioUrl ?? "");
+  const [message, setMessage] = useState(prefill?.message ?? "");
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
-  const [success, setSuccess] = useState(false);
 
   const isEditorial = variant === "editorial";
   const labelClass = isEditorial ? "ruwaq-ad-field-label" : "ruwaq-label";
@@ -54,7 +68,7 @@ export function JoinDirectoryForm({
       companyName,
       contactName,
       contactPhone,
-      contactEmail: contactEmail || undefined,
+      contactEmail,
       crNumber: crNumber || undefined,
       citySlug,
       categorySlug,
@@ -68,17 +82,8 @@ export function JoinDirectoryForm({
       setError(copy.errors[key] ?? copy.errors.server);
       return;
     }
-    setSuccess(true);
+    router.push(joinStatusPath(result.applicationId));
   };
-
-  if (success) {
-    return (
-      <div className={isEditorial ? "ruwaq-join-editorial-success" : "ruwaq-pro-join-success"}>
-        <h2 className="ruwaq-ad-section-title text-2xl">{copy.successTitle}</h2>
-        <p className="mt-4 text-sm leading-relaxed text-neutral-600">{copy.successBody}</p>
-      </div>
-    );
-  }
 
   return (
     <form onSubmit={onSubmit} className={formClass}>
@@ -134,6 +139,7 @@ export function JoinDirectoryForm({
           type="email"
           value={contactEmail}
           onChange={(e) => setContactEmail(e.target.value)}
+          required
           dir="ltr"
         />
       </div>
