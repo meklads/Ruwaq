@@ -844,6 +844,7 @@ export type Messages = {
       tagline: string;
       address: string;
       tasamiGroup: string;
+      tasamiGroupLabel: string;
       product: string;
       company: string;
       legal: string;

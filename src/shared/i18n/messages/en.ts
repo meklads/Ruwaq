@@ -1276,6 +1276,7 @@ export const en: Messages = {
    tagline: "Professionalism builds trust, the easiest, most trusted real estate & engineering proposals.",
    address: "Jeddah, Al-Zahra District, Saudi Arabia",
    tasamiGroup: "Ruwaq is part of Tasami Group",
+   tasamiGroupLabel: "Tasami Group",
    product: "Product",
    company: "Company",
    legal: "Legal",

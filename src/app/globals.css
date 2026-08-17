@@ -2784,6 +2784,30 @@
     letter-spacing: -0.02em;
   }
 
+  .ruwaq-ad-footer-tasami {
+    @apply inline-flex max-w-sm flex-col gap-1.5 border border-[#c9a063]/55 bg-[#c9a063]/10 px-4 py-3.5 transition-colors;
+  }
+
+  .ruwaq-ad-footer-tasami:hover {
+    @apply border-[#d4b47a] bg-[#c9a063]/18;
+  }
+
+  .ruwaq-ad-footer-tasami__label {
+    @apply text-[10px] font-semibold uppercase tracking-[0.28em] text-[#d4b47a];
+  }
+
+  html[lang="ar"] .ruwaq-ad-footer-tasami__label {
+    @apply normal-case tracking-wide text-xs;
+  }
+
+  .ruwaq-ad-footer-tasami__text {
+    @apply text-sm font-semibold leading-snug text-white;
+  }
+
+  .ruwaq-ad-footer-tasami:hover .ruwaq-ad-footer-tasami__text {
+    @apply text-[#f5e6cc];
+  }
+
   html[lang="ar"] .ruwaq-ad-footer-newsletter-title,
   html[data-lang="ar"] .ruwaq-ad-footer-newsletter-title {
     font-family: var(--font-ar), var(--font-ar-fallback);
