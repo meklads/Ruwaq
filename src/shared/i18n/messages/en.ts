@@ -1295,8 +1295,6 @@ export const en: Messages = {
    beesmotion: "Beesmotion, digital marketing",
    followUs: "Follow us",
    regionLabel: "Saudi Arabia, Western Region",
-   affiliateNote:
-    "Ruwaq is part of the Graphics House ecosystem. Visualization leads may route to Graphics House; fit-out and contracting to Turriva; digital marketing for businesses to Beesmotion.",
   },
  },
  pages: {

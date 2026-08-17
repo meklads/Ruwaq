@@ -188,8 +188,7 @@ export async function SiteFooter() {
                 {footer.regionLabel}
               </div>
             </div>
-            <p className="mt-6 text-[11px] leading-relaxed text-white/45">{footer.affiliateNote}</p>
-            <div className="mt-4 flex flex-col gap-2 text-[10px] uppercase tracking-widest text-white/45 sm:flex-row sm:items-center sm:justify-between">
+            <div className="mt-6 flex flex-col gap-2 text-[10px] uppercase tracking-widest text-white/45 sm:flex-row sm:items-center sm:justify-between">
               <p>{footer.copyright}</p>
               <a href={RUWQ_PUBLIC_URL} className="transition-colors hover:text-white/70">
                 {RUWQ_PUBLIC_URL.replace("https://", "")}

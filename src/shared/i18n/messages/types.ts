@@ -862,7 +862,6 @@ export type Messages = {
       beesmotion: string;
       followUs: string;
       regionLabel: string;
-      affiliateNote: string;
     };
   };
   pages: {
