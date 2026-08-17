@@ -2789,7 +2789,7 @@
   }
 
   .ruwaq-ad-footer-tasami:hover {
-    @apply border-[#d4b47a] bg-[#c9a063]/18;
+    @apply border-[#d4b47a] bg-[#c9a063]/20;
   }
 
   .ruwaq-ad-footer-tasami__label {
