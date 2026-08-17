@@ -89,6 +89,7 @@ export async function SiteFooter() {
             <div>
               <RuwaqLogo href="/" variant="dark" />
               <p className="mt-6 max-w-sm text-sm leading-relaxed text-white/75">{footer.tagline}</p>
+              <p className="mt-3 text-sm font-medium text-white/70">{footer.tasamiGroup}</p>
               <p className="mt-4 text-xs text-white/50">{footer.address}</p>
               <div className="mt-6">
                 <p className="ruwaq-ad-footer-heading text-white/55">{footer.followUs}</p>

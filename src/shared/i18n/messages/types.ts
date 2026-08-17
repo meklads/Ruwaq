@@ -843,6 +843,7 @@ export type Messages = {
     footer: {
       tagline: string;
       address: string;
+      tasamiGroup: string;
       product: string;
       company: string;
       legal: string;
