@@ -6,6 +6,7 @@ import {
   GRAPHICS_HOUSE_URL,
   RUWQ_PUBLIC_EMAIL,
   RUWQ_PUBLIC_URL,
+  TASAMI_GROUP_URL,
   TURRIVA_URL,
   beesmotionReferralUrl,
   graphicsHouseReferralUrl,
@@ -91,7 +92,7 @@ export async function SiteFooter() {
               <p className="mt-6 max-w-sm text-sm leading-relaxed text-white/75">{footer.tagline}</p>
               <p className="mt-3 text-sm font-medium text-white/70">
                 <a
-                  href="https://www.tasamify.com/"
+                  href={TASAMI_GROUP_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="transition-colors hover:text-white"

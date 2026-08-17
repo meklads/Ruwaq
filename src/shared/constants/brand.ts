@@ -4,6 +4,7 @@ export const RUWQ_PUBLIC_EMAIL = `hello@${RUWQ_PUBLIC_HOST}`;
 export const RUWQ_PUBLIC_URL = `https://${RUWQ_PUBLIC_HOST}`;
 
 /** Ecosystem brands — Ruwaq acts as a lead funnel alongside Turriva and Graphics House. */
+export const TASAMI_GROUP_URL = "https://www.tasamify.com/";
 export const GRAPHICS_HOUSE_URL = "https://3dgraphicshouse.com";
 export const GRAPHICS_HOUSE_PROJECT_LAUNCH_URL =
   "https://3dgraphicshouse.com/solutions/project-launch.html";
