@@ -4,6 +4,7 @@ import { getLocale } from "@/shared/i18n/server";
 import { getSession } from "@/modules/auth/server/session";
 import { db } from "@/shared/lib/db";
 import { JoinDirectoryForm } from "@/modules/marketplace/components/join-directory-form";
+import { BeesmotionPromoBanner } from "@/modules/marketplace/components/beesmotion-promo-banner";
 import { joinStatusPath } from "@/modules/marketplace/lib/join-status";
 import { getLatestJoinApplicationForEmail } from "@/modules/marketplace/server/join.actions";
 import {
@@ -92,6 +93,8 @@ export default async function JoinDirectoryPage({ searchParams }: Props) {
           />
         </div>
       </div>
+
+      <BeesmotionPromoBanner locale={locale} campaign="join_page_ad" />
     </div>
   );
 }

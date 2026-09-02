@@ -3,6 +3,7 @@ import Link from "next/link";
 import { getMessages } from "@/shared/i18n";
 import { getLocale } from "@/shared/i18n/server";
 import { QuoteRequestForm } from "@/modules/marketplace/components/quote-request-form";
+import { GraphicsHousePromoBanner } from "@/modules/marketplace/components/graphics-house-promo-banner";
 import {
   parseCategorySlug,
   parseCitySlug,
@@ -86,6 +87,8 @@ export default async function RequestQuotePage({ searchParams }: Props) {
           />
         </div>
       </div>
+
+      <GraphicsHousePromoBanner locale={locale} campaign="request_quote_page_ad" />
     </div>
   );
 }
