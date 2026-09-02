@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { MARKETPLACE_CITIES } from "@/shared/constants/marketplace-taxonomy";
 import {
   PROJECT_LAUNCH_INQUIRY_KEYS,
   PROJECT_LAUNCH_SERVICE_KEYS,
@@ -38,7 +37,6 @@ export function VisualizationLeadForm({ copy, locale }: Props) {
   const [jobTitle, setJobTitle] = useState("");
   const [serviceInterest, setServiceInterest] = useState<ProjectLaunchServiceKey | "">("");
   const [inquiryType, setInquiryType] = useState<ProjectLaunchInquiryKey | "">("");
-  const [citySlug, setCitySlug] = useState<string>("");
   const [projectType, setProjectType] = useState<(typeof PROJECT_TYPE_KEYS)[number]>("residential");
   const [projectDetails, setProjectDetails] = useState("");
   const [budgetRange, setBudgetRange] = useState("");
@@ -60,7 +58,6 @@ export function VisualizationLeadForm({ copy, locale }: Props) {
       jobTitle: jobTitle || undefined,
       serviceInterest: serviceInterest || undefined,
       inquiryType: inquiryType || undefined,
-      citySlug: citySlug ? (citySlug as "jeddah" | "makkah" | "madinah") : undefined,
       projectType,
       projectDetails,
       budgetRange: budgetRange || undefined,
@@ -176,22 +173,6 @@ export function VisualizationLeadForm({ copy, locale }: Props) {
           {PROJECT_TYPE_KEYS.map((key) => (
             <option key={key} value={key}>
               {copy.projectTypes[key]}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <div>
-        <label className="ruwaq-ad-field-label">{copy.fields.city}</label>
-        <select
-          className="ruwaq-ad-field"
-          value={citySlug}
-          onChange={(e) => setCitySlug(e.target.value)}
-        >
-          <option value="">{copy.fields.cityOptional}</option>
-          {MARKETPLACE_CITIES.map((city) => (
-            <option key={city.slug} value={city.slug}>
-              {locale === "ar" ? city.nameAr : city.nameEn}
             </option>
           ))}
         </select>

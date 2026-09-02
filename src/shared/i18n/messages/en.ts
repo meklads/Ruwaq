@@ -74,7 +74,7 @@ export const en: Messages = {
    eyebrow: "ProjectLaunch™ · Graphics House",
    title: "Launch your project before concrete",
    subtitle:
-    "For real estate developers — register your project and get an initial launch plan from Graphics House within 24 hours.",
+    "For developers across KSA, the Gulf, and worldwide — register your project and get a visual launch plan within 24 hours.",
    formLabel: "Book a launch session",
    services: [
     "Cinematic CGI",
@@ -94,7 +94,7 @@ export const en: Messages = {
     "Graphics House is Ruwaq’s ProjectLaunch™ partner. Ruwaq remains your free directory for engineering quotes; this form is for real estate launch only.",
    projectLaunchBanner: "ProjectLaunch™ — integrated real estate launch",
    projectLaunchDescription:
-    "Brand identity, cinematic CGI, smart maquettes, interactive sales tools, and showrooms — one visual language before ground breaks.",
+    "Brand identity, CGI, smart maquettes, and sales experiences — for projects in KSA, the Gulf, and worldwide.",
    projectLaunchLearnMore: "Explore ProjectLaunch™",
    submit: "Book your project launch session",
    submitting: "Sending…",
@@ -114,8 +114,6 @@ export const en: Messages = {
     phone: "Mobile / WhatsApp",
     phonePlaceholder: "+966 5xxxxxxxx",
     projectType: "Project type",
-    city: "Project city",
-    cityOptional: "Select city (optional)",
     serviceInterest: "Service needed",
     servicePlaceholder: "Select service…",
     inquiryType: "What matters to you?",
@@ -328,7 +326,7 @@ export const en: Messages = {
    },
    visualizationTitle: "Launch your project — ProjectLaunch™",
    visualizationSubtitle:
-    "For developers: register your project and Graphics House will respond within 24 hours with an initial launch plan.",
+    "For developers in KSA, the Gulf, and worldwide — register your project and Graphics House will respond within 24 hours.",
    visualizationHint: "Learn about the system before submitting:",
    visualizationPageLink: "ProjectLaunch™ by Graphics House",
    visualizationSubmit: "Book launch session — free",

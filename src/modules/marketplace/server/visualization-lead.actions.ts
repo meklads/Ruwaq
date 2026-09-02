@@ -2,8 +2,6 @@
 
 import { z } from "zod";
 import { db } from "@/shared/lib/db";
-import { getCityBySlug } from "@/shared/constants/marketplace-taxonomy";
-import { parseCitySlug } from "@/modules/marketplace/lib/marketplace-slugs";
 import { normalizeKsaPhone } from "@/modules/marketplace/lib/lead-phone";
 import {
   formatProjectLaunchDetails,
@@ -44,7 +42,6 @@ const submitVisualizationLeadSchema = z.object({
   jobTitle: z.string().trim().max(120).optional(),
   serviceInterest: z.enum(PROJECT_LAUNCH_SERVICE_KEYS).optional(),
   inquiryType: z.enum(PROJECT_LAUNCH_INQUIRY_KEYS).optional(),
-  citySlug: z.enum(["jeddah", "makkah", "madinah"]).optional(),
   projectType: z.enum(projectTypeKeys),
   projectDetails: z.string().trim().min(10, { message: "validation" }).max(4000),
   budgetRange: z.string().trim().max(80).optional(),
@@ -70,8 +67,6 @@ export async function submitVisualizationLead(
   }
 
   const data = parsed.data;
-  const citySlug = data.citySlug ? parseCitySlug(data.citySlug) : null;
-  const cityMeta = citySlug ? getCityBySlug(citySlug) : null;
   const projectDetails = formatProjectLaunchDetails({
     projectDetails: data.projectDetails,
     clientEmail: data.clientEmail || undefined,
@@ -88,7 +83,7 @@ export async function submitVisualizationLead(
         clientName: data.clientName,
         clientPhone: data.clientPhone,
         companyName: data.companyName || null,
-        city: cityMeta?.enum ?? null,
+        city: null,
         projectType: data.projectType,
         projectDetails,
         budgetRange: data.budgetRange || null,
@@ -106,7 +101,7 @@ export async function submitVisualizationLead(
         jobTitle: data.jobTitle,
         serviceInterest: data.serviceInterest,
         inquiryType: data.inquiryType,
-        citySlug,
+        citySlug: null,
         projectType: lead.projectType,
         projectDetails: lead.projectDetails,
         budgetRange: lead.budgetRange,

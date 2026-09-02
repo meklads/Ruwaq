@@ -93,8 +93,6 @@ export type Messages = {
         phone: string;
         phonePlaceholder: string;
         projectType: string;
-        city: string;
-        cityOptional: string;
         serviceInterest: string;
         servicePlaceholder: string;
         inquiryType: string;

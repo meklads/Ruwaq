@@ -129,7 +129,6 @@ export function QuoteRequestForm({
         jobTitle: jobTitle || undefined,
         serviceInterest: serviceInterest || undefined,
         inquiryType: inquiryType || undefined,
-        citySlug,
         projectType,
         projectDetails,
         budgetRange: budgetRange || undefined,
@@ -389,95 +388,97 @@ export function QuoteRequestForm({
         </div>
       ) : null}
 
-      <div className={isCompactModal ? "grid gap-4 sm:grid-cols-2" : undefined}>
+      {isVisualization ? (
         <div>
-          <label className={labelClass}>{copy.fields.city}</label>
-          {lockJeddah ? (
-            <>
+          <label className={labelClass}>{visualizationCopy.fields.projectType}</label>
+          <select
+            className={fieldClass}
+            value={projectType}
+            onChange={(e) =>
+              setProjectType(e.target.value as (typeof PROJECT_TYPE_KEYS)[number])
+            }
+            required
+          >
+            {PROJECT_TYPE_KEYS.map((key) => (
+              <option key={key} value={key}>
+                {visualizationCopy.projectTypes[key]}
+              </option>
+            ))}
+          </select>
+        </div>
+      ) : (
+        <div className={isCompactModal ? "grid gap-4 sm:grid-cols-2" : undefined}>
+          <div>
+            <label className={labelClass}>{copy.fields.city}</label>
+            {lockJeddah ? (
+              <>
+                <p className={`${fieldClass} bg-neutral-50 text-neutral-800`}>
+                  {jeddahCity ? (locale === "ar" ? jeddahCity.nameAr : jeddahCity.nameEn) : "Jeddah"}
+                </p>
+                <p className="mt-2 text-xs leading-relaxed text-neutral-500">{copy.jeddahOnlyNote}</p>
+              </>
+            ) : (
+              <select
+                className={fieldClass}
+                value={citySlug}
+                onChange={(e) => setCitySlug(parseCitySlug(e.target.value))}
+              >
+                {MARKETPLACE_CITIES.map((c) => (
+                  <option key={c.slug} value={c.slug}>
+                    {locale === "ar" ? c.nameAr : c.nameEn}
+                  </option>
+                ))}
+              </select>
+            )}
+          </div>
+
+          {isCompactModal ? (
+            <div>
+              <label className={labelClass}>{copy.fields.projectType}</label>
+              <select
+                className={fieldClass}
+                value={projectType}
+                onChange={(e) =>
+                  setProjectType(e.target.value as (typeof PROJECT_TYPE_KEYS)[number])
+                }
+                required
+              >
+                {PROJECT_TYPE_KEYS.map((key) => (
+                  <option key={key} value={key}>
+                    {visualizationCopy.projectTypes[key]}
+                  </option>
+                ))}
+              </select>
+            </div>
+          ) : lockCategory ? (
+            <div>
+              <label className={labelClass}>{copy.fields.category}</label>
               <p className={`${fieldClass} bg-neutral-50 text-neutral-800`}>
-                {jeddahCity ? (locale === "ar" ? jeddahCity.nameAr : jeddahCity.nameEn) : "Jeddah"}
+                {lockedCategory
+                  ? locale === "ar"
+                    ? lockedCategory.nameAr
+                    : lockedCategory.nameEn
+                  : categorySlug}
               </p>
-              <p className="mt-2 text-xs leading-relaxed text-neutral-500">{copy.jeddahOnlyNote}</p>
-            </>
+            </div>
           ) : (
-            <select
-              className={fieldClass}
-              value={citySlug}
-              onChange={(e) => setCitySlug(parseCitySlug(e.target.value))}
-            >
-              {MARKETPLACE_CITIES.map((c) => (
-                <option key={c.slug} value={c.slug}>
-                  {locale === "ar" ? c.nameAr : c.nameEn}
-                </option>
-              ))}
-            </select>
+            <div>
+              <label className={labelClass}>{copy.fields.category}</label>
+              <select
+                className={fieldClass}
+                value={categorySlug}
+                onChange={(e) => setCategorySlug(parseCategorySlug(e.target.value))}
+              >
+                {MARKETPLACE_CATEGORIES.map((c) => (
+                  <option key={c.slug} value={c.slug}>
+                    {locale === "ar" ? c.nameAr : c.nameEn}
+                  </option>
+                ))}
+              </select>
+            </div>
           )}
         </div>
-
-        {isCompactModal ? (
-          <div>
-            <label className={labelClass}>{copy.fields.projectType}</label>
-            <select
-              className={fieldClass}
-              value={projectType}
-              onChange={(e) =>
-                setProjectType(e.target.value as (typeof PROJECT_TYPE_KEYS)[number])
-              }
-              required
-            >
-              {PROJECT_TYPE_KEYS.map((key) => (
-                <option key={key} value={key}>
-                  {visualizationCopy.projectTypes[key]}
-                </option>
-              ))}
-            </select>
-          </div>
-        ) : isVisualization ? (
-          <div>
-            <label className={labelClass}>{visualizationCopy.fields.projectType}</label>
-            <select
-              className={fieldClass}
-              value={projectType}
-              onChange={(e) =>
-                setProjectType(e.target.value as (typeof PROJECT_TYPE_KEYS)[number])
-              }
-              required
-            >
-              {PROJECT_TYPE_KEYS.map((key) => (
-                <option key={key} value={key}>
-                  {visualizationCopy.projectTypes[key]}
-                </option>
-              ))}
-            </select>
-          </div>
-        ) : lockCategory ? (
-          <div>
-            <label className={labelClass}>{copy.fields.category}</label>
-            <p className={`${fieldClass} bg-neutral-50 text-neutral-800`}>
-              {lockedCategory
-                ? locale === "ar"
-                  ? lockedCategory.nameAr
-                  : lockedCategory.nameEn
-                : categorySlug}
-            </p>
-          </div>
-        ) : (
-          <div>
-            <label className={labelClass}>{copy.fields.category}</label>
-            <select
-              className={fieldClass}
-              value={categorySlug}
-              onChange={(e) => setCategorySlug(parseCategorySlug(e.target.value))}
-            >
-              {MARKETPLACE_CATEGORIES.map((c) => (
-                <option key={c.slug} value={c.slug}>
-                  {locale === "ar" ? c.nameAr : c.nameEn}
-                </option>
-              ))}
-            </select>
-          </div>
-        )}
-      </div>
+      )}
 
       {isVisualization ? (
         <>
