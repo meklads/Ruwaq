@@ -26,7 +26,9 @@ type Props = {
 };
 
 export function TemplateSampleGallery({ locale, items, labels, startCta }: Props) {
-  const [active, setActive] = useState<SampleTemplateSlug>(items[0]?.slug ?? "ruwaq-classic");
+  const [active, setActive] = useState<SampleTemplateSlug>(
+    items[0]?.slug ?? "ruwaq-executive"
+  );
 
   const sampleUrl = useMemo(
     () => `/api/templates/samples/${active}?locale=${locale}`,
@@ -85,7 +87,7 @@ export function TemplateSampleGallery({ locale, items, labels, startCta }: Props
           key={active}
           title={activeItem?.title ?? labels.previewLabel}
           src={sampleUrl}
-          className="h-[min(78vh,920px)] w-full border-0 bg-slate-100"
+          className="h-[min(78vh,920px)] w-full border-0 bg-slate-200/80 shadow-inner"
         />
       </div>
 

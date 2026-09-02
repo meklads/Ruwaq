@@ -46,6 +46,10 @@ export function buildPrintPaginationCss(pageBackground: string): string {
       background: ${pageBackground};
       box-shadow: 0 4px 18px rgba(15,23,42,0.14);
     }
+    .cover-page {
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
     .meta-grid, .scope-item, .clause-item, .estimate-banner,
     .signature-box, table tr, .boq-table tr {
       break-inside: avoid;

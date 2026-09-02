@@ -20,8 +20,8 @@ export const ruwaqBrand = {
     budgetMatchText: "#2D6A4F",
   },
   fonts: {
-    arabic: "'Tajawal', 'IBM Plex Sans Arabic', 'Noto Sans Arabic', Tahoma, sans-serif",
-    latin: "'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif",
+    arabic: "'IBM Plex Sans Arabic', 'Noto Sans Arabic', Tahoma, sans-serif",
+    latin: "'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif",
   },
   footer: {
     addressAr: "جدة، حي الزهراء، المملكة العربية السعودية",

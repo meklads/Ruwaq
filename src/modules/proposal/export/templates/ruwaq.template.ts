@@ -9,6 +9,11 @@ import {
   escapeHtml,
   formatAmount,
 } from "../proposal-export-utils";
+import {
+  buildCoverPageCss,
+  buildCoverPageHtml,
+  buildHeaderLogoHtml,
+} from "../template-letterhead";
 
 function assetUrl(base: string, path: string): string {
   return `${base.replace(/\/$/, "")}${path}`;
@@ -29,24 +34,6 @@ function safeHttpUrl(value: unknown): string | null {
 
 function exportLink(href: string, label: string, color: string): string {
   return `<a href="${escapeHtml(href)}" style="color:${color};text-decoration:none;">${escapeHtml(label)}</a>`;
-}
-
-function headerLogoHtml(
-  data: ProposalExportData,
-  labels: ReturnType<typeof getMessages>["export"],
-  usePlaceholder: boolean
-): string {
-  const logo = usePlaceholder ? null : safeHttpUrl(data.logoUrl);
-  const companyName = data.companyName?.trim();
-
-  const circleInner = logo
-    ? `<img src="${escapeHtml(logo)}" alt="">`
-    : `<span class="logo-placeholder-text">${escapeHtml(labels.logoPlaceholder)}</span>`;
-
-  return `<div class="header-logo-col" aria-label="${escapeHtml(labels.preparedBy)}">
-      <div class="logo-circle">${circleInner}</div>
-      ${companyName ? `<p class="header-company-name">${escapeHtml(companyName)}</p>` : ""}
-    </div>`;
 }
 
 export function renderRuwaqTemplate(
@@ -276,7 +263,7 @@ export function renderRuwaqTemplate(
     ? (data.timeline!.milestones as Record<string, unknown>[])
     : [];
 
-  const headerLogo = headerLogoHtml(data, labels, useLogoPlaceholder);
+  const headerLogo = buildHeaderLogoHtml(data, labels, useLogoPlaceholder, colors);
   const footerAddress = locale === "ar" ? footer.addressAr : footer.addressEn;
   const footerTagline = locale === "ar" ? footer.taglineAr : footer.taglineEn;
   const sampleBadge = platformBranding
@@ -320,7 +307,21 @@ export function renderRuwaqTemplate(
 
   const fontLink = `<link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Cairo:wght@400;600;700&family=Montserrat:wght@400;600;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">`;
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">`;
+
+  const coverPage = buildCoverPageHtml({
+    locale: locale === "ar" ? "ar" : "en",
+    data,
+    colors,
+    docTitle,
+    preparedForLabel: labels.preparedFor,
+    dateLabel: labels.date,
+    validityLabel: labels.validity,
+    confidentialLabel: locale === "ar" ? "سري — للعميل المعني فقط" : "Confidential — for intended recipient only",
+    isExecutive,
+    useLogoPlaceholder,
+    mandalaUrl: assetUrl(base, "/brand/luxury/ruwaq-mandala.svg"),
+  });
 
   return `<!DOCTYPE html>
 <html dir="${dir}" lang="${locale}">
@@ -361,10 +362,11 @@ export function renderRuwaqTemplate(
       font-weight: 700; z-index: 10; font-family: inherit;
     }
     .banner {
-      background: ${colors.creamBg};
+      background: linear-gradient(180deg, ${colors.creamBg} 0%, ${colors.white} 100%);
       padding: 18px 32px 20px;
       color: ${colors.text};
       border-bottom: 1px solid ${printBorder};
+      border-top: 4px solid ${colors.gold};
     }
     .banner-top {
       display: flex;
@@ -376,33 +378,7 @@ export function renderRuwaqTemplate(
     .header-logo-col {
       flex-shrink: 0;
       text-align: center;
-      min-width: 80px;
-    }
-    .logo-circle {
-      width: 72px;
-      height: 72px;
-      border-radius: 50%;
-      background: ${colors.white};
-      border: 1.5px dashed #D1D5DB;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      margin: 0 auto 6px;
-    }
-    .logo-circle img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      padding: 8px;
-    }
-    .logo-placeholder-text {
-      font-size: 9px;
-      font-weight: 600;
-      color: #9CA3AF;
-      line-height: 1.35;
-      text-align: center;
-      padding: 6px;
+      min-width: 96px;
     }
     .header-company-name {
       font-size: 11px;
@@ -410,7 +386,7 @@ export function renderRuwaqTemplate(
       color: ${colors.navy};
       margin: 0;
       line-height: 1.4;
-      max-width: 92px;
+      max-width: 108px;
     }
     .banner-main {
       flex: 1;
@@ -425,12 +401,13 @@ export function renderRuwaqTemplate(
       margin-bottom: 4px;
     }
     .banner-title {
-      font-size: 22px;
-      font-weight: 700;
+      font-size: 24px;
+      font-weight: 800;
       color: ${colors.navy};
       margin: 0 0 4px;
-      line-height: 1.38;
+      line-height: 1.32;
       word-break: break-word;
+      letter-spacing: -0.015em;
     }
     .banner-client {
       font-size: 13px;
@@ -448,12 +425,13 @@ export function renderRuwaqTemplate(
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 12px 28px;
-      background: ${colors.creamBg};
-      border: 1px solid ${colors.cream};
-      border-radius: 14px;
+      background: ${colors.white};
+      border: 1px solid ${printBorder};
+      border-radius: 12px;
       padding: 18px 20px;
       margin-bottom: 28px;
       font-size: 13px;
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05);
     }
     .meta-grid div { color: ${colors.textMuted}; }
     .meta-grid strong { color: ${colors.navy}; font-weight: 600; }
@@ -488,25 +466,27 @@ export function renderRuwaqTemplate(
     }
     table { width: 100%; border-collapse: collapse; margin: 12px 0 20px; }
     th {
-      background: ${printSurface};
-      color: ${colors.navy};
+      background: ${colors.navy};
+      color: ${colors.white};
       padding: 10px 14px;
-      font-size: 12px;
-      font-weight: 600;
+      font-size: 11px;
+      font-weight: 700;
       text-align: start;
-      border-bottom: 1px solid ${printBorder};
+      letter-spacing: 0.04em;
+      border-bottom: none;
     }
     td { font-size: 13px; color: ${colors.text}; }
     .total-box {
       display: inline-block;
-      background: ${printSurface};
-      color: ${colors.navy};
-      padding: 10px 18px;
+      background: linear-gradient(135deg, ${colors.navy} 0%, #1e293b 100%);
+      color: ${colors.white};
+      padding: 12px 20px;
       border-radius: 10px;
-      font-size: 15px;
-      font-weight: 700;
+      font-size: 16px;
+      font-weight: 800;
       margin: 8px 0 16px;
-      border: 1px solid ${printBorder};
+      border: 2px solid ${colors.gold};
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12);
     }
     .estimate-banner {
       background: ${colors.estimateBg};
@@ -563,12 +543,12 @@ export function renderRuwaqTemplate(
       overflow: hidden;
     }
     .boq-table th {
-      background: ${printSurface};
-      color: ${colors.navy};
+      background: ${colors.navy};
+      color: ${colors.white};
       padding: 10px 14px;
       font-size: 11px;
       font-weight: 700;
-      letter-spacing: 0.03em;
+      letter-spacing: 0.04em;
     }
     .boq-table td {
       padding: 11px 14px;
@@ -599,11 +579,22 @@ export function renderRuwaqTemplate(
       gap: 28px;
     }
     .signature-box {
-      border-top: 1px solid ${printBorder};
-      padding-top: 10px;
+      border: 1px solid ${printBorder};
+      border-radius: 10px;
+      padding: 14px 16px 18px;
       font-size: 13px;
       color: ${colors.textMuted};
-      min-height: 72px;
+      min-height: 96px;
+      background: ${colors.white};
+    }
+    .signature-line {
+      display: block;
+      margin-top: 28px;
+      border-top: 1px solid ${colors.navy};
+      padding-top: 8px;
+      font-size: 12px;
+      color: ${colors.navy};
+      font-weight: 600;
     }
     .doc-footer {
       background: ${printSurface};
@@ -766,12 +757,8 @@ export function renderRuwaqTemplate(
     body.variant-executive .header-company-name {
       color: ${colors.white};
     }
-    body.variant-executive .logo-circle {
-      background: rgba(255,255,255,0.06);
-      border: 1.5px solid rgba(255,255,255,0.3);
-    }
-    body.variant-executive .logo-placeholder-text {
-      color: rgba(255,255,255,0.55);
+    body.variant-executive .logo-monogram-text {
+      color: rgba(255,255,255,0.85);
     }
     body.variant-executive .meta-grid {
       border-radius: 2px;
@@ -873,6 +860,7 @@ export function renderRuwaqTemplate(
       .watermark-band { opacity: 1; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
       body.has-watermark .page-wrap { margin-top: 32px; }
     }
+    ${buildCoverPageCss(colors, dir, isExecutive)}
     ${hfStyle ? hfStyle.css(dir) : ""}
     ${buildPrintPaginationCss(colors.white)}
   </style>
@@ -882,6 +870,7 @@ export function renderRuwaqTemplate(
   ${watermarkOverlay}
   <button class="print-btn no-print" onclick="window.print()">${escapeHtml(labels.savePdf)}</button>
   <div class="page-wrap">
+    ${coverPage}
     <header class="banner">
       <div class="banner-top">
         <div class="banner-main">
@@ -1007,8 +996,8 @@ export function renderRuwaqTemplate(
       ${sectionTitle(labels.acceptance, "acceptance")}
       <p style="font-size:13px;color:${colors.textMuted};margin-bottom:8px;">${escapeHtml(labels.acceptanceText)}</p>
       <div class="signature">
-        <div class="signature-box"><strong style="color:${colors.navy};">${escapeHtml(labels.clientSignature)}</strong><br>${escapeHtml(data.clientName)}</div>
-        <div class="signature-box"><strong style="color:${colors.navy};">${escapeHtml(labels.providerSignature)}</strong><br>${escapeHtml(data.companyName ?? "—")}</div>
+        <div class="signature-box"><strong style="color:${colors.navy};">${escapeHtml(labels.clientSignature)}</strong><br>${escapeHtml(data.clientName)}<span class="signature-line">${locale === "ar" ? "التوقيع والتاريخ" : "Signature & date"}</span></div>
+        <div class="signature-box"><strong style="color:${colors.navy};">${escapeHtml(labels.providerSignature)}</strong><br>${escapeHtml(data.companyName ?? "—")}<span class="signature-line">${locale === "ar" ? "التوقيع والتاريخ" : "Signature & date"}</span></div>
       </div>
     </main>
   </div>

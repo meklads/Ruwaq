@@ -1802,9 +1802,9 @@ export const en: Messages = {
   },
  },
  templates: {
-  title: "Proposal sample gallery",
+  title: "NASAQ template gallery",
   subtitle:
-   "Three samples to explore: villa fit-out (Ruwaq classic), engineering supervision (Ruwaq executive), and 3D visualization (Graphics House).",
+   "Three polished samples: engineering supervision (executive), villa fit-out (classic), and 3D visualization (Graphics House).",
   openSample: "Open in new tab",
   openSampleHint: "Demo data for preview only, not for client delivery.",
   note: "Your real proposals show your company identity only.",
@@ -1812,18 +1812,18 @@ export const en: Messages = {
   back: "Back",
   gallery: [
    {
-    slug: "ruwaq-classic",
-    brand: "Ruwaq",
-    title: "Residential villa fit-out",
-    body: "Fit-out scope, BOQ, 30/40/30 payments, and approved clause pack.",
-    badge: "Primary sample",
+    slug: "ruwaq-executive",
+    brand: "NASAQ, Executive",
+    title: "Engineering supervision, office tower",
+    body: "A formal letterhead layout for engineering firms: supervision, reports, timeline.",
+    badge: "Featured sample",
    },
    {
-    slug: "ruwaq-executive",
-    brand: "Ruwaq, Executive",
-    title: "Engineering supervision, office tower",
-    body: "A more formal layout for engineering firms: supervision, reports, timeline.",
-    badge: "Ruwaq sample 2",
+    slug: "ruwaq-classic",
+    brand: "NASAQ",
+    title: "Residential villa fit-out",
+    body: "Fit-out scope, BOQ, 30/40/30 payments, and approved clause pack.",
+    badge: "Classic layout",
    },
    {
     slug: "graphics-house",

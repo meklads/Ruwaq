@@ -6,6 +6,13 @@ import type { SampleTemplateSlug } from "./sample-template-keys";
 import { sampleSlugToTemplateId } from "./sample-template-keys";
 import { appBaseUrlFromEnv } from "./proposal-export-utils";
 
+function sampleCompanyIdentity(base: string) {
+  return {
+    platformBranding: false as const,
+    logoUrl: `${base}/brand/sample/company-logo.svg`,
+  };
+}
+
 function dateStrings(locale: Locale) {
   const bcp47 = localeToBcp47(locale);
   const now = new Date();
@@ -70,7 +77,7 @@ function buildRuwaqClassicSample(locale: Locale, base: string): ProposalExportDa
   const { date, validityDate } = dateStrings(locale);
 
   return {
-    platformBranding: true,
+    ...sampleCompanyIdentity(base),
     templateId: "ruwaq",
     appBaseUrl: base,
     projectName: isAr ? "تشطيب فيلا سكنية — حي الملقا" : "Residential villa fit-out — Al Malqa",
@@ -175,7 +182,7 @@ function buildRuwaqExecutiveSample(locale: Locale, base: string): ProposalExport
   const { date, validityDate } = dateStrings(locale);
 
   return {
-    platformBranding: true,
+    ...sampleCompanyIdentity(base),
     templateId: "ruwaq_executive",
     appBaseUrl: base,
     projectName: isAr
@@ -290,7 +297,7 @@ function buildGraphicsHouseSample(locale: Locale, base: string): ProposalExportD
   const { date, validityDate } = dateStrings(locale);
 
   return {
-    platformBranding: true,
+    ...sampleCompanyIdentity(base),
     templateId: "graphics_house",
     appBaseUrl: base,
     logoUrl: `${base}/brand/graphics-house/logo-mark.png`,
