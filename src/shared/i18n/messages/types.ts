@@ -1043,8 +1043,18 @@ export type Messages = {
       title: string;
       titleHighlight: string;
       intro: string;
+      asideLead: string;
       signedInHint: string;
       myProposals: string;
+      steps: readonly { title: string; body: string }[];
+      trustTitle: string;
+      trustItems: readonly string[];
+      ecosystemTitle: string;
+      ecosystemBody: string;
+      ecosystemJoinLink: string;
+      ecosystemMatchLink: string;
+      ctaCardTitle: string;
+      ctaCardNote: string;
       featuresTitle: string;
       samplesTitle: string;
       samplesIntro: string;

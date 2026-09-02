@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { getMessages } from "@/shared/i18n";
 import { getLocale } from "@/shared/i18n/server";
 import { getSession } from "@/modules/auth/server/session";
-import { ContractorPromoBanner } from "@/modules/marketplace/components/contractor-promo-banner";
 import { ProposalsLandingPage } from "@/modules/marketing/components/proposals-landing-page";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -21,16 +20,13 @@ export default async function ProposalsMarketingPage() {
   const session = await getSession();
 
   return (
-    <>
-      <ProposalsLandingPage
-        copy={t.pages.proposalsLanding}
-        sales={t.sales}
-        templates={t.templates}
-        locale={locale}
-        isSignedIn={Boolean(session?.user)}
-        startProposalLabel={t.site.nav.startProposal}
-      />
-      <ContractorPromoBanner locale={locale} />
-    </>
+    <ProposalsLandingPage
+      copy={t.pages.proposalsLanding}
+      sales={t.sales}
+      templates={t.templates}
+      locale={locale}
+      isSignedIn={Boolean(session?.user)}
+      startProposalLabel={t.site.nav.startProposal}
+    />
   );
 }

@@ -1382,7 +1382,7 @@ export const en: Messages = {
    newProjects: "New launches",
    guides: "Practical guides",
    mainNavLabel: "Main navigation",
-   proBarTagline: "Jeddah project matching — 3 contractors per request",
+   proBarTagline: "Where projects meet verified expertise",
   },
   proApplyBand: {
    eyebrow: "RUWAQ PRO DIRECTORY",
@@ -1742,8 +1742,38 @@ export const en: Messages = {
    titleHighlight: "with your branding",
    intro:
     "Three inputs only, Ruwaq writes full scope, approved clauses, payment schedule, and an export-ready PDF. Try free, no card required.",
+   asideLead:
+    "Turn what you know about the project into a document that builds trust: clear scope, structured payments, and assumptions before you send.",
    signedInHint: "You're signed in, continue from your dashboard.",
    myProposals: "My proposals",
+   steps: [
+    {
+     title: "Three inputs only",
+     body: "Client, scope description, and fixed price or initial estimate. Everything else is optional.",
+    },
+    {
+     title: "Ruwaq writes the proposal",
+     body: "Scope, deliverables, timeline, commercial terms, and review gates before export.",
+    },
+    {
+     title: "PDF under your brand",
+     body: "Your logo, CR, and VAT. The client sees your firm, not a third-party platform.",
+    },
+   ],
+   trustTitle: "Why contractors trust Ruwaq",
+   trustItems: [
+    "Clauses aligned with the Saudi market",
+    "Assumptions and exclusions that protect both sides",
+    "Estimate-only mode for site visits first",
+    "Arabic and English, CR and VAT ready",
+   ],
+   ecosystemTitle: "Part of the Ruwaq ecosystem",
+   ecosystemBody:
+    "Verified directory contractors receive matched Jeddah leads — then send professional proposals from here.",
+   ecosystemJoinLink: "Join the verified directory",
+   ecosystemMatchLink: "How matching works",
+   ctaCardTitle: "Start a proposal now",
+   ctaCardNote: "No card required · Try instantly · 3 free proposals per month",
    featuresTitle: "Why contractors choose Ruwaq",
    samplesTitle: "Explore ready samples",
    samplesIntro: "Three templates to preview: fit-out, engineering supervision, and architectural visualization, demo data only.",
