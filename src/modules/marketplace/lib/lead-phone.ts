@@ -1,3 +1,5 @@
+import { RUWQ_SUPPORT_WHATSAPP_E164 } from "@/shared/constants/brand";
+
 /** Normalize Saudi mobile to E.164 +9665xxxxxxxx */
 export function normalizeKsaPhone(raw: string): string {
   const compact = raw.replace(/[\s-]/g, "").trim();
@@ -37,7 +39,7 @@ export function supportWhatsAppE164(): string {
   const raw =
     process.env.RUWQ_SUPPORT_WHATSAPP?.trim() ||
     process.env.NEXT_PUBLIC_RUWQ_SUPPORT_WHATSAPP?.trim() ||
-    "";
+    RUWQ_SUPPORT_WHATSAPP_E164;
   if (!raw) return "";
   try {
     return normalizeKsaPhone(raw);

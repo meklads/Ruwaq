@@ -4,6 +4,7 @@ import {
   TOUR_IMAGES,
 } from "../../src/content/marketing-images";
 import { CURATED_PRO_SLUGS } from "../../src/content/curated-pro-listings";
+import { RUWQ_SUPPORT_WHATSAPP_E164 } from "../../src/shared/constants/brand";
 import type { ListingSeed } from "./marketplace-listing-generator";
 
 type ListingOverride = Partial<
@@ -41,8 +42,8 @@ const OVERRIDES: Record<string, ListingOverride> = {
 • Featured in Ruwaq project tours — North Jeddah villa (2025)
 
 The reference profile other directory listings are measured against.`,
-    phone: "+966920012301",
-    whatsapp: "+966920012301",
+    phone: RUWQ_SUPPORT_WHATSAPP_E164,
+    whatsapp: RUWQ_SUPPORT_WHATSAPP_E164,
     address: "جدة — حي المحمدية، المملكة العربية السعودية",
     isFeatured: true,
     directoryTier: "PRO",
@@ -67,8 +68,8 @@ The reference profile other directory listings are measured against.`,
 • Annexes, shell works, and hotel/villa renovation
 • Coordinates with Graphics House for pre-build visualization
 • Clear SLA and phased handover minutes`,
-    phone: "+966920012302",
-    whatsapp: "+966920012302",
+    phone: RUWQ_SUPPORT_WHATSAPP_E164,
+    whatsapp: RUWQ_SUPPORT_WHATSAPP_E164,
     isFeatured: true,
     directoryTier: "PRO",
     images: LISTING_SEED_IMAGE_POOLS.contracting.slice(0, 4),

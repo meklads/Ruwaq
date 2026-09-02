@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { RUWQ_PUBLIC_EMAIL } from "@/shared/constants/brand";
+import { RUWQ_PUBLIC_EMAIL, RUWQ_SUPPORT_WHATSAPP_E164 } from "@/shared/constants/brand";
 import type { Messages } from "@/shared/i18n/messages/types";
 import type { Locale } from "@/shared/i18n/locale";
 
@@ -10,7 +10,8 @@ type Props = {
 
 export function ContactPageContent({ copy, locale }: Props) {
   const arrow = locale === "ar" ? "←" : "→";
-  const whatsapp = process.env.NEXT_PUBLIC_RUWQ_SUPPORT_WHATSAPP?.trim() || "";
+  const whatsapp =
+    process.env.NEXT_PUBLIC_RUWQ_SUPPORT_WHATSAPP?.trim() || RUWQ_SUPPORT_WHATSAPP_E164;
 
   return (
     <div className="ruwaq-ad-page">
