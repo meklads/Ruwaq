@@ -16,10 +16,10 @@ import {
  *   3 AI proposals / month, basic export template, Ruwaq footer + PDF watermark
  *
  * VERIFIED — manual /join approval (no online payment yet)
- *   30 proposals / month, full clause packs, directory badge — watermark stays
+ *   30 proposals / month, full clause packs, directory badge, clean PDF (no watermark)
  *
  * PRO — curated directory partners
- *   Unlimited proposals, white-label PDF, featured directory — no watermark
+ *   Unlimited proposals, white-label PDF, featured directory, lead priority — no watermark
  *
  * PAID — future Moyasar/Tap (CompanyProfile.isPaid)
  *   Unlocks premium templates + removes watermark for VERIFIED tier

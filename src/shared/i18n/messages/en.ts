@@ -1411,8 +1411,12 @@ export const en: Messages = {
      body: "When a client requests your sector, Ruwaq shortlists you among the top 3 contractors — with instant inbox notification.",
     },
     {
-     title: "AI proposals + verified badge",
-     body: "AI proposal builder, Verified/PRO directory badge, and Ruwaq team support.",
+     title: "Proposal tool — no watermark",
+     body: "Proposal studio included with PRO Directory — clean white-label PDFs with your brand only, unlimited exports, no “Powered by Ruwaq” or client-name watermark.",
+    },
+    {
+     title: "PRO badge + support",
+     body: "Verified directory badge, featured placement priority, and Ruwaq team support for your profile and proposals.",
     },
    ],
    comingSoonCta: "Subscriptions opening soon",

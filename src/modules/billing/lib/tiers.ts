@@ -92,12 +92,14 @@ export const TIERS: Record<RuwaqTier, TierConfig> = {
     leadPriority: true,
     featuresAr: [
       "عروض غير محدودة",
+      "PDF بدون علامة مائية — هوية شركتك فقط",
       "PDF بالهوية الكاملة (white-label)",
       "ظهور مميز في الدليل",
       "أولوية في توجيه طلبات العملاء",
     ],
     featuresEn: [
       "Unlimited proposals",
+      "Clean PDF — no Ruwaq watermark",
       "White-label PDF branding",
       "Featured directory placement",
       "Priority client lead routing",

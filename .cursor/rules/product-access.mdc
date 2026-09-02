@@ -30,7 +30,7 @@ Grow active subscriber data first. **No online payment** until traffic proves PM
 ### VERIFIED (manual `/join` approval)
 
 - 30 proposals / month, full clause packs, directory badge
-- **Watermark stays** until `CompanyProfile.isPaid` (future Moyasar)
+- **Watermark stays** until `CompanyProfile.isPaid` (future Moyasar) — applies to STARTER only; VERIFIED+ get clean PDF
 
 ### PRO (curated directory partners)
 
