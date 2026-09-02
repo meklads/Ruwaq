@@ -1092,6 +1092,9 @@ export type Messages = {
     closePreview: string;
     startWithLook: string;
     subscribeHint: string;
+    frameTitle: string;
+    frameHint: string;
+    watermarkToggle: string;
     gallery: readonly {
       slug: "ruwaq-classic" | "ruwaq-executive" | "graphics-house";
       brand: string;

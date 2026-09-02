@@ -408,6 +408,10 @@ export function buildSampleExportData(
     primary?: string;
     accent?: string;
     surface?: string;
+  },
+  letterhead?: {
+    frameId?: string;
+    centerWatermark?: boolean;
   }
 ): ProposalExportData {
   const base = (baseUrl ?? appBaseUrlFromEnv()).replace(/\/$/, "");
@@ -431,6 +435,8 @@ export function buildSampleExportData(
     ...(palette?.primary ? { palettePrimary: palette.primary } : {}),
     ...(palette?.accent ? { paletteAccent: palette.accent } : {}),
     ...(palette?.surface ? { paletteSurface: palette.surface } : {}),
+    ...(letterhead?.frameId ? { letterheadFrameId: letterhead.frameId } : {}),
+    centerWatermark: letterhead?.centerWatermark ?? true,
   };
 }
 

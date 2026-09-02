@@ -36,6 +36,9 @@ export default async function TemplateSamplePage() {
             closePreview: t.templates.closePreview,
             startWithLook: t.templates.startWithLook,
             subscribeHint: t.templates.subscribeHint,
+            frameTitle: t.templates.frameTitle,
+            frameHint: t.templates.frameHint,
+            watermarkToggle: t.templates.watermarkToggle,
           }}
           startCta={t.site.nav.startProposal}
         />

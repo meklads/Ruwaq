@@ -18,6 +18,13 @@ import {
   buildPaletteThemeCss,
   resolveTemplatePalette,
 } from "../template-palettes";
+import {
+  buildCenterWatermarkHtml,
+  buildLetterheadFooterHtml,
+  buildLetterheadFrameCss,
+  buildLetterheadHeaderHtml,
+  parseLetterheadFrameId,
+} from "../letterhead-frames";
 
 function assetUrl(base: string, path: string): string {
   return `${base.replace(/\/$/, "")}${path}`;
@@ -267,7 +274,9 @@ export function renderRuwaqTemplate(
     accent: data.paletteAccent,
     surface: data.paletteSurface,
   });
-  const bodyClass = `${showWatermark ? "has-watermark" : ""}${isExecutive ? " variant-executive" : ""}${hfStyle ? ` hf-${hfStyle.id}` : ""}`.trim();
+  const frameId = parseLetterheadFrameId(data.letterheadFrameId);
+  const showCenterWatermark = data.centerWatermark !== false;
+  const bodyClass = `${showWatermark ? "has-watermark" : ""}${isExecutive ? " variant-executive" : ""}${hfStyle ? ` hf-${hfStyle.id}` : ""} lh-active`.trim();
 
   const milestones = Array.isArray(data.timeline?.milestones)
     ? (data.timeline!.milestones as Record<string, unknown>[])
@@ -276,9 +285,6 @@ export function renderRuwaqTemplate(
   const headerLogo = buildHeaderLogoHtml(data, labels, useLogoPlaceholder, colors);
   const footerAddress = locale === "ar" ? footer.addressAr : footer.addressEn;
   const footerTagline = locale === "ar" ? footer.taglineAr : footer.taglineEn;
-  const sampleBadge = platformBranding
-    ? `<div style="display:inline-block;margin-top:10px;padding:4px 10px;border-radius:6px;background:rgba(212,175,55,0.18);border:1px solid ${colors.gold};font-size:11px;font-weight:600;color:${colors.gold};">${escapeHtml(labels.sampleBadge)}</div>`
-    : "";
 
   const clientFooterLines = [
     data.companyName?.trim(),
@@ -318,6 +324,37 @@ export function renderRuwaqTemplate(
   const fontLink = `<link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">`;
+
+  const letterheadHeader = buildLetterheadHeaderHtml({
+    data,
+    palette,
+    frameId,
+    dir,
+    docTitle,
+    preparedForLabel: labels.preparedFor,
+  });
+
+  const letterheadFooter = buildLetterheadFooterHtml({
+    data,
+    palette,
+    frameId,
+    dir,
+    labels: {
+      phone: labels.phone,
+      email: labels.email,
+      address: labels.address,
+      crNumber: labels.crNumber,
+      vatNumber: labels.vatNumber,
+      websiteLink: labels.websiteLink,
+      footer: labels.footer,
+    },
+  });
+
+  const centerWatermark = buildCenterWatermarkHtml({
+    data,
+    palette,
+    enabled: showCenterWatermark,
+  });
 
   const coverChromeFooter = `<div class="cover-chrome-footer-inner">
       <div class="cover-chrome-footer-company">${escapeHtml(data.companyName?.trim() || labels.logoPlaceholder)}</div>
@@ -883,26 +920,18 @@ export function renderRuwaqTemplate(
     ${buildCoverPageCss(colors, dir, isExecutive)}
     ${hfStyle ? hfStyle.css(dir) : ""}
     ${buildPaletteThemeCss(palette, dir)}
+    ${buildLetterheadFrameCss(palette, dir)}
     ${buildPrintPaginationCss(colors.white)}
   </style>
   ${PAGED_JS_SCRIPT_TAG}
 </head>
 <body class="${bodyClass}">
   ${watermarkOverlay}
+  ${centerWatermark}
   <button class="print-btn no-print" onclick="window.print()">${escapeHtml(labels.savePdf)}</button>
   <div class="page-wrap">
     ${coverPage}
-    <header class="banner">
-      <div class="banner-top">
-        <div class="banner-main">
-          <div class="banner-badge">${escapeHtml(docTitle)}</div>
-          <h1 class="banner-title">${escapeHtml(data.projectName)}</h1>
-          <div class="banner-client">${escapeHtml(labels.preparedFor)} ${escapeHtml(data.clientName)}</div>
-          ${sampleBadge}
-        </div>
-        ${showBrandPanel ? headerLogo : ""}
-      </div>
-    </header>
+    ${letterheadHeader}
 
     <!-- Rendered here (not at the end of the document) so Paged.js's
          position: running(pageFooter) captures it before laying out
@@ -910,7 +939,7 @@ export function renderRuwaqTemplate(
          its source appears in the DOM, so this must sit near the top,
          right alongside the header, even though it visually renders in
          the page's bottom margin box on every page. -->
-    ${platformBranding ? platformFooter : clientFooter}
+    ${platformBranding ? platformFooter : letterheadFooter}
 
     <main class="content">
       <div class="meta-grid">

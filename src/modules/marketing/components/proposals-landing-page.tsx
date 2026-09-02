@@ -149,6 +149,9 @@ export function ProposalsLandingPage({
                   closePreview: templates.closePreview,
                   startWithLook: templates.startWithLook,
                   subscribeHint: templates.subscribeHint,
+                  frameTitle: templates.frameTitle,
+                  frameHint: templates.frameHint,
+                  watermarkToggle: templates.watermarkToggle,
                 }}
                 startCta={startProposalLabel}
               />

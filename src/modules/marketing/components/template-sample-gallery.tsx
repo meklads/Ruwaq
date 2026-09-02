@@ -11,6 +11,11 @@ import {
   resolveTemplatePalette,
   type TemplatePalette,
 } from "@/modules/proposal/export/template-palettes";
+import {
+  LETTERHEAD_FRAME_ORDER,
+  LETTERHEAD_FRAMES,
+  type LetterheadFrameId,
+} from "@/modules/proposal/export/letterhead-frames";
 
 type GalleryItem = {
   slug: SampleTemplateSlug;
@@ -35,6 +40,9 @@ type Labels = {
   closePreview: string;
   startWithLook: string;
   subscribeHint: string;
+  frameTitle: string;
+  frameHint: string;
+  watermarkToggle: string;
 };
 
 type Props = {
@@ -47,9 +55,12 @@ type Props = {
 function buildSampleUrl(
   slug: SampleTemplateSlug,
   locale: Locale,
-  palette: TemplatePalette
+  palette: TemplatePalette,
+  frameId: LetterheadFrameId,
+  centerWatermark: boolean
 ): string {
-  return `/api/templates/samples/${slug}?locale=${locale}&${paletteToQuery(palette)}`;
+  const wm = centerWatermark ? "1" : "0";
+  return `/api/templates/samples/${slug}?locale=${locale}&${paletteToQuery(palette)}&frame=${frameId}&wm=${wm}`;
 }
 
 function A4Thumb({
@@ -175,6 +186,8 @@ export function TemplateSampleGallery({ locale, items, labels, startCta }: Props
   const [customAccent, setCustomAccent] = useState("#C9A063");
   const [customSurface, setCustomSurface] = useState("#F7F4EF");
   const [useCustom, setUseCustom] = useState(false);
+  const [frameId, setFrameId] = useState<LetterheadFrameId>("wave");
+  const [centerWatermark, setCenterWatermark] = useState(true);
   const [modalSlug, setModalSlug] = useState<SampleTemplateSlug | null>(null);
 
   const palette = useMemo(
@@ -188,8 +201,10 @@ export function TemplateSampleGallery({ locale, items, labels, startCta }: Props
   );
 
   const modalItem = items.find((item) => item.slug === modalSlug) ?? null;
-  const modalSrc = modalItem ? buildSampleUrl(modalItem.slug, locale, palette) : "";
-  const startHref = `/proposals/new?${paletteToQuery(palette)}`;
+  const modalSrc = modalItem
+    ? buildSampleUrl(modalItem.slug, locale, palette, frameId, centerWatermark)
+    : "";
+  const startHref = `/proposals/new?${paletteToQuery(palette)}&frame=${frameId}`;
 
   return (
     <div className="nasaq-template-gallery">
@@ -280,9 +295,44 @@ export function TemplateSampleGallery({ locale, items, labels, startCta }: Props
         </div>
       </div>
 
+      <div className="mt-5 rounded-2xl border border-neutral-200 bg-white p-5 sm:p-6">
+        <h3 className="font-display text-base font-bold text-[#2F4A6E]">{labels.frameTitle}</h3>
+        <p className="mt-1 max-w-xl text-sm leading-relaxed text-neutral-600">{labels.frameHint}</p>
+        <div className="mt-4 flex flex-wrap gap-2">
+          {LETTERHEAD_FRAME_ORDER.map((id) => {
+            const frame = LETTERHEAD_FRAMES[id];
+            const selected = frameId === id;
+            const name = locale === "ar" ? frame.nameAr : frame.nameEn;
+            return (
+              <button
+                key={id}
+                type="button"
+                onClick={() => setFrameId(id)}
+                className={`rounded-full border px-3.5 py-1.5 text-xs font-semibold transition ${
+                  selected
+                    ? "border-[#2F4A6E] bg-[#2F4A6E] text-white"
+                    : "border-neutral-200 bg-[#F7F4EF] text-[#2F4A6E] hover:border-neutral-300"
+                }`}
+              >
+                {name}
+              </button>
+            );
+          })}
+        </div>
+        <label className="mt-4 flex cursor-pointer items-center gap-2.5 text-sm text-neutral-600">
+          <input
+            type="checkbox"
+            checked={centerWatermark}
+            onChange={(e) => setCenterWatermark(e.target.checked)}
+            className="h-4 w-4 rounded border-neutral-300 accent-[#2F4A6E]"
+          />
+          {labels.watermarkToggle}
+        </label>
+      </div>
+
       <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {items.map((item) => {
-          const src = buildSampleUrl(item.slug, locale, palette);
+          const src = buildSampleUrl(item.slug, locale, palette, frameId, centerWatermark);
           return (
             <article key={item.slug} className="flex flex-col">
               <A4Thumb

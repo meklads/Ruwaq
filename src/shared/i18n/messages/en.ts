@@ -1796,7 +1796,7 @@ export const en: Messages = {
    featuresTitle: "Why contractors choose Ruwaq",
    samplesTitle: "Design your look — then start",
    samplesIntro:
-    "Pick a 2–3 color palette, see the full page without scrolling, and open a large preview. Header and footer follow your colors on every page — exactly what your client sees.",
+    "Pick colors and a header/footer frame, see the full page, and toggle a soft watermark. Logo on top — your company details below — on every page.",
    ctaPrimary: "Start a free proposal",
    ctaSecondary: "Preview a sample",
    ctaPricing: "Plans & pricing",
@@ -1820,7 +1820,10 @@ export const en: Messages = {
   previewCta: "Large preview",
   closePreview: "Close",
   startWithLook: "Start with this look",
-  subscribeHint: "Custom colors and advanced templates unlock with a subscription",
+  subscribeHint: "Custom colors and advanced frames unlock with a subscription",
+  frameTitle: "Header & footer frame",
+  frameHint: "Same pattern every time: logo on top, company details below — only the shapes change.",
+  watermarkToggle: "Soft center watermark (10% opacity)",
   gallery: [
    {
     slug: "ruwaq-executive",

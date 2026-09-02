@@ -39,6 +39,10 @@ export type ProposalExportData = {
   palettePrimary?: string;
   paletteAccent?: string;
   paletteSurface?: string;
+  /** Geometric letterhead frame motif (header + footer shapes). */
+  letterheadFrameId?: string;
+  /** Soft center watermark (~10% opacity). Defaults on for branded samples. */
+  centerWatermark?: boolean;
   /** When true, shows Ruwaq platform branding (sample preview only). */
   platformBranding?: boolean;
   /** Smart BOQ lines for export (Trust Layer). */

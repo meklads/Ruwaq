@@ -26,8 +26,8 @@
 export const PAGED_JS_SCRIPT_TAG =
   '<script src="https://unpkg.com/pagedjs/dist/paged.polyfill.js"></script>';
 
-const PAGE_MARGIN_TOP = "50mm";
-const PAGE_MARGIN_BOTTOM = "36mm";
+const PAGE_MARGIN_TOP = "56mm";
+const PAGE_MARGIN_BOTTOM = "42mm";
 const PAGE_MARGIN_SIDE = "14mm";
 
 export function buildPrintPaginationCss(pageBackground: string): string {
