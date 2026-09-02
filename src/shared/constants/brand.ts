@@ -6,6 +6,10 @@ export const RUWQ_PUBLIC_URL = `https://${RUWQ_PUBLIC_HOST}`;
 /** Ruwaq / Turriva support WhatsApp (E.164) — quote follow-up & contact page. */
 export const RUWQ_SUPPORT_WHATSAPP_E164 = "+966502786513";
 
+/** Proposal SaaS product name — NASAQ (نَسَق). */
+export const NASAQ_PRODUCT_NAME_AR = "نَسَق";
+export const NASAQ_PRODUCT_NAME_EN = "NASAQ";
+
 /** Ecosystem brands — Ruwaq acts as a lead funnel alongside Turriva and Graphics House. */
 export const TASAMI_GROUP_URL = "https://www.tasamify.com/";
 export const GRAPHICS_HOUSE_URL = "https://3dgraphicshouse.com";

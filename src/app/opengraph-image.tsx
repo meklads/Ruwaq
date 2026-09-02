@@ -64,7 +64,7 @@ export default function OpenGraphImage() {
             marginTop: 12,
           }}
         >
-          Engineering directory and AI proposal studio, Western Region KSA
+          Engineering directory and NASAQ, Western Region KSA
         </div>
       </div>
     ),

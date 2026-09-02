@@ -17,8 +17,8 @@ export default async function PricingPage() {
         </h1>
         <p className="ruwaq-pro-directory-meta mt-4 normal-case tracking-normal">
           {locale === "ar"
-            ? "مرحلة الإطلاق: المحتوى والدليل مجانيان. أداة العروض — 3 شهرياً بعد إكمال ملف الشركة (شعار + إيميل) مع شعار Ruwaq. الدفع الإلكتروني لاحقاً."
-            : "Launch phase: editorial & directory are free. Proposal tool — 3/month after company profile (logo + email) with Ruwaq branding. Online billing later."}
+            ? "مرحلة الإطلاق: المحتوى والدليل مجانيان. نَسَق — 3 عروض شهرياً بعد إكمال ملف الشركة (شعار + إيميل) مع شعار Ruwaq. الدفع الإلكتروني لاحقاً."
+            : "Launch phase: editorial & directory are free. NASAQ — 3/month after company profile (logo + email) with Ruwaq branding. Online billing later."}
         </p>
       </header>
 

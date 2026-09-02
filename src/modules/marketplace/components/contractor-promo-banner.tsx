@@ -9,11 +9,11 @@ type Props = {
 const PROPOSALS_AD = {
   ar: {
     src: MARKETING_IMAGES.proposalsAdAr,
-    alt: "رواق — أنشئ عروضاً احترافية تفوز بالعملاء في دقائق",
+    alt: "نَسَق من رواق — عروض احترافية تفوز بالعملاء في دقائق",
   },
   en: {
     src: MARKETING_IMAGES.proposalsAdEn,
-    alt: "Ruwaq — Create professional proposals that win clients in minutes",
+    alt: "NASAQ by Ruwaq — Create professional proposals that win clients in minutes",
   },
 } as const;
 

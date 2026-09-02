@@ -20,8 +20,8 @@ export function buildOrganizationJsonLd(locale: Locale) {
     logo: `${RUWQ_PUBLIC_URL}${DEFAULT_MARKETING_HERO}`,
     description:
       locale === "ar"
-        ? "دليل هندسي وعقاري للمنطقة الغربية مع أداة عروض احترافية للمقاولين."
-        : "Engineering & property directory for Western Region KSA with an AI proposal studio for contractors.",
+        ? "دليل هندسي وعقاري للمنطقة الغربية مع نَسَق — عروض احترافية للمقاولين."
+        : "Engineering & property directory for Western Region KSA with NASAQ for contractors.",
     areaServed: [
       { "@type": "City", name: "Jeddah" },
       { "@type": "City", name: "Makkah" },

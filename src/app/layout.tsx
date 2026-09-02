@@ -79,8 +79,8 @@ export async function generateMetadata(): Promise<Metadata> {
       : "Ruwaq | Engineering & property marketplace, Western Region";
   const description =
     locale === "ar"
-      ? "دليل مقاولات وتكييف وتشطيبات معتمد في جدة ومكة والمدينة، مع أداة عروض احترافية للمقاولين."
-      : "Verified contractors directory in Jeddah, Makkah, and Madinah, plus AI proposal builder.";
+      ? "دليل مقاولات وتكييف وتشطيبات معتمد في جدة ومكة والمدينة، مع نَسَق — عروض احترافية للمقاولين."
+      : "Verified contractors directory in Jeddah, Makkah, and Madinah, plus NASAQ — professional proposal builder.";
 
   return {
     title,

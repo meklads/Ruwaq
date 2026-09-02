@@ -16,7 +16,7 @@ export const en: Messages = {
   leadInbox: "Lead inbox",
   requestQuote: "Start your project",
   browseCategories: "Categories",
-  contractorHub: "Contractor proposal tool",
+  contractorHub: "NASAQ",
   aboutPlatform: "About the platform",
   backToDirectory: "← Client directory",
   closeModal: "Close",
@@ -31,7 +31,7 @@ export const en: Messages = {
    trustLine: "8 sectors, 3 cities, Free quote requests",
    ctaPrimary: "Get verified quotes",
    ctaSecondary: "Browse verified companies",
-   ctaContractor: "Contractor proposal tool",
+   ctaContractor: "NASAQ",
   },
   search: {
    cityLabel: "City",
@@ -46,7 +46,7 @@ export const en: Messages = {
    subtitle: "8 high-ticket sectors across Western Region cities",
   },
   contractorSection: {
-   title: "Proposal tool for contractors",
+   title: "NASAQ",
    subtitle: "Draft professional AI proposals and export branded PDFs in minutes.",
    cta: "Start a proposal",
   },
@@ -264,7 +264,7 @@ export const en: Messages = {
     },
     {
      quote:
-      "The proposal tool saved hours, branded PDF with VAT ready for my client.",
+      "NASAQ saved hours of formatting — branded PDF with VAT ready for my client.",
      role: "Fit-out contractor",
      city: "Jeddah",
     },
@@ -312,8 +312,8 @@ export const en: Messages = {
      body: "Transparent pricing, direct WhatsApp contact, and Ruwaq assurance: periodic reviews and immediate badge removal on serious complaints.",
     },
     {
-     title: "Proposal tool for contractors",
-     body: "Separate portal at /proposals, AI PDF quotes, deal tracking, and sector-matched leads.",
+     title: "NASAQ",
+     body: "The NASAQ portal — AI PDF quotes, deal tracking, and sector-matched leads.",
     },
    ],
   },
@@ -449,7 +449,7 @@ export const en: Messages = {
    clientsSection: "For owners",
    providersSection: "For professionals",
    requestQuoteLink: "Request a free quote",
-   proposalStudioLink: "Open proposal studio",
+   proposalStudioLink: "Open NASAQ",
    tradeApplyBar: "Trade professional? Apply now",
   },
   leadStatus: {
@@ -561,7 +561,7 @@ export const en: Messages = {
     nextTitle: "Next step",
     nextPending: "Review takes 3 to 5 business days. Keep this link to track status.",
     nextReviewing: "The team is reviewing your commercial registration and portfolio.",
-    nextApproved: "Your company is live in the directory. Complete your company profile for proposal studio.",
+    nextApproved: "Your company is live in the directory. Complete your company profile for NASAQ.",
     nextRejected: "You may submit a new application after addressing the notes below.",
     viewListing: "View directory listing",
     applyAgain: "Submit a new application",
@@ -612,7 +612,7 @@ export const en: Messages = {
     "Ruwaq connects property owners with verified contractors across the Western Region, transparent, direct, and free for clients.",
    ctaOwners: "Request a free quote",
    ctaContractors: "Apply to the directory",
-   ctaProposals: "Contractor proposal tool",
+   ctaProposals: "NASAQ",
    trustTitle: "What “verified” means",
    trustBody:
     "Active CR, professional accreditation, and Ruwaq portfolio review, click the badge on any listing for full standards.",
@@ -1390,7 +1390,7 @@ export const en: Messages = {
    featured: "Featured",
    howItWorks: "How it works",
    howWeMatch: "About matching",
-   forContractors: "For contractors",
+   forContractors: "NASAQ",
    startProposal: "Start a proposal",
    tours: "Tours",
    newProjects: "New launches",
@@ -1425,8 +1425,8 @@ export const en: Messages = {
      body: "When a client requests your sector, Ruwaq shortlists you among the top 3 contractors — with instant inbox notification.",
     },
     {
-     title: "Proposal tool — no watermark",
-     body: "Proposal studio included with PRO Directory — clean white-label PDFs with your brand only, unlimited exports, no “Powered by Ruwaq” or client-name watermark.",
+     title: "NASAQ — no watermark",
+     body: "NASAQ included with PRO Directory — clean white-label PDFs with your brand only, unlimited exports, no “Powered by Ruwaq” or client-name watermark.",
     },
     {
      title: "PRO badge + support",
@@ -1437,7 +1437,7 @@ export const en: Messages = {
    comingSoonNote: "Register your interest now — we contact PRO Directory partners first when paid plans launch.",
    applyCta: "Apply free (directory)",
    pricingCta: "Plans & pricing",
-   proposalsCta: "Proposal tool",
+   proposalsCta: "NASAQ",
    developersCta: "Developer packages",
   },
   developers: {
@@ -1726,7 +1726,7 @@ export const en: Messages = {
    eyebrow: "Contact Ruwaq",
    title: "We're here to help",
    intro:
-    "Whether you're a property owner looking for a verified provider, or a contractor who needs a professional proposal tool, reach out and we'll respond within one business day.",
+    "Whether you're a property owner looking for a verified provider, or a contractor who needs NASAQ, reach out and we'll respond within one business day.",
    emailLabel: "Email",
    whatsappLabel: "Support WhatsApp",
    responseTitle: "Response times",
@@ -1742,16 +1742,16 @@ export const en: Messages = {
      body: "For 3D renders and visualization, use the visualization page or the dual-intent quote form.",
     },
     {
-     title: "Proposal studio for contractors",
+     title: "NASAQ for contractors",
      body: "Start a free proposal with no account, or read the FAQ and pricing page before signing in.",
     },
    ],
    ctaQuote: "Request a quote",
-   ctaProposal: "Proposals for contractors",
+   ctaProposal: "NASAQ for contractors",
    ctaFaq: "FAQ",
   },
   proposalsLanding: {
-   eyebrow: "Ruwaq, Proposal studio",
+   eyebrow: "Ruwaq · NASAQ",
    title: "Professional proposals in minutes",
    titleHighlight: "with your branding",
    intro:
@@ -2081,7 +2081,7 @@ export const en: Messages = {
   notFoundMessage:
    "This link may have expired or is no longer valid. Contact the sender for an updated link.",
   goHome: "Go to Ruwaq",
-  poweredBy: "Delivered via Ruwaq, professional proposals for Saudi contractors.",
+  poweredBy: "Delivered via NASAQ from Ruwaq — professional proposals for Saudi contractors.",
   liveRoom: {
    approveCta: "Approve proposal",
    amendCta: "Request changes",
