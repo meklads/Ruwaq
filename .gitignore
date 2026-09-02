@@ -41,3 +41,6 @@ prisma/migrations/
 !/public/uploads/logos/.gitkeep
 /public/uploads/designs/*
 !/public/uploads/designs/.gitkeep
+
+Thumbs.db
+**/Thumbs.db
