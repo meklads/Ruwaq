@@ -1,7 +1,10 @@
 /**
- * Letterhead frame motifs for NASAQ proposals.
- * Same pattern everywhere: decorative header (logo) + decorative footer (company data).
- * Shape language varies; colors always come from the 2–3 color palette (never black).
+ * Letterhead frames — faithful replicas of the professional letterhead
+ * references (Dream Studio wings, triangle corners, dual waves, teal bars,
+ * rounded navy blocks, soft arcs). Palette colors replace sample hues;
+ * near-black ink uses a lifted slate, never #000.
+ *
+ * Proportions (A4): header ≈ 14–18% · footer ≈ 12–15% · white body between.
  */
 
 import type { ProposalExportData } from "./proposal-export-types";
@@ -26,30 +29,41 @@ export type LetterheadFrame = {
 };
 
 export const LETTERHEAD_FRAMES: Record<LetterheadFrameId, LetterheadFrame> = {
-  wave: { id: "wave", nameAr: "موجة", nameEn: "Wave" },
-  corner_cut: { id: "corner_cut", nameAr: "زاوية هندسية", nameEn: "Corner cut" },
-  dual_bar: { id: "dual_bar", nameAr: "شريطان", nameEn: "Dual bar" },
-  soft_arc: { id: "soft_arc", nameAr: "قوس ناعم", nameEn: "Soft arc" },
-  diagonal: { id: "diagonal", nameAr: "مائل", nameEn: "Diagonal" },
-  ribbon: { id: "ribbon", nameAr: "شريط", nameEn: "Ribbon" },
-  split_block: { id: "split_block", nameAr: "كتلة منقسمة", nameEn: "Split block" },
-  crest_line: { id: "crest_line", nameAr: "خط شعار", nameEn: "Crest line" },
+  wave: { id: "wave", nameAr: "موجة مزدوجة", nameEn: "Dual wave" },
+  corner_cut: { id: "corner_cut", nameAr: "جناح هندسي", nameEn: "Corner wing" },
+  dual_bar: { id: "dual_bar", nameAr: "شريط مائل", nameEn: "Angled bar" },
+  soft_arc: { id: "soft_arc", nameAr: "قوس مزدوج", nameEn: "Soft arcs" },
+  diagonal: { id: "diagonal", nameAr: "مثلثات", nameEn: "Triangles" },
+  ribbon: { id: "ribbon", nameAr: "موجة تقنية", nameEn: "Tech wave" },
+  split_block: { id: "split_block", nameAr: "كتل مستديرة", nameEn: "Rounded blocks" },
+  crest_line: { id: "crest_line", nameAr: "شريط متوازي", nameEn: "Parallel bars" },
 };
 
 export const LETTERHEAD_FRAME_ORDER: LetterheadFrameId[] = [
-  "wave",
   "corner_cut",
-  "dual_bar",
-  "soft_arc",
   "diagonal",
+  "wave",
+  "crest_line",
+  "soft_arc",
   "ribbon",
   "split_block",
-  "crest_line",
+  "dual_bar",
 ];
 
 export function parseLetterheadFrameId(value: string | null | undefined): LetterheadFrameId {
   if (value && value in LETTERHEAD_FRAMES) return value as LetterheadFrameId;
-  return "wave";
+  return "corner_cut";
+}
+
+/** Dark accent for layered shapes — never pure black. */
+function inkOf(primary: string): string {
+  const hex = primary.replace("#", "");
+  if (hex.length !== 6) return primary;
+  const n = parseInt(hex, 16);
+  const r = Math.max(0, ((n >> 16) & 255) - 28);
+  const g = Math.max(0, ((n >> 8) & 255) - 28);
+  const b = Math.max(0, (n & 255) - 28);
+  return `#${((r << 16) | (g << 8) | b).toString(16).padStart(6, "0")}`;
 }
 
 function safeHttpUrl(value: unknown): string | null {
@@ -65,64 +79,182 @@ function safeHttpUrl(value: unknown): string | null {
   }
 }
 
-function headerDecorSvg(frame: LetterheadFrameId, primary: string, accent: string, rtl: boolean): string {
+/**
+ * Header art — viewBox 800×140 (≈ 18% of A4 height when scaled to page width).
+ * Shapes sit in corners; brand row lives in the clear white zone.
+ */
+function headerArtSvg(
+  frame: LetterheadFrameId,
+  primary: string,
+  accent: string,
+  surface: string,
+  rtl: boolean
+): string {
   const flip = rtl ? `transform="scale(-1,1) translate(-800,0)"` : "";
+  const ink = inkOf(primary);
+
   switch (frame) {
-    case "wave":
-      return `<svg class="lh-decor lh-decor--header" viewBox="0 0 800 90" preserveAspectRatio="none" aria-hidden="true"><g ${flip}><path fill="${primary}" d="M0 0h800v52C620 88 420 40 0 70V0z"/><path fill="${accent}" d="M0 48c260 28 480-20 800 8V62C560 28 300 78 0 58V48z" opacity="0.92"/></g></svg>`;
+    /* Dream Studio — overlapping parallelogram wings, top-right */
     case "corner_cut":
-      return `<svg class="lh-decor lh-decor--header" viewBox="0 0 800 90" preserveAspectRatio="none" aria-hidden="true"><g ${flip}><polygon fill="${primary}" points="520,0 800,0 800,90 620,90"/><polygon fill="${accent}" points="560,0 800,0 800,38 680,38"/><polygon fill="${accent}" points="0,0 120,0 0,48" opacity="0.85"/></g></svg>`;
-    case "dual_bar":
-      return `<svg class="lh-decor lh-decor--header" viewBox="0 0 800 90" preserveAspectRatio="none" aria-hidden="true"><g ${flip}><rect fill="${primary}" width="800" height="54"/><rect fill="${accent}" y="54" width="800" height="10"/><rect fill="${accent}" x="640" y="0" width="160" height="54" opacity="0.35"/></g></svg>`;
-    case "soft_arc":
-      return `<svg class="lh-decor lh-decor--header" viewBox="0 0 800 90" preserveAspectRatio="none" aria-hidden="true"><g ${flip}><path fill="${primary}" d="M0 0h800v40c-180 48-420 48-800 0V0z"/><path fill="none" stroke="${accent}" stroke-width="6" d="M0 58c220 36 520 36 800 0"/></g></svg>`;
+      return `<svg class="lh-art lh-art--header" viewBox="0 0 800 140" preserveAspectRatio="xMaxYMin meet" aria-hidden="true"><g ${flip}>
+        <rect x="0" y="0" width="800" height="3" fill="${ink}" opacity="0.35"/>
+        <polygon fill="${ink}" points="520,0 800,0 800,78 610,78"/>
+        <polygon fill="${accent}" points="560,0 800,0 800,36 640,36"/>
+        <polygon fill="${accent}" points="500,0 545,0 505,78 460,78" opacity="0.55"/>
+      </g></svg>`;
+
+    /* Triangle corner stack — top-right + slim left tip */
     case "diagonal":
-      return `<svg class="lh-decor lh-decor--header" viewBox="0 0 800 90" preserveAspectRatio="none" aria-hidden="true"><g ${flip}><polygon fill="${primary}" points="0,0 800,0 800,28 180,90 0,90"/><polygon fill="${accent}" points="200,0 360,0 120,90 0,90 0,70"/></g></svg>`;
-    case "ribbon":
-      return `<svg class="lh-decor lh-decor--header" viewBox="0 0 800 90" preserveAspectRatio="none" aria-hidden="true"><g ${flip}><path fill="${primary}" d="M0 0h800v36H0z"/><path fill="${accent}" d="M0 36h520l40 18-40 18H0z"/><path fill="${primary}" d="M520 36l40 18 40-18v36H520z" opacity="0.9"/></g></svg>`;
-    case "split_block":
-      return `<svg class="lh-decor lh-decor--header" viewBox="0 0 800 90" preserveAspectRatio="none" aria-hidden="true"><g ${flip}><rect fill="${primary}" width="420" height="70"/><rect fill="${accent}" x="420" width="380" height="14"/><rect fill="${primary}" x="420" y="56" width="380" height="14" opacity="0.55"/><circle cx="400" cy="35" r="18" fill="${accent}"/></g></svg>`;
+      return `<svg class="lh-art lh-art--header" viewBox="0 0 800 140" preserveAspectRatio="xMaxYMin meet" aria-hidden="true"><g ${flip}>
+        <polygon fill="${ink}" points="620,0 800,0 800,110"/>
+        <polygon fill="${accent}" points="560,0 720,0 800,70 800,110 640,40"/>
+        <polygon fill="${primary}" points="680,0 800,0 800,48" opacity="0.85"/>
+        <polygon fill="${accent}" points="0,0 95,0 0,55"/>
+      </g></svg>`;
+
+    /* Dual wave — thick primary + secondary ink wave (Company template) */
+    case "wave":
+      return `<svg class="lh-art lh-art--header" viewBox="0 0 800 140" preserveAspectRatio="none" aria-hidden="true"><g ${flip}>
+        <path fill="${accent}" d="M0 0h800v78C640 118 420 95 0 108V0z"/>
+        <path fill="${primary}" d="M0 0h800v58C600 98 380 72 0 88V0z"/>
+        <path fill="${ink}" d="M0 72c280 42 520-8 800 28v18C560 78 300 128 0 98V72z" opacity="0.92"/>
+        <path fill="${surface}" d="M0 95c300 28 520-12 800 18V140H0z"/>
+      </g></svg>`;
+
+    /* Parallel bars + corner parallelograms (Personal Brand teal style) */
     case "crest_line":
+      return `<svg class="lh-art lh-art--header" viewBox="0 0 800 140" preserveAspectRatio="xMaxYMin meet" aria-hidden="true"><g ${flip}>
+        <rect x="0" y="8" width="620" height="10" fill="${accent}"/>
+        <polygon fill="${ink}" points="600,0 800,0 800,48 640,48"/>
+        <polygon fill="${accent}" points="560,52 760,52 720,92 520,92"/>
+      </g></svg>`;
+
+    /* Soft double arcs (Brands green) — logo sits in white center top */
+    case "soft_arc":
+      return `<svg class="lh-art lh-art--header" viewBox="0 0 800 140" preserveAspectRatio="none" aria-hidden="true"><g ${flip}>
+        <path fill="${accent}" d="M0 0h800v28C560 70 240 70 0 28V0z"/>
+        <path fill="${primary}" d="M0 18h800v36C580 92 220 92 0 54V18z"/>
+        <path fill="none" stroke="${accent}" stroke-width="5" d="M40 78c220 36 500 36 720 0"/>
+      </g></svg>`;
+
+    /* Tech wave — red over navy curves */
+    case "ribbon":
+      return `<svg class="lh-art lh-art--header" viewBox="0 0 800 140" preserveAspectRatio="none" aria-hidden="true"><g ${flip}>
+        <path fill="${primary}" d="M0 0h800v70C580 115 260 100 0 88V0z"/>
+        <path fill="${accent}" d="M0 0h800v42C600 78 300 55 0 62V0z"/>
+        <path fill="${surface}" d="M0 85c280 30 520-5 800 20V140H0z"/>
+      </g></svg>`;
+
+    /* Rounded navy block left + yellow rules (LZ company) */
+    case "split_block":
+      return `<svg class="lh-art lh-art--header" viewBox="0 0 800 140" preserveAspectRatio="none" aria-hidden="true"><g ${flip}>
+        <rect x="0" y="0" width="800" height="6" fill="${accent}"/>
+        <path fill="${primary}" d="M0 6h380v88c0 18-14 32-32 32H0V6z"/>
+        <rect x="400" y="98" width="360" height="5" fill="${accent}"/>
+        <path fill="${surface}" d="M360 6h440v100c0 0-40 0-80-40S400 6 360 6z" opacity="0"/>
+      </g></svg>`;
+
+    /* Angled bottom-style header bar with white swoop */
+    case "dual_bar":
     default:
-      return `<svg class="lh-decor lh-decor--header" viewBox="0 0 800 90" preserveAspectRatio="none" aria-hidden="true"><g ${flip}><rect fill="${primary}" y="0" width="800" height="8"/><rect fill="${accent}" y="12" width="800" height="3"/><path fill="${primary}" d="M300 20h200l20 28H280z" opacity="0.15"/></g></svg>`;
+      return `<svg class="lh-art lh-art--header" viewBox="0 0 800 140" preserveAspectRatio="none" aria-hidden="true"><g ${flip}>
+        <path fill="${accent}" d="M0 0h800v72C620 110 400 85 0 100V0z"/>
+        <path fill="${primary}" d="M0 0h800v52C580 90 360 68 0 78V0z"/>
+        <path fill="${ink}" d="M0 68c300 38 500-10 800 22v14C540 72 280 118 0 92V68z" opacity="0.88"/>
+        <path fill="${surface}" d="M0 100c320 22 500-8 800 12V140H0z"/>
+      </g></svg>`;
   }
 }
 
-function footerDecorSvg(frame: LetterheadFrameId, primary: string, accent: string, rtl: boolean): string {
+/**
+ * Footer art — viewBox 800×110 (≈ 13% of A4).
+ * Contact row sits above this band in HTML.
+ */
+function footerArtSvg(
+  frame: LetterheadFrameId,
+  primary: string,
+  accent: string,
+  surface: string,
+  rtl: boolean
+): string {
   const flip = rtl ? `transform="scale(-1,1) translate(-800,0)"` : "";
+  const ink = inkOf(primary);
+
   switch (frame) {
-    case "wave":
-      return `<svg class="lh-decor lh-decor--footer" viewBox="0 0 800 80" preserveAspectRatio="none" aria-hidden="true"><g ${flip}><path fill="${accent}" d="M0 28c280-36 520 24 800-4V80H0z" opacity="0.9"/><path fill="${primary}" d="M0 40c260-30 540 20 800-2V80H0z"/></g></svg>`;
     case "corner_cut":
-      return `<svg class="lh-decor lh-decor--footer" viewBox="0 0 800 80" preserveAspectRatio="none" aria-hidden="true"><g ${flip}><polygon fill="${primary}" points="0,30 180,80 0,80"/><rect fill="${primary}" y="58" width="800" height="22"/><polygon fill="${accent}" points="640,40 800,40 800,80 700,80"/></g></svg>`;
-    case "dual_bar":
-      return `<svg class="lh-decor lh-decor--footer" viewBox="0 0 800 80" preserveAspectRatio="none" aria-hidden="true"><g ${flip}><rect fill="${accent}" y="40" width="800" height="10"/><rect fill="${primary}" y="50" width="800" height="30"/></g></svg>`;
-    case "soft_arc":
-      return `<svg class="lh-decor lh-decor--footer" viewBox="0 0 800 80" preserveAspectRatio="none" aria-hidden="true"><g ${flip}><path fill="none" stroke="${accent}" stroke-width="5" d="M0 22c220-30 520-30 800 0"/><path fill="${primary}" d="M0 36c260-40 540-40 800 0V80H0z"/></g></svg>`;
+      return `<svg class="lh-art lh-art--footer" viewBox="0 0 800 110" preserveAspectRatio="xMinYMax meet" aria-hidden="true"><g ${flip}>
+        <polygon fill="${accent}" points="0,48 140,48 100,110 0,110"/>
+        <polygon fill="${ink}" points="90,55 200,55 160,110 50,110" opacity="0.45"/>
+        <rect x="0" y="88" width="800" height="22" fill="${ink}"/>
+        <polygon fill="${accent}" points="0,78 800,78 800,88 0,88"/>
+      </g></svg>`;
+
     case "diagonal":
-      return `<svg class="lh-decor lh-decor--footer" viewBox="0 0 800 80" preserveAspectRatio="none" aria-hidden="true"><g ${flip}><polygon fill="${primary}" points="0,50 620,20 800,20 800,80 0,80"/><polygon fill="${accent}" points="560,28 800,28 800,48 600,48"/></g></svg>`;
-    case "ribbon":
-      return `<svg class="lh-decor lh-decor--footer" viewBox="0 0 800 80" preserveAspectRatio="none" aria-hidden="true"><g ${flip}><path fill="${accent}" d="M280 18h520v44H280l-20-22z"/><path fill="${primary}" d="M0 40h800v40H0z"/></g></svg>`;
-    case "split_block":
-      return `<svg class="lh-decor lh-decor--footer" viewBox="0 0 800 80" preserveAspectRatio="none" aria-hidden="true"><g ${flip}><rect fill="${accent}" y="28" width="800" height="10"/><rect fill="${primary}" y="38" width="520" height="42"/><rect fill="${primary}" x="520" y="50" width="280" height="30" opacity="0.7"/></g></svg>`;
+      return `<svg class="lh-art lh-art--footer" viewBox="0 0 800 110" preserveAspectRatio="xMinYMax meet" aria-hidden="true"><g ${flip}>
+        <polygon fill="${accent}" points="0,110 0,35 160,110"/>
+        <polygon fill="${primary}" points="0,110 40,55 220,110"/>
+        <polygon fill="${ink}" points="80,110 0,70 0,110"/>
+      </g></svg>`;
+
+    case "wave":
+      return `<svg class="lh-art lh-art--footer" viewBox="0 0 800 110" preserveAspectRatio="none" aria-hidden="true"><g ${flip}>
+        <path fill="${surface}" d="M0 0h800v40C520 10 280 55 0 28V0z"/>
+        <path fill="${accent}" d="M0 55h560L800 110H0z"/>
+        <polygon fill="${ink}" points="720,70 800,70 800,110 680,110"/>
+      </g></svg>`;
+
     case "crest_line":
+      return `<svg class="lh-art lh-art--footer" viewBox="0 0 800 110" preserveAspectRatio="xMinYMax meet" aria-hidden="true"><g ${flip}>
+        <polygon fill="${ink}" points="0,55 160,55 120,110 0,110"/>
+        <rect x="80" y="88" width="720" height="22" fill="${accent}"/>
+        <polygon fill="${accent}" points="480,52 700,52 660,88 440,88"/>
+      </g></svg>`;
+
+    case "soft_arc":
+      return `<svg class="lh-art lh-art--footer" viewBox="0 0 800 110" preserveAspectRatio="none" aria-hidden="true"><g ${flip}>
+        <path fill="none" stroke="${accent}" stroke-width="6" d="M30 28c230-40 510-40 740 0"/>
+        <path fill="${primary}" d="M0 48c260-44 540-44 800 0V110H0z"/>
+      </g></svg>`;
+
+    case "ribbon":
+      return `<svg class="lh-art lh-art--footer" viewBox="0 0 800 110" preserveAspectRatio="none" aria-hidden="true"><g ${flip}>
+        <path fill="${accent}" d="M0 35c280-40 520 10 800-5V70C560 95 280 50 0 78V35z"/>
+        <path fill="${primary}" d="M0 58c300-35 520 15 800 0V110H0z"/>
+      </g></svg>`;
+
+    case "split_block":
+      return `<svg class="lh-art lh-art--footer" viewBox="0 0 800 110" preserveAspectRatio="none" aria-hidden="true"><g ${flip}>
+        <rect x="0" y="20" width="800" height="5" fill="${accent}"/>
+        <path fill="${accent}" d="M0 40h300v70c0 0-20 0-48-28S0 40 0 40z"/>
+        <path fill="${primary}" d="M280 40h520v70H280z"/>
+      </g></svg>`;
+
+    case "dual_bar":
     default:
-      return `<svg class="lh-decor lh-decor--footer" viewBox="0 0 800 80" preserveAspectRatio="none" aria-hidden="true"><g ${flip}><rect fill="${accent}" y="36" width="800" height="3"/><rect fill="${primary}" y="48" width="800" height="32"/></g></svg>`;
+      return `<svg class="lh-art lh-art--footer" viewBox="0 0 800 110" preserveAspectRatio="none" aria-hidden="true"><g ${flip}>
+        <path fill="${accent}" d="M0 55h580L720 110H0z"/>
+        <polygon fill="${ink}" points="680,70 800,55 800,110 640,110"/>
+      </g></svg>`;
   }
 }
 
-function logoBlock(data: ProposalExportData, onPrimary: string, accent: string): string {
+function logoBlock(data: ProposalExportData, primary: string, accent: string): string {
   const logo = safeHttpUrl(data.logoUrl);
   const name = data.companyName?.trim() || "";
   if (logo) {
     return `<div class="lh-logo"><img src="${escapeHtml(logo)}" alt=""></div>`;
   }
   if (name) {
-    return `<div class="lh-logo lh-logo--mono" style="border-color:${accent};color:${accent};background:${onPrimary}22">${escapeHtml(
+    return `<div class="lh-logo lh-logo--mono" style="background:${primary};color:${accent};border-color:${accent}">${escapeHtml(
       companyInitials(name)
     )}</div>`;
   }
   return "";
+}
+
+/** Frames where brand sits on colored wave (need light text). */
+function brandOnColor(frame: LetterheadFrameId): boolean {
+  return frame === "wave" || frame === "dual_bar" || frame === "ribbon" || frame === "split_block";
 }
 
 export function buildLetterheadHeaderHtml(options: {
@@ -136,11 +268,16 @@ export function buildLetterheadHeaderHtml(options: {
   const { data, palette, frameId, dir, docTitle, preparedForLabel } = options;
   const rtl = dir === "rtl";
   const company = data.companyName?.trim() || "";
-  return `<header class="banner lh-header lh-frame--${frameId}">
-      ${headerDecorSvg(frameId, palette.primary, palette.accent, rtl)}
+  const onColor = brandOnColor(frameId);
+  const tone = onColor ? "lh-header--on-color" : "lh-header--on-white";
+
+  return `<header class="banner lh-header lh-frame--${frameId} ${tone}">
+      <div class="lh-header-art" aria-hidden="true">
+        ${headerArtSvg(frameId, palette.primary, palette.accent, palette.surface, rtl)}
+      </div>
       <div class="lh-header-inner">
         <div class="lh-brand">
-          ${logoBlock(data, palette.onPrimary, palette.accent)}
+          ${logoBlock(data, palette.primary, palette.accent)}
           <div class="lh-brand-text">
             ${company ? `<div class="lh-company">${escapeHtml(company)}</div>` : ""}
             <div class="lh-doc-title">${escapeHtml(docTitle)}</div>
@@ -186,7 +323,7 @@ export function buildLetterheadFooterHtml(options: {
           .slice(0, 4)
           .map(
             (item) =>
-              `<div class="lh-footer-item"><span class="lh-footer-dot" aria-hidden="true"></span><div><div class="lh-footer-label">${escapeHtml(
+              `<div class="lh-footer-item"><span class="lh-footer-icon" aria-hidden="true"></span><div><div class="lh-footer-label">${escapeHtml(
                 item.label
               )}</div><div class="lh-footer-value">${escapeHtml(item.value)}</div></div></div>`
           )
@@ -198,11 +335,12 @@ export function buildLetterheadFooterHtml(options: {
         ${company ? `<div class="lh-footer-company">${escapeHtml(company)}</div>` : ""}
         ${grid}
       </div>
-      ${footerDecorSvg(frameId, palette.primary, palette.accent, rtl)}
+      <div class="lh-footer-art" aria-hidden="true">
+        ${footerArtSvg(frameId, palette.primary, palette.accent, palette.surface, rtl)}
+      </div>
     </footer>`;
 }
 
-/** Optional center watermark at ~10% opacity — logo or company monogram. */
 export function buildCenterWatermarkHtml(options: {
   data: ProposalExportData;
   palette: TemplatePalette;
@@ -221,36 +359,55 @@ export function buildCenterWatermarkHtml(options: {
 }
 
 export function buildLetterheadFrameCss(palette: TemplatePalette, dir: "rtl" | "ltr"): string {
-  const { primary, accent, onPrimary, textMuted } = palette;
+  const { primary, accent, onPrimary, textMuted, surface } = palette;
   return `
     .lh-header, .lh-footer {
       position: relative;
       overflow: hidden;
-      background: transparent !important;
+      background: #ffffff !important;
       background-image: none !important;
       border: none !important;
-      border-bottom: none !important;
-      border-top: none !important;
       padding: 0 !important;
-      color: ${primary};
       box-shadow: none !important;
+      color: ${primary};
     }
-    .lh-decor {
-      display: block;
-      width: 100%;
+    .lh-header {
+      min-height: 118px;
+    }
+    .lh-footer {
+      min-height: 108px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+    .lh-header-art, .lh-footer-art {
+      position: absolute;
+      left: 0;
+      right: 0;
       pointer-events: none;
+      line-height: 0;
     }
-    .lh-decor--header { height: 72px; }
-    .lh-decor--footer { height: 56px; margin-top: 8px; }
+    .lh-header-art {
+      top: 0;
+      height: 118px;
+    }
+    .lh-footer-art {
+      bottom: 0;
+      height: 88px;
+    }
+    .lh-art {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
     .lh-header-inner {
       position: relative;
-      z-index: 1;
+      z-index: 2;
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
       gap: 16px;
-      padding: 10px 28px 14px;
-      margin-top: -58px;
+      padding: 22px 32px 16px;
       flex-wrap: wrap;
     }
     .lh-brand {
@@ -258,10 +415,11 @@ export function buildLetterheadFrameCss(palette: TemplatePalette, dir: "rtl" | "
       align-items: center;
       gap: 12px;
       min-width: 0;
+      max-width: 58%;
     }
     .lh-logo {
-      width: 52px;
-      height: 52px;
+      width: 56px;
+      height: 56px;
       border-radius: 10px;
       background: #fff;
       border: 1.5px solid ${accent};
@@ -270,7 +428,7 @@ export function buildLetterheadFrameCss(palette: TemplatePalette, dir: "rtl" | "
       justify-content: center;
       overflow: hidden;
       flex-shrink: 0;
-      box-shadow: 0 4px 14px rgba(47,74,110,0.12);
+      box-shadow: 0 2px 10px rgba(47,74,110,0.1);
     }
     .lh-logo img {
       width: 100%;
@@ -279,31 +437,33 @@ export function buildLetterheadFrameCss(palette: TemplatePalette, dir: "rtl" | "
       padding: 6px;
     }
     .lh-logo--mono {
-      font-size: 15px;
+      font-size: 16px;
       font-weight: 800;
       letter-spacing: 0.06em;
+      border-radius: 10px;
     }
     .lh-company {
-      font-size: 14px;
+      font-size: 16px;
       font-weight: 800;
-      color: ${onPrimary};
-      line-height: 1.3;
-      text-shadow: 0 1px 2px rgba(47,74,110,0.25);
+      line-height: 1.25;
+      letter-spacing: 0.01em;
+      color: ${primary};
     }
     .lh-doc-title {
       font-size: 10px;
       font-weight: 700;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       color: ${accent};
-      margin-top: 2px;
+      margin-top: 3px;
     }
     .lh-header-meta {
       text-align: ${dir === "rtl" ? "left" : "right"};
-      max-width: 280px;
+      max-width: 260px;
+      padding-top: 4px;
     }
     .lh-project {
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 700;
       color: ${primary};
       line-height: 1.35;
@@ -311,28 +471,26 @@ export function buildLetterheadFrameCss(palette: TemplatePalette, dir: "rtl" | "
     .lh-client {
       font-size: 11px;
       color: ${textMuted};
-      margin-top: 3px;
+      margin-top: 4px;
     }
-    /* Frames with solid top bars need light text on the brand row */
-    .lh-frame--dual_bar .lh-company,
-    .lh-frame--ribbon .lh-company,
-    .lh-frame--split_block .lh-company,
-    .lh-frame--wave .lh-company,
-    .lh-frame--soft_arc .lh-company,
-    .lh-frame--diagonal .lh-company {
-      color: ${onPrimary};
-    }
-    .lh-frame--crest_line .lh-company,
-    .lh-frame--crest_line .lh-project {
-      color: ${primary};
-    }
-    .lh-frame--crest_line .lh-doc-title { color: ${accent}; }
-    .lh-frame--crest_line .lh-header-inner { margin-top: 4px; }
-    .lh-frame--corner_cut .lh-header-inner { margin-top: -40px; }
+    /* Brand on colored wave */
+    .lh-header--on-color .lh-company { color: ${onPrimary}; text-shadow: 0 1px 2px rgba(47,74,110,0.2); }
+    .lh-header--on-color .lh-doc-title { color: ${accent}; }
+    .lh-header--on-color .lh-project { color: ${onPrimary}; }
+    .lh-header--on-color .lh-client { color: ${onPrimary}cc; }
+    .lh-header--on-color .lh-logo { border-color: ${onPrimary}55; }
+    .lh-frame--split_block .lh-header-inner { padding-inline-start: 28px; }
+    .lh-frame--split_block.lh-header--on-color .lh-brand { max-width: 44%; }
+    .lh-frame--soft_arc .lh-header-inner { justify-content: center; text-align: center; padding-top: 12px; }
+    .lh-frame--soft_arc .lh-brand { flex-direction: column; max-width: 100%; }
+    .lh-frame--soft_arc .lh-header-meta { display: none; }
+    .lh-frame--ribbon .lh-header-inner { padding-top: 48px; }
+    .lh-frame--ribbon.lh-header--on-color .lh-company { color: ${accent}; }
     .lh-footer-inner {
       position: relative;
-      z-index: 1;
-      padding: 10px 28px 4px;
+      z-index: 2;
+      padding: 10px 32px 12px;
+      background: linear-gradient(180deg, #ffffff 70%, ${surface}00 100%);
     }
     .lh-footer-company {
       font-size: 12px;
@@ -342,8 +500,8 @@ export function buildLetterheadFrameCss(palette: TemplatePalette, dir: "rtl" | "
     }
     .lh-footer-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 8px 14px;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 10px 16px;
     }
     .lh-footer-item {
       display: flex;
@@ -352,24 +510,49 @@ export function buildLetterheadFrameCss(palette: TemplatePalette, dir: "rtl" | "
       font-size: 10px;
       color: ${textMuted};
     }
-    .lh-footer-dot {
-      width: 8px;
-      height: 8px;
-      margin-top: 3px;
-      border-radius: 2px;
+    .lh-footer-icon {
+      width: 14px;
+      height: 14px;
+      margin-top: 1px;
+      border-radius: 3px;
       background: ${accent};
       flex-shrink: 0;
     }
     .lh-footer-label {
       font-size: 9px;
       font-weight: 700;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
       color: ${primary};
       margin-bottom: 1px;
     }
     .lh-footer-value { line-height: 1.4; word-break: break-word; }
     .lh-footer-fallback { font-size: 10px; color: ${textMuted}; }
+    .lh-frame--soft_arc .lh-footer-inner {
+      padding-bottom: 8px;
+    }
+    .lh-frame--soft_arc .lh-footer-item,
+    .lh-frame--soft_arc .lh-footer-label,
+    .lh-frame--soft_arc .lh-footer-value,
+    .lh-frame--soft_arc .lh-footer-company { color: ${onPrimary}; }
+    .lh-frame--soft_arc .lh-footer-icon { background: ${accent}; }
+    .lh-frame--soft_arc .lh-footer-inner {
+      position: absolute;
+      left: 0; right: 0; bottom: 10px;
+      z-index: 3;
+      background: transparent;
+      padding-bottom: 4px;
+    }
+    .lh-frame--split_block .lh-footer-inner {
+      position: absolute;
+      left: 0; right: 0; bottom: 18px;
+      z-index: 3;
+      background: transparent;
+      padding-bottom: 0;
+    }
+    .lh-frame--split_block .lh-footer-company,
+    .lh-frame--split_block .lh-footer-label { color: ${onPrimary}; }
+    .lh-frame--split_block .lh-footer-value { color: ${onPrimary}dd; }
     .lh-center-watermark {
       position: fixed;
       inset: 0;
@@ -381,8 +564,8 @@ export function buildLetterheadFrameCss(palette: TemplatePalette, dir: "rtl" | "
     }
     .lh-wm-mark {
       opacity: 0.1;
-      width: min(42vw, 280px);
-      height: min(42vw, 280px);
+      width: min(42vw, 260px);
+      height: min(42vw, 260px);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -391,17 +574,14 @@ export function buildLetterheadFrameCss(palette: TemplatePalette, dir: "rtl" | "
       width: 100%;
       height: 100%;
       object-fit: contain;
-      filter: grayscale(0.15);
     }
     .lh-wm-mono {
-      font-size: 96px;
+      font-size: 88px;
       font-weight: 800;
       letter-spacing: 0.08em;
       line-height: 1;
-      opacity: 1;
     }
     @media print {
-      .lh-center-watermark { position: fixed; }
       .lh-wm-mark { opacity: 0.1; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     }
   `;

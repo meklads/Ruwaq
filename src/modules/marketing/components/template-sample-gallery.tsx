@@ -150,7 +150,7 @@ export function TemplateSampleGallery({ locale, items, labels, startCta, studio 
   const [customAccent, setCustomAccent] = useState("#C9A063");
   const [customSurface, setCustomSurface] = useState("#F7F4EF");
   const [useCustom, setUseCustom] = useState(false);
-  const [frameId, setFrameId] = useState<LetterheadFrameId>("wave");
+  const [frameId, setFrameId] = useState<LetterheadFrameId>("corner_cut");
   const [centerWatermark, setCenterWatermark] = useState(true);
   const [activeSlug, setActiveSlug] = useState<SampleTemplateSlug>(
     items[0]?.slug ?? "ruwaq-executive"

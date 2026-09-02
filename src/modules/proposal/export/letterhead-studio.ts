@@ -128,7 +128,8 @@ export function renderLetterheadStudioHtml(options: {
       position: relative;
       z-index: 1;
       flex: 1;
-      padding: 28px 36px 20px;
+      padding: 22px 36px 18px;
+      background: #fff;
     }
     .studio-to {
       font-size: 12px;
