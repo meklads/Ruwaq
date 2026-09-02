@@ -1822,7 +1822,7 @@ export const en: Messages = {
   startWithLook: "Start with this look",
   subscribeHint: "Custom colors and advanced frames unlock with a subscription",
   frameTitle: "Header & footer library",
-  frameHint: "8 ready frames. Click to preview: one empty page — “Logo here” circle and “Address here” boxes.",
+  frameHint: "8 exact reference designs — including template.pdf. Click for a full-page preview with logo circle and address boxes.",
   watermarkToggle: "Soft watermark (10%)",
   gallery: [
    {

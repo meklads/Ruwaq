@@ -18,13 +18,7 @@ import {
   buildPaletteThemeCss,
   resolveTemplatePalette,
 } from "../template-palettes";
-import {
-  buildCenterWatermarkHtml,
-  buildLetterheadFooterHtml,
-  buildLetterheadFrameCss,
-  buildLetterheadHeaderHtml,
-  parseLetterheadFrameId,
-} from "../letterhead-frames";
+import { parseLetterheadFrameId } from "../letterhead-frames";
 
 function assetUrl(base: string, path: string): string {
   return `${base.replace(/\/$/, "")}${path}`;
@@ -275,8 +269,8 @@ export function renderRuwaqTemplate(
     surface: data.paletteSurface,
   });
   const frameId = parseLetterheadFrameId(data.letterheadFrameId);
-  const showCenterWatermark = data.centerWatermark !== false;
-  const bodyClass = `${showWatermark ? "has-watermark" : ""}${isExecutive ? " variant-executive" : ""}${hfStyle ? ` hf-${hfStyle.id}` : ""} lh-active`.trim();
+  void frameId;
+  const bodyClass = `${showWatermark ? "has-watermark" : ""}${isExecutive ? " variant-executive" : ""}${hfStyle ? ` hf-${hfStyle.id}` : ""}`.trim();
 
   const milestones = Array.isArray(data.timeline?.milestones)
     ? (data.timeline!.milestones as Record<string, unknown>[])
@@ -325,37 +319,6 @@ export function renderRuwaqTemplate(
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">`;
 
-  const letterheadHeader = buildLetterheadHeaderHtml({
-    data,
-    palette,
-    frameId,
-    dir,
-    docTitle,
-    preparedForLabel: labels.preparedFor,
-  });
-
-  const letterheadFooter = buildLetterheadFooterHtml({
-    data,
-    palette,
-    frameId,
-    dir,
-    labels: {
-      phone: labels.phone,
-      email: labels.email,
-      address: labels.address,
-      crNumber: labels.crNumber,
-      vatNumber: labels.vatNumber,
-      websiteLink: labels.websiteLink,
-      footer: labels.footer,
-    },
-  });
-
-  const centerWatermark = buildCenterWatermarkHtml({
-    palette,
-    enabled: showCenterWatermark,
-    label: data.companyName?.trim() || (locale === "ar" ? "نسق" : "NQ"),
-  });
-
   const coverChromeFooter = `<div class="cover-chrome-footer-inner">
       <div class="cover-chrome-footer-company">${escapeHtml(data.companyName?.trim() || labels.logoPlaceholder)}</div>
       <div class="cover-chrome-footer-meta">${escapeHtml(
@@ -363,6 +326,17 @@ export function renderRuwaqTemplate(
           (locale === "ar" ? footer.addressAr : footer.addressEn)
       )}</div>
     </div>`;
+
+  const classicHeader = `<header class="banner">
+      <div class="banner-top">
+        <div class="banner-main">
+          <div class="banner-badge">${escapeHtml(docTitle)}</div>
+          <h1 class="banner-title">${escapeHtml(data.projectName)}</h1>
+          <div class="banner-client">${escapeHtml(labels.preparedFor)} ${escapeHtml(data.clientName)}</div>
+        </div>
+        ${showBrandPanel ? headerLogo : ""}
+      </div>
+    </header>`;
 
   const coverPage = buildCoverPageHtml({
     locale: locale === "ar" ? "ar" : "en",
@@ -920,18 +894,16 @@ export function renderRuwaqTemplate(
     ${buildCoverPageCss(colors, dir, isExecutive)}
     ${hfStyle ? hfStyle.css(dir) : ""}
     ${buildPaletteThemeCss(palette, dir)}
-    ${buildLetterheadFrameCss(palette, dir)}
     ${buildPrintPaginationCss(colors.white)}
   </style>
   ${PAGED_JS_SCRIPT_TAG}
 </head>
 <body class="${bodyClass}">
   ${watermarkOverlay}
-  ${centerWatermark}
   <button class="print-btn no-print" onclick="window.print()">${escapeHtml(labels.savePdf)}</button>
   <div class="page-wrap">
     ${coverPage}
-    ${letterheadHeader}
+    ${classicHeader}
 
     <!-- Rendered here (not at the end of the document) so Paged.js's
          position: running(pageFooter) captures it before laying out
@@ -939,7 +911,7 @@ export function renderRuwaqTemplate(
          its source appears in the DOM, so this must sit near the top,
          right alongside the header, even though it visually renders in
          the page's bottom margin box on every page. -->
-    ${platformBranding ? platformFooter : letterheadFooter}
+    ${platformBranding ? platformFooter : clientFooter}
 
     <main class="content">
       <div class="meta-grid">

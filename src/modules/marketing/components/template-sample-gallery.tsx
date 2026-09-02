@@ -1,19 +1,11 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import type { Locale } from "@/shared/i18n/locale";
 import {
-  TEMPLATE_PALETTE_ORDER,
-  TEMPLATE_PALETTES,
-  paletteToQuery,
-  resolveTemplatePalette,
-  type TemplatePalette,
-} from "@/modules/proposal/export/template-palettes";
-import {
   LETTERHEAD_FRAME_ORDER,
   LETTERHEAD_FRAMES,
-  buildFrameThumbSvg,
   type LetterheadFrameId,
 } from "@/modules/proposal/export/letterhead-frames";
 
@@ -41,19 +33,12 @@ type Props = {
   locale: Locale;
   labels: Labels;
   startCta: string;
-  /** @deprecated library no longer needs proposal sample items */
   items?: readonly unknown[];
   studio?: boolean;
 };
 
-function previewUrl(
-  locale: Locale,
-  palette: TemplatePalette,
-  frameId: LetterheadFrameId,
-  centerWatermark: boolean
-): string {
-  const wm = centerWatermark ? "1" : "0";
-  return `/api/templates/samples/ruwaq-classic?locale=${locale}&${paletteToQuery(palette)}&frame=${frameId}&wm=${wm}`;
+function previewUrl(locale: Locale, frameId: LetterheadFrameId, wm: boolean): string {
+  return `/api/templates/samples/ruwaq-classic?locale=${locale}&frame=${frameId}&wm=${wm ? "1" : "0"}`;
 }
 
 function PreviewModal({
@@ -139,21 +124,14 @@ function PreviewModal({
 }
 
 export function TemplateSampleGallery({ locale, labels, startCta }: Props) {
-  const [paletteId, setPaletteId] = useState<string>("gold_sand");
-  const [frameId, setFrameId] = useState<LetterheadFrameId>("corner_cut");
+  const [frameId, setFrameId] = useState<LetterheadFrameId>("graphics_house");
   const [centerWatermark, setCenterWatermark] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
 
-  const palette = useMemo(() => resolveTemplatePalette({ paletteId }), [paletteId]);
   const frame = LETTERHEAD_FRAMES[frameId];
   const frameName = locale === "ar" ? frame.nameAr : frame.nameEn;
-  const src = previewUrl(locale, palette, frameId, centerWatermark);
-  const startHref = `/proposals/new?${paletteToQuery(palette)}&frame=${frameId}`;
-
-  const openPreview = (id: LetterheadFrameId) => {
-    setFrameId(id);
-    setModalOpen(true);
-  };
+  const src = previewUrl(locale, frameId, centerWatermark);
+  const startHref = `/proposals/new?frame=${frameId}`;
 
   return (
     <div className="nasaq-library">
@@ -162,38 +140,9 @@ export function TemplateSampleGallery({ locale, labels, startCta }: Props) {
           <h3 className="font-display text-base font-bold text-[#2F4A6E] sm:text-lg">
             {labels.frameTitle}
           </h3>
-          <p className="mt-1 max-w-xl text-sm text-neutral-600">{labels.frameHint}</p>
+          <p className="mt-1 max-w-2xl text-sm text-neutral-600">{labels.frameHint}</p>
         </div>
-        <p className="text-[11px] font-medium text-[#C9A063]">{labels.subscribeHint}</p>
-      </div>
-
-      <div className="mt-4 flex flex-wrap items-center gap-3">
-        <span className="text-[11px] font-bold uppercase tracking-wider text-neutral-500">
-          {labels.paletteTitle}
-        </span>
-        <div className="flex flex-wrap gap-1.5">
-          {TEMPLATE_PALETTE_ORDER.map((id) => {
-            const p = TEMPLATE_PALETTES[id];
-            const selected = paletteId === id;
-            return (
-              <button
-                key={id}
-                type="button"
-                title={locale === "ar" ? p.nameAr : p.nameEn}
-                onClick={() => setPaletteId(id)}
-                className={`h-7 w-7 overflow-hidden rounded-md border-2 transition ${
-                  selected ? "border-[#C9A063] ring-2 ring-[#C9A063]/30" : "border-white shadow"
-                }`}
-              >
-                <span className="flex h-full w-full">
-                  <span className="w-1/2" style={{ background: p.primary }} />
-                  <span className="w-1/2" style={{ background: p.accent }} />
-                </span>
-              </button>
-            );
-          })}
-        </div>
-        <label className="ms-auto flex cursor-pointer items-center gap-2 text-xs text-neutral-600">
+        <label className="flex cursor-pointer items-center gap-2 text-xs text-neutral-600">
           <input
             type="checkbox"
             checked={centerWatermark}
@@ -209,22 +158,28 @@ export function TemplateSampleGallery({ locale, labels, startCta }: Props) {
           const f = LETTERHEAD_FRAMES[id];
           const selected = frameId === id;
           const name = locale === "ar" ? f.nameAr : f.nameEn;
-          const thumb = buildFrameThumbSvg(id, palette.primary, palette.accent);
           return (
             <button
               key={id}
               type="button"
-              onClick={() => openPreview(id)}
+              onClick={() => {
+                setFrameId(id);
+                setModalOpen(true);
+              }}
               className={`group overflow-hidden rounded-xl border bg-white text-start transition hover:-translate-y-0.5 hover:shadow-md ${
                 selected
                   ? "border-[#C9A063] shadow-md ring-1 ring-[#C9A063]/30"
                   : "border-neutral-200"
               }`}
             >
-              <div
-                className="bg-[#ebe6de] p-3"
-                dangerouslySetInnerHTML={{ __html: thumb }}
-              />
+              <div className="aspect-[210/297] overflow-hidden bg-[#ebe6de]">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={f.image}
+                  alt={name}
+                  className="h-full w-full object-cover object-top"
+                />
+              </div>
               <div className="border-t border-neutral-100 px-3 py-2.5">
                 <p className="text-xs font-bold text-[#2F4A6E]">{name}</p>
                 <p className="mt-0.5 text-[10px] text-neutral-500 group-hover:text-[#C9A063]">
@@ -247,7 +202,10 @@ export function TemplateSampleGallery({ locale, labels, startCta }: Props) {
         <Link href={startHref} className="btn-ruwaq-primary px-7 py-2.5 text-sm">
           {labels.startWithLook}
         </Link>
-        <Link href="/proposals/new" className="text-sm font-semibold text-neutral-600 underline-offset-2 hover:underline">
+        <Link
+          href="/proposals/new"
+          className="text-sm font-semibold text-neutral-600 underline-offset-2 hover:underline"
+        >
           {startCta}
         </Link>
       </div>
