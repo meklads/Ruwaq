@@ -512,10 +512,7 @@ export async function duplicateProposal(
 export async function getProposalIdByShareToken(
   token: string
 ): Promise<string | null> {
-  const doc = await db.generatedDocument.findFirst({
-    where: { shareToken: token },
-    select: { proposalId: true },
-  });
-  return doc?.proposalId ?? null;
+  const { getProposalIdByAnyShareToken } = await import("./live-room.service");
+  return getProposalIdByAnyShareToken(token);
 }
 

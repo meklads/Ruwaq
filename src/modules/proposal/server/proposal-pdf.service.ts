@@ -4,6 +4,7 @@ import { asciiFilename } from "./proposal-export-html";
 import { assertCanMutateProposal } from "./proposal-auth";
 import { assertCanPublishProposal } from "./review-gates.service";
 import { logUsageEvent } from "@/shared/lib/usage-events";
+import { ensureProposalShareLink } from "./live-room.service";
 
 function appBaseUrl(): string {
   return (
@@ -39,6 +40,8 @@ export async function exportProposalAsPdf(proposalId: string) {
   } catch (error) {
     console.warn("Could not save GeneratedDocument record:", error);
   }
+
+  await ensureProposalShareLink(proposalId, proposal.clientName, shareToken);
 
   await db.proposal.update({
     where: { id: proposalId },

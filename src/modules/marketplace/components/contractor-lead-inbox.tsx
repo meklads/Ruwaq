@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import Link from "next/link";
 import {
   markLeadMatchResponded,
   markLeadMatchesViewed,
@@ -114,6 +115,12 @@ export function ContractorLeadInbox({
             </p>
 
             <div className="mt-5 flex flex-wrap gap-3">
+              <Link
+                href={`/proposals/new?matchId=${encodeURIComponent(lead.matchId)}`}
+                className="ruwaq-pro-btn-solid px-5 py-2.5 text-sm"
+              >
+                {copy.createProposalCta}
+              </Link>
               <a
                 href={whatsAppUrl}
                 target="_blank"

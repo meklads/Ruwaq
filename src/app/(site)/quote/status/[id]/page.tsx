@@ -4,7 +4,7 @@ import type { MarketplaceLeadStatus } from "@prisma/client";
 import { getMessages } from "@/shared/i18n";
 import { getLocale } from "@/shared/i18n/server";
 import { getPublicLeadStatus } from "@/modules/marketplace/server/lead-status.actions";
-import { buildWhatsAppUrl } from "@/modules/marketplace/lib/lead-phone";
+import { QuoteStatusMatchCard } from "@/modules/marketplace/components/quote-status-match-card";
 
 export const dynamic = "force-dynamic";
 
@@ -92,35 +92,16 @@ export default async function QuoteStatusPage({ params }: Props) {
         {hasMatches ? (
           <div className="mt-10">
             <h2 className="text-sm font-semibold text-neutral-950">{copy.matchesTitle}</h2>
-            <ol className="mt-4 space-y-4">
+            <p className="mt-2 text-sm text-neutral-600">{copy.matchesIntro}</p>
+            <ol className="mt-6 grid gap-6">
               {lead.matches.map((match) => (
-                <li
+                <QuoteStatusMatchCard
                   key={match.listingSlug}
-                  className="flex flex-wrap items-center justify-between gap-3 border border-neutral-200 bg-white p-4"
-                >
-                  <div>
-                    <p className="text-xs font-semibold text-neutral-400">#{match.rank}</p>
-                    <p className="mt-1 font-semibold text-neutral-950">{match.companyName}</p>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    <Link
-                      href={`/listing/${match.listingSlug}`}
-                      className="ruwaq-pro-btn-outline px-4 py-2 text-sm"
-                    >
-                      {copy.viewProfile}
-                    </Link>
-                    {match.whatsapp ? (
-                      <a
-                        href={buildWhatsAppUrl(match.whatsapp, "")}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center rounded-full bg-[#25D366] px-4 py-2 text-sm font-semibold text-white"
-                      >
-                        {copy.whatsapp}
-                      </a>
-                    ) : null}
-                  </div>
-                </li>
+                  match={match}
+                  copy={copy}
+                  locale={locale}
+                  clientName={lead.clientName}
+                />
               ))}
             </ol>
           </div>

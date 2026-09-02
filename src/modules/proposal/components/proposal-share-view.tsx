@@ -14,6 +14,7 @@ type Props = {
   reviewLabels: ReviewLabels;
   exportLabels: ExportLabels;
   dir: "rtl" | "ltr";
+  onPdfDownload?: () => void;
 };
 
 export function ProposalShareView({
@@ -22,6 +23,7 @@ export function ProposalShareView({
   reviewLabels,
   exportLabels,
   dir,
+  onPdfDownload,
 }: Props) {
   const locale = data.locale;
   const isEstimate = data.commercialMode === "estimate_only";
@@ -64,6 +66,7 @@ export function ProposalShareView({
             href={data.pdfUrl}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => onPdfDownload?.()}
             className="btn-ruwaq-primary shrink-0 text-center shadow-ruwaq-lg"
           >
             {labels.downloadOfficialPdf}
@@ -365,6 +368,7 @@ export function ProposalShareView({
             href={data.pdfUrl}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => onPdfDownload?.()}
             className="btn-ruwaq-primary inline-flex w-full justify-center"
           >
             {labels.downloadOfficialPdf}

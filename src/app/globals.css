@@ -1605,6 +1605,58 @@
     @apply normal-case tracking-wide;
   }
 
+  .ruwaq-share-live-root {
+    @apply relative pb-36;
+  }
+
+  .ruwaq-share-live-footer {
+    @apply fixed inset-x-0 bottom-0 z-50 border-t border-ruwaq-stone/60 bg-white/95 backdrop-blur-md;
+  }
+
+  .ruwaq-share-live-footer-inner {
+    @apply mx-auto max-w-4xl px-4 py-4 sm:px-6;
+  }
+
+  .ruwaq-share-live-actions {
+    @apply flex flex-wrap gap-3;
+  }
+
+  .ruwaq-share-live-panel {
+    @apply space-y-4;
+  }
+
+  .ruwaq-share-live-panel-title {
+    @apply text-sm font-bold text-ruwaq-ink;
+  }
+
+  .ruwaq-share-live-field {
+    @apply block space-y-1.5 text-sm;
+  }
+
+  .ruwaq-share-live-checks {
+    @apply space-y-2 text-sm text-ruwaq-ink-soft;
+  }
+
+  .ruwaq-share-live-checks label {
+    @apply flex items-start gap-2;
+  }
+
+  .ruwaq-share-live-message {
+    @apply mb-3 text-sm;
+  }
+
+  .ruwaq-share-live-message--success {
+    @apply text-emerald-700;
+  }
+
+  .ruwaq-share-live-message--error {
+    @apply text-red-600;
+  }
+
+  .ruwaq-share-live-approved {
+    @apply text-center text-sm font-semibold text-emerald-800;
+  }
+
   /* —— Ruwaq PRO · AD PRO editorial luxury —— */
   .ruwaq-pro-hero {
     @apply relative flex min-h-[580px] w-full flex-col overflow-hidden border-b border-neutral-950 bg-neutral-950 text-center md:min-h-[680px];

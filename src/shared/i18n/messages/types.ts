@@ -309,6 +309,13 @@ export type Messages = {
       nextMatched: string;
       nextClosed: string;
       matchesTitle: string;
+      matchesIntro: string;
+      verifiedBadge: string;
+      tierBadges: { PRO: string; VERIFIED: string; STARTER: string };
+      matchPending: string;
+      matchViewed: string;
+      matchResponded: string;
+      matchRespondedHours: (hours: number) => string;
       viewProfile: string;
       whatsapp: string;
       newRequest: string;
@@ -334,6 +341,7 @@ export type Messages = {
       budgetLabel: string;
       whatsAppCta: string;
       emailCta: string;
+      createProposalCta: string;
       noProfileBody: string;
       tierLockedBody: string;
       noListingBody: string;
@@ -671,6 +679,7 @@ export type Messages = {
     generatingAnalyze: string;
     generatingWrite: string;
     generatingWaitHint: string;
+    leadPrefillNotice: (referenceCode: string) => string;
     errors: {
       projectRequired: string;
       descriptionRequired: string;
@@ -1307,5 +1316,32 @@ export type Messages = {
     notFoundMessage: string;
     goHome: string;
     poweredBy: string;
+    liveRoom: {
+      approveCta: string;
+      amendCta: string;
+      approveTitle: string;
+      amendTitle: string;
+      nameLabel: string;
+      approveScope: string;
+      approveCommercial: string;
+      approveTimeline: string;
+      estimateAck: (pct: number) => string;
+      submitApprove: string;
+      submitAmend: string;
+      cancel: string;
+      amendSectionLabel: string;
+      amendNoteLabel: string;
+      approveSuccess: string;
+      amendSuccess: string;
+      approvedBanner: string;
+      alreadyApproved: string;
+      approveError: string;
+      amendError: string;
+      nameRequired: string;
+      checkboxesRequired: string;
+      estimateAckRequired: string;
+      amendFieldsRequired: string;
+      sections: Record<string, string>;
+    };
   };
 };

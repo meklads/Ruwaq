@@ -1,4 +1,5 @@
 import { db } from "@/shared/lib/db";
+import { resolveShareToken } from "@/modules/proposal/server/live-room.service";
 import type {
   CommercialTerms,
   Deliverable,
@@ -56,26 +57,23 @@ export type ShareProposalView = {
 export async function getShareViewByToken(
   token: string
 ): Promise<ShareProposalView | null> {
-  const doc = await db.generatedDocument.findFirst({
-    where: { shareToken: token },
+  const resolved = await resolveShareToken(token);
+  if (!resolved || resolved.status !== "active") return null;
+
+  const proposal = await db.proposal.findUnique({
+    where: { id: resolved.proposalId },
     include: {
-      proposal: {
-        include: {
-          boqLines: { orderBy: { sortOrder: "asc" } },
-          clauseSelections: {
-            where: { enabled: true },
-            include: { clauseTemplate: true },
-            orderBy: { sortOrder: "asc" },
-          },
-          clausePack: true,
-        },
+      boqLines: { orderBy: { sortOrder: "asc" } },
+      clauseSelections: {
+        where: { enabled: true },
+        include: { clauseTemplate: true },
+        orderBy: { sortOrder: "asc" },
       },
+      clausePack: true,
     },
   });
 
-  if (!doc?.proposal) return null;
-
-  const proposal = doc.proposal;
+  if (!proposal) return null;
   const locale: Locale = proposal.locale === "en" ? "en" : "ar";
 
   const company = proposal.userId

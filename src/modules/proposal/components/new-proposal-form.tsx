@@ -17,12 +17,14 @@ import {
 import Link from "next/link";
 import { AppPageHero } from "@/shared/components/app-page-hero";
 import { trackEvent } from "@/shared/lib/analytics";
+import type { LeadProposalPrefill } from "@/modules/marketplace/server/lead-prefill.actions";
 
 type Step = "project" | "details" | "generating";
 
 type Props = {
   /** Home: hero above + tool section. Page: compact app hero (legacy route). */
   variant?: "embedded" | "page";
+  prefill?: LeadProposalPrefill | null;
 };
 
 const EMPTY_OPTIONAL: OptionalDetailsValues = {
@@ -45,29 +47,48 @@ const INITIAL_FORM = {
 
 const TOOL_SECTION_ID = "create-proposal";
 
+function formFromPrefill(prefill: LeadProposalPrefill | null | undefined) {
+  if (!prefill) return INITIAL_FORM;
+  return {
+    projectName: prefill.projectName,
+    clientName: prefill.clientName,
+    description: prefill.description,
+    budget: prefill.budget,
+    paymentType: "milestone_30_40_30" as PaymentType,
+    commercialMode: prefill.commercialMode,
+    projectLocation: prefill.projectLocation,
+    propertyType: "" as PropertyType,
+    areaSqm: 0,
+    durationHint: "",
+    specifications: "",
+  };
+}
+
 function stepForField(field: ProposalTextField): Step {
   return field === "description" ? "details" : "project";
 }
 
-export function NewProposalForm({ variant = "embedded" }: Props) {
+export function NewProposalForm({ variant = "embedded", prefill = null }: Props) {
   const t = useT();
   const locale = useLocale();
   const router = useRouter();
   const [step, setStep] = useState<Step>("project");
   const [error, setError] = useState<string | null>(null);
   const [progress, setProgress] = useState(0);
-  const [optionalOpen, setOptionalOpen] = useState(false);
-  const [form, setForm] = useState(INITIAL_FORM);
+  const [optionalOpen, setOptionalOpen] = useState(Boolean(prefill?.projectLocation));
+  const [form, setForm] = useState(() => formFromPrefill(prefill));
   const prevLocale = useRef(locale);
 
   useEffect(() => {
     if (prevLocale.current === locale) return;
     prevLocale.current = locale;
-    setForm(INITIAL_FORM);
-    setStep("project");
-    setOptionalOpen(false);
-    setError(null);
-  }, [locale]);
+    if (!prefill) {
+      setForm(INITIAL_FORM);
+      setStep("project");
+      setOptionalOpen(false);
+      setError(null);
+    }
+  }, [locale, prefill]);
 
   const forward = locale === "ar" ? "←" : "→";
   const backward = locale === "ar" ? "→" : "←";
@@ -264,6 +285,12 @@ export function NewProposalForm({ variant = "embedded" }: Props) {
       </div>
 
       <div className="ruwaq-form-card">
+        {prefill ? (
+          <div className="mb-6 rounded-xl border border-sky-200 bg-sky-50 px-4 py-3 text-sm text-sky-950">
+            {t.form.leadPrefillNotice(prefill.referenceCode)}
+          </div>
+        ) : null}
+
         {error && (
           <div className="mb-6 rounded-xl bg-red-50 px-4 py-3 text-sm text-red-600">
             {error}
