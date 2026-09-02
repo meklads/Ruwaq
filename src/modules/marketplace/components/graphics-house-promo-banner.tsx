@@ -1,7 +1,6 @@
-import Image from "next/image";
-import Link from "next/link";
 import { MARKETING_IMAGES } from "@/content/marketing-images";
 import { graphicsHouseProjectLaunchReferralUrl } from "@/shared/constants/brand";
+import { EcosystemImageAd } from "@/modules/marketplace/components/ecosystem-image-ad";
 import type { Locale } from "@/shared/i18n/locale";
 
 const GRAPHICS_HOUSE_AD = {
@@ -18,7 +17,7 @@ type Props = {
   campaign?: string;
 };
 
-/** Graphics House ProjectLaunch™ full-bleed ad — place on developer / visualization surfaces only. */
+/** Graphics House ProjectLaunch™ — developer / visualization surfaces. */
 export function GraphicsHousePromoBanner({
   locale,
   campaign = "graphics_house_ad",
@@ -26,28 +25,13 @@ export function GraphicsHousePromoBanner({
   const ad = GRAPHICS_HOUSE_AD[locale];
 
   return (
-    <section
+    <EcosystemImageAd
       id="visualization"
-      className="ruwaq-ad-featured-section ruwaq-ad-featured-section--stone scroll-mt-28"
-      aria-label={ad.alt}
-    >
-      <div className="ruwaq-ad-featured-section__frame">
-        <Link
-          href={graphicsHouseProjectLaunchReferralUrl(campaign)}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="ruwaq-ad-featured-image-link"
-        >
-          <Image
-            src={MARKETING_IMAGES.graphicsHouseAd}
-            alt={ad.alt}
-            width={1749}
-            height={718}
-            className="ruwaq-ad-featured-image-banner"
-            sizes="(max-width: 768px) 100vw, 1140px"
-          />
-        </Link>
-      </div>
-    </section>
+      href={graphicsHouseProjectLaunchReferralUrl(campaign)}
+      src={MARKETING_IMAGES.graphicsHouseAd}
+      alt={ad.alt}
+      sectionTone="stone"
+      external
+    />
   );
 }

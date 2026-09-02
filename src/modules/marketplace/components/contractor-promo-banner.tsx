@@ -1,6 +1,5 @@
-import Image from "next/image";
-import Link from "next/link";
 import { MARKETING_IMAGES } from "@/content/marketing-images";
+import { EcosystemImageAd } from "@/modules/marketplace/components/ecosystem-image-ad";
 import type { Locale } from "@/shared/i18n/locale";
 
 type Props = {
@@ -10,40 +9,24 @@ type Props = {
 const PROPOSALS_AD = {
   ar: {
     src: MARKETING_IMAGES.proposalsAdAr,
-    width: 1749,
-    height: 718,
     alt: "رواق — أنشئ عروضاً احترافية تفوز بالعملاء في دقائق",
   },
   en: {
     src: MARKETING_IMAGES.proposalsAdEn,
-    width: 1749,
-    height: 718,
     alt: "Ruwaq — Create professional proposals that win clients in minutes",
   },
 } as const;
 
-/** Ruwaq proposal OS ad — place on /pricing and contractor hub surfaces, alone. */
+/** Ruwaq proposal tool — /pricing. */
 export function ContractorPromoBanner({ locale }: Props) {
   const ad = PROPOSALS_AD[locale];
 
   return (
-    <section
+    <EcosystemImageAd
       id="contractor-promo"
-      className="ruwaq-ad-featured-section ruwaq-ad-featured-section--white scroll-mt-28"
-      aria-label={ad.alt}
-    >
-      <div className="ruwaq-ad-featured-section__frame">
-        <Link href="/proposals/new" className="ruwaq-ad-featured-image-link">
-          <Image
-            src={ad.src}
-            alt={ad.alt}
-            width={ad.width}
-            height={ad.height}
-            className="ruwaq-ad-featured-image-banner"
-            sizes="(max-width: 768px) 100vw, 1140px"
-          />
-        </Link>
-      </div>
-    </section>
+      href="/proposals/new"
+      src={ad.src}
+      alt={ad.alt}
+    />
   );
 }
