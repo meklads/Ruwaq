@@ -50,6 +50,8 @@ type Props = {
   items: readonly GalleryItem[];
   labels: Labels;
   startCta: string;
+  /** Compact studio: controls + one big preview, no long scroll. */
+  studio?: boolean;
 };
 
 function buildSampleUrl(
@@ -57,45 +59,12 @@ function buildSampleUrl(
   locale: Locale,
   palette: TemplatePalette,
   frameId: LetterheadFrameId,
-  centerWatermark: boolean
+  centerWatermark: boolean,
+  full = false
 ): string {
   const wm = centerWatermark ? "1" : "0";
-  return `/api/templates/samples/${slug}?locale=${locale}&${paletteToQuery(palette)}&frame=${frameId}&wm=${wm}`;
-}
-
-function A4Thumb({
-  src,
-  title,
-  onOpen,
-  openLabel,
-}: {
-  src: string;
-  title: string;
-  onOpen: () => void;
-  openLabel: string;
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onOpen}
-      className="group relative w-full overflow-hidden rounded-xl border border-neutral-200 bg-[#ebe6de] text-start shadow-sm transition hover:-translate-y-0.5 hover:border-[#C9A063]/50 hover:shadow-lg"
-      aria-label={openLabel}
-    >
-      <div className="nasaq-a4-stage">
-        <iframe
-          key={src}
-          title={title}
-          src={src}
-          loading="lazy"
-          tabIndex={-1}
-          className="nasaq-a4-iframe pointer-events-none"
-        />
-      </div>
-      <span className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#2F4A6E]/85 to-transparent px-3 pb-3 pt-10 text-center text-xs font-semibold text-white opacity-0 transition group-hover:opacity-100">
-        {openLabel}
-      </span>
-    </button>
-  );
+  const view = full ? "&view=full" : "";
+  return `/api/templates/samples/${slug}?locale=${locale}&${paletteToQuery(palette)}&frame=${frameId}&wm=${wm}${view}`;
 }
 
 function PreviewModal({
@@ -135,7 +104,7 @@ function PreviewModal({
 
   return (
     <div
-      className="fixed inset-0 z-[80] flex items-center justify-center p-3 sm:p-6"
+      className="fixed inset-0 z-[80] flex items-center justify-center p-3 sm:p-5"
       role="dialog"
       aria-modal="true"
       aria-label={title}
@@ -146,8 +115,8 @@ function PreviewModal({
         aria-label={closeLabel}
         onClick={onClose}
       />
-      <div className="relative z-[81] flex max-h-[94vh] w-full max-w-5xl flex-col overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-2xl">
-        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-neutral-100 bg-[#F7F4EF] px-4 py-3 sm:px-5">
+      <div className="relative z-[81] flex h-[min(94vh,920px)] w-full max-w-4xl flex-col overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-2xl">
+        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-neutral-100 bg-[#F7F4EF] px-4 py-3">
           <div>
             <p className="text-sm font-semibold text-[#2F4A6E]">{title}</p>
             <p className="mt-0.5 text-[11px] text-neutral-500">{note}</p>
@@ -159,20 +128,15 @@ function PreviewModal({
             <button
               type="button"
               onClick={onClose}
-              className="rounded-lg border border-neutral-200 bg-white px-3 py-2 text-xs font-semibold text-neutral-700 hover:bg-neutral-50"
+              className="rounded-lg border border-neutral-200 bg-white px-3 py-2 text-xs font-semibold text-neutral-700"
             >
               {closeLabel}
             </button>
           </div>
         </div>
-        <div className="min-h-0 flex-1 overflow-auto bg-[#e5e1d8] p-3 sm:p-5">
-          <div className="mx-auto max-w-[920px] overflow-hidden rounded-xl bg-white shadow-lg">
-            <iframe
-              key={src}
-              title={title}
-              src={src}
-              className="h-[min(78vh,1100px)] w-full border-0"
-            />
+        <div className="min-h-0 flex-1 overflow-auto bg-[#e5e1d8] p-3 sm:p-4">
+          <div className="mx-auto max-w-[820px] overflow-hidden rounded-xl bg-white shadow-lg">
+            <iframe key={src} title={title} src={src} className="h-[min(78vh,1000px)] w-full border-0" />
           </div>
         </div>
       </div>
@@ -180,7 +144,7 @@ function PreviewModal({
   );
 }
 
-export function TemplateSampleGallery({ locale, items, labels, startCta }: Props) {
+export function TemplateSampleGallery({ locale, items, labels, startCta, studio }: Props) {
   const [paletteId, setPaletteId] = useState<string>("gold_sand");
   const [customPrimary, setCustomPrimary] = useState("#2F4A6E");
   const [customAccent, setCustomAccent] = useState("#C9A063");
@@ -188,7 +152,10 @@ export function TemplateSampleGallery({ locale, items, labels, startCta }: Props
   const [useCustom, setUseCustom] = useState(false);
   const [frameId, setFrameId] = useState<LetterheadFrameId>("wave");
   const [centerWatermark, setCenterWatermark] = useState(true);
-  const [modalSlug, setModalSlug] = useState<SampleTemplateSlug | null>(null);
+  const [activeSlug, setActiveSlug] = useState<SampleTemplateSlug>(
+    items[0]?.slug ?? "ruwaq-executive"
+  );
+  const [modalOpen, setModalOpen] = useState(false);
 
   const palette = useMemo(
     () =>
@@ -200,105 +167,23 @@ export function TemplateSampleGallery({ locale, items, labels, startCta }: Props
     [useCustom, customPrimary, customAccent, customSurface, paletteId]
   );
 
-  const modalItem = items.find((item) => item.slug === modalSlug) ?? null;
-  const modalSrc = modalItem
-    ? buildSampleUrl(modalItem.slug, locale, palette, frameId, centerWatermark)
+  const activeItem = items.find((item) => item.slug === activeSlug) ?? items[0];
+  const previewSrc = activeItem
+    ? buildSampleUrl(activeItem.slug, locale, palette, frameId, centerWatermark)
+    : "";
+  const fullSrc = activeItem
+    ? buildSampleUrl(activeItem.slug, locale, palette, frameId, centerWatermark, true)
     : "";
   const startHref = `/proposals/new?${paletteToQuery(palette)}&frame=${frameId}`;
 
-  return (
-    <div className="nasaq-template-gallery">
-      <div className="rounded-2xl border border-neutral-200 bg-gradient-to-br from-[#F7F4EF] via-white to-[#eef3f8] p-5 sm:p-7">
-        <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <h3 className="font-display text-base font-bold text-[#2F4A6E] sm:text-lg">
-              {labels.paletteTitle}
-            </h3>
-            <p className="mt-1 max-w-xl text-sm leading-relaxed text-neutral-600">
-              {labels.paletteHint}
-            </p>
-          </div>
-          <p className="text-[11px] font-medium text-[#C9A063] sm:text-xs">{labels.subscribeHint}</p>
-        </div>
-
-        <div className="mt-5 flex flex-wrap gap-2.5">
-          {TEMPLATE_PALETTE_ORDER.map((id) => {
-            const p = TEMPLATE_PALETTES[id];
-            const selected = !useCustom && paletteId === id;
-            const name = locale === "ar" ? p.nameAr : p.nameEn;
-            return (
-              <button
-                key={id}
-                type="button"
-                onClick={() => {
-                  setUseCustom(false);
-                  setPaletteId(id);
-                }}
-                className={`flex items-center gap-2 rounded-xl border px-2.5 py-2 transition ${
-                  selected
-                    ? "border-[#C9A063] bg-white shadow-md ring-1 ring-[#C9A063]/35"
-                    : "border-neutral-200 bg-white/70 hover:border-neutral-300"
-                }`}
-              >
-                <span className="flex h-8 w-8 overflow-hidden rounded-lg shadow-inner">
-                  <span className="w-[45%]" style={{ background: p.primary }} />
-                  <span className="w-[30%]" style={{ background: p.accent }} />
-                  <span className="w-[25%]" style={{ background: p.surface }} />
-                </span>
-                <span className="text-[11px] font-semibold text-[#2F4A6E] sm:text-xs">{name}</span>
-              </button>
-            );
-          })}
-        </div>
-
-        <div className="mt-5 border-t border-neutral-200/80 pt-5">
-          <button
-            type="button"
-            onClick={() => setUseCustom(true)}
-            className={`text-xs font-semibold underline-offset-2 hover:underline ${
-              useCustom ? "text-[#2F4A6E]" : "text-neutral-500"
-            }`}
-          >
-            {labels.customColors}
-          </button>
-          {useCustom ? (
-            <div className="mt-3 flex flex-wrap gap-4">
-              <label className="flex items-center gap-2 text-xs text-neutral-600">
-                <span>{labels.primaryColor}</span>
-                <input
-                  type="color"
-                  value={customPrimary}
-                  onChange={(e) => setCustomPrimary(e.target.value)}
-                  className="h-9 w-12 cursor-pointer rounded border border-neutral-200 bg-white"
-                />
-              </label>
-              <label className="flex items-center gap-2 text-xs text-neutral-600">
-                <span>{labels.accentColor}</span>
-                <input
-                  type="color"
-                  value={customAccent}
-                  onChange={(e) => setCustomAccent(e.target.value)}
-                  className="h-9 w-12 cursor-pointer rounded border border-neutral-200 bg-white"
-                />
-              </label>
-              <label className="flex items-center gap-2 text-xs text-neutral-600">
-                <span>{labels.surfaceColor}</span>
-                <input
-                  type="color"
-                  value={customSurface}
-                  onChange={(e) => setCustomSurface(e.target.value)}
-                  className="h-9 w-12 cursor-pointer rounded border border-neutral-200 bg-white"
-                />
-              </label>
-            </div>
-          ) : null}
-        </div>
-      </div>
-
-      <div className="mt-5 rounded-2xl border border-neutral-200 bg-white p-5 sm:p-6">
-        <h3 className="font-display text-base font-bold text-[#2F4A6E]">{labels.frameTitle}</h3>
-        <p className="mt-1 max-w-xl text-sm leading-relaxed text-neutral-600">{labels.frameHint}</p>
-        <div className="mt-4 flex flex-wrap gap-2">
+  const controls = (
+    <div className="flex min-h-0 flex-col gap-4">
+      <div>
+        <p className="text-[11px] font-bold uppercase tracking-wider text-[#C9A063]">
+          {labels.frameTitle}
+        </p>
+        <p className="mt-1 text-xs leading-relaxed text-neutral-500">{labels.frameHint}</p>
+        <div className="mt-3 flex flex-wrap gap-1.5">
           {LETTERHEAD_FRAME_ORDER.map((id) => {
             const frame = LETTERHEAD_FRAMES[id];
             const selected = frameId === id;
@@ -308,10 +193,10 @@ export function TemplateSampleGallery({ locale, items, labels, startCta }: Props
                 key={id}
                 type="button"
                 onClick={() => setFrameId(id)}
-                className={`rounded-full border px-3.5 py-1.5 text-xs font-semibold transition ${
+                className={`rounded-full border px-2.5 py-1 text-[11px] font-semibold transition ${
                   selected
                     ? "border-[#2F4A6E] bg-[#2F4A6E] text-white"
-                    : "border-neutral-200 bg-[#F7F4EF] text-[#2F4A6E] hover:border-neutral-300"
+                    : "border-neutral-200 bg-white text-[#2F4A6E] hover:border-neutral-300"
                 }`}
               >
                 {name}
@@ -319,59 +204,190 @@ export function TemplateSampleGallery({ locale, items, labels, startCta }: Props
             );
           })}
         </div>
-        <label className="mt-4 flex cursor-pointer items-center gap-2.5 text-sm text-neutral-600">
-          <input
-            type="checkbox"
-            checked={centerWatermark}
-            onChange={(e) => setCenterWatermark(e.target.checked)}
-            className="h-4 w-4 rounded border-neutral-300 accent-[#2F4A6E]"
-          />
-          {labels.watermarkToggle}
-        </label>
       </div>
 
-      <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {items.map((item) => {
-          const src = buildSampleUrl(item.slug, locale, palette, frameId, centerWatermark);
-          return (
-            <article key={item.slug} className="flex flex-col">
-              <A4Thumb
-                src={src}
-                title={item.title}
-                openLabel={labels.previewCta}
-                onOpen={() => setModalSlug(item.slug)}
-              />
-              <div className="mt-3 px-0.5">
-                <p className="text-[10px] font-bold uppercase tracking-wider text-[#C9A063]">
-                  {item.brand}
-                </p>
-                <h3 className="mt-1 font-display text-base font-bold text-[#2F4A6E]">{item.title}</h3>
-                <p className="mt-1.5 text-sm leading-relaxed text-neutral-600">{item.body}</p>
-                <span className="mt-2 inline-block text-[10px] font-semibold text-[#2F4A6E]/70">
-                  {item.badge}
+      <div>
+        <p className="text-[11px] font-bold uppercase tracking-wider text-[#C9A063]">
+          {labels.paletteTitle}
+        </p>
+        <div className="mt-2 flex flex-wrap gap-1.5">
+          {TEMPLATE_PALETTE_ORDER.map((id) => {
+            const p = TEMPLATE_PALETTES[id];
+            const selected = !useCustom && paletteId === id;
+            return (
+              <button
+                key={id}
+                type="button"
+                title={locale === "ar" ? p.nameAr : p.nameEn}
+                onClick={() => {
+                  setUseCustom(false);
+                  setPaletteId(id);
+                }}
+                className={`h-8 w-8 overflow-hidden rounded-lg border-2 transition ${
+                  selected ? "border-[#C9A063] ring-2 ring-[#C9A063]/25" : "border-white shadow-sm"
+                }`}
+              >
+                <span className="flex h-full w-full">
+                  <span className="w-[45%]" style={{ background: p.primary }} />
+                  <span className="w-[30%]" style={{ background: p.accent }} />
+                  <span className="w-[25%]" style={{ background: p.surface }} />
                 </span>
-              </div>
-            </article>
+              </button>
+            );
+          })}
+        </div>
+        <button
+          type="button"
+          onClick={() => setUseCustom(true)}
+          className="mt-2 text-[11px] font-semibold text-neutral-500 underline-offset-2 hover:underline"
+        >
+          {labels.customColors}
+        </button>
+        {useCustom ? (
+          <div className="mt-2 flex flex-wrap gap-3">
+            <label className="flex items-center gap-1.5 text-[11px] text-neutral-600">
+              <span>{labels.primaryColor}</span>
+              <input
+                type="color"
+                value={customPrimary}
+                onChange={(e) => setCustomPrimary(e.target.value)}
+                className="h-7 w-9 cursor-pointer rounded border border-neutral-200"
+              />
+            </label>
+            <label className="flex items-center gap-1.5 text-[11px] text-neutral-600">
+              <span>{labels.accentColor}</span>
+              <input
+                type="color"
+                value={customAccent}
+                onChange={(e) => setCustomAccent(e.target.value)}
+                className="h-7 w-9 cursor-pointer rounded border border-neutral-200"
+              />
+            </label>
+            <label className="flex items-center gap-1.5 text-[11px] text-neutral-600">
+              <span>{labels.surfaceColor}</span>
+              <input
+                type="color"
+                value={customSurface}
+                onChange={(e) => setCustomSurface(e.target.value)}
+                className="h-7 w-9 cursor-pointer rounded border border-neutral-200"
+              />
+            </label>
+          </div>
+        ) : null}
+      </div>
+
+      <div className="flex flex-wrap gap-1.5">
+        {items.map((item) => {
+          const selected = item.slug === activeSlug;
+          return (
+            <button
+              key={item.slug}
+              type="button"
+              onClick={() => setActiveSlug(item.slug)}
+              className={`rounded-lg border px-2.5 py-1.5 text-[11px] font-semibold transition ${
+                selected
+                  ? "border-[#C9A063] bg-[#F7F4EF] text-[#2F4A6E]"
+                  : "border-neutral-200 bg-white text-neutral-600"
+              }`}
+            >
+              {item.title}
+            </button>
           );
         })}
       </div>
 
-      <p className="mt-4 text-center text-xs text-neutral-500">{labels.openSampleHint}</p>
+      <label className="flex cursor-pointer items-center gap-2 text-xs text-neutral-600">
+        <input
+          type="checkbox"
+          checked={centerWatermark}
+          onChange={(e) => setCenterWatermark(e.target.checked)}
+          className="h-3.5 w-3.5 rounded border-neutral-300 accent-[#2F4A6E]"
+        />
+        {labels.watermarkToggle}
+      </label>
 
-      <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-        <Link href={startHref} className="btn-ruwaq-primary inline-flex px-9 py-3.5">
+      <div className="mt-auto flex flex-col gap-2 pt-2">
+        <Link href={startHref} className="btn-ruwaq-primary w-full px-4 py-2.5 text-center text-sm">
           {labels.startWithLook}
         </Link>
-        <Link href="/proposals/new" className="btn-ruwaq-accent inline-flex px-7 py-3 text-sm">
-          {startCta}
-        </Link>
+        <button
+          type="button"
+          onClick={() => setModalOpen(true)}
+          className="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2 text-center text-xs font-semibold text-[#2F4A6E] hover:bg-[#F7F4EF]"
+        >
+          {labels.previewCta}
+        </button>
+        <p className="text-center text-[10px] text-neutral-400">{labels.subscribeHint}</p>
       </div>
+    </div>
+  );
 
+  if (studio) {
+    return (
+      <div className="nasaq-studio">
+        <aside className="nasaq-studio-controls">{controls}</aside>
+        <div className="nasaq-studio-stage">
+          <div className="nasaq-studio-sheet-wrap">
+            <iframe
+              key={previewSrc}
+              title={activeItem?.title ?? labels.previewLabel}
+              src={previewSrc}
+              className="nasaq-studio-iframe"
+            />
+          </div>
+          <button
+            type="button"
+            onClick={() => setModalOpen(true)}
+            className="nasaq-studio-expand"
+          >
+            {labels.previewCta}
+          </button>
+        </div>
+        <PreviewModal
+          open={modalOpen}
+          onClose={() => setModalOpen(false)}
+          src={fullSrc}
+          title={`${labels.previewLabel}: ${activeItem?.title ?? ""}`}
+          note={labels.note}
+          closeLabel={labels.closePreview}
+          startHref={startHref}
+          startLabel={labels.startWithLook}
+        />
+      </div>
+    );
+  }
+
+  return (
+    <div className="nasaq-template-gallery">
+      <div className="grid gap-6 lg:grid-cols-[minmax(240px,300px)_minmax(0,1fr)]">
+        <div className="rounded-2xl border border-neutral-200 bg-[#F7F4EF]/80 p-4 sm:p-5">
+          {controls}
+        </div>
+        <div className="overflow-hidden rounded-2xl border border-neutral-200 bg-[#ebe6de] p-3 sm:p-4">
+          <div className="nasaq-a4-stage mx-auto max-w-md cursor-pointer" onClick={() => setModalOpen(true)}>
+            <iframe
+              key={previewSrc}
+              title={activeItem?.title ?? labels.previewLabel}
+              src={previewSrc}
+              className="nasaq-a4-iframe pointer-events-none"
+            />
+          </div>
+          <p className="mt-3 text-center text-xs text-neutral-500">{labels.openSampleHint}</p>
+          <div className="mt-3 flex justify-center gap-2">
+            <Link href={startHref} className="btn-ruwaq-primary px-6 py-2.5 text-sm">
+              {labels.startWithLook}
+            </Link>
+            <Link href="/proposals/new" className="btn-ruwaq-accent px-5 py-2.5 text-sm">
+              {startCta}
+            </Link>
+          </div>
+        </div>
+      </div>
       <PreviewModal
-        open={Boolean(modalItem)}
-        onClose={() => setModalSlug(null)}
-        src={modalSrc}
-        title={`${labels.previewLabel}: ${modalItem?.title ?? ""}`}
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        src={fullSrc}
+        title={`${labels.previewLabel}: ${activeItem?.title ?? ""}`}
         note={labels.note}
         closeLabel={labels.closePreview}
         startHref={startHref}
