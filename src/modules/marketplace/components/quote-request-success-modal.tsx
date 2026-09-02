@@ -52,7 +52,7 @@ export function QuoteRequestSuccessModal({
             {copy.close}
           </button>
         ) : (
-          <Link href="/categories" className="btn-ruwaq-secondary px-6 py-3.5">
+          <Link href="/how-we-match" className="btn-ruwaq-secondary px-6 py-3.5">
             {copy.browseCategories}
           </Link>
         )}

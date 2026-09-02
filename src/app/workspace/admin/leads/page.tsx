@@ -6,6 +6,7 @@ import { isAdminEmail } from "@/shared/lib/env";
 import { db } from "@/shared/lib/db";
 import { AppPageHero } from "@/shared/components/app-page-hero";
 import { AdminMarketplaceLeadActions } from "@/modules/marketplace/components/admin/admin-marketplace-lead-actions";
+import { AdminLeadMatcher } from "@/modules/marketplace/components/admin/admin-lead-matcher";
 import { AdminPartnerLeadActions } from "@/modules/marketplace/components/admin/admin-partner-lead-actions";
 import {
   citySlugFromEnum,
@@ -54,12 +55,18 @@ export default async function AdminLeadsPage({ searchParams }: Props) {
         ? { status: "CLOSED" as const }
         : undefined;
 
-  const [leads, partnerLeads, openCount] = await Promise.all([
+  const [leads, partnerLeads, openCount, verifiedListings] = await Promise.all([
     db.marketplaceLead.findMany({
       where: leadWhere,
       orderBy: { createdAt: "desc" },
       take: 100,
-      include: { category: true },
+      include: {
+        category: true,
+        matches: {
+          orderBy: { rank: "asc" },
+          include: { listing: true },
+        },
+      },
     }),
     db.partnerLead.findMany({
       where: { source: "GRAPHICS_HOUSE" },
@@ -67,6 +74,17 @@ export default async function AdminLeadsPage({ searchParams }: Props) {
       take: 50,
     }),
     db.marketplaceLead.count({ where: { status: { not: "CLOSED" } } }),
+    db.providerListing.findMany({
+      where: { isVerified: true },
+      select: {
+        id: true,
+        titleAr: true,
+        titleEn: true,
+        city: true,
+        category: { select: { slug: true } },
+      },
+      orderBy: [{ directorySortRank: "asc" }, { titleAr: "asc" }],
+    }),
   ]);
 
   const tabs = [
@@ -133,6 +151,19 @@ export default async function AdminLeadsPage({ searchParams }: Props) {
                   ? categoryMeta.nameAr
                   : categoryMeta?.nameEn ?? lead.category.slug;
               const referenceCode = leadReferenceCode(lead.id);
+              const matchCandidates = verifiedListings
+                .filter(
+                  (l) => l.city === lead.city && l.category.slug === lead.category.slug
+                )
+                .map((l) => ({
+                  id: l.id,
+                  label: (locale === "ar" ? l.titleAr : l.titleEn) ?? l.id,
+                }));
+              const initialMatches = lead.matches.map((m) => ({
+                rank: m.rank,
+                listingId: m.listingId,
+                label: (locale === "ar" ? m.listing.titleAr : m.listing.titleEn) ?? m.listingId,
+              }));
 
               return (
                 <article
@@ -168,6 +199,13 @@ export default async function AdminLeadsPage({ searchParams }: Props) {
                       <p className="mt-3 rounded bg-ruwaq-paper p-3 text-sm leading-relaxed text-ruwaq-ink-soft">
                         {lead.projectDetails}
                       </p>
+                      <AdminLeadMatcher
+                        leadId={lead.id}
+                        citySlug={citySlug}
+                        categorySlug={lead.category.slug}
+                        candidates={matchCandidates}
+                        initialMatches={initialMatches}
+                      />
                     </div>
                     <AdminMarketplaceLeadActions
                       leadId={lead.id}

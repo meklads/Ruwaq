@@ -134,7 +134,7 @@ export function QuoteRequestForm({
       clientName,
       clientPhone,
       clientEmail: !isCompactModal && clientEmail.trim() ? clientEmail.trim() : undefined,
-      citySlug,
+      citySlug: lockJeddah ? "jeddah" : citySlug,
       categorySlug,
       projectDetails: isCompactModal
         ? projectDetails.trim().length >= 10
@@ -213,6 +213,8 @@ export function QuoteRequestForm({
     : isCompactModal
       ? copy.modalSubtitle
       : null;
+  const lockJeddah = variant === "page" && !isVisualization;
+  const jeddahCity = MARKETPLACE_CITIES.find((c) => c.slug === "jeddah");
 
   return (
     <form onSubmit={onSubmit} className={formClass}>
@@ -223,6 +225,9 @@ export function QuoteRequestForm({
       )}
       {pageSubtitle ? (
         <p className="text-center text-sm leading-relaxed text-neutral-600">{pageSubtitle}</p>
+      ) : null}
+      {variant === "page" && !isVisualization ? (
+        <p className="text-center text-sm leading-relaxed text-neutral-600">{copy.pageLead}</p>
       ) : null}
 
       {variant === "page" ? (
@@ -294,17 +299,26 @@ export function QuoteRequestForm({
       <div className={isCompactModal ? "grid gap-4 sm:grid-cols-2" : undefined}>
         <div>
           <label className={labelClass}>{copy.fields.city}</label>
-          <select
-            className={fieldClass}
-            value={citySlug}
-            onChange={(e) => setCitySlug(parseCitySlug(e.target.value))}
-          >
-            {MARKETPLACE_CITIES.map((c) => (
-              <option key={c.slug} value={c.slug}>
-                {locale === "ar" ? c.nameAr : c.nameEn}
-              </option>
-            ))}
-          </select>
+          {lockJeddah ? (
+            <>
+              <p className={`${fieldClass} bg-neutral-50 text-neutral-800`}>
+                {jeddahCity ? (locale === "ar" ? jeddahCity.nameAr : jeddahCity.nameEn) : "Jeddah"}
+              </p>
+              <p className="mt-2 text-xs leading-relaxed text-neutral-500">{copy.jeddahOnlyNote}</p>
+            </>
+          ) : (
+            <select
+              className={fieldClass}
+              value={citySlug}
+              onChange={(e) => setCitySlug(parseCitySlug(e.target.value))}
+            >
+              {MARKETPLACE_CITIES.map((c) => (
+                <option key={c.slug} value={c.slug}>
+                  {locale === "ar" ? c.nameAr : c.nameEn}
+                </option>
+              ))}
+            </select>
+          )}
         </div>
 
         {isCompactModal ? (

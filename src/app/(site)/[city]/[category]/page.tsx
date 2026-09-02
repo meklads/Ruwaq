@@ -14,7 +14,7 @@ import { getListingsForCityCategory } from "@/modules/marketplace/server/listing
 import { ListingCard } from "@/modules/marketplace/components/directory/ListingCard";
 import { DirectoryFilters } from "@/modules/marketplace/components/directory-filters";
 import { DirectoryEmptyState } from "@/modules/marketplace/components/directory-empty-state";
-import { CategoryQuoteCta } from "@/modules/marketplace/components/category-quote-cta";
+import { CategoryQuoteBanner } from "@/modules/marketplace/components/category-quote-banner";
 import {
   parseFeaturedOnly,
   parseListingsSort,
@@ -161,18 +161,20 @@ export default async function CategoryListingPage({ params, searchParams }: Prop
           initialFeatured={featuredOnly}
           initialSort={sort}
         />
-        <div className="mt-6">
-          <CategoryQuoteCta
-            label={t.marketplace.listing.requestCta}
-            closeLabel={t.nav.closeModal}
-            copy={t.marketplace.quote}
-            visualizationCopy={t.marketplace.visualization}
-            locale={locale}
-            citySlug={city.slug}
-            categorySlug={catMeta.slug}
-          />
-        </div>
       </header>
+
+      <CategoryQuoteBanner
+        locale={locale}
+        cityName={cityName}
+        categoryName={catName}
+        title={t.marketplace.categoryPage.bannerTitle}
+        lead={t.marketplace.categoryPage.bannerLead}
+        cta={t.marketplace.categoryPage.bannerCta}
+        howMatchLabel={t.marketplace.categoryPage.howMatch}
+        citySlug={city.slug}
+        categorySlug={catMeta.slug}
+      />
+
       {listings.length === 0 ? (
         <DirectoryEmptyState
           copy={t.marketplace.listing.emptyState}

@@ -592,6 +592,7 @@ model ProviderListing {
   providerType  ProviderType    @default(EXECUTOR)
   images        Json            @default("[]")
   directoryApplication DirectoryApplication?
+  leadMatches   MarketplaceLeadMatch[]
   createdAt     DateTime        @default(now())
   updatedAt     DateTime        @updatedAt
 
@@ -613,11 +614,25 @@ model MarketplaceLead {
   assignedTo     String?
   locale         String                @default("ar")
   routingNote    String?
+  matches        MarketplaceLeadMatch[]
   createdAt      DateTime              @default(now())
   updatedAt      DateTime              @updatedAt
 
   @@index([status, createdAt])
   @@index([city, categoryId])
+}
+
+model MarketplaceLeadMatch {
+  id        String          @id @default(cuid())
+  leadId    String
+  lead      MarketplaceLead @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  listingId String
+  listing   ProviderListing @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  rank      Int
+  createdAt DateTime        @default(now())
+
+  @@unique([leadId, listingId])
+  @@index([leadId])
 }
 
 model PartnerLead {

@@ -114,6 +114,25 @@ export type Messages = {
       contractorsSteps: readonly { title: string; body: string }[];
       learnMore: string;
     };
+    howWeMatch: {
+      metaTitle: string;
+      metaDescription: string;
+      eyebrow: string;
+      title: string;
+      lead: string;
+      steps: readonly { title: string; body: string }[];
+      criteriaTitle: string;
+      criteria: readonly string[];
+      ctaTitle: string;
+      ctaQuote: string;
+      ctaJoin: string;
+    };
+    categoryPage: {
+      bannerTitle: string;
+      bannerLead: string;
+      bannerCta: string;
+      howMatch: string;
+    };
     trustStandards: {
       modalTitle: string;
       intro: string;
@@ -143,6 +162,8 @@ export type Messages = {
     };
     quote: {
       title: string;
+      pageLead: string;
+      jeddahOnlyNote: string;
       requestTypeLabel: string;
       requestTypes: {
         marketplace: string;
@@ -347,9 +368,10 @@ export type Messages = {
       heroEyebrow: string;
       heroTitle: string;
       heroSubtitle: string;
+      heroPrimaryCta: string;
+      heroHowMatchCta: string;
       heroExploreTours: string;
       heroReadGuides: string;
-      heroDirectoryCta: string;
       heroDirectoryLink: string;
       todaysStoriesEyebrow: string;
       todaysStoriesTitle: string;
@@ -796,6 +818,7 @@ export type Messages = {
       directory: string;
       featured: string;
       howItWorks: string;
+      howWeMatch: string;
       forContractors: string;
       startProposal: string;
       tours: string;

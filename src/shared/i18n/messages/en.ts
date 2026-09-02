@@ -131,16 +131,16 @@ export const en: Messages = {
    ownersTitle: "For property owners",
    ownersSteps: [
     {
-     title: "Pick sector and city",
-     body: "Jeddah, Makkah, or Madinah, choose your sector (fit-out, kitchens, materials, HVAC, and more).",
+     title: "Describe your project once",
+     body: "Fit-out type, area, budget, and Jeddah district — one free form.",
     },
     {
-     title: "Describe your project",
-     body: "Request a quote 100% free, no hidden fees for the client.",
+     title: "We pick the best 3 contractors",
+     body: "Ruwaq curates 3 verified companies that fit your sector and budget — not a random directory list.",
     },
     {
-     title: "Receive verified offers",
-     body: "Verified companies contact you directly on WhatsApp, full transparency.",
+     title: "Direct contact within 24 hours",
+     body: "All three reach you on WhatsApp with clear offers — free for the client.",
     },
    ],
    contractorsTitle: "For contractors",
@@ -159,6 +159,50 @@ export const en: Messages = {
     },
    ],
    learnMore: "Read full guide",
+  },
+  howWeMatch: {
+   metaTitle: "How we pick the best 3 contractors | Ruwaq",
+   metaDescription:
+    "Ruwaq criteria for matching 3 verified Jeddah contractors per project — sector, budget, and PRO profile quality.",
+   eyebrow: "Ruwaq · Jeddah",
+   title: "How we pick the best 3 contractors for your project",
+   lead:
+    "Ruwaq is not a random directory. Every request is reviewed by our team and routed to exactly three companies — the best fit for your sector and budget in Jeddah.",
+   steps: [
+    {
+     title: "1. Request review",
+     body: "We check completeness: project type, area, budget, and district. Incomplete requests get a follow-up before matching.",
+    },
+    {
+     title: "2. Sector & budget fit",
+     body: "We shortlist from Ruwaq PRO — active companies in your trade (fit-out, kitchens, HVAC, etc.) within your budget range.",
+    },
+    {
+     title: "3. Quality & response priority",
+     body: "We favour complete profiles, active CR, and fast response on past Ruwaq leads.",
+    },
+    {
+     title: "4. Three only — no more",
+     body: "You get exactly 3 contractors so you are not flooded with calls. Each knows they were officially shortlisted by Ruwaq.",
+    },
+   ],
+   criteriaTitle: "What gets a company shortlisted",
+   criteria: [
+    "Active Saudi CR and a complete Ruwaq company profile",
+    "Documented portfolio in the same sector",
+    "Response within 4 hours on past Ruwaq requests",
+    "Ruwaq team review after each project (expanding)",
+   ],
+   ctaTitle: "Ready to start your Jeddah project?",
+   ctaQuote: "Describe your project",
+   ctaJoin: "Join as a verified contractor",
+  },
+  categoryPage: {
+   bannerTitle: "Have a project? Describe it once — we match 3 contractors",
+   bannerLead:
+    "We shortlist the best 3 verified companies in this sector in Jeddah for your budget. Free for clients, response within 24 hours.",
+   bannerCta: "Start your project request",
+   howMatch: "How we pick the 3?",
   },
   trustStandards: {
    modalTitle: "Ruwaq “Verified company” standards",
@@ -248,7 +292,10 @@ export const en: Messages = {
    ],
   },
   quote: {
-   title: "Get competitive quotes within 24 hours",
+   title: "Describe your project once — we match 3 contractors in Jeddah",
+   pageLead:
+    "One free form. Ruwaq reviews your request and shortlists the best 3 verified companies for your budget within 24 hours.",
+   jeddahOnlyNote: "Jeddah only for now — Makkah and Madinah coming soon.",
    requestTypeLabel: "What do you need?",
    requestTypes: {
     marketplace: "Engineering & contracting quote",
@@ -270,12 +317,13 @@ export const en: Messages = {
    modalSubtitle: "Four fields only — we review and respond within 24 hours.",
    success: "Request received. We will contact you soon.",
    successModal: {
-    title: "Request received",
-    subtitle: "Our team will review your request and respond within 24 hours. Save your reference code for follow-up.",
+    title: "Project received",
+    subtitle:
+     "Ruwaq reviews your details and shortlists the best 3 verified contractors in Jeddah within 24 hours. Save your reference for follow-up.",
     referenceLabel: "Reference",
     whatsAppCta: "Follow up on WhatsApp",
     close: "Close",
-    browseCategories: "Browse sectors",
+    browseCategories: "How we pick the 3?",
     noWhatsAppHint: "We will contact you on the mobile number you provided.",
    },
    errors: {
@@ -332,8 +380,8 @@ export const en: Messages = {
    titleAfter: "Directory",
    title: "Ruwaq PRO Directory",
    subtitle:
-    "Verified fit-out, contracting, and supply companies in Jeddah, Makkah, and Madinah.",
-   trustLine: "8 sectors, 3 cities, Free quote requests",
+    "Verified contractor network in Jeddah — 3 matched per project request.",
+   trustLine: "Jeddah only now · 3 verified contractors per request · free for clients",
    allCategories: "All sectors",
    applyCta: "Join the directory",
    applyHint: "We review CR and licenses before listing.",
@@ -462,14 +510,15 @@ export const en: Messages = {
    trendingEyebrow: "Trending sectors",
    trendingTitle: "Browse by trade",
    allSectors: "All sectors",
-   heroEyebrow: "Ruwaq · Property & design",
-   heroTitle: "PRO directory, tours, and inspiration",
+   heroEyebrow: "Ruwaq · Jeddah",
+   heroTitle: "Have a project? Describe it once",
    heroSubtitle:
-    "Search Ruwaq PRO for verified contractors and suppliers in Jeddah, Makkah, and Madinah — then explore tours and guides for inspiration.",
-   heroDirectoryCta: "Directory",
-   heroExploreTours: "Explore tours",
-   heroReadGuides: "Guides",
-   heroDirectoryLink: "Browse the PRO directory",
+    "We match you with the best 3 verified contractors for your budget in Jeddah — free within 24 hours.",
+   heroPrimaryCta: "Start your project request",
+   heroHowMatchCta: "How we pick the 3?",
+   heroExploreTours: "Project tours",
+   heroReadGuides: "Practical guides",
+   heroDirectoryLink: "PRO directory",
    todaysStoriesEyebrow: "Today's Stories",
    todaysStoriesTitle: "Today's Stories",
    todaysStoriesLead:
@@ -638,9 +687,9 @@ export const en: Messages = {
    allGuides: "← All guides",
   },
   footerCta: {
-   title: "Explore approved sectors",
-   subtitle: "Seven engineering categories across three cities, pick yours or search from the homepage.",
-   button: "Browse sectors",
+   title: "Have a project in Jeddah?",
+   subtitle: "Describe it once — we match the best 3 verified contractors within 24 hours.",
+   button: "Start your project request",
   },
   footerTagline:
    "Engineering & property directory for Western Region, verified companies and quote requests in one place.",
@@ -1211,13 +1260,14 @@ export const en: Messages = {
    directory: "Directory",
    featured: "Featured",
    howItWorks: "How it works",
+   howWeMatch: "How we pick the 3",
    forContractors: "Proposals",
    startProposal: "Start a proposal",
    tours: "Project tours",
    newProjects: "New launches",
    guides: "Guides",
    mainNavLabel: "Main navigation",
-   proBarTagline: "For verified contractors & suppliers",
+   proBarTagline: "Jeddah project matching — 3 contractors per request",
   },
   proApplyBand: {
    eyebrow: "RUWAQ PRO",
