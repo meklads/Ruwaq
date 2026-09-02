@@ -10,8 +10,6 @@ export async function SiteHeader() {
   const nav = t.site.header;
 
   const mainLinks = [
-    { href: "/request-quote", label: t.nav.requestQuote },
-    { href: "/how-we-match", label: nav.howWeMatch },
     { href: "/categories?city=jeddah", label: nav.directory },
     { href: "/tours", label: nav.tours },
     { href: "/guides", label: nav.guides },

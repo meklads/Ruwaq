@@ -872,6 +872,7 @@ export type Messages = {
       address: string;
       tasamiGroup: string;
       tasamiGroupLabel: string;
+      explore: string;
       product: string;
       company: string;
       legal: string;

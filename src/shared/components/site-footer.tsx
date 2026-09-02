@@ -20,13 +20,13 @@ export async function SiteFooter() {
   const footer = t.site.footer;
 
   const directoryLinks = [
-    { href: "/categories", label: nav.directory },
+    { href: "/categories?city=jeddah", label: nav.directory },
     { href: "/tours", label: nav.tours },
     { href: "/guides", label: nav.guides },
     { href: "/pro", label: nav.featured },
-    { href: "/join", label: nav.applyNow },
     { href: "/how-it-works", label: nav.howItWorks },
     { href: "/request-quote", label: t.nav.requestQuote },
+    { href: "/join", label: nav.applyNow },
   ];
 
   const ecosystemLinks = [
@@ -117,7 +117,7 @@ export async function SiteFooter() {
             </div>
 
             <div>
-              <h3 className="ruwaq-ad-footer-heading">{nav.directory}</h3>
+              <h3 className="ruwaq-ad-footer-heading">{footer.explore}</h3>
               <ul className="mt-5 space-y-2.5">
                 {directoryLinks.map((link) => (
                   <li key={link.href}>

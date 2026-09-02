@@ -84,8 +84,8 @@ export default async function JeddahHubPage() {
           <Link href="/request-quote?city=jeddah" className="ruwaq-pro-btn-solid px-6 py-3">
             {t.nav.requestQuote}
           </Link>
-          <Link href="/how-we-match" className="ruwaq-pro-btn-outline px-6 py-3">
-            {t.site.header.howWeMatch}
+          <Link href="/how-it-works" className="ruwaq-pro-btn-outline px-6 py-3">
+            {t.site.header.howItWorks}
           </Link>
           <Link href="/tours" className="ruwaq-pro-btn-outline px-6 py-3">
             {t.site.header.tours}
