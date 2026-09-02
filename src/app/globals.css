@@ -1869,15 +1869,17 @@
   }
 
   .ruwaq-pro-directory-title {
-    @apply mt-2 font-display text-3xl font-semibold tracking-tight text-neutral-950 md:text-4xl;
+    @apply mt-2 font-display text-2xl font-semibold tracking-tight text-neutral-950 md:text-3xl;
     font-family: var(--font-marketing-latin), system-ui, sans-serif;
+    line-height: 1.25;
   }
 
   html[lang="ar"] .ruwaq-pro-directory-title,
   html[data-lang="ar"] .ruwaq-pro-directory-title {
     font-family: var(--font-ar), var(--font-ar-fallback);
-    font-weight: 300;
+    font-weight: 500;
     letter-spacing: 0;
+    line-height: 1.35;
   }
 
   .ruwaq-pro-directory-count {
