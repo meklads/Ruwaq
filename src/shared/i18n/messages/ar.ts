@@ -3,6 +3,10 @@ export const ar = {
   name: "رواق",
   subtitle: "أسهل وأوثق عروض قطاع العقار",
  },
+ nasaq: {
+  name: "نَسَق",
+  tagline: "أداة صناعة العروض الاحترافية",
+ },
  nav: {
   myProposals: "عروضي",
   companyProfile: "ملف الشركة",
@@ -1754,6 +1758,7 @@ export const ar = {
    ctaFaq: "الأسئلة الشائعة",
   },
   proposalsLanding: {
+   brandFromRuwaq: "من رواق",
    eyebrow: "رواق · نَسَق",
    title: "عرض احترافي في دقائق",
    titleHighlight: "بهوية شركتك",
@@ -1769,7 +1774,7 @@ export const ar = {
      body: "العميل، وصف العمل، وسعر ثابت أو تقدير أولي. الباقي اختياري.",
     },
     {
-     title: "رواق يكتب العرض",
+     title: "نَسَق يكتب العرض",
      body: "نطاق، مخرجات، جدول زمني، شروط تجارية، وبوابات مراجعة قبل التصدير.",
     },
     {

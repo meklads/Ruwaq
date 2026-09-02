@@ -1,10 +1,12 @@
 import Link from "next/link";
 import { TemplateSampleGallery } from "@/modules/marketing/components/template-sample-gallery";
+import { NasaqBrandLockup } from "@/shared/components/nasaq-brand-lockup";
 import type { Messages } from "@/shared/i18n/messages/types";
 import type { Locale } from "@/shared/i18n/locale";
 
 type Props = {
   copy: Messages["pages"]["proposalsLanding"];
+  nasaq: Messages["nasaq"];
   sales: Messages["sales"];
   templates: Messages["templates"];
   locale: Locale;
@@ -14,6 +16,7 @@ type Props = {
 
 export function ProposalsLandingPage({
   copy,
+  nasaq,
   sales,
   templates,
   locale,
@@ -26,8 +29,9 @@ export function ProposalsLandingPage({
     <div className="ruwaq-ad-page">
       <div className="ruwaq-join-editorial">
         <aside className="ruwaq-join-editorial-aside">
-          <p className="ruwaq-ad-eyebrow">{copy.eyebrow}</p>
-          <h1 className="ruwaq-ad-section-title mt-3">
+          <p className="ruwaq-ad-eyebrow">{copy.brandFromRuwaq}</p>
+          <NasaqBrandLockup name={nasaq.name} tagline={nasaq.tagline} className="mt-3" />
+          <h1 className="ruwaq-ad-section-title mt-6">
             {copy.title}{" "}
             <span className="text-ruwaq-gold">{copy.titleHighlight}</span>
           </h1>

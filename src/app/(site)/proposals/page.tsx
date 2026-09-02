@@ -8,8 +8,9 @@ export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
   const t = getMessages(locale);
   const copy = t.pages.proposalsLanding;
+  const nasaq = t.nasaq;
   return {
-    title: `${copy.title}, ${copy.titleHighlight}`,
+    title: `${nasaq.name} — ${nasaq.tagline}`,
     description: copy.intro,
   };
 }
@@ -22,6 +23,7 @@ export default async function ProposalsMarketingPage() {
   return (
     <ProposalsLandingPage
       copy={t.pages.proposalsLanding}
+      nasaq={t.nasaq}
       sales={t.sales}
       templates={t.templates}
       locale={locale}

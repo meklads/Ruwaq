@@ -5,6 +5,10 @@ export const en: Messages = {
   name: "Ruwaq",
   subtitle: "Easiest, most trusted real estate proposals",
  },
+ nasaq: {
+  name: "NASAQ",
+  tagline: "Professional Proposal Tool",
+ },
  nav: {
   myProposals: "My Proposals",
   companyProfile: "Company profile",
@@ -1751,6 +1755,7 @@ export const en: Messages = {
    ctaFaq: "FAQ",
   },
   proposalsLanding: {
+   brandFromRuwaq: "from Ruwaq",
    eyebrow: "Ruwaq · NASAQ",
    title: "Professional proposals in minutes",
    titleHighlight: "with your branding",
@@ -1766,7 +1771,7 @@ export const en: Messages = {
      body: "Client, scope description, and fixed price or initial estimate. Everything else is optional.",
     },
     {
-     title: "Ruwaq writes the proposal",
+     title: "NASAQ writes the proposal",
      body: "Scope, deliverables, timeline, commercial terms, and review gates before export.",
     },
     {

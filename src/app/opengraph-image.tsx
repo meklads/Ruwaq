@@ -64,7 +64,7 @@ export default function OpenGraphImage() {
             marginTop: 12,
           }}
         >
-          Engineering directory and NASAQ, Western Region KSA
+          Engineering directory and NASAQ — Professional Proposal Tool
         </div>
       </div>
     ),

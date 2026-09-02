@@ -1657,6 +1657,22 @@
     @apply text-center text-sm font-semibold text-emerald-800;
   }
 
+  .ruwaq-nasaq-lockup__name {
+    @apply text-2xl font-semibold tracking-tight text-neutral-950 sm:text-[1.65rem];
+  }
+
+  html[lang="ar"] .ruwaq-nasaq-lockup__name {
+    @apply font-semibold;
+  }
+
+  .ruwaq-nasaq-lockup__tagline {
+    @apply mt-1 text-sm leading-relaxed text-neutral-600 sm:text-[0.9375rem];
+  }
+
+  html[lang="ar"] .ruwaq-nasaq-lockup__tagline {
+    @apply text-[0.9375rem] leading-relaxed;
+  }
+
   /* —— Ruwaq PRO · AD PRO editorial luxury —— */
   .ruwaq-pro-hero {
     @apply relative flex min-h-[580px] w-full flex-col overflow-hidden border-b border-neutral-950 bg-neutral-950 text-center md:min-h-[680px];

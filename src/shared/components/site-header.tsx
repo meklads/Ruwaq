@@ -52,7 +52,7 @@ export async function SiteHeader() {
                 {link.label}
               </Link>
             ))}
-            <Link href={proNavLink.href} className="ruwaq-ad-nav-link ruwaq-ad-nav-link--pro">
+            <Link href={proNavLink.href} className="ruwaq-ad-nav-link ruwaq-ad-nav-link--pro" title={`${t.nasaq.name} — ${t.nasaq.tagline}`}>
               {proNavLink.label}
             </Link>
           </nav>

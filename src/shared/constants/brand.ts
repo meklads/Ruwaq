@@ -9,6 +9,8 @@ export const RUWQ_SUPPORT_WHATSAPP_E164 = "+966502786513";
 /** Proposal SaaS product name — NASAQ (نَسَق). */
 export const NASAQ_PRODUCT_NAME_AR = "نَسَق";
 export const NASAQ_PRODUCT_NAME_EN = "NASAQ";
+export const NASAQ_TAGLINE_AR = "أداة صناعة العروض الاحترافية";
+export const NASAQ_TAGLINE_EN = "Professional Proposal Tool";
 
 /** Ecosystem brands — Ruwaq acts as a lead funnel alongside Turriva and Graphics House. */
 export const TASAMI_GROUP_URL = "https://www.tasamify.com/";

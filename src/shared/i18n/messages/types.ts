@@ -1,5 +1,6 @@
 export type Messages = {
   app: { name: string; subtitle: string };
+  nasaq: { name: string; tagline: string };
   nav: {
     myProposals: string;
     companyProfile: string;
@@ -1048,6 +1049,7 @@ export type Messages = {
       ctaFaq: string;
     };
     proposalsLanding: {
+      brandFromRuwaq: string;
       eyebrow: string;
       title: string;
       titleHighlight: string;
