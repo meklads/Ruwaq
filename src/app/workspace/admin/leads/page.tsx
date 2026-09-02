@@ -14,6 +14,7 @@ import {
   getCityBySlug,
 } from "@/shared/constants/marketplace-taxonomy";
 import { leadReferenceCode } from "@/modules/marketplace/lib/lead-phone";
+import { scoreLeadMatchCandidates } from "@/modules/marketplace/lib/lead-match-scoring";
 import type { Locale } from "@/shared/i18n/locale";
 
 export const dynamic = "force-dynamic";
@@ -81,6 +82,10 @@ export default async function AdminLeadsPage({ searchParams }: Props) {
         titleAr: true,
         titleEn: true,
         city: true,
+        directorySortRank: true,
+        directoryTier: true,
+        isFeatured: true,
+        isVerified: true,
         category: { select: { slug: true } },
       },
       orderBy: [{ directorySortRank: "asc" }, { titleAr: "asc" }],
@@ -151,6 +156,11 @@ export default async function AdminLeadsPage({ searchParams }: Props) {
                   ? categoryMeta.nameAr
                   : categoryMeta?.nameEn ?? lead.category.slug;
               const referenceCode = leadReferenceCode(lead.id);
+              const initialMatches = lead.matches.map((m) => ({
+                rank: m.rank,
+                listingId: m.listingId,
+                label: (locale === "ar" ? m.listing.titleAr : m.listing.titleEn) ?? m.listingId,
+              }));
               const matchCandidates = verifiedListings
                 .filter(
                   (l) => l.city === lead.city && l.category.slug === lead.category.slug
@@ -159,11 +169,13 @@ export default async function AdminLeadsPage({ searchParams }: Props) {
                   id: l.id,
                   label: (locale === "ar" ? l.titleAr : l.titleEn) ?? l.id,
                 }));
-              const initialMatches = lead.matches.map((m) => ({
-                rank: m.rank,
-                listingId: m.listingId,
-                label: (locale === "ar" ? m.listing.titleAr : m.listing.titleEn) ?? m.listingId,
-              }));
+              const scoringPool = verifiedListings.filter(
+                (l) => l.city === lead.city && l.category.slug === lead.category.slug
+              );
+              const suggestedMatches =
+                initialMatches.length === 0
+                  ? scoreLeadMatchCandidates(scoringPool, locale)
+                  : [];
 
               return (
                 <article
@@ -205,6 +217,7 @@ export default async function AdminLeadsPage({ searchParams }: Props) {
                         categorySlug={lead.category.slug}
                         candidates={matchCandidates}
                         initialMatches={initialMatches}
+                        suggestedMatches={suggestedMatches}
                       />
                     </div>
                     <AdminMarketplaceLeadActions

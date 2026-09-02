@@ -5,7 +5,7 @@ import { z } from "zod";
 import type { MarketplaceLeadStatus } from "@prisma/client";
 import { db } from "@/shared/lib/db";
 import { getAdminSessionEmail } from "@/modules/marketplace/server/require-admin";
-import { sendClientLeadMatchEmail } from "@/modules/marketplace/server/lead-notify-email";
+import { sendClientLeadMatchEmail, sendContractorLeadMatchEmail } from "@/modules/marketplace/server/lead-notify-email";
 import { quoteStatusUrl } from "@/modules/marketplace/lib/quote-status";
 import { leadReferenceCode } from "@/modules/marketplace/lib/lead-phone";
 import {
@@ -98,7 +98,9 @@ export async function setMarketplaceLeadMatches(
       categoryId: true,
       city: true,
       clientName: true,
+      clientPhone: true,
       clientEmail: true,
+      projectDetails: true,
       locale: true,
       category: { select: { nameAr: true, nameEn: true } },
     },
@@ -145,7 +147,15 @@ export async function setMarketplaceLeadMatches(
         orderBy: { rank: "asc" },
         select: {
           rank: true,
-          listing: { select: { titleAr: true, titleEn: true, slug: true } },
+          listing: {
+            select: {
+              titleAr: true,
+              titleEn: true,
+              slug: true,
+              owner: { select: { email: true } },
+              directoryApplication: { select: { contactEmail: true } },
+            },
+          },
         },
       });
 
@@ -158,6 +168,7 @@ export async function setMarketplaceLeadMatches(
         locale === "ar" ? lead.category.nameAr : lead.category.nameEn;
       const referenceCode = leadReferenceCode(lead.id);
       const baseUrl = process.env.NEXT_PUBLIC_APP_URL?.replace(/\/$/, "") ?? "https://ruwaq.co";
+      const inboxUrl = `${baseUrl}/leads`;
 
       if (lead.clientEmail) {
         try {
@@ -182,9 +193,34 @@ export async function setMarketplaceLeadMatches(
           console.error("[setMarketplaceLeadMatches] client match email failed", err);
         }
       }
+
+      for (const row of matchRows) {
+        const contractorEmail =
+          row.listing.owner?.email ?? row.listing.directoryApplication?.contactEmail;
+        if (!contractorEmail) continue;
+
+        try {
+          await sendContractorLeadMatchEmail({
+            locale,
+            contractorEmail,
+            companyName: row.listing.titleAr,
+            rank: row.rank,
+            referenceCode,
+            cityLabel,
+            categoryLabel,
+            clientName: lead.clientName,
+            clientPhone: lead.clientPhone,
+            projectDetails: lead.projectDetails,
+            inboxUrl,
+          });
+        } catch (err) {
+          console.error("[setMarketplaceLeadMatches] contractor match email failed", err);
+        }
+      }
     }
 
     revalidatePath("/workspace/admin/leads");
+    revalidatePath("/workspace/leads");
     revalidatePath(`/quote/status/${parsed.data.leadId}`);
     return { success: true };
   } catch (err) {

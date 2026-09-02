@@ -18,12 +18,21 @@ export type LeadMatchSelection = {
   label: string;
 };
 
+export type LeadMatchSuggestion = {
+  rank: number;
+  listingId: string;
+  label: string;
+  score: number;
+  reasons: string[];
+};
+
 type Props = {
   leadId: string;
   citySlug: string;
   categorySlug: string;
   candidates: LeadMatchCandidate[];
   initialMatches: LeadMatchSelection[];
+  suggestedMatches?: LeadMatchSuggestion[];
 };
 
 const ERROR_LABELS: Record<string, string> = {
@@ -40,23 +49,35 @@ export function AdminLeadMatcher({
   categorySlug,
   candidates,
   initialMatches,
+  suggestedMatches = [],
 }: Props) {
   const router = useRouter();
   const [pending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
   const [saved, setSaved] = useState(false);
 
-  const initialByRank = useMemo(() => {
+  const defaultByRank = useMemo(() => {
     const map: Record<number, string> = { 1: "", 2: "", 3: "" };
-    for (const m of initialMatches) {
+    const source = initialMatches.length > 0 ? initialMatches : suggestedMatches;
+    for (const m of source) {
       if (m.rank >= 1 && m.rank <= 3) map[m.rank] = m.listingId;
     }
     return map;
-  }, [initialMatches]);
+  }, [initialMatches, suggestedMatches]);
 
-  const [rank1, setRank1] = useState(initialByRank[1] ?? "");
-  const [rank2, setRank2] = useState(initialByRank[2] ?? "");
-  const [rank3, setRank3] = useState(initialByRank[3] ?? "");
+  const [rank1, setRank1] = useState(defaultByRank[1] ?? "");
+  const [rank2, setRank2] = useState(defaultByRank[2] ?? "");
+  const [rank3, setRank3] = useState(defaultByRank[3] ?? "");
+
+  const applySuggestions = () => {
+    const byRank: Record<number, string> = { 1: "", 2: "", 3: "" };
+    for (const s of suggestedMatches) {
+      if (s.rank >= 1 && s.rank <= 3) byRank[s.rank] = s.listingId;
+    }
+    setRank1(byRank[1] ?? "");
+    setRank2(byRank[2] ?? "");
+    setRank3(byRank[3] ?? "");
+  };
 
   const onSave = () => {
     setError(null);
@@ -105,6 +126,30 @@ export function AdminLeadMatcher({
       <p className="text-xs font-semibold uppercase tracking-widest text-ruwaq-ink-muted">
         Top 3 match · {citySlug} / {categorySlug}
       </p>
+
+      {suggestedMatches.length > 0 && initialMatches.length === 0 ? (
+        <div className="mt-3 rounded border border-sky-200 bg-sky-50/80 p-3">
+          <p className="text-xs font-semibold text-sky-950">Auto-score suggestions</p>
+          <ul className="mt-2 space-y-1 text-xs text-sky-900">
+            {suggestedMatches.map((s) => (
+              <li key={s.rank}>
+                #{s.rank} {s.label}{" "}
+                <span className="text-sky-700">
+                  ({s.score} pts — {s.reasons.slice(0, 2).join(", ")})
+                </span>
+              </li>
+            ))}
+          </ul>
+          <button
+            type="button"
+            onClick={applySuggestions}
+            className="mt-3 rounded border border-sky-300 bg-white px-3 py-1 text-xs font-semibold text-sky-950"
+          >
+            Apply suggestions
+          </button>
+        </div>
+      ) : null}
+
       <div className="mt-3 grid gap-3 sm:grid-cols-3">
         {renderSelect(1, rank1, setRank1)}
         {renderSelect(2, rank2, setRank2)}

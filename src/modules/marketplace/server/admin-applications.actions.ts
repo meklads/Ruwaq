@@ -104,6 +104,13 @@ export async function approveDirectoryApplication(
 
   const heroImage = categoryImageForSlug(application.category.slug);
 
+  const ownerUser = application.contactEmail
+    ? await db.user.findUnique({
+        where: { email: application.contactEmail },
+        select: { id: true },
+      })
+    : null;
+
   try {
     const listing = await db.$transaction(async (tx) => {
       const created = await tx.providerListing.create({
@@ -115,6 +122,7 @@ export async function approveDirectoryApplication(
           descriptionEn: descriptions.descriptionEn,
           city: application.city,
           categoryId: application.categoryId,
+          ownerUserId: ownerUser?.id ?? null,
           phone: application.contactPhone,
           whatsapp: application.contactPhone,
           isVerified: tierFlags.isVerified,

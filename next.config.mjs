@@ -81,6 +81,11 @@ const nextConfig = {
         permanent: false,
       },
       {
+        source: "/leads",
+        destination: "/workspace/leads",
+        permanent: false,
+      },
+      {
         source: "/:city/elevators",
         destination: "/:city/contracting",
         permanent: true,

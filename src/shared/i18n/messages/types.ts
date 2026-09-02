@@ -8,6 +8,7 @@ export type Messages = {
     signOut: string;
     newProposal: string;
     previewSample: string;
+    leadInbox: string;
     requestQuote: string;
     browseCategories: string;
     contractorHub: string;
@@ -309,6 +310,23 @@ export type Messages = {
         BROADCASTED_TO_PARTNERS: string;
         CLOSED: string;
       };
+    };
+    contractorInbox: {
+      eyebrow: string;
+      title: string;
+      subtitle: string;
+      empty: string;
+      matchedBadge: string;
+      referenceLabel: string;
+      budgetLabel: string;
+      whatsAppCta: string;
+      emailCta: string;
+      noProfileBody: string;
+      tierLockedBody: string;
+      noListingBody: string;
+      completeProfileCta: string;
+      joinDirectoryCta: string;
+      backToProposals: string;
     };
     join: {
       eyebrow: string;

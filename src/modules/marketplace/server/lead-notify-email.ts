@@ -44,6 +44,20 @@ type ClientLeadMatchEmailPayload = {
   }[];
 };
 
+type ContractorLeadMatchEmailPayload = {
+  locale: "ar" | "en";
+  contractorEmail: string;
+  companyName: string;
+  rank: number;
+  referenceCode: string;
+  cityLabel: string;
+  categoryLabel: string;
+  clientName: string;
+  clientPhone: string;
+  projectDetails: string;
+  inboxUrl: string;
+};
+
 type JoinApplicationOpsPayload = {
   applicationId: string;
   companyName: string;
@@ -290,6 +304,59 @@ export async function sendClientLeadMatchEmail(
       ].join("\n");
 
   await sendPlainEmail({ to: [payload.clientEmail], subject, text });
+}
+
+export async function sendContractorLeadMatchEmail(
+  payload: ContractorLeadMatchEmailPayload
+): Promise<void> {
+  const isAr = payload.locale === "ar";
+  const subject = isAr
+    ? `رواق — طلب مشروع جديد (#${payload.rank}) · ${payload.referenceCode}`
+    : `Ruwaq — new matched lead (#${payload.rank}) · ${payload.referenceCode}`;
+
+  const text = isAr
+    ? [
+        `مرحباً ${payload.companyName}،`,
+        "",
+        `رُشّحت شركتكم ضمن أفضل 3 مقاولين لطلب مشروع في رواق.`,
+        `الترتيب: #${payload.rank}`,
+        `رقم المرجع: ${payload.referenceCode}`,
+        `المدينة: ${payload.cityLabel}`,
+        `القطاع: ${payload.categoryLabel}`,
+        "",
+        `العميل: ${payload.clientName}`,
+        `الجوال: ${payload.clientPhone}`,
+        "",
+        "تفاصيل المشروع:",
+        payload.projectDetails,
+        "",
+        "افتح صندوق الطلبات في بوابة المقاول:",
+        payload.inboxUrl,
+        "",
+        RUWQ_PUBLIC_URL,
+      ].join("\n")
+    : [
+        `Hello ${payload.companyName},`,
+        "",
+        `Your company was shortlisted as one of 3 matched contractors on Ruwaq.`,
+        `Rank: #${payload.rank}`,
+        `Reference: ${payload.referenceCode}`,
+        `City: ${payload.cityLabel}`,
+        `Category: ${payload.categoryLabel}`,
+        "",
+        `Client: ${payload.clientName}`,
+        `Phone: ${payload.clientPhone}`,
+        "",
+        "Project details:",
+        payload.projectDetails,
+        "",
+        "Open your contractor inbox:",
+        payload.inboxUrl,
+        "",
+        RUWQ_PUBLIC_URL,
+      ].join("\n");
+
+  await sendPlainEmail({ to: [payload.contractorEmail], subject, text });
 }
 
 export async function sendJoinApplicationOpsEmail(
