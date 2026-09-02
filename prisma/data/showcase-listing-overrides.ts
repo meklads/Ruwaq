@@ -87,8 +87,8 @@ The reference profile other directory listings are measured against.`,
 • Renders, films, and smart showrooms for real estate launches
 • Integrated with Turriva for site execution
 • Fast intake via Ruwaq /visualization`,
-    phone: "+966920012303",
-    whatsapp: "+966920012303",
+    phone: RUWQ_SUPPORT_WHATSAPP_E164,
+    whatsapp: RUWQ_SUPPORT_WHATSAPP_E164,
     isFeatured: true,
     directoryTier: "PRO",
     images: [
