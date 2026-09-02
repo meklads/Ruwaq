@@ -6,6 +6,7 @@ import type { Locale } from "@/shared/i18n/locale";
 import {
   LETTERHEAD_FRAME_ORDER,
   LETTERHEAD_FRAMES,
+  frameThumbDataUri,
   type LetterheadFrameId,
 } from "@/modules/proposal/export/letterhead-frames";
 
@@ -124,7 +125,7 @@ function PreviewModal({
 }
 
 export function TemplateSampleGallery({ locale, labels, startCta }: Props) {
-  const [frameId, setFrameId] = useState<LetterheadFrameId>("graphics_house");
+  const [frameId, setFrameId] = useState<LetterheadFrameId>("wing_crest");
   const [centerWatermark, setCenterWatermark] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -175,7 +176,7 @@ export function TemplateSampleGallery({ locale, labels, startCta }: Props) {
               <div className="aspect-[210/297] overflow-hidden bg-[#ebe6de]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src={f.image}
+                  src={frameThumbDataUri(id)}
                   alt={name}
                   className="h-full w-full object-cover object-top"
                 />
