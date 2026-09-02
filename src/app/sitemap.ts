@@ -7,6 +7,7 @@ import {
 } from "@/shared/constants/marketplace-taxonomy";
 import { getAllShowcaseProjects } from "@/content/showcase-projects";
 import { RUWQ_GUIDES } from "@/content/guides";
+import { getAllJeddahIntentSlugs } from "@/content/jeddah-landings";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = env.NEXT_PUBLIC_APP_URL;
@@ -34,6 +35,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: "/how-it-works", priority: 0.72, changeFrequency: "monthly" as const },
     { path: "/how-we-match", priority: 0.78, changeFrequency: "monthly" as const },
     { path: "/hubs/riyadh", priority: 0.82, changeFrequency: "weekly" as const },
+    { path: "/hubs/jeddah", priority: 0.88, changeFrequency: "weekly" as const },
     { path: "/hubs/dammam", priority: 0.75, changeFrequency: "monthly" as const },
     { path: "/developers", priority: 0.8, changeFrequency: "monthly" as const },
     { path: "/pricing", priority: 0.7, changeFrequency: "monthly" as const },
@@ -86,10 +88,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     listingRoutes = [];
   }
 
+  const jeddahIntentRoutes: RouteEntry[] = getAllJeddahIntentSlugs().map((intent) => ({
+    path: `/hubs/jeddah/${intent}`,
+    priority: 0.84,
+    changeFrequency: "weekly" as const,
+  }));
+
   const allRoutes: RouteEntry[] = [
     ...staticRoutes,
     ...cityRoutes,
     ...seoRoutes,
+    ...jeddahIntentRoutes,
     ...tourRoutes,
     ...projectRoutes,
     ...guideRoutes,

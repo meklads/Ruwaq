@@ -6,6 +6,7 @@ import { getLocale } from "@/shared/i18n/server";
 import {
   getCategoryBySlug,
   getCityBySlug,
+  MARKETPLACE_CITIES,
   type MarketplaceCategorySlug,
   type MarketplaceCitySlug,
 } from "@/shared/constants/marketplace-taxonomy";
@@ -15,15 +16,19 @@ import { ListingCard } from "@/modules/marketplace/components/directory/ListingC
 import { DirectoryFilters } from "@/modules/marketplace/components/directory-filters";
 import { DirectoryEmptyState } from "@/modules/marketplace/components/directory-empty-state";
 import { CategoryQuoteBanner } from "@/modules/marketplace/components/category-quote-banner";
+import { JeddahCategoryLanding } from "@/modules/marketplace/components/jeddah-category-landing";
+import { getJeddahSectorLanding } from "@/content/jeddah-landings";
 import {
   parseFeaturedOnly,
   parseListingsSort,
 } from "@/modules/marketplace/lib/listings-query";
+import type { ListingsSort } from "@/modules/marketplace/lib/listings-query";
 import { JsonLdScript } from "@/modules/marketplace/components/json-ld-script";
 import {
   buildCategoryCollectionJsonLd,
   buildCategoryItemListJsonLd,
   buildCategoryListingMetadata,
+  buildJeddahLandingMetadata,
 } from "@/modules/marketplace/seo/marketplace-seo";
 
 export const dynamic = "force-dynamic";
@@ -62,6 +67,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     params.city as MarketplaceCitySlug,
     params.category as MarketplaceCategorySlug
   );
+
+  if (city.slug === "jeddah") {
+    const landing = getJeddahSectorLanding(cat.slug);
+    if (landing) {
+      return buildJeddahLandingMetadata({
+        locale,
+        landing,
+        path: `/${city.slug}/${cat.slug}`,
+      });
+    }
+  }
+
   return buildCategoryListingMetadata({
     locale,
     citySlug: params.city as MarketplaceCitySlug,
@@ -87,7 +104,7 @@ export default async function CategoryListingPage({ params, searchParams }: Prop
   const featuredOnly = parseFeaturedOnly(searchParams.featured);
   const sort = parseListingsSort(searchParams.sort);
 
-  const { listings, total, pageSize, totalPages } = await getListingsForCityCategory(
+  const { listings, total, totalPages } = await getListingsForCityCategory(
     params.city as MarketplaceCitySlug,
     params.category as MarketplaceCategorySlug,
     { query: q, page, featuredOnly, sort }
@@ -110,6 +127,44 @@ export default async function CategoryListingPage({ params, searchParams }: Prop
     citySlug: city.slug,
     categorySlug: catMeta.slug,
   });
+
+  const jeddahLanding = city.slug === "jeddah" ? getJeddahSectorLanding(catMeta.slug) : undefined;
+
+  if (jeddahLanding) {
+    return (
+      <JeddahCategoryLanding
+        landing={jeddahLanding}
+        locale={locale}
+        citySlug={city.slug}
+        cityName={cityName}
+        categorySlug={catMeta.slug}
+        categoryName={catName}
+        listings={listings}
+        total={total}
+        totalPages={totalPages}
+        page={page}
+        q={q}
+        featuredOnly={featuredOnly}
+        sort={sort}
+        buildPageHref={(p) =>
+          buildPageHref(city.slug, catMeta.slug, p, {
+            query: q,
+            featured: featuredOnly,
+            sort,
+          })
+        }
+        quoteCopy={t.marketplace.quote}
+        visualizationCopy={t.marketplace.visualization}
+        listingLabels={t.marketplace.listing}
+        filtersCopy={t.marketplace.filters}
+        directoryLabel={t.marketplace.proDirectory.directoryLabel}
+        closeLabel={t.nav.closeModal}
+        itemListJsonLd={itemListJsonLd}
+        collectionJsonLd={collectionJsonLd}
+        howMatchLabel={t.marketplace.categoryPage.howMatch}
+      />
+    );
+  }
 
   const resultLabel =
     locale === "ar"

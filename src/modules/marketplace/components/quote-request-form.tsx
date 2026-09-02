@@ -38,7 +38,8 @@ type Props = {
   initialIntent?: QuoteIntent;
   initialProjectDetails?: string;
   initialBudgetRange?: string;
-  variant?: "page" | "modal";
+  variant?: "page" | "modal" | "landing";
+  lockCategory?: boolean;
   onSuccessClose?: () => void;
 };
 
@@ -52,6 +53,7 @@ export function QuoteRequestForm({
   initialProjectDetails = "",
   initialBudgetRange = "",
   variant = "page",
+  lockCategory = false,
   onSuccessClose,
 }: Props) {
   const resolvedCity = parseCitySlug(initialCity);
@@ -196,14 +198,17 @@ export function QuoteRequestForm({
   const formClass =
     variant === "modal"
       ? "ruwaq-form-card mx-auto max-w-xl space-y-4 px-6 pb-8 pt-10"
-      : "mx-auto max-w-xl space-y-5";
+      : variant === "landing"
+        ? "mx-auto max-w-xl space-y-4"
+        : "mx-auto max-w-xl space-y-5";
 
-  const labelClass = variant === "page" ? "ruwaq-ad-field-label" : "ruwaq-label";
-  const fieldClass = variant === "page" ? "ruwaq-ad-field" : "ruwaq-field";
+  const labelClass =
+    variant === "page" || variant === "landing" ? "ruwaq-ad-field-label" : "ruwaq-label";
+  const fieldClass = variant === "page" || variant === "landing" ? "ruwaq-ad-field" : "ruwaq-field";
   const titleClass =
     variant === "page" ? "ruwaq-ad-section-title text-center" : "ruwaq-app-title pt-2 text-center text-xl";
   const submitClass =
-    variant === "page"
+    variant === "page" || variant === "landing"
       ? "ruwaq-pro-btn-solid w-full px-8 py-3 disabled:opacity-50"
       : "btn-ruwaq-primary w-full disabled:opacity-50";
 
@@ -213,16 +218,17 @@ export function QuoteRequestForm({
     : isCompactModal
       ? copy.modalSubtitle
       : null;
-  const lockJeddah = variant === "page" && !isVisualization;
+  const lockJeddah = (variant === "page" || variant === "landing") && !isVisualization;
   const jeddahCity = MARKETPLACE_CITIES.find((c) => c.slug === "jeddah");
+  const lockedCategory = MARKETPLACE_CATEGORIES.find((c) => c.slug === categorySlug);
 
   return (
     <form onSubmit={onSubmit} className={formClass}>
       {variant === "page" ? (
         <h1 className={titleClass}>{pageTitle}</h1>
-      ) : (
+      ) : variant === "modal" ? (
         <h2 className={titleClass}>{pageTitle}</h2>
-      )}
+      ) : null}
       {pageSubtitle ? (
         <p className="text-center text-sm leading-relaxed text-neutral-600">{pageSubtitle}</p>
       ) : null}
@@ -356,6 +362,17 @@ export function QuoteRequestForm({
                 </option>
               ))}
             </select>
+          </div>
+        ) : lockCategory ? (
+          <div>
+            <label className={labelClass}>{copy.fields.category}</label>
+            <p className={`${fieldClass} bg-neutral-50 text-neutral-800`}>
+              {lockedCategory
+                ? locale === "ar"
+                  ? lockedCategory.nameAr
+                  : lockedCategory.nameEn
+                : categorySlug}
+            </p>
           </div>
         ) : (
           <div>

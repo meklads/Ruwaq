@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import type { ProviderListing, ServiceCategory } from "@prisma/client";
+import type { JeddahSectorLanding } from "@/content/jeddah-landings/types";
 import type { Locale } from "@/shared/i18n/locale";
 import {
   citySlugFromEnum,
@@ -123,7 +124,52 @@ export function buildCategoryListingMetadata(opts: {
       description,
       images: [ogImage],
     },
-    robots: { index: true, follow: true },
+    robots: { index: true, follow: true     },
+  };
+}
+
+export function buildJeddahLandingMetadata(opts: {
+  locale: Locale;
+  landing: JeddahSectorLanding;
+  path: string;
+}): Metadata {
+  const cat = getCategoryBySlug(opts.landing.categorySlug);
+  const title = opts.locale === "ar" ? opts.landing.metaTitleAr : opts.landing.metaTitleEn;
+  const description =
+    opts.locale === "ar" ? opts.landing.metaDescriptionAr : opts.landing.metaDescriptionEn;
+  const url = canonical(opts.path);
+  const ogImage = absoluteMarketingImage(
+    categoryImageForSlug(opts.landing.categorySlug),
+    appBaseUrlFromEnv()
+  );
+
+  const keywordsAr = cat
+    ? [cat.nameAr, "جدة", "مقاولين", "3 مقاولين", "رواق", ...opts.landing.metaDescriptionAr.split(" ").slice(0, 6)]
+    : ["جدة", "رواق"];
+  const keywordsEn = cat
+    ? [cat.nameEn, "Jeddah", "contractors", "Ruwaq", ...opts.landing.metaDescriptionEn.split(" ").slice(0, 6)]
+    : ["Jeddah", "Ruwaq"];
+
+  return {
+    title,
+    description,
+    keywords: opts.locale === "ar" ? keywordsAr : keywordsEn,
+    alternates: { canonical: url },
+    openGraph: {
+      title,
+      description,
+      url,
+      siteName: opts.locale === "ar" ? "رواق" : "Ruwaq",
+      locale: opts.locale === "ar" ? "ar_SA" : "en_SA",
+      type: "website",
+      images: [{ url: ogImage, width: 1200, height: 630, alt: title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [ogImage],
+    },
   };
 }
 
