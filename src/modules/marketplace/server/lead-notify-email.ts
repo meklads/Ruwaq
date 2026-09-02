@@ -26,6 +26,22 @@ type ClientConfirmationEmailPayload = {
   referenceCode: string;
   cityLabel: string;
   categoryLabel: string;
+  statusUrl: string;
+};
+
+type ClientLeadMatchEmailPayload = {
+  locale: "ar" | "en";
+  clientName: string;
+  clientEmail: string;
+  referenceCode: string;
+  cityLabel: string;
+  categoryLabel: string;
+  statusUrl: string;
+  matches: readonly {
+    rank: number;
+    companyName: string;
+    listingUrl: string;
+  }[];
 };
 
 type JoinApplicationOpsPayload = {
@@ -71,7 +87,11 @@ type GraphicsHouseEmailPayload = {
   leadId: string;
   clientName: string;
   clientPhone: string;
+  clientEmail?: string;
   companyName?: string | null;
+  jobTitle?: string;
+  serviceInterest?: string;
+  inquiryType?: string;
   citySlug?: string | null;
   projectType: string;
   projectDetails: string;
@@ -201,6 +221,8 @@ export async function sendClientLeadConfirmationEmail(
         "",
         "سيتواصل فريق رواق معك على الواتساب خلال 24 ساعة.",
         "",
+        `تابع حالة طلبك: ${payload.statusUrl}`,
+        "",
         RUWQ_PUBLIC_URL,
       ].join("\n")
     : [
@@ -212,6 +234,57 @@ export async function sendClientLeadConfirmationEmail(
         `Category: ${payload.categoryLabel}`,
         "",
         "The Ruwaq team will reach out on WhatsApp within 24 hours.",
+        "",
+        `Track your request: ${payload.statusUrl}`,
+        "",
+        RUWQ_PUBLIC_URL,
+      ].join("\n");
+
+  await sendPlainEmail({ to: [payload.clientEmail], subject, text });
+}
+
+export async function sendClientLeadMatchEmail(
+  payload: ClientLeadMatchEmailPayload
+): Promise<void> {
+  const isAr = payload.locale === "ar";
+  const matchLines = payload.matches.map((m) =>
+    isAr
+      ? `${m.rank}. ${m.companyName}\n   ${m.listingUrl}`
+      : `${m.rank}. ${m.companyName}\n   ${m.listingUrl}`
+  );
+
+  const subject = isAr
+    ? `رواق — رشّحنا 3 مقاولين لمشروعك (${payload.referenceCode})`
+    : `Ruwaq — your 3 matched contractors (${payload.referenceCode})`;
+
+  const text = isAr
+    ? [
+        `مرحباً ${payload.clientName}،`,
+        "",
+        "أنهى فريق رواق مراجعة طلبك ويرشّح الشركات التالية:",
+        `رقم المرجع: ${payload.referenceCode}`,
+        `المدينة: ${payload.cityLabel}`,
+        `القطاع: ${payload.categoryLabel}`,
+        "",
+        ...matchLines,
+        "",
+        "يمكنك متابعة التفاصيل والتواصل عبر صفحة حالة الطلب:",
+        payload.statusUrl,
+        "",
+        RUWQ_PUBLIC_URL,
+      ].join("\n")
+    : [
+        `Hello ${payload.clientName},`,
+        "",
+        "The Ruwaq team reviewed your request and matched these contractors:",
+        `Reference: ${payload.referenceCode}`,
+        `City: ${payload.cityLabel}`,
+        `Category: ${payload.categoryLabel}`,
+        "",
+        ...matchLines,
+        "",
+        "View details and follow up on your status page:",
+        payload.statusUrl,
         "",
         RUWQ_PUBLIC_URL,
       ].join("\n");
@@ -370,14 +443,18 @@ export async function sendGraphicsHouseLeadEmail(
   if (to.length === 0) return;
 
   const cityPart = payload.citySlug ? ` (${payload.citySlug})` : "";
-  const subject = `[Ruwaq → GH] ${payload.projectType} — ${payload.clientName}${cityPart}`;
+  const subject = `[Ruwaq → GH] ProjectLaunch — ${payload.projectType} — ${payload.clientName}${cityPart}`;
 
   const text = [
-    "New Graphics House visualization lead from Ruwaq",
+    "New Graphics House ProjectLaunch lead from Ruwaq",
     `Lead ID: ${payload.leadId}`,
     `Client: ${payload.clientName}`,
     `Phone: ${payload.clientPhone}`,
+    payload.clientEmail ? `Email: ${payload.clientEmail}` : null,
     payload.companyName ? `Company: ${payload.companyName}` : null,
+    payload.jobTitle ? `Job title: ${payload.jobTitle}` : null,
+    payload.serviceInterest ? `Service: ${payload.serviceInterest}` : null,
+    payload.inquiryType ? `Inquiry: ${payload.inquiryType}` : null,
     payload.citySlug ? `City: ${payload.citySlug}` : null,
     `Project type: ${payload.projectType}`,
     payload.budgetRange ? `Budget: ${payload.budgetRange}` : null,

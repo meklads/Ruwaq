@@ -3,11 +3,13 @@
 import Link from "next/link";
 import type { Messages } from "@/shared/i18n/messages/types";
 import type { Locale } from "@/shared/i18n/locale";
+import { quoteStatusPath } from "@/modules/marketplace/lib/quote-status";
 
 type Props = {
   copy: Messages["marketplace"]["quote"]["successModal"];
   locale: Locale;
   referenceCode: string;
+  leadId: string;
   whatsAppUrl: string | null;
   onClose?: () => void;
   variant?: "inline" | "overlay";
@@ -17,6 +19,7 @@ export function QuoteRequestSuccessModal({
   copy,
   locale,
   referenceCode,
+  leadId,
   whatsAppUrl,
   onClose,
   variant = "inline",
@@ -37,6 +40,12 @@ export function QuoteRequestSuccessModal({
         {copy.referenceLabel}: <span className="ms-1 font-mono text-ruwaq-ink">{referenceCode}</span>
       </p>
       <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
+        <Link
+          href={quoteStatusPath(leadId)}
+          className="inline-flex items-center justify-center gap-2 rounded-full bg-neutral-950 px-6 py-3.5 text-sm font-bold text-white shadow-sm transition hover:bg-neutral-800"
+        >
+          {copy.statusCta} {arrow}
+        </Link>
         {whatsAppUrl ? (
           <a
             href={whatsAppUrl}

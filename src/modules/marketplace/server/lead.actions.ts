@@ -15,6 +15,7 @@ import {
   resolveLeadStatus,
 } from "@/modules/marketplace/server/lead-routing";
 import { sendClientLeadConfirmationEmail } from "@/modules/marketplace/server/lead-notify-email";
+import { quoteStatusUrl } from "@/modules/marketplace/lib/quote-status";
 import { logUsageEvent } from "@/shared/lib/usage-events";
 import {
   buildClientFollowUpWhatsAppMessage,
@@ -110,6 +111,7 @@ async function persistAndRouteLead(
     data: {
       clientName: data.clientName,
       clientPhone: data.clientPhone,
+      clientEmail: data.clientEmail?.trim() || null,
       city: cityMeta.enum,
       categoryId: category.id,
       projectDetails: data.projectDetails,
@@ -157,6 +159,7 @@ async function persistAndRouteLead(
         referenceCode,
         cityLabel,
         categoryLabel,
+        statusUrl: quoteStatusUrl(lead.id),
       });
     } catch (err) {
       console.error("[submitLead] client confirmation email failed", err);

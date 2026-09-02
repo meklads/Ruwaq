@@ -72,6 +72,9 @@ export type Messages = {
       trustTitle: string;
       trustItems: readonly string[];
       partnerNote: string;
+      projectLaunchBanner: string;
+      projectLaunchDescription: string;
+      projectLaunchLearnMore: string;
       submit: string;
       submitting: string;
       successTitle: string;
@@ -83,13 +86,33 @@ export type Messages = {
         name: string;
         company: string;
         companyPlaceholder: string;
+        email: string;
+        emailPlaceholder: string;
+        jobTitle: string;
         phone: string;
         phonePlaceholder: string;
         projectType: string;
         city: string;
         cityOptional: string;
+        serviceInterest: string;
+        servicePlaceholder: string;
+        inquiryType: string;
+        inquiryPlaceholder: string;
         details: string;
         budget: string;
+      };
+      serviceInterests: {
+        integrated_launch: string;
+        smart_maquette: string;
+        cgi: string;
+        interactive: string;
+        gallery: string;
+        media: string;
+      };
+      inquiryTypes: {
+        new_project: string;
+        partnership: string;
+        general: string;
       };
       projectTypes: {
         residential: string;
@@ -189,6 +212,7 @@ export type Messages = {
         whatsAppCta: string;
         close: string;
         browseCategories: string;
+        statusCta: string;
         noWhatsAppHint: string;
       };
       errors: {
@@ -259,6 +283,32 @@ export type Messages = {
       requestQuoteLink: string;
       proposalStudioLink: string;
       tradeApplyBar: string;
+    };
+    leadStatus: {
+      metaTitle: string;
+      metaDescription: string;
+      eyebrow: string;
+      notFoundTitle: string;
+      notFoundBody: string;
+      submittedOn: string;
+      referenceLabel: string;
+      nextTitle: string;
+      nextNew: string;
+      nextAssigned: string;
+      nextMatched: string;
+      nextClosed: string;
+      matchesTitle: string;
+      viewProfile: string;
+      whatsapp: string;
+      newRequest: string;
+      howWeMatch: string;
+      bookmarkHint: string;
+      labels: {
+        NEW: string;
+        ASSIGNED_TO_TURRIVA: string;
+        BROADCASTED_TO_PARTNERS: string;
+        CLOSED: string;
+      };
     };
     join: {
       eyebrow: string;

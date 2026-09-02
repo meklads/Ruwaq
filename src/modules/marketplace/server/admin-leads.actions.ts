@@ -5,6 +5,13 @@ import { z } from "zod";
 import type { MarketplaceLeadStatus } from "@prisma/client";
 import { db } from "@/shared/lib/db";
 import { getAdminSessionEmail } from "@/modules/marketplace/server/require-admin";
+import { sendClientLeadMatchEmail } from "@/modules/marketplace/server/lead-notify-email";
+import { quoteStatusUrl } from "@/modules/marketplace/lib/quote-status";
+import { leadReferenceCode } from "@/modules/marketplace/lib/lead-phone";
+import {
+  citySlugFromEnum,
+  getCityBySlug,
+} from "@/shared/constants/marketplace-taxonomy";
 
 const statusSchema = z.enum([
   "NEW",
@@ -86,7 +93,15 @@ export async function setMarketplaceLeadMatches(
 
   const lead = await db.marketplaceLead.findUnique({
     where: { id: parsed.data.leadId },
-    select: { id: true, categoryId: true, city: true },
+    select: {
+      id: true,
+      categoryId: true,
+      city: true,
+      clientName: true,
+      clientEmail: true,
+      locale: true,
+      category: { select: { nameAr: true, nameEn: true } },
+    },
   });
   if (!lead) return { success: false, error: "not_found" };
 
@@ -114,8 +129,63 @@ export async function setMarketplaceLeadMatches(
           },
         })
       ),
+      ...(parsed.data.matches.length > 0
+        ? [
+            db.marketplaceLead.update({
+              where: { id: parsed.data.leadId },
+              data: { status: "BROADCASTED_TO_PARTNERS" },
+            }),
+          ]
+        : []),
     ]);
+
+    if (parsed.data.matches.length > 0) {
+      const matchRows = await db.marketplaceLeadMatch.findMany({
+        where: { leadId: parsed.data.leadId },
+        orderBy: { rank: "asc" },
+        select: {
+          rank: true,
+          listing: { select: { titleAr: true, titleEn: true, slug: true } },
+        },
+      });
+
+      const citySlug = citySlugFromEnum(lead.city);
+      const cityMeta = getCityBySlug(citySlug);
+      const locale = lead.locale === "en" ? "en" : "ar";
+      const cityLabel =
+        locale === "ar" ? (cityMeta?.nameAr ?? lead.city) : (cityMeta?.nameEn ?? lead.city);
+      const categoryLabel =
+        locale === "ar" ? lead.category.nameAr : lead.category.nameEn;
+      const referenceCode = leadReferenceCode(lead.id);
+      const baseUrl = process.env.NEXT_PUBLIC_APP_URL?.replace(/\/$/, "") ?? "https://ruwaq.co";
+
+      if (lead.clientEmail) {
+        try {
+          await sendClientLeadMatchEmail({
+            locale,
+            clientName: lead.clientName,
+            clientEmail: lead.clientEmail,
+            referenceCode,
+            cityLabel,
+            categoryLabel,
+            statusUrl: quoteStatusUrl(lead.id),
+            matches: matchRows.map((row) => ({
+              rank: row.rank,
+              companyName:
+                locale === "ar"
+                  ? row.listing.titleAr
+                  : (row.listing.titleEn ?? row.listing.titleAr),
+              listingUrl: `${baseUrl}/listing/${row.listing.slug}`,
+            })),
+          });
+        } catch (err) {
+          console.error("[setMarketplaceLeadMatches] client match email failed", err);
+        }
+      }
+    }
+
     revalidatePath("/workspace/admin/leads");
+    revalidatePath(`/quote/status/${parsed.data.leadId}`);
     return { success: true };
   } catch (err) {
     console.error("[setMarketplaceLeadMatches]", err);

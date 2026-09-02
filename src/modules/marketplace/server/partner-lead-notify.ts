@@ -5,7 +5,11 @@ type GraphicsHouseLeadPayload = {
   leadId: string;
   clientName: string;
   clientPhone: string;
+  clientEmail?: string;
   companyName?: string | null;
+  jobTitle?: string;
+  serviceInterest?: string;
+  inquiryType?: string;
   citySlug?: string | null;
   projectType: string;
   projectDetails: string;

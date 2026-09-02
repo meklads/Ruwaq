@@ -5,7 +5,7 @@ import { getLocale } from "@/shared/i18n/server";
 import { VISUALIZATION_HERO } from "@/content/marketing-images";
 import { VisualizationLeadForm } from "@/modules/marketplace/components/visualization-lead-form";
 import { GraphicsHouseLogo } from "@/shared/components/graphics-house-logo";
-import { graphicsHouseReferralUrl } from "@/shared/constants/brand";
+import { graphicsHouseProjectLaunchReferralUrl } from "@/shared/constants/brand";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
@@ -22,7 +22,7 @@ export default async function VisualizationPage() {
   const locale = await getLocale();
   const t = getMessages(locale);
   const copy = t.marketplace.visualization;
-  const ghUrl = graphicsHouseReferralUrl("visualization_page");
+  const ghUrl = graphicsHouseProjectLaunchReferralUrl("visualization_page");
 
   return (
     <div className="ruwaq-ad-page">

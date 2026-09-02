@@ -5,6 +5,11 @@ import { db } from "@/shared/lib/db";
 import { getCityBySlug } from "@/shared/constants/marketplace-taxonomy";
 import { parseCitySlug } from "@/modules/marketplace/lib/marketplace-slugs";
 import { normalizeKsaPhone } from "@/modules/marketplace/lib/lead-phone";
+import {
+  formatProjectLaunchDetails,
+  PROJECT_LAUNCH_INQUIRY_KEYS,
+  PROJECT_LAUNCH_SERVICE_KEYS,
+} from "@/modules/marketplace/lib/project-launch";
 import { notifyGraphicsHouseLead } from "@/modules/marketplace/server/partner-lead-notify";
 import { logUsageEvent } from "@/shared/lib/usage-events";
 
@@ -34,7 +39,11 @@ const ksaPhone = z
 const submitVisualizationLeadSchema = z.object({
   clientName: z.string().trim().min(2, { message: "validation" }).max(120),
   clientPhone: ksaPhone,
+  clientEmail: z.string().trim().email().max(160).optional().or(z.literal("")),
   companyName: z.string().trim().max(160).optional(),
+  jobTitle: z.string().trim().max(120).optional(),
+  serviceInterest: z.enum(PROJECT_LAUNCH_SERVICE_KEYS).optional(),
+  inquiryType: z.enum(PROJECT_LAUNCH_INQUIRY_KEYS).optional(),
   citySlug: z.enum(["jeddah", "makkah", "madinah"]).optional(),
   projectType: z.enum(projectTypeKeys),
   projectDetails: z.string().trim().min(10, { message: "validation" }).max(4000),
@@ -63,10 +72,14 @@ export async function submitVisualizationLead(
   const data = parsed.data;
   const citySlug = data.citySlug ? parseCitySlug(data.citySlug) : null;
   const cityMeta = citySlug ? getCityBySlug(citySlug) : null;
-  const projectDetails =
-    data.referrer === "request_quote"
-      ? `${data.projectDetails}\n\n— Submitted via Ruwaq /request-quote`
-      : data.projectDetails;
+  const projectDetails = formatProjectLaunchDetails({
+    projectDetails: data.projectDetails,
+    clientEmail: data.clientEmail || undefined,
+    jobTitle: data.jobTitle,
+    serviceInterest: data.serviceInterest,
+    inquiryType: data.inquiryType,
+    referrer: data.referrer,
+  });
 
   try {
     const lead = await db.partnerLead.create({
@@ -88,7 +101,11 @@ export async function submitVisualizationLead(
         leadId: lead.id,
         clientName: lead.clientName,
         clientPhone: lead.clientPhone,
+        clientEmail: data.clientEmail || undefined,
         companyName: lead.companyName,
+        jobTitle: data.jobTitle,
+        serviceInterest: data.serviceInterest,
+        inquiryType: data.inquiryType,
         citySlug,
         projectType: lead.projectType,
         projectDetails: lead.projectDetails,

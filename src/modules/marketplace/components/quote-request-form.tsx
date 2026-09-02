@@ -10,11 +10,18 @@ import {
   parseCategorySlug,
   parseCitySlug,
 } from "@/modules/marketplace/lib/marketplace-slugs";
+import {
+  PROJECT_LAUNCH_INQUIRY_KEYS,
+  PROJECT_LAUNCH_SERVICE_KEYS,
+  type ProjectLaunchInquiryKey,
+  type ProjectLaunchServiceKey,
+} from "@/modules/marketplace/lib/project-launch";
 import { submitLead } from "@/modules/marketplace/server/lead.actions";
 import { submitVisualizationLead } from "@/modules/marketplace/server/visualization-lead.actions";
 import { trackEvent } from "@/shared/lib/analytics";
 import { QuoteRequestSuccessModal } from "@/modules/marketplace/components/quote-request-success-modal";
-import { graphicsHouseReferralUrl } from "@/shared/constants/brand";
+import { ProjectLaunchBanner } from "@/modules/marketplace/components/project-launch-banner";
+import { graphicsHouseProjectLaunchReferralUrl } from "@/shared/constants/brand";
 import type { Messages } from "@/shared/i18n/messages/types";
 import type { Locale } from "@/shared/i18n/locale";
 
@@ -64,6 +71,9 @@ export function QuoteRequestForm({
   const [clientPhone, setClientPhone] = useState("");
   const [clientEmail, setClientEmail] = useState("");
   const [companyName, setCompanyName] = useState("");
+  const [jobTitle, setJobTitle] = useState("");
+  const [serviceInterest, setServiceInterest] = useState<ProjectLaunchServiceKey | "">("");
+  const [inquiryType, setInquiryType] = useState<ProjectLaunchInquiryKey | "">("");
   const [citySlug, setCitySlug] = useState(resolvedCity);
   const [categorySlug, setCategorySlug] = useState(resolvedCategory);
   const [projectType, setProjectType] =
@@ -73,6 +83,7 @@ export function QuoteRequestForm({
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
   const [marketplaceSuccess, setMarketplaceSuccess] = useState<{
+    leadId: string;
     referenceCode: string;
     whatsAppUrl: string | null;
   } | null>(null);
@@ -97,7 +108,7 @@ export function QuoteRequestForm({
 
   const isVisualization = intent === "visualization";
   const isCompactModal = variant === "modal" && !isVisualization;
-  const ghUrl = graphicsHouseReferralUrl("request_quote_visualization");
+  const projectLaunchUrl = graphicsHouseProjectLaunchReferralUrl("request_quote_visualization");
 
   const buildCompactProjectDetails = () => {
     const typeLabel = visualizationCopy.projectTypes[projectType];
@@ -113,7 +124,11 @@ export function QuoteRequestForm({
       const result = await submitVisualizationLead({
         clientName,
         clientPhone,
+        clientEmail: clientEmail.trim(),
         companyName: companyName || undefined,
+        jobTitle: jobTitle || undefined,
+        serviceInterest: serviceInterest || undefined,
+        inquiryType: inquiryType || undefined,
         citySlug,
         projectType,
         projectDetails,
@@ -153,6 +168,7 @@ export function QuoteRequestForm({
       return;
     }
     setMarketplaceSuccess({
+      leadId: result.leadId,
       referenceCode: result.referenceCode,
       whatsAppUrl: result.whatsAppUrl,
     });
@@ -168,7 +184,7 @@ export function QuoteRequestForm({
             {copy.visualizationSuccess.subtitle}
           </p>
           <a
-            href={ghUrl}
+            href={projectLaunchUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="ruwaq-pro-btn-outline mt-8 inline-flex px-6 py-2.5"
@@ -187,6 +203,7 @@ export function QuoteRequestForm({
           copy={copy.successModal}
           locale={locale}
           referenceCode={marketplaceSuccess.referenceCode}
+          leadId={marketplaceSuccess.leadId}
           whatsAppUrl={marketplaceSuccess.whatsAppUrl}
           onClose={onSuccessClose}
           variant={variant === "modal" ? "inline" : "overlay"}
@@ -221,6 +238,7 @@ export function QuoteRequestForm({
   const lockJeddah = (variant === "page" || variant === "landing") && !isVisualization;
   const jeddahCity = MARKETPLACE_CITIES.find((c) => c.slug === "jeddah");
   const lockedCategory = MARKETPLACE_CATEGORIES.find((c) => c.slug === categorySlug);
+  const projectLaunchHintUrl = graphicsHouseProjectLaunchReferralUrl("request_quote_hint");
 
   return (
     <form onSubmit={onSubmit} className={formClass}>
@@ -266,12 +284,29 @@ export function QuoteRequestForm({
           {isVisualization ? (
             <p className="mt-3 text-xs leading-relaxed text-neutral-500">
               {copy.visualizationHint}{" "}
-              <Link href="/visualization" className="underline underline-offset-2 hover:text-neutral-950">
+              <a
+                href={projectLaunchHintUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline underline-offset-2 hover:text-neutral-950"
+              >
                 {copy.visualizationPageLink}
+              </a>
+              {" · "}
+              <Link href="/visualization" className="underline underline-offset-2 hover:text-neutral-950">
+                {locale === "ar" ? "النموذج الكامل" : "Full form"}
               </Link>
             </p>
           ) : null}
         </div>
+      ) : null}
+
+      {isVisualization && variant === "page" ? (
+        <ProjectLaunchBanner
+          copy={visualizationCopy}
+          locale={locale}
+          campaign="request_quote_banner"
+        />
       ) : null}
 
       {error ? (
@@ -289,7 +324,7 @@ export function QuoteRequestForm({
         />
       </div>
 
-      {isVisualization && variant === "page" ? (
+      {isVisualization ? (
         <div>
           <label className={labelClass}>{visualizationCopy.fields.company}</label>
           <input
@@ -297,6 +332,58 @@ export function QuoteRequestForm({
             value={companyName}
             onChange={(e) => setCompanyName(e.target.value)}
             placeholder={visualizationCopy.fields.companyPlaceholder}
+            dir={locale === "ar" ? "rtl" : "ltr"}
+          />
+        </div>
+      ) : null}
+
+      {!isCompactModal ? (
+        <div>
+          <label className={labelClass}>
+            {isVisualization ? visualizationCopy.fields.email : copy.fields.email}
+          </label>
+          <input
+            className={fieldClass}
+            type="email"
+            inputMode="email"
+            autoComplete="email"
+            placeholder={
+              isVisualization
+                ? visualizationCopy.fields.emailPlaceholder
+                : copy.fields.emailPlaceholder
+            }
+            value={clientEmail}
+            onChange={(e) => setClientEmail(e.target.value)}
+            required={isVisualization}
+            dir="ltr"
+          />
+          {!isVisualization ? (
+            <p className="mt-1 text-xs text-neutral-500">{copy.fields.emailHint}</p>
+          ) : null}
+        </div>
+      ) : null}
+
+      <div>
+        <label className={labelClass}>{copy.fields.phone}</label>
+        <input
+          className={fieldClass}
+          type="tel"
+          inputMode="tel"
+          placeholder={copy.fields.phonePlaceholder}
+          value={clientPhone}
+          onChange={(e) => setClientPhone(e.target.value)}
+          required
+          dir="ltr"
+        />
+      </div>
+
+      {isVisualization ? (
+        <div>
+          <label className={labelClass}>{visualizationCopy.fields.jobTitle}</label>
+          <input
+            className={fieldClass}
+            value={jobTitle}
+            onChange={(e) => setJobTitle(e.target.value)}
             dir={locale === "ar" ? "rtl" : "ltr"}
           />
         </div>
@@ -392,41 +479,49 @@ export function QuoteRequestForm({
         )}
       </div>
 
-      <div>
-        <label className={labelClass}>{copy.fields.phone}</label>
-        <input
-          className={fieldClass}
-          type="tel"
-          inputMode="tel"
-          placeholder={copy.fields.phonePlaceholder}
-          value={clientPhone}
-          onChange={(e) => setClientPhone(e.target.value)}
-          required
-          dir="ltr"
-        />
-      </div>
-
-      {!isCompactModal ? (
-        <div>
-          <label className={labelClass}>{copy.fields.email}</label>
-          <input
-            className={fieldClass}
-            type="email"
-            inputMode="email"
-            autoComplete="email"
-            placeholder={copy.fields.emailPlaceholder}
-            value={clientEmail}
-            onChange={(e) => setClientEmail(e.target.value)}
-            dir="ltr"
-          />
-          <p className="mt-1 text-xs text-neutral-500">{copy.fields.emailHint}</p>
-        </div>
+      {isVisualization ? (
+        <>
+          <div>
+            <label className={labelClass}>{visualizationCopy.fields.serviceInterest}</label>
+            <select
+              className={fieldClass}
+              value={serviceInterest}
+              onChange={(e) =>
+                setServiceInterest(e.target.value as ProjectLaunchServiceKey | "")
+              }
+            >
+              <option value="">{visualizationCopy.fields.servicePlaceholder}</option>
+              {PROJECT_LAUNCH_SERVICE_KEYS.map((key) => (
+                <option key={key} value={key}>
+                  {visualizationCopy.serviceInterests[key]}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label className={labelClass}>{visualizationCopy.fields.inquiryType}</label>
+            <select
+              className={fieldClass}
+              value={inquiryType}
+              onChange={(e) => setInquiryType(e.target.value as ProjectLaunchInquiryKey | "")}
+            >
+              <option value="">{visualizationCopy.fields.inquiryPlaceholder}</option>
+              {PROJECT_LAUNCH_INQUIRY_KEYS.map((key) => (
+                <option key={key} value={key}>
+                  {visualizationCopy.inquiryTypes[key]}
+                </option>
+              ))}
+            </select>
+          </div>
+        </>
       ) : null}
 
       {!isCompactModal ? (
         <>
           <div>
-            <label className={labelClass}>{copy.fields.details}</label>
+            <label className={labelClass}>
+              {isVisualization ? visualizationCopy.fields.details : copy.fields.details}
+            </label>
             <textarea
               className={fieldClass}
               rows={5}
@@ -439,7 +534,9 @@ export function QuoteRequestForm({
           </div>
 
           <div>
-            <label className={labelClass}>{copy.fields.budget}</label>
+            <label className={labelClass}>
+              {isVisualization ? visualizationCopy.fields.budget : copy.fields.budget}
+            </label>
             <input
               className={fieldClass}
               value={budgetRange}

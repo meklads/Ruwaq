@@ -605,6 +605,7 @@ model MarketplaceLead {
   id             String                @id @default(cuid())
   clientName     String
   clientPhone    String
+  clientEmail    String?
   city           MarketplaceCity
   categoryId     String
   category       ServiceCategory       @relation(fields: [categoryId], references: [id], onDelete: Restrict)
