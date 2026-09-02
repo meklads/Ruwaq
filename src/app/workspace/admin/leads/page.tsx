@@ -86,6 +86,7 @@ export default async function AdminLeadsPage({ searchParams }: Props) {
         directoryTier: true,
         isFeatured: true,
         isVerified: true,
+        providerType: true,
         category: { select: { slug: true } },
       },
       orderBy: [{ directorySortRank: "asc" }, { titleAr: "asc" }],
@@ -160,6 +161,9 @@ export default async function AdminLeadsPage({ searchParams }: Props) {
                 rank: m.rank,
                 listingId: m.listingId,
                 label: (locale === "ar" ? m.listing.titleAr : m.listing.titleEn) ?? m.listingId,
+                viewedAt: m.viewedAt,
+                respondedAt: m.respondedAt,
+                responseChannel: m.responseChannel,
               }));
               const matchCandidates = verifiedListings
                 .filter(
@@ -174,7 +178,11 @@ export default async function AdminLeadsPage({ searchParams }: Props) {
               );
               const suggestedMatches =
                 initialMatches.length === 0
-                  ? scoreLeadMatchCandidates(scoringPool, locale)
+                  ? scoreLeadMatchCandidates(scoringPool, locale, 3, {
+                      categorySlug: lead.category.slug,
+                      projectDetails: lead.projectDetails,
+                      budgetRange: lead.budgetRange,
+                    })
                   : [];
 
               return (

@@ -29,6 +29,7 @@ function buildIntegrations() {
     turrivaWebhook: envSet("TURRIVA_LEAD_WEBHOOK_URL"),
     storage: envSet("STORAGE_ACCESS_KEY") && envSet("STORAGE_BUCKET"),
     ga4: envSet("NEXT_PUBLIC_GA_MEASUREMENT_ID"),
+    cronSecret: envSet("CRON_SECRET"),
   };
 }
 
@@ -64,13 +65,17 @@ export async function GET() {
            (table_name = 'Proposal' AND column_name = 'editToken')
            OR (table_name = 'CompanyProfile' AND column_name = 'exportTemplateId')
            OR (table_name = 'DirectoryApplication' AND column_name = 'listingId')
+           OR (table_name = 'MarketplaceLeadMatch' AND column_name = 'viewedAt')
+           OR (table_name = 'MarketplaceLead' AND column_name = 'clientEmail')
          )`
     );
     const columnNames = new Set(columns.map((c) => c.column_name));
     const schemaReady =
       columnNames.has("editToken") &&
       columnNames.has("exportTemplateId") &&
-      columnNames.has("listingId");
+      columnNames.has("listingId") &&
+      columnNames.has("viewedAt") &&
+      columnNames.has("clientEmail");
 
     return NextResponse.json({
       ok: true,

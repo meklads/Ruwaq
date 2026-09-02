@@ -624,16 +624,22 @@ model MarketplaceLead {
 }
 
 model MarketplaceLeadMatch {
-  id        String          @id @default(cuid())
-  leadId    String
-  lead      MarketplaceLead @relation(fields: [leadId], references: [id], onDelete: Cascade)
-  listingId String
-  listing   ProviderListing @relation(fields: [listingId], references: [id], onDelete: Cascade)
-  rank      Int
-  createdAt DateTime        @default(now())
+  id             String          @id @default(cuid())
+  leadId         String
+  lead           MarketplaceLead @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  listingId      String
+  listing        ProviderListing @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  rank           Int
+  notifiedAt     DateTime?
+  viewedAt       DateTime?
+  respondedAt    DateTime?
+  responseChannel String?
+  reminderSentAt DateTime?
+  createdAt      DateTime        @default(now())
 
   @@unique([leadId, listingId])
   @@index([leadId])
+  @@index([listingId, viewedAt])
 }
 
 model PartnerLead {

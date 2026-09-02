@@ -315,6 +315,9 @@ export type Messages = {
       subtitle: string;
       empty: string;
       matchedBadge: string;
+      pendingBadge: string;
+      viewedBadge: string;
+      respondedBadge: string;
       referenceLabel: string;
       budgetLabel: string;
       whatsAppCta: string;

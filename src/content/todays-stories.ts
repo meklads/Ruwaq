@@ -18,6 +18,20 @@ export type TodaysStory = {
 /** Curated weekly editorial feed — update slots when publishing new guides or tours. */
 export const TODAYS_STORIES: TodaysStory[] = [
   {
+    id: "story-how-we-match",
+    kind: "guide",
+    href: "/how-we-match",
+    image: "/images/marketing/hero-villa-family.jpg",
+    titleAr: "كيف نطابق مشروعك مع 3 مقاولين معتمدين في جدة",
+    titleEn: "How Ruwaq Matches Your Jeddah Project to 3 Verified Contractors",
+    excerptAr: "صف مشروعك مرة واحدة — نراجع الطلب، نختار أفضل 3 شركاء، وترسل لك حالة المطابقة.",
+    excerptEn: "Describe once — we review, pick the top 3 partners, and send you a match status page.",
+    categoryAr: "مطابقة المشاريع",
+    categoryEn: "Project matching",
+    featured: true,
+    publishedAt: "2026-09-02",
+  },
+  {
     id: "story-engineering-supervision",
     kind: "guide",
     href: "/guides/engineering-supervision-basics",
@@ -28,7 +42,6 @@ export const TODAYS_STORIES: TodaysStory[] = [
     excerptEn: "Foundations to handover — hold points, variation orders, and annual supervision fees.",
     categoryAr: "إشراف",
     categoryEn: "Supervision",
-    featured: true,
     publishedAt: "2026-08-13",
   },
   {

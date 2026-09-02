@@ -128,6 +128,7 @@ export async function setMarketplaceLeadMatches(
             leadId: parsed.data.leadId,
             listingId: m.listingId,
             rank: m.rank,
+            notifiedAt: new Date(),
           },
         })
       ),

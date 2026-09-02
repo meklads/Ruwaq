@@ -110,8 +110,8 @@ The reference profile other directory listings are measured against.`,
 • Verified partner on the North Jeddah villa tour
 • Site survey, manufacture, and install in 6–8 weeks
 • Ruwaq PRO — kitchens & custom joinery`,
-    phone: "+966920012304",
-    whatsapp: "+966920012304",
+    phone: "+966551234304",
+    whatsapp: "+966551234304",
     isFeatured: true,
     directoryTier: "PRO",
     images: [...LISTING_SEED_IMAGE_POOLS.kitchens],
@@ -129,8 +129,8 @@ The reference profile other directory listings are measured against.`,
 • North Jeddah villa tour partner
 • Seasonal maintenance plans for residential projects
 • Ruwaq PRO — HVAC sector`,
-    phone: "+966920012305",
-    whatsapp: "+966920012305",
+    phone: "+966551234305",
+    whatsapp: "+966551234305",
     isFeatured: true,
     directoryTier: "PRO",
     images: [...LISTING_SEED_IMAGE_POOLS.hvac],
@@ -148,8 +148,8 @@ The reference profile other directory listings are measured against.`,
 • Moisture-resistant materials and hospitality standards
 • Acoustic gypsum and porcelain for wet areas
 • Ruwaq PRO verified — fit-out`,
-    phone: "+966920012306",
-    whatsapp: "+966920012306",
+    phone: "+966551234306",
+    whatsapp: "+966551234306",
     isFeatured: true,
     directoryTier: "PRO",
     images: [
@@ -169,8 +169,8 @@ The reference profile other directory listings are measured against.`,
 • Makkah serviced tower tour partner
 • Hotel and residential tower AC maintenance
 • Ruwaq PRO — HVAC`,
-    phone: "+966920012307",
-    whatsapp: "+966920012307",
+    phone: "+966551234307",
+    whatsapp: "+966551234307",
     isFeatured: true,
     directoryTier: "PRO",
     images: [...LISTING_SEED_IMAGE_POOLS.hvac],
@@ -186,8 +186,8 @@ The reference profile other directory listings are measured against.`,
 • Madinah villa tour partner — outdoor living suites
 • Integrated with landscaping and exterior lighting
 • Ruwaq PRO — outdoor & landscape`,
-    phone: "+966920012308",
-    whatsapp: "+966920012308",
+    phone: "+966551234308",
+    whatsapp: "+966551234308",
     isFeatured: true,
     directoryTier: "PRO",
     images: [
@@ -207,8 +207,8 @@ The reference profile other directory listings are measured against.`,
 • Madinah villa tour partner
 • Family pools and concealed path lighting
 • Ruwaq PRO — landscaping`,
-    phone: "+966920012309",
-    whatsapp: "+966920012309",
+    phone: "+966551234309",
+    whatsapp: "+966551234309",
     isFeatured: true,
     directoryTier: "PRO",
     images: [...LISTING_SEED_IMAGE_POOLS.outdoor],
@@ -224,8 +224,8 @@ The reference profile other directory listings are measured against.`,
 • Calacatta, travertine, and cut-to-size slabs
 • Ruwaq PRO verified trade supplier
 • Works with fit-out contractors in the directory`,
-    phone: "+966920012310",
-    whatsapp: "+966920012310",
+    phone: "+966551234310",
+    whatsapp: "+966551234310",
     isFeatured: true,
     directoryTier: "PRO",
     images: [...LISTING_SEED_IMAGE_POOLS["luxury-materials"]],

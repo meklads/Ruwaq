@@ -52,6 +52,9 @@ North star: **Jeddah project matching** — describe once, get 3 verified contra
 | 21 | Jeddah SEO landings (8 sectors + hub + 3 intents) | done |
 | 22 | Quote status page + match email + ProjectLaunch™ form | done |
 | 23 | Contractor lead inbox + auto-score suggestions | done |
+| 24 | Contractor response tracking (viewed / responded) | done |
+| 25 | 4h contractor reminder emails + cron route | done |
+| 26 | Smarter lead match scoring (budget + project signals) | done |
 
 ## When user says "next step"
 

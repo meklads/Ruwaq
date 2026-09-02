@@ -26,6 +26,9 @@ export type ContractorInboxLead = {
   categoryNameAr: string;
   categoryNameEn: string;
   listingTitle: string;
+  viewedAt: Date | null;
+  respondedAt: Date | null;
+  responseChannel: string | null;
 };
 
 async function resolveContractorListingIds(
@@ -122,6 +125,9 @@ export async function getContractorLeadInbox(
       categoryNameAr: categoryMeta?.nameAr ?? match.lead.category.nameAr,
       categoryNameEn: categoryMeta?.nameEn ?? match.lead.category.nameEn,
       listingTitle: match.listing.titleAr,
+      viewedAt: match.viewedAt,
+      respondedAt: match.respondedAt,
+      responseChannel: match.responseChannel,
     };
   });
 

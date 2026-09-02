@@ -58,6 +58,19 @@ type ContractorLeadMatchEmailPayload = {
   inboxUrl: string;
 };
 
+type ContractorLeadReminderEmailPayload = {
+  locale: "ar" | "en";
+  contractorEmail: string;
+  companyName: string;
+  rank: number;
+  referenceCode: string;
+  clientName: string;
+  cityLabel: string;
+  categoryLabel: string;
+  slaHours: number;
+  inboxUrl: string;
+};
+
 type JoinApplicationOpsPayload = {
   applicationId: string;
   companyName: string;
@@ -351,6 +364,47 @@ export async function sendContractorLeadMatchEmail(
         payload.projectDetails,
         "",
         "Open your contractor inbox:",
+        payload.inboxUrl,
+        "",
+        RUWQ_PUBLIC_URL,
+      ].join("\n");
+
+  await sendPlainEmail({ to: [payload.contractorEmail], subject, text });
+}
+
+export async function sendContractorLeadReminderEmail(
+  payload: ContractorLeadReminderEmailPayload
+): Promise<void> {
+  const isAr = payload.locale === "ar";
+  const subject = isAr
+    ? `تذكير رواق — طلب ${payload.referenceCode} بانتظار ردكم`
+    : `Ruwaq reminder — lead ${payload.referenceCode} awaiting your response`;
+
+  const text = isAr
+    ? [
+        `مرحباً ${payload.companyName}،`,
+        "",
+        `لديكم طلب مشروع مرشّح (#${payload.rank}) لم يُفتح بعد في صندوق رواق.`,
+        `العميل: ${payload.clientName}`,
+        `المدينة: ${payload.cityLabel}`,
+        `القطاع: ${payload.categoryLabel}`,
+        `رقم المرجع: ${payload.referenceCode}`,
+        "",
+        `نعد العملاء بالتواصل خلال ${payload.slaHours} ساعات — افتحوا الطلب الآن:`,
+        payload.inboxUrl,
+        "",
+        RUWQ_PUBLIC_URL,
+      ].join("\n")
+    : [
+        `Hello ${payload.companyName},`,
+        "",
+        `You have a matched lead (#${payload.rank}) that has not been opened in your Ruwaq inbox yet.`,
+        `Client: ${payload.clientName}`,
+        `City: ${payload.cityLabel}`,
+        `Category: ${payload.categoryLabel}`,
+        `Reference: ${payload.referenceCode}`,
+        "",
+        `We promise clients contact within ${payload.slaHours} hours — open the lead now:`,
         payload.inboxUrl,
         "",
         RUWQ_PUBLIC_URL,

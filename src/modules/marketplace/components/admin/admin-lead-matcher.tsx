@@ -16,6 +16,9 @@ export type LeadMatchSelection = {
   rank: number;
   listingId: string;
   label: string;
+  viewedAt?: Date | null;
+  respondedAt?: Date | null;
+  responseChannel?: string | null;
 };
 
 export type LeadMatchSuggestion = {
@@ -172,6 +175,15 @@ export function AdminLeadMatcher({
           {initialMatches.map((m) => (
             <li key={m.rank}>
               #{m.rank} {m.label}
+              {m.respondedAt ? (
+                <span className="ms-2 text-sky-700">
+                  · responded{m.responseChannel ? ` (${m.responseChannel})` : ""}
+                </span>
+              ) : m.viewedAt ? (
+                <span className="ms-2 text-amber-700">· viewed</span>
+              ) : (
+                <span className="ms-2 text-neutral-400">· pending</span>
+              )}
             </li>
           ))}
         </ul>
