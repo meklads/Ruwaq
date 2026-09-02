@@ -916,6 +916,10 @@ export type Messages = {
       eyebrow: string;
       title: string;
       lead: string;
+      benefitsTitle: string;
+      benefits: readonly { title: string; body: string }[];
+      comingSoonCta: string;
+      comingSoonNote: string;
       applyCta: string;
       pricingCta: string;
       proposalsCta: string;

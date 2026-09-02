@@ -84,7 +84,7 @@ export function JeddahCategoryLanding({
       <JsonLdScript data={itemListJsonLd ?? collectionJsonLd} />
       {itemListJsonLd ? <JsonLdScript data={collectionJsonLd} /> : null}
 
-      <header className="border-b border-neutral-200 bg-neutral-950 px-4 py-10 text-white sm:px-6 lg:py-14">
+      <header className="ruwaq-surface-dark border-b border-neutral-200 bg-neutral-950 px-4 py-10 text-white sm:px-6 lg:py-14">
         <div className="mx-auto max-w-5xl">
           <nav className="ruwaq-pro-breadcrumb text-white/60" aria-label="Breadcrumb">
             <Link href="/" className="hover:text-white">
@@ -101,7 +101,7 @@ export function JeddahCategoryLanding({
           <p className="mt-6 text-[10px] font-semibold uppercase tracking-[0.28em] text-[#d4b47a]">
             {isAr ? "رواق · جدة" : "Ruwaq · Jeddah"}
           </p>
-          <h1 className="mt-3 font-serif text-3xl font-medium tracking-tight sm:text-4xl lg:text-5xl">
+          <h1 className="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl lg:text-[2.5rem]">
             {heroTitle}
           </h1>
           <p className="mt-4 max-w-2xl text-sm leading-relaxed text-white/75 sm:text-base">

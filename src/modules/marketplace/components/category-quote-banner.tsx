@@ -27,11 +27,11 @@ export function CategoryQuoteBanner({
   const quoteHref = `/request-quote?city=${citySlug}&category=${categorySlug}`;
 
   return (
-    <aside className="mb-10 border border-neutral-950 bg-neutral-950 px-6 py-8 text-white sm:px-8 sm:py-10">
+    <aside className="ruwaq-surface-dark mb-10 border border-neutral-950 bg-neutral-950 px-6 py-8 text-white sm:px-8 sm:py-10">
       <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#d4b47a]">
         {locale === "ar" ? `${categoryName} · ${cityName}` : `${categoryName} · ${cityName}`}
       </p>
-      <h2 className="mt-3 font-serif text-2xl font-medium tracking-tight sm:text-3xl">
+      <h2 className="mt-3 text-2xl font-semibold tracking-tight text-white sm:text-3xl">
         {title}
       </h2>
       <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/75">{lead}</p>

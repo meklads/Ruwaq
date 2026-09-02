@@ -53,8 +53,8 @@ export default async function HowWeMatchPage() {
         </ul>
       </section>
 
-      <section className="ruwaq-ad-content mx-auto mt-16 max-w-3xl border border-neutral-950 bg-neutral-950 px-8 py-10 text-center text-white">
-        <h2 className="font-serif text-2xl font-medium">{copy.ctaTitle}</h2>
+      <section className="ruwaq-ad-content mx-auto mt-16 max-w-3xl border border-neutral-950 bg-neutral-950 px-8 py-10 text-center text-white ruwaq-surface-dark">
+        <h2 className="text-lg font-semibold sm:text-xl">{copy.ctaTitle}</h2>
         <div className="mt-6 flex flex-wrap justify-center gap-3">
           <Link href="/request-quote" className="ruwaq-pro-btn-solid bg-[#c9a063] px-8 py-3 text-neutral-950 hover:bg-[#d4b47a]">
             {copy.ctaQuote}

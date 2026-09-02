@@ -19,17 +19,52 @@ export async function RuwaqProApplyBand() {
             </h2>
             <p className="ruwaq-pro-apply-band__lead">{copy.lead}</p>
           </div>
-          <div className="ruwaq-pro-apply-band__actions">
-            <ProApplyTrackedLinks
-              primaryClass="ruwaq-pro-apply-band__cta-primary"
-              secondaryClass="ruwaq-pro-apply-band__cta-secondary"
-              links={[
-                { href: "/join", label: copy.applyCta, event: "pro_apply_click", source: "pro_apply_band" },
-                { href: "/pricing", label: copy.pricingCta, event: "pro_apply_click", source: "pro_apply_band_pricing" },
-                { href: "/proposals/new", label: copy.proposalsCta, event: "pro_apply_click", source: "pro_apply_band_proposals" },
-                { href: "/developers", label: copy.developersCta, event: "developer_inquiry", source: "pro_apply_band" },
-              ]}
-            />
+
+          <div className="ruwaq-pro-apply-band__benefits">
+            <h3 className="ruwaq-pro-apply-band__benefits-title">{copy.benefitsTitle}</h3>
+            <ul className="ruwaq-pro-apply-band__benefits-grid">
+              {copy.benefits.map((benefit) => (
+                <li key={benefit.title} className="ruwaq-pro-apply-band__benefit">
+                  <p className="ruwaq-pro-apply-band__benefit-title">{benefit.title}</p>
+                  <p className="ruwaq-pro-apply-band__benefit-body">{benefit.body}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="ruwaq-pro-apply-band__footer">
+            <div>
+              <Link href="/contact" className="ruwaq-pro-apply-band__coming-soon">
+                {copy.comingSoonCta}
+              </Link>
+              <p className="ruwaq-pro-apply-band__coming-note">{copy.comingSoonNote}</p>
+            </div>
+            <div className="ruwaq-pro-apply-band__actions">
+              <ProApplyTrackedLinks
+                primaryClass="ruwaq-pro-apply-band__cta-primary"
+                secondaryClass="ruwaq-pro-apply-band__cta-secondary"
+                links={[
+                  {
+                    href: "/join",
+                    label: copy.applyCta,
+                    event: "pro_apply_click",
+                    source: "pro_apply_band",
+                  },
+                  {
+                    href: "/pricing",
+                    label: copy.pricingCta,
+                    event: "pro_apply_click",
+                    source: "pro_apply_band_pricing",
+                  },
+                  {
+                    href: "/proposals/new",
+                    label: copy.proposalsCta,
+                    event: "pro_apply_click",
+                    source: "pro_apply_band_proposals",
+                  },
+                ]}
+              />
+            </div>
           </div>
         </div>
       </div>

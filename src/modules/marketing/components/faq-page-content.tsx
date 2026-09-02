@@ -59,7 +59,7 @@ export function FaqPageContent({ copy, locale }: Props) {
           </dl>
         </section>
 
-        <div className="mt-16 border border-neutral-950 bg-neutral-950 p-8 text-center text-white sm:p-10">
+        <div className="ruwaq-surface-dark mt-16 border border-neutral-950 bg-neutral-950 p-8 text-center text-white sm:p-10">
           <h2 className="text-xl font-semibold sm:text-2xl">{copy.ctaTitle}</h2>
           <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-white/75">{copy.ctaSubtitle}</p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">

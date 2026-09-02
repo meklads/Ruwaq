@@ -1385,10 +1385,39 @@ export const en: Messages = {
    proBarTagline: "Jeddah project matching — 3 contractors per request",
   },
   proApplyBand: {
-   eyebrow: "RUWAQ PRO",
-   title: "Apply to the verified PRO directory",
-   lead: "Curated profile, project gallery, client lead priority, and AI proposals — for serious fit-out and contracting firms.",
-   applyCta: "Apply to join",
+   eyebrow: "RUWAQ PRO DIRECTORY",
+   title: "Join the verified PRO directory",
+   lead: "More than a listing — a growth partnership: professional profile, client lead visibility, and digital marketing from the ecosystem team.",
+   benefitsTitle: "PRO Directory member benefits",
+   benefits: [
+    {
+     title: "Dedicated landing page",
+     body: "A polished company profile page — project gallery, services, and contact — ready to share with clients.",
+    },
+    {
+     title: "Homepage featured placement",
+     body: "Priority in Featured PRO and Today's Directory — in front of Jeddah project owners before competitors.",
+    },
+    {
+     title: "2× digital marketing / month",
+     body: "Two free digital campaigns monthly via Bees Motion — clear KPIs and a performance improvement guarantee.",
+    },
+    {
+     title: "Monthly Reels ad",
+     body: "One professional Reel per month showcasing your project or service — ready for Instagram and LinkedIn.",
+    },
+    {
+     title: "Lead match priority",
+     body: "When a client requests your sector, Ruwaq shortlists you among the top 3 contractors — with instant inbox notification.",
+    },
+    {
+     title: "AI proposals + verified badge",
+     body: "AI proposal builder, Verified/PRO directory badge, and Ruwaq team support.",
+    },
+   ],
+   comingSoonCta: "Subscriptions opening soon",
+   comingSoonNote: "Register your interest now — we contact PRO Directory partners first when paid plans launch.",
+   applyCta: "Apply free (directory)",
    pricingCta: "Plans & pricing",
    proposalsCta: "Proposal tool",
    developersCta: "Developer packages",
