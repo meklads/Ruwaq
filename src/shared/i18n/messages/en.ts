@@ -1796,7 +1796,7 @@ export const en: Messages = {
    featuresTitle: "Why contractors choose Ruwaq",
    samplesTitle: "Design your look — then start",
    samplesIntro:
-    "Pick colors and a header/footer frame, see the full page, and toggle a soft watermark. Logo on top — your company details below — on every page.",
+    "A professional header & footer library — pick a frame, preview one empty full page with logo circle and address boxes, then start.",
    ctaPrimary: "Start a free proposal",
    ctaSecondary: "Preview a sample",
    ctaPricing: "Plans & pricing",
@@ -1807,8 +1807,8 @@ export const en: Messages = {
   subtitle:
    "Three polished samples: engineering supervision (executive), villa fit-out (classic), and 3D visualization (Graphics House).",
   openSample: "Open in new tab",
-  openSampleHint: "Demo data for preview only. Your real proposals carry your company identity and colors.",
-  note: "Your real proposals show your company identity only.",
+  openSampleHint: "Preview is empty on purpose — we place your logo and address at delivery.",
+  note: "One full page · no body content · header and footer only.",
   previewLabel: "Preview",
   back: "Back",
   paletteTitle: "Proposal color palette",
@@ -1821,9 +1821,9 @@ export const en: Messages = {
   closePreview: "Close",
   startWithLook: "Start with this look",
   subscribeHint: "Custom colors and advanced frames unlock with a subscription",
-  frameTitle: "Header & footer frame",
-  frameHint: "Same pattern every time: logo on top, company details below — only the shapes change.",
-  watermarkToggle: "Soft center watermark (10% opacity)",
+  frameTitle: "Header & footer library",
+  frameHint: "8 ready frames. Click to preview: one empty page — “Logo here” circle and “Address here” boxes.",
+  watermarkToggle: "Soft watermark (10%)",
   gallery: [
    {
     slug: "ruwaq-executive",

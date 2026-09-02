@@ -13,11 +13,9 @@ export default async function TemplateSamplePage() {
       <p className="ruwaq-eyebrow">{t.nav.previewSample}</p>
       <h1 className="nasaq-landing-title mt-3 max-w-2xl">{t.templates.title}</h1>
       <p className="mt-2 max-w-xl text-sm leading-relaxed text-neutral-600">{t.templates.subtitle}</p>
-
-      <div className="nasaq-landing-studio mt-6 min-h-[min(78vh,820px)]">
+      <div className="mt-6 rounded-2xl border border-neutral-200 bg-white p-4 sm:p-6">
         <TemplateSampleGallery
           locale={locale}
-          items={t.templates.gallery}
           labels={{
             openSample: t.templates.openSample,
             openSampleHint: t.templates.openSampleHint,
@@ -38,7 +36,6 @@ export default async function TemplateSamplePage() {
             watermarkToggle: t.templates.watermarkToggle,
           }}
           startCta={t.site.nav.startProposal}
-          studio
         />
       </div>
     </div>

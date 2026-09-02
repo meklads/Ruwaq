@@ -20,18 +20,35 @@ type RouteParams = { params: Promise<{ slug: string }> };
 
 export async function GET(req: NextRequest, { params }: RouteParams) {
   const { slug } = await params;
+  const localeParam = req.nextUrl.searchParams.get("locale");
+  const locale: Locale = localeParam === "en" ? "en" : "ar";
+  const paletteQuery = parsePaletteQuery(req.nextUrl.searchParams);
+  const frameId = parseLetterheadFrameId(req.nextUrl.searchParams.get("frame"));
+  const wm = req.nextUrl.searchParams.get("wm");
+  const view = req.nextUrl.searchParams.get("view");
+  const palette = resolveTemplatePalette(paletteQuery);
+
+  // Library preview: empty letterhead page (header + footer only).
+  if (view !== "full") {
+    const html = renderLetterheadStudioHtml({
+      locale,
+      frameId,
+      palette,
+      centerWatermark: wm === "0" ? false : true,
+    });
+    return new NextResponse(html, {
+      headers: {
+        "Content-Type": "text/html; charset=utf-8",
+        "Cache-Control": "no-store",
+      },
+    });
+  }
 
   if (!isSampleTemplateSlug(slug)) {
     return NextResponse.json({ error: "Unknown sample template" }, { status: 404 });
   }
 
-  const localeParam = req.nextUrl.searchParams.get("locale");
-  const locale: Locale = localeParam === "en" ? "en" : "ar";
   const hfStyleId = req.nextUrl.searchParams.get("hf") ?? undefined;
-  const paletteQuery = parsePaletteQuery(req.nextUrl.searchParams);
-  const frameId = parseLetterheadFrameId(req.nextUrl.searchParams.get("frame"));
-  const wm = req.nextUrl.searchParams.get("wm");
-  const view = req.nextUrl.searchParams.get("view");
   const base = appBaseUrlFromEnv();
   const data = buildSampleExportData(
     locale,
@@ -39,21 +56,9 @@ export async function GET(req: NextRequest, { params }: RouteParams) {
     base,
     hfStyleId,
     paletteQuery,
-    {
-      frameId,
-      centerWatermark: wm === "0" ? false : true,
-    }
+    { frameId, centerWatermark: wm === "0" ? false : true }
   );
-
-  const html =
-    view === "full"
-      ? renderProposalExportHtml(locale, data)
-      : renderLetterheadStudioHtml({
-          locale,
-          data,
-          frameId,
-          palette: resolveTemplatePalette(paletteQuery),
-        });
+  const html = renderProposalExportHtml(locale, data);
 
   return new NextResponse(html, {
     headers: {

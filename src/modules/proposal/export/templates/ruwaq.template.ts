@@ -351,9 +351,9 @@ export function renderRuwaqTemplate(
   });
 
   const centerWatermark = buildCenterWatermarkHtml({
-    data,
     palette,
     enabled: showCenterWatermark,
+    label: data.companyName?.trim() || (locale === "ar" ? "نسق" : "NQ"),
   });
 
   const coverChromeFooter = `<div class="cover-chrome-footer-inner">

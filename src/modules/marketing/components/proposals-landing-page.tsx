@@ -27,18 +27,16 @@ export function ProposalsLandingPage({
 
   return (
     <div className="nasaq-landing">
-      {/* One primary viewport: brand + studio */}
-      <section className="nasaq-landing-hero">
-        <div className="nasaq-landing-intro">
+      <section className="nasaq-library-hero">
+        <div className="nasaq-library-intro">
           <p className="ruwaq-ad-eyebrow">{copy.brandFromRuwaq}</p>
           <NasaqBrandLockup name={nasaq.name} tagline={nasaq.tagline} className="mt-2" />
           <h1 className="nasaq-landing-title mt-4">
             {copy.title} <span className="text-ruwaq-gold">{copy.titleHighlight}</span>
           </h1>
-          <p className="mt-3 text-sm leading-relaxed text-neutral-600 sm:text-[15px]">
+          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-neutral-600 sm:text-[15px]">
             {copy.samplesIntro}
           </p>
-
           <div className="mt-5 flex flex-wrap gap-2">
             <Link href="/proposals/new" className="ruwaq-pro-btn-solid px-6 py-2.5 text-sm">
               {copy.ctaPrimary} {arrow}
@@ -47,7 +45,6 @@ export function ProposalsLandingPage({
               {copy.ctaPricing}
             </Link>
           </div>
-
           {isSignedIn ? (
             <p className="mt-3 text-xs text-neutral-500">
               {copy.signedInHint}{" "}
@@ -61,23 +58,11 @@ export function ProposalsLandingPage({
           ) : (
             <p className="mt-3 text-xs text-neutral-500">{copy.ctaCardNote}</p>
           )}
-
-          <ul className="mt-5 space-y-1.5 text-xs text-neutral-600">
-            {copy.trustItems.slice(0, 3).map((item) => (
-              <li key={item} className="flex gap-2">
-                <span className="text-[#C9A063]" aria-hidden>
-                  ✓
-                </span>
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
         </div>
 
-        <div className="nasaq-landing-studio">
+        <div className="mt-8 rounded-2xl border border-neutral-200 bg-white p-4 sm:p-6">
           <TemplateSampleGallery
             locale={locale}
-            items={templates.gallery}
             labels={{
               openSample: templates.openSample,
               openSampleHint: templates.openSampleHint,
@@ -98,15 +83,13 @@ export function ProposalsLandingPage({
               watermarkToggle: templates.watermarkToggle,
             }}
             startCta={startProposalLabel}
-            studio
           />
         </div>
       </section>
 
-      {/* Secondary — below the fold, optional scroll */}
       <section className="nasaq-landing-more">
         <h2 className="text-base font-semibold text-neutral-900">{copy.featuresTitle}</h2>
-        <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-4 grid gap-3 sm:grid-cols-3">
           {sales.features.items.slice(0, 3).map((item) => (
             <div key={item.title} className="rounded-xl border border-neutral-200 bg-white p-4">
               <h3 className="text-sm font-semibold text-neutral-900">{item.title}</h3>
@@ -123,12 +106,6 @@ export function ProposalsLandingPage({
             className="font-semibold text-neutral-900 underline underline-offset-4"
           >
             {copy.ecosystemMatchLink}
-          </Link>
-          <Link
-            href="/templates/sample"
-            className="font-semibold text-neutral-900 underline underline-offset-4"
-          >
-            {copy.ctaSecondary}
           </Link>
         </div>
       </section>
