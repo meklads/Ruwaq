@@ -53,12 +53,12 @@ export function HeroRotatingHeadlines({
           className="ruwaq-pro-display ruwaq-pro-display--hero"
           aria-live="polite"
         >
-          <span key={`title-${index}`} className="ruwaq-hero-rotate-panel block">
+          <span key={`title-${index}`} className="ruwaq-hero-rotate-panel ruwaq-hero-rotate-title block">
             {slide.title}
           </span>
           <span
             key={`lead-${index}`}
-            className="ruwaq-pro-subtitle ruwaq-hero-rotate-panel mt-3 block max-w-2xl text-base font-semibold md:text-lg"
+            className="ruwaq-pro-subtitle ruwaq-hero-rotate-panel ruwaq-hero-rotate-lead block"
           >
             {slide.lead}
           </span>
@@ -67,7 +67,7 @@ export function HeroRotatingHeadlines({
 
       {slides.length > 1 ? (
         <div
-          className="mt-5 flex justify-center gap-2"
+          className="ruwaq-hero-rotate-dots flex justify-center gap-2"
           role="tablist"
           aria-label="Hero messages"
         >
@@ -87,7 +87,7 @@ export function HeroRotatingHeadlines({
         </div>
       ) : null}
 
-      <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+      <div className="ruwaq-hero-rotate-actions flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
         <Link
           key={`cta-${index}`}
           href={slide.primaryHref}

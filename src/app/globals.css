@@ -1602,7 +1602,7 @@
 
   /* —— Ruwaq PRO · AD PRO editorial luxury —— */
   .ruwaq-pro-hero {
-    @apply relative flex min-h-[560px] w-full flex-col items-center justify-center overflow-hidden border-b border-neutral-950 bg-neutral-950 px-4 pb-14 pt-16 text-center md:min-h-[640px] md:pb-16 md:pt-20;
+    @apply relative flex min-h-[580px] w-full flex-col overflow-hidden border-b border-neutral-950 bg-neutral-950 text-center md:min-h-[680px];
   }
 
   .ruwaq-pro-hero-bg {
@@ -1621,7 +1621,15 @@
   }
 
   .ruwaq-pro-hero-inner {
-    @apply relative z-10 mx-auto flex w-full max-w-[var(--ruwaq-ad-content-max)] flex-col items-center px-[var(--ruwaq-ad-gutter)];
+    @apply relative z-10 mx-auto flex min-h-[inherit] w-full max-w-[var(--ruwaq-ad-content-max)] flex-col justify-between px-4 pb-10 pt-24 md:px-[var(--ruwaq-ad-gutter)] md:pb-14 md:pt-28;
+  }
+
+  .ruwaq-pro-hero-main {
+    @apply flex flex-1 flex-col items-center justify-center pt-4 md:pt-8;
+  }
+
+  .ruwaq-pro-hero-foot {
+    @apply mt-8 flex w-full flex-col items-center gap-5 md:mt-10;
   }
 
   .ruwaq-pro-hero-search {
@@ -1633,13 +1641,29 @@
   }
 
   .ruwaq-pro-display--hero {
-    @apply text-3xl font-bold text-white md:text-[2.85rem] md:leading-[1.12];
+    @apply text-3xl font-bold leading-[1.2] text-white md:text-[2.65rem] md:leading-[1.18];
     color: #ffffff;
     text-shadow: 0 2px 24px rgba(0, 0, 0, 0.35);
   }
 
   .ruwaq-hero-rotate-wrap {
-    @apply mx-auto min-h-[9.5rem] max-w-4xl md:min-h-[10.5rem];
+    @apply mx-auto flex min-h-[8.5rem] w-full max-w-4xl flex-col items-center justify-center md:min-h-[9.5rem];
+  }
+
+  .ruwaq-hero-rotate-title {
+    @apply max-w-4xl;
+  }
+
+  .ruwaq-hero-rotate-lead {
+    @apply mx-auto mt-4 max-w-2xl;
+  }
+
+  .ruwaq-hero-rotate-dots {
+    @apply mt-6;
+  }
+
+  .ruwaq-hero-rotate-actions {
+    @apply mt-7 md:mt-8;
   }
 
   @keyframes ruwaq-hero-fade-in {
@@ -1697,7 +1721,7 @@
   }
 
   .ruwaq-pro-hero-trade-wrap {
-    @apply mt-5 flex w-full justify-center;
+    @apply flex w-full justify-center;
   }
 
   .ruwaq-pro-hero-trade-bar {
@@ -1761,7 +1785,7 @@
   }
 
   .ruwaq-pro-eyebrow {
-    @apply text-[10px] font-semibold uppercase tracking-[0.28em] text-white/90;
+    @apply mb-5 text-[10px] font-semibold uppercase tracking-[0.28em] text-white/90 md:mb-6;
   }
 
   html[lang="ar"] .ruwaq-pro-eyebrow {
@@ -1786,6 +1810,7 @@
   html[lang="ar"] .ruwaq-pro-hero h1.ruwaq-pro-display,
   html[data-lang="ar"] .ruwaq-pro-hero h1.ruwaq-pro-display {
     font-weight: 700;
+    line-height: 1.35;
   }
 
   .ruwaq-pro-display-accent {

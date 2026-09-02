@@ -24,31 +24,35 @@ export function RuwaqProHero({ magazineCopy, proCopy, locale }: Props) {
       <div className="ruwaq-pro-hero-overlay" aria-hidden />
 
       <div className="ruwaq-pro-hero-inner">
-        <p className="ruwaq-pro-eyebrow">{magazineCopy.heroEyebrow}</p>
+        <div className="ruwaq-pro-hero-main">
+          <p className="ruwaq-pro-eyebrow">{magazineCopy.heroEyebrow}</p>
 
-        <HeroRotatingHeadlines
-          slides={magazineCopy.heroSlides}
-          howMatchCta={magazineCopy.heroHowMatchCta}
-        />
-
-        <div className="ruwaq-pro-hero-editorial-row mt-6 flex flex-wrap items-center justify-center gap-2">
-          <Link href="/tours" className="ruwaq-pro-hero-chip">
-            {magazineCopy.heroExploreTours}
-          </Link>
-          <Link href="/guides" className="ruwaq-pro-hero-chip">
-            {magazineCopy.heroReadGuides}
-          </Link>
-          <Link href="/categories?city=jeddah" className="ruwaq-pro-hero-chip">
-            {magazineCopy.heroDirectoryLink}
-          </Link>
+          <HeroRotatingHeadlines
+            slides={magazineCopy.heroSlides}
+            howMatchCta={magazineCopy.heroHowMatchCta}
+          />
         </div>
 
-        <p className="ruwaq-pro-hero-trust mt-5">{proCopy.trustLine}</p>
+        <div className="ruwaq-pro-hero-foot">
+          <div className="ruwaq-pro-hero-editorial-row flex flex-wrap items-center justify-center gap-2">
+            <Link href="/tours" className="ruwaq-pro-hero-chip">
+              {magazineCopy.heroExploreTours}
+            </Link>
+            <Link href="/guides" className="ruwaq-pro-hero-chip">
+              {magazineCopy.heroReadGuides}
+            </Link>
+            <Link href="/categories?city=jeddah" className="ruwaq-pro-hero-chip">
+              {magazineCopy.heroDirectoryLink}
+            </Link>
+          </div>
 
-        <div className="ruwaq-pro-hero-trade-wrap">
-          <Link href={proCopy.applyHref} className="ruwaq-pro-hero-trade-bar">
-            {proCopy.tradeApplyBar}
-          </Link>
+          <p className="ruwaq-pro-hero-trust">{proCopy.trustLine}</p>
+
+          <div className="ruwaq-pro-hero-trade-wrap">
+            <Link href={proCopy.applyHref} className="ruwaq-pro-hero-trade-bar">
+              {proCopy.tradeApplyBar}
+            </Link>
+          </div>
         </div>
       </div>
     </section>
