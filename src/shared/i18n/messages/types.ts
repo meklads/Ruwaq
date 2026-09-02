@@ -366,8 +366,12 @@ export type Messages = {
       trendingTitle: string;
       allSectors: string;
       heroEyebrow: string;
-      heroTitle: string;
-      heroSubtitle: string;
+      heroSlides: readonly {
+        title: string;
+        lead: string;
+        primaryCta: string;
+        primaryHref: string;
+      }[];
       heroPrimaryCta: string;
       heroHowMatchCta: string;
       heroExploreTours: string;

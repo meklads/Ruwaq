@@ -507,9 +507,20 @@ export const ar = {
    trendingTitle: "تصفّح حسب التخصص",
    allSectors: "جميع القطاعات",
    heroEyebrow: "رواق · جدة",
-   heroTitle: "لديك مشروع؟ اكتبه مرة واحدة",
-   heroSubtitle:
-    "نوصّلك بأفضل 3 مقاولين معتمدين يناسبون ميزانيتك في جدة — مجاناً خلال 24 ساعة.",
+   heroSlides: [
+    {
+     title: "تريد بناء فيلا أو عمارة؟",
+     lead: "بناء أو تشطيب؟ دعنا نرشّح لك ثلاثة مقاولين معتمدين",
+     primaryCta: "ابدأ طلب مشروعك",
+     primaryHref: "/request-quote",
+    },
+    {
+     title: "مطور عقاري؟ لديك مشروع عقاري؟",
+     lead: "من الهوية إلى البيع — نرشّح لك فريقاً معتمداً",
+     primaryCta: "نسّق فريق مشروعك",
+     primaryHref: "/developers",
+    },
+   ],
    heroPrimaryCta: "ابدأ طلب مشروعك",
    heroHowMatchCta: "كيف نختار الـ3؟",
    heroExploreTours: "جولات مشاريع",

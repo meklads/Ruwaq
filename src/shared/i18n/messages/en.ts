@@ -511,9 +511,20 @@ export const en: Messages = {
    trendingTitle: "Browse by trade",
    allSectors: "All sectors",
    heroEyebrow: "Ruwaq · Jeddah",
-   heroTitle: "Have a project? Describe it once",
-   heroSubtitle:
-    "We match you with the best 3 verified contractors for your budget in Jeddah — free within 24 hours.",
+   heroSlides: [
+    {
+     title: "Building a villa or tower?",
+     lead: "Construction or fit-out? We shortlist three verified contractors for you",
+     primaryCta: "Start your project request",
+     primaryHref: "/request-quote",
+    },
+    {
+     title: "Real estate developer with a new project?",
+     lead: "From identity to sales — we match a verified project team",
+     primaryCta: "Build your project team",
+     primaryHref: "/developers",
+    },
+   ],
    heroPrimaryCta: "Start your project request",
    heroHowMatchCta: "How we pick the 3?",
    heroExploreTours: "Project tours",

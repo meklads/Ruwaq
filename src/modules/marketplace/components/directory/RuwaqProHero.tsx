@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { MARKETING_IMAGES } from "@/content/marketing-images";
+import { HeroRotatingHeadlines } from "@/modules/marketplace/components/directory/hero-rotating-headlines";
 import type { Messages } from "@/shared/i18n/messages/types";
 import type { Locale } from "@/shared/i18n/locale";
 
@@ -25,28 +26,10 @@ export function RuwaqProHero({ magazineCopy, proCopy, locale }: Props) {
       <div className="ruwaq-pro-hero-inner">
         <p className="ruwaq-pro-eyebrow">{magazineCopy.heroEyebrow}</p>
 
-        <h1 id="ruwaq-pro-hero-title" className="ruwaq-pro-display ruwaq-pro-display--hero">
-          {magazineCopy.heroTitle}
-        </h1>
-
-        <p className="ruwaq-pro-subtitle mt-3 max-w-2xl text-base md:text-lg">
-          {magazineCopy.heroSubtitle}
-        </p>
-
-        <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-          <Link
-            href="/request-quote"
-            className="ruwaq-pro-btn-solid inline-flex min-w-[240px] justify-center px-10 py-4 text-sm"
-          >
-            {magazineCopy.heroPrimaryCta}
-          </Link>
-          <Link
-            href="/how-we-match"
-            className="ruwaq-pro-btn-outline inline-flex min-w-[200px] justify-center border-white/40 bg-white/5 px-8 py-4 text-sm text-white hover:bg-white/10"
-          >
-            {magazineCopy.heroHowMatchCta}
-          </Link>
-        </div>
+        <HeroRotatingHeadlines
+          slides={magazineCopy.heroSlides}
+          howMatchCta={magazineCopy.heroHowMatchCta}
+        />
 
         <div className="ruwaq-pro-hero-editorial-row mt-6 flex flex-wrap items-center justify-center gap-2">
           <Link href="/tours" className="ruwaq-pro-hero-chip">

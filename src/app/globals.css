@@ -1638,6 +1638,31 @@
     text-shadow: 0 2px 24px rgba(0, 0, 0, 0.35);
   }
 
+  .ruwaq-hero-rotate-wrap {
+    @apply mx-auto min-h-[9.5rem] max-w-4xl md:min-h-[10.5rem];
+  }
+
+  @keyframes ruwaq-hero-fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .ruwaq-hero-rotate-panel {
+    animation: ruwaq-hero-fade-in 0.65s ease-out both;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ruwaq-hero-rotate-panel {
+      animation: none;
+    }
+  }
+
   html[lang="en"] .ruwaq-pro-hero h1.ruwaq-pro-display,
   html[data-lang="en"] .ruwaq-pro-hero h1.ruwaq-pro-display,
   html[lang="ar"] .ruwaq-pro-hero h1.ruwaq-pro-display,
