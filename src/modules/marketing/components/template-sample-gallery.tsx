@@ -9,6 +9,11 @@ import {
   frameThumbDataUri,
   type LetterheadFrameId,
 } from "@/modules/proposal/export/letterhead-frames";
+import {
+  TEMPLATE_PALETTE_ORDER,
+  TEMPLATE_PALETTES,
+  type TemplatePaletteId,
+} from "@/modules/proposal/export/template-palettes";
 
 type Labels = {
   openSample: string;
@@ -38,8 +43,27 @@ type Props = {
   studio?: boolean;
 };
 
-function previewUrl(locale: Locale, frameId: LetterheadFrameId, wm: boolean): string {
-  return `/api/templates/samples/ruwaq-classic?locale=${locale}&frame=${frameId}&wm=${wm ? "1" : "0"}`;
+const PRESET_PALETTES = TEMPLATE_PALETTE_ORDER.slice(0, 4);
+
+function previewUrl(
+  locale: Locale,
+  frameId: LetterheadFrameId,
+  wm: boolean,
+  paletteId: TemplatePaletteId,
+  primary: string,
+  accent: string
+): string {
+  const qs = new URLSearchParams({
+    locale,
+    frame: frameId,
+    wm: wm ? "1" : "0",
+    palette: paletteId === "custom" ? "custom" : paletteId,
+  });
+  if (paletteId === "custom") {
+    qs.set("primary", primary);
+    qs.set("accent", accent);
+  }
+  return `/api/templates/samples/ruwaq-classic?${qs.toString()}`;
 }
 
 function PreviewModal({
@@ -125,14 +149,22 @@ function PreviewModal({
 }
 
 export function TemplateSampleGallery({ locale, labels, startCta }: Props) {
-  const [frameId, setFrameId] = useState<LetterheadFrameId>("wing_crest");
+  const [frameId, setFrameId] = useState<LetterheadFrameId>("bar_classic");
+  const [paletteId, setPaletteId] = useState<TemplatePaletteId>("gold_sand");
+  const [primary, setPrimary] = useState("#2F4A6E");
+  const [accent, setAccent] = useState("#C9A063");
   const [centerWatermark, setCenterWatermark] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
 
   const frame = LETTERHEAD_FRAMES[frameId];
   const frameName = locale === "ar" ? frame.nameAr : frame.nameEn;
-  const src = previewUrl(locale, frameId, centerWatermark);
-  const startHref = `/proposals/new?frame=${frameId}`;
+  const activePrimary =
+    paletteId === "custom" ? primary : TEMPLATE_PALETTES[paletteId as Exclude<TemplatePaletteId, "custom">].primary;
+  const activeAccent =
+    paletteId === "custom" ? accent : TEMPLATE_PALETTES[paletteId as Exclude<TemplatePaletteId, "custom">].accent;
+  const src = previewUrl(locale, frameId, centerWatermark, paletteId, activePrimary, activeAccent);
+  const startHref = `/proposals/new?frame=${frameId}&palette=${paletteId}`;
+  const colorsEnabled = frame.colorable;
 
   return (
     <div className="nasaq-library">
@@ -154,11 +186,82 @@ export function TemplateSampleGallery({ locale, labels, startCta }: Props) {
         </label>
       </div>
 
-      <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
+      <div className="mt-5">
+        <p className="text-xs font-semibold text-[#2F4A6E]">{labels.paletteTitle}</p>
+        <p className="mt-0.5 text-[11px] text-neutral-500">
+          {colorsEnabled ? labels.paletteHint : locale === "ar" ? "مثال Graphics House ثابت — الألوان للنماذج المستطيلة فقط." : "Graphics House example is fixed — colors apply to rectangular layouts only."}
+        </p>
+        <div className={`mt-3 flex flex-wrap gap-2 ${colorsEnabled ? "" : "pointer-events-none opacity-45"}`}>
+          {PRESET_PALETTES.map((id) => {
+            const pal = TEMPLATE_PALETTES[id];
+            const selected = paletteId === id;
+            return (
+              <button
+                key={id}
+                type="button"
+                disabled={!colorsEnabled}
+                onClick={() => setPaletteId(id)}
+                className={`flex items-center gap-2 rounded-lg border px-3 py-2 text-xs font-semibold transition ${
+                  selected
+                    ? "border-[#C9A063] bg-white shadow-sm ring-1 ring-[#C9A063]/30"
+                    : "border-neutral-200 bg-white hover:border-neutral-300"
+                }`}
+              >
+                <span className="flex h-4 overflow-hidden rounded-sm">
+                  <span className="h-4 w-4" style={{ background: pal.primary }} />
+                  <span className="h-4 w-4" style={{ background: pal.accent }} />
+                </span>
+                {locale === "ar" ? pal.nameAr : pal.nameEn}
+              </button>
+            );
+          })}
+          <button
+            type="button"
+            disabled={!colorsEnabled}
+            onClick={() => setPaletteId("custom")}
+            className={`rounded-lg border px-3 py-2 text-xs font-semibold ${
+              paletteId === "custom"
+                ? "border-[#C9A063] bg-white ring-1 ring-[#C9A063]/30"
+                : "border-neutral-200 bg-white"
+            }`}
+          >
+            {labels.customColors}
+          </button>
+        </div>
+        {colorsEnabled && paletteId === "custom" ? (
+          <div className="mt-3 flex flex-wrap gap-4">
+            <label className="flex items-center gap-2 text-xs text-neutral-600">
+              {labels.primaryColor}
+              <input
+                type="color"
+                value={primary}
+                onChange={(e) => setPrimary(e.target.value)}
+                className="h-8 w-10 cursor-pointer rounded border border-neutral-200 bg-white p-0.5"
+              />
+            </label>
+            <label className="flex items-center gap-2 text-xs text-neutral-600">
+              {labels.accentColor}
+              <input
+                type="color"
+                value={accent}
+                onChange={(e) => setAccent(e.target.value)}
+                className="h-8 w-10 cursor-pointer rounded border border-neutral-200 bg-white p-0.5"
+              />
+            </label>
+          </div>
+        ) : null}
+      </div>
+
+      <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-5">
         {LETTERHEAD_FRAME_ORDER.map((id) => {
           const f = LETTERHEAD_FRAMES[id];
           const selected = frameId === id;
           const name = locale === "ar" ? f.nameAr : f.nameEn;
+          const thumb = frameThumbDataUri(
+            id,
+            f.colorable ? activePrimary : "#2F4A6E",
+            f.colorable ? activeAccent : "#C9A063"
+          );
           return (
             <button
               key={id}
@@ -175,16 +278,16 @@ export function TemplateSampleGallery({ locale, labels, startCta }: Props) {
             >
               <div className="aspect-[210/297] overflow-hidden bg-[#ebe6de]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={frameThumbDataUri(id)}
-                  alt={name}
-                  className="h-full w-full object-cover object-top"
-                />
+                <img src={thumb} alt={name} className="h-full w-full object-cover object-top" />
               </div>
               <div className="border-t border-neutral-100 px-3 py-2.5">
                 <p className="text-xs font-bold text-[#2F4A6E]">{name}</p>
                 <p className="mt-0.5 text-[10px] text-neutral-500 group-hover:text-[#C9A063]">
-                  {labels.previewCta}
+                  {f.pdf
+                    ? locale === "ar"
+                      ? "مثال PDF"
+                      : "PDF example"
+                    : labels.previewCta}
                 </p>
               </div>
             </button>
@@ -200,6 +303,16 @@ export function TemplateSampleGallery({ locale, labels, startCta }: Props) {
         >
           {labels.previewLabel}: {frameName}
         </button>
+        {frame.pdf ? (
+          <a
+            href={frame.pdf}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-lg border border-neutral-200 bg-white px-5 py-2.5 text-sm font-semibold text-[#2F4A6E]"
+          >
+            {locale === "ar" ? "تحميل PDF المثال" : "Download example PDF"}
+          </a>
+        ) : null}
         <Link href={startHref} className="btn-ruwaq-primary px-7 py-2.5 text-sm">
           {labels.startWithLook}
         </Link>

@@ -1822,7 +1822,7 @@ export const en: Messages = {
   startWithLook: "Start with this look",
   subscribeHint: "Custom colors and advanced frames unlock with a subscription",
   frameTitle: "Header & footer library",
-  frameHint: "8 exact reference designs — including template.pdf. Click for a full-page preview with logo circle and address boxes.",
+  frameHint: "One Graphics House PDF example + 4 simple rectangular header/footer layouts. Change colors on the rectangular layouts only.",
   watermarkToggle: "Soft watermark (10%)",
   gallery: [
    {

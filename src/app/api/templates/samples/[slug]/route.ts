@@ -9,17 +9,23 @@ export const dynamic = "force-dynamic";
 type RouteParams = { params: Promise<{ slug: string }> };
 
 export async function GET(req: NextRequest, { params }: RouteParams) {
-  await params; // slug unused — library is frame-based
+  await params;
   const localeParam = req.nextUrl.searchParams.get("locale");
   const locale: Locale = localeParam === "en" ? "en" : "ar";
   const frameId = parseLetterheadFrameId(req.nextUrl.searchParams.get("frame"));
   const wm = req.nextUrl.searchParams.get("wm");
+  const paletteId = req.nextUrl.searchParams.get("palette");
+  const primary = req.nextUrl.searchParams.get("primary");
+  const accent = req.nextUrl.searchParams.get("accent");
 
   const html = renderLetterheadStudioHtml({
     locale,
     frameId,
     centerWatermark: wm === "0" ? false : true,
     appBaseUrl: appBaseUrlFromEnv(),
+    paletteId,
+    primary,
+    accent,
   });
 
   return new NextResponse(html, {
