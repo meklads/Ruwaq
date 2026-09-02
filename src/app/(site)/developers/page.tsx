@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { SPONSORED_LAUNCH_PACKAGES } from "@/content/sponsored-launch-packages";
+import { GraphicsHousePromoBanner } from "@/modules/marketplace/components/graphics-house-promo-banner";
 import { getMessages } from "@/shared/i18n";
 import { getLocale } from "@/shared/i18n/server";
 
@@ -67,6 +68,8 @@ export default async function DevelopersPage() {
           </div>
         </section>
       </div>
+
+      <GraphicsHousePromoBanner locale={locale} campaign="developers_page_ad" />
     </div>
   );
 }

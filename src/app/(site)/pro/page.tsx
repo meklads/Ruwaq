@@ -10,6 +10,7 @@ import {
 import { getProShowcaseListings } from "@/modules/marketplace/server/join.actions";
 import { ListingCard } from "@/modules/marketplace/components/directory/ListingCard";
 import { DirectoryEmptyState } from "@/modules/marketplace/components/directory-empty-state";
+import { BeesmotionPromoBanner } from "@/modules/marketplace/components/beesmotion-promo-banner";
 import { parseCitySlug } from "@/modules/marketplace/lib/marketplace-slugs";
 
 type Props = {
@@ -87,6 +88,8 @@ export default async function ProShowcasePage({ searchParams }: Props) {
           {t.marketplace.proDirectory.applyCta}
         </Link>
       </p>
+
+      <BeesmotionPromoBanner locale={locale} campaign="pro_page_ad" />
     </div>
   );
 }

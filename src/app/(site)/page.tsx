@@ -8,7 +8,6 @@ import { ProjectToursHomeSection } from "@/modules/marketplace/components/projec
 import { GuidesSection } from "@/modules/marketplace/components/guides-section";
 import { EditorialCategoryGrid } from "@/modules/marketplace/components/editorial-category-grid";
 import { HowItWorksSection } from "@/modules/marketplace/components/how-it-works-section";
-import { HomepagePromoBands } from "@/modules/marketplace/components/homepage-promo-bands";
 import { buildOrganizationJsonLd, buildWebSiteJsonLd } from "@/modules/marketplace/seo/site-jsonld";
 
 export default async function HomePage() {
@@ -49,7 +48,6 @@ export default async function HomePage() {
       />
       <TodaysDirectorySection />
       <HowItWorksSection copy={t.marketplace.howItWorks} locale={locale} />
-      <HomepagePromoBands locale={locale} />
     </>
   );
 }

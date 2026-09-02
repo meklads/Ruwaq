@@ -5,6 +5,7 @@ import { getLocale } from "@/shared/i18n/server";
 import { VISUALIZATION_HERO } from "@/content/marketing-images";
 import { VisualizationLeadForm } from "@/modules/marketplace/components/visualization-lead-form";
 import { GraphicsHouseLogo } from "@/shared/components/graphics-house-logo";
+import { GraphicsHousePromoBanner } from "@/modules/marketplace/components/graphics-house-promo-banner";
 import { graphicsHouseProjectLaunchReferralUrl } from "@/shared/constants/brand";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -78,6 +79,8 @@ export default async function VisualizationPage() {
           <VisualizationLeadForm copy={copy} locale={locale} />
         </div>
       </div>
+
+      <GraphicsHousePromoBanner locale={locale} campaign="visualization_page_ad" />
     </div>
   );
 }

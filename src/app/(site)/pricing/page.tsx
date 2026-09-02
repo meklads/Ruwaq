@@ -2,6 +2,7 @@ import Link from "next/link";
 import { getMessages } from "@/shared/i18n";
 import { getLocale } from "@/shared/i18n/server";
 import { TIERS, TIER_ORDER } from "@/modules/billing/lib/tiers";
+import { ContractorPromoBanner } from "@/modules/marketplace/components/contractor-promo-banner";
 
 export default async function PricingPage() {
   const locale = await getLocale();
@@ -88,6 +89,10 @@ export default async function PricingPage() {
           {t.nav.contractorHub}
         </Link>
       </p>
+
+      <div className="mt-16">
+        <ContractorPromoBanner locale={locale} />
+      </div>
     </div>
   );
 }

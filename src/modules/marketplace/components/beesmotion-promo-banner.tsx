@@ -5,21 +5,25 @@ import type { Locale } from "@/shared/i18n/locale";
 
 type Props = {
   locale: Locale;
+  campaign?: string;
 };
 
 const BEESMOTION_AD = {
   ar: {
-    alt: "بيز موشن، التسويق الرقمي والإنتاج الإعلامي",
+    alt: "بيز موشن — تسويق رقمي وإنتاج إعلامي للمنشآت",
   },
   en: {
-    alt: "Beesmotion, Digital Marketing & Media Production",
+    alt: "Beesmotion — Digital marketing & media production",
   },
 } as const;
 
-/** Beesmotion banner for contractors — between partner row and proposals ad. */
-export function BeesmotionPromoBanner({ locale }: Props) {
+/** Beesmotion ad — place on contractor growth surfaces (/pro, /join), alone. */
+export function BeesmotionPromoBanner({
+  locale,
+  campaign = "beesmotion_ad",
+}: Props) {
   const ad = BEESMOTION_AD[locale];
-  const href = beesmotionReferralUrl("homepage_featured_ad");
+  const href = beesmotionReferralUrl(campaign);
 
   return (
     <section

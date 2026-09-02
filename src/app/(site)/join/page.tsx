@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { getMessages } from "@/shared/i18n";
 import { getLocale } from "@/shared/i18n/server";
 import { getSession } from "@/modules/auth/server/session";
@@ -9,7 +10,6 @@ import {
   parseCategorySlug,
   parseCitySlug,
 } from "@/modules/marketplace/lib/marketplace-slugs";
-import Link from "next/link";
 
 export const dynamic = "force-dynamic";
 

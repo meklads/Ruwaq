@@ -6,19 +6,23 @@ import type { Locale } from "@/shared/i18n/locale";
 
 const GRAPHICS_HOUSE_AD = {
   ar: {
-    alt: "جرافيكس هاوس، أنظمة المبيعات البصرية",
+    alt: "جرافيكس هاوس — ProjectLaunch™ لإطلاق المشاريع العقارية",
   },
   en: {
-    alt: "Graphics House, We Build Visual Sales Systems",
+    alt: "Graphics House — ProjectLaunch™ for real estate developments",
   },
 } as const;
 
 type Props = {
   locale: Locale;
+  campaign?: string;
 };
 
-/** Graphics House banner (shared ad2En2 asset for all locales). */
-export function GraphicsHousePromoBanner({ locale }: Props) {
+/** Graphics House ProjectLaunch™ full-bleed ad — place on developer / visualization surfaces only. */
+export function GraphicsHousePromoBanner({
+  locale,
+  campaign = "graphics_house_ad",
+}: Props) {
   const ad = GRAPHICS_HOUSE_AD[locale];
 
   return (
@@ -29,7 +33,7 @@ export function GraphicsHousePromoBanner({ locale }: Props) {
     >
       <div className="ruwaq-ad-featured-section__frame">
         <Link
-          href={graphicsHouseProjectLaunchReferralUrl("homepage_featured_ad")}
+          href={graphicsHouseProjectLaunchReferralUrl(campaign)}
           target="_blank"
           rel="noopener noreferrer"
           className="ruwaq-ad-featured-image-link"

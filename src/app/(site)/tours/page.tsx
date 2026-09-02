@@ -4,6 +4,7 @@ import { getMessages } from "@/shared/i18n";
 import { getLocale } from "@/shared/i18n/server";
 import { getAllShowcaseProjects } from "@/content/showcase-projects";
 import { OffPlanPfListing } from "@/modules/marketplace/components/off-plan/off-plan-pf-listing";
+import { TurrivaPromoBanner } from "@/modules/marketplace/components/turriva-promo-banner";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
@@ -54,6 +55,8 @@ export default async function ProjectToursHubPage() {
           />
         </div>
       </section>
+
+      <TurrivaPromoBanner locale={locale} campaign="tours_page_ad" />
     </div>
   );
 }

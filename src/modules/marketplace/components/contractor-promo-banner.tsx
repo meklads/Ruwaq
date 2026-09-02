@@ -12,17 +12,17 @@ const PROPOSALS_AD = {
     src: MARKETING_IMAGES.proposalsAdAr,
     width: 1749,
     height: 718,
-    alt: "رواق، أداة العروض الاحترافية",
+    alt: "رواق — أنشئ عروضاً احترافية تفوز بالعملاء في دقائق",
   },
   en: {
     src: MARKETING_IMAGES.proposalsAdEn,
     width: 1749,
     height: 718,
-    alt: "Ruwaq, Professional proposal tool",
+    alt: "Ruwaq — Create professional proposals that win clients in minutes",
   },
 } as const;
 
-/** Proposal OS banner, locale-specific asset (ad3Ar / ad3En). */
+/** Ruwaq proposal OS ad — place on /pricing and contractor hub surfaces, alone. */
 export function ContractorPromoBanner({ locale }: Props) {
   const ad = PROPOSALS_AD[locale];
 
