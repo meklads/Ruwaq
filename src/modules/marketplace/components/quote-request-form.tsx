@@ -216,19 +216,22 @@ export function QuoteRequestForm({
       ? "ruwaq-form-card mx-auto max-w-xl space-y-4 px-6 pb-8 pt-10"
       : variant === "landing"
         ? "mx-auto max-w-xl space-y-4"
-        : "mx-auto max-w-xl space-y-5";
+        : "ruwaq-join-editorial-fields";
 
   const labelClass =
     variant === "page" || variant === "landing" ? "ruwaq-ad-field-label" : "ruwaq-label";
   const fieldClass = variant === "page" || variant === "landing" ? "ruwaq-ad-field" : "ruwaq-field";
-  const titleClass =
-    variant === "page" ? "ruwaq-ad-section-title text-center" : "ruwaq-app-title pt-2 text-center text-xl";
+  const titleClass = "ruwaq-app-title pt-2 text-center text-xl";
   const submitClass =
     variant === "page" || variant === "landing"
-      ? "ruwaq-pro-btn-solid w-full px-8 py-3 disabled:opacity-50"
+      ? "ruwaq-pro-btn-solid w-full px-8 py-3.5 disabled:opacity-50"
       : "btn-ruwaq-primary w-full disabled:opacity-50";
 
-  const pageTitle = isVisualization ? copy.visualizationTitle : isCompactModal ? copy.modalTitle : copy.title;
+  const pageTitle = isVisualization
+    ? copy.visualizationTitle
+    : isCompactModal
+      ? copy.modalTitle
+      : copy.title;
   const pageSubtitle = isVisualization
     ? copy.visualizationSubtitle
     : isCompactModal
@@ -241,29 +244,29 @@ export function QuoteRequestForm({
 
   return (
     <form onSubmit={onSubmit} className={formClass}>
-      {variant === "page" ? (
-        <h1 className={titleClass}>{pageTitle}</h1>
-      ) : variant === "modal" ? (
-        <h2 className={titleClass}>{pageTitle}</h2>
+      {variant === "page" && isVisualization ? (
+        <div className="border-b border-neutral-200 pb-5">
+          <h2 className="text-lg font-semibold text-neutral-950">{copy.visualizationTitle}</h2>
+          <p className="mt-2 text-sm leading-relaxed text-neutral-600">{copy.visualizationSubtitle}</p>
+        </div>
       ) : null}
-      {pageSubtitle ? (
+
+      {variant === "modal" ? <h2 className={titleClass}>{pageTitle}</h2> : null}
+      {variant === "modal" && pageSubtitle ? (
         <p className="text-center text-sm leading-relaxed text-neutral-600">{pageSubtitle}</p>
-      ) : null}
-      {variant === "page" && !isVisualization ? (
-        <p className="text-center text-sm leading-relaxed text-neutral-600">{copy.pageLead}</p>
       ) : null}
 
       {variant === "page" ? (
         <div>
           <p className={labelClass}>{copy.requestTypeLabel}</p>
-          <div className="mt-2 grid grid-cols-1 gap-2 sm:grid-cols-2">
+          <div className="ruwaq-quote-intent" role="group" aria-label={copy.requestTypeLabel}>
             <button
               type="button"
               onClick={() => setIntent("marketplace")}
-              className={`border px-4 py-3 text-start text-sm transition-colors ${
+              className={`ruwaq-quote-intent__btn ${
                 intent === "marketplace"
-                  ? "border-neutral-950 bg-neutral-950 text-white"
-                  : "border-neutral-300 bg-white text-neutral-700 hover:border-neutral-950"
+                  ? "ruwaq-quote-intent__btn--active"
+                  : "ruwaq-quote-intent__btn--idle"
               }`}
             >
               {copy.requestTypes.marketplace}
@@ -271,10 +274,10 @@ export function QuoteRequestForm({
             <button
               type="button"
               onClick={() => setIntent("visualization")}
-              className={`border px-4 py-3 text-start text-sm transition-colors ${
+              className={`ruwaq-quote-intent__btn ${
                 intent === "visualization"
-                  ? "border-neutral-950 bg-neutral-950 text-white"
-                  : "border-neutral-300 bg-white text-neutral-700 hover:border-neutral-950"
+                  ? "ruwaq-quote-intent__btn--active"
+                  : "ruwaq-quote-intent__btn--idle"
               }`}
             >
               {copy.requestTypes.visualization}
@@ -530,6 +533,11 @@ export function QuoteRequestForm({
               onChange={(e) => setProjectDetails(e.target.value)}
               required
               minLength={10}
+              placeholder={
+                isVisualization
+                  ? visualizationCopy.fields.detailsPlaceholder
+                  : copy.fields.detailsPlaceholder
+              }
               dir={locale === "ar" ? "rtl" : "ltr"}
             />
           </div>
@@ -542,6 +550,11 @@ export function QuoteRequestForm({
               className={fieldClass}
               value={budgetRange}
               onChange={(e) => setBudgetRange(e.target.value)}
+              placeholder={
+                isVisualization
+                  ? visualizationCopy.fields.budgetPlaceholder
+                  : copy.fields.budgetPlaceholder
+              }
               dir={locale === "ar" ? "rtl" : "ltr"}
             />
           </div>
@@ -555,6 +568,8 @@ export function QuoteRequestForm({
             ? copy.visualizationSubmit
             : copy.submit}
       </button>
+
+      {variant === "page" ? <p className="ruwaq-quote-privacy">{copy.privacyNote}</p> : null}
     </form>
   );
 }

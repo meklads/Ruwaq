@@ -16,17 +16,21 @@ import { localeDir } from "@/shared/i18n/locale";
 import { RUWQ_PUBLIC_URL } from "@/shared/constants/brand";
 import { DEFAULT_MARKETING_HERO } from "@/content/marketing-images";
 
-/** Graphics House ProjectLaunch™, Tajawal primary, IBM Plex Sans Arabic fallback */
-const tajawal = Tajawal({
+/**
+ * Arabic stack: IBM Plex Sans Arabic primary (Saudi DGA / institutional feel —
+ * closest free stand-in for Vision 2030’s licensed 29LT Bukra; we do not embed Bukra).
+ * Tajawal kept as soft marketing fallback.
+ */
+const ibmPlexArabic = IBM_Plex_Sans_Arabic({
   subsets: ["arabic"],
-  weight: ["200", "300", "400", "500", "700"],
+  weight: ["300", "400", "500", "600", "700"],
   variable: "--font-ar",
   display: "swap",
 });
 
-const ibmPlexArabic = IBM_Plex_Sans_Arabic({
+const tajawal = Tajawal({
   subsets: ["arabic"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["200", "300", "400", "500", "700"],
   variable: "--font-ar-alt",
   display: "swap",
 });
@@ -122,7 +126,7 @@ export default async function RootLayout({
       className={`${tajawal.variable} ${ibmPlexArabic.variable} ${amiri.variable} ${inter.variable} ${montserrat.variable} ${playfair.variable} ${plusJakarta.variable}`}
     >
       <body
-        className={`min-h-screen bg-white ${locale === "ar" ? tajawal.className : plusJakarta.className}`}
+        className={`min-h-screen bg-white ${locale === "ar" ? ibmPlexArabic.className : plusJakarta.className}`}
       >
         <GoogleAnalytics />
         <Providers locale={locale}>{children}</Providers>

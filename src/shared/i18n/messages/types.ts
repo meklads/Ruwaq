@@ -98,7 +98,9 @@ export type Messages = {
         inquiryType: string;
         inquiryPlaceholder: string;
         details: string;
+        detailsPlaceholder: string;
         budget: string;
+        budgetPlaceholder: string;
       };
       serviceInterests: {
         integrated_launch: string;
@@ -183,9 +185,17 @@ export type Messages = {
       sections: readonly { title: string; body: string }[];
     };
     quote: {
+      metaTitle: string;
+      metaDescription: string;
+      eyebrow: string;
       title: string;
       pageLead: string;
       jeddahOnlyNote: string;
+      trustTitle: string;
+      trustItems: readonly string[];
+      steps: readonly { title: string; body: string }[];
+      howMatchLink: string;
+      privacyNote: string;
       requestTypeLabel: string;
       requestTypes: {
         marketplace: string;
@@ -227,7 +237,9 @@ export type Messages = {
         city: string;
         category: string;
         details: string;
+        detailsPlaceholder: string;
         budget: string;
+        budgetPlaceholder: string;
         projectType: string;
         email: string;
         emailPlaceholder: string;

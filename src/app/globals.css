@@ -47,7 +47,7 @@
     --df-ink: #1d1d1f;
     --df-ink-soft: #6e6e73;
     --df-ink-muted: #86868b;
-    --font-ar-fallback: var(--font-ar-alt), "IBM Plex Sans Arabic", "Segoe UI", "Apple Color Emoji",
+    --font-ar-fallback: var(--font-ar-alt), "Tajawal", "Segoe UI", "Apple Color Emoji",
       "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
     --font-marketing-ar: var(--font-ar);
     --font-latin-fallback: system-ui, -apple-system, sans-serif;
@@ -74,7 +74,7 @@
   html[lang="ar"] body,
   html[data-lang="ar"] body {
     font-family: var(--font-ar), var(--font-ar-fallback);
-    font-weight: 300;
+    font-weight: 400;
   }
 
   html[lang="en"] body,
@@ -2949,16 +2949,18 @@
   }
 
   .ruwaq-ad-section-title {
-    @apply mt-2 font-display text-3xl font-semibold tracking-tight text-neutral-950 md:text-4xl;
+    @apply mt-2 font-display text-2xl font-semibold tracking-tight text-neutral-950 md:text-3xl;
     font-family: var(--font-marketing-latin), system-ui, sans-serif;
     letter-spacing: -0.02em;
+    line-height: 1.25;
   }
 
   html[lang="ar"] .ruwaq-ad-section-title,
   html[data-lang="ar"] .ruwaq-ad-section-title {
     font-family: var(--font-ar), var(--font-ar-fallback);
-    font-weight: 300;
+    font-weight: 500;
     letter-spacing: 0;
+    line-height: 1.35;
   }
 
   .ruwaq-ad-section-lead {
@@ -3127,7 +3129,43 @@
   }
 
   .ruwaq-ad-field {
-    @apply w-full border border-neutral-300 bg-white px-3 py-2.5 text-sm text-neutral-950 outline-none transition-colors focus:border-neutral-950;
+    @apply w-full border border-neutral-300 bg-white px-3.5 py-3 text-sm text-neutral-950 outline-none transition-colors placeholder:text-neutral-400 focus:border-neutral-950;
+  }
+
+  .ruwaq-quote-intent {
+    @apply mt-2 grid grid-cols-1 gap-2 sm:grid-cols-2;
+  }
+
+  .ruwaq-quote-intent__btn {
+    @apply border px-4 py-3.5 text-start text-sm transition-colors;
+  }
+
+  .ruwaq-quote-intent__btn--active {
+    @apply border-neutral-950 bg-neutral-950 text-white;
+  }
+
+  .ruwaq-quote-intent__btn--idle {
+    @apply border-neutral-300 bg-white text-neutral-700 hover:border-neutral-950;
+  }
+
+  .ruwaq-quote-trust-list {
+    @apply mt-4 space-y-3;
+  }
+
+  .ruwaq-quote-trust-list li {
+    @apply flex gap-2.5 text-sm leading-relaxed text-neutral-600;
+  }
+
+  .ruwaq-quote-steps {
+    @apply mt-8 space-y-5 border-t border-neutral-200 pt-8;
+  }
+
+  .ruwaq-quote-step {
+    @apply border-s-2 border-neutral-900 ps-4;
+  }
+
+  .ruwaq-quote-privacy {
+    @apply mt-4 text-center text-xs leading-relaxed text-neutral-500;
   }
 
   .ruwaq-ad-page {

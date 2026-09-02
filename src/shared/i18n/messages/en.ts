@@ -119,7 +119,10 @@ export const en: Messages = {
     inquiryType: "What matters to you?",
     inquiryPlaceholder: "Select…",
     details: "How can we help?",
+    detailsPlaceholder:
+     "Project location, unit count, sales stage, and target launch window.",
     budget: "Budget range (optional)",
+    budgetPlaceholder: "e.g. SAR 150–400k for the launch package",
    },
    serviceInterests: {
     integrated_launch: "Integrated visual launch system",
@@ -315,10 +318,37 @@ export const en: Messages = {
    ],
   },
   quote: {
-   title: "Describe your project once — we match 3 contractors in Jeddah",
+   metaTitle: "Request a project — 3 verified contractors in Jeddah | Ruwaq",
+   metaDescription:
+    "One free form. Describe your Jeddah project and we shortlist the best 3 verified companies within 24 hours — no obligation.",
+   eyebrow: "Jeddah project matching",
+   title: "Describe once — get 3 verified contractors",
    pageLead:
-    "One free form. Ruwaq reviews your request and shortlists the best 3 verified companies for your budget within 24 hours.",
+    "One free form. Ruwaq reviews your request and shortlists the best 3 verified companies for your scope and budget within 24 hours.",
    jeddahOnlyNote: "Jeddah only for now — Makkah and Madinah coming soon.",
+   trustTitle: "Why Ruwaq?",
+   trustItems: [
+    "3 verified contractors per request — no open auction",
+    "Human review within 24 hours",
+    "Free for owners — no visible commission",
+    "Track status with a reference number",
+   ],
+   steps: [
+    {
+     title: "1. Describe the project",
+     body: "City, category, details, and budget if you have one.",
+    },
+    {
+     title: "2. We review and match",
+     body: "We pick the best 3 from Ruwaq PRO by specialty and capacity.",
+    },
+    {
+     title: "3. You contact directly",
+     body: "You get status and contacts — you choose who to hire.",
+    },
+   ],
+   howMatchLink: "How we match",
+   privacyNote: "Your details are used only to match your project. We do not share your number outside shortlisted contractors.",
    requestTypeLabel: "What do you need?",
    requestTypes: {
     marketplace: "Engineering & contracting quote",
@@ -364,7 +394,10 @@ export const en: Messages = {
     city: "City",
     category: "Service type",
     details: "Project details",
+    detailsPlaceholder:
+     "e.g. 420 m² villa in North Jeddah — full fit-out, rough budget, and target handover.",
     budget: "Budget range (optional)",
+    budgetPlaceholder: "e.g. SAR 800k – 1.2M",
     projectType: "Project type",
     email: "Email (optional)",
     emailPlaceholder: "name@example.com",
