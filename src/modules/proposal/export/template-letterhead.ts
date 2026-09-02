@@ -65,6 +65,8 @@ export function buildCoverPageHtml(options: {
   isExecutive: boolean;
   useLogoPlaceholder: boolean;
   mandalaUrl: string;
+  headerLogoHtml: string;
+  footerHtml: string;
 }): string {
   const {
     locale,
@@ -78,6 +80,8 @@ export function buildCoverPageHtml(options: {
     isExecutive,
     useLogoPlaceholder,
     mandalaUrl,
+    headerLogoHtml,
+    footerHtml,
   } = options;
 
   const logo = useLogoPlaceholder ? null : safeHttpUrl(data.logoUrl);
@@ -102,6 +106,15 @@ export function buildCoverPageHtml(options: {
   ].filter(Boolean) as [string, string][];
 
   return `<section class="${coverClass}" aria-label="${escapeHtml(docTitle)}">
+      <div class="cover-chrome-header">
+        <div class="cover-chrome-header-inner">
+          <div>
+            <div class="banner-badge" style="margin:0 0 4px;">${escapeHtml(docTitle)}</div>
+            <div class="cover-chrome-project">${escapeHtml(data.projectName)}</div>
+          </div>
+          ${headerLogoHtml}
+        </div>
+      </div>
       <div class="cover-ornament" aria-hidden="true">
         <img src="${escapeHtml(mandalaUrl)}" alt="">
       </div>
@@ -126,6 +139,7 @@ export function buildCoverPageHtml(options: {
           <span class="cover-gold-rule" aria-hidden="true"></span>
         </div>
       </div>
+      <div class="cover-chrome-footer">${footerHtml}</div>
     </section>`;
 }
 
@@ -140,23 +154,62 @@ export function buildCoverPageCss(
     .cover-page {
       position: relative;
       min-height: 297mm;
-      padding: 48px 40px 40px;
-      background: linear-gradient(165deg, ${colors.white} 0%, #f8f7f4 48%, ${colors.white} 100%);
-      border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+      padding: 0;
+      background: linear-gradient(165deg, ${colors.white} 0%, #f7f4ef 48%, ${colors.white} 100%);
+      border-bottom: 1px solid rgba(47, 74, 110, 0.1);
       break-after: page;
       page-break-after: always;
       overflow: hidden;
       text-align: ${textAlign};
+      display: flex;
+      flex-direction: column;
     }
     .cover-page--executive {
-      background: linear-gradient(145deg, ${colors.navy} 0%, #1e293b 55%, #0f172a 100%);
+      background: linear-gradient(145deg, ${colors.navy} 0%, #3d5a80 100%);
       color: ${colors.white};
       border-bottom: 4px solid ${colors.gold};
+    }
+    .cover-chrome-header {
+      padding: 14px 28px;
+      flex-shrink: 0;
+    }
+    .cover-chrome-header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+    .cover-chrome-project {
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.35;
+      max-width: 420px;
+    }
+    .cover-chrome-footer {
+      margin-top: auto;
+      flex-shrink: 0;
+      padding: 14px 28px 16px;
+    }
+    .cover-chrome-footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      flex-wrap: wrap;
+      font-size: 11px;
+    }
+    .cover-chrome-footer-company {
+      font-weight: 700;
+    }
+    .cover-chrome-footer-meta {
+      opacity: 0.8;
+      max-width: 320px;
+      text-align: ${dir === "rtl" ? "left" : "right"};
     }
     .cover-ornament {
       position: absolute;
       ${dir === "rtl" ? "left" : "right"}: -8%;
-      top: -6%;
+      top: 12%;
       width: 52%;
       max-width: 420px;
       opacity: ${isExecutive ? 0.07 : 0.045};
@@ -172,7 +225,11 @@ export function buildCoverPageCss(
       z-index: 1;
       max-width: 620px;
       margin: 0 auto;
-      padding-top: 12mm;
+      padding: 28px 40px 32px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
     .cover-logo {
       margin-bottom: 18px;
@@ -293,7 +350,7 @@ export function buildCoverPageCss(
       width: 72px;
       height: 72px;
       border-radius: 10px;
-      background: linear-gradient(145deg, ${colors.navy} 0%, #1e293b 100%);
+      background: linear-gradient(145deg, ${colors.navy} 0%, #3d5a80 100%);
       border: 1.5px solid ${colors.gold};
       display: flex;
       align-items: center;

@@ -39,17 +39,19 @@ export function buildPrintPaginationCss(pageBackground: string): string {
       @top-center { content: element(pageHeader); width: 100%; margin: 0; }
       @bottom-center { content: element(pageFooter); width: 100%; margin: 0; }
     }
-    .banner { position: running(pageHeader); }
-    .doc-footer, .doc-footer-client { position: running(pageFooter); }
-    .pagedjs_pages { background: #E5E7EB; padding: 24px 0; }
+    .pagedjs_pages { background: #E8E4DC; padding: 24px 0; }
     .pagedjs_page {
       background: ${pageBackground};
-      box-shadow: 0 4px 18px rgba(15,23,42,0.14);
+      box-shadow: 0 4px 18px rgba(47,74,110,0.12);
     }
+    /* Cover is a full page with its own chrome header/footer */
     .cover-page {
       break-inside: avoid;
       page-break-inside: avoid;
     }
+    /* Running letterhead on every content page after the cover */
+    .banner { position: running(pageHeader); }
+    .doc-footer, .doc-footer-client { position: running(pageFooter); }
     .meta-grid, .scope-item, .clause-item, .estimate-banner,
     .signature-box, table tr, .boq-table tr {
       break-inside: avoid;

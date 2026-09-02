@@ -1082,6 +1082,16 @@ export type Messages = {
     note: string;
     previewLabel: string;
     back: string;
+    paletteTitle: string;
+    paletteHint: string;
+    customColors: string;
+    primaryColor: string;
+    accentColor: string;
+    surfaceColor: string;
+    previewCta: string;
+    closePreview: string;
+    startWithLook: string;
+    subscribeHint: string;
     gallery: readonly {
       slug: "ruwaq-classic" | "ruwaq-executive" | "graphics-house";
       brand: string;

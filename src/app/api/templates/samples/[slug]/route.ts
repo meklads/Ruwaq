@@ -7,6 +7,7 @@ import {
 } from "@/modules/proposal/export/sample-template-keys";
 import { renderProposalExportHtml } from "@/modules/proposal/export/templates";
 import { appBaseUrlFromEnv } from "@/modules/proposal/export/proposal-export-utils";
+import { parsePaletteQuery } from "@/modules/proposal/export/template-palettes";
 
 export const dynamic = "force-dynamic";
 
@@ -22,8 +23,15 @@ export async function GET(req: NextRequest, { params }: RouteParams) {
   const localeParam = req.nextUrl.searchParams.get("locale");
   const locale: Locale = localeParam === "en" ? "en" : "ar";
   const hfStyleId = req.nextUrl.searchParams.get("hf") ?? undefined;
+  const palette = parsePaletteQuery(req.nextUrl.searchParams);
   const base = appBaseUrlFromEnv();
-  const data = buildSampleExportData(locale, slug as SampleTemplateSlug, base, hfStyleId);
+  const data = buildSampleExportData(
+    locale,
+    slug as SampleTemplateSlug,
+    base,
+    hfStyleId,
+    palette
+  );
   const html = renderProposalExportHtml(locale, data);
 
   return new NextResponse(html, {

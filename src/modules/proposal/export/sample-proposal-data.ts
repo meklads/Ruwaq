@@ -402,7 +402,13 @@ export function buildSampleExportData(
   locale: Locale,
   slug: SampleTemplateSlug,
   baseUrl?: string,
-  headerFooterStyleId?: string
+  headerFooterStyleId?: string,
+  palette?: {
+    paletteId?: string;
+    primary?: string;
+    accent?: string;
+    surface?: string;
+  }
 ): ProposalExportData {
   const base = (baseUrl ?? appBaseUrlFromEnv()).replace(/\/$/, "");
   sampleSlugToTemplateId(slug);
@@ -418,8 +424,14 @@ export function buildSampleExportData(
     }
   })();
 
-  // Only the free "ruwaq" classic template honors header/footer skins.
-  return headerFooterStyleId ? { ...data, headerFooterStyleId } : data;
+  return {
+    ...data,
+    ...(headerFooterStyleId ? { headerFooterStyleId } : {}),
+    ...(palette?.paletteId ? { paletteId: palette.paletteId } : {}),
+    ...(palette?.primary ? { palettePrimary: palette.primary } : {}),
+    ...(palette?.accent ? { paletteAccent: palette.accent } : {}),
+    ...(palette?.surface ? { paletteSurface: palette.surface } : {}),
+  };
 }
 
 /** @deprecated Use buildSampleExportData(locale, "ruwaq-classic", baseUrl) */

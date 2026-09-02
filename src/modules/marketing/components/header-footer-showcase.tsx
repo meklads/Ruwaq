@@ -128,12 +128,24 @@ export function HeaderFooterShowcase({
             </div>
           </div>
           <div className="overflow-hidden rounded-b-xl border border-ruwaq-stone/60 shadow-sm">
-            <iframe
-              key={previewSrc}
-              title={name}
-              src={previewSrc}
-              className="h-[560px] w-full border-0 bg-white"
-            />
+            <div className="nasaq-a4-stage mx-auto max-w-md bg-[#ebe6de]">
+              <iframe
+                key={previewSrc}
+                title={name}
+                src={previewSrc}
+                className="nasaq-a4-iframe pointer-events-none"
+              />
+            </div>
+            <div className="flex justify-center border-t border-ruwaq-stone/40 bg-white px-4 py-3">
+              <a
+                href={previewSrc}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-ruwaq-accent px-5 py-2 text-xs"
+              >
+                {openInNewTab}
+              </a>
+            </div>
           </div>
         </div>
       </div>

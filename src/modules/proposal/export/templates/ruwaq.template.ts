@@ -14,6 +14,10 @@ import {
   buildCoverPageHtml,
   buildHeaderLogoHtml,
 } from "../template-letterhead";
+import {
+  buildPaletteThemeCss,
+  resolveTemplatePalette,
+} from "../template-palettes";
 
 function assetUrl(base: string, path: string): string {
   return `${base.replace(/\/$/, "")}${path}`;
@@ -257,6 +261,12 @@ export function renderRuwaqTemplate(
   // of exportTemplateId. Only meaningful on the classic "ruwaq" template;
   // executive/Graphics House keep their own fixed, premium-differentiated look.
   const hfStyle = !isExecutive ? getHeaderFooterStyle(data.headerFooterStyleId) : null;
+  const palette = resolveTemplatePalette({
+    paletteId: data.paletteId,
+    primary: data.palettePrimary,
+    accent: data.paletteAccent,
+    surface: data.paletteSurface,
+  });
   const bodyClass = `${showWatermark ? "has-watermark" : ""}${isExecutive ? " variant-executive" : ""}${hfStyle ? ` hf-${hfStyle.id}` : ""}`.trim();
 
   const milestones = Array.isArray(data.timeline?.milestones)
@@ -309,6 +319,14 @@ export function renderRuwaqTemplate(
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">`;
 
+  const coverChromeFooter = `<div class="cover-chrome-footer-inner">
+      <div class="cover-chrome-footer-company">${escapeHtml(data.companyName?.trim() || labels.logoPlaceholder)}</div>
+      <div class="cover-chrome-footer-meta">${escapeHtml(
+        [data.companyPhone, data.companyEmail, data.address].filter(Boolean).join(" · ") ||
+          (locale === "ar" ? footer.addressAr : footer.addressEn)
+      )}</div>
+    </div>`;
+
   const coverPage = buildCoverPageHtml({
     locale: locale === "ar" ? "ar" : "en",
     data,
@@ -321,6 +339,8 @@ export function renderRuwaqTemplate(
     isExecutive,
     useLogoPlaceholder,
     mandalaUrl: assetUrl(base, "/brand/luxury/ruwaq-mandala.svg"),
+    headerLogoHtml: showBrandPanel ? headerLogo : "",
+    footerHtml: coverChromeFooter,
   });
 
   return `<!DOCTYPE html>
@@ -478,7 +498,7 @@ export function renderRuwaqTemplate(
     td { font-size: 13px; color: ${colors.text}; }
     .total-box {
       display: inline-block;
-      background: linear-gradient(135deg, ${colors.navy} 0%, #1e293b 100%);
+      background: linear-gradient(135deg, ${colors.navy} 0%, #3d5a80 100%);
       color: ${colors.white};
       padding: 12px 20px;
       border-radius: 10px;
@@ -486,7 +506,7 @@ export function renderRuwaqTemplate(
       font-weight: 800;
       margin: 8px 0 16px;
       border: 2px solid ${colors.gold};
-      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12);
+      box-shadow: 0 8px 24px rgba(47, 74, 110, 0.16);
     }
     .estimate-banner {
       background: ${colors.estimateBg};
@@ -739,7 +759,7 @@ export function renderRuwaqTemplate(
       letter-spacing: 0.002em;
     }
     body.variant-executive .banner {
-      background: linear-gradient(135deg, ${colors.navy} 0%, #1E293B 100%);
+      background: linear-gradient(135deg, ${colors.navy} 0%, #3d5a80 100%);
       border-bottom: 4px solid ${colors.gold};
       padding: 30px 32px 28px;
     }
@@ -862,6 +882,7 @@ export function renderRuwaqTemplate(
     }
     ${buildCoverPageCss(colors, dir, isExecutive)}
     ${hfStyle ? hfStyle.css(dir) : ""}
+    ${buildPaletteThemeCss(palette, dir)}
     ${buildPrintPaginationCss(colors.white)}
   </style>
   ${PAGED_JS_SCRIPT_TAG}

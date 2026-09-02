@@ -139,6 +139,16 @@ export function ProposalsLandingPage({
                   openSampleHint: templates.openSampleHint,
                   note: templates.note,
                   previewLabel: templates.previewLabel,
+                  paletteTitle: templates.paletteTitle,
+                  paletteHint: templates.paletteHint,
+                  customColors: templates.customColors,
+                  primaryColor: templates.primaryColor,
+                  accentColor: templates.accentColor,
+                  surfaceColor: templates.surfaceColor,
+                  previewCta: templates.previewCta,
+                  closePreview: templates.closePreview,
+                  startWithLook: templates.startWithLook,
+                  subscribeHint: templates.subscribeHint,
                 }}
                 startCta={startProposalLabel}
               />

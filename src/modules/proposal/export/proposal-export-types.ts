@@ -34,6 +34,11 @@ export type ProposalExportData = {
   templateId?: "ruwaq" | "ruwaq_executive" | "graphics_house";
   /** Header/footer color skin — only applied when templateId is "ruwaq". */
   headerFooterStyleId?: string;
+  /** Curated or custom 2–3 color palette driving the whole document chrome. */
+  paletteId?: string;
+  palettePrimary?: string;
+  paletteAccent?: string;
+  paletteSurface?: string;
   /** When true, shows Ruwaq platform branding (sample preview only). */
   platformBranding?: boolean;
   /** Smart BOQ lines for export (Trust Layer). */

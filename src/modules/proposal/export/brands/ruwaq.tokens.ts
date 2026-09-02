@@ -2,14 +2,15 @@
 export const ruwaqBrand = {
   id: "ruwaq" as const,
   colors: {
-    navy: "#0F172A",
-    navySoft: "#94A3B8",
+    /** Deep blue — never pure black */
+    navy: "#2F4A6E",
+    navySoft: "#8FA3BC",
     gold: "#C9A063",
     goldLight: "#D4B47A",
-    cream: "#E8E8ED",
-    creamBg: "#F5F5F7",
-    text: "#1D1D1F",
-    textMuted: "#6E6E73",
+    cream: "#E8E4DC",
+    creamBg: "#F7F4EF",
+    text: "#3A4556",
+    textMuted: "#6B7280",
     white: "#FFFFFF",
     estimateBg: "rgba(201, 160, 99, 0.12)",
     estimateBorder: "rgba(201, 160, 99, 0.35)",

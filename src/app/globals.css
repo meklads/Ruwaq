@@ -4418,3 +4418,29 @@
     @apply absolute -bottom-8 start-1/2 -translate-x-1/2 text-sm text-white/70;
   }
 }
+
+/* NASAQ template gallery — full A4 page thumb without scroll */
+.nasaq-a4-stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 210 / 297;
+  overflow: hidden;
+  background: #ebe6de;
+  container-type: inline-size;
+}
+
+.nasaq-a4-iframe {
+  position: absolute;
+  top: 0;
+  inset-inline-start: 0;
+  width: 794px;
+  height: 1123px;
+  border: 0;
+  background: #fff;
+  transform: scale(calc(100cqw / 794));
+  transform-origin: top left;
+}
+
+html[dir="rtl"] .nasaq-a4-iframe {
+  transform-origin: top right;
+}

@@ -26,6 +26,16 @@ export default async function TemplateSamplePage() {
             openSampleHint: t.templates.openSampleHint,
             note: t.templates.note,
             previewLabel: t.templates.previewLabel,
+            paletteTitle: t.templates.paletteTitle,
+            paletteHint: t.templates.paletteHint,
+            customColors: t.templates.customColors,
+            primaryColor: t.templates.primaryColor,
+            accentColor: t.templates.accentColor,
+            surfaceColor: t.templates.surfaceColor,
+            previewCta: t.templates.previewCta,
+            closePreview: t.templates.closePreview,
+            startWithLook: t.templates.startWithLook,
+            subscribeHint: t.templates.subscribeHint,
           }}
           startCta={t.site.nav.startProposal}
         />

@@ -1794,8 +1794,9 @@ export const en: Messages = {
    ctaCardTitle: "Start a proposal now",
    ctaCardNote: "No card required · Try instantly · 3 free proposals per month",
    featuresTitle: "Why contractors choose Ruwaq",
-   samplesTitle: "Explore ready samples",
-   samplesIntro: "Three templates to preview: fit-out, engineering supervision, and architectural visualization, demo data only.",
+   samplesTitle: "Design your look — then start",
+   samplesIntro:
+    "Pick a 2–3 color palette, see the full page without scrolling, and open a large preview. Header and footer follow your colors on every page — exactly what your client sees.",
    ctaPrimary: "Start a free proposal",
    ctaSecondary: "Preview a sample",
    ctaPricing: "Plans & pricing",
@@ -1806,10 +1807,20 @@ export const en: Messages = {
   subtitle:
    "Three polished samples: engineering supervision (executive), villa fit-out (classic), and 3D visualization (Graphics House).",
   openSample: "Open in new tab",
-  openSampleHint: "Demo data for preview only, not for client delivery.",
+  openSampleHint: "Demo data for preview only. Your real proposals carry your company identity and colors.",
   note: "Your real proposals show your company identity only.",
   previewLabel: "Preview",
   back: "Back",
+  paletteTitle: "Proposal color palette",
+  paletteHint: "Pick a ready 3-color look or set two/three colors — header, footer, and tables update instantly.",
+  customColors: "Or pick your own colors",
+  primaryColor: "Primary",
+  accentColor: "Accent",
+  surfaceColor: "Surface",
+  previewCta: "Large preview",
+  closePreview: "Close",
+  startWithLook: "Start with this look",
+  subscribeHint: "Custom colors and advanced templates unlock with a subscription",
   gallery: [
    {
     slug: "ruwaq-executive",

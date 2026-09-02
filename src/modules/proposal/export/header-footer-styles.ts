@@ -55,29 +55,29 @@ export const HEADER_FOOTER_STYLES: Record<HeaderFooterStyleId, HeaderFooterStyle
 
   charcoal_copper: {
     id: "charcoal_copper",
-    nameAr: "الحداثة",
-    nameEn: "Modern Charcoal",
-    swatch: ["#292524", "#B87333"],
-    css: (dir) => `
+    nameAr: "النحاس الدافئ",
+    nameEn: "Warm Copper",
+    swatch: ["#5C4A3A", "#B87333"],
+    css: () => `
       body.hf-charcoal_copper .banner {
-        background: #292524;
-        background-image: repeating-linear-gradient(115deg, rgba(184,115,51,0.10) 0 2px, transparent 2px 22px);
+        background: #5C4A3A;
+        background-image: repeating-linear-gradient(115deg, rgba(184,115,51,0.12) 0 2px, transparent 2px 22px);
         border-bottom: 3px solid #B87333;
       }
       body.hf-charcoal_copper .banner-badge { color: #D89B5C; }
-      body.hf-charcoal_copper .banner-title { color: #FFFFFF; }
-      body.hf-charcoal_copper .banner-client { color: rgba(255,255,255,0.7); }
-      body.hf-charcoal_copper .header-company-name { color: #FFFFFF; }
-      body.hf-charcoal_copper .logo-circle { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.28); }
+      body.hf-charcoal_copper .banner-title { color: #FFFEFA; }
+      body.hf-charcoal_copper .banner-client { color: rgba(255,254,250,0.75); }
+      body.hf-charcoal_copper .header-company-name { color: #FFFEFA; }
+      body.hf-charcoal_copper .logo-circle { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.32); }
       body.hf-charcoal_copper .doc-footer,
       body.hf-charcoal_copper .doc-footer-client {
-        background: #292524;
-        color: rgba(255,255,255,0.75);
+        background: #5C4A3A;
+        color: rgba(255,254,250,0.78);
         border-top: none;
       }
       body.hf-charcoal_copper .doc-footer a,
       body.hf-charcoal_copper .doc-footer-tagline { color: #D89B5C; }
-      body.hf-charcoal_copper footer.doc-footer-client > div:first-child { color: #FFFFFF !important; }
+      body.hf-charcoal_copper footer.doc-footer-client > div:first-child { color: #FFFEFA !important; }
     `,
   },
 
@@ -139,17 +139,17 @@ export const HEADER_FOOTER_STYLES: Record<HeaderFooterStyleId, HeaderFooterStyle
     id: "ivory_contemporary",
     nameAr: "الأبيض العصري",
     nameEn: "Ivory Contemporary",
-    swatch: ["#FAF9F6", "#0F172A"],
+    swatch: ["#FAF9F6", "#2F4A6E"],
     css: (dir) => `
       body.hf-ivory_contemporary .banner {
         background: #FAF9F6;
         border-bottom: 1px solid #E5E1D8;
-        border-${borderSide(dir)}: 4px solid #0F172A;
+        border-${borderSide(dir)}: 4px solid #2F4A6E;
       }
-      body.hf-ivory_contemporary .banner-badge { color: #0F172A; }
-      body.hf-ivory_contemporary .banner-title { color: #0F172A; }
+      body.hf-ivory_contemporary .banner-badge { color: #2F4A6E; }
+      body.hf-ivory_contemporary .banner-title { color: #2F4A6E; }
       body.hf-ivory_contemporary .banner-client { color: #6E6E73; }
-      body.hf-ivory_contemporary .header-company-name { color: #0F172A; }
+      body.hf-ivory_contemporary .header-company-name { color: #2F4A6E; }
       body.hf-ivory_contemporary .logo-circle { background: #FFFFFF; border: 1.5px solid #E5E1D8; }
       body.hf-ivory_contemporary .doc-footer,
       body.hf-ivory_contemporary .doc-footer-client {
@@ -158,7 +158,7 @@ export const HEADER_FOOTER_STYLES: Record<HeaderFooterStyleId, HeaderFooterStyle
         border-top: 1px solid #E5E1D8;
       }
       body.hf-ivory_contemporary .doc-footer a,
-      body.hf-ivory_contemporary .doc-footer-tagline { color: #0F172A; }
+      body.hf-ivory_contemporary .doc-footer-tagline { color: #2F4A6E; }
     `,
   },
 
@@ -276,29 +276,29 @@ export const HEADER_FOOTER_STYLES: Record<HeaderFooterStyleId, HeaderFooterStyle
 
   obsidian_gold: {
     id: "obsidian_gold",
-    nameAr: "الأبنوس الفاخر",
-    nameEn: "Obsidian Gold",
-    swatch: ["#161616", "#C9A063"],
+    nameAr: "نيلي وذهبي",
+    nameEn: "Indigo Gold",
+    swatch: ["#3D4F78", "#C9A063"],
     css: () => `
       body.hf-obsidian_gold .banner {
-        background: #161616;
-        background-image: linear-gradient(180deg, rgba(201,160,99,0.08) 0%, transparent 60%);
+        background: #3D4F78;
+        background-image: linear-gradient(180deg, rgba(201,160,99,0.12) 0%, transparent 60%);
         border-bottom: 3px solid #C9A063;
       }
       body.hf-obsidian_gold .banner-badge { color: #C9A063; letter-spacing: 0.14em; }
-      body.hf-obsidian_gold .banner-title { color: #FFFFFF; }
-      body.hf-obsidian_gold .banner-client { color: rgba(255,255,255,0.65); }
-      body.hf-obsidian_gold .header-company-name { color: #FFFFFF; }
-      body.hf-obsidian_gold .logo-circle { background: rgba(201,160,99,0.08); border-color: rgba(201,160,99,0.4); }
+      body.hf-obsidian_gold .banner-title { color: #FFFEFA; }
+      body.hf-obsidian_gold .banner-client { color: rgba(255,254,250,0.72); }
+      body.hf-obsidian_gold .header-company-name { color: #FFFEFA; }
+      body.hf-obsidian_gold .logo-circle { background: rgba(201,160,99,0.1); border-color: rgba(201,160,99,0.45); }
       body.hf-obsidian_gold .doc-footer,
       body.hf-obsidian_gold .doc-footer-client {
-        background: #161616;
-        color: rgba(255,255,255,0.7);
+        background: #3D4F78;
+        color: rgba(255,254,250,0.75);
         border-top: none;
       }
       body.hf-obsidian_gold .doc-footer a,
       body.hf-obsidian_gold .doc-footer-tagline { color: #C9A063; }
-      body.hf-obsidian_gold footer.doc-footer-client > div:first-child { color: #FFFFFF !important; }
+      body.hf-obsidian_gold footer.doc-footer-client > div:first-child { color: #FFFEFA !important; }
     `,
   },
 };
@@ -383,7 +383,7 @@ export function buildHeaderFooterPreviewHtml(options: {
   .banner {
     background: #F5F5F7;
     padding: 14px 18px 16px;
-    color: #1D1D1F;
+    color: #3A4556;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -391,7 +391,7 @@ export function buildHeaderFooterPreviewHtml(options: {
   }
   .banner-main { flex: 1; min-width: 0; }
   .banner-badge { font-size: 8px; letter-spacing: 0.1em; text-transform: uppercase; color: #C9A063; font-weight: 700; margin-bottom: 3px; }
-  .banner-title { font-size: 14px; font-weight: 700; color: #0F172A; margin: 0; }
+  .banner-title { font-size: 14px; font-weight: 700; color: #2F4A6E; margin: 0; }
   .header-logo-col { flex-shrink: 0; text-align: center; min-width: 48px; }
   .logo-circle {
     width: 34px; height: 34px; border-radius: 50%; background: #fff;
@@ -399,7 +399,7 @@ export function buildHeaderFooterPreviewHtml(options: {
     justify-content: center; overflow: hidden; margin: 0 auto 3px;
   }
   .logo-circle img { width: 100%; height: 100%; object-fit: contain; padding: 3px; }
-  .header-company-name { font-size: 7px; font-weight: 700; color: #0F172A; margin: 0; max-width: 60px; }
+  .header-company-name { font-size: 7px; font-weight: 700; color: #2F4A6E; margin: 0; max-width: 60px; }
   .doc-footer-client {
     border-top: 1px solid #E5E7EB;
     padding: 8px 18px 10px;
@@ -407,7 +407,7 @@ export function buildHeaderFooterPreviewHtml(options: {
     color: #6E6E73;
     background: #F3F4F6;
   }
-  .doc-footer-client > div:first-child { font-weight: 600; color: #0F172A; }
+  .doc-footer-client > div:first-child { font-weight: 600; color: #2F4A6E; }
   ${style.css(options.dir)}
 </style>
 </head>
