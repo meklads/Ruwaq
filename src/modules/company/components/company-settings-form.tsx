@@ -13,6 +13,12 @@ import { UpgradeModal } from "@/modules/billing/components/upgrade-modal";
 import { HeaderFooterStylePicker } from "./header-footer-style-picker";
 import type { HeaderFooterStyleId } from "@/modules/proposal/export/header-footer-styles";
 import {
+  LETTERHEAD_FRAME_ORDER,
+  LETTERHEAD_FRAMES,
+  parseLetterheadFrameId,
+} from "@/modules/proposal/export/letterhead-frames";
+import { TEMPLATE_PALETTE_ORDER, TEMPLATE_PALETTES } from "@/modules/proposal/export/template-palettes";
+import {
   isValidEmail,
   isValidHttpUrl,
   isValidPhone,
@@ -20,7 +26,7 @@ import {
 
 interface Props {
   initial: CompanyProfile | null;
-  /** Master switch (env BILLING_ENABLED). false = free trial, nothing locked. */
+  /** Master switch (env BILLING_ENABLED). When false, online checkout is hidden; freemium gates still apply. */
   billingEnabled: boolean;
   /** Style chosen on the public showcase before sign-up (cookie-carried). */
   preferredStyleId?: HeaderFooterStyleId;
@@ -55,6 +61,14 @@ export function CompanySettingsForm({ initial, billingEnabled, preferredStyleId 
     headerFooterStyleId: (initial?.headerFooterStyleId ??
       preferredStyleId ??
       "gold_classic") as HeaderFooterStyleId,
+    letterheadFrameId: parseLetterheadFrameId(
+      (initial as { letterheadFrameId?: string } | null)?.letterheadFrameId
+    ),
+    paletteId:
+      (initial as { paletteId?: string } | null)?.paletteId &&
+      (initial as { paletteId?: string }).paletteId! in TEMPLATE_PALETTES
+        ? (initial as { paletteId: string }).paletteId
+        : "gold_sand",
   });
 
   const update = (field: string, value: string) => {
@@ -332,14 +346,68 @@ export function CompanySettingsForm({ initial, billingEnabled, preferredStyleId 
               companyName={form.companyName}
               logoUrl={form.logoUrl}
               isPaid={isPaid}
-              onRequestUpgrade={() => setUpgradeOpen(true)}
+              onRequestUpgrade={() => billingEnabled && setUpgradeOpen(true)}
             />
+            <div className="mt-6 space-y-3 rounded-lg border border-ruwaq-stone/40 bg-ruwaq-linen/40 p-4">
+              <p className="text-sm font-semibold text-ruwaq-ink">
+                هيدر/فوتر مستطيل (نَسَق)
+              </p>
+              <p className="text-xs text-ruwaq-ink-muted">
+                يُطبَّق على تصدير PDF بدل الأشكال القديمة عند الاختيار.
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {LETTERHEAD_FRAME_ORDER.filter((id) => LETTERHEAD_FRAMES[id].colorable).map(
+                  (id) => {
+                    const f = LETTERHEAD_FRAMES[id];
+                    const selected = form.letterheadFrameId === id;
+                    return (
+                      <button
+                        key={id}
+                        type="button"
+                        onClick={() => update("letterheadFrameId", id)}
+                        className={`rounded border px-3 py-1.5 text-xs font-semibold ${
+                          selected
+                            ? "border-[#C9A063] bg-white text-[#2F4A6E]"
+                            : "border-ruwaq-stone/50 bg-white/70 text-ruwaq-ink-muted"
+                        }`}
+                      >
+                        {f.nameAr}
+                      </button>
+                    );
+                  }
+                )}
+              </div>
+              <div className="flex flex-wrap gap-2 pt-1">
+                {TEMPLATE_PALETTE_ORDER.slice(0, 4).map((id) => {
+                  const pal = TEMPLATE_PALETTES[id];
+                  const selected = form.paletteId === id;
+                  return (
+                    <button
+                      key={id}
+                      type="button"
+                      onClick={() => update("paletteId", id)}
+                      className={`flex items-center gap-2 rounded border px-2.5 py-1.5 text-[11px] font-semibold ${
+                        selected
+                          ? "border-[#C9A063] bg-white"
+                          : "border-ruwaq-stone/50 bg-white/70"
+                      }`}
+                    >
+                      <span className="flex h-3.5 overflow-hidden rounded-sm">
+                        <span className="h-3.5 w-3.5" style={{ background: pal.primary }} />
+                        <span className="h-3.5 w-3.5" style={{ background: pal.accent }} />
+                      </span>
+                      {pal.nameAr}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
           </>
         )}
       </section>
 
       <UpgradeModal
-        open={upgradeOpen}
+        open={upgradeOpen && billingEnabled}
         onClose={() => setUpgradeOpen(false)}
         onSuccess={() => setUpgradeOpen(false)}
       />

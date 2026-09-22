@@ -1687,9 +1687,9 @@
     @apply absolute inset-0;
     background: linear-gradient(
       180deg,
-      rgba(8, 8, 8, 0.55) 0%,
-      rgba(8, 8, 8, 0.45) 45%,
-      rgba(8, 8, 8, 0.62) 100%
+      rgba(6, 8, 12, 0.72) 0%,
+      rgba(6, 8, 12, 0.58) 42%,
+      rgba(6, 8, 12, 0.78) 100%
     );
   }
 
@@ -1858,7 +1858,9 @@
   }
 
   .ruwaq-pro-eyebrow {
-    @apply mb-5 text-[10px] font-semibold uppercase tracking-[0.28em] text-white/90 md:mb-6;
+    @apply mb-5 text-[10px] font-semibold uppercase tracking-[0.28em] text-white md:mb-6;
+    color: #ffffff;
+    text-shadow: 0 1px 14px rgba(0, 0, 0, 0.5);
   }
 
   html[lang="ar"] .ruwaq-pro-eyebrow {
@@ -1899,8 +1901,8 @@
 
   .ruwaq-pro-subtitle {
     @apply mt-5 max-w-2xl text-sm font-normal leading-relaxed text-white md:text-base;
-    color: rgba(255, 255, 255, 0.92);
-    text-shadow: 0 1px 16px rgba(0, 0, 0, 0.28);
+    color: #ffffff;
+    text-shadow: 0 2px 18px rgba(0, 0, 0, 0.55);
   }
 
   .ruwaq-pro-chip {

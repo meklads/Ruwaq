@@ -1,10 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSession } from "@/modules/auth/server/session";
+import { isOnlineCheckoutEnabled } from "@/modules/billing/lib/product-access";
 import { capturePremiumTemplatesOrder } from "@/modules/billing/server/paypal.service";
 import { logServerError } from "@/shared/lib/usage-events";
 
 export async function POST(req: NextRequest) {
   try {
+    if (!isOnlineCheckoutEnabled()) {
+      return NextResponse.json(
+        { error: "Online checkout is not enabled yet." },
+        { status: 503 }
+      );
+    }
     const session = await getSession();
     if (!session?.user?.id) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -21,7 +28,10 @@ export async function POST(req: NextRequest) {
   } catch (error) {
     logServerError("paypal capture-order", error);
     return NextResponse.json(
-      { error: "Payment could not be confirmed. If you were charged, contact hello@turriva.co." },
+      {
+        error:
+          "Payment could not be confirmed. If you were charged, contact hello@turriva.co.",
+      },
       { status: 500 }
     );
   }

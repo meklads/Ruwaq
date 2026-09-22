@@ -9,6 +9,8 @@ import {
   resolveEntitledExportTemplateId,
 } from "@/modules/company/lib/export-template-ids";
 import { resolveEntitledHeaderFooterStyleId } from "@/modules/proposal/export/header-footer-styles";
+import { parseLetterheadFrameId } from "@/modules/proposal/export/letterhead-frames";
+import { TEMPLATE_PALETTES } from "@/modules/proposal/export/template-palettes";
 import {
   isValidEmail,
   isValidHttpUrl,
@@ -52,6 +54,11 @@ export async function PUT(req: NextRequest) {
       body.headerFooterStyleId,
       isPaid
     );
+    const letterheadFrameId = parseLetterheadFrameId(body.letterheadFrameId);
+    const paletteId =
+      typeof body.paletteId === "string" && body.paletteId in TEMPLATE_PALETTES
+        ? body.paletteId
+        : "gold_sand";
 
     const logoUrl = str(body.logoUrl);
     const phone = str(body.phone);
@@ -93,6 +100,8 @@ export async function PUT(req: NextRequest) {
       catalogUrl,
       exportTemplateId: entitledTemplateId,
       headerFooterStyleId: entitledStyleId,
+      letterheadFrameId,
+      paletteId,
     };
 
     const profile = await db.companyProfile.upsert({

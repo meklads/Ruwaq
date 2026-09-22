@@ -163,7 +163,9 @@ export function TemplateSampleGallery({ locale, labels, startCta }: Props) {
   const activeAccent =
     paletteId === "custom" ? accent : TEMPLATE_PALETTES[paletteId as Exclude<TemplatePaletteId, "custom">].accent;
   const src = previewUrl(locale, frameId, centerWatermark, paletteId, activePrimary, activeAccent);
-  const startHref = `/proposals/new?frame=${frameId}&palette=${paletteId}`;
+  const startHref = `/letterhead/${frameId}?palette=${
+    paletteId === "custom" ? "gold_sand" : paletteId
+  }`;
   const colorsEnabled = frame.colorable;
 
   return (
@@ -270,19 +272,20 @@ export function TemplateSampleGallery({ locale, labels, startCta }: Props) {
                 setFrameId(id);
                 setModalOpen(true);
               }}
-              className={`group overflow-hidden rounded-xl border bg-white text-start transition hover:-translate-y-0.5 hover:shadow-md ${
+              className={`group overflow-hidden border bg-[#FBF9F5] text-start transition duration-200 hover:-translate-y-0.5 ${
                 selected
-                  ? "border-[#C9A063] shadow-md ring-1 ring-[#C9A063]/30"
-                  : "border-neutral-200"
+                  ? "border-[#C9A063] ring-1 ring-[#C9A063]/40"
+                  : "border-neutral-200/90 hover:border-neutral-300"
               }`}
+              style={{ borderRadius: 2 }}
             >
               <div className="aspect-[210/297] overflow-hidden bg-[#ebe6de]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={thumb} alt={name} className="h-full w-full object-cover object-top" />
               </div>
-              <div className="border-t border-neutral-100 px-3 py-2.5">
-                <p className="text-xs font-bold text-[#2F4A6E]">{name}</p>
-                <p className="mt-0.5 text-[10px] text-neutral-500 group-hover:text-[#C9A063]">
+              <div className="border-t border-neutral-100/80 px-3 py-2.5">
+                <p className="text-[11px] font-semibold tracking-wide text-[#2F4A6E]">{name}</p>
+                <p className="mt-0.5 text-[10px] text-neutral-500 group-hover:text-[#8B7355]">
                   {f.pdf
                     ? locale === "ar"
                       ? "مثال PDF"

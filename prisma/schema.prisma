@@ -97,6 +97,13 @@ model CompanyProfile {
   /// "ruwaq". See src/modules/proposal/export/header-footer-styles.ts.
   headerFooterStyleId String @default("gold_classic")
 
+  /// Rectangular letterhead frame (bar_classic | bar_accent | bar_split | bar_bands).
+  /// See src/modules/proposal/export/letterhead-frames.ts.
+  letterheadFrameId String @default("bar_classic")
+
+  /// Curated palette id (gold_sand, ocean_mist, …) for letterhead bars.
+  paletteId String @default("gold_sand")
+
   /// True once a one-time payment unlocks premium export templates
   /// (ruwaq_executive, graphics_house). Free tier always keeps "ruwaq".
   isPaid Boolean   @default(false)

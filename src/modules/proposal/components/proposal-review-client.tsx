@@ -329,7 +329,7 @@ export function ProposalReviewClient({
               {t.graphicsHouseUpsell.body}
             </p>
           </div>
-          <Link href="/services" className="btn-ruwaq-secondary shrink-0 px-4 py-2 text-sm">
+          <Link href="/proposals" className="btn-ruwaq-secondary shrink-0 px-4 py-2 text-sm">
             {t.graphicsHouseUpsell.cta}
           </Link>
         </div>

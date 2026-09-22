@@ -376,12 +376,111 @@ export function renderExactLetterheadHtml(options: {
 </html>`;
 }
 
-/* ---- Compatibility stubs ---- */
+/* ---- Export chrome (running header/footer bars) ---- */
 import type { TemplatePalette } from "./template-palettes";
 import type { ProposalExportData } from "./proposal-export-types";
 
-export function buildLetterheadFrameCss(_palette: TemplatePalette, _dir: "rtl" | "ltr"): string {
-  return "";
+/** Cookie that carries a public gallery pick into company settings / export. */
+export const LETTERHEAD_FRAME_PREF_COOKIE = "ruwaq_lh_frame";
+export const LETTERHEAD_PALETTE_PREF_COOKIE = "ruwaq_lh_palette";
+
+/**
+ * CSS for print running header/footer — simple rectangular bars matching
+ * the library frames. Prefer this over full-page SVG inside Paged.js boxes.
+ */
+export function buildLetterheadFrameCss(
+  palette: TemplatePalette,
+  _dir: "rtl" | "ltr",
+  frameId: LetterheadFrameId = "bar_classic"
+): string {
+  if (frameId === "graphics_house") return "";
+  const p = palette.primary;
+  const a = palette.accent;
+  const on = palette.onPrimary;
+  const text = palette.text;
+
+  const shared = `
+    body.lh-${frameId} .banner {
+      border: none !important;
+      box-shadow: none !important;
+      padding: 12px 16px !important;
+      color: ${on} !important;
+    }
+    body.lh-${frameId} .banner-badge,
+    body.lh-${frameId} .banner-title,
+    body.lh-${frameId} .banner-client {
+      color: ${on} !important;
+    }
+    body.lh-${frameId} .banner-badge {
+      background: rgba(255,255,255,0.14) !important;
+      border: 1px solid rgba(255,255,255,0.22) !important;
+    }
+    body.lh-${frameId} .doc-footer,
+    body.lh-${frameId} .doc-footer-client {
+      border: none !important;
+      padding: 10px 16px !important;
+      color: ${on} !important;
+      background: ${p} !important;
+    }
+    body.lh-${frameId} .doc-footer-client > div:first-child,
+    body.lh-${frameId} .doc-footer-tagline {
+      color: ${on} !important;
+    }
+    body.lh-${frameId} .doc-footer a,
+    body.lh-${frameId} .doc-footer-meta,
+    body.lh-${frameId} .doc-footer-note {
+      color: rgba(255,255,255,0.85) !important;
+    }
+  `;
+
+  switch (frameId) {
+    case "bar_classic":
+      return `${shared}
+        body.lh-bar_classic .banner { background: ${p} !important; }
+        body.lh-bar_classic .doc-footer,
+        body.lh-bar_classic .doc-footer-client { background: ${p} !important; }
+      `;
+    case "bar_accent":
+      return `${shared}
+        body.lh-bar_accent .banner {
+          background: ${p} !important;
+          border-bottom: 4px solid ${a} !important;
+        }
+        body.lh-bar_accent .doc-footer,
+        body.lh-bar_accent .doc-footer-client {
+          background: ${p} !important;
+          border-top: 4px solid ${a} !important;
+        }
+      `;
+    case "bar_split":
+      return `${shared}
+        body.lh-bar_split .banner {
+          background: linear-gradient(90deg, ${p} 0%, ${p} 66%, ${a} 66%, ${a} 100%) !important;
+        }
+        body.lh-bar_split .doc-footer,
+        body.lh-bar_split .doc-footer-client {
+          background: linear-gradient(90deg, ${a} 0%, ${a} 33%, ${p} 33%, ${p} 100%) !important;
+        }
+      `;
+    case "bar_bands":
+      return `${shared}
+        body.lh-bar_bands .banner {
+          background: linear-gradient(180deg, ${p} 0%, ${p} 58%, ${a} 58%, ${a} 100%) !important;
+          padding-top: 14px !important;
+          padding-bottom: 14px !important;
+        }
+        body.lh-bar_bands .doc-footer,
+        body.lh-bar_bands .doc-footer-client {
+          background: linear-gradient(180deg, ${a} 0%, ${a} 38%, ${p} 38%, ${p} 100%) !important;
+          padding-top: 12px !important;
+          padding-bottom: 12px !important;
+        }
+      `;
+    default:
+      return `${shared}
+        body.lh-${frameId} .banner { background: ${p} !important; color: ${text}; }
+      `;
+  }
 }
 
 export function buildLetterheadHeaderHtml(_o: {

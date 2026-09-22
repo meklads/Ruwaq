@@ -152,6 +152,8 @@ export async function loadProposalExportContext(
       premiumExport
     ),
     headerFooterStyleId: company?.headerFooterStyleId ?? undefined,
+    letterheadFrameId: company?.letterheadFrameId ?? undefined,
+    paletteId: company?.paletteId ?? undefined,
   };
 
   return {

@@ -56,6 +56,21 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: "/directory",
+        destination: "/pro",
+        permanent: true,
+      },
+      {
+        source: "/directory/:path*",
+        destination: "/pro",
+        permanent: true,
+      },
+      {
+        source: "/services",
+        destination: "/proposals",
+        permanent: false,
+      },
+      {
         source: "/proposals/new",
         destination: "/workspace/proposals/new",
         permanent: false,

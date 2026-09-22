@@ -21,13 +21,13 @@ export async function ContractorPortalHeader() {
   }
 
   const links = [
-    { href: "/proposals", label: t.nav.myProposals, key: "proposals" },
+    { href: "/workspace/proposals", label: t.nav.myProposals, key: "proposals" },
     ...(showLeadInbox
-      ? [{ href: "/leads", label: t.nav.leadInbox, key: "leads" as const }]
+      ? [{ href: "/workspace/leads", label: t.nav.leadInbox, key: "leads" as const }]
       : []),
-    { href: "/proposals/new", label: t.nav.newProposal, key: "new" },
-    { href: "/templates/sample", label: t.nav.previewSample, key: "sample" },
-    { href: "/settings/company", label: t.nav.settings, key: "settings" },
+    { href: "/workspace/proposals/new", label: t.nav.newProposal, key: "new" },
+    { href: "/workspace/templates/sample", label: t.nav.previewSample, key: "sample" },
+    { href: "/workspace/settings/company", label: t.nav.settings, key: "settings" },
   ];
 
   return (
@@ -35,7 +35,7 @@ export async function ContractorPortalHeader() {
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="flex min-h-[4.5rem] flex-wrap items-center justify-between gap-3 py-3">
           <div className="flex items-center gap-4">
-            <RuwaqLogo href="/proposals" variant="dark" />
+            <RuwaqLogo href="/workspace/proposals" variant="dark" />
             <Link
               href="/"
               className="hidden text-xs font-medium text-white/75 transition hover:text-white sm:inline"

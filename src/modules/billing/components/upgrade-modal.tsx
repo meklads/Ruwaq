@@ -28,9 +28,11 @@ export function UpgradeModal({ open, onClose, onSuccess }: Props) {
   const buttonsHostRef = useRef<HTMLDivElement>(null);
   const [status, setStatus] = useState<"idle" | "loading" | "error">("idle");
   const clientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID;
+  // Online checkout is deferred until BILLING_ENABLED=true (see product-access).
+  const billingEnabled = process.env.NEXT_PUBLIC_BILLING_ENABLED === "true";
 
   useEffect(() => {
-    if (!open || !clientId) return;
+    if (!open || !clientId || !billingEnabled) return;
 
     let cancelled = false;
 
@@ -111,19 +113,27 @@ export function UpgradeModal({ open, onClose, onSuccess }: Props) {
           {t.upgrade.title}
         </h3>
         <p className="mt-1 text-sm text-ruwaq-ink-muted">{t.upgrade.subtitle}</p>
-        <p className="mt-3 text-2xl font-bold text-ruwaq-ink">
-          {t.upgrade.price}
-        </p>
-        <p className="mt-1 text-xs text-ruwaq-ink-muted">{t.upgrade.priceNote}</p>
-
-        {clientId ? (
-          <div className="mt-4" ref={buttonsHostRef} />
+        {!billingEnabled ? (
+          <p className="mt-4 text-sm text-ruwaq-ink-muted">
+            {t.upgrade.notConfigured}
+          </p>
         ) : (
-          <p className="mt-4 text-sm text-amber-700">{t.upgrade.notConfigured}</p>
-        )}
+          <>
+            <p className="mt-3 text-2xl font-bold text-ruwaq-ink">
+              {t.upgrade.price}
+            </p>
+            <p className="mt-1 text-xs text-ruwaq-ink-muted">{t.upgrade.priceNote}</p>
 
-        {status === "error" && (
-          <p className="mt-2 text-sm text-red-600">{t.upgrade.error}</p>
+            {clientId ? (
+              <div className="mt-4" ref={buttonsHostRef} />
+            ) : (
+              <p className="mt-4 text-sm text-amber-700">{t.upgrade.notConfigured}</p>
+            )}
+
+            {status === "error" && (
+              <p className="mt-2 text-sm text-red-600">{t.upgrade.error}</p>
+            )}
+          </>
         )}
       </div>
     </div>

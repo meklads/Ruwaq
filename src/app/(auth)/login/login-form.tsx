@@ -12,7 +12,11 @@ export default function LoginForm({
 }) {
   const t = useT();
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl") ?? "/proposals";
+  const rawCallback = searchParams.get("callbackUrl");
+  const callbackUrl =
+    rawCallback && rawCallback.startsWith("/") && !rawCallback.startsWith("//")
+      ? rawCallback
+      : "/workspace/proposals";
   const perks = [
     t.login.perks.profile,
     t.login.perks.support,
@@ -81,7 +85,7 @@ export default function LoginForm({
             {t.login.servicesBody}
           </p>
           <Link
-            href="/services"
+            href="/proposals"
             className="mt-3 inline-block text-sm font-medium text-brand-600 hover:text-brand-700"
           >
             {t.login.servicesCta}

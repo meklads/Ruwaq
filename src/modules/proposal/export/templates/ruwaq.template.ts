@@ -18,7 +18,7 @@ import {
   buildPaletteThemeCss,
   resolveTemplatePalette,
 } from "../template-palettes";
-import { parseLetterheadFrameId } from "../letterhead-frames";
+import { parseLetterheadFrameId, buildLetterheadFrameCss } from "../letterhead-frames";
 
 function assetUrl(base: string, path: string): string {
   return `${base.replace(/\/$/, "")}${path}`;
@@ -269,8 +269,8 @@ export function renderRuwaqTemplate(
     surface: data.paletteSurface,
   });
   const frameId = parseLetterheadFrameId(data.letterheadFrameId);
-  void frameId;
-  const bodyClass = `${showWatermark ? "has-watermark" : ""}${isExecutive ? " variant-executive" : ""}${hfStyle ? ` hf-${hfStyle.id}` : ""}`.trim();
+  const useLetterheadChrome = !isExecutive && frameId !== "graphics_house";
+  const bodyClass = `${showWatermark ? "has-watermark" : ""}${isExecutive ? " variant-executive" : ""}${hfStyle && !useLetterheadChrome ? ` hf-${hfStyle.id}` : ""}${useLetterheadChrome ? ` lh-${frameId}` : ""}`.trim();
 
   const milestones = Array.isArray(data.timeline?.milestones)
     ? (data.timeline!.milestones as Record<string, unknown>[])
@@ -892,7 +892,8 @@ export function renderRuwaqTemplate(
       body.has-watermark .page-wrap { margin-top: 32px; }
     }
     ${buildCoverPageCss(colors, dir, isExecutive)}
-    ${hfStyle ? hfStyle.css(dir) : ""}
+    ${hfStyle && !useLetterheadChrome ? hfStyle.css(dir) : ""}
+    ${useLetterheadChrome ? buildLetterheadFrameCss(palette, dir, frameId) : ""}
     ${buildPaletteThemeCss(palette, dir)}
     ${buildPrintPaginationCss(colors.white)}
   </style>

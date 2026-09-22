@@ -1,9 +1,19 @@
 import { NextResponse } from "next/server";
 import { getSession } from "@/modules/auth/server/session";
-import { createPremiumTemplatesOrder, isPaypalConfigured } from "@/modules/billing/server/paypal.service";
+import { isOnlineCheckoutEnabled } from "@/modules/billing/lib/product-access";
+import {
+  createPremiumTemplatesOrder,
+  isPaypalConfigured,
+} from "@/modules/billing/server/paypal.service";
 
 export async function POST() {
   try {
+    if (!isOnlineCheckoutEnabled()) {
+      return NextResponse.json(
+        { error: "Online checkout is not enabled yet." },
+        { status: 503 }
+      );
+    }
     const session = await getSession();
     if (!session?.user?.id) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });

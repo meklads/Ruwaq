@@ -110,10 +110,15 @@ export async function getPublicLeadStatus(leadId: string): Promise<PublicLeadSta
   const cityMeta = getCityBySlug(citySlug);
   const categoryMeta = getCategoryBySlug(lead.category.slug);
 
+  // Public page: never expose full client name or direct WhatsApp.
+  const firstToken = lead.clientName.trim().split(/\s+/)[0] ?? "";
+  const publicClientName =
+    firstToken.length > 1 ? `${firstToken[0]}***` : "—";
+
   return {
     id: lead.id,
     referenceCode: leadReferenceCode(lead.id),
-    clientName: lead.clientName,
+    clientName: publicClientName,
     status: lead.status,
     createdAt: lead.createdAt,
     cityNameAr: cityMeta?.nameAr ?? lead.city,
@@ -129,7 +134,7 @@ export async function getPublicLeadStatus(leadId: string): Promise<PublicLeadSta
         companyNameAr: listing.titleAr,
         companyNameEn: listing.titleEn ?? listing.titleAr,
         listingSlug: listing.slug,
-        whatsapp: listing.whatsapp,
+        whatsapp: null,
         heroImage: listingHeroFromSlug(
           listing.slug,
           listing.category.slug,

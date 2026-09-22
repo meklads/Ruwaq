@@ -11,30 +11,15 @@ echo "=========================================="
   echo "→ Database schema setup..."
   if ./node_modules/.bin/prisma db push --skip-generate 2>&1; then
     echo "→ Database schema ready ✓"
-    echo "→ Seeding categories, marketplace listings (144 companies), and clause packs..."
-    # Legacy production DBs may have fewer than 144 listings — upgrade automatically.
-    if [ -z "$SEED_RESET" ]; then
-      LISTING_COUNT=$(npx tsx -e '
-        import { PrismaClient } from "@prisma/client";
-        const prisma = new PrismaClient();
-        prisma.providerListing
-          .count()
-          .then((count) => {
-            console.log(count);
-            return prisma.$disconnect();
-          })
-          .catch(async () => {
-            console.log("0");
-            await prisma.$disconnect();
-          });
-      ' 2>/dev/null | tail -1)
-      if [ -n "$LISTING_COUNT" ] && [ "$LISTING_COUNT" != "144" ]; then
-        echo "→ Found ${LISTING_COUNT} listings (expected 144) — enabling SEED_RESET for marketplace"
-        export SEED_RESET=true
-      fi
+    echo "→ Seeding categories, marketplace listings, and clause packs (upsert only)..."
+    # NEVER auto-enable SEED_RESET in production — that wipes leads, join
+    # applications, and listings. Only run a destructive reset when an
+    # operator explicitly sets SEED_RESET=true in Coolify.
+    if [ "$SEED_RESET" = "true" ]; then
+      echo "⚠ SEED_RESET=true — marketplace wipe requested explicitly"
     fi
     if npx tsx prisma/seed.ts 2>&1; then
-      echo "→ Clause packs seeded ✓"
+      echo "→ Clause pack seed ✓"
     else
       echo "⚠ Clause pack seed failed — will auto-seed on first proposal"
     fi
