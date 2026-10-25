@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import {
   Amiri,
+  Aref_Ruqaa,
   IBM_Plex_Sans_Arabic,
   Inter,
   Montserrat,
@@ -9,6 +10,7 @@ import {
   Tajawal,
 } from "next/font/google";
 import "./globals.css";
+import "./ruwaq-v3.css";
 import { Providers } from "./providers";
 import { GoogleAnalytics } from "@/shared/components/google-analytics";
 import { getLocale } from "@/shared/i18n/server";
@@ -39,6 +41,14 @@ const amiri = Amiri({
   subsets: ["arabic"],
   weight: ["400", "700"],
   variable: "--font-ar-display",
+  display: "swap",
+});
+
+/** Reviewer's handwriting — used only inside the hero quote-sheet illustration. */
+const arefRuqaa = Aref_Ruqaa({
+  subsets: ["arabic"],
+  weight: ["400", "700"],
+  variable: "--font-ruqaa",
   display: "swap",
 });
 
@@ -75,12 +85,12 @@ export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
   const title =
     locale === "ar"
-      ? "رواق | منصة الهندسة والعقار، المنطقة الغربية"
-      : "Ruwaq | Engineering & property marketplace, Western Region";
+      ? "رواق | شريكك المستقل في مشاريع التشطيب والبناء بجدة"
+      : "Ruwaq | Your independent partner in fit-out and construction, Jeddah";
   const description =
     locale === "ar"
-      ? "دليل مقاولات وتكييف وتشطيبات معتمد في جدة ومكة والمدينة، مع نَسَق — أداة صناعة العروض الاحترافية."
-      : "Verified contractors directory in Jeddah, Makkah, and Madinah, plus NASAQ — Professional Proposal Tool.";
+      ? "نراجع عروض المقاولين، ونعدّ مواصفات مشروعك، ونرافقك حتى الاستلام النهائي، لتدفع مقابل عمل أُنجِز بالمواصفات التي اخترتها."
+      : "We review contractor quotes, define your specifications and stay with you until handover, so you pay for work done to the specs you chose.";
 
   return {
     title,
@@ -123,7 +133,7 @@ export default async function RootLayout({
       lang={locale}
       dir={dir}
       data-lang={locale}
-      className={`${tajawal.variable} ${ibmPlexArabic.variable} ${amiri.variable} ${inter.variable} ${montserrat.variable} ${playfair.variable} ${plusJakarta.variable}`}
+      className={`${tajawal.variable} ${ibmPlexArabic.variable} ${amiri.variable} ${arefRuqaa.variable} ${inter.variable} ${montserrat.variable} ${playfair.variable} ${plusJakarta.variable}`}
     >
       <body
         className={`min-h-screen bg-white ${locale === "ar" ? ibmPlexArabic.className : plusJakarta.className}`}

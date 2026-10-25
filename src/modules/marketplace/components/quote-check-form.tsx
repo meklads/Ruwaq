@@ -69,42 +69,42 @@ export function QuoteCheckForm({ locale }: Props) {
 
   if (success) {
     return (
-      <div className="ruwaq-qc-success" role="status">
-        <h2 className="text-xl font-semibold text-neutral-950">{copy.success.title}</h2>
-        <p className="mt-4 text-xs uppercase tracking-widest text-neutral-500">{copy.success.refLabel}</p>
-        <p className="mt-1 font-mono text-2xl font-bold text-neutral-950" dir="ltr">
+      <div className="rw-success" role="status">
+        <h2 className="rw-h2" style={{ fontSize: "1.6rem" }}>{copy.success.title}</h2>
+        <p className="rw-fineprint mt-4">{copy.success.refLabel}</p>
+        <p className="rw-ref" dir="ltr">
           {success.referenceCode}
         </p>
-        <p className="mt-5 text-sm leading-relaxed text-neutral-700">{copy.success.body}</p>
+        <p className="mt-5 text-sm leading-relaxed text-[color:var(--rw-ink-soft)]">{copy.success.body}</p>
         {success.whatsAppUrl ? (
           <a
             href={success.whatsAppUrl}
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => trackEvent("quote_check_whatsapp_click", { locale })}
-            className="ruwaq-pro-btn-solid mt-6 inline-flex w-full justify-center px-8 py-3.5"
+            className="rw-btn rw-btn--primary rw-btn--block mt-6"
           >
             {copy.success.whatsAppCta}
           </a>
         ) : (
-          <p className="mt-6 text-sm text-neutral-700">{copy.success.noWhatsApp}</p>
+          <p className="mt-6 text-sm text-[color:var(--rw-ink-soft)]">{copy.success.noWhatsApp}</p>
         )}
         <p className="mt-4 text-xs text-neutral-500">{copy.success.sla}</p>
       </div>
     );
   }
 
-  const label = "ruwaq-ad-field-label";
-  const field = "ruwaq-ad-field";
+  const label = "rw-label";
+  const field = "rw-field";
 
   return (
-    <form onSubmit={onSubmit} className="ruwaq-join-editorial-fields" id="check-form">
+    <form onSubmit={onSubmit} className="rw-form" id="check-form">
       <div>
-        <h2 className="text-lg font-semibold text-neutral-950">{f.title}</h2>
-        <p className="mt-1.5 text-sm leading-relaxed text-neutral-600">{f.lead}</p>
+        <h2 className="rw-h2" style={{ fontSize: "1.5rem" }}>{f.title}</h2>
+        <p className="mt-1.5 text-sm leading-relaxed text-[color:var(--rw-ink-soft)]">{f.lead}</p>
       </div>
 
-      {error ? <div className="rounded-xl bg-red-50 px-4 py-3 text-sm text-red-600">{error}</div> : null}
+      {error ? <div className="rw-error" role="alert">{error}</div> : null}
 
       <div>
         <label className={label} htmlFor="qc-name">{f.fields.name}</label>
@@ -135,7 +135,7 @@ export function QuoteCheckForm({ locale }: Props) {
         />
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="rw-form__grid">
         <div>
           <label className={label} htmlFor="qc-city">{f.fields.city}</label>
           <select id="qc-city" className={field} value={city} onChange={(e) => setCity(e.target.value as QuoteCheckCityKey)}>
@@ -207,9 +207,9 @@ export function QuoteCheckForm({ locale }: Props) {
 
       <fieldset>
         <legend className={label}>{f.fields.package}</legend>
-        <div className="ruwaq-qc-packages">
+        <div className="rw-choice">
           {QUOTE_CHECK_PACKAGE_KEYS.map((k) => (
-            <label key={k} className={`ruwaq-qc-package ${packageKey === k ? "ruwaq-qc-package--active" : ""}`}>
+            <label key={k} data-active={packageKey === k ? "true" : "false"}>
               <input
                 type="radio"
                 name="qc-package"
@@ -238,10 +238,10 @@ export function QuoteCheckForm({ locale }: Props) {
         />
       </div>
 
-      <button type="submit" disabled={pending} className="ruwaq-pro-btn-solid w-full px-8 py-3.5 disabled:opacity-50">
+      <button type="submit" disabled={pending} className="rw-btn rw-btn--primary rw-btn--block disabled:opacity-50">
         {pending ? f.submitting : f.submit}
       </button>
-      <p className="ruwaq-quote-privacy">{f.privacy}</p>
+      <p className="rw-fineprint">{f.privacy}</p>
     </form>
   );
 }

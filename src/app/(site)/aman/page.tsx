@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { getLocale } from "@/shared/i18n/server";
 import { env } from "@/shared/lib/env";
 import { getSiteCopy } from "@/modules/ruwaq/site-copy";
@@ -16,40 +17,61 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function AmanPage() {
   const locale = (await getLocale()) === "en" ? "en" : "ar";
   const c = getSiteCopy(locale).aman;
+  const n = (i: number) => (i + 1).toLocaleString(locale === "ar" ? "ar-SA" : "en-US");
 
   return (
-    <div className="ruwaq-qc">
-      <section className="ruwaq-qc-hero ruwaq-surface-dark">
-        <div className="ruwaq-qc-wrap">
-          <p className="ruwaq-qc-eyebrow">{c.eyebrow}</p>
-          <h1 className="ruwaq-qc-title">{c.title}</h1>
-          <p className="ruwaq-qc-lead">{c.lead}</p>
+    <div className="rw">
+      <section className="rw-page-hero rw-page-hero--ink">
+        <div className="rw-wrap">
+          <p className="rw-eyebrow">{c.eyebrow}</p>
+          <h1 className="rw-display">{c.title}</h1>
+          <p className="rw-lead">{c.lead}</p>
+          <div className="rw-hero__actions">
+            <a href="#request-form" className="rw-btn rw-btn--gold">
+              {c.cta}
+            </a>
+          </div>
         </div>
       </section>
 
-      <section className="ruwaq-qc-section">
-        <div className="ruwaq-qc-wrap ruwaq-qc-split">
+      <section className="rw-section">
+        <div className="rw-wrap rw-split rw-split--even">
           <div>
-            <h2 className="ruwaq-qc-h2">{c.stepsTitle}</h2>
-            <ol className="ruwaq-qc-steps">
+            <h2 className="rw-h2">{c.stepsTitle}</h2>
+            <ol className="rw-process">
               {c.steps.map((s, i) => (
                 <li key={s.title}>
-                  <span className="ruwaq-qc-num">{i + 1}</span>
+                  <span className="rw-process__n">{n(i)}</span>
                   <div>
-                    <h3 className="ruwaq-qc-card-title">{s.title}</h3>
-                    <p className="ruwaq-qc-card-body">{s.body}</p>
+                    <h3 className="rw-h3">{s.title}</h3>
+                    <p className="rw-body">{s.body}</p>
                   </div>
                 </li>
               ))}
             </ol>
-            <div className="ruwaq-qc-card mt-10">
-              <h3 className="ruwaq-qc-card-title mt-0">{c.feeTitle}</h3>
-              <p className="ruwaq-qc-card-body">{c.fee}</p>
+
+            <figure style={{ marginBlockStart: "3rem" }}>
+              <Image
+                src="/images/marketing/keys-new-home.jpg"
+                alt={locale === "ar" ? "أسرة تتسلّم مفاتيح منزلها" : "A family receiving the keys to their home"}
+                width={1920}
+                height={1280}
+                sizes="(min-width: 960px) 50vw, 100vw"
+                style={{ width: "100%", height: "auto", borderRadius: 8 }}
+              />
+            </figure>
+
+            <div className="rw-callout" style={{ marginBlockStart: "2.5rem" }}>
+              <h3 className="rw-h3">{c.feeTitle}</h3>
+              <p className="rw-body">{c.fee}</p>
             </div>
-            <p className="mt-4 text-xs leading-relaxed text-neutral-500">{c.disclaimer}</p>
+            <p className="rw-fineprint" style={{ marginBlockStart: "1rem" }}>
+              {c.disclaimer}
+            </p>
           </div>
-          <div className="ruwaq-qc-form-card">
-            <ServiceRequestForm locale={locale} service="aman" title={c.formTitle} defaultStage="chose_contractor" />
+
+          <div className="rw-form-card" id="request-form">
+            <ServiceRequestForm locale={locale} service="aman" title={c.formTitle} lead={c.formLead} defaultStage="chose_contractor" />
           </div>
         </div>
       </section>

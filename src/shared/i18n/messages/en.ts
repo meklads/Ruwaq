@@ -1996,7 +1996,7 @@ export const en: Messages = {
   inlineTitle: "Premium templates available",
   inlineBody: "Unlock the \"Ruwaq Executive\" and \"Graphics House\" templates with a single small payment.",
   lockedSuffix: "locked",
-  notConfigured: "Payments aren't enabled yet. Contact hello@ruwaq.co.",
+  notConfigured: "Payments aren't enabled yet. Contact info@ruwaq.co.",
   close: "Close",
   error: "Payment could not be completed. Try again or contact us.",
   trialNotice: "All templates are free for now during the trial period.",

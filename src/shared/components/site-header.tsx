@@ -1,16 +1,14 @@
+import Image from "next/image";
 import Link from "next/link";
-import { getMessages } from "@/shared/i18n";
 import { getLocale } from "@/shared/i18n/server";
-import { RuwaqLogo } from "@/shared/components/ruwaq-logo";
 import { LocaleSwitcher } from "@/shared/i18n/locale-switcher";
 import { getSiteCopy } from "@/modules/ruwaq/site-copy";
 
 export async function SiteHeader() {
   const locale = await getLocale();
-  const t = getMessages(locale);
   const c = getSiteCopy(locale).header;
 
-  const mainLinks = [
+  const links = [
     { href: "/check", label: c.check },
     { href: "/project-file", label: c.projectFile },
     { href: "/aman", label: c.aman },
@@ -20,47 +18,41 @@ export async function SiteHeader() {
   ];
 
   return (
-    <header className="ruwaq-ad-header">
-      <div className="ruwaq-ad-pro-bar">
-        <div className="ruwaq-ad-container flex flex-wrap items-center justify-between gap-3 py-2.5 sm:gap-4">
-          <span className="ruwaq-ad-pro-bar-tagline">{c.topBar}</span>
-          <Link href="/pro" className="ruwaq-ad-pro-bar-link">
-            {c.contractors}
-          </Link>
-        </div>
-      </div>
+    <header className="rw rw-header">
+      <div className="rw-wrap rw-header__bar">
+        <Link href="/" className="rw-header__logo" aria-label="رواق Ruwaq">
+          <Image src="/brand/ruwaq/logo-on-light-trim.png" alt="رواق Ruwaq" width={738} height={324} priority />
+        </Link>
 
-      <div className="border-b border-neutral-200 bg-white">
-        <div className="ruwaq-ad-container flex items-center justify-between gap-4 py-3 lg:py-4">
-          <RuwaqLogo href="/" variant="editorial" />
-
-          <nav className="hidden flex-1 items-center justify-center gap-6 lg:flex" aria-label={t.site.header.mainNavLabel}>
-            {mainLinks.map((link) => (
-              <Link key={link.href} href={link.href} className="ruwaq-ad-nav-link">
-                {link.label}
-              </Link>
-            ))}
-          </nav>
-
-          <div className="flex shrink-0 items-center gap-3">
-            <Link href="/check" className="ruwaq-ad-pro-bar-apply hidden sm:inline-flex">
-              {c.cta}
-            </Link>
-            <LocaleSwitcher />
-          </div>
-        </div>
-
-        <nav className="flex gap-0 overflow-x-auto border-t border-neutral-100 lg:hidden" aria-label={t.site.header.mainNavLabel}>
-          {mainLinks.map((link) => (
-            <Link key={link.href} href={link.href} className="ruwaq-ad-mobile-nav-link">
-              {link.label}
+        <nav className="rw-nav" aria-label={c.menu}>
+          {links.map((l) => (
+            <Link key={l.href} href={l.href}>
+              {l.label}
             </Link>
           ))}
-          <Link href="/pro" className="ruwaq-ad-mobile-nav-link ruwaq-ad-mobile-nav-link--pro">
+        </nav>
+
+        <div className="rw-header__actions">
+          <Link href="/pro" className="rw-btn rw-btn--outline rw-btn--sm rw-header__contractors">
             {c.contractors}
           </Link>
-        </nav>
+          <Link href="/check" className="rw-btn rw-btn--primary rw-btn--sm rw-header__cta">
+            {c.cta}
+          </Link>
+          <LocaleSwitcher />
+        </div>
       </div>
+
+      <nav className="rw-mobile-nav rw-wrap" aria-label={c.menu}>
+        {links.map((l) => (
+          <Link key={l.href} href={l.href}>
+            {l.label}
+          </Link>
+        ))}
+        <Link href="/pro" className="rw-mobile-nav__pro">
+          {c.contractors}
+        </Link>
+      </nav>
     </header>
   );
 }

@@ -18,10 +18,11 @@ type Props = {
   locale: "ar" | "en";
   service: ServiceKey;
   title: string;
+  lead?: string;
   defaultStage?: ServiceStageKey;
 };
 
-export function ServiceRequestForm({ locale, service, title, defaultStage = "planning" }: Props) {
+export function ServiceRequestForm({ locale, service, title, lead, defaultStage = "planning" }: Props) {
   const f = getSiteCopy(locale).serviceForm;
   const dir = locale === "ar" ? "rtl" : "ltr";
 
@@ -65,19 +66,19 @@ export function ServiceRequestForm({ locale, service, title, defaultStage = "pla
 
   if (success) {
     return (
-      <div className="ruwaq-qc-success" role="status">
-        <h2 className="text-xl font-semibold text-neutral-950">{f.successTitle}</h2>
-        <p className="mt-4 text-xs uppercase tracking-widest text-neutral-500">{f.refLabel}</p>
-        <p className="mt-1 font-mono text-2xl font-bold text-neutral-950" dir="ltr">
+      <div className="rw-success" role="status">
+        <h2 className="rw-h2" style={{ fontSize: "1.6rem" }}>{f.successTitle}</h2>
+        <p className="rw-fineprint mt-4">{f.refLabel}</p>
+        <p className="rw-ref" dir="ltr">
           {success.referenceCode}
         </p>
-        <p className="mt-5 text-sm leading-relaxed text-neutral-700">{f.successBody}</p>
+        <p className="mt-5 text-sm leading-relaxed text-[color:var(--rw-ink-soft)]">{f.successBody}</p>
         {success.whatsAppUrl ? (
           <a
             href={success.whatsAppUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="ruwaq-pro-btn-solid mt-6 inline-flex w-full justify-center px-8 py-3.5"
+            className="rw-btn rw-btn--primary rw-btn--block mt-6"
           >
             {f.whatsAppCta}
           </a>
@@ -86,13 +87,14 @@ export function ServiceRequestForm({ locale, service, title, defaultStage = "pla
     );
   }
 
-  const label = "ruwaq-ad-field-label";
-  const field = "ruwaq-ad-field";
+  const label = "rw-label";
+  const field = "rw-field";
 
   return (
-    <form onSubmit={onSubmit} className="ruwaq-join-editorial-fields" id="request-form">
-      <h2 className="text-lg font-semibold text-neutral-950">{title}</h2>
-      {error ? <div className="rounded-xl bg-red-50 px-4 py-3 text-sm text-red-600">{error}</div> : null}
+    <form onSubmit={onSubmit} className="rw-form" id="request-form">
+      <h2 className="rw-h2" style={{ fontSize: "1.5rem" }}>{title}</h2>
+      {lead ? <p className="rw-fineprint" style={{ fontSize: "0.9rem", marginBlockStart: "-0.5rem" }}>{lead}</p> : null}
+      {error ? <div className="rw-error" role="alert">{error}</div> : null}
 
       <div>
         <label className={label} htmlFor="sr-name">{f.name}</label>
@@ -103,7 +105,7 @@ export function ServiceRequestForm({ locale, service, title, defaultStage = "pla
         <input id="sr-phone" className={field} value={clientPhone} onChange={(e) => setClientPhone(e.target.value)} required inputMode="tel" autoComplete="tel" placeholder="05xxxxxxxx" dir="ltr" />
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="rw-form__grid">
         <div>
           <label className={label} htmlFor="sr-city">{f.city}</label>
           <select id="sr-city" className={field} value={city} onChange={(e) => setCity(e.target.value as ServiceCityKey)}>
@@ -143,10 +145,10 @@ export function ServiceRequestForm({ locale, service, title, defaultStage = "pla
         <textarea id="sr-notes" className={field} rows={3} value={notes} onChange={(e) => setNotes(e.target.value)} placeholder={f.notesPlaceholder} maxLength={2000} dir={dir} />
       </div>
 
-      <button type="submit" disabled={pending} className="ruwaq-pro-btn-solid w-full px-8 py-3.5 disabled:opacity-50">
+      <button type="submit" disabled={pending} className="rw-btn rw-btn--primary rw-btn--block disabled:opacity-50">
         {pending ? f.submitting : f.submit}
       </button>
-      <p className="ruwaq-quote-privacy">{f.privacy}</p>
+      <p className="rw-fineprint">{f.privacy}</p>
     </form>
   );
 }

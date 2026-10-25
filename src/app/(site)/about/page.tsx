@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { getLocale } from "@/shared/i18n/server";
 import { env } from "@/shared/lib/env";
 import { getSiteCopy } from "@/modules/ruwaq/site-copy";
@@ -17,47 +18,59 @@ export default async function AboutPage() {
   const c = getSiteCopy(locale).about;
 
   return (
-    <div className="ruwaq-qc">
-      <section className="ruwaq-qc-hero ruwaq-surface-dark">
-        <div className="ruwaq-qc-wrap ruwaq-qc-narrow">
-          <p className="ruwaq-qc-eyebrow">{c.eyebrow}</p>
-          <h1 className="ruwaq-qc-title">{c.title}</h1>
+    <div className="rw">
+      <section className="rw-page-hero">
+        <div className="rw-wrap">
+          <p className="rw-eyebrow">{c.eyebrow}</p>
+          <h1 className="rw-display">{c.title}</h1>
         </div>
       </section>
 
-      <section className="ruwaq-qc-section">
-        <div className="ruwaq-qc-wrap ruwaq-qc-narrow space-y-5">
-          {c.paragraphs.map((p) => (
-            <p key={p} className="text-lg leading-loose text-neutral-700">{p}</p>
-          ))}
+      <section className="rw-section">
+        <div className="rw-wrap rw-split rw-split--even" style={{ alignItems: "center" }}>
+          <div style={{ display: "grid", gap: "1.25rem" }}>
+            {c.paragraphs.map((p) => (
+              <p key={p} style={{ fontSize: "1.125rem", lineHeight: 2, color: "var(--rw-ink-soft)" }}>
+                {p}
+              </p>
+            ))}
+          </div>
+          <Image
+            src="/images/marketing/family-living-room.jpg"
+            alt={locale === "ar" ? "أسرة في منزلها" : "A family at home"}
+            width={1920}
+            height={1280}
+            sizes="(min-width: 960px) 50vw, 100vw"
+            style={{ width: "100%", height: "auto", borderRadius: 8 }}
+          />
         </div>
       </section>
 
-      <section className="ruwaq-qc-section ruwaq-qc-section--muted">
-        <div className="ruwaq-qc-wrap">
-          <h2 className="ruwaq-qc-h2">{c.principlesTitle}</h2>
-          <div className="ruwaq-qc-grid">
+      <section className="rw-section rw-section--stone">
+        <div className="rw-wrap">
+          <h2 className="rw-h2">{c.principlesTitle}</h2>
+          <dl className="rw-rows">
             {c.principles.map((p) => (
-              <div key={p.title} className="ruwaq-qc-card">
-                <h3 className="ruwaq-qc-card-title mt-0">{p.title}</h3>
-                <p className="ruwaq-qc-card-body">{p.body}</p>
+              <div key={p.title}>
+                <dt>{p.title}</dt>
+                <dd>{p.body}</dd>
               </div>
             ))}
-          </div>
+          </dl>
         </div>
       </section>
 
-      <section className="ruwaq-qc-section">
-        <div className="ruwaq-qc-wrap">
-          <h2 className="ruwaq-qc-h2">{c.groupTitle}</h2>
-          <div className="ruwaq-qc-grid ruwaq-qc-grid--3">
+      <section className="rw-section">
+        <div className="rw-wrap">
+          <h2 className="rw-h2">{c.groupTitle}</h2>
+          <dl className="rw-rows">
             {c.group.map((g) => (
-              <div key={g.name} className="ruwaq-qc-card">
-                <h3 className="ruwaq-qc-card-title mt-0">{g.name}</h3>
-                <p className="ruwaq-qc-card-body">{g.body}</p>
+              <div key={g.name}>
+                <dt>{g.name}</dt>
+                <dd>{g.body}</dd>
               </div>
             ))}
-          </div>
+          </dl>
         </div>
       </section>
     </div>

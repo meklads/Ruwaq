@@ -16,39 +16,60 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function ProjectFilePage() {
   const locale = (await getLocale()) === "en" ? "en" : "ar";
   const c = getSiteCopy(locale).projectFile;
+  const n = (i: number) => (i + 1).toLocaleString(locale === "ar" ? "ar-SA" : "en-US");
 
   return (
-    <div className="ruwaq-qc">
-      <section className="ruwaq-qc-hero ruwaq-surface-dark">
-        <div className="ruwaq-qc-wrap">
-          <p className="ruwaq-qc-eyebrow">{c.eyebrow}</p>
-          <h1 className="ruwaq-qc-title">{c.title}</h1>
-          <p className="ruwaq-qc-lead">{c.lead}</p>
+    <div className="rw">
+      <section className="rw-page-hero">
+        <div className="rw-wrap">
+          <p className="rw-eyebrow">{c.eyebrow}</p>
+          <h1 className="rw-display">{c.title}</h1>
+          <p className="rw-lead">{c.lead}</p>
+          <div className="rw-hero__actions">
+            <a href="#request-form" className="rw-btn rw-btn--primary">
+              {c.cta}
+            </a>
+          </div>
         </div>
       </section>
 
-      <section className="ruwaq-qc-section">
-        <div className="ruwaq-qc-wrap ruwaq-qc-split">
+      <section className="rw-section">
+        <div className="rw-wrap rw-split rw-split--even">
           <div>
-            <h2 className="ruwaq-qc-h2">{c.includesTitle}</h2>
-            <ol className="ruwaq-qc-steps">
+            <h2 className="rw-h2">{c.includesTitle}</h2>
+            <ol className="rw-process">
               {c.includes.map((s, i) => (
                 <li key={s.title}>
-                  <span className="ruwaq-qc-num">{i + 1}</span>
+                  <span className="rw-process__n">{n(i)}</span>
                   <div>
-                    <h3 className="ruwaq-qc-card-title">{s.title}</h3>
-                    <p className="ruwaq-qc-card-body">{s.body}</p>
+                    <h3 className="rw-h3">{s.title}</h3>
+                    <p className="rw-body">{s.body}</p>
                   </div>
                 </li>
               ))}
             </ol>
-            <div className="ruwaq-qc-card mt-10">
-              <h3 className="ruwaq-qc-card-title mt-0">{c.noteTitle}</h3>
-              <p className="ruwaq-qc-card-body">{c.note}</p>
+
+            <h2 className="rw-h2" style={{ marginBlockStart: "3.5rem" }}>
+              {c.resultTitle}
+            </h2>
+            <ul className="rw-issues" style={{ marginBlockStart: "1.5rem" }}>
+              {c.results.map((r) => (
+                <li key={r}>
+                  <p className="rw-body" style={{ color: "var(--rw-ink)" }}>
+                    {r}
+                  </p>
+                </li>
+              ))}
+            </ul>
+
+            <div className="rw-callout" style={{ marginBlockStart: "2.5rem" }}>
+              <h3 className="rw-h3">{c.pricingTitle}</h3>
+              <p className="rw-body">{c.pricing}</p>
             </div>
           </div>
-          <div className="ruwaq-qc-form-card">
-            <ServiceRequestForm locale={locale} service="project_file" title={c.formTitle} defaultStage="planning" />
+
+          <div className="rw-form-card" id="request-form">
+            <ServiceRequestForm locale={locale} service="project_file" title={c.formTitle} lead={c.formLead} defaultStage="planning" />
           </div>
         </div>
       </section>

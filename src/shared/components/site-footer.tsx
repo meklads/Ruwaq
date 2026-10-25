@@ -1,203 +1,142 @@
+import Image from "next/image";
 import Link from "next/link";
-import { getMessages } from "@/shared/i18n";
 import { getLocale } from "@/shared/i18n/server";
 import {
-  BEESMOTION_URL,
-  GRAPHICS_HOUSE_URL,
   RUWQ_PUBLIC_EMAIL,
-  RUWQ_PUBLIC_URL,
   TASAMI_GROUP_URL,
   TURRIVA_URL,
   beesmotionReferralUrl,
   graphicsHouseReferralUrl,
 } from "@/shared/constants/brand";
-import { RuwaqLogo } from "@/shared/components/ruwaq-logo";
 import { getSiteCopy } from "@/modules/ruwaq/site-copy";
+
+const WHATSAPP_DISPLAY = "0502786513";
+const WHATSAPP_URL = "https://wa.me/966502786513";
 
 export async function SiteFooter() {
   const locale = await getLocale();
-  const t = getMessages(locale);
-  const nav = t.site.header;
-  const footer = t.site.footer;
-
   const c = getSiteCopy(locale);
   const f = c.footer;
+  const ar = locale !== "en";
 
-  const directoryLinks = [
+  const owner = [
     { href: "/check", label: c.header.check },
     { href: "/project-file", label: c.header.projectFile },
     { href: "/aman", label: c.header.aman },
     { href: "/how-it-works", label: c.header.howItWorks },
     { href: "/guides", label: c.header.guides },
   ];
-
-  const ecosystemLinks = [
-    { href: "/pro", label: f.network, external: false },
-    { href: "/join", label: f.join, external: false },
-    { href: "/proposals", label: f.nasaq, external: false },
-    { href: "/pricing", label: f.pricing, external: false },
-    { href: "/faq", label: f.nasaqFaq, external: false },
-    { href: graphicsHouseReferralUrl("footer_ecosystem"), label: footer.graphicsHouse, external: true },
-    { href: TURRIVA_URL, label: footer.turriva, external: true },
-    { href: beesmotionReferralUrl("footer_ecosystem"), label: footer.beesmotion, external: true },
+  const contractors = [
+    { href: "/pro", label: f.network },
+    { href: "/join", label: f.join },
+    { href: "/proposals", label: f.nasaq },
+    { href: "/pricing", label: f.pricing },
+    { href: "/faq", label: f.nasaqFaq },
   ];
-
-  const companyLinks = [
+  const company = [
     { href: "/about", label: c.header.about },
-    { href: "/contact", label: footer.contact },
+    { href: "/contact", label: f.contact },
+    { href: "/privacy", label: f.privacy },
+    { href: "/terms", label: f.terms },
   ];
-
-  const legalLinks = [
-    { href: "/privacy", label: t.site.nav.privacy },
-    { href: "/terms", label: t.site.nav.terms },
+  const group = [
+    { href: graphicsHouseReferralUrl("footer_ecosystem"), label: ar ? "جرافيكس هاوس" : "Graphics House" },
+    { href: TURRIVA_URL, label: ar ? "توريفا" : "Turriva" },
+    { href: beesmotionReferralUrl("footer_ecosystem"), label: ar ? "بيز موشن" : "Bees Motion" },
   ];
 
   return (
-    <footer className="ruwaq-ad-footer">
-      <div className="ruwaq-ad-band-greige border-b border-neutral-950/10">
-        <div className="ruwaq-ad-container grid gap-8 py-14 lg:grid-cols-[1.4fr_auto] lg:items-center lg:gap-12 lg:py-16">
+    <footer className="rw">
+      <section className="rw-footer-cta">
+        <div className="rw-wrap rw-footer-cta__inner">
           <div>
-            <h2 className="ruwaq-ad-footer-newsletter-title text-neutral-950">{f.ctaTitle}</h2>
-            <p className="mt-3 max-w-xl text-sm leading-relaxed text-neutral-700">
+            <h2 className="rw-h2">{f.ctaTitle}</h2>
+            <p className="rw-lead" style={{ marginBlockStart: "0.75rem" }}>
               {f.ctaSubtitle}
             </p>
           </div>
-          <div className="flex flex-col gap-3 sm:flex-row lg:justify-end">
-            <Link
-              href="/check"
-              className="ruwaq-pro-chip inline-flex border-neutral-950 bg-neutral-950 text-white hover:bg-neutral-800"
-            >
+          <div className="rw-hero__actions" style={{ marginBlockStart: 0 }}>
+            <Link href="/check" className="rw-btn rw-btn--primary">
               {f.ctaOwner}
             </Link>
-            <Link
-              href="/pro"
-              className="ruwaq-pro-chip inline-flex border-neutral-950 bg-transparent text-neutral-950 hover:bg-neutral-950/5"
-            >
+            <Link href="/pro" className="rw-btn rw-btn--outline">
               {f.ctaContractor}
             </Link>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div className="ruwaq-ad-band-charcoal ruwaq-ad-footer--dark">
-        <div className="ruwaq-ad-container py-16 sm:py-20">
-          <div className="grid gap-12 lg:grid-cols-[1.35fr_1fr_1fr_1fr]">
+      <div className="rw-footer">
+        <div className="rw-wrap">
+          <div className="rw-footer__grid">
             <div>
-              <RuwaqLogo href="/" variant="dark" />
-              <p className="mt-6 max-w-sm text-sm leading-relaxed text-white/75">{f.tagline}</p>
-              <a
-                href={TASAMI_GROUP_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="ruwaq-ad-footer-tasami mt-5"
-              >
-                <span className="ruwaq-ad-footer-tasami__label">{footer.tasamiGroupLabel}</span>
-                <span className="ruwaq-ad-footer-tasami__text">{footer.tasamiGroup}</span>
-              </a>
-              <p className="mt-4 text-xs text-white/50">{footer.address}</p>
-              <div className="mt-6">
-                <p className="ruwaq-ad-footer-heading text-white/55">{footer.followUs}</p>
-                <div className="mt-3 flex items-center gap-3">
-                  <a
-                    href={GRAPHICS_HOUSE_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex h-9 w-9 items-center justify-center border border-white/20 text-[10px] font-semibold uppercase tracking-widest text-white/80 transition-colors hover:border-white hover:text-white"
-                    aria-label="Graphics House"
-                  >
-                    GH
+              <Link href="/" className="rw-footer__logo" aria-label="رواق Ruwaq">
+                <Image src="/brand/ruwaq/logo-on-dark-trim.png" alt="رواق Ruwaq" width={1274} height={551} />
+              </Link>
+              <p style={{ marginBlockStart: "1rem", maxWidth: "26rem", lineHeight: 1.9 }}>{f.tagline}</p>
+              <ul style={{ marginBlockStart: "1.25rem" }}>
+                <li>
+                  <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" dir="ltr">
+                    {ar ? "واتساب" : "WhatsApp"}: {WHATSAPP_DISPLAY}
                   </a>
-                </div>
-              </div>
+                </li>
+                <li>
+                  <a href={`mailto:${RUWQ_PUBLIC_EMAIL}`} dir="ltr">
+                    {RUWQ_PUBLIC_EMAIL}
+                  </a>
+                </li>
+                <li>{f.city}</li>
+              </ul>
             </div>
-
             <div>
-              <h3 className="ruwaq-ad-footer-heading">{f.servicesTitle}</h3>
-              <ul className="mt-5 space-y-2.5">
-                {directoryLinks.map((link) => (
-                  <li key={link.href}>
-                    <Link href={link.href} className="ruwaq-ad-footer-link">
-                      {link.label}
-                    </Link>
+              <h3>{f.servicesTitle}</h3>
+              <ul>
+                {owner.map((l) => (
+                  <li key={l.href}>
+                    <Link href={l.href}>{l.label}</Link>
                   </li>
                 ))}
               </ul>
             </div>
-
             <div>
-              <h3 className="ruwaq-ad-footer-heading">{f.contractorsTitle} · {f.groupTitle}</h3>
-              <ul className="mt-5 space-y-2.5">
-                {ecosystemLinks.map((link) => (
-                  <li key={link.href}>
-                    {link.external ? (
-                      <a
-                        href={link.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="ruwaq-ad-footer-link"
-                      >
-                        {link.label}
-                      </a>
-                    ) : (
-                      <Link href={link.href} className="ruwaq-ad-footer-link">
-                        {link.label}
-                      </Link>
-                    )}
+              <h3>{f.contractorsTitle}</h3>
+              <ul>
+                {contractors.map((l) => (
+                  <li key={l.href}>
+                    <Link href={l.href}>{l.label}</Link>
                   </li>
                 ))}
               </ul>
             </div>
-
             <div>
-              <h3 className="ruwaq-ad-footer-heading">{footer.company}</h3>
-              <ul className="mt-5 space-y-2.5">
-                {companyLinks.map((link) => (
-                  <li key={link.href}>
-                    <Link href={link.href} className="ruwaq-ad-footer-link">
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-              <h3 className="ruwaq-ad-footer-heading mt-8">{footer.legal}</h3>
-              <ul className="mt-5 space-y-2.5">
-                {legalLinks.map((link) => (
-                  <li key={link.href}>
-                    <Link href={link.href} className="ruwaq-ad-footer-link">
-                      {link.label}
-                    </Link>
+              <h3>{f.companyTitle}</h3>
+              <ul>
+                {company.map((l) => (
+                  <li key={l.href}>
+                    <Link href={l.href}>{l.label}</Link>
                   </li>
                 ))}
               </ul>
             </div>
           </div>
 
-          <div className="mt-14 border-t border-white/10 pt-8">
-            <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
-              <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
-                {legalLinks.map((link, index) => (
-                  <span key={link.href} className="inline-flex items-center gap-3">
-                    {index > 0 ? (
-                      <span className="hidden text-white/25 sm:inline" aria-hidden>
-                        |
-                      </span>
-                    ) : null}
-                    <Link href={link.href} className="ruwaq-ad-footer-legal-link">
-                      {link.label}
-                    </Link>
-                  </span>
-                ))}
-              </div>
-              <div className="inline-flex items-center gap-2 border border-white/20 px-3 py-2 text-[10px] uppercase tracking-widest text-white/70">
-                {footer.regionLabel}
-              </div>
-            </div>
-            <div className="mt-6 flex flex-col gap-2 text-[10px] uppercase tracking-widest text-white/45 sm:flex-row sm:items-center sm:justify-between">
-              <p>{footer.copyright}</p>
-              <a href={RUWQ_PUBLIC_URL} className="transition-colors hover:text-white/70">
-                {RUWQ_PUBLIC_URL.replace("https://", "")}
+          <div className="rw-footer__bottom">
+            <div>
+              <a href={TASAMI_GROUP_URL} target="_blank" rel="noopener noreferrer">
+                {f.groupLine}
               </a>
+              {": "}
+              {group.map((g, i) => (
+                <span key={g.label}>
+                  {i > 0 ? (ar ? "، " : ", ") : ""}
+                  <a href={g.href} target="_blank" rel="noopener noreferrer">
+                    {g.label}
+                  </a>
+                </span>
+              ))}
+              <p style={{ marginBlockStart: "0.35rem" }}>{f.groupNote}</p>
             </div>
+            <p>{f.copyright}</p>
           </div>
         </div>
       </div>

@@ -20,52 +20,69 @@ export default async function HowItWorksPage() {
   const home = site.home;
 
   return (
-    <div className="ruwaq-qc">
-      <section className="ruwaq-qc-hero ruwaq-surface-dark">
-        <div className="ruwaq-qc-wrap">
-          <p className="ruwaq-qc-eyebrow">{c.eyebrow}</p>
-          <h1 className="ruwaq-qc-title">{c.title}</h1>
-          <p className="ruwaq-qc-lead">{c.lead}</p>
+    <div className="rw">
+      <section className="rw-page-hero">
+        <div className="rw-wrap">
+          <p className="rw-eyebrow">{c.eyebrow}</p>
+          <h1 className="rw-display">{c.title}</h1>
+          <p className="rw-lead">{c.lead}</p>
         </div>
       </section>
 
-      <section className="ruwaq-qc-section">
-        <div className="ruwaq-qc-wrap">
-          <div className="ruwaq-qc-grid ruwaq-home-services">
-            {c.journey.map((j, i) => (
-              <Link key={j.href} href={j.href} className="ruwaq-qc-card ruwaq-home-service">
-                <span className="ruwaq-home-step">0{i + 1}</span>
-                <p className="mt-2 text-sm font-semibold text-neutral-500">{j.when}</p>
-                <h2 className="ruwaq-qc-card-title">{j.title}</h2>
-                <p className="ruwaq-qc-card-body">{j.body}</p>
-                <span className="ruwaq-home-service-cta">
-                  {j.cta} {locale === "ar" ? "←" : "→"}
-                </span>
-              </Link>
+      <section className="rw-section">
+        <div className="rw-wrap">
+          <div className="rw-steps3" style={{ marginBlockStart: 0 }}>
+            {home.services.map((sv) => (
+              <article key={sv.href} className="rw-step">
+                <span className="rw-step__num">{sv.step}</span>
+                <p className="rw-step__when">{sv.when}</p>
+                <h2 className="rw-step__title">{sv.title}</h2>
+                <p className="rw-step__body">{sv.body}</p>
+                <p className="rw-step__meta">{sv.meta}</p>
+                <div className="rw-step__cta">
+                  <Link href={sv.href} className="rw-btn rw-btn--outline rw-btn--sm">
+                    {sv.cta}
+                  </Link>
+                </div>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="ruwaq-qc-section ruwaq-qc-section--muted">
-        <div className="ruwaq-qc-wrap">
-          <h2 className="ruwaq-qc-h2">{home.locksTitle}</h2>
-          <ol className="ruwaq-qc-grid">
-            {home.locks.map((l, i) => (
-              <li key={l.title} className="ruwaq-qc-card">
-                <span className="ruwaq-qc-num">{i + 1}</span>
-                <h3 className="ruwaq-qc-card-title">{l.title}</h3>
-                <p className="ruwaq-qc-card-body">{l.body}</p>
+      <section className="rw-section rw-section--stone">
+        <div className="rw-wrap">
+          <h2 className="rw-h2" style={{ maxWidth: "40rem" }}>
+            {home.measuresTitle}
+          </h2>
+          <p className="rw-body" style={{ marginBlockStart: "0.75rem" }}>
+            {home.measuresLead}
+          </p>
+          <ol className="rw-measures">
+            {home.measures.map((m, i) => (
+              <li key={m.title}>
+                <span className="rw-measures__n">{(i + 1).toLocaleString(locale === "ar" ? "ar-SA" : "en-US")}</span>
+                <div>
+                  <h3 className="rw-h3">{m.title}</h3>
+                  <p className="rw-body">{m.body}</p>
+                </div>
               </li>
             ))}
           </ol>
         </div>
       </section>
 
-      <section className="ruwaq-qc-hero ruwaq-surface-dark">
-        <div className="ruwaq-qc-wrap ruwaq-qc-narrow">
-          <p className="ruwaq-qc-eyebrow">{home.principleTitle}</p>
-          <p className="mt-4 text-lg leading-relaxed text-white/90 sm:text-xl">{home.principleBody}</p>
+      <section className="rw-section rw-section--ink">
+        <div className="rw-wrap rw-narrow">
+          <h2 className="rw-h2">{c.closingTitle}</h2>
+          <p className="rw-lead" style={{ marginBlockStart: "1rem" }}>
+            {c.closing}
+          </p>
+          <div className="rw-hero__actions">
+            <Link href="/check" className="rw-btn rw-btn--gold">
+              {home.primaryCta}
+            </Link>
+          </div>
         </div>
       </section>
     </div>

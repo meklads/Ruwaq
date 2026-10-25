@@ -29,7 +29,7 @@ export const TIER_DIRECTORY_SORT: Record<RuwaqTier, number> = {
 export const TIERS: Record<RuwaqTier, TierConfig> = {
   STARTER: {
     id: "STARTER",
-    nameAr: "التجريبية",
+    nameAr: "الأساسية",
     nameEn: "Starter",
     priceSar: 0,
     monthlyProposalLimit: 3,
@@ -53,8 +53,8 @@ export const TIERS: Record<RuwaqTier, TierConfig> = {
   },
   VERIFIED: {
     id: "VERIFIED",
-    nameAr: "المعتمد",
-    nameEn: "Verified",
+    nameAr: "المهنية",
+    nameEn: "Professional",
     priceSar: 199,
     monthlyProposalLimit: 30,
     pdfWatermark: false,
@@ -77,8 +77,8 @@ export const TIERS: Record<RuwaqTier, TierConfig> = {
   },
   PRO: {
     id: "PRO",
-    nameAr: "النخبة",
-    nameEn: "PRO",
+    nameAr: "المؤسسية",
+    nameEn: "Enterprise",
     priceSar: 499,
     monthlyProposalLimit: null,
     pdfWatermark: false,

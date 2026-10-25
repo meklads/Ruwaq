@@ -16,8 +16,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function QuoteCheckPage() {
-  const rawLocale = await getLocale();
-  const locale = rawLocale === "en" ? "en" : "ar";
+  const locale = (await getLocale()) === "en" ? "en" : "ar";
   const c = getQuoteCheckCopy(locale);
 
   const faqJsonLd = {
@@ -31,128 +30,125 @@ export default async function QuoteCheckPage() {
   };
 
   return (
-    <div className="ruwaq-qc">
+    <div className="rw">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
 
-      {/* Hero */}
-      <section className="ruwaq-qc-hero ruwaq-surface-dark">
-        <div className="ruwaq-qc-wrap">
-          <p className="ruwaq-qc-eyebrow">{c.hero.eyebrow}</p>
-          <h1 className="ruwaq-qc-title">{c.hero.title}</h1>
-          <p className="ruwaq-qc-lead">{c.hero.lead}</p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <a href="#check-form" className="ruwaq-pro-btn-solid bg-[#c9a063] px-8 py-3.5 text-neutral-950 hover:bg-[#d4b47a]">
+      <section className="rw-page-hero">
+        <div className="rw-wrap">
+          <p className="rw-eyebrow">{c.hero.eyebrow}</p>
+          <h1 className="rw-display">{c.hero.title}</h1>
+          <p className="rw-lead">{c.hero.lead}</p>
+          <div className="rw-hero__actions">
+            <a href="#check-form" className="rw-btn rw-btn--primary">
               {c.hero.primaryCta}
             </a>
-            <a
-              href="#what-we-check"
-              className="inline-flex items-center border border-white/30 px-8 py-3.5 text-sm font-semibold text-white transition-colors hover:border-white"
-            >
+            <a href="#what-we-check" className="rw-btn rw-btn--outline">
               {c.hero.secondaryCta}
             </a>
           </div>
-          <ul className="ruwaq-qc-trust">
+          <ul className="rw-trust">
             {c.hero.trust.map((t) => (
-              <li key={t}>
-                <span aria-hidden>✓</span> {t}
-              </li>
+              <li key={t}>{t}</li>
             ))}
           </ul>
         </div>
       </section>
 
-      {/* Problem */}
-      <section className="ruwaq-qc-section">
-        <div className="ruwaq-qc-wrap">
-          <h2 className="ruwaq-qc-h2">{c.problem.title}</h2>
-          <ul className="ruwaq-qc-problems">
+      <section className="rw-section">
+        <div className="rw-wrap rw-split">
+          <div className="rw-split__sticky">
+            <h2 className="rw-h2">{c.problem.title}</h2>
+            <div className="rw-callout rw-callout--mark" style={{ marginBlockStart: "1.5rem" }}>
+              <p style={{ fontWeight: 600 }}>{c.problem.closing}</p>
+            </div>
+          </div>
+          <ul className="rw-issues">
             {c.problem.items.map((i) => (
-              <li key={i}>{i}</li>
-            ))}
-          </ul>
-          <p className="ruwaq-qc-closing">{c.problem.closing}</p>
-        </div>
-      </section>
-
-      {/* What we check */}
-      <section className="ruwaq-qc-section ruwaq-qc-section--muted" id="what-we-check">
-        <div className="ruwaq-qc-wrap">
-          <h2 className="ruwaq-qc-h2">{c.checks.title}</h2>
-          <ol className="ruwaq-qc-grid">
-            {c.checks.items.map((i, idx) => (
-              <li key={i.title} className="ruwaq-qc-card">
-                <span className="ruwaq-qc-num">{idx + 1}</span>
-                <h3 className="ruwaq-qc-card-title">{i.title}</h3>
-                <p className="ruwaq-qc-card-body">{i.body}</p>
+              <li key={i}>
+                <p className="rw-body" style={{ color: "var(--rw-ink)" }}>
+                  {i}
+                </p>
               </li>
             ))}
-          </ol>
+          </ul>
         </div>
       </section>
 
-      {/* Steps + packages + form */}
-      <section className="ruwaq-qc-section">
-        <div className="ruwaq-qc-wrap ruwaq-qc-split">
+      <section className="rw-section rw-section--stone" id="what-we-check">
+        <div className="rw-wrap">
+          <h2 className="rw-h2">{c.checks.title}</h2>
+          <dl className="rw-rows">
+            {c.checks.items.map((i) => (
+              <div key={i.title}>
+                <dt>{i.title}</dt>
+                <dd>{i.body}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </section>
+
+      <section className="rw-section">
+        <div className="rw-wrap rw-split rw-split--even">
           <div>
-            <h2 className="ruwaq-qc-h2">{c.steps.title}</h2>
-            <ol className="ruwaq-qc-steps">
+            <h2 className="rw-h2">{c.steps.title}</h2>
+            <ol className="rw-process">
               {c.steps.items.map((s, idx) => (
                 <li key={s.title}>
-                  <span className="ruwaq-qc-num">{idx + 1}</span>
+                  <span className="rw-process__n">{(idx + 1).toLocaleString(locale === "ar" ? "ar-SA" : "en-US")}</span>
                   <div>
-                    <h3 className="ruwaq-qc-card-title">{s.title}</h3>
-                    <p className="ruwaq-qc-card-body">{s.body}</p>
+                    <h3 className="rw-h3">{s.title}</h3>
+                    <p className="rw-body">{s.body}</p>
                   </div>
                 </li>
               ))}
             </ol>
 
-            <h2 className="ruwaq-qc-h2 mt-12">{c.packages.title}</h2>
-            <div className="ruwaq-qc-plans">
+            <h2 className="rw-h2" style={{ marginBlockStart: "3.5rem" }}>
+              {c.packages.title}
+            </h2>
+            <div className="rw-plans">
               {[c.packages.free, c.packages.detailed].map((p, idx) => (
-                <div key={p.name} className={`ruwaq-qc-plan ${idx === 1 ? "ruwaq-qc-plan--featured" : ""}`}>
-                  {"badge" in p && p.badge ? <span className="ruwaq-qc-badge">{p.badge as string}</span> : null}
-                  <h3 className="ruwaq-qc-card-title">{p.name}</h3>
-                  <p className="ruwaq-qc-price">{p.price}</p>
+                <div key={p.name} className={`rw-plan ${idx === 1 ? "rw-plan--featured" : ""}`}>
+                  <h3 className="rw-h3">{p.name}</h3>
+                  <p className="rw-plan__price">{p.price}</p>
                   <ul>
                     {p.items.map((i) => (
-                      <li key={i}>
-                        <span aria-hidden>✓</span> {i}
-                      </li>
+                      <li key={i}>{i}</li>
                     ))}
                   </ul>
                 </div>
               ))}
             </div>
-            <p className="mt-4 text-xs leading-relaxed text-neutral-500">{c.packages.note}</p>
+            <p className="rw-fineprint" style={{ marginBlockStart: "0.85rem" }}>
+              {c.packages.note}
+            </p>
           </div>
 
-          <div className="ruwaq-qc-form-card">
+          <div className="rw-form-card" id="check-form">
             <QuoteCheckForm locale={locale} />
           </div>
         </div>
       </section>
 
-      {/* Why Ruwaq */}
-      <section className="ruwaq-qc-section ruwaq-qc-section--muted">
-        <div className="ruwaq-qc-wrap">
-          <h2 className="ruwaq-qc-h2">{c.why.title}</h2>
-          <div className="ruwaq-qc-grid ruwaq-qc-grid--3">
+      <section className="rw-section rw-section--stone">
+        <div className="rw-wrap">
+          <h2 className="rw-h2">{c.why.title}</h2>
+          <dl className="rw-rows">
             {c.why.items.map((i) => (
-              <div key={i.title} className="ruwaq-qc-card">
-                <h3 className="ruwaq-qc-card-title">{i.title}</h3>
-                <p className="ruwaq-qc-card-body">{i.body}</p>
+              <div key={i.title}>
+                <dt>{i.title}</dt>
+                <dd>{i.body}</dd>
               </div>
             ))}
-          </div>
+          </dl>
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="ruwaq-qc-section">
-        <div className="ruwaq-qc-wrap ruwaq-qc-narrow">
-          <h2 className="ruwaq-qc-h2">{c.faq.title}</h2>
-          <div className="ruwaq-qc-faq">
+      <section className="rw-section">
+        <div className="rw-wrap rw-narrow">
+          <h2 className="rw-h2">{c.faq.title}</h2>
+          <div className="rw-faq" style={{ marginBlockStart: "1.75rem" }}>
             {c.faq.items.map((i) => (
               <details key={i.q}>
                 <summary>{i.q}</summary>
@@ -160,19 +156,6 @@ export default async function QuoteCheckPage() {
               </details>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Final CTA */}
-      <section className="ruwaq-qc-hero ruwaq-surface-dark">
-        <div className="ruwaq-qc-wrap text-center">
-          <h2 className="text-xl font-semibold text-white sm:text-2xl">{c.finalCta.title}</h2>
-          <a
-            href="#check-form"
-            className="ruwaq-pro-btn-solid mt-6 inline-flex bg-[#c9a063] px-8 py-3.5 text-neutral-950 hover:bg-[#d4b47a]"
-          >
-            {c.finalCta.button}
-          </a>
         </div>
       </section>
     </div>
