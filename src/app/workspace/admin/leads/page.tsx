@@ -70,7 +70,7 @@ export default async function AdminLeadsPage({ searchParams }: Props) {
       },
     }),
     db.partnerLead.findMany({
-      where: { source: "GRAPHICS_HOUSE" },
+      where: { source: { in: ["GRAPHICS_HOUSE", "RUWAQ_QUOTE_CHECK"] } },
       orderBy: { createdAt: "desc" },
       take: 50,
     }),
@@ -250,7 +250,7 @@ export default async function AdminLeadsPage({ searchParams }: Props) {
 
         <section>
           <h2 className="mb-4 text-sm font-semibold uppercase tracking-widest text-ruwaq-ink-muted">
-            Graphics House visualization
+            Graphics House visualization · Quote checks (/check)
           </h2>
           <div className="space-y-4">
             {partnerLeads.map((lead) => {
@@ -262,6 +262,11 @@ export default async function AdminLeadsPage({ searchParams }: Props) {
                 >
                   <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                     <div>
+                      <p className="mb-1 text-[11px] font-semibold uppercase tracking-widest text-ruwaq-ink-muted">
+                        {lead.source === "RUWAQ_QUOTE_CHECK" ? "Quote check · 48h" : "Graphics House"}
+                        {" · "}
+                        {new Date(lead.createdAt).toLocaleString("en-GB", { timeZone: "Asia/Riyadh" })}
+                      </p>
                       <h3 className="font-bold text-ruwaq-ink">{lead.clientName}</h3>
                       <p className="mt-1 text-sm text-ruwaq-ink-soft">
                         {lead.projectType}
@@ -271,7 +276,7 @@ export default async function AdminLeadsPage({ searchParams }: Props) {
                       <p className="mt-1 font-mono text-xs text-ruwaq-ink-muted" dir="ltr">
                         {lead.clientPhone}
                       </p>
-                      <p className="mt-3 text-sm leading-relaxed text-ruwaq-ink-soft">
+                      <p className="mt-3 whitespace-pre-line text-sm leading-relaxed text-ruwaq-ink-soft">
                         {lead.projectDetails}
                       </p>
                     </div>

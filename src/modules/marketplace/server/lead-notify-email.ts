@@ -591,3 +591,39 @@ export async function sendGraphicsHouseLeadEmail(
 
   await sendPlainEmail({ to, subject, text });
 }
+
+export type QuoteCheckOpsPayload = {
+  leadId: string;
+  referenceCode: string;
+  clientName: string;
+  clientPhone: string;
+  cityLabel: string;
+  projectTypeLabel: string;
+  packageLabel: string;
+  details: string;
+  locale: string;
+};
+
+/** Ops alert for the «افحص عرض سعرك» (quote check) service — /check */
+export async function sendQuoteCheckOpsEmail(payload: QuoteCheckOpsPayload): Promise<void> {
+  const to = resolveRuwaqOpsEmails();
+  const subject = `[Ruwaq Quote Check] ${payload.packageLabel} — ${payload.clientName} (${payload.referenceCode})`;
+  const text = [
+    "New quote-check request (48h SLA)",
+    `Reference: ${payload.referenceCode}`,
+    `Lead ID: ${payload.leadId}`,
+    `Name: ${payload.clientName}`,
+    `Phone: ${payload.clientPhone}`,
+    `City: ${payload.cityLabel}`,
+    `Project: ${payload.projectTypeLabel}`,
+    `Package: ${payload.packageLabel}`,
+    "",
+    payload.details,
+    "",
+    "The client will send the quote file on WhatsApp using the reference code.",
+    `Locale: ${payload.locale}`,
+    `Admin: ${adminLeadsUrl()}`,
+  ].join("\n");
+
+  await sendPlainEmail({ to, subject, text });
+}

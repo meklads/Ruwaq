@@ -544,6 +544,7 @@ enum MarketplaceLeadStatus {
 
 enum PartnerLeadSource {
   GRAPHICS_HOUSE
+  RUWAQ_QUOTE_CHECK
 }
 
 enum DirectoryApplicationStatus {

@@ -640,7 +640,7 @@ export const ar = {
     },
    ],
    heroPrimaryCta: "ابدأ طلب مشروعك",
-   heroHowMatchCta: "تعرّف على المطابقة",
+   heroHowMatchCta: "افحص عرض مقاولك مجاناً",
    heroExploreTours: "جولات مشاريع",
    heroReadGuides: "أدلة عملية",
    heroDirectoryLink: "دليل المحترفين",

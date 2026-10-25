@@ -39,6 +39,7 @@ export function isPublicAppPath(pathname: string): boolean {
     "/join",
     "/visualization",
     "/request-quote",
+    "/check",
     "/categories",
     "/tours",
     "/projects",

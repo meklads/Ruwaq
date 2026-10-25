@@ -30,6 +30,7 @@ export function RuwaqProHero({ magazineCopy, proCopy, locale }: Props) {
           <HeroRotatingHeadlines
             slides={magazineCopy.heroSlides}
             howMatchCta={magazineCopy.heroHowMatchCta}
+            howMatchHref="/check"
           />
         </div>
 

@@ -646,7 +646,7 @@ export const en: Messages = {
     },
    ],
    heroPrimaryCta: "Start your project request",
-   heroHowMatchCta: "About matching",
+   heroHowMatchCta: "Free contractor quote check",
    heroExploreTours: "Project tours",
    heroReadGuides: "Practical guides",
    heroDirectoryLink: "PRO directory",

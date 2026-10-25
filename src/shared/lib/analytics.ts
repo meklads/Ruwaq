@@ -9,6 +9,8 @@ declare global {
 
 export type AnalyticsEvent =
   | "quote_submit"
+  | "quote_check_submit"
+  | "quote_check_whatsapp_click"
   | "visualization_lead"
   | "proposal_start"
   | "budget_estimate"
