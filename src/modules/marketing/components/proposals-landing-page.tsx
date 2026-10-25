@@ -102,7 +102,7 @@ export function ProposalsLandingPage({
             {copy.ecosystemJoinLink}
           </Link>
           <Link
-            href="/how-we-match"
+            href="/pro"
             className="font-semibold text-neutral-900 underline underline-offset-4"
           >
             {copy.ecosystemMatchLink}

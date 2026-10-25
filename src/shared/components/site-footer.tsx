@@ -12,6 +12,7 @@ import {
   graphicsHouseReferralUrl,
 } from "@/shared/constants/brand";
 import { RuwaqLogo } from "@/shared/components/ruwaq-logo";
+import { getSiteCopy } from "@/modules/ruwaq/site-copy";
 
 export async function SiteFooter() {
   const locale = await getLocale();
@@ -19,36 +20,30 @@ export async function SiteFooter() {
   const nav = t.site.header;
   const footer = t.site.footer;
 
+  const c = getSiteCopy(locale);
+  const f = c.footer;
+
   const directoryLinks = [
-    { href: "/categories?city=jeddah", label: nav.directory },
-    { href: "/tours", label: nav.tours },
-    { href: "/guides", label: nav.guides },
-    { href: "/pro", label: nav.featured },
-    { href: "/how-it-works", label: nav.howItWorks },
-    { href: "/request-quote", label: t.nav.requestQuote },
-    { href: "/join", label: nav.applyNow },
+    { href: "/check", label: c.header.check },
+    { href: "/project-file", label: c.header.projectFile },
+    { href: "/aman", label: c.header.aman },
+    { href: "/how-it-works", label: c.header.howItWorks },
+    { href: "/guides", label: c.header.guides },
   ];
 
   const ecosystemLinks = [
-    { href: "/visualization", label: footer.graphicsHouseVisualization, external: false },
-    {
-      href: graphicsHouseReferralUrl("footer_ecosystem"),
-      label: footer.graphicsHouse,
-      external: true,
-    },
+    { href: "/pro", label: f.network, external: false },
+    { href: "/join", label: f.join, external: false },
+    { href: "/proposals", label: f.nasaq, external: false },
+    { href: "/pricing", label: f.pricing, external: false },
+    { href: "/faq", label: f.nasaqFaq, external: false },
+    { href: graphicsHouseReferralUrl("footer_ecosystem"), label: footer.graphicsHouse, external: true },
     { href: TURRIVA_URL, label: footer.turriva, external: true },
-    {
-      href: beesmotionReferralUrl("footer_ecosystem"),
-      label: footer.beesmotion,
-      external: true,
-    },
-    { href: "/proposals", label: t.nav.contractorHub, external: false },
-    { href: "/pricing", label: t.site.nav.pricing, external: false },
+    { href: beesmotionReferralUrl("footer_ecosystem"), label: footer.beesmotion, external: true },
   ];
 
   const companyLinks = [
-    { href: "/about", label: t.nav.aboutPlatform },
-    { href: "/faq", label: t.site.nav.faq },
+    { href: "/about", label: c.header.about },
     { href: "/contact", label: footer.contact },
   ];
 
@@ -62,23 +57,23 @@ export async function SiteFooter() {
       <div className="ruwaq-ad-band-greige border-b border-neutral-950/10">
         <div className="ruwaq-ad-container grid gap-8 py-14 lg:grid-cols-[1.4fr_auto] lg:items-center lg:gap-12 lg:py-16">
           <div>
-            <h2 className="ruwaq-ad-footer-newsletter-title text-neutral-950">{footer.ctaTitle}</h2>
+            <h2 className="ruwaq-ad-footer-newsletter-title text-neutral-950">{f.ctaTitle}</h2>
             <p className="mt-3 max-w-xl text-sm leading-relaxed text-neutral-700">
-              {footer.ctaSubtitle}
+              {f.ctaSubtitle}
             </p>
           </div>
           <div className="flex flex-col gap-3 sm:flex-row lg:justify-end">
             <Link
-              href="/request-quote"
+              href="/check"
               className="ruwaq-pro-chip inline-flex border-neutral-950 bg-neutral-950 text-white hover:bg-neutral-800"
             >
-              {footer.ctaOwner}
+              {f.ctaOwner}
             </Link>
             <Link
-              href="/proposals"
+              href="/pro"
               className="ruwaq-pro-chip inline-flex border-neutral-950 bg-transparent text-neutral-950 hover:bg-neutral-950/5"
             >
-              {footer.ctaButton}
+              {f.ctaContractor}
             </Link>
           </div>
         </div>
@@ -89,7 +84,7 @@ export async function SiteFooter() {
           <div className="grid gap-12 lg:grid-cols-[1.35fr_1fr_1fr_1fr]">
             <div>
               <RuwaqLogo href="/" variant="dark" />
-              <p className="mt-6 max-w-sm text-sm leading-relaxed text-white/75">{footer.tagline}</p>
+              <p className="mt-6 max-w-sm text-sm leading-relaxed text-white/75">{f.tagline}</p>
               <a
                 href={TASAMI_GROUP_URL}
                 target="_blank"
@@ -117,7 +112,7 @@ export async function SiteFooter() {
             </div>
 
             <div>
-              <h3 className="ruwaq-ad-footer-heading">{footer.explore}</h3>
+              <h3 className="ruwaq-ad-footer-heading">{f.servicesTitle}</h3>
               <ul className="mt-5 space-y-2.5">
                 {directoryLinks.map((link) => (
                   <li key={link.href}>
@@ -130,7 +125,7 @@ export async function SiteFooter() {
             </div>
 
             <div>
-              <h3 className="ruwaq-ad-footer-heading">{footer.ecosystem}</h3>
+              <h3 className="ruwaq-ad-footer-heading">{f.contractorsTitle} · {f.groupTitle}</h3>
               <ul className="mt-5 space-y-2.5">
                 {ecosystemLinks.map((link) => (
                   <li key={link.href}>

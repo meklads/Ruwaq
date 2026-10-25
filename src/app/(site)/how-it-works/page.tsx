@@ -1,75 +1,72 @@
+import type { Metadata } from "next";
 import Link from "next/link";
-import { getMessages } from "@/shared/i18n";
 import { getLocale } from "@/shared/i18n/server";
+import { env } from "@/shared/lib/env";
+import { getSiteCopy } from "@/modules/ruwaq/site-copy";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const c = getSiteCopy(await getLocale()).how;
+  return {
+    title: c.metaTitle,
+    description: c.metaDescription,
+    alternates: { canonical: `${env.NEXT_PUBLIC_APP_URL}/how-it-works` },
+  };
+}
 
 export default async function HowItWorksPage() {
-  const locale = await getLocale();
-  const t = getMessages(locale);
-  const copy = t.marketplace.howItWorks;
-  const page = t.marketplace.howItWorksPage;
+  const locale = (await getLocale()) === "en" ? "en" : "ar";
+  const site = getSiteCopy(locale);
+  const c = site.how;
+  const home = site.home;
 
   return (
-    <div className="ruwaq-pro-directory">
-      <header className="ruwaq-pro-directory-header text-center">
-        <p className="ruwaq-pro-eyebrow text-neutral-500">{page.eyebrow}</p>
-        <h1 className="ruwaq-pro-directory-title">{copy.title}</h1>
-        <p className="ruwaq-pro-directory-meta mt-3 normal-case tracking-normal">{copy.subtitle}</p>
-        <p className="mx-auto mt-6 max-w-2xl text-sm leading-relaxed text-neutral-600">{page.intro}</p>
-      </header>
+    <div className="ruwaq-qc">
+      <section className="ruwaq-qc-hero ruwaq-surface-dark">
+        <div className="ruwaq-qc-wrap">
+          <p className="ruwaq-qc-eyebrow">{c.eyebrow}</p>
+          <h1 className="ruwaq-qc-title">{c.title}</h1>
+          <p className="ruwaq-qc-lead">{c.lead}</p>
+        </div>
+      </section>
 
-      <div className="ruwaq-ad-content mt-12 grid gap-12 md:grid-cols-2">
-        <section>
-          <h2 className="text-sm font-semibold uppercase tracking-widest text-neutral-900">
-            {copy.ownersTitle}
-          </h2>
-          <ol className="mt-6 space-y-6">
-            {copy.ownersSteps.map((step, i) => (
-              <li key={step.title} className="border-s-2 border-neutral-900 ps-5">
-                <p className="font-semibold text-neutral-900">
-                  {i + 1}. {step.title}
-                </p>
-                <p className="mt-2 text-sm leading-relaxed text-neutral-600">{step.body}</p>
+      <section className="ruwaq-qc-section">
+        <div className="ruwaq-qc-wrap">
+          <div className="ruwaq-qc-grid ruwaq-home-services">
+            {c.journey.map((j, i) => (
+              <Link key={j.href} href={j.href} className="ruwaq-qc-card ruwaq-home-service">
+                <span className="ruwaq-home-step">0{i + 1}</span>
+                <p className="mt-2 text-sm font-semibold text-neutral-500">{j.when}</p>
+                <h2 className="ruwaq-qc-card-title">{j.title}</h2>
+                <p className="ruwaq-qc-card-body">{j.body}</p>
+                <span className="ruwaq-home-service-cta">
+                  {j.cta} {locale === "ar" ? "←" : "→"}
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="ruwaq-qc-section ruwaq-qc-section--muted">
+        <div className="ruwaq-qc-wrap">
+          <h2 className="ruwaq-qc-h2">{home.locksTitle}</h2>
+          <ol className="ruwaq-qc-grid">
+            {home.locks.map((l, i) => (
+              <li key={l.title} className="ruwaq-qc-card">
+                <span className="ruwaq-qc-num">{i + 1}</span>
+                <h3 className="ruwaq-qc-card-title">{l.title}</h3>
+                <p className="ruwaq-qc-card-body">{l.body}</p>
               </li>
             ))}
           </ol>
-          <p className="mt-8">
-            <Link href="/request-quote" className="ruwaq-pro-btn-solid px-6 py-2.5">
-              {page.ctaOwners}
-            </Link>
-          </p>
-        </section>
+        </div>
+      </section>
 
-        <section>
-          <h2 className="text-sm font-semibold uppercase tracking-widest text-neutral-900">
-            {copy.contractorsTitle}
-          </h2>
-          <ol className="mt-6 space-y-6">
-            {copy.contractorsSteps.map((step, i) => (
-              <li key={step.title} className="border-s-2 border-neutral-300 ps-5">
-                <p className="font-semibold text-neutral-900">
-                  {i + 1}. {step.title}
-                </p>
-                <p className="mt-2 text-sm leading-relaxed text-neutral-600">{step.body}</p>
-              </li>
-            ))}
-          </ol>
-          <p className="mt-8 flex flex-wrap gap-3">
-            <Link href="/join" className="ruwaq-pro-btn-solid px-6 py-2.5">
-              {page.ctaContractors}
-            </Link>
-            <Link href="/proposals" className="ruwaq-pro-btn-outline px-6 py-2.5">
-              {page.ctaProposals}
-            </Link>
-          </p>
-        </section>
-      </div>
-
-      <section className="mx-auto mt-16 max-w-3xl border border-neutral-200 bg-white p-8 text-center">
-        <h2 className="text-lg font-semibold text-neutral-900">{page.trustTitle}</h2>
-        <p className="mt-3 text-sm leading-relaxed text-neutral-600">{page.trustBody}</p>
-        <Link href="/about" className="ruwaq-pro-btn-outline mt-6 inline-flex px-6 py-2.5">
-          {copy.learnMore}
-        </Link>
+      <section className="ruwaq-qc-hero ruwaq-surface-dark">
+        <div className="ruwaq-qc-wrap ruwaq-qc-narrow">
+          <p className="ruwaq-qc-eyebrow">{home.principleTitle}</p>
+          <p className="mt-4 text-lg leading-relaxed text-white/90 sm:text-xl">{home.principleBody}</p>
+        </div>
       </section>
     </div>
   );

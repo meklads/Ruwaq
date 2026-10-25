@@ -607,9 +607,9 @@ export type QuoteCheckOpsPayload = {
 /** Ops alert for the «افحص عرض سعرك» (quote check) service — /check */
 export async function sendQuoteCheckOpsEmail(payload: QuoteCheckOpsPayload): Promise<void> {
   const to = resolveRuwaqOpsEmails();
-  const subject = `[Ruwaq Quote Check] ${payload.packageLabel} — ${payload.clientName} (${payload.referenceCode})`;
+  const subject = `[Ruwaq Request] ${payload.packageLabel} — ${payload.clientName} (${payload.referenceCode})`;
   const text = [
-    "New quote-check request (48h SLA)",
+    "New Ruwaq service request",
     `Reference: ${payload.referenceCode}`,
     `Lead ID: ${payload.leadId}`,
     `Name: ${payload.clientName}`,
@@ -620,7 +620,7 @@ export async function sendQuoteCheckOpsEmail(payload: QuoteCheckOpsPayload): Pro
     "",
     payload.details,
     "",
-    "The client will send the quote file on WhatsApp using the reference code.",
+    "Follow up with the client on WhatsApp using the reference code.",
     `Locale: ${payload.locale}`,
     `Admin: ${adminLeadsUrl()}`,
   ].join("\n");

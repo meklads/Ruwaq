@@ -19,7 +19,27 @@ const nextConfig = {
     ],
   },
   async redirects() {
+    // Ruwaq v2 («ممثّل المالك»): retire directory/tours/off-plan surfaces that
+    // contradict the owner-side positioning. Temporary (302) so they can return
+    // once real, vetted network members exist.
+    const cities = ["jeddah", "makkah", "madinah"];
+    const v2 = [
+      { source: "/request-quote", destination: "/project-file", permanent: false },
+      { source: "/how-we-match", destination: "/how-it-works", permanent: false },
+      { source: "/categories", destination: "/project-file", permanent: false },
+      { source: "/listing/:slug*", destination: "/pro", permanent: false },
+      { source: "/tours", destination: "/", permanent: false },
+      { source: "/tours/:slug*", destination: "/", permanent: false },
+      { source: "/developers", destination: "/", permanent: false },
+      { source: "/hubs/:slug*", destination: "/", permanent: false },
+      { source: "/visualization", destination: "https://3dgraphicshouse.com/?utm_source=ruwaq&utm_medium=redirect", permanent: false },
+      ...cities.flatMap((city) => [
+        { source: `/${city}`, destination: "/project-file", permanent: false },
+        { source: `/${city}/:category*`, destination: "/project-file", permanent: false },
+      ]),
+    ];
     return [
+      ...v2,
       {
         source: "/projects/al-rajhi-gardens",
         destination: "/tours/abraj-omar-makkah",

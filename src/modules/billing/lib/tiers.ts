@@ -68,13 +68,11 @@ export const TIERS: Record<RuwaqTier, TierConfig> = {
       "30 عرضاً شهرياً",
       "34 بنداً قانونياً وتقنياً",
       "PDF نظيف بدون علامة مائية",
-      "شارة «معتمد» في الدليل",
     ],
     featuresEn: [
       "30 proposals / month",
       "Full clause template library",
       "Clean unbranded PDFs",
-      "Verified badge in directory",
     ],
   },
   PRO: {
@@ -86,23 +84,20 @@ export const TIERS: Record<RuwaqTier, TierConfig> = {
     pdfWatermark: false,
     fullClausePacks: true,
     whiteLabelPdf: true,
-    directorySortRank: TIER_DIRECTORY_SORT.PRO,
-    directoryFeatured: true,
+    // Ruwaq v2: paying for Nasaq never buys ranking, featuring or lead priority.
+    directorySortRank: TIER_DIRECTORY_SORT.VERIFIED,
+    directoryFeatured: false,
     directoryVerifiedBadge: true,
-    leadPriority: true,
+    leadPriority: false,
     featuresAr: [
       "عروض غير محدودة",
       "PDF بدون علامة مائية — هوية شركتك فقط",
       "PDF بالهوية الكاملة (white-label)",
-      "ظهور مميز في الدليل",
-      "أولوية في توجيه طلبات العملاء",
     ],
     featuresEn: [
       "Unlimited proposals",
       "Clean PDF — no Ruwaq watermark",
       "White-label PDF branding",
-      "Featured directory placement",
-      "Priority client lead routing",
     ],
   },
 };

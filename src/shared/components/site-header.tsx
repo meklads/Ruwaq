@@ -3,39 +3,30 @@ import { getMessages } from "@/shared/i18n";
 import { getLocale } from "@/shared/i18n/server";
 import { RuwaqLogo } from "@/shared/components/ruwaq-logo";
 import { LocaleSwitcher } from "@/shared/i18n/locale-switcher";
+import { getSiteCopy } from "@/modules/ruwaq/site-copy";
 
 export async function SiteHeader() {
   const locale = await getLocale();
   const t = getMessages(locale);
-  const nav = t.site.header;
+  const c = getSiteCopy(locale).header;
 
   const mainLinks = [
-    { href: "/categories?city=jeddah", label: nav.directory },
-    { href: "/tours", label: nav.tours },
-    { href: "/guides", label: nav.guides },
-    { href: "/how-it-works", label: nav.howItWorks },
+    { href: "/check", label: c.check },
+    { href: "/project-file", label: c.projectFile },
+    { href: "/aman", label: c.aman },
+    { href: "/how-it-works", label: c.howItWorks },
+    { href: "/guides", label: c.guides },
+    { href: "/about", label: c.about },
   ];
-
-  const proNavLink = { href: "/proposals", label: nav.forContractors };
 
   return (
     <header className="ruwaq-ad-header">
       <div className="ruwaq-ad-pro-bar">
         <div className="ruwaq-ad-container flex flex-wrap items-center justify-between gap-3 py-2.5 sm:gap-4">
-          <div className="flex min-w-0 flex-col gap-0.5 sm:flex-row sm:items-center sm:gap-4">
-            <Link href="/pro" className="ruwaq-ad-pro-bar-label">
-              {t.marketplace.proDirectory.directoryLabel}
-            </Link>
-            <span className="ruwaq-ad-pro-bar-tagline">{nav.proBarTagline}</span>
-          </div>
-          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-            <Link href="/request-quote" className="ruwaq-ad-pro-bar-link">
-              {t.nav.requestQuote}
-            </Link>
-            <Link href="/join" className="ruwaq-ad-pro-bar-apply">
-              {nav.applyNow}
-            </Link>
-          </div>
+          <span className="ruwaq-ad-pro-bar-tagline">{c.topBar}</span>
+          <Link href="/pro" className="ruwaq-ad-pro-bar-link">
+            {c.contractors}
+          </Link>
         </div>
       </div>
 
@@ -43,36 +34,30 @@ export async function SiteHeader() {
         <div className="ruwaq-ad-container flex items-center justify-between gap-4 py-3 lg:py-4">
           <RuwaqLogo href="/" variant="editorial" />
 
-          <nav
-            className="hidden flex-1 items-center justify-center gap-6 lg:flex"
-            aria-label={nav.mainNavLabel}
-          >
+          <nav className="hidden flex-1 items-center justify-center gap-6 lg:flex" aria-label={t.site.header.mainNavLabel}>
             {mainLinks.map((link) => (
               <Link key={link.href} href={link.href} className="ruwaq-ad-nav-link">
                 {link.label}
               </Link>
             ))}
-            <Link href={proNavLink.href} className="ruwaq-ad-nav-link ruwaq-ad-nav-link--pro" title={`${t.nasaq.name} — ${t.nasaq.tagline}`}>
-              {proNavLink.label}
-            </Link>
           </nav>
 
           <div className="flex shrink-0 items-center gap-3">
+            <Link href="/check" className="ruwaq-ad-pro-bar-apply hidden sm:inline-flex">
+              {c.cta}
+            </Link>
             <LocaleSwitcher />
           </div>
         </div>
 
-        <nav
-          className="flex gap-0 overflow-x-auto border-t border-neutral-100 lg:hidden"
-          aria-label={nav.mainNavLabel}
-        >
+        <nav className="flex gap-0 overflow-x-auto border-t border-neutral-100 lg:hidden" aria-label={t.site.header.mainNavLabel}>
           {mainLinks.map((link) => (
             <Link key={link.href} href={link.href} className="ruwaq-ad-mobile-nav-link">
               {link.label}
             </Link>
           ))}
-          <Link href={proNavLink.href} className="ruwaq-ad-mobile-nav-link ruwaq-ad-mobile-nav-link--pro">
-            {proNavLink.label}
+          <Link href="/pro" className="ruwaq-ad-mobile-nav-link ruwaq-ad-mobile-nav-link--pro">
+            {c.contractors}
           </Link>
         </nav>
       </div>

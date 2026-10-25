@@ -70,7 +70,7 @@ export default async function AdminLeadsPage({ searchParams }: Props) {
       },
     }),
     db.partnerLead.findMany({
-      where: { source: { in: ["GRAPHICS_HOUSE", "RUWAQ_QUOTE_CHECK"] } },
+      where: { source: { in: ["GRAPHICS_HOUSE", "RUWAQ_QUOTE_CHECK", "RUWAQ_PROJECT_FILE", "RUWAQ_AMAN"] } },
       orderBy: { createdAt: "desc" },
       take: 50,
     }),
@@ -250,7 +250,7 @@ export default async function AdminLeadsPage({ searchParams }: Props) {
 
         <section>
           <h2 className="mb-4 text-sm font-semibold uppercase tracking-widest text-ruwaq-ink-muted">
-            Graphics House visualization · Quote checks (/check)
+            Ruwaq service requests (/check · /project-file · /aman) · Graphics House
           </h2>
           <div className="space-y-4">
             {partnerLeads.map((lead) => {
@@ -263,7 +263,13 @@ export default async function AdminLeadsPage({ searchParams }: Props) {
                   <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                     <div>
                       <p className="mb-1 text-[11px] font-semibold uppercase tracking-widest text-ruwaq-ink-muted">
-                        {lead.source === "RUWAQ_QUOTE_CHECK" ? "Quote check · 48h" : "Graphics House"}
+                        {lead.source === "RUWAQ_QUOTE_CHECK"
+                          ? "Quote check · 48h"
+                          : lead.source === "RUWAQ_PROJECT_FILE"
+                            ? "Project File · 24h"
+                            : lead.source === "RUWAQ_AMAN"
+                              ? "Ruwaq Aman · 24h"
+                              : "Graphics House"}
                         {" · "}
                         {new Date(lead.createdAt).toLocaleString("en-GB", { timeZone: "Asia/Riyadh" })}
                       </p>

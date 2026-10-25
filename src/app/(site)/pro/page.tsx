@@ -1,95 +1,111 @@
+import type { Metadata } from "next";
 import Link from "next/link";
-import { getMessages } from "@/shared/i18n";
 import { getLocale } from "@/shared/i18n/server";
-import {
-  MARKETPLACE_CITIES,
-  citySlugFromEnum,
-  getCityBySlug,
-  type MarketplaceCitySlug,
-} from "@/shared/constants/marketplace-taxonomy";
-import { getProShowcaseListings } from "@/modules/marketplace/server/join.actions";
-import { ListingCard } from "@/modules/marketplace/components/directory/ListingCard";
-import { DirectoryEmptyState } from "@/modules/marketplace/components/directory-empty-state";
-import { BeesmotionPromoBanner } from "@/modules/marketplace/components/beesmotion-promo-banner";
-import { parseCitySlug } from "@/modules/marketplace/lib/marketplace-slugs";
+import { env } from "@/shared/lib/env";
+import { getSiteCopy } from "@/modules/ruwaq/site-copy";
 
-type Props = {
-  searchParams: { city?: string };
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const c = getSiteCopy(await getLocale()).contractors;
+  return {
+    title: c.metaTitle,
+    description: c.metaDescription,
+    alternates: { canonical: `${env.NEXT_PUBLIC_APP_URL}/pro` },
+  };
+}
 
-export default async function ProShowcasePage({ searchParams }: Props) {
-  const locale = await getLocale();
-  const t = getMessages(locale);
-  const copy = t.marketplace.proShowcase;
-  const citySlug = searchParams.city ? parseCitySlug(searchParams.city) : undefined;
-  const listings = await getProShowcaseListings(citySlug as MarketplaceCitySlug | undefined);
+/**
+ * Contractor door — «شبكة رواق».
+ * The public directory is intentionally hidden until real, vetted members exist.
+ */
+export default async function ContractorsPage() {
+  const locale = (await getLocale()) === "en" ? "en" : "ar";
+  const c = getSiteCopy(locale).contractors;
 
   return (
-    <div className="ruwaq-pro-directory">
-      <header className="ruwaq-pro-directory-header">
-        <p className="ruwaq-pro-eyebrow text-neutral-500">{copy.eyebrow}</p>
-        <h1 className="ruwaq-pro-directory-title">{copy.title}</h1>
-        <p className="ruwaq-pro-directory-meta mt-3 normal-case tracking-normal">{copy.subtitle}</p>
-        <nav className="mt-6 flex flex-wrap gap-2" aria-label={copy.filterCity}>
-          <Link
-            href="/pro"
-            className={`ruwaq-pro-chip border-neutral-300 bg-white text-neutral-900${!citySlug ? " ring-2 ring-neutral-900" : ""}`}
-          >
-            {copy.allCities}
-          </Link>
-          {MARKETPLACE_CITIES.map((city) => (
-            <Link
-              key={city.slug}
-              href={`/pro?city=${city.slug}`}
-              className={`ruwaq-pro-chip border-neutral-300 bg-white text-neutral-900${citySlug === city.slug ? " ring-2 ring-neutral-900" : ""}`}
-            >
-              {locale === "ar" ? city.nameAr : city.nameEn}
+    <div className="ruwaq-qc">
+      <section className="ruwaq-qc-hero ruwaq-surface-dark">
+        <div className="ruwaq-qc-wrap">
+          <p className="ruwaq-qc-eyebrow">{c.eyebrow}</p>
+          <h1 className="ruwaq-qc-title">{c.title}</h1>
+          <p className="ruwaq-qc-lead">{c.lead}</p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link href="/join" className="ruwaq-pro-btn-solid bg-[#c9a063] px-8 py-3.5 text-neutral-950 hover:bg-[#d4b47a]">
+              {c.primaryCta}
             </Link>
-          ))}
-        </nav>
-      </header>
-
-      {listings.length === 0 ? (
-        <DirectoryEmptyState
-          copy={t.marketplace.listing.emptyState}
-          quoteErrors={t.marketplace.quote.errors}
-          fields={t.marketplace.quote.fields}
-          locale={locale}
-          citySlug={citySlug ?? "jeddah"}
-          categorySlug="fit-out"
-        />
-      ) : (
-        <div className="ruwaq-pro-editorial-grid">
-          {listings.map((listing) => {
-            const cityMeta = getCityBySlug(citySlugFromEnum(listing.city));
-            const cityLabel = cityMeta
-              ? locale === "ar"
-                ? cityMeta.nameAr
-                : cityMeta.nameEn
-              : undefined;
-            const categoryLabel =
-              locale === "ar" ? listing.category.nameAr : listing.category.nameEn;
-            return (
-              <ListingCard
-                key={listing.id}
-                listing={listing}
-                labels={t.marketplace.listing}
-                locale={locale}
-                categoryLabel={categoryLabel}
-                cityLabel={cityLabel}
-              />
-            );
-          })}
+            <Link href="/proposals" className="inline-flex items-center border border-white/30 px-8 py-3.5 text-sm font-semibold text-white transition-colors hover:border-white">
+              {c.secondaryCta}
+            </Link>
+          </div>
         </div>
-      )}
+      </section>
 
-      <p className="ruwaq-ad-content mt-12 text-center">
-        <Link href="/join" className="ruwaq-pro-btn-solid px-8 py-3">
-          {t.marketplace.proDirectory.applyCta}
-        </Link>
-      </p>
+      <section className="ruwaq-qc-section">
+        <div className="ruwaq-qc-wrap">
+          <h2 className="ruwaq-qc-h2">{c.whyTitle}</h2>
+          <div className="ruwaq-qc-grid ruwaq-qc-grid--2">
+            {c.why.map((w) => (
+              <div key={w.title} className="ruwaq-qc-card">
+                <h3 className="ruwaq-qc-card-title mt-0">{w.title}</h3>
+                <p className="ruwaq-qc-card-body">{w.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-      <BeesmotionPromoBanner locale={locale} campaign="pro_page_ad" />
+      <section className="ruwaq-qc-section ruwaq-qc-section--muted">
+        <div className="ruwaq-qc-wrap ruwaq-qc-split">
+          <div>
+            <h2 className="ruwaq-qc-h2">{c.criteriaTitle}</h2>
+            <ul className="ruwaq-qc-steps">
+              {c.criteria.map((item, i) => (
+                <li key={item}>
+                  <span className="ruwaq-qc-num">{i + 1}</span>
+                  <p className="ruwaq-qc-card-body mt-1">{item}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h2 className="ruwaq-qc-h2">{c.rankingTitle}</h2>
+            <p className="ruwaq-qc-card-body mt-4 text-base">{c.ranking}</p>
+            <div className="ruwaq-net-status mt-8">
+              <h3 className="ruwaq-qc-card-title mt-0">{c.networkStatusTitle}</h3>
+              <p className="ruwaq-qc-card-body">{c.networkStatus}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="ruwaq-qc-section">
+        <div className="ruwaq-qc-wrap">
+          <h2 className="ruwaq-qc-h2">{c.feesTitle}</h2>
+          <div className="ruwaq-qc-grid ruwaq-qc-grid--3">
+            {c.fees.map((f) => (
+              <div key={f.title} className="ruwaq-qc-card">
+                <h3 className="ruwaq-qc-card-title mt-0">{f.title}</h3>
+                <p className="ruwaq-qc-card-body">{f.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="ruwaq-qc-hero ruwaq-surface-dark">
+        <div className="ruwaq-qc-wrap ruwaq-qc-narrow">
+          <p className="ruwaq-qc-eyebrow">{c.nasaqEyebrow}</p>
+          <h2 className="mt-3 text-2xl font-bold text-white sm:text-3xl">{c.nasaqTitle}</h2>
+          <p className="mt-4 leading-relaxed text-white/80">{c.nasaqBody}</p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link href="/proposals" className="ruwaq-pro-btn-solid bg-[#c9a063] px-8 py-3.5 text-neutral-950 hover:bg-[#d4b47a]">
+              {c.nasaqCta}
+            </Link>
+            <Link href="/pricing" className="inline-flex items-center border border-white/30 px-8 py-3.5 text-sm font-semibold text-white transition-colors hover:border-white">
+              {c.nasaqPricing}
+            </Link>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

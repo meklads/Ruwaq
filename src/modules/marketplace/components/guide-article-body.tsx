@@ -133,15 +133,15 @@ export function GuideArticleBody({ blocks, copy }: Props) {
               </aside>
             );
           case "cta": {
-            const secondaryHref =
-              block.secondaryHref ?? directoryHrefFromQuote(block.href) ?? undefined;
-            const secondaryLabel = block.secondaryLabel ?? copy.ctaDirectory;
+            // Ruwaq v2: every guide CTA leads to the owner-side services.
+            const secondaryHref = "/project-file";
+            const secondaryLabel = copy.ctaDirectory;
             return (
               <div key={key} className="ruwaq-guide-cta">
                 {block.lead ? <p className="ruwaq-guide-cta__lead">{block.lead}</p> : null}
                 <div className="ruwaq-guide-cta__actions">
-                  <Link href={block.href} className="ruwaq-guide-cta__btn">
-                    {block.label || copy.ctaQuote}
+                  <Link href="/check" className="ruwaq-guide-cta__btn">
+                    {copy.ctaQuote}
                   </Link>
                   {secondaryHref ? (
                     <Link href={secondaryHref} className="ruwaq-guide-cta__btn-secondary">

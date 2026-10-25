@@ -18,6 +18,7 @@ export type UsageEventType =
   | "off_plan_brochure_lead"
   | "visualization_lead_submitted"
   | "quote_check_submitted"
+  | "service_request_submitted"
   | "pro_apply_click"
   | "tour_shop_click"
   | "developer_inquiry";

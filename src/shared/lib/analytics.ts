@@ -11,6 +11,7 @@ export type AnalyticsEvent =
   | "quote_submit"
   | "quote_check_submit"
   | "quote_check_whatsapp_click"
+  | "service_request_submit"
   | "visualization_lead"
   | "proposal_start"
   | "budget_estimate"

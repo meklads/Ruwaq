@@ -50,13 +50,14 @@ export type RuwaqGuide = {
 };
 
 export function guideCtaHref(guide: Pick<RuwaqGuide, "citySlug" | "categorySlug">): string {
-  const city = guide.citySlug ?? "jeddah";
-  return `/request-quote?city=${city}&category=${guide.categorySlug}`;
+  // Ruwaq v2: guides lead to the free quote check, not to contractor matching.
+  void guide;
+  return "/check";
 }
 
 export function guideDirectoryHref(guide: Pick<RuwaqGuide, "citySlug" | "categorySlug">): string {
-  const city = guide.citySlug ?? "jeddah";
-  return `/${city}/${guide.categorySlug}`;
+  void guide;
+  return "/project-file";
 }
 
 export function countGuideWords(blocks: GuideBlock[]): number {
