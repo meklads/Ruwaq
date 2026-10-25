@@ -1,9 +1,8 @@
 import {
-  BEESMOTION_URL,
   GRAPHICS_HOUSE_URL,
   RUWQ_PUBLIC_EMAIL,
   RUWQ_PUBLIC_URL,
-  TURRIVA_URL,
+  TASAMI_GROUP_URL,
 } from "@/shared/constants/brand";
 import { DEFAULT_MARKETING_HERO } from "@/content/marketing-images";
 import type { Locale } from "@/shared/i18n/locale";
@@ -27,7 +26,7 @@ export function buildOrganizationJsonLd(locale: Locale) {
       { "@type": "City", name: "Makkah" },
       { "@type": "City", name: "Madinah" },
     ],
-    sameAs: [TURRIVA_URL, GRAPHICS_HOUSE_URL, BEESMOTION_URL],
+    sameAs: [GRAPHICS_HOUSE_URL, TASAMI_GROUP_URL],
   };
 }
 

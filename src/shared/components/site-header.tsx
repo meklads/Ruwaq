@@ -1,7 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
 import { getLocale } from "@/shared/i18n/server";
 import { LocaleSwitcher } from "@/shared/i18n/locale-switcher";
+import { RuwaqLogo } from "@/shared/components/ruwaq-logo";
 import { getSiteCopy } from "@/modules/ruwaq/site-copy";
 
 export async function SiteHeader() {
@@ -20,9 +20,7 @@ export async function SiteHeader() {
   return (
     <header className="rw rw-header">
       <div className="rw-wrap rw-header__bar">
-        <Link href="/" className="rw-header__logo" aria-label="رواق Ruwaq">
-          <Image src="/brand/ruwaq/logo-on-light-trim.png" alt="رواق Ruwaq" width={738} height={324} priority />
-        </Link>
+        <RuwaqLogo href="/" variant="editorial" className="rw-header__logo" />
 
         <nav className="rw-nav" aria-label={c.menu}>
           {links.map((l) => (

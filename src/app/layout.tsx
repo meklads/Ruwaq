@@ -32,7 +32,7 @@ const ibmPlexArabic = IBM_Plex_Sans_Arabic({
 
 const tajawal = Tajawal({
   subsets: ["arabic"],
-  weight: ["200", "300", "400", "500", "700"],
+  weight: ["200", "300", "400", "500", "700", "800"],
   variable: "--font-ar-alt",
   display: "swap",
 });

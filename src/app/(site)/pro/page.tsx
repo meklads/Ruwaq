@@ -3,20 +3,14 @@ import Link from "next/link";
 import { getLocale } from "@/shared/i18n/server";
 import { env } from "@/shared/lib/env";
 import { getSiteCopy } from "@/modules/ruwaq/site-copy";
+import { CardIcon, CONTRACTOR_ICONS } from "@/modules/ruwaq/icons";
 
 export async function generateMetadata(): Promise<Metadata> {
   const c = getSiteCopy(await getLocale()).contractors;
-  return {
-    title: c.metaTitle,
-    description: c.metaDescription,
-    alternates: { canonical: `${env.NEXT_PUBLIC_APP_URL}/pro` },
-  };
+  return { title: c.metaTitle, description: c.metaDescription, alternates: { canonical: `${env.NEXT_PUBLIC_APP_URL}/pro` } };
 }
 
-/**
- * Contractor door — «شبكة رواق».
- * The public directory stays hidden until real, vetted members exist.
- */
+/** Contractor door — «شبكة رواق». No public directory until real, vetted members exist. */
 export default async function ContractorsPage() {
   const locale = (await getLocale()) === "en" ? "en" : "ar";
   const c = getSiteCopy(locale).contractors;
@@ -26,10 +20,12 @@ export default async function ContractorsPage() {
     <div className="rw">
       <section className="rw-page-hero rw-page-hero--ink">
         <div className="rw-wrap">
-          <p className="rw-eyebrow">{c.eyebrow}</p>
-          <h1 className="rw-display">{c.title}</h1>
+          <span className="rw-eyebrow">{c.eyebrow}</span>
+          <h1 className="rw-display" style={{ maxWidth: "48rem" }}>
+            {c.title}
+          </h1>
           <p className="rw-lead">{c.lead}</p>
-          <div className="rw-hero__actions">
+          <div className="rw-actions">
             <Link href="/join" className="rw-btn rw-btn--gold">
               {c.primaryCta}
             </Link>
@@ -42,67 +38,74 @@ export default async function ContractorsPage() {
 
       <section className="rw-section">
         <div className="rw-wrap">
-          <h2 className="rw-h2">{c.whyTitle}</h2>
-          <dl className="rw-rows">
-            {c.why.map((w) => (
-              <div key={w.title}>
-                <dt>{w.title}</dt>
-                <dd>{w.body}</dd>
-              </div>
+          <div className="rw-head">
+            <h2 className="rw-h2">{c.whyTitle}</h2>
+          </div>
+          <div className="rw-grid rw-grid--4">
+            {c.why.map((w, i) => (
+              <article key={w.title} className="rw-card">
+                <CardIcon icon={CONTRACTOR_ICONS[i]} />
+                <h3 className="rw-h3">{w.title}</h3>
+                <p className="rw-body">{w.body}</p>
+              </article>
             ))}
-          </dl>
+          </div>
         </div>
       </section>
 
       <section className="rw-section rw-section--stone">
-        <div className="rw-wrap rw-split rw-split--even">
+        <div className="rw-wrap rw-split">
           <div>
-            <h2 className="rw-h2">{c.criteriaTitle}</h2>
-            <ol className="rw-process">
+            <div className="rw-head">
+              <h2 className="rw-h2">{c.criteriaTitle}</h2>
+            </div>
+            <ol className="rw-steps">
               {c.criteria.map((item, i) => (
                 <li key={item}>
-                  <span className="rw-process__n">{n(i)}</span>
-                  <p className="rw-body" style={{ color: "var(--rw-ink)", alignSelf: "center" }}>
+                  <span className="rw-steps__n">{n(i)}</span>
+                  <p className="rw-body" style={{ color: "var(--rw-ink)", paddingBlockStart: "0.35rem" }}>
                     {item}
                   </p>
                 </li>
               ))}
             </ol>
           </div>
-          <div>
-            <h2 className="rw-h2">{c.rankingTitle}</h2>
-            <p className="rw-body" style={{ marginBlockStart: "1.25rem", fontSize: "1.075rem" }}>
-              {c.ranking}
-            </p>
-            <div className="rw-callout" style={{ marginBlockStart: "2rem", background: "#fff" }}>
+          <div style={{ display: "grid", gap: "1.25rem" }}>
+            <article className="rw-card">
+              <h3 className="rw-h3">{c.rankingTitle}</h3>
+              <p className="rw-body">{c.ranking}</p>
+            </article>
+            <article className="rw-card">
               <h3 className="rw-h3">{c.statusTitle}</h3>
               <p className="rw-body">{c.status}</p>
-            </div>
+            </article>
           </div>
         </div>
       </section>
 
       <section className="rw-section">
         <div className="rw-wrap">
-          <h2 className="rw-h2">{c.feesTitle}</h2>
-          <dl className="rw-rows">
+          <div className="rw-head">
+            <h2 className="rw-h2">{c.feesTitle}</h2>
+          </div>
+          <div className="rw-grid rw-grid--3">
             {c.fees.map((f) => (
-              <div key={f.title}>
-                <dt>{f.title}</dt>
-                <dd>{f.body}</dd>
-              </div>
+              <article key={f.title} className="rw-card">
+                <h3 className="rw-h3">{f.title}</h3>
+                <p className="rw-body">{f.body}</p>
+              </article>
             ))}
-          </dl>
+          </div>
         </div>
       </section>
 
-      <section className="rw-section" style={{ paddingBlockStart: 0 }}>
+      <section className="rw-section rw-section--flush-top">
         <div className="rw-wrap">
           <div className="rw-door">
             <div>
               <h2 className="rw-h2">{c.nasaqTitle}</h2>
               <p>{c.nasaqBody}</p>
-              <div className="rw-door__actions">
+              <div className="rw-actions">
                 <Link href="/proposals" className="rw-btn rw-btn--gold">
                   {c.nasaqCta}
                 </Link>

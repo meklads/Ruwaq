@@ -8,7 +8,7 @@ export default async function ShareNotFound() {
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center px-4 text-center">
-      <p className="text-sm font-bold text-ruwaq-gold">Turriva Real Estate</p>
+      <p className="text-sm font-bold text-ruwaq-gold">رواق</p>
       <h1 className="mt-4 text-2xl font-bold text-ruwaq-navy">
         {t.share.notFoundTitle}
       </h1>

@@ -3,14 +3,11 @@ import Image from "next/image";
 import { getLocale } from "@/shared/i18n/server";
 import { env } from "@/shared/lib/env";
 import { getSiteCopy } from "@/modules/ruwaq/site-copy";
+import { CardIcon, GROUP_ICONS, PRINCIPLE_ICONS } from "@/modules/ruwaq/icons";
 
 export async function generateMetadata(): Promise<Metadata> {
   const c = getSiteCopy(await getLocale()).about;
-  return {
-    title: c.metaTitle,
-    description: c.metaDescription,
-    alternates: { canonical: `${env.NEXT_PUBLIC_APP_URL}/about` },
-  };
+  return { title: c.metaTitle, description: c.metaDescription, alternates: { canonical: `${env.NEXT_PUBLIC_APP_URL}/about` } };
 }
 
 export default async function AboutPage() {
@@ -21,16 +18,18 @@ export default async function AboutPage() {
     <div className="rw">
       <section className="rw-page-hero">
         <div className="rw-wrap">
-          <p className="rw-eyebrow">{c.eyebrow}</p>
-          <h1 className="rw-display">{c.title}</h1>
+          <span className="rw-eyebrow">{c.eyebrow}</span>
+          <h1 className="rw-display" style={{ maxWidth: "48rem" }}>
+            {c.title}
+          </h1>
         </div>
       </section>
 
       <section className="rw-section">
-        <div className="rw-wrap rw-split rw-split--even" style={{ alignItems: "center" }}>
+        <div className="rw-wrap rw-split rw-split--even">
           <div style={{ display: "grid", gap: "1.25rem" }}>
             {c.paragraphs.map((p) => (
-              <p key={p} style={{ fontSize: "1.125rem", lineHeight: 2, color: "var(--rw-ink-soft)" }}>
+              <p key={p} className="rw-lead" style={{ maxWidth: "none" }}>
                 {p}
               </p>
             ))}
@@ -40,37 +39,43 @@ export default async function AboutPage() {
             alt={locale === "ar" ? "أسرة في منزلها" : "A family at home"}
             width={1920}
             height={1280}
-            sizes="(min-width: 960px) 50vw, 100vw"
-            style={{ width: "100%", height: "auto", borderRadius: 8 }}
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            style={{ width: "100%", height: "auto", borderRadius: 14 }}
           />
         </div>
       </section>
 
       <section className="rw-section rw-section--stone">
         <div className="rw-wrap">
-          <h2 className="rw-h2">{c.principlesTitle}</h2>
-          <dl className="rw-rows">
-            {c.principles.map((p) => (
-              <div key={p.title}>
-                <dt>{p.title}</dt>
-                <dd>{p.body}</dd>
-              </div>
+          <div className="rw-head">
+            <h2 className="rw-h2">{c.principlesTitle}</h2>
+          </div>
+          <div className="rw-grid rw-grid--4">
+            {c.principles.map((p, i) => (
+              <article key={p.title} className="rw-card">
+                <CardIcon icon={PRINCIPLE_ICONS[i]} />
+                <h3 className="rw-h3">{p.title}</h3>
+                <p className="rw-body">{p.body}</p>
+              </article>
             ))}
-          </dl>
+          </div>
         </div>
       </section>
 
       <section className="rw-section">
         <div className="rw-wrap">
-          <h2 className="rw-h2">{c.groupTitle}</h2>
-          <dl className="rw-rows">
-            {c.group.map((g) => (
-              <div key={g.name}>
-                <dt>{g.name}</dt>
-                <dd>{g.body}</dd>
-              </div>
+          <div className="rw-head">
+            <h2 className="rw-h2">{c.groupTitle}</h2>
+          </div>
+          <div className="rw-grid rw-grid--2">
+            {c.group.map((g, i) => (
+              <article key={g.name} className="rw-card">
+                <CardIcon icon={GROUP_ICONS[i]} />
+                <h3 className="rw-h3">{g.name}</h3>
+                <p className="rw-body">{g.body}</p>
+              </article>
             ))}
-          </dl>
+          </div>
         </div>
       </section>
     </div>

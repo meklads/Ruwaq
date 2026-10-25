@@ -1,14 +1,12 @@
-import Image from "next/image";
 import Link from "next/link";
 import { getLocale } from "@/shared/i18n/server";
 import {
   RUWQ_PUBLIC_EMAIL,
   TASAMI_GROUP_URL,
-  TURRIVA_URL,
-  beesmotionReferralUrl,
   graphicsHouseReferralUrl,
 } from "@/shared/constants/brand";
 import { getSiteCopy } from "@/modules/ruwaq/site-copy";
+import { RuwaqLogo } from "@/shared/components/ruwaq-logo";
 
 const WHATSAPP_DISPLAY = "0502786513";
 const WHATSAPP_URL = "https://wa.me/966502786513";
@@ -41,8 +39,6 @@ export async function SiteFooter() {
   ];
   const group = [
     { href: graphicsHouseReferralUrl("footer_ecosystem"), label: ar ? "جرافيكس هاوس" : "Graphics House" },
-    { href: TURRIVA_URL, label: ar ? "توريفا" : "Turriva" },
-    { href: beesmotionReferralUrl("footer_ecosystem"), label: ar ? "بيز موشن" : "Bees Motion" },
   ];
 
   return (
@@ -51,11 +47,11 @@ export async function SiteFooter() {
         <div className="rw-wrap rw-footer-cta__inner">
           <div>
             <h2 className="rw-h2">{f.ctaTitle}</h2>
-            <p className="rw-lead" style={{ marginBlockStart: "0.75rem" }}>
+            <p className="rw-lead" style={{ marginBlockStart: "0.85rem" }}>
               {f.ctaSubtitle}
             </p>
           </div>
-          <div className="rw-hero__actions" style={{ marginBlockStart: 0 }}>
+          <div className="rw-actions" style={{ marginBlockStart: 0 }}>
             <Link href="/check" className="rw-btn rw-btn--primary">
               {f.ctaOwner}
             </Link>
@@ -70,11 +66,9 @@ export async function SiteFooter() {
         <div className="rw-wrap">
           <div className="rw-footer__grid">
             <div>
-              <Link href="/" className="rw-footer__logo" aria-label="رواق Ruwaq">
-                <Image src="/brand/ruwaq/logo-on-dark-trim.png" alt="رواق Ruwaq" width={1274} height={551} />
-              </Link>
-              <p style={{ marginBlockStart: "1rem", maxWidth: "26rem", lineHeight: 1.9 }}>{f.tagline}</p>
-              <ul style={{ marginBlockStart: "1.25rem" }}>
+              <RuwaqLogo href="/" variant="dark" size="footer" />
+              <p className="rw-footer__about">{f.tagline}</p>
+              <ul className="rw-footer__contact">
                 <li>
                   <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" dir="ltr">
                     {ar ? "واتساب" : "WhatsApp"}: {WHATSAPP_DISPLAY}

@@ -3,10 +3,10 @@ import { getLocale } from "@/shared/i18n/server";
 import { env } from "@/shared/lib/env";
 import { getQuoteCheckCopy } from "@/modules/marketplace/lib/quote-check-copy";
 import { QuoteCheckForm } from "@/modules/marketplace/components/quote-check-form";
+import { CardIcon, CHECK_ICONS, FEAR_ICONS, PRINCIPLE_ICONS } from "@/modules/ruwaq/icons";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const locale = await getLocale();
-  const copy = getQuoteCheckCopy(locale === "en" ? "en" : "ar");
+  const copy = getQuoteCheckCopy((await getLocale()) === "en" ? "en" : "ar");
   return {
     title: copy.metaTitle,
     description: copy.metaDescription,
@@ -18,15 +18,11 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function QuoteCheckPage() {
   const locale = (await getLocale()) === "en" ? "en" : "ar";
   const c = getQuoteCheckCopy(locale);
-
+  const n = (i: number) => (i + 1).toLocaleString(locale === "ar" ? "ar-SA" : "en-US");
   const faqJsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: c.faq.items.map((i) => ({
-      "@type": "Question",
-      name: i.q,
-      acceptedAnswer: { "@type": "Answer", text: i.a },
-    })),
+    mainEntity: c.faq.items.map((i) => ({ "@type": "Question", name: i.q, acceptedAnswer: { "@type": "Answer", text: i.a } })),
   };
 
   return (
@@ -35,10 +31,12 @@ export default async function QuoteCheckPage() {
 
       <section className="rw-page-hero">
         <div className="rw-wrap">
-          <p className="rw-eyebrow">{c.hero.eyebrow}</p>
-          <h1 className="rw-display">{c.hero.title}</h1>
+          <span className="rw-eyebrow">{c.hero.eyebrow}</span>
+          <h1 className="rw-display" style={{ maxWidth: "48rem" }}>
+            {c.hero.title}
+          </h1>
           <p className="rw-lead">{c.hero.lead}</p>
-          <div className="rw-hero__actions">
+          <div className="rw-actions">
             <a href="#check-form" className="rw-btn rw-btn--primary">
               {c.hero.primaryCta}
             </a>
@@ -55,47 +53,53 @@ export default async function QuoteCheckPage() {
       </section>
 
       <section className="rw-section">
-        <div className="rw-wrap rw-split">
-          <div className="rw-split__sticky">
+        <div className="rw-wrap">
+          <div className="rw-head">
             <h2 className="rw-h2">{c.problem.title}</h2>
-            <div className="rw-callout rw-callout--mark" style={{ marginBlockStart: "1.5rem" }}>
-              <p style={{ fontWeight: 600 }}>{c.problem.closing}</p>
-            </div>
           </div>
-          <ul className="rw-issues">
-            {c.problem.items.map((i) => (
-              <li key={i}>
+          <div className="rw-grid rw-grid--4">
+            {c.problem.items.map((i, idx) => (
+              <article key={i} className="rw-card">
+                <CardIcon icon={FEAR_ICONS[idx]} tone="mark" />
                 <p className="rw-body" style={{ color: "var(--rw-ink)" }}>
                   {i}
                 </p>
-              </li>
+              </article>
             ))}
-          </ul>
+          </div>
+          <div className="rw-note-box rw-note-box--mark" style={{ marginBlockStart: "1.25rem" }}>
+            <p style={{ fontWeight: 600 }}>{c.problem.closing}</p>
+          </div>
         </div>
       </section>
 
       <section className="rw-section rw-section--stone" id="what-we-check">
         <div className="rw-wrap">
-          <h2 className="rw-h2">{c.checks.title}</h2>
-          <dl className="rw-rows">
-            {c.checks.items.map((i) => (
-              <div key={i.title}>
-                <dt>{i.title}</dt>
-                <dd>{i.body}</dd>
-              </div>
+          <div className="rw-head">
+            <h2 className="rw-h2">{c.checks.title}</h2>
+          </div>
+          <div className="rw-grid rw-grid--3">
+            {c.checks.items.map((i, idx) => (
+              <article key={i.title} className="rw-card">
+                <CardIcon icon={CHECK_ICONS[idx]} />
+                <h3 className="rw-h3">{i.title}</h3>
+                <p className="rw-body">{i.body}</p>
+              </article>
             ))}
-          </dl>
+          </div>
         </div>
       </section>
 
       <section className="rw-section">
-        <div className="rw-wrap rw-split rw-split--even">
+        <div className="rw-wrap rw-split rw-split--form">
           <div>
-            <h2 className="rw-h2">{c.steps.title}</h2>
-            <ol className="rw-process">
+            <div className="rw-head">
+              <h2 className="rw-h2">{c.steps.title}</h2>
+            </div>
+            <ol className="rw-steps">
               {c.steps.items.map((s, idx) => (
                 <li key={s.title}>
-                  <span className="rw-process__n">{(idx + 1).toLocaleString(locale === "ar" ? "ar-SA" : "en-US")}</span>
+                  <span className="rw-steps__n">{n(idx)}</span>
                   <div>
                     <h3 className="rw-h3">{s.title}</h3>
                     <p className="rw-body">{s.body}</p>
@@ -104,10 +108,10 @@ export default async function QuoteCheckPage() {
               ))}
             </ol>
 
-            <h2 className="rw-h2" style={{ marginBlockStart: "3.5rem" }}>
-              {c.packages.title}
-            </h2>
-            <div className="rw-plans">
+            <div className="rw-head" style={{ marginBlockStart: "clamp(3rem, 6vw, 4.5rem)" }}>
+              <h2 className="rw-h2">{c.packages.title}</h2>
+            </div>
+            <div className="rw-grid rw-grid--2">
               {[c.packages.free, c.packages.detailed].map((p, idx) => (
                 <div key={p.name} className={`rw-plan ${idx === 1 ? "rw-plan--featured" : ""}`}>
                   <h3 className="rw-h3">{p.name}</h3>
@@ -120,7 +124,7 @@ export default async function QuoteCheckPage() {
                 </div>
               ))}
             </div>
-            <p className="rw-fineprint" style={{ marginBlockStart: "0.85rem" }}>
+            <p className="rw-fineprint" style={{ marginBlockStart: "1rem" }}>
               {c.packages.note}
             </p>
           </div>
@@ -133,22 +137,27 @@ export default async function QuoteCheckPage() {
 
       <section className="rw-section rw-section--stone">
         <div className="rw-wrap">
-          <h2 className="rw-h2">{c.why.title}</h2>
-          <dl className="rw-rows">
-            {c.why.items.map((i) => (
-              <div key={i.title}>
-                <dt>{i.title}</dt>
-                <dd>{i.body}</dd>
-              </div>
+          <div className="rw-head">
+            <h2 className="rw-h2">{c.why.title}</h2>
+          </div>
+          <div className="rw-grid rw-grid--3">
+            {c.why.items.map((i, idx) => (
+              <article key={i.title} className="rw-card">
+                <CardIcon icon={PRINCIPLE_ICONS[idx]} />
+                <h3 className="rw-h3">{i.title}</h3>
+                <p className="rw-body">{i.body}</p>
+              </article>
             ))}
-          </dl>
+          </div>
         </div>
       </section>
 
       <section className="rw-section">
         <div className="rw-wrap rw-narrow">
-          <h2 className="rw-h2">{c.faq.title}</h2>
-          <div className="rw-faq" style={{ marginBlockStart: "1.75rem" }}>
+          <div className="rw-head">
+            <h2 className="rw-h2">{c.faq.title}</h2>
+          </div>
+          <div className="rw-faq">
             {c.faq.items.map((i) => (
               <details key={i.q}>
                 <summary>{i.q}</summary>

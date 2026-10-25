@@ -287,11 +287,10 @@ const ar = {
       { title: "إفصاح كامل", body: "عمولة النجاح من المقاول ثابتة وموحّدة ومعلنة، وشركات مجموعتنا لا تُرشَّح إلا بموافقتك." },
       { title: "حدود واضحة", body: "نراجع ونفحص ونعتمد في نطاق الخدمة، ولا نحلّ محلّ المقاول في مسؤوليته." },
     ],
-    groupTitle: "شركات المجموعة",
+    groupTitle: "من مجموعة تسامي",
     group: [
-      { name: "جرافيكس هاوس", body: "التصوّر المعماري ثلاثي الأبعاد، وتُعدّ تصوّرات «ملف المشروع»." },
-      { name: "توريفا", body: "الديكور والمقاولات، وتُعرَض على العميل بعد الإفصاح وموافقته فقط." },
-      { name: "بيز موشن", body: "التسويق الرقمي وإنتاج المحتوى." },
+      { name: "مجموعة تسامي", body: "المظلة التي ينتمي إليها رواق، بخبرة خمسة عشر عاماً في التصميم والتنفيذ المعماري بالمملكة." },
+      { name: "جرافيكس هاوس", body: "استوديو التصوّر المعماري ثلاثي الأبعاد في المجموعة، ويُعدّ تصوّرات «ملف المشروع»." },
     ],
   },
   how: {
@@ -544,11 +543,10 @@ const en: SiteCopy = {
       { title: "Full disclosure", body: "The contractor success fee is fixed, uniform and disclosed; our group's companies are suggested only with your consent." },
       { title: "Clear boundaries", body: "We review, inspect and approve within the scope; we don't replace the contractor's responsibility." },
     ],
-    groupTitle: "Group companies",
+    groupTitle: "From Tasami Group",
     group: [
-      { name: "Graphics House", body: "3D architectural visualisation; produces the Project File visuals." },
-      { name: "Turriva", body: "Décor and contracting; shown to clients only after disclosure and consent." },
-      { name: "Bees Motion", body: "Digital marketing and content production." },
+      { name: "Tasami Group", body: "The group Ruwaq belongs to, with fifteen years in architectural design and execution in the Kingdom." },
+      { name: "Graphics House", body: "The group's 3D architectural visualisation studio; produces the Project File visuals." },
     ],
   },
   how: {

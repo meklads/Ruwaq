@@ -3,14 +3,11 @@ import Link from "next/link";
 import { getLocale } from "@/shared/i18n/server";
 import { env } from "@/shared/lib/env";
 import { getSiteCopy } from "@/modules/ruwaq/site-copy";
+import { CardIcon, MEASURE_ICONS, SERVICE_ICONS } from "@/modules/ruwaq/icons";
 
 export async function generateMetadata(): Promise<Metadata> {
   const c = getSiteCopy(await getLocale()).how;
-  return {
-    title: c.metaTitle,
-    description: c.metaDescription,
-    alternates: { canonical: `${env.NEXT_PUBLIC_APP_URL}/how-it-works` },
-  };
+  return { title: c.metaTitle, description: c.metaDescription, alternates: { canonical: `${env.NEXT_PUBLIC_APP_URL}/how-it-works` } };
 }
 
 export default async function HowItWorksPage() {
@@ -23,23 +20,28 @@ export default async function HowItWorksPage() {
     <div className="rw">
       <section className="rw-page-hero">
         <div className="rw-wrap">
-          <p className="rw-eyebrow">{c.eyebrow}</p>
-          <h1 className="rw-display">{c.title}</h1>
+          <span className="rw-eyebrow">{c.eyebrow}</span>
+          <h1 className="rw-display" style={{ maxWidth: "48rem" }}>
+            {c.title}
+          </h1>
           <p className="rw-lead">{c.lead}</p>
         </div>
       </section>
 
       <section className="rw-section">
         <div className="rw-wrap">
-          <div className="rw-steps3" style={{ marginBlockStart: 0 }}>
-            {home.services.map((sv) => (
-              <article key={sv.href} className="rw-step">
-                <span className="rw-step__num">{sv.step}</span>
-                <p className="rw-step__when">{sv.when}</p>
-                <h2 className="rw-step__title">{sv.title}</h2>
-                <p className="rw-step__body">{sv.body}</p>
-                <p className="rw-step__meta">{sv.meta}</p>
-                <div className="rw-step__cta">
+          <div className="rw-grid rw-grid--3">
+            {home.services.map((sv, i) => (
+              <article key={sv.href} className="rw-card rw-service">
+                <CardIcon icon={SERVICE_ICONS[i]} />
+                <span className="rw-service__step">
+                  {locale === "ar" ? "الخطوة" : "Step"} {sv.step}
+                </span>
+                <p className="rw-service__when">{sv.when}</p>
+                <h2 className="rw-service__title">{sv.title}</h2>
+                <p className="rw-service__body">{sv.body}</p>
+                <p className="rw-service__meta">{sv.meta}</p>
+                <div className="rw-service__cta">
                   <Link href={sv.href} className="rw-btn rw-btn--outline rw-btn--sm">
                     {sv.cta}
                   </Link>
@@ -52,23 +54,19 @@ export default async function HowItWorksPage() {
 
       <section className="rw-section rw-section--stone">
         <div className="rw-wrap">
-          <h2 className="rw-h2" style={{ maxWidth: "40rem" }}>
-            {home.measuresTitle}
-          </h2>
-          <p className="rw-body" style={{ marginBlockStart: "0.75rem" }}>
-            {home.measuresLead}
-          </p>
-          <ol className="rw-measures">
+          <div className="rw-head">
+            <h2 className="rw-h2">{home.measuresTitle}</h2>
+            <p className="rw-body">{home.measuresLead}</p>
+          </div>
+          <div className="rw-grid rw-grid--3">
             {home.measures.map((m, i) => (
-              <li key={m.title}>
-                <span className="rw-measures__n">{(i + 1).toLocaleString(locale === "ar" ? "ar-SA" : "en-US")}</span>
-                <div>
-                  <h3 className="rw-h3">{m.title}</h3>
-                  <p className="rw-body">{m.body}</p>
-                </div>
-              </li>
+              <article key={m.title} className="rw-card">
+                <CardIcon icon={MEASURE_ICONS[i]} />
+                <h3 className="rw-h3">{m.title}</h3>
+                <p className="rw-body">{m.body}</p>
+              </article>
             ))}
-          </ol>
+          </div>
         </div>
       </section>
 
@@ -78,7 +76,7 @@ export default async function HowItWorksPage() {
           <p className="rw-lead" style={{ marginBlockStart: "1rem" }}>
             {c.closing}
           </p>
-          <div className="rw-hero__actions">
+          <div className="rw-actions">
             <Link href="/check" className="rw-btn rw-btn--gold">
               {home.primaryCta}
             </Link>

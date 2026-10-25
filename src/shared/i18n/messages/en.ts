@@ -309,7 +309,7 @@ export const en: Messages = {
     },
     {
      title: "How does Ruwaq make money?",
-     body: "Client requests are free. Revenue from: Turriva coordination on fit-out/contracting, Ruwaq Pro for contractors (SAR 199/mo), and nominal lead unlock fees in sectors like HVAC and elevators.",
+     body: "Client requests are free. Ruwaq earns its fees from owners for its services, and from Nasaq plans for contractors.",
     },
     {
      title: "How we build trust",
@@ -773,7 +773,7 @@ export const en: Messages = {
    sponsoredRibbonLabel: "Ruwaq sponsored launch",
    sponsoredRibbonCta: "Developer packages →",
    coBrandLine:
-    "3D visualization by Graphics House | Engineering supply & execution by Turriva | Marketing by BeesMotion",
+    "3D visualization by Graphics House",
    coBrandDisclaimer:
     "Marketing showcase only. Verify developer credentials and licenses before commitment.",
    filters: {
@@ -1418,7 +1418,7 @@ export const en: Messages = {
     },
     {
      title: "2× digital marketing / month",
-     body: "Two free digital campaigns monthly via Bees Motion — clear KPIs and a performance improvement guarantee.",
+     body: "Two digital campaigns monthly with clear KPIs.",
     },
     {
      title: "Monthly Reels ad",
@@ -1509,8 +1509,8 @@ export const en: Messages = {
    ecosystem: "Ecosystem",
    graphicsHouse: "Graphics House, visualization",
    graphicsHouseVisualization: "Register visualization project",
-   turriva: "Turriva, decor & contracting",
-   beesmotion: "Beesmotion, digital marketing",
+   turriva: "",
+   beesmotion: "",
    followUs: "Follow us",
    regionLabel: "Saudi Arabia, Western Region",
   },

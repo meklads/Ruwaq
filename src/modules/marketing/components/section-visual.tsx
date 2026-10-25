@@ -60,14 +60,14 @@ export const LANDING_SECTION_IMAGES = {
 export function landingSectionAlts(locale: "ar" | "en") {
   if (locale === "ar") {
     return {
-      problem: "من فوضى Word إلى عرض منظم مع توريفا العقارية",
+      problem: "من فوضى Word إلى عرض منظم مع نَسَق",
       sample: "نموذج عرض تشطيب احترافي على المكتب",
       audience: "مقاول تشطيب يراجع العرض في موقع المشروع",
       trust: "اتفاق ناجح بعد إرسال عرض PDF باسم شركتك",
     };
   }
   return {
-    problem: "From Word chaos to an organized Turriva proposal",
+    problem: "From Word chaos to an organized Nasaq proposal",
     sample: "Professional fit-out proposal on a desk",
     audience: "Contractor reviewing a proposal on site",
     trust: "Successful deal after sending a branded PDF proposal",
