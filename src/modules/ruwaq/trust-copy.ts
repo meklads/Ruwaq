@@ -135,7 +135,7 @@ const ar = {
     ],
     recommendationTitle: "التوصية",
     recommendation: "اطلب من المقاول عرضاً معدّلاً مكتوباً يضيف البنود الغائبة ويحدد المواصفات أعلاه، وتفاوض على شروط الدفع قبل أي التزام. وإن أردت مقارنة حقيقية، فاطلب «ملف المشروع» لتحصل على ثلاثة عروض مسعّرة على جدول الكميات ذاته، مع خصم قيمة هذا التقرير.",
-    reviewedBy: "يُعدّ التقرير الحقيقي فريق رواق بالتعاون مع شريكنا الهندسي، مكتب حفني الهندسي، ويُذكر اسم المهندس المراجِع في التقرير.",
+    reviewedBy: "يُعدّ التقرير فريق رواق، ويوضّح مصدر كل ملاحظة وما تستند إليه.",
     ctaTitle: "أرسل عرضك، ويصلك تقرير مثله خلال ٤٨ ساعة",
     cta: "افحص عرضك مجاناً",
   },
@@ -242,7 +242,7 @@ const ar = {
       { q: "هل رواق مقاول؟", a: "لا. رواق لا ينفّذ أعمال تشطيب أو بناء. نحن جهة تمثّل المالك: نراجع العروض، ونعدّ المواصفات، ونتحقق من الإنجاز قبل كل دفعة." },
       { q: "من يدفع لرواق؟", a: "المالك يدفع أتعاب الخدمات التي يطلبها، ونعلنها قبل البدء. وما نتقاضاه من المقاولين ثابت وموحّد ومعلن، ومفصّل في ميثاق الاستقلال." },
       { q: "هل الفحص المجاني مجاني فعلاً؟", a: "نعم. تصلك الملاحظات الرئيسية على عرضك خلال ٤٨ ساعة دون أي التزام. أما التقرير المفصّل بما فيه من بنود ومواصفات وأسئلة وتوصية، فقيمته ٢٩٩ ريالاً." },
-      { q: "من يراجع عرضي؟", a: "فريق رواق بالتعاون مع شريكنا الهندسي، مكتب حفني الهندسي. ويُذكر اسم المهندس المراجِع في التقرير المفصّل." },
+      { q: "من يراجع عرضي؟", a: "فريق رواق. ويوضّح التقرير المفصّل مصدر كل ملاحظة وما تستند إليه." },
       { q: "هل يعرف المقاول أنني أرسلت عرضه للفحص؟", a: "لا، إلا إذا طلبت أنت ذلك. التقرير لك وحدك، ولا نشاركه مع أي طرف دون إذنك." },
       { q: "هل تحتفظون بأموالي في رواق أمان؟", a: "لا. يتم الدفع بينك وبين المقاول مباشرة. دورنا أن نفحص المرحلة ونعتمدها قبل أن تصرف دفعتها." },
       { q: "بدأ التنفيذ في مشروعي، هل فات الأوان؟", a: "لا. يمكن أن نبدأ معك من أي مرحلة: نقيّم ما أُنجز، ونراجع العقد، ونربط ما بقي من دفعات بالإنجاز." },
@@ -326,10 +326,6 @@ const ar = {
   },
 
   /* ── Join ──────────────────────────────────────────── */
-  partner: {
-    title: "شريكنا الهندسي",
-    body: "نعمل في الفحص والإشراف بالتعاون مع مكتب حفني الهندسي، فتُراجَع العروض وتُفحَص المراحل بعين هندسية متخصصة، ويُذكر اسم المهندس المسؤول في كل تقرير.",
-  },
 
   join: {
     eyebrow: "شبكة رواق للمقاولين",
@@ -452,7 +448,7 @@ const en: TrustCopy = {
     ],
     recommendationTitle: "Recommendation",
     recommendation: "Ask for a written revised quote adding the missing items and specifying the above, and negotiate the payment terms before committing. For a true comparison, request a Project File: three quotes priced on the same BOQ, with this report's fee credited.",
-    reviewedBy: "Real reports are prepared by Ruwaq with our engineering partner, Hefni Engineering Office, and name the reviewing engineer.",
+    reviewedBy: "Real reports are prepared by the Ruwaq team and explain the source of every note.",
     ctaTitle: "Send your quote and get a report like this within 48 hours",
     cta: "Check your quote free",
   },
@@ -551,7 +547,7 @@ const en: TrustCopy = {
       { q: "Is Ruwaq a contractor?", a: "No. We don't execute fit-out or construction. We represent the owner: reviewing quotes, preparing specs and verifying progress before each payment." },
       { q: "Who pays Ruwaq?", a: "The owner pays for the services they request, with fees stated upfront. Anything we receive from contractors is fixed, equal and published in our independence charter." },
       { q: "Is the free check really free?", a: "Yes — key notes within 48 hours, no commitment. The detailed report is 299 SAR." },
-      { q: "Who reviews my quote?", a: "The Ruwaq team with our engineering partner, Hefni Engineering Office. The detailed report names the reviewing engineer." },
+      { q: "Who reviews my quote?", a: "The Ruwaq team. The detailed report explains the source of every note." },
       { q: "Will the contractor know I sent the quote?", a: "Only if you ask us to tell them. The report is yours alone." },
       { q: "Does Ruwaq Aman hold my money?", a: "No. You pay the contractor directly; we inspect and approve each stage before its payment." },
       { q: "Work has started — is it too late?", a: "No. We can join at any stage, assess what's done, review the contract and tie remaining payments to progress." },
@@ -624,10 +620,6 @@ const en: TrustCopy = {
     networkTitle: "Working within the Ruwaq network?",
     networkBody: "Ruwaq's BOQ arrives ready in Nasaq — price it and send it without retyping.",
     networkCta: "Ruwaq contractor network",
-  },
-  partner: {
-    title: "Our engineering partner",
-    body: "We review quotes and inspect stages with Hefni Engineering Office, so every report carries a specialist engineering view and names the responsible engineer.",
   },
   join: {
     eyebrow: "Ruwaq contractor network",
