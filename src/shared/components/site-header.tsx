@@ -11,7 +11,6 @@ export async function SiteHeader() {
   const links = [
     { href: "/check", label: c.check },
     { href: "/project-file", label: c.projectFile },
-    { href: "/aman", label: c.aman },
     { href: "/how-it-works", label: c.howItWorks },
     { href: "/guides", label: c.guides },
     { href: "/about", label: c.about },

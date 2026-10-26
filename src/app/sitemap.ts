@@ -18,7 +18,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/estimate", priority: 0.9, changeFrequency: "monthly" },
     { path: "/checklist", priority: 0.85, changeFrequency: "monthly" },
     { path: "/project-file", priority: 0.9, changeFrequency: "monthly" },
-    { path: "/aman", priority: 0.85, changeFrequency: "monthly" },
     { path: "/how-it-works", priority: 0.75, changeFrequency: "monthly" },
     { path: "/charter", priority: 0.75, changeFrequency: "monthly" },
     { path: "/guides", priority: 0.85, changeFrequency: "weekly" },

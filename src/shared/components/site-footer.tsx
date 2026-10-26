@@ -18,7 +18,6 @@ export async function SiteFooter() {
   const owner = [
     { href: "/check", label: c.header.check },
     { href: "/project-file", label: c.header.projectFile },
-    { href: "/aman", label: c.header.aman },
     { href: "/estimate", label: t.nav.estimate },
     { href: "/checklist", label: t.nav.checklist },
     { href: "/guides", label: c.header.guides },
