@@ -773,7 +773,7 @@ export const en: Messages = {
    sponsoredRibbonLabel: "Ruwaq sponsored launch",
    sponsoredRibbonCta: "Developer packages →",
    coBrandLine:
-    "3D visualization by Graphics House",
+    "",
    coBrandDisclaimer:
     "Marketing showcase only. Verify developer credentials and licenses before commitment.",
    filters: {
@@ -1249,7 +1249,7 @@ export const en: Messages = {
    eyebrow: "See for yourself",
    title: "Proposal sample gallery",
    body:
-    "Three live samples: villa fit-out, engineering supervision, and 3D visualization, Ruwaq and Graphics House designs.",
+    "Three live samples: villa fit-out, engineering supervision, and 3D visualization, Nasaq designs.",
    cta: "Browse all three samples",
    comingSoon: "Coming soon",
    items: [
@@ -1264,7 +1264,7 @@ export const en: Messages = {
      live: true,
     },
     {
-     title: "3D visualization, Graphics House",
+     title: "3D visualization, Architectural",
      body: "Design studio identity for architectural visualization.",
      live: true,
     },
@@ -1491,23 +1491,23 @@ export const en: Messages = {
   footer: {
    tagline: "Professionalism builds trust, the easiest, most trusted real estate & engineering proposals.",
    address: "Jeddah, Al-Zahra District, Saudi Arabia",
-   tasamiGroup: "Ruwaq is part of Tasami Group",
-   tasamiGroupLabel: "Tasami Group",
+   tasamiGroup: "",
+   tasamiGroupLabel: "",
    explore: "Explore",
    product: "Product",
    company: "Company",
    legal: "Legal",
    contact: "Contact us",
    copyright: "© Ruwaq. All rights reserved.",
-   sponsoredBy: "Ruwaq is powered by",
-   sponsoredByLink: "Graphics House",
+   sponsoredBy: "",
+   sponsoredByLink: "",
    ctaTitle: "Step inside the Ruwaq directory",
    ctaSubtitle:
     "Request free quotes from verified companies, or start a professional proposal in minutes.",
    ctaOwner: "Request a free quote",
    ctaButton: "Start a proposal",
    ecosystem: "Ecosystem",
-   graphicsHouse: "Graphics House, visualization",
+   graphicsHouse: "",
    graphicsHouseVisualization: "Register visualization project",
    turriva: "",
    beesmotion: "",
@@ -1566,10 +1566,10 @@ export const en: Messages = {
     { title: "Your identity", body: "Your proposals show your company, Ruwaq works behind the scenes." },
     { title: "Built for KSA", body: "Arabic/English, CR/VAT, local real estate context." },
    ],
-   sponsoredTitle: "Powered by Graphics House",
+   sponsoredTitle: "",
    sponsoredBody:
-    "Ruwaq is built with the design and brand expertise of Graphics House, professional visual identity for proposals that build trust.",
-   sponsoredLink: "3dgraphicshouse.com",
+    "",
+   sponsoredLink: "",
   },
   privacy: {
    title: "Privacy policy",
@@ -1742,7 +1742,7 @@ export const en: Messages = {
      body: "Use the request-a-quote form, we review it and match you with the right provider in Jeddah, Makkah, or Madinah.",
     },
     {
-     title: "Architectural visualization (Graphics House)",
+     title: "Architectural visualization",
      body: "For 3D renders and visualization, use the visualization page or the dual-intent quote form.",
     },
     {
@@ -1805,7 +1805,7 @@ export const en: Messages = {
  templates: {
   title: "NASAQ template gallery",
   subtitle:
-   "Three polished samples: engineering supervision (executive), villa fit-out (classic), and 3D visualization (Graphics House).",
+   "Three polished samples: engineering supervision (executive), villa fit-out (classic), and 3D visualization (Architectural).",
   openSample: "Open in new tab",
   openSampleHint: "Preview is empty on purpose — we place your logo and address at delivery.",
   note: "One full page · no body content · header and footer only.",
@@ -1822,7 +1822,7 @@ export const en: Messages = {
   startWithLook: "Start with this look",
   subscribeHint: "Custom colors and advanced frames unlock with a subscription",
   frameTitle: "Header & footer library",
-  frameHint: "One Graphics House PDF example + 4 simple rectangular header/footer layouts. Change colors on the rectangular layouts only.",
+  frameHint: "Four header/footer layouts; change their colours to match your brand.",
   watermarkToggle: "Soft watermark (10%)",
   gallery: [
    {
@@ -1841,9 +1841,9 @@ export const en: Messages = {
    },
    {
     slug: "graphics-house",
-    brand: "Graphics House",
+    brand: "Architectural",
     title: "3D visualization package",
-    body: "Graphics House identity for design and architectural visualization proposals.",
+    body: "Architectural identity for design and architectural visualization proposals.",
     badge: "GH sample",
    },
   ],
@@ -1966,7 +1966,7 @@ export const en: Messages = {
   exportTemplateOptions: {
    ruwaq: "Ruwaq Classic, fit-out & general contracting",
    ruwaq_executive: "Ruwaq Executive, engineering & supervision",
-   graphics_house: "Graphics House, visualization & creative",
+   graphics_house: "Architectural, visualization & creative",
   },
   address: "Address",
   addressPlaceholder: "e.g. Riyadh, Al Malqa",
@@ -1989,12 +1989,12 @@ export const en: Messages = {
  },
  upgrade: {
   title: "Unlock premium templates",
-  subtitle: "Ruwaq Executive and Graphics House templates, a higher-end look for your proposals.",
+  subtitle: "Ruwaq Executive and Architectural templates, a higher-end look for your proposals.",
   price: "$15 one-time",
   priceNote: "Paid via PayPal for now (a Saudi payment gateway is coming soon). The base template stays free forever.",
   cta: "Upgrade now",
   inlineTitle: "Premium templates available",
-  inlineBody: "Unlock the \"Ruwaq Executive\" and \"Graphics House\" templates with a single small payment.",
+  inlineBody: "Unlock the \"Ruwaq Executive\" and \"Architectural\" templates with a single small payment.",
   lockedSuffix: "locked",
   notConfigured: "Payments aren't enabled yet. Contact info@ruwaq.co.",
   close: "Close",

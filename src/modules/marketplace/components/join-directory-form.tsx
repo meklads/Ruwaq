@@ -56,9 +56,9 @@ export function JoinDirectoryForm({
   const [pending, setPending] = useState(false);
 
   const isEditorial = variant === "editorial";
-  const labelClass = isEditorial ? "ruwaq-ad-field-label" : "ruwaq-label";
-  const fieldClass = isEditorial ? "ruwaq-ad-field" : "ruwaq-field";
-  const formClass = isEditorial ? "ruwaq-join-editorial-fields" : "ruwaq-pro-join-form";
+  const labelClass = isEditorial ? "rw-label" : "ruwaq-label";
+  const fieldClass = isEditorial ? "rw-field" : "ruwaq-field";
+  const formClass = isEditorial ? "rw-form" : "ruwaq-pro-join-form";
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -88,13 +88,13 @@ export function JoinDirectoryForm({
   return (
     <form onSubmit={onSubmit} className={formClass}>
       {error ? (
-        <div className="border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+        <div className={isEditorial ? "rw-error" : "border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700"} role="alert">
           {error}
         </div>
       ) : null}
 
       {isEditorial ? (
-        <p className="ruwaq-join-step-label">{copy.stepCompany}</p>
+        <p className="rw-eyebrow" style={{ marginBlock: "0.75rem 0" }}>{copy.stepCompany}</p>
       ) : null}
 
       <div>
@@ -107,7 +107,7 @@ export function JoinDirectoryForm({
           dir={locale === "ar" ? "rtl" : "ltr"}
         />
       </div>
-      <div className="grid gap-5 sm:grid-cols-2">
+      <div className={isEditorial ? "rw-form__grid" : "grid gap-5 sm:grid-cols-2"}>
         <div>
           <label className={labelClass}>{copy.fields.contactName}</label>
           <input
@@ -145,10 +145,10 @@ export function JoinDirectoryForm({
       </div>
 
       {isEditorial ? (
-        <p className="ruwaq-join-step-label">{copy.stepVerification}</p>
+        <p className="rw-eyebrow" style={{ marginBlock: "0.75rem 0" }}>{copy.stepVerification}</p>
       ) : null}
 
-      <div className="grid gap-5 sm:grid-cols-2">
+      <div className={isEditorial ? "rw-form__grid" : "grid gap-5 sm:grid-cols-2"}>
         <div>
           <label className={labelClass}>{copy.fields.crNumber}</label>
           <input
@@ -190,7 +190,7 @@ export function JoinDirectoryForm({
       </div>
 
       {isEditorial ? (
-        <p className="ruwaq-join-step-label">{copy.stepPortfolio}</p>
+        <p className="rw-eyebrow" style={{ marginBlock: "0.75rem 0" }}>{copy.stepPortfolio}</p>
       ) : null}
 
       <div>
@@ -217,7 +217,7 @@ export function JoinDirectoryForm({
       <button
         type="submit"
         disabled={pending}
-        className="ruwaq-pro-btn-solid w-full px-8 py-3.5 disabled:opacity-50"
+        className={isEditorial ? "rw-btn rw-btn--primary rw-btn--block disabled:opacity-50" : "ruwaq-pro-btn-solid w-full px-8 py-3.5 disabled:opacity-50"}
       >
         {pending ? copy.submitting : copy.submit}
       </button>

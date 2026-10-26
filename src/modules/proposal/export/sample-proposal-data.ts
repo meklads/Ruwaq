@@ -300,19 +300,18 @@ function buildGraphicsHouseSample(locale: Locale, base: string): ProposalExportD
     ...sampleCompanyIdentity(base),
     templateId: "graphics_house",
     appBaseUrl: base,
-    logoUrl: `${base}/brand/graphics-house/logo-mark.png`,
     projectName: isAr
       ? "حزمة تصور ثلاثي الأبعاد — مشروع سكني فاخر"
       : "3D visualization package — luxury residential project",
     clientName: isAr ? "مجموعة الرؤية للتطوير العقاري" : "Al Ru'ya Development Group",
-    companyName: "Graphics House",
+    companyName: isAr ? "استوديو المسار للتصميم" : "Al Masar Design Studio",
     address: isAr ? "جدة — المملكة العربية السعودية" : "Jeddah — Saudi Arabia",
     about: isAr
       ? "استوديو تصميم وتصوير معماري يقدّم عروضاً بصرية احترافية للمطورين والمكاتب الهندسية منذ أكثر من 15 عاماً."
       : "Design and architectural visualization studio serving developers and engineering firms for over 15 years.",
     companyPhone: "+966 12 345 6789",
-    companyEmail: "hello@3dgraphicshouse.com",
-    website: "https://3dgraphicshouse.com",
+    companyEmail: "info@almasar.example",
+    website: "https://almasar.example",
     proposalNumber: "GH-2026-0315",
     introduction: isAr
       ? "نقدّم عرضنا لإنتاج حزمة تصوير ثلاثي الأبعاد كاملة للمشروع السكني، تشمل مناظر خارجية وداخلية وعرضاً تفاعلياً للمبيعات."

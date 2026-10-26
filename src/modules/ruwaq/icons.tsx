@@ -9,6 +9,8 @@ import {
   FileQuestion,
   FileSearch,
   FileSignature,
+  Calculator,
+  ScrollText,
   KeyRound,
   Layers,
   ListX,
@@ -29,6 +31,7 @@ export const MEASURE_ICONS: LucideIcon[] = [Eye, BadgeCheck, Scale, FileSignatur
 export const CONTRACTOR_ICONS: LucideIcon[] = [ClipboardList, UserCheck, CalendarCheck, TrendingUp];
 export const PRINCIPLE_ICONS: LucideIcon[] = [UserCheck, Lock, Eye, Scale];
 export const CHECK_ICONS: LucideIcon[] = [ClipboardList, FileQuestion, Scale, Banknote, CalendarCheck, ShieldCheck];
+export const PROOF_ICONS: LucideIcon[] = [FileSearch, Calculator, ScrollText];
 export const GROUP_ICONS: LucideIcon[] = [Building2, Layers];
 
 export function iconAt(list: LucideIcon[], i: number): LucideIcon {

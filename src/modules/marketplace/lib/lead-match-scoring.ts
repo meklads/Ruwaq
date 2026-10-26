@@ -127,7 +127,7 @@ export function scoreLeadMatchCandidates(
     if (listing.isVerified) {
       score += 10;
     }
-    score += Math.max(0, (2 - listing.directorySortRank) * 5);
+    // Ruwaq charter: subscription tier never affects matching (no paid ranking).
 
     if (lead) {
       const providerFit =

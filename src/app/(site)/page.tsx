@@ -6,7 +6,8 @@ import { env } from "@/shared/lib/env";
 import { RUWQ_GUIDES } from "@/content/guides";
 import { buildOrganizationJsonLd, buildWebSiteJsonLd } from "@/modules/marketplace/seo/site-jsonld";
 import { getSiteCopy } from "@/modules/ruwaq/site-copy";
-import { CardIcon, iconAt, CONTRACTOR_ICONS, FEAR_ICONS, MEASURE_ICONS, SERVICE_ICONS } from "@/modules/ruwaq/icons";
+import { CardIcon, iconAt, CONTRACTOR_ICONS, FEAR_ICONS, MEASURE_ICONS, PROOF_ICONS, SERVICE_ICONS } from "@/modules/ruwaq/icons";
+import { getTrustCopy } from "@/modules/ruwaq/trust-copy";
 
 export async function generateMetadata(): Promise<Metadata> {
   const c = getSiteCopy(await getLocale()).home;
@@ -17,6 +18,7 @@ export default async function HomePage() {
   const locale = (await getLocale()) === "en" ? "en" : "ar";
   const c = getSiteCopy(locale).home;
   const s = c.sheet;
+  const t = getTrustCopy(locale);
   const guides = RUWQ_GUIDES.slice(0, 3);
   const ar = locale === "ar";
 
@@ -127,6 +129,28 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* Proof — verify before trusting */}
+      <section className="rw-section rw-section--stone">
+        <div className="rw-wrap">
+          <div className="rw-head">
+            <h2 className="rw-h2">{t.proof.title}</h2>
+            <p className="rw-body">{t.proof.lead}</p>
+          </div>
+          <div className="rw-proof">
+            {t.proof.items.map((p, i) => (
+              <article key={p.href} className="rw-card">
+                <CardIcon icon={PROOF_ICONS[i]} />
+                <h3 className="rw-h3">{p.title}</h3>
+                <p className="rw-body">{p.body}</p>
+                <Link href={p.href} className="rw-link">
+                  {p.cta}
+                </Link>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Principle */}
       <section className="rw-photo-split">
         <Image
@@ -139,7 +163,7 @@ export default async function HomePage() {
         <div className="rw-photo-split__text">
           <h2 className="rw-h2">{c.principleTitle}</h2>
           <p>{c.principleBody}</p>
-          <Link href="/about" className="rw-link">
+          <Link href="/charter" className="rw-link">
             {c.principleLink}
           </Link>
         </div>
@@ -172,8 +196,31 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* Guides */}
+      <section className="rw-section rw-section--stone">
+        <div className="rw-wrap">
+          <div className="rw-head-row">
+            <div className="rw-head">
+              <h2 className="rw-h2">{c.guidesTitle}</h2>
+              <p className="rw-body">{c.guidesLead}</p>
+            </div>
+            <Link href="/guides" className="rw-link">
+              {c.guidesAll}
+            </Link>
+          </div>
+          <div className="rw-grid rw-grid--3">
+            {guides.map((g) => (
+              <Link key={g.slug} href={`/guides/${g.slug}`} className="rw-guide">
+                <Image src={g.heroImage} alt="" width={900} height={600} sizes="(min-width: 1024px) 33vw, 100vw" />
+                <h3>{ar ? g.titleAr : g.titleEn}</h3>
+                <p>{ar ? g.excerptAr : g.excerptEn}</p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
       {/* Contractor door */}
-      <section className="rw-section rw-section--flush-top">
+      <section className="rw-section">
         <div className="rw-wrap">
           <div className="rw-door">
             <div>
@@ -204,29 +251,6 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Guides */}
-      <section className="rw-section rw-section--stone">
-        <div className="rw-wrap">
-          <div className="rw-head-row">
-            <div className="rw-head">
-              <h2 className="rw-h2">{c.guidesTitle}</h2>
-              <p className="rw-body">{c.guidesLead}</p>
-            </div>
-            <Link href="/guides" className="rw-link">
-              {c.guidesAll}
-            </Link>
-          </div>
-          <div className="rw-grid rw-grid--3">
-            {guides.map((g) => (
-              <Link key={g.slug} href={`/guides/${g.slug}`} className="rw-guide">
-                <Image src={g.heroImage} alt="" width={900} height={600} sizes="(min-width: 1024px) 33vw, 100vw" />
-                <h3>{ar ? g.titleAr : g.titleEn}</h3>
-                <p>{ar ? g.excerptAr : g.excerptEn}</p>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
     </div>
   );
 }

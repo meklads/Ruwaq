@@ -319,7 +319,7 @@ export function ProposalReviewClient({
           </Link>
         </div>
       )}
-      {exported && (
+      {false && exported && (
         <div className="ruwaq-upsell-card flex flex-wrap items-center justify-between gap-3">
           <div>
             <p className="text-sm font-semibold text-ruwaq-ink">

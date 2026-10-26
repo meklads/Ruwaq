@@ -3,7 +3,9 @@ import Image from "next/image";
 import { getLocale } from "@/shared/i18n/server";
 import { env } from "@/shared/lib/env";
 import { getSiteCopy } from "@/modules/ruwaq/site-copy";
-import { CardIcon, GROUP_ICONS, PRINCIPLE_ICONS } from "@/modules/ruwaq/icons";
+import Link from "next/link";
+import { CardIcon, PRINCIPLE_ICONS } from "@/modules/ruwaq/icons";
+import { getTrustCopy } from "@/modules/ruwaq/trust-copy";
 
 export async function generateMetadata(): Promise<Metadata> {
   const c = getSiteCopy(await getLocale()).about;
@@ -13,6 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function AboutPage() {
   const locale = (await getLocale()) === "en" ? "en" : "ar";
   const c = getSiteCopy(locale).about;
+  const t = getTrustCopy(locale);
 
   return (
     <div className="rw">
@@ -64,17 +67,14 @@ export default async function AboutPage() {
 
       <section className="rw-section">
         <div className="rw-wrap">
-          <div className="rw-head">
-            <h2 className="rw-h2">{c.groupTitle}</h2>
-          </div>
-          <div className="rw-grid rw-grid--2">
-            {c.group.map((g, i) => (
-              <article key={g.name} className="rw-card">
-                <CardIcon icon={GROUP_ICONS[i]} />
-                <h3 className="rw-h3">{g.name}</h3>
-                <p className="rw-body">{g.body}</p>
-              </article>
-            ))}
+          <div className="rw-head-row" style={{ marginBlockEnd: 0 }}>
+            <div className="rw-head">
+              <h2 className="rw-h2">{t.charter.title}</h2>
+              <p className="rw-body">{t.charter.lead}</p>
+            </div>
+            <Link href="/charter" className="rw-btn rw-btn--primary">
+              {t.nav.charter}
+            </Link>
           </div>
         </div>
       </section>

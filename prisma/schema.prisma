@@ -547,6 +547,7 @@ enum PartnerLeadSource {
   RUWAQ_QUOTE_CHECK
   RUWAQ_PROJECT_FILE
   RUWAQ_AMAN
+  RUWAQ_CHECKLIST
 }
 
 enum DirectoryApplicationStatus {

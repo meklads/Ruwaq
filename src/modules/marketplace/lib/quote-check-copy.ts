@@ -69,7 +69,7 @@ const ar = {
     title: "لماذا رواق",
     items: [
       { title: "لا مصلحة لنا في عرضك", body: "لا نتقاضى من أي مقاول مقابل هذه المراجعة، فرأينا خالص لك." },
-      { title: "خبرة في السوق المحلي", body: "رواق إحدى شركات مجموعة تسامي، بخبرة تمتد خمسة عشر عاماً في التصميم والتنفيذ المعماري بالمملكة." },
+      { title: "خبرة في السوق المحلي", body: "فريق بخبرة خمسة عشر عاماً في التصميم والتنفيذ المعماري بالمملكة، يعرف أين تختبئ الثغرات في العروض." },
       { title: "سرية كاملة", body: "لا يطّلع على عرضك ولا على اسم مقاولك أحد خارج فريق المراجعة." },
     ],
   },
@@ -207,7 +207,7 @@ const en: typeof ar = {
     title: "We're on your side",
     items: [
       { title: "We don't sell contractors", body: "The review isn't influenced by any contractor, and no party pays us a commission for it." },
-      { title: "Saudi market experience", body: "Ruwaq is part of Tasami Group, with 15+ years in architectural design and execution in the Kingdom." },
+      { title: "Saudi market experience", body: "A team with 15 years in architectural design and execution in the Kingdom, who know where quotes hide their gaps." },
       { title: "Fully confidential", body: "We never share your quote or your contractor's name." },
     ],
   },

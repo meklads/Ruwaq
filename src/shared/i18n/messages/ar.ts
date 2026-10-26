@@ -767,7 +767,7 @@ export const ar = {
    sponsoredRibbonLabel: "إطلاق برعاية Ruwaq",
    sponsoredRibbonCta: "باقات المطورين ←",
    coBrandLine:
-    "التصوّر والتصميم ثلاثي الأبعاد بواسطة جرافيكس هاوس",
+    "",
    coBrandDisclaimer:
     "محتوى تسويقي للعرض فقط. يرجى التحقق من المطور والتراخيص قبل أي التزام.",
    filters: {
@@ -1240,7 +1240,7 @@ export const ar = {
    eyebrow: "شاهد بنفسك",
    title: "معرض نماذج العروض",
    body:
-    "ثلاثة نماذج جاهزة للاطلاع: تشطيب فيلا، إشراف هندسي، وتصور ثلاثي الأبعاد، بتصاميم رواق وGraphics House.",
+    "ثلاثة نماذج جاهزة للاطلاع: تشطيب فيلا، إشراف هندسي، وتصور ثلاثي الأبعاد، بتصاميم نَسَق.",
    cta: "استعرض النماذج الثلاثة",
    comingSoon: "قريباً",
    items: [
@@ -1255,7 +1255,7 @@ export const ar = {
      live: true,
     },
     {
-     title: "تصور 3D، Graphics House",
+     title: "تصور ثلاثي الأبعاد، معماري",
      body: "هوية استوديو التصميم والتصوير المعماري.",
      live: true,
     },
@@ -1482,23 +1482,23 @@ export const ar = {
   footer: {
    tagline: "احترافية تبني الثقة، أسهل وأوثق عروض قطاع العقار والهندسة.",
    address: "جدة، حي الزهراء، المملكة العربية السعودية",
-   tasamiGroup: "رواق جزء من مجموعة تسامي",
-   tasamiGroupLabel: "مجموعة تسامي",
+   tasamiGroup: "",
+   tasamiGroupLabel: "",
    explore: "استكشف",
    product: "المنتج",
    company: "الشركة",
    legal: "قانوني",
    contact: "تواصل معنا",
    copyright: "© رواق. جميع الحقوق محفوظة.",
-   sponsoredBy: "رواق برعاية",
-   sponsoredByLink: "Graphics House",
+   sponsoredBy: "",
+   sponsoredByLink: "",
    ctaTitle: "ادخل إلى دليل رواق",
    ctaSubtitle:
     "اطلب عروض أسعار مجانية من شركات موثّقة، أو ابدأ عرضاً احترافياً خلال دقائق.",
    ctaOwner: "اطلب عرض سعر مجاني",
    ctaButton: "ابدأ عرضاً الآن",
    ecosystem: "المنظومة",
-   graphicsHouse: "جرافيكس هاوس، تصوير معماري",
+   graphicsHouse: "",
    graphicsHouseVisualization: "سجّل مشروع تصوير",
    turriva: "",
    beesmotion: "",
@@ -1569,10 +1569,10 @@ export const ar = {
      body: "عربي/إنجليزي، CR/VAT، وسياق عقاري محلي.",
     },
    ],
-   sponsoredTitle: "برعاية Graphics House",
+   sponsoredTitle: "",
    sponsoredBody:
-    "رواق مبني بخبرة التصميم والهوية البصرية من Graphics House، عروض بمظهر احترافي يبني الثقة.",
-   sponsoredLink: "3dgraphicshouse.com",
+    "",
+   sponsoredLink: "",
   },
   privacy: {
    title: "سياسة الخصوصية",
@@ -1745,7 +1745,7 @@ export const ar = {
      body: "استخدم نموذج «اطلب عرض سعر»، نراجعه ونوصلك بالمزود المناسب في جدة أو مكة أو المدينة.",
     },
     {
-     title: "التصوير المعماري (جرافيكس هاوس)",
+     title: "التصوير المعماري",
      body: "للمشاريع التي تحتاج تصوراً ثلاثي الأبعاد أو رenders، صفحة التصوير المعماري أو نموذج الطلب المزدوج.",
     },
     {
@@ -1808,7 +1808,7 @@ export const ar = {
  templates: {
   title: "معرض نماذج نَسَق",
   subtitle:
-   "ثلاثة نماذج جاهزة: إشراف هندسي (تنفيذي)، تشطيب فيلا (كلاسيكي)، وتصور ثلاثي الأبعاد (Graphics House).",
+   "ثلاثة نماذج جاهزة: إشراف هندسي (تنفيذي)، تشطيب فيلا (كلاسيكي)، وتصور ثلاثي الأبعاد (معماري).",
   openSample: "فتح في تبويب جديد",
   openSampleHint: "المعاينة فارغة عمداً — عند التنفيذ نضع شعارك وعناوينك.",
   note: "صفحة واحدة كاملة · بدون محتوى · فقط الهيدر والفوتر.",
@@ -1825,7 +1825,7 @@ export const ar = {
   startWithLook: "ابدأ بهذا المظهر",
   subscribeHint: "الألوان المخصصة والأشكال المتقدمة تفتح مع الاشتراك",
   frameTitle: "مكتبة الهيدر والفوتر",
-  frameHint: "مثال Graphics House (PDF) + ٤ هيدر/فوتر مستطيلة بسيطة. غيّر الألوان للنماذج المستطيلة فقط.",
+  frameHint: "أربعة تصاميم للهيدر والفوتر، يمكنك تغيير ألوانها بما يناسب هوية شركتك.",
   watermarkToggle: "علامة مائية خفيفة (١٠٪)",
   gallery: [
    {
@@ -1844,9 +1844,9 @@ export const ar = {
    },
    {
     slug: "graphics-house",
-    brand: "Graphics House",
+    brand: "معماري",
     title: "تصور ثلاثي الأبعاد",
-    body: "هوية Graphics House لعروض التصميم والتصوير المعماري.",
+    body: "هوية معمارية لعروض التصميم والتصوير المعماري.",
     badge: "نموذج GH",
    },
   ],
@@ -1967,7 +1967,7 @@ export const ar = {
   exportTemplateOptions: {
    ruwaq: "رواق كلاسيك، تشطيب ومقاولات عامة",
    ruwaq_executive: "رواق تنفيذي، هندسة وإشراف",
-   graphics_house: "Graphics House، تصور وإبداع",
+   graphics_house: "معماري، تصور وإبداع",
   },
   address: "العنوان",
   addressPlaceholder: "مثال: الرياض، حي الملقا",
@@ -1990,12 +1990,12 @@ export const ar = {
  },
  upgrade: {
   title: "افتح القوالب المميزة",
-  subtitle: "قالب رواق التنفيذي وقالب Graphics House، تصميم أعلى مستوى لعروضك.",
+  subtitle: "قالب رواق التنفيذي والقالب المعماري، تصميم أعلى مستوى لعروضك.",
   price: "15$ دفعة واحدة",
   priceNote: "دفع عبر PayPal حالياً (بوابة سعودية قادمة قريباً). القالب الأساسي مجاني دائماً.",
   cta: "الترقية الآن",
   inlineTitle: "قوالب أعلى مستوى متاحة",
-  inlineBody: "افتح قالبي \"رواق تنفيذي\" و\"Graphics House\" بدفعة واحدة صغيرة.",
+  inlineBody: "افتح قالبي \"رواق تنفيذي\" و\"معماري\" بدفعة واحدة صغيرة.",
   lockedSuffix: "مقفل",
   notConfigured: "الدفع غير مفعّل حالياً. تواصل معنا على info@ruwaq.co.",
   close: "إغلاق",

@@ -36,8 +36,8 @@ export type LetterheadFrame = {
 export const LETTERHEAD_FRAMES: Record<LetterheadFrameId, LetterheadFrame> = {
   graphics_house: {
     id: "graphics_house",
-    nameAr: "مثال Graphics House",
-    nameEn: "Graphics House example",
+    nameAr: "مثال معماري",
+    nameEn: "Architectural example",
     image: "/letterheads/refs/template-p1.png",
     pdf: "/letterheads/refs/template.pdf",
     colorable: false,
@@ -96,8 +96,8 @@ export const LETTERHEAD_FRAMES: Record<LetterheadFrameId, LetterheadFrame> = {
   },
 };
 
+// The fixed-artwork reference frame stays available by id, but is not offered publicly.
 export const LETTERHEAD_FRAME_ORDER: LetterheadFrameId[] = [
-  "graphics_house",
   "bar_classic",
   "bar_accent",
   "bar_split",
@@ -252,7 +252,7 @@ export function renderExactLetterheadHtml(options: {
   const pdfLink =
     frame.pdf &&
     `<p class="pdf-note"><a href="${base}${frame.pdf}" target="_blank" rel="noopener">${
-      isAr ? "تحميل مثال PDF (Graphics House)" : "Download PDF example (Graphics House)"
+      isAr ? "تحميل مثال PDF" : "Download PDF example"
     }</a></p>`;
 
   return `<!DOCTYPE html>

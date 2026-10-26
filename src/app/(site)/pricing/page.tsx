@@ -1,98 +1,72 @@
+import type { Metadata } from "next";
 import Link from "next/link";
-import { getMessages } from "@/shared/i18n";
 import { getLocale } from "@/shared/i18n/server";
 import { TIERS, TIER_ORDER } from "@/modules/billing/lib/tiers";
-import { ContractorPromoBanner } from "@/modules/marketplace/components/contractor-promo-banner";
+import { getTrustCopy } from "@/modules/ruwaq/trust-copy";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const c = getTrustCopy(await getLocale()).pricing;
+  return { title: c.metaTitle, description: c.lead };
+}
 
 export default async function PricingPage() {
-  const locale = await getLocale();
-  const t = getMessages(locale);
+  const locale = (await getLocale()) === "en" ? "en" : "ar";
+  const c = getTrustCopy(locale).pricing;
+  const fmt = (n: number) => n.toLocaleString(locale === "ar" ? "ar-SA" : "en-US");
 
   return (
-    <div className="ruwaq-pro-directory">
-      <header className="ruwaq-pro-directory-header text-center">
-        <p className="ruwaq-pro-directory-label">RUWAQ PRO, PLANS</p>
-        <h1 className="ruwaq-pro-directory-title">
-          {locale === "ar" ? "باقات رواق للمقاولين" : "Ruwaq contractor plans"}
-        </h1>
-        <p className="ruwaq-pro-directory-meta mt-4 normal-case tracking-normal">
-          {locale === "ar"
-            ? "مرحلة الإطلاق: المحتوى والدليل مجانيان. نَسَق — 3 عروض شهرياً بعد إكمال ملف الشركة (شعار + إيميل) مع شعار Ruwaq. الدفع الإلكتروني لاحقاً."
-            : "Launch phase: editorial & directory are free. NASAQ — 3/month after company profile (logo + email) with Ruwaq branding. Online billing later."}
-        </p>
-      </header>
+    <div className="rw">
+      <section className="rw-page-hero">
+        <div className="rw-wrap">
+          <span className="rw-eyebrow">{c.eyebrow}</span>
+          <h1 className="rw-display">{c.title}</h1>
+          <p className="rw-lead">{c.lead}</p>
+        </div>
+      </section>
 
-      <div className="ruwaq-ad-content mt-12 grid grid-cols-1 gap-8 md:grid-cols-3">
-        {TIER_ORDER.map((tierId) => {
-          const tier = TIERS[tierId];
-          const highlighted = tierId === "VERIFIED";
-          return (
-            <article
-              key={tierId}
-              className={`flex flex-col border bg-white p-8 ${
-                highlighted ? "border-neutral-950 ring-1 ring-neutral-950" : "border-neutral-200"
-              }`}
-            >
-              <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-neutral-500">
-                {tierId}
-              </p>
-              <h2 className="mt-2 font-serif text-2xl font-medium tracking-tight text-neutral-950">
-                {locale === "ar" ? tier.nameAr : tier.nameEn}
-              </h2>
-              <p className="mt-4 font-serif text-3xl text-neutral-950">
-                {tier.priceSar === 0 ? (
-                  locale === "ar" ? "مجاني" : "Free"
-                ) : (
-                  <>
-                    {tier.priceSar}{" "}
-                    <span className="text-sm font-sans text-neutral-500">
-                      {locale === "ar" ? "ر.س/شهر" : "SAR/mo"}
-                    </span>
-                  </>
-                )}
-              </p>
-              <ul className="mt-6 flex-1 space-y-3 border-t border-neutral-200 pt-6 text-sm text-neutral-700">
-                {(locale === "ar" ? tier.featuresAr : tier.featuresEn).map((feature) => (
-                  <li key={feature} className="border-s border-neutral-300 ps-3">
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-              <Link
-                href={tierId === "STARTER" ? "/proposals/new" : "/join"}
-                className={`mt-8 block py-3 text-center text-xs font-semibold uppercase tracking-widest ${
-                  highlighted
-                    ? "ruwaq-pro-btn-solid"
-                    : "ruwaq-pro-btn-outline"
-                }`}
-              >
-                {tierId === "STARTER"
-                  ? locale === "ar"
-                    ? "ابدأ مجاناً"
-                    : "Start free"
-                  : locale === "ar"
-                    ? "ترقية الحساب"
-                    : "Upgrade"}
-              </Link>
-            </article>
-          );
-        })}
-      </div>
-
-      <p className="mx-auto mt-12 max-w-2xl text-center text-sm text-neutral-500">
-        {locale === "ar"
-          ? "الترقية إلى Verified أو PRO عبر /join — بدون دفع إلكتروني حالياً. بوابة Moyasar عند النمو."
-          : "Upgrade to Verified or PRO via /join — no online checkout yet. Moyasar when we scale."}
-      </p>
-      <p className="mt-6 text-center">
-        <Link href="/proposals" className="ruwaq-pro-btn-outline px-8 py-3">
-          {t.nav.contractorHub}
-        </Link>
-      </p>
-
-      <div className="mt-16">
-        <ContractorPromoBanner locale={locale} />
-      </div>
+      <section className="rw-section">
+        <div className="rw-wrap">
+          <div className="rw-grid rw-grid--3">
+            {TIER_ORDER.map((id) => {
+              const t = TIERS[id];
+              const featured = id === "VERIFIED";
+              return (
+                <article key={id} className={`rw-plan ${featured ? "rw-plan--featured" : ""}`} style={{ display: "flex", flexDirection: "column" }}>
+                  <h2 className="rw-h3">{locale === "ar" ? t.nameAr : t.nameEn}</h2>
+                  <p className="rw-plan__price">
+                    {t.priceSar === 0 ? (
+                      c.free
+                    ) : (
+                      <>
+                        {fmt(t.priceSar)} <span className="rw-small" style={{ fontWeight: 500 }}>{c.perMonth}</span>
+                      </>
+                    )}
+                  </p>
+                  <ul style={{ flex: "1 1 auto" }}>
+                    {(locale === "ar" ? t.featuresAr : t.featuresEn).map((f) => (
+                      <li key={f}>{f}</li>
+                    ))}
+                  </ul>
+                  <div style={{ marginBlockStart: "1.5rem" }}>
+                    <Link
+                      href={id === "STARTER" ? "/proposals/new" : "/contact"}
+                      className={`rw-btn rw-btn--block ${featured ? "rw-btn--primary" : "rw-btn--outline"}`}
+                    >
+                      {id === "STARTER" ? c.start : c.upgrade}
+                    </Link>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+          <div className="rw-head-row" style={{ marginBlock: "2rem 0" }}>
+            <p className="rw-fineprint">{c.note}</p>
+            <Link href="/proposals" className="rw-link">
+              {c.back}
+            </Link>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

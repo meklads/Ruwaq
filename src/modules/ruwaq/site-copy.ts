@@ -31,8 +31,6 @@ const ar = {
     servicesTitle: "خدمات المالك",
     contractorsTitle: "للمقاولين",
     companyTitle: "رواق",
-    groupLine: "رواق إحدى شركات مجموعة تسامي",
-    groupNote: "شركات المجموعة لا تُدرج في ترشيحات رواق إلا بعد الإفصاح للعميل وموافقته.",
     network: "شبكة رواق",
     join: "طلب الانضمام",
     nasaq: "نَسَق",
@@ -110,8 +108,8 @@ const ar = {
     ],
     principleTitle: "استقلالنا ليس شعاراً، بل نموذج عمل",
     principleBody:
-      "لا يستطيع أي مقاول أن يشتري ترشيحاً من رواق؛ الدخول إلى شبكتنا بالتحقق، والترتيب فيها بالأداء. وإن رشّحنا يوماً شركةً من مجموعتنا، أفصحنا لك بذلك صراحةً، وكان القرار لك.",
-    principleLink: "مبادئنا",
+      "لا يستطيع أي مقاول أن يشتري ترشيحاً من رواق؛ الدخول إلى شبكتنا بالتحقق، والترتيب فيها بالأداء. وأي شركة ذات صلة بنا تخضع للمعايير ذاتها، ونفصح لك عن صلتها كتابةً قبل أن تختار.",
+    principleLink: "اقرأ ميثاق الاستقلال",
     measuresTitle: "سبعة إجراءات وقائية تسبق الخطأ قبل أن يقع",
     measuresLead: "الثقة لا تُبنى بالوعود، بل بإجراءات تجعل الخطأ صعباً من الأساس.",
     measures: [
@@ -278,19 +276,14 @@ const ar = {
     paragraphs: [
       "يستعين كبار المطوّرين بجهات متخصصة تمثّلهم أمام المقاول، تراجع وتفحص وتعتمد قبل كل دفعة. أمّا مالك الفيلا أو الشقة، فكثيراً ما يواجه المشروع وحده، بماله ووقته وأحلام أسرته.",
       "من هذه الفجوة وُلد رواق. نضع خبرتنا في خدمة المالك الفرد، بالدقة ذاتها التي تحظى بها المشاريع الكبرى، وبأتعاب تناسب حجم مشروعه.",
-      "رواق إحدى شركات مجموعة تسامي، التي تعمل منذ خمسة عشر عاماً في التصميم والتنفيذ المعماري في المملكة العربية السعودية.",
+      "يقف خلف رواق فريق عمل خمسة عشر عاماً في التصميم والتنفيذ المعماري في المملكة العربية السعودية، ويعرف من الداخل أين تقع الثغرات التي يدفع المالك ثمنها.",
     ],
     principlesTitle: "مبادئنا",
     principles: [
       { title: "المالك هو عميلنا", body: "أتعابنا من المالك، فمصلحتنا من مصلحته." },
       { title: "لا ترشيح مدفوع", body: "لا يشتري المقاول ظهوراً أو ترتيباً؛ الدخول بالتحقق والترتيب بالأداء." },
-      { title: "إفصاح كامل", body: "عمولة النجاح من المقاول ثابتة وموحّدة ومعلنة، وشركات مجموعتنا لا تُرشَّح إلا بموافقتك." },
+      { title: "إفصاح كامل", body: "عمولة النجاح من المقاول ثابتة وموحّدة ومعلنة، وأي شركة ذات صلة بنا لا تُعرض عليك إلا بإفصاح مكتوب." },
       { title: "حدود واضحة", body: "نراجع ونفحص ونعتمد في نطاق الخدمة، ولا نحلّ محلّ المقاول في مسؤوليته." },
-    ],
-    groupTitle: "من مجموعة تسامي",
-    group: [
-      { name: "مجموعة تسامي", body: "المظلة التي ينتمي إليها رواق، بخبرة خمسة عشر عاماً في التصميم والتنفيذ المعماري بالمملكة." },
-      { name: "جرافيكس هاوس", body: "استوديو التصوّر المعماري ثلاثي الأبعاد في المجموعة، ويُعدّ تصوّرات «ملف المشروع»." },
     ],
   },
   how: {
@@ -330,8 +323,6 @@ const en: SiteCopy = {
     servicesTitle: "Owner services",
     contractorsTitle: "Contractors",
     companyTitle: "Ruwaq",
-    groupLine: "Ruwaq is part of Tasami Group",
-    groupNote: "Group companies are only suggested after disclosure and with the client's consent.",
     network: "Ruwaq network",
     join: "Apply to join",
     nasaq: "Nasaq",
@@ -385,8 +376,8 @@ const en: SiteCopy = {
     ],
     principleTitle: "Our independence is a business model, not a slogan",
     principleBody:
-      "No contractor can buy a referral from Ruwaq: entry is by vetting, ranking by performance. If we ever suggest a company from our own group, we tell you plainly and the decision is yours.",
-    principleLink: "Our principles",
+      "No contractor can buy a referral from Ruwaq: entry is by vetting, ranking by performance. Any company related to us meets the same standards, and we disclose the relationship in writing before you choose.",
+    principleLink: "Read the independence charter",
     measuresTitle: "Seven safeguards that act before mistakes happen",
     measuresLead: "Trust isn't built on promises, but on procedures that make mistakes hard in the first place.",
     measures: [
@@ -534,19 +525,14 @@ const en: SiteCopy = {
     paragraphs: [
       "Large developers appoint specialists to represent them before the contractor — to review, inspect and approve before every payment. The owner of a villa or an apartment usually faces the project alone, with their money, their time and their family's hopes.",
       "Ruwaq was born from that gap. We put our expertise at the service of the individual owner, with the same rigour large projects enjoy, at fees that suit the size of their project.",
-      "Ruwaq is part of Tasami Group, active for fifteen years in architectural design and execution in Saudi Arabia.",
+      "Behind Ruwaq is a team with fifteen years in architectural design and execution in Saudi Arabia, who know from the inside where the gaps owners pay for lie.",
     ],
     principlesTitle: "Our principles",
     principles: [
       { title: "The owner is our client", body: "Our fees come from the owner, so our interest is theirs." },
       { title: "No paid referrals", body: "Contractors can't buy visibility or ranking: entry by vetting, ranking by performance." },
-      { title: "Full disclosure", body: "The contractor success fee is fixed, uniform and disclosed; our group's companies are suggested only with your consent." },
+      { title: "Full disclosure", body: "The contractor success fee is fixed, uniform and disclosed; any related company is shown to you only with written disclosure." },
       { title: "Clear boundaries", body: "We review, inspect and approve within the scope; we don't replace the contractor's responsibility." },
-    ],
-    groupTitle: "From Tasami Group",
-    group: [
-      { name: "Tasami Group", body: "The group Ruwaq belongs to, with fifteen years in architectural design and execution in the Kingdom." },
-      { name: "Graphics House", body: "The group's 3D architectural visualisation studio; produces the Project File visuals." },
     ],
   },
   how: {

@@ -3,7 +3,12 @@ import { getLocale } from "@/shared/i18n/server";
 import { env } from "@/shared/lib/env";
 import { getQuoteCheckCopy } from "@/modules/marketplace/lib/quote-check-copy";
 import { QuoteCheckForm } from "@/modules/marketplace/components/quote-check-form";
+import Link from "next/link";
+import { ShieldCheck } from "lucide-react";
 import { CardIcon, CHECK_ICONS, FEAR_ICONS, PRINCIPLE_ICONS } from "@/modules/ruwaq/icons";
+import { GUARANTEE_ENABLED, getTrustCopy } from "@/modules/ruwaq/trust-copy";
+import { TrackedLink } from "@/modules/ruwaq/tracked-link";
+import { RUWQ_SUPPORT_WHATSAPP_E164 } from "@/shared/constants/brand";
 
 export async function generateMetadata(): Promise<Metadata> {
   const copy = getQuoteCheckCopy((await getLocale()) === "en" ? "en" : "ar");
@@ -19,6 +24,10 @@ export default async function QuoteCheckPage() {
   const locale = (await getLocale()) === "en" ? "en" : "ar";
   const c = getQuoteCheckCopy(locale);
   const n = (i: number) => (i + 1).toLocaleString(locale === "ar" ? "ar-SA" : "en-US");
+  const t = getTrustCopy(locale);
+  const x = t.checkExtras;
+  const wa = (process.env.NEXT_PUBLIC_RUWQ_SUPPORT_WHATSAPP?.trim() || RUWQ_SUPPORT_WHATSAPP_E164).replace(/\D/g, "");
+  const waHref = `https://wa.me/${wa}?text=${encodeURIComponent(x.fastMessage)}`;
   const faqJsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -127,10 +136,37 @@ export default async function QuoteCheckPage() {
             <p className="rw-fineprint" style={{ marginBlockStart: "1rem" }}>
               {c.packages.note}
             </p>
+            {GUARANTEE_ENABLED ? (
+              <div className="rw-guarantee" style={{ marginBlockStart: "1.25rem" }}>
+                <span className="rw-guarantee__seal" aria-hidden="true">
+                  <ShieldCheck size={22} strokeWidth={1.6} />
+                </span>
+                <div>
+                  <h3 className="rw-h3">{t.charter.guaranteeTitle}</h3>
+                  <p className="rw-body">{t.charter.guarantee}</p>
+                </div>
+              </div>
+            ) : null}
+            <p style={{ marginBlockStart: "1.5rem" }}>
+              <Link href="/check/sample" className="rw-link">
+                {x.sampleLink}
+              </Link>
+            </p>
           </div>
 
-          <div className="rw-form-card" id="check-form">
-            <QuoteCheckForm locale={locale} />
+          <div style={{ display: "grid", gap: "1.25rem" }}>
+            <div className="rw-form-card" id="check-form">
+              <QuoteCheckForm locale={locale} />
+            </div>
+            <div className="rw-note-box">
+              <h3 className="rw-h3">{x.fastTitle}</h3>
+              <p className="rw-body">{x.fastBody}</p>
+              <div style={{ marginBlockStart: "0.9rem" }}>
+                <TrackedLink href={waHref} event="check_whatsapp_fastlane" external className="rw-btn rw-btn--outline rw-btn--sm">
+                  {x.fastCta}
+                </TrackedLink>
+              </div>
+            </div>
           </div>
         </div>
       </section>

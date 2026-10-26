@@ -18,7 +18,12 @@ export type AnalyticsEvent =
   | "pro_apply_click"
   | "tour_shop_click"
   | "developer_inquiry"
-  | "off_plan_brochure";
+  | "off_plan_brochure"
+  | "estimate_calculated"
+  | "estimate_to_check"
+  | "checklist_submit"
+  | "sample_report_print"
+  | "check_whatsapp_fastlane";
 
 type EventParams = Record<string, string | number | boolean | undefined>;
 

@@ -6,6 +6,7 @@ import { getMessages } from "@/shared/i18n";
 import { getLocale } from "@/shared/i18n/server";
 import { getGuide, RUWQ_GUIDES } from "@/content/guides";
 import { GuideArticleBody } from "@/modules/marketplace/components/guide-article-body";
+import { getTrustCopy } from "@/modules/ruwaq/trust-copy";
 
 type Props = { params: { slug: string } };
 
@@ -48,40 +49,41 @@ export default async function GuideArticlePage({ params }: Props) {
   const excerpt = locale === "ar" ? guide.excerptAr : guide.excerptEn;
   const blocks = locale === "ar" ? guide.blocksAr : guide.blocksEn;
 
+  const c = getTrustCopy(locale).guides;
+  const num = (n: number) => n.toLocaleString(locale === "ar" ? "ar-SA" : "en-US");
+
   return (
-    <article className="ruwaq-ad-page ruwaq-guide-article">
-      <header className="ruwaq-ad-section border-b border-neutral-200">
-        <div className="ruwaq-ad-content ruwaq-guide-article__header">
-          <p className="ruwaq-ad-eyebrow">
-            {copy.eyebrow} · {guide.readMinutes} {copy.minRead}
-          </p>
-          <h1 className="ruwaq-ad-section-title">{title}</h1>
-          <p className="ruwaq-ad-section-lead">{excerpt}</p>
+    <article className="rw">
+      <section className="rw-page-hero">
+        <div className="rw-wrap">
+          <div className="rw-article" style={{ marginInline: 0 }}>
+            <span className="rw-eyebrow">
+              <Link href="/guides">{c.eyebrow}</Link> — {num(guide.readMinutes)} {c.minRead}
+            </span>
+            <h1 className="rw-display">{title}</h1>
+            <p className="rw-lead">{excerpt}</p>
+          </div>
         </div>
-      </header>
+      </section>
 
-      <div className="ruwaq-ad-content">
-        <div className="relative mt-8 aspect-[21/9] overflow-hidden bg-neutral-100">
-          <Image
-            src={guide.heroImage}
-            alt={title}
-            fill
-            className="object-cover"
-            priority
-            sizes="(max-width: 1280px) 100vw, 1152px"
-          />
+      <section className="rw-section" style={{ paddingBlockStart: "clamp(2rem, 4vw, 3rem)" }}>
+        <div className="rw-wrap">
+          <Image src={guide.heroImage} alt={title} width={1600} height={686} priority sizes="(max-width: 1280px) 100vw, 1200px" className="rw-hero-img" />
+          <div className="rw-article" style={{ marginBlockStart: "clamp(2.5rem, 5vw, 4rem)" }}>
+            <GuideArticleBody blocks={blocks} copy={copy} />
+          </div>
         </div>
-      </div>
+      </section>
 
-      <div className="ruwaq-ad-content ruwaq-guide-article__body">
-        <GuideArticleBody blocks={blocks} copy={copy} />
-
-        <p className="ruwaq-guide-back mt-14 text-center">
-          <Link href="/guides" className="ruwaq-pro-btn-outline px-6 py-2.5">
-            {copy.allGuides}
-          </Link>
-        </p>
-      </div>
+      <section className="rw-section rw-section--flush-top">
+        <div className="rw-wrap">
+          <div className="rw-article" style={{ paddingBlockStart: "2rem", borderBlockStart: "1px solid var(--rw-line)" }}>
+            <Link href="/guides" className="rw-link">
+              {c.all}
+            </Link>
+          </div>
+        </div>
+      </section>
     </article>
   );
 }

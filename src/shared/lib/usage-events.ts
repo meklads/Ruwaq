@@ -21,7 +21,8 @@ export type UsageEventType =
   | "service_request_submitted"
   | "pro_apply_click"
   | "tour_shop_click"
-  | "developer_inquiry";
+  | "developer_inquiry"
+  | "checklist_lead_submitted";
 
 export function logUsageEvent(
   type: UsageEventType,

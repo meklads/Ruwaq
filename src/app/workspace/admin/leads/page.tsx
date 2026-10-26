@@ -70,7 +70,7 @@ export default async function AdminLeadsPage({ searchParams }: Props) {
       },
     }),
     db.partnerLead.findMany({
-      where: { source: { in: ["GRAPHICS_HOUSE", "RUWAQ_QUOTE_CHECK", "RUWAQ_PROJECT_FILE", "RUWAQ_AMAN"] } },
+      where: { source: { in: ["GRAPHICS_HOUSE", "RUWAQ_QUOTE_CHECK", "RUWAQ_PROJECT_FILE", "RUWAQ_AMAN", "RUWAQ_CHECKLIST"] } },
       orderBy: { createdAt: "desc" },
       take: 50,
     }),
@@ -269,7 +269,9 @@ export default async function AdminLeadsPage({ searchParams }: Props) {
                             ? "Project File · 24h"
                             : lead.source === "RUWAQ_AMAN"
                               ? "Ruwaq Aman · 24h"
-                              : "Graphics House"}
+                              : lead.source === "RUWAQ_CHECKLIST"
+                                ? "Checklist download · nurture"
+                                : "Graphics House"}
                         {" · "}
                         {new Date(lead.createdAt).toLocaleString("en-GB", { timeZone: "Asia/Riyadh" })}
                       </p>

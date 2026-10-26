@@ -1,11 +1,8 @@
 import Link from "next/link";
 import { getLocale } from "@/shared/i18n/server";
-import {
-  RUWQ_PUBLIC_EMAIL,
-  TASAMI_GROUP_URL,
-  graphicsHouseReferralUrl,
-} from "@/shared/constants/brand";
+import { RUWQ_PUBLIC_EMAIL } from "@/shared/constants/brand";
 import { getSiteCopy } from "@/modules/ruwaq/site-copy";
+import { getTrustCopy } from "@/modules/ruwaq/trust-copy";
 import { RuwaqLogo } from "@/shared/components/ruwaq-logo";
 
 const WHATSAPP_DISPLAY = "0502786513";
@@ -15,13 +12,15 @@ export async function SiteFooter() {
   const locale = await getLocale();
   const c = getSiteCopy(locale);
   const f = c.footer;
+  const t = getTrustCopy(locale);
   const ar = locale !== "en";
 
   const owner = [
     { href: "/check", label: c.header.check },
     { href: "/project-file", label: c.header.projectFile },
     { href: "/aman", label: c.header.aman },
-    { href: "/how-it-works", label: c.header.howItWorks },
+    { href: "/estimate", label: t.nav.estimate },
+    { href: "/checklist", label: t.nav.checklist },
     { href: "/guides", label: c.header.guides },
   ];
   const contractors = [
@@ -29,16 +28,15 @@ export async function SiteFooter() {
     { href: "/join", label: f.join },
     { href: "/proposals", label: f.nasaq },
     { href: "/pricing", label: f.pricing },
-    { href: "/faq", label: f.nasaqFaq },
   ];
   const company = [
     { href: "/about", label: c.header.about },
+    { href: "/how-it-works", label: c.header.howItWorks },
+    { href: "/charter", label: t.nav.charter },
+    { href: "/faq", label: f.nasaqFaq },
     { href: "/contact", label: f.contact },
     { href: "/privacy", label: f.privacy },
     { href: "/terms", label: f.terms },
-  ];
-  const group = [
-    { href: graphicsHouseReferralUrl("footer_ecosystem"), label: ar ? "جرافيكس هاوس" : "Graphics House" },
   ];
 
   return (
@@ -115,21 +113,6 @@ export async function SiteFooter() {
           </div>
 
           <div className="rw-footer__bottom">
-            <div>
-              <a href={TASAMI_GROUP_URL} target="_blank" rel="noopener noreferrer">
-                {f.groupLine}
-              </a>
-              {": "}
-              {group.map((g, i) => (
-                <span key={g.label}>
-                  {i > 0 ? (ar ? "، " : ", ") : ""}
-                  <a href={g.href} target="_blank" rel="noopener noreferrer">
-                    {g.label}
-                  </a>
-                </span>
-              ))}
-              <p style={{ marginBlockStart: "0.35rem" }}>{f.groupNote}</p>
-            </div>
             <p>{f.copyright}</p>
           </div>
         </div>
