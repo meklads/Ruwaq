@@ -67,6 +67,15 @@ export default async function AboutPage() {
 
       <section className="rw-section">
         <div className="rw-wrap">
+          <div className="rw-note-box" style={{ padding: "clamp(1.5rem, 4vw, 2.5rem)", maxWidth: "52rem" }}>
+            <h2 className="rw-h3">{t.partner.title}</h2>
+            <p className="rw-body">{t.partner.body}</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="rw-section rw-section--flush-top">
+        <div className="rw-wrap">
           <div className="rw-head-row" style={{ marginBlockEnd: 0 }}>
             <div className="rw-head">
               <h2 className="rw-h2">{t.charter.title}</h2>
