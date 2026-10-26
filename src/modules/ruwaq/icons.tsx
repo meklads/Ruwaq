@@ -27,7 +27,7 @@ import {
 /** Icon sets keyed by position in the matching copy arrays (site-copy.ts). */
 export const FEAR_ICONS: LucideIcon[] = [Wallet, FileQuestion, ListX, EyeOff];
 export const SERVICE_ICONS: LucideIcon[] = [FileSearch, Layers, ShieldCheck];
-export const MEASURE_ICONS: LucideIcon[] = [Eye, BadgeCheck, Scale, FileSignature, Banknote, ClipboardCheck, KeyRound];
+export const MEASURE_ICONS: LucideIcon[] = [Eye, BadgeCheck, Scale, FileSignature, Banknote, KeyRound];
 export const CONTRACTOR_ICONS: LucideIcon[] = [ClipboardList, UserCheck, CalendarCheck, TrendingUp];
 export const PRINCIPLE_ICONS: LucideIcon[] = [UserCheck, Lock, Eye, Scale];
 export const CHECK_ICONS: LucideIcon[] = [ClipboardList, FileQuestion, Scale, Banknote, CalendarCheck, ShieldCheck];

@@ -13,11 +13,11 @@ const ctaHref = guideCtaHref(meta);
 export const customKitchenPlanningGuide: RuwaqGuide = {
   ...meta,
   titleAr:
-    "تخطيط المطبخ المخصص للفيلا السعودية: من المطبخ الرئيسي والفرن إلى zones العمل وMEP",
+    "تخطيط المطبخ المخصص للفيلا السعودية: من المطبخ الرئيسي والتحضيري إلى مناطق العمل والتمديدات",
   titleEn:
     "Custom Kitchen Planning for Saudi Villas: Main Kitchen, Dirty Kitchen, Work Zones, and MEP Coordination",
   excerptAr:
-    "المطبخ الفاخر في الفيلا السعودية أكثر من مثلث عمل — main kitchen وdirty kitchen وpantry وservice loop. دليل يربط التخطيط بالتشطيب قبل الجبس.",
+    "المطبخ في الفيلا السعودية أكثر من مثلث عمل: مطبخ رئيسي، ومطبخ تحضيري، ومخزن، ومسار خدمة. دليل يربط التخطيط بالتشطيب قبل إغلاق الجبس.",
   excerptEn:
     "A luxury villa kitchen in Saudi Arabia is more than a work triangle — main kitchen, dirty kitchen, pantry, and service loop all matter. A guide that ties planning to fit-out before gypsum closes.",
   seoKeywordsAr: [

@@ -6,8 +6,7 @@ import { env } from "@/shared/lib/env";
 import { RUWQ_GUIDES } from "@/content/guides";
 import { buildOrganizationJsonLd, buildWebSiteJsonLd } from "@/modules/marketplace/seo/site-jsonld";
 import { getSiteCopy } from "@/modules/ruwaq/site-copy";
-import { CardIcon, iconAt, CONTRACTOR_ICONS, FEAR_ICONS, MEASURE_ICONS, PROOF_ICONS, SERVICE_ICONS } from "@/modules/ruwaq/icons";
-import { getTrustCopy } from "@/modules/ruwaq/trust-copy";
+import { getHomeCopy } from "@/modules/ruwaq/home-copy";
 
 export async function generateMetadata(): Promise<Metadata> {
   const c = getSiteCopy(await getLocale()).home;
@@ -16,196 +15,161 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function HomePage() {
   const locale = (await getLocale()) === "en" ? "en" : "ar";
-  const c = getSiteCopy(locale).home;
-  const s = c.sheet;
-  const t = getTrustCopy(locale);
+  const h = getHomeCopy(locale);
+  const s = h.sheet;
   const guides = RUWQ_GUIDES.slice(0, 3);
   const ar = locale === "ar";
+  const num = (i: number) => (i + 1).toLocaleString(ar ? "ar-SA" : "en-US");
 
   return (
-    <div className="rw">
+    <div className="rw rw-home">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(buildOrganizationJsonLd(locale)) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(buildWebSiteJsonLd(locale)) }} />
 
-      {/* Hero */}
-      <section className="rw-hero">
-        <div className="rw-wrap rw-hero__grid">
-          <div>
-            <span className="rw-eyebrow">{c.eyebrow}</span>
-            <h1 className="rw-hero-title">{c.title}</h1>
-            <p className="rw-lead">{c.lead}</p>
+      {/* Hero: the idea in one sentence, and the reviewed quote beside it */}
+      <section className="rw-hx">
+        <div className="rw-wrap rw-hx__grid">
+          <div className="rw-hx__text">
+            <h1 className="rw-hx__title">{h.title}</h1>
+            <p className="rw-hx__lead">{h.lead}</p>
             <div className="rw-actions">
-              <Link href="/check" className="rw-btn rw-btn--primary">
-                {c.primaryCta}
+              <Link href="/check" className="rw-btn rw-btn--primary rw-btn--lg">
+                {h.primaryCta}
               </Link>
-              <Link href="/how-it-works" className="rw-btn rw-btn--outline">
-                {c.secondaryCta}
+              <Link href="/check/sample" className="rw-btn rw-btn--outline rw-btn--lg">
+                {h.secondaryCta}
               </Link>
             </div>
-            <ul className="rw-trust">
-              {c.trust.map((t) => (
-                <li key={t}>{t}</li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="rw-sheet-stage" aria-hidden="true">
-            <div className="rw-sheet">
-              <div className="rw-sheet__head">
-                <span className="rw-sheet__title">{s.title}</span>
-                <span className="rw-sheet__meta">{s.meta}</span>
-              </div>
-              <div className="rw-sheet__cols">
-                <span>{ar ? "البند" : "Item"}</span>
-                <span className="rw-sheet__num">{ar ? "الكمية" : "Qty"}</span>
-                <span className="rw-sheet__num">{ar ? "ريال" : "SAR"}</span>
-              </div>
-              {s.rows.map((r) => (
-                <div key={r.item} className="rw-sheet__row">
-                  <span>
-                    <span className={r.kind === "circle" ? "rw-mark-circle" : r.kind === "underline" ? "rw-mark-under" : undefined}>{r.item}</span>
-                    {r.note ? <span className="rw-note">{r.note}</span> : null}
-                  </span>
-                  <span className="rw-sheet__num">{r.qty}</span>
-                  <span className="rw-sheet__num">{r.price}</span>
+            <dl className="rw-hx__facts">
+              {h.facts.map((f) => (
+                <div key={f.label}>
+                  <dt>{f.value}</dt>
+                  <dd>{f.label}</dd>
                 </div>
               ))}
-              <p className="rw-sheet__missing">＋ {s.missing}</p>
-              <p className="rw-sheet__payment">
-                <span className="rw-strike">{s.payment}</span>
-                <span className="rw-note">{s.paymentNote}</span>
-              </p>
-              <span className="rw-stamp">{s.stamp}</span>
-            </div>
+            </dl>
           </div>
+
+          <figure className="rw-qd" aria-label={ar ? "مثال على عرض سعر بعد مراجعة رواق" : "Example of a quote after Ruwaq's review"}>
+            <div className="rw-qd__paper">
+              <header className="rw-qd__head">
+                <strong>{s.title}</strong>
+                <span>{s.meta}</span>
+              </header>
+              <div className="rw-qd__cols" aria-hidden="true">
+                <span>{s.cols.item}</span>
+                <span>{s.cols.qty}</span>
+                <span>{s.cols.price}</span>
+              </div>
+              <ul className="rw-qd__rows">
+                {s.rows.map((r) => (
+                  <li key={r.item} className={r.flag ? `rw-qd__row rw-qd__row--${r.flag}` : "rw-qd__row"}>
+                    <div className="rw-qd__line">
+                      <span className="rw-qd__item">{r.item}</span>
+                      <span className="rw-qd__num">{r.qty || "—"}</span>
+                      <span className="rw-qd__num">{r.price || "—"}</span>
+                    </div>
+                    {r.note ? <p className="rw-qd__note">{r.note}</p> : null}
+                  </li>
+                ))}
+                <li className="rw-qd__row rw-qd__row--terms">
+                  <div className="rw-qd__line">
+                    <span className="rw-qd__item">{s.payment.label}</span>
+                    <span className="rw-qd__num rw-qd__num--wide">{s.payment.value}</span>
+                  </div>
+                  <p className="rw-qd__note">{s.payment.note}</p>
+                </li>
+              </ul>
+              <footer className="rw-qd__foot">
+                <span>{s.by}</span>
+                <strong>{s.summary}</strong>
+              </footer>
+            </div>
+          </figure>
         </div>
       </section>
 
-      {/* Why owners worry */}
+      {/* How it works: a real three-step sequence */}
       <section className="rw-section rw-section--stone">
         <div className="rw-wrap">
-          <div className="rw-head">
-            <h2 className="rw-h2">{c.fearsTitle}</h2>
-            <p className="rw-body">{c.fearsLead}</p>
-          </div>
-          <div className="rw-grid rw-grid--4">
-            {c.fears.map((f, i) => (
-              <article key={f.title} className="rw-card">
-                <CardIcon icon={FEAR_ICONS[i]} tone="mark" />
-                <h3 className="rw-h3">{f.title}</h3>
-                <p className="rw-body">{f.body}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Services */}
-      <section className="rw-section" id="services">
-        <div className="rw-wrap">
-          <div className="rw-head">
-            <h2 className="rw-h2">{c.servicesTitle}</h2>
-            <p className="rw-body">{c.servicesLead}</p>
-          </div>
-          <div className="rw-grid rw-grid--3">
-            {c.services.map((sv, i) => (
-              <article key={sv.href} className="rw-card rw-service">
-                <CardIcon icon={SERVICE_ICONS[i]} />
-                <span className="rw-service__step">
-                  {ar ? "الخطوة" : "Step"} {sv.step}
+          <h2 className="rw-h2 rw-home__h2">{h.stepsTitle}</h2>
+          <ol className="rw-hsteps">
+            {h.steps.map((st, i) => (
+              <li key={st.title}>
+                <span className="rw-hsteps__n" aria-hidden="true">
+                  {num(i)}
                 </span>
-                <p className="rw-service__when">{sv.when}</p>
-                <h3 className="rw-service__title">{sv.title}</h3>
-                <p className="rw-service__body">{sv.body}</p>
-                <p className="rw-service__meta">{sv.meta}</p>
-                <div className="rw-service__cta">
-                  <Link href={sv.href} className="rw-btn rw-btn--outline rw-btn--sm">
-                    {sv.cta}
-                  </Link>
-                </div>
-              </article>
+                <h3 className="rw-h3">{st.title}</h3>
+                <p className="rw-body">{st.body}</p>
+              </li>
             ))}
-          </div>
+          </ol>
         </div>
       </section>
 
-      {/* Proof — verify before trusting */}
-      <section className="rw-section rw-section--stone">
-        <div className="rw-wrap">
-          <div className="rw-head">
-            <h2 className="rw-h2">{t.proof.title}</h2>
-            <p className="rw-body">{t.proof.lead}</p>
+      {/* What we usually find */}
+      <section className="rw-section">
+        <div className="rw-wrap rw-find">
+          <div className="rw-find__head">
+            <h2 className="rw-h2">{h.findTitle}</h2>
+            <Link href="/check/sample" className="rw-link">
+              {h.findCta}
+            </Link>
           </div>
-          <div className="rw-proof">
-            {t.proof.items.map((p, i) => (
-              <article key={p.href} className="rw-card">
-                <CardIcon icon={PROOF_ICONS[i]} />
-                <h3 className="rw-h3">{p.title}</h3>
-                <p className="rw-body">{p.body}</p>
-                <Link href={p.href} className="rw-link">
-                  {p.cta}
-                </Link>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Principle */}
-      <section className="rw-photo-split">
-        <Image
-          src="/images/marketing/hero-villa-family.jpg"
-          alt={ar ? "أسرة أمام فيلتها في جدة" : "A family in front of their villa in Jeddah"}
-          width={1920}
-          height={1920}
-          sizes="(min-width: 1024px) 50vw, 100vw"
-        />
-        <div className="rw-photo-split__text">
-          <h2 className="rw-h2">{c.principleTitle}</h2>
-          <p>{c.principleBody}</p>
-          <Link href="/charter" className="rw-link">
-            {c.principleLink}
-          </Link>
-        </div>
-      </section>
-
-      {/* Seven safeguards */}
-      <section className="rw-section" id="protect">
-        <div className="rw-wrap">
-          <div className="rw-head">
-            <h2 className="rw-h2">{c.measuresTitle}</h2>
-            <p className="rw-body">{c.measuresLead}</p>
-          </div>
-          <div className="rw-grid rw-grid--4">
-            {c.measures.map((m, i) => (
-              <article key={m.title} className="rw-card">
-                <CardIcon icon={MEASURE_ICONS[i]} />
-                <h3 className="rw-h3">{m.title}</h3>
-                <p className="rw-body">{m.body}</p>
-              </article>
-            ))}
-            <article className="rw-card" style={{ background: "var(--rw-stone)", borderColor: "transparent", display: "flex", flexDirection: "column", justifyContent: "center" }}>
-              <h3 className="rw-h3">{c.finalTitle}</h3>
-              <div style={{ marginBlockStart: "1rem" }}>
-                <Link href="/check" className="rw-btn rw-btn--primary rw-btn--sm">
-                  {c.finalCta}
-                </Link>
+          <dl className="rw-find__list">
+            {h.find.map((f) => (
+              <div key={f.title}>
+                <dt>{f.title}</dt>
+                <dd>{f.body}</dd>
               </div>
-            </article>
+            ))}
+          </dl>
+        </div>
+      </section>
+
+      {/* Services as a plain list, not a card kit */}
+      <section className="rw-section rw-section--flush-top">
+        <div className="rw-wrap">
+          <h2 className="rw-h2 rw-home__h2">{h.servicesTitle}</h2>
+          <ul className="rw-svc">
+            {h.services.map((sv) => (
+              <li key={sv.href}>
+                <div>
+                  <h3 className="rw-svc__title">{sv.title}</h3>
+                  <p className="rw-svc__when">{sv.when}</p>
+                </div>
+                <p className="rw-svc__price">{sv.price}</p>
+                <Link href={sv.href} className="rw-btn rw-btn--outline rw-btn--sm">
+                  {sv.cta}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* Independence */}
+      <section className="rw-section rw-section--ink">
+        <div className="rw-wrap rw-indep">
+          <h2 className="rw-h2">{h.independenceTitle}</h2>
+          <div>
+            <p className="rw-lead">{h.independenceBody}</p>
+            <p style={{ marginBlockStart: "1.25rem" }}>
+              <Link href="/charter" className="rw-link">
+                {h.independenceLink}
+              </Link>
+            </p>
           </div>
         </div>
       </section>
 
       {/* Guides */}
-      <section className="rw-section rw-section--stone">
+      <section className="rw-section">
         <div className="rw-wrap">
           <div className="rw-head-row">
-            <div className="rw-head">
-              <h2 className="rw-h2">{c.guidesTitle}</h2>
-              <p className="rw-body">{c.guidesLead}</p>
-            </div>
+            <h2 className="rw-h2">{h.guidesTitle}</h2>
             <Link href="/guides" className="rw-link">
-              {c.guidesAll}
+              {h.guidesAll}
             </Link>
           </div>
           <div className="rw-grid rw-grid--3">
@@ -219,38 +183,16 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
-      {/* Contractor door */}
-      <section className="rw-section">
-        <div className="rw-wrap">
-          <div className="rw-door">
-            <div>
-              <span className="rw-eyebrow">{c.contractorsEyebrow}</span>
-              <h2 className="rw-h2">{c.contractorsTitle}</h2>
-              <p>{c.contractorsBody}</p>
-              <div className="rw-actions">
-                <Link href="/pro" className="rw-btn rw-btn--gold">
-                  {c.contractorsPrimary}
-                </Link>
-                <Link href="/proposals" className="rw-btn rw-btn--outline-light">
-                  {c.contractorsSecondary}
-                </Link>
-              </div>
-            </div>
-            <ul className="rw-door__points">
-              {c.contractorsPoints.map((p, i) => {
-                const Icon = iconAt(CONTRACTOR_ICONS, i);
-                return (
-                  <li key={p} style={{ display: "flex", gap: "0.75rem", alignItems: "center" }}>
-                    <Icon size={18} strokeWidth={1.6} color="var(--rw-gold-soft)" aria-hidden="true" />
-                    {p}
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
+
+      {/* Contractors: one quiet line */}
+      <section className="rw-pro-line">
+        <div className="rw-wrap rw-pro-line__inner">
+          <p>{h.contractorsText}</p>
+          <Link href="/pro" className="rw-link">
+            {h.contractorsCta}
+          </Link>
         </div>
       </section>
-
     </div>
   );
 }

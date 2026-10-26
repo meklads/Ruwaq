@@ -10,18 +10,19 @@
    ───────────────────────────────────────────────────────────── */
 
 :root {
-  --rw-ink: #16302e;
-  --rw-ink-2: #0f2321;
-  --rw-ink-soft: #3f5552;
-  --rw-muted: #66766f;
+  /* v4 palette — white, light grey, deep green. No gold, no blue. */
+  --rw-ink: #12372a;        /* deep green: headings, dark bands, primary buttons */
+  --rw-ink-2: #0c2a20;      /* hover / footer */
+  --rw-ink-soft: #3b4842;   /* body text */
+  --rw-muted: #6a7570;
   --rw-paper: #ffffff;
-  --rw-stone: #f2f4f1;
-  --rw-stone-2: #e7ebe6;
-  --rw-line: #e1e6e1;
-  --rw-gold: #b08d57;
-  --rw-gold-soft: #d6c09a;
-  --rw-mark: #2148c0;
-  --rw-mark-soft: #eaeffc;
+  --rw-stone: #f4f5f5;      /* light grey surface */
+  --rw-stone-2: #e9eceb;
+  --rw-line: #e1e5e3;
+  --rw-gold: #1e6b4f;       /* legacy token name, now the mid green accent */
+  --rw-gold-soft: #9cc9b2;  /* accent on dark green */
+  --rw-mark: #1e6b4f;       /* Ruwaq review notes */
+  --rw-mark-soft: #e6f1eb;
   --rw-radius: 8px;
   --rw-radius-lg: 14px;
   --rw-max: 75rem;
@@ -29,11 +30,11 @@
   --rw-section: clamp(4rem, 8vw, 7rem);
   --rw-font: var(--font-ar-alt), "Tajawal", var(--font-ar), "IBM Plex Sans Arabic", system-ui, sans-serif;
   --rw-head: var(--rw-font);
-  --rw-hand: var(--font-ruqaa), "Aref Ruqaa", serif;
+  --rw-hand: var(--rw-font);
 
   --rw-fs-hero: clamp(47px, 5.2vw, 73px);
-  --rw-fs-h1: clamp(32px, 3.6vw, 56px);
-  --rw-fs-h2: clamp(28px, 3vw, 42px);
+  --rw-fs-h1: clamp(30px, 3.4vw, 48px);
+  --rw-fs-h2: clamp(26px, 2.5vw, 36px);
   --rw-fs-sub: clamp(20px, 2vw, 26px);
   --rw-fs-h3: clamp(15px, 1.05vw, 17px);
   --rw-fs-body: clamp(15px, 1.05vw, 17px);
@@ -78,7 +79,7 @@ html[lang="en"] {
 .rw .rw-display {
   font-family: var(--rw-head);
   font-size: var(--rw-fs-h1);
-  font-weight: 300;
+  font-weight: 700;
   line-height: 1.2;
   letter-spacing: -0.01em;
   text-wrap: balance;
@@ -86,7 +87,7 @@ html[lang="en"] {
 .rw .rw-h2 {
   font-family: var(--rw-head);
   font-size: var(--rw-fs-h2);
-  font-weight: 300;
+  font-weight: 600;
   line-height: 1.25;
   letter-spacing: -0.01em;
   text-wrap: balance;
@@ -140,7 +141,7 @@ html[lang="en"] {
   justify-content: center;
   min-height: 3rem;
   padding: 0.75rem 1.6rem;
-  border-radius: 999px;
+  border-radius: 8px;
   font-size: 15px;
   font-weight: 600;
   line-height: 1.2;
@@ -157,8 +158,8 @@ html[lang="en"] {
 }
 .rw-btn--primary { background: var(--rw-ink); color: #fff; }
 .rw-btn--primary:hover { background: var(--rw-ink-2); }
-.rw-btn--gold { background: var(--rw-gold); color: #fff; }
-.rw-btn--gold:hover { background: #9c7b48; }
+.rw-btn--gold { background: #fff; color: var(--rw-ink); }
+.rw-btn--gold:hover { background: var(--rw-mark-soft); }
 .rw-btn--outline { border-color: var(--rw-line); background: #fff; color: var(--rw-ink); }
 .rw-btn--outline:hover { border-color: var(--rw-ink); }
 .rw-btn--outline-light { border-color: rgba(255, 255, 255, 0.35); color: #fff; background: transparent; }
@@ -523,7 +524,7 @@ textarea.rw-field { height: auto; min-height: 6.5rem; padding: 0.75rem 0.95rem; 
 }
 
 /* Official logo lockup (previous asset) */
-.rw-header .ruwaq-brand-lockup__img { width: 99px; }
+.rw-header .ruwaq-brand-lockup__img { width: 84px; }
 @media (min-width: 640px) { .rw-header .ruwaq-brand-lockup__img { width: 111px; } }
 .rw-footer .ruwaq-brand-lockup__img { width: 130px; }
 
@@ -721,3 +722,136 @@ a.rw-contact__value:hover { text-decoration: underline; text-decoration-color: v
 .rw .rw-article .ruwaq-guide-callout--warning { background: var(--rw-mark-soft); }
 .rw .rw-article .ruwaq-guide-callout__title { font-size: 14px; font-weight: 700; letter-spacing: 0; text-transform: none; color: var(--rw-ink); }
 .rw .rw-article .ruwaq-guide-callout__text { font-size: 15px; line-height: 1.85; color: var(--rw-ink-soft); }
+
+
+/* ─────────────────────────────────────────────────────────────
+   v4 home — one idea at first glance.
+   White and light grey surfaces, deep green for Ruwaq's voice.
+   The only illustrative element is the reviewed quote.
+   ───────────────────────────────────────────────────────────── */
+.rw-btn--lg { min-height: 3.4rem; padding: 0.9rem 1.8rem; font-size: 16px; }
+.rw-section--ink .rw-link { text-decoration-color: var(--rw-gold-soft); }
+.rw-home .rw-h2 { line-height: 1.35; }
+.rw-home .rw-section--ink .rw-h2 { color: #fff; font-weight: 500; }
+.rw-home__h2 { margin-block-end: clamp(2rem, 4vw, 3rem); max-width: 40rem; }
+
+/* Hero */
+.rw-hx { padding-block: clamp(2.75rem, 6vw, 5.5rem); background: var(--rw-paper); border-block-end: 1px solid var(--rw-line); }
+.rw-hx__grid { display: grid; gap: clamp(2.5rem, 5vw, 4.5rem); align-items: center; }
+@media (min-width: 1024px) { .rw-hx__grid { grid-template-columns: 1.05fr 0.95fr; } }
+.rw .rw-hx__title {
+  font-family: var(--rw-head);
+  font-size: clamp(32px, 4vw, 54px);
+  font-weight: 700;
+  line-height: 1.32;
+  color: var(--rw-ink);
+  text-wrap: balance;
+  max-width: 17em;
+}
+.rw-hx__lead { margin-block-start: 1.5rem; font-size: clamp(17px, 1.3vw, 19px); line-height: 1.95; color: var(--rw-ink-soft); max-width: 36rem; }
+.rw-hx .rw-actions { margin-block-start: 2.25rem; }
+.rw-hx__facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-block-start: 2.75rem;
+  border-block-start: 1px solid var(--rw-line);
+  max-width: 36rem;
+}
+.rw-hx__facts > div { padding-block-start: 1.1rem; padding-inline-end: 1rem; }
+.rw-hx__facts > div + div { border-inline-start: 1px solid var(--rw-line); padding-inline-start: 1.1rem; }
+.rw-hx__facts dt { font-size: clamp(18px, 1.6vw, 22px); font-weight: 700; color: var(--rw-ink); line-height: 1.3; }
+.rw-hx__facts dd { margin-block-start: 0.3rem; font-size: 13.5px; line-height: 1.6; color: var(--rw-muted); }
+@media (max-width: 560px) {
+  .rw-hx__facts { grid-template-columns: 1fr; }
+  .rw-hx__facts > div { display: flex; align-items: baseline; gap: 0.75rem; padding-block: 0.85rem; padding-inline: 0; border-block-end: 1px solid var(--rw-line); }
+  .rw-hx__facts > div + div { border-inline-start: 0; padding-inline-start: 0; }
+  .rw-hx__facts dd { margin: 0; }
+}
+
+/* The reviewed quote */
+.rw-qd { margin: 0; background: var(--rw-stone); border-radius: 12px; padding: clamp(1rem, 3vw, 2.25rem); }
+.rw-qd__paper {
+  background: #fff;
+  border: 1px solid var(--rw-line);
+  border-radius: 6px;
+  padding: clamp(1.1rem, 2.5vw, 1.75rem);
+  box-shadow: 0 18px 40px -28px rgba(18, 55, 42, 0.35);
+  max-width: 32rem;
+  margin-inline: auto;
+}
+.rw-qd__head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding-block-end: 0.85rem; border-block-end: 2px solid var(--rw-ink); }
+.rw-qd__head strong { font-size: 15.5px; font-weight: 700; color: var(--rw-ink); }
+.rw-qd__head span { font-size: 12.5px; color: var(--rw-muted); }
+.rw-qd__cols, .rw-qd__line { display: grid; grid-template-columns: minmax(0, 1fr) 5.25rem 5rem; gap: 0.75rem; align-items: baseline; }
+.rw-qd__cols { font-size: 12px; color: var(--rw-muted); padding-block: 0.7rem 0.35rem; }
+.rw-qd__cols span:not(:first-child), .rw-qd__num { text-align: end; }
+.rw-qd__row { padding-block: 0.75rem; border-block-end: 1px solid var(--rw-stone-2); font-size: 14px; }
+.rw-qd__item { color: var(--rw-ink); font-weight: 500; }
+.rw-qd__num { font-variant-numeric: tabular-nums; color: var(--rw-ink-soft); }
+.rw-qd__num--wide { grid-column: 2 / span 2; }
+.rw-qd__note {
+  position: relative;
+  margin-block-start: 0.4rem;
+  padding-inline-start: 1rem;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--rw-mark);
+  font-weight: 500;
+}
+.rw-qd__note::before { content: ""; position: absolute; inset-inline-start: 0; top: 0.62em; width: 6px; height: 6px; border-radius: 50%; background: var(--rw-mark); }
+.rw-qd__row--missing { background: var(--rw-mark-soft); border-radius: 4px; padding-inline: 0.75rem; border-block-end-color: transparent; margin-block: 0.25rem; }
+.rw-qd__row--missing .rw-qd__item { color: var(--rw-mark); }
+.rw-qd__row--terms { border-block-end: 0; }
+.rw-qd__foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-block-start: 0.75rem;
+  padding: 0.8rem 1rem;
+  background: var(--rw-ink);
+  color: #fff;
+  border-radius: 4px;
+}
+.rw-qd__foot span { font-size: 13px; color: var(--rw-gold-soft); }
+.rw-qd__foot strong { font-size: 14.5px; font-weight: 600; }
+@media (max-width: 520px) {
+  .rw-qd__cols, .rw-qd__line { grid-template-columns: minmax(0, 1fr) 4.2rem 4.4rem; gap: 0.5rem; }
+  .rw-qd__row { font-size: 13px; }
+}
+
+/* Steps */
+.rw-hsteps { display: grid; gap: 2.25rem; }
+@media (min-width: 860px) { .rw-hsteps { grid-template-columns: repeat(3, 1fr); gap: 3rem; } }
+.rw-hsteps li { border-block-start: 2px solid var(--rw-ink); padding-block-start: 1.25rem; }
+.rw-hsteps__n { display: block; font-size: 15px; font-weight: 700; color: var(--rw-mark); margin-block-end: 0.6rem; font-variant-numeric: tabular-nums; }
+.rw-hsteps .rw-h3 { font-size: 19px; font-weight: 700; color: var(--rw-ink); }
+.rw-hsteps .rw-body { margin-block-start: 0.5rem; }
+
+/* What we usually find */
+.rw-find { display: grid; gap: 2rem; }
+@media (min-width: 1024px) { .rw-find { grid-template-columns: 0.75fr 1.25fr; gap: 4rem; align-items: start; } }
+.rw-find__head { display: grid; gap: 1.25rem; justify-items: start; }
+.rw-find__list { display: grid; column-gap: 2.5rem; }
+@media (min-width: 720px) { .rw-find__list { grid-template-columns: repeat(2, 1fr); } }
+.rw-find__list > div { border-block-start: 1px solid var(--rw-line); padding-block: 1.4rem; }
+.rw-find__list dt { font-size: 17px; font-weight: 700; color: var(--rw-ink); }
+.rw-find__list dd { margin-block-start: 0.4rem; color: var(--rw-ink-soft); line-height: 1.8; }
+
+/* Services list */
+.rw-svc { border-block-end: 1px solid var(--rw-line); }
+.rw-svc li { display: grid; gap: 0.75rem 2rem; align-items: center; padding-block: 1.5rem; border-block-start: 1px solid var(--rw-line); }
+@media (min-width: 860px) { .rw-svc li { grid-template-columns: 1.3fr 1fr auto; } }
+.rw .rw-svc__title { font-size: 19px; font-weight: 700; color: var(--rw-ink); line-height: 1.4; }
+.rw-svc__when { margin-block-start: 0.2rem; font-size: 15px; color: var(--rw-muted); }
+.rw-svc__price { font-size: 15px; color: var(--rw-ink-soft); }
+.rw-svc .rw-btn { justify-self: start; }
+
+/* Independence */
+.rw-indep { display: grid; gap: 1.5rem 4rem; }
+@media (min-width: 960px) { .rw-indep { grid-template-columns: 1fr 1fr; align-items: start; } }
+
+/* Contractors line */
+.rw-pro-line { border-block-start: 1px solid var(--rw-line); background: var(--rw-paper); }
+.rw-pro-line__inner { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem 2rem; padding-block: 1.75rem; }
+.rw-pro-line p { color: var(--rw-ink-soft); }

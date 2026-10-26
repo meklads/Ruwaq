@@ -10,24 +10,24 @@ type Locale = "ar" | "en";
 const ar = {
   header: {
     services: "خدماتنا",
-    check: "فحص عرض السعر",
+    check: "مراجعة عرض السعر",
     projectFile: "ملف المشروع",
     aman: "رواق أمان",
     guides: "الأدلة",
     howItWorks: "كيف نعمل",
     about: "من نحن",
     contractors: "للمقاولين",
-    cta: "افحص عرضك مجاناً",
+    cta: "أرسل عرض السعر مجاناً",
     menu: "القائمة",
     close: "إغلاق",
   },
   footer: {
     ctaTitle: "هل بين يديك مشروع تشطيب أو بناء؟",
     ctaSubtitle: "ابدأ بخطوة لا تكلّفك شيئاً: أرسل إلينا عرض المقاول، ونوضّح لك ما ينقصه قبل أن تلتزم بتوقيعه.",
-    ctaOwner: "افحص عرضك مجاناً",
+    ctaOwner: "أرسل عرض السعر مجاناً",
     ctaContractor: "انضم إلى شبكة رواق للمقاولين",
     tagline:
-      "رواق جهة مستقلة تمثّل مالك المشروع؛ نراجع العروض، ونعدّ المواصفات، ونرافق التنفيذ حتى الاستلام، لتكون كل دفعة مقابل عمل مُنجَز ومُعتمَد.",
+      "رواق جهة مستقلة تمثّل مالك المشروع؛ نراجع عروض المقاولين ونوحّد نطاق المقارنة ونراجع شروط العقد والدفعات، لتوقّع وأنت تعرف ما تدفع مقابله.",
     servicesTitle: "خدمات المالك",
     contractorsTitle: "للمقاولين",
     companyTitle: "رواق",
@@ -45,7 +45,7 @@ const ar = {
   home: {
     metaTitle: "رواق | شريكك المستقل في مشاريع التشطيب والبناء بجدة",
     metaDescription:
-      "نراجع عروض المقاولين، ونعدّ مواصفات مشروعك، ونرافقك حتى الاستلام النهائي، لتدفع مقابل عمل أُنجِز بالمواصفات التي اخترتها.",
+      "أرسل عرض المقاول قبل أن توقّع، ونعيده إليك خلال ٤٨ ساعة وعليه البنود الغائبة وما يحتاج توضيحاً وما يستحق التفاوض.",
     eyebrow: "رواق، جدة",
     title: "بيتك يستحق من يقف في صفّك.",
     lead: "في كل مشروع تشطيب طرفان، لكلٍّ منهما مصلحته. رواق يقف إلى جانب المالك وحده: نراجع العروض بمعايير واضحة، ونوحّد نطاق المقارنة، ونربط الدفعات بمراحل محددة في العقد.",
@@ -80,7 +80,7 @@ const ar = {
     services: [
       {
         step: "١",
-        title: "فحص عرض السعر",
+        title: "مراجعة عرض السعر",
         when: "لديك عرض وتوشك أن توقّع",
         body: "أرسل العرض الذي بين يديك، وخلال ٤٨ ساعة نبيّن لك ما ينقصه، وما يحتمل أكثر من تفسير، وما إذا كان السعر في حدوده المعقولة.",
         meta: "مجاني، أو ٢٩٩ ريالاً للتقرير المفصّل",
@@ -110,7 +110,7 @@ const ar = {
     principleBody:
       "لا يستطيع أي مقاول أن يشتري ترشيحاً من رواق؛ الدخول إلى شبكتنا بالتحقق، والترتيب فيها بالأداء. وأي شركة ذات صلة بنا تخضع للمعايير ذاتها، ونفصح لك عن صلتها كتابةً قبل أن تختار.",
     principleLink: "اقرأ ميثاق الاستقلال",
-    measuresTitle: "سبعة إجراءات وقائية تسبق الخطأ قبل أن يقع",
+    measuresTitle: "ستة شروط تُكتب في العقد قبل أن توقّع",
     measuresLead: "الثقة لا تُبنى بالوعود، بل بإجراءات تجعل الخطأ صعباً من الأساس.",
     measures: [
       { title: "مواصفات تراها قبل أن تدفع", body: "تصوّر ثلاثي الأبعاد وجدول كميات يحدّد العلامة والدرجة والمقاس؛ فما تراه هو ما تستلمه." },
@@ -118,8 +118,7 @@ const ar = {
       { title: "عروض قابلة للمقارنة", body: "يسعّر المقاولون جدول الكميات ذاته، فتظهر الفوارق الحقيقية لا الأرقام الإجمالية وحدها." },
       { title: "عقد موحّد موثّق", body: "عبر منصة «مقاول»، بما يمنحه قوة السند التنفيذي أمام محاكم التنفيذ." },
       { title: "دفعات مرتبطة بمراحل", body: "مقدّمة محدودة، ومراحل دفع محددة في العقد يتفق عليها الطرفان قبل التوقيع." },
-      { title: "فحص في اللحظات الحاسمة", body: "التمديدات قبل إغلاق الجدران، واختبار العزل، وميول البلاط، ومطابقة المواد عند وصولها." },
-      { title: "استلام محفوظ الحق", body: "قائمة ملاحظات موثّقة، ونسبة محتجزة حتى نهاية فترة الملاحظات." },
+      { title: "شروط تسليم مكتوبة", body: "قائمة ملاحظات قبل الاستلام، ونسبة محتجزة حتى نهاية فترة الملاحظات، منصوص عليهما في العقد." },
     ],
     contractorsEyebrow: "شبكة رواق للمقاولين",
     contractorsTitle: "مقاول يعتزّ بعمله؟ هذا مكانك.",
@@ -288,9 +287,9 @@ const ar = {
   },
   how: {
     metaTitle: "كيف نعمل — رحلة مشروعك مع رواق | رواق",
-    metaDescription: "رحلة رواق من أول عرض سعر حتى الاستلام النهائي: فحص عرض السعر، وملف المشروع، ورواق أمان.",
+    metaDescription: "كيف يعمل رواق: مراجعة عرض السعر، وملف المشروع، ومراجعة العقد قبل التوقيع.",
     eyebrow: "كيف نعمل",
-    title: "من أول عرض سعر، حتى آخر يوم في الموقع.",
+    title: "من أول عرض سعر، حتى توقيع العقد.",
     lead: "لكل مشروع نقطة بداية مختلفة. اختر المرحلة التي تشبه موقفك اليوم، ونبدأ معك من هناك.",
     closingTitle: "استقلالنا هو ما يجعل رأينا جديراً بثقتك",
     closing: "نتقاضى أتعابنا من المالك، ولا نبيع لأي مقاول ظهوراً أو ترتيباً. ذلك وحده ما يجعل نصيحتنا خالصة لك.",
@@ -302,21 +301,21 @@ export type SiteCopy = typeof ar;
 const en: SiteCopy = {
   header: {
     services: "Services",
-    check: "Quote check",
+    check: "Quote review",
     projectFile: "Project File",
     aman: "Ruwaq Aman",
     guides: "Guides",
     howItWorks: "How we work",
     about: "About",
     contractors: "For contractors",
-    cta: "Check your quote free",
+    cta: "Send your quote free",
     menu: "Menu",
     close: "Close",
   },
   footer: {
     ctaTitle: "Planning a fit-out or a build?",
     ctaSubtitle: "Start with a step that costs nothing: send us your contractor's quote and we'll show you what it lacks before you sign.",
-    ctaOwner: "Check your quote free",
+    ctaOwner: "Send your quote free",
     ctaContractor: "Join the Ruwaq contractor network",
     tagline:
       "Ruwaq is an independent party that represents the owner: we review quotes, define the comparison scope and stay with you through the contract, so every payment follows defined milestones.",
@@ -370,7 +369,7 @@ const en: SiteCopy = {
     servicesTitle: "Three steps, from the first quote to handing over the keys",
     servicesLead: "Start wherever you are today; we stay with you as far as you need.",
     services: [
-      { step: "1", title: "Quote check", when: "You have a quote and are about to sign", body: "Send us the quote and within 48 hours we show you what's missing, what's ambiguous, and whether the price is reasonable.", meta: "Free, or SAR 299 for the detailed report", href: "/check", cta: "Send your quote" },
+      { step: "1", title: "Quote review", when: "You have a quote and are about to sign", body: "Send us the quote and within 48 hours we show you what's missing, what's ambiguous, and whether the price is reasonable.", meta: "Free, or SAR 299 for the detailed report", href: "/check", cta: "Send your quote" },
       { step: "2", title: "Project File", when: "Your quotes can't be compared", body: "3D visualisation and a unified bill of quantities, then three quotes from vetted contractors with a comparison report.", meta: "Quote within one working day", href: "/project-file", cta: "Request your Project File" },
       { step: "3", title: "Contract review", when: "You've chosen a contractor", body: "We review the contract and payment schedule and recommend changes before you sign.", meta: "Fees agreed before we start", href: "/check", cta: "Send the contract for review" },
     ],
@@ -378,7 +377,7 @@ const en: SiteCopy = {
     principleBody:
       "No contractor can buy a referral from Ruwaq: entry is by vetting, ranking by performance. Any company related to us meets the same standards, and we disclose the relationship in writing before you choose.",
     principleLink: "Read the independence charter",
-    measuresTitle: "Seven safeguards that act before mistakes happen",
+    measuresTitle: "Six terms to write into the contract before you sign",
     measuresLead: "Trust isn't built on promises, but on procedures that make mistakes hard in the first place.",
     measures: [
       { title: "Specs you see before you pay", body: "3D visualisation and a BOQ naming brand, grade and size — what you see is what you receive." },
@@ -386,8 +385,7 @@ const en: SiteCopy = {
       { title: "Comparable quotes", body: "Contractors price the same BOQ, so real differences show — not just totals." },
       { title: "A registered unified contract", body: "Via the Muqawil platform, giving it the force of an enforceable instrument." },
       { title: "Payments follow milestones", body: "A limited advance; payment schedule set in the contract before you sign." },
-      { title: "Inspection at decisive moments", body: "MEP before walls close, waterproofing tests, tile falls, and materials checked on delivery." },
-      { title: "A documented handover", body: "A documented snag list and a retention until the defects period ends." },
+      { title: "Written handover terms", body: "A snag list before handover and a retention until the defects period ends, both written into the contract." },
     ],
     contractorsEyebrow: "Ruwaq contractor network",
     contractorsTitle: "Proud of your work? This is your place.",
@@ -537,9 +535,9 @@ const en: SiteCopy = {
   },
   how: {
     metaTitle: "How we work | Ruwaq",
-    metaDescription: "Ruwaq's journey from the first quote to final handover: quote check, Project File and Ruwaq Aman.",
+    metaDescription: "How Ruwaq works: quote review, Project File and contract review before you sign.",
     eyebrow: "How we work",
-    title: "From the first quote to the last day on site.",
+    title: "From the first quote to the signed contract.",
     lead: "Every project starts somewhere different. Choose the stage that matches where you are today, and we begin there.",
     closingTitle: "Our independence is what makes our advice worth trusting",
     closing: "We are paid by the owner and sell no contractor visibility or ranking. That alone keeps our advice entirely yours.",
