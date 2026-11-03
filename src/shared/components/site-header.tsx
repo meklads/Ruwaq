@@ -13,10 +13,10 @@ export async function SiteHeader() {
 
   const nav = getContentCopy(locale).nav;
   const links = [
-    { href: "/radar", label: c.radar },
     { href: "/updates", label: nav.updates },
-    { href: "/specialists", label: nav.specialists },
     { href: "/insights", label: nav.insights },
+    { href: "/specialists", label: nav.specialists },
+    { href: "/radar", label: c.radar },
     { href: "/about", label: c.about },
     { href: "/contact", label: c.contact },
   ];
@@ -36,11 +36,11 @@ export async function SiteHeader() {
 
         <div className="rw-header__actions">
           {radarApp && (
-            <a href={radarApp} className="rw-btn rw-btn--outline rw-btn--sm rw-header__contractors">
+            <a href={radarApp} className="rw-link rw-header__enter" rel="noopener">
               {c.enter}
             </a>
           )}
-          <Link href="/radar" className="rw-btn rw-btn--primary rw-btn--sm rw-header__cta">
+          <Link href="/contact" className="rw-btn rw-btn--primary rw-btn--sm rw-header__cta">
             {c.cta}
           </Link>
           <LocaleSwitcher />

@@ -14,6 +14,7 @@ import "./ruwaq-radar.css";
 import { Providers } from "./providers";
 import { GoogleAnalytics } from "@/shared/components/google-analytics";
 import { getLocale } from "@/shared/i18n/server";
+import { getSiteCopy } from "@/modules/site/copy";
 import { localeDir } from "@/shared/i18n/locale";
 import { RUWQ_PUBLIC_URL } from "@/shared/constants/brand";
 import { DEFAULT_MARKETING_HERO } from "@/content/marketing-images";
@@ -75,14 +76,7 @@ const plusJakarta = Plus_Jakarta_Sans({
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
-  const title =
-    locale === "ar"
-      ? "رواق | من إشارات السوق إلى فرص تجارية"
-      : "Ruwaq | From market signals to business opportunities";
-  const description =
-    locale === "ar"
-      ? "رواق منصة استخبارات فرص تجارية: تابع المشاريع والأحداث والجهات، وافهم ما تغيّر وما قد يعنيه لنشاطك. الرادار في مرحلة بناء الإصدار الداخلي ولم يُفتح للاستخدام التجاري بعد."
-      : "Ruwaq is a business-opportunity intelligence platform: follow projects, events and organisations, and understand what changed and what it may mean for your business. Radar is at the stage of building its internal release and has not been opened for commercial use.";
+  const { title, description } = getSiteCopy(locale).meta;
 
   return {
     robots: process.env.RUWAQ_PRIVATE_PREVIEW === "1" ? { index: false, follow: false } : undefined,
