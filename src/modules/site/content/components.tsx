@@ -125,3 +125,24 @@ export function FallbackNotice({ title, locale }: { title: Localized; locale: Lo
   if (!only) return null;
   return <p className="rwc-notice">{getContentCopy(locale).fallback[only]}</p>;
 }
+
+/** Public placeholder for a section that has no published content yet. Never shows items or drafts. */
+export function ComingSoon({ section, locale }: { section: "updates" | "insights" | "specialists"; locale: Locale }) {
+  const c = getContentCopy(locale);
+  return (
+    <div className="rw">
+      <section className="rw-page-hero">
+        <div className="rw-wrap rw-narrow">
+          <p className="rw-eyebrow">{c.soon.badge}</p>
+          <h1 className="rw-display">{c.list[section].title}</h1>
+          <p className="rw-lead">{c.soon[section]}</p>
+          <p className="rw-fineprint" style={{ marginBlockStart: "1rem" }}>{c.soon.note}</p>
+          <div className="rw-actions">
+            <Link href="/radar" className="rw-btn rw-btn--primary">{c.soon.radarCta}</Link>
+            <Link href="/contact" className="rw-btn rw-btn--outline">{c.soon.contactCta}</Link>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}

@@ -5,7 +5,6 @@ import { RuwaqLogo } from "@/shared/components/ruwaq-logo";
 import { getSiteCopy } from "@/modules/site/copy";
 import { getRadarAppUrl } from "@/modules/site/radar-link";
 import { getContentCopy } from "@/modules/site/content/copy";
-import { sectionAvailability } from "@/modules/site/content/loader";
 
 export async function SiteHeader() {
   const locale = await getLocale();
@@ -13,12 +12,11 @@ export async function SiteHeader() {
   const radarApp = getRadarAppUrl();
 
   const nav = getContentCopy(locale).nav;
-  const has = sectionAvailability();
   const links = [
     { href: "/radar", label: c.radar },
-    ...(has.updates ? [{ href: "/updates", label: nav.updates }] : []),
-    ...(has.specialists ? [{ href: "/specialists", label: nav.specialists }] : []),
-    ...(has.insights ? [{ href: "/insights", label: nav.insights }] : []),
+    { href: "/updates", label: nav.updates },
+    { href: "/specialists", label: nav.specialists },
+    { href: "/insights", label: nav.insights },
     { href: "/about", label: c.about },
     { href: "/contact", label: c.contact },
   ];
