@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { TemplateSampleGallery } from "@/modules/marketing/components/template-sample-gallery";
+import { ReadyProposalsGallery } from "@/modules/marketing/components/ready-proposals-gallery";
 import { getTrustCopy } from "@/modules/ruwaq/trust-copy";
 import type { Messages } from "@/shared/i18n/messages/types";
 import type { Locale } from "@/shared/i18n/locale";
@@ -68,6 +69,45 @@ export function ProposalsLandingPage({
                 <p className="rw-body">{item.body}</p>
               </article>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="samples" className="rw-section" style={{ scrollMarginTop: "5rem" }}>
+        <div className="rw-wrap">
+          <div className="rw-head">
+            <span className="rw-eyebrow">{sales.sample.eyebrow}</span>
+            <h2 className="rw-h2">{sales.sample.title}</h2>
+            <p className="rw-body">{sales.sample.body}</p>
+          </div>
+          <div className="rw-card">
+            <ReadyProposalsGallery
+              locale={locale}
+              items={templates.gallery}
+              labels={{
+                openSample: templates.openSample,
+                openSampleHint:
+                  locale === "ar"
+                    ? "اضغط على أي نموذج لمعاينته كاملًا. البيانات خيالية للتوضيح فقط."
+                    : "Click any sample to preview it in full. The data is fictional, for illustration only.",
+                note:
+                  locale === "ar"
+                    ? "نموذج كامل ببيانات خيالية لغرض العرض فقط."
+                    : "A full sample with fictional data, for illustration only.",
+                previewLabel: templates.previewLabel,
+                paletteTitle: templates.paletteTitle,
+                paletteHint: templates.paletteHint,
+                customColors: templates.customColors,
+                primaryColor: templates.primaryColor,
+                accentColor: templates.accentColor,
+                surfaceColor: templates.surfaceColor,
+                previewCta: templates.previewCta,
+                closePreview: templates.closePreview,
+                startWithLook: templates.startWithLook,
+                subscribeHint: templates.subscribeHint,
+              }}
+              startCta={startProposalLabel}
+            />
           </div>
         </div>
       </section>

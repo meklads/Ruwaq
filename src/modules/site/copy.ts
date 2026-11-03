@@ -12,7 +12,7 @@ type Step = { title: string; body: string };
 type Copy = {
   header: { radar: string; about: string; contact: string; cta: string; enter: string; menu: string };
   footer: {
-    about: string; sections: string; radar: string; tools: string; nasaq: string; guides: string;
+    about: string; sections: string; radar: string; tools: string; nasaq: string; ready: string; guides: string;
     company: string; aboutLink: string; contact: string; privacy: string; terms: string; enter: string;
     rights: string; cta: string; ctaBody: string; ctaButton: string;
   };
@@ -25,7 +25,7 @@ type Copy = {
     };
     how: { eyebrow: string; title: string; body: string; cards: Card[] };
     radar: { eyebrow: string; title: string; body: string; cta: string };
-    tools: { eyebrow: string; title: string; body: string; link: string };
+    tools: { eyebrow: string; title: string; body: string; link: string; ready: string };
   };
   radar: {
     eyebrow: string; title: string; lead: string; status: string;
@@ -46,7 +46,7 @@ const ar: Copy = {
   header: { radar: "الرادار", about: "من نحن", contact: "تواصل", cta: "تواصل", enter: "دخول العملاء", menu: "القائمة الرئيسية" },
   footer: {
     about: "مظلة معرفية قيد البناء عن المشاريع والجهات في السوق السعودي.",
-    sections: "الأقسام", radar: "الرادار (تجربة داخلية)", tools: "أدوات", nasaq: "نَسَق: إعداد عروض الأسعار", guides: "الأدلة",
+    sections: "الأقسام", radar: "الرادار (تجربة داخلية)", tools: "أدوات", nasaq: "نَسَق: إعداد عروض الأسعار", ready: "العروض الجاهزة (نماذج نَسَق)", guides: "الأدلة",
     company: "رواق", aboutLink: "من نحن", contact: "تواصل", privacy: "الخصوصية", terms: "الشروط", enter: "دخول العملاء",
     rights: "جميع الحقوق محفوظة", cta: "تواصل معنا", ctaBody: "للاستفسار عن رواق أو لإبداء ملاحظاتك.", ctaButton: "تواصل",
   },
@@ -96,6 +96,7 @@ const ar: Copy = {
       title: "نَسَق لإعداد عروض الأسعار",
       body: "أداة مستقلة لإعداد عروض أسعار احترافية، وهي قائمة بذاتها ولا ترتبط بمحتوى رواق.",
       link: "تعرّف على نَسَق",
+      ready: "العروض الجاهزة",
     },
   },
   radar: {
@@ -181,7 +182,7 @@ const en: Copy = {
   header: { radar: "Radar", about: "About", contact: "Contact", cta: "Contact", enter: "Client login", menu: "Main menu" },
   footer: {
     about: "A knowledge umbrella, under construction, about projects and organisations in the Saudi market.",
-    sections: "Sections", radar: "Radar (internal trial)", tools: "Tools", nasaq: "NASAQ: quotation builder", guides: "Guides",
+    sections: "Sections", radar: "Radar (internal trial)", tools: "Tools", nasaq: "NASAQ: quotation builder", ready: "Ready proposals (NASAQ samples)", guides: "Guides",
     company: "Ruwaq", aboutLink: "About", contact: "Contact", privacy: "Privacy", terms: "Terms", enter: "Client login",
     rights: "All rights reserved", cta: "Get in touch", ctaBody: "Questions about Ruwaq, or your feedback.", ctaButton: "Contact",
   },
@@ -231,6 +232,7 @@ const en: Copy = {
       title: "NASAQ for quotations",
       body: "A standalone tool for preparing professional quotations. It stands on its own and is not tied to Ruwaq’s content.",
       link: "Discover NASAQ",
+      ready: "Ready proposals",
     },
   },
   radar: {
