@@ -2,18 +2,25 @@ import Link from "next/link";
 import { getLocale } from "@/shared/i18n/server";
 import { LocaleSwitcher } from "@/shared/i18n/locale-switcher";
 import { RuwaqLogo } from "@/shared/components/ruwaq-logo";
-import { getSiteCopy } from "@/modules/ruwaq/site-copy";
+import { getSiteCopy } from "@/modules/site/copy";
+import { getRadarAppUrl } from "@/modules/site/radar-link";
+import { getContentCopy } from "@/modules/site/content/copy";
+import { sectionAvailability } from "@/modules/site/content/loader";
 
 export async function SiteHeader() {
   const locale = await getLocale();
   const c = getSiteCopy(locale).header;
+  const radarApp = getRadarAppUrl();
 
+  const nav = getContentCopy(locale).nav;
+  const has = sectionAvailability();
   const links = [
-    { href: "/check", label: c.check },
-    { href: "/project-file", label: c.projectFile },
-    { href: "/how-it-works", label: c.howItWorks },
-    { href: "/guides", label: c.guides },
+    { href: "/radar", label: c.radar },
+    ...(has.updates ? [{ href: "/updates", label: nav.updates }] : []),
+    ...(has.specialists ? [{ href: "/specialists", label: nav.specialists }] : []),
+    ...(has.insights ? [{ href: "/insights", label: nav.insights }] : []),
     { href: "/about", label: c.about },
+    { href: "/contact", label: c.contact },
   ];
 
   return (
@@ -30,10 +37,12 @@ export async function SiteHeader() {
         </nav>
 
         <div className="rw-header__actions">
-          <Link href="/pro" className="rw-btn rw-btn--outline rw-btn--sm rw-header__contractors">
-            {c.contractors}
-          </Link>
-          <Link href="/check" className="rw-btn rw-btn--primary rw-btn--sm rw-header__cta">
+          {radarApp && (
+            <a href={radarApp} className="rw-btn rw-btn--outline rw-btn--sm rw-header__contractors">
+              {c.enter}
+            </a>
+          )}
+          <Link href="/radar" className="rw-btn rw-btn--primary rw-btn--sm rw-header__cta">
             {c.cta}
           </Link>
           <LocaleSwitcher />
@@ -46,9 +55,6 @@ export async function SiteHeader() {
             {l.label}
           </Link>
         ))}
-        <Link href="/pro" className="rw-mobile-nav__pro">
-          {c.contractors}
-        </Link>
       </nav>
     </header>
   );

@@ -51,7 +51,7 @@ export default function OpenGraphImage() {
             color: "rgba(255,255,255,0.92)",
           }}
         >
-          دليل هندسي وعقاري في المنطقة الغربية
+          من إشارات السوق إلى فرص تجارية
         </div>
         <div
           style={{
@@ -64,7 +64,7 @@ export default function OpenGraphImage() {
             marginTop: 12,
           }}
         >
-          Engineering directory and NASAQ — Professional Proposal Tool
+          From market signals to business opportunities
         </div>
       </div>
     ),

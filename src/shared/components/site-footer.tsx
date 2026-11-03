@@ -1,41 +1,39 @@
 import Link from "next/link";
 import { getLocale } from "@/shared/i18n/server";
-import { RUWQ_PUBLIC_EMAIL } from "@/shared/constants/brand";
-import { getSiteCopy } from "@/modules/ruwaq/site-copy";
-import { getTrustCopy } from "@/modules/ruwaq/trust-copy";
+import { RUWQ_PUBLIC_EMAIL, RUWQ_SUPPORT_WHATSAPP_E164 } from "@/shared/constants/brand";
+import { getSiteCopy } from "@/modules/site/copy";
 import { RuwaqLogo } from "@/shared/components/ruwaq-logo";
-
-const WHATSAPP_DISPLAY = "0502786513";
-const WHATSAPP_URL = "https://wa.me/966502786513";
+import { getContentCopy } from "@/modules/site/content/copy";
+import { sectionAvailability } from "@/modules/site/content/loader";
 
 export async function SiteFooter() {
   const locale = await getLocale();
-  const c = getSiteCopy(locale);
-  const f = c.footer;
-  const t = getTrustCopy(locale);
-  const ar = locale !== "en";
+  const f = getSiteCopy(locale).footer;
+  const waDigits = RUWQ_SUPPORT_WHATSAPP_E164.replace(/\D/g, "");
 
-  const owner = [
-    { href: "/check", label: c.header.check },
-    { href: "/project-file", label: c.header.projectFile },
-    { href: "/estimate", label: t.nav.estimate },
-    { href: "/checklist", label: t.nav.checklist },
-    { href: "/guides", label: c.header.guides },
+  const nav = getContentCopy(locale).nav;
+  const has = sectionAvailability();
+  const product = [
+    { href: "/radar", label: f.radar },
+    { href: "/#how", label: f.how },
+    ...(has.updates ? [{ href: "/updates", label: nav.updates }] : []),
+    ...(has.specialists ? [{ href: "/specialists", label: nav.specialists }] : []),
+    ...(has.insights ? [{ href: "/insights", label: nav.insights }] : []),
   ];
-  const contractors = [
-    { href: "/pro", label: f.network },
-    { href: "/join", label: f.join },
+  const tools = [
     { href: "/proposals", label: f.nasaq },
-    { href: "/pricing", label: f.pricing },
+    { href: "/guides", label: f.guides },
   ];
   const company = [
-    { href: "/about", label: c.header.about },
-    { href: "/how-it-works", label: c.header.howItWorks },
-    { href: "/charter", label: t.nav.charter },
-    { href: "/faq", label: f.nasaqFaq },
+    { href: "/about", label: f.aboutLink },
     { href: "/contact", label: f.contact },
     { href: "/privacy", label: f.privacy },
     { href: "/terms", label: f.terms },
+  ];
+  const columns = [
+    { title: f.product, links: product },
+    { title: f.tools, links: tools },
+    { title: f.company, links: company },
   ];
 
   return (
@@ -43,17 +41,14 @@ export async function SiteFooter() {
       <section className="rw-footer-cta">
         <div className="rw-wrap rw-footer-cta__inner">
           <div>
-            <h2 className="rw-h2">{f.ctaTitle}</h2>
+            <h2 className="rw-h2">{f.cta}</h2>
             <p className="rw-lead" style={{ marginBlockStart: "0.85rem" }}>
-              {f.ctaSubtitle}
+              {f.ctaBody}
             </p>
           </div>
           <div className="rw-actions" style={{ marginBlockStart: 0 }}>
-            <Link href="/check" className="rw-btn rw-btn--primary">
-              {f.ctaOwner}
-            </Link>
-            <Link href="/pro" className="rw-btn rw-btn--outline">
-              {f.ctaContractor}
+            <Link href="/contact" className="rw-btn rw-btn--primary">
+              {f.ctaButton}
             </Link>
           </div>
         </div>
@@ -64,11 +59,11 @@ export async function SiteFooter() {
           <div className="rw-footer__grid">
             <div>
               <RuwaqLogo href="/" variant="dark" size="footer" />
-              <p className="rw-footer__about">{f.tagline}</p>
+              <p className="rw-footer__about">{f.about}</p>
               <ul className="rw-footer__contact">
                 <li>
-                  <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" dir="ltr">
-                    {ar ? "واتساب" : "WhatsApp"}: {WHATSAPP_DISPLAY}
+                  <a href={`https://wa.me/${waDigits}`} target="_blank" rel="noopener noreferrer" dir="ltr">
+                    {RUWQ_SUPPORT_WHATSAPP_E164}
                   </a>
                 </li>
                 <li>
@@ -76,43 +71,26 @@ export async function SiteFooter() {
                     {RUWQ_PUBLIC_EMAIL}
                   </a>
                 </li>
-                <li>{f.city}</li>
               </ul>
             </div>
-            <div>
-              <h3>{f.servicesTitle}</h3>
-              <ul>
-                {owner.map((l) => (
-                  <li key={l.href}>
-                    <Link href={l.href}>{l.label}</Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h3>{f.contractorsTitle}</h3>
-              <ul>
-                {contractors.map((l) => (
-                  <li key={l.href}>
-                    <Link href={l.href}>{l.label}</Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h3>{f.companyTitle}</h3>
-              <ul>
-                {company.map((l) => (
-                  <li key={l.href}>
-                    <Link href={l.href}>{l.label}</Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            {columns.map((col) => (
+              <div key={col.title}>
+                <h3>{col.title}</h3>
+                <ul>
+                  {col.links.map((l) => (
+                    <li key={l.href}>
+                      <Link href={l.href}>{l.label}</Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
 
           <div className="rw-footer__bottom">
-            <p>{f.copyright}</p>
+            <p>
+              © {new Date().getFullYear()} {locale === "ar" ? "رواق" : "Ruwaq"} · {f.rights}
+            </p>
           </div>
         </div>
       </div>

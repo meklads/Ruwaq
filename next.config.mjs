@@ -1,5 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Build-time switch for the PRIVATE PREVIEW build only (see Dockerfile.preview). Inlined so the
+  // bundler drops the draft-content module from every other build. Default: off.
+  env: {
+    RUWAQ_PRIVATE_PREVIEW: process.env.RUWAQ_PRIVATE_PREVIEW === "1" ? "1" : "0",
+  },
   experimental: {
     serverActions: {
       bodySizeLimit: "5mb",
