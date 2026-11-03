@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
 import { getLocale } from "@/shared/i18n/server";
 import { getContentCopy } from "@/modules/site/content/copy";
 import { getEntities } from "@/modules/site/content/loader";
 import { pickText } from "@/modules/site/content/localize";
-import { EntityCard } from "@/modules/site/content/components";
+import { EntityCard, ComingSoon } from "@/modules/site/content/components";
 
 export async function generateMetadata(): Promise<Metadata> {
   const c = getContentCopy(await getLocale()).list.specialists;
@@ -17,7 +16,7 @@ type Props = { searchParams: { discipline?: string; city?: string } };
 export default async function SpecialistsPage({ searchParams }: Props) {
   const locale = await getLocale();
   const all = getEntities();
-  if (all.length === 0) notFound();
+  if (all.length === 0) return <ComingSoon section="specialists" locale={locale} />;
   const c = getContentCopy(locale);
 
   const disciplinesOf = (e: (typeof all)[number]) => e.disciplines.map((d) => pickText(d, locale)?.text).filter((x): x is string => Boolean(x));

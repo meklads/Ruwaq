@@ -20,6 +20,10 @@ type C = {
     insights: { title: string; lead: string };
     specialists: { title: string; lead: string; fine: string };
   };
+  soon: {
+    badge: string; note: string; radarCta: string; contactCta: string;
+    updates: string; insights: string; specialists: string;
+  };
   home: { eyebrow: string; title: string; body: string; all: { updates: string; insights: string; specialists: string } };
   update: {
     published: string; eventDate: string; reviewed: string; what: string; project: string; location: string;
@@ -64,6 +68,15 @@ const ar: C = {
       lead: "ملفات تعريفية لجهات تعمل في منظومة المشاريع، تفصل بين ما تنشره الجهة عن نفسها، وما يدعمه مصدر آخر، وما راجعته رواق فعلًا.",
       fine: "ملفات تحريرية مبنية على مصادر معلنة، ولا تعني علاقة تجارية أو تزكية. الانتقاء لا يعني اعتمادًا مهنيًا ولا ضمانًا لجودة الخدمات، وليس هذا الدليل أداة لاختيار مقاول.",
     },
+  },
+  soon: {
+    badge: "قريبًا",
+    note: "هذا القسم قيد الإعداد، وسيُفتح حين تكتمل مواده ومراجعتها.",
+    radarCta: "تعرّف على الرادار",
+    contactCta: "تواصل معنا",
+    updates: "سيعرض ما أُعلن أو تغيّر في مشاريع مختارة في السوق السعودي، مع المصدر وتاريخ النشر وما لم يتضح بعد، ليسهل عليك متابعة تحوّلات المشاريع.",
+    insights: "سيقدّم تحليلات وتقارير قصيرة حول سؤال محدد وفترة ونطاق، مع المنهجية وحدود التغطية، دون ادعاء أنها تمثل السوق كله.",
+    specialists: "سيضم ملفات تعريفية لجهات تعمل في منظومة المشاريع، تفصل بين ما تنشره الجهة عن نفسها وما يدعمه مصدر آخر وما راجعته رواق فعلًا.",
   },
   home: {
     eyebrow: "من معرفة رواق",
@@ -124,6 +137,15 @@ const en: C = {
       lead: "Profiles of organisations in the projects ecosystem, separating what the organisation says about itself, what another source supports, and what Ruwaq actually reviewed.",
       fine: "Editorial profiles based on public sources; they do not imply a commercial relationship or endorsement. Selection is not a professional accreditation or a guarantee of service quality, and this is not a tool for choosing a contractor.",
     },
+  },
+  soon: {
+    badge: "Coming soon",
+    note: "This section is being prepared and will open once its material has been written and reviewed.",
+    radarCta: "Explore the Radar",
+    contactCta: "Contact us",
+    updates: "It will show what was announced or changed in selected Saudi projects, with the source, publication date and what is still unclear, so you can follow how projects move.",
+    insights: "It will offer short analyses and reports built around one question, period and scope, with the methodology and coverage limits, without claiming to represent the whole market.",
+    specialists: "It will hold profiles of organisations in the projects ecosystem, separating what each says about itself, what another source supports, and what Ruwaq actually reviewed.",
   },
   home: {
     eyebrow: "From Ruwaq’s knowledge",

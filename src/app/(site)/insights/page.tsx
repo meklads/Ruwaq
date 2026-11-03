@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
 import { getLocale } from "@/shared/i18n/server";
 import { getContentCopy } from "@/modules/site/content/copy";
 import { getInsights } from "@/modules/site/content/loader";
-import { InsightCard } from "@/modules/site/content/components";
+import { InsightCard, ComingSoon } from "@/modules/site/content/components";
 
 export async function generateMetadata(): Promise<Metadata> {
   const c = getContentCopy(await getLocale()).list.insights;
@@ -13,7 +12,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function InsightsPage() {
   const locale = await getLocale();
   const items = getInsights();
-  if (items.length === 0) notFound();
+  if (items.length === 0) return <ComingSoon section="insights" locale={locale} />;
   const c = getContentCopy(locale).list.insights;
   return (
     <div className="rw">

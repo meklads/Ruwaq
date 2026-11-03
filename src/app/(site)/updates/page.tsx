@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
 import { getLocale } from "@/shared/i18n/server";
 import { getContentCopy } from "@/modules/site/content/copy";
 import { getUpdates } from "@/modules/site/content/loader";
-import { UpdateCard } from "@/modules/site/content/components";
+import { UpdateCard, ComingSoon } from "@/modules/site/content/components";
 
 export async function generateMetadata(): Promise<Metadata> {
   const c = getContentCopy(await getLocale()).list.updates;
@@ -13,7 +12,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function UpdatesPage() {
   const locale = await getLocale();
   const items = getUpdates();
-  if (items.length === 0) notFound();
+  if (items.length === 0) return <ComingSoon section="updates" locale={locale} />;
   const c = getContentCopy(locale).list.updates;
   return (
     <div className="rw">
