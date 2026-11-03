@@ -4,19 +4,20 @@ import { RUWQ_PUBLIC_EMAIL, RUWQ_SUPPORT_WHATSAPP_E164 } from "@/shared/constant
 import { getSiteCopy } from "@/modules/site/copy";
 import { RuwaqLogo } from "@/shared/components/ruwaq-logo";
 import { getContentCopy } from "@/modules/site/content/copy";
+import { getRadarAppUrl } from "@/modules/site/radar-link";
 
 export async function SiteFooter() {
   const locale = await getLocale();
   const f = getSiteCopy(locale).footer;
+  const radarApp = getRadarAppUrl();
   const waDigits = RUWQ_SUPPORT_WHATSAPP_E164.replace(/\D/g, "");
 
   const nav = getContentCopy(locale).nav;
   const product = [
-    { href: "/radar", label: f.radar },
-    { href: "/#how", label: f.how },
     { href: "/updates", label: nav.updates },
-    { href: "/specialists", label: nav.specialists },
     { href: "/insights", label: nav.insights },
+    { href: "/specialists", label: nav.specialists },
+    { href: "/radar", label: f.radar },
   ];
   const tools = [
     { href: "/proposals", label: f.nasaq },
@@ -27,9 +28,10 @@ export async function SiteFooter() {
     { href: "/contact", label: f.contact },
     { href: "/privacy", label: f.privacy },
     { href: "/terms", label: f.terms },
+    ...(radarApp ? [{ href: radarApp, label: f.enter }] : []),
   ];
   const columns = [
-    { title: f.product, links: product },
+    { title: f.sections, links: product },
     { title: f.tools, links: tools },
     { title: f.company, links: company },
   ];

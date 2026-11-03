@@ -26,7 +26,7 @@ export default async function AboutPage() {
             ))}
           </dl>
           <div className="rw-actions">
-            <Link href="/radar" className="rw-btn rw-btn--primary">
+            <Link href="/#sections" className="rw-btn rw-btn--primary">
               {a.cta}
             </Link>
           </div>

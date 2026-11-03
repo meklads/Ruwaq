@@ -1,4 +1,5 @@
 import { ImageResponse } from "next/og";
+import { getSiteCopy } from "@/modules/site/copy";
 
 export const runtime = "edge";
 export const size = { width: 1200, height: 630 };
@@ -51,7 +52,7 @@ export default function OpenGraphImage() {
             color: "rgba(255,255,255,0.92)",
           }}
         >
-          من إشارات السوق إلى فرص تجارية
+          {getSiteCopy("ar").meta.ogLine}
         </div>
         <div
           style={{
@@ -64,7 +65,7 @@ export default function OpenGraphImage() {
             marginTop: 12,
           }}
         >
-          From market signals to business opportunities
+          {getSiteCopy("en").meta.ogLine}
         </div>
       </div>
     ),

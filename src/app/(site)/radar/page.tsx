@@ -33,15 +33,30 @@ export default async function RadarPage() {
               <dt className="rw-h3">{r.audience.title}</dt>
               <dd>{r.audience.body}</dd>
             </div>
-            <div>
-              <dt className="rw-h3">{r.problem.title}</dt>
-              <dd>{r.problem.body}</dd>
-            </div>
           </dl>
         </div>
       </section>
 
       <section className="rw-section rw-section--stone">
+        <div className="rw-wrap">
+          <div className="rw-grid rw-grid--2">
+            <div className="rw-card">
+              <h2 className="rw-h3">{r.works.title}</h2>
+              <ul className="rw-body" style={{ marginBlockStart: "0.75rem", paddingInlineStart: "1.1rem", listStyle: "disc" }}>
+                {r.works.items.map((i) => (<li key={i}>{i}</li>))}
+              </ul>
+            </div>
+            <div className="rw-card">
+              <h2 className="rw-h3">{r.planned.title}</h2>
+              <ul className="rw-body" style={{ marginBlockStart: "0.75rem", paddingInlineStart: "1.1rem", listStyle: "disc" }}>
+                {r.planned.items.map((i) => (<li key={i}>{i}</li>))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="rw-section">
         <div className="rw-wrap">
           <div className="rw-head">
             <h2 className="rw-display">{r.journey.title}</h2>
@@ -58,6 +73,27 @@ export default async function RadarPage() {
               </li>
             ))}
           </ol>
+        </div>
+      </section>
+
+      <section className="rw-section rw-section--stone">
+        <div className="rw-wrap rw-narrow">
+          <article className="rw-opp" aria-label={r.example.label}>
+            <span className="rw-opp__label">{r.example.label}</span>
+            <h2 className="rw-opp__title">{r.example.title}</h2>
+            <div className="rw-opp__rows">
+              {r.example.rows.map((row) => (
+                <div key={row.key} className="rw-opp__row">
+                  <span className="rw-opp__k">
+                    {row.key}
+                    {row.tag && <span className={`rw-opp__tag${row.inferred ? " rw-opp__tag--inferred" : ""}`}>{row.tag}</span>}
+                  </span>
+                  <span className="rw-opp__v">{row.value}</span>
+                </div>
+              ))}
+            </div>
+            <p className="rw-opp__foot">{r.example.footnote}</p>
+          </article>
         </div>
       </section>
 

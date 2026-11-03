@@ -20,3 +20,11 @@ Owner-advisor pages and modules (`/check`, `/project-file`, `/aman`, `/checklist
 
 ## Reference
 Published reference: `Websites/RuwaqPublished` @ `3cf2d19`. Pre-change backup: `_Archive/Ruwaq-pre-unify-2026-11-03` (see its MANIFEST.txt). Superseded marketplace PRD moved to `docs/archive/`.
+
+## Update — 2026-11-03: umbrella positioning
+- Ruwaq is the public umbrella for knowledge about projects and organisations in the Saudi market, still under construction. The home page no longer presents Radar as the product.
+- Home order: hero with an honest section-status card → the three sections (updates, insights, specialists; «قريبًا» until material is approved and published) → principles → a quiet Radar note → NASAQ link.
+- Radar is a secondary item: «قيد التطوير والتجربة الداخلية», tested inside Graphics House, not available for subscription or external use. `/radar` separates what the prototype does from what is planned, and carries the illustrative example (labelled hypothetical). No waitlist, sign-up, launch date or results claims.
+- The header and footer show a quiet «دخول العملاء» link only when `NEXT_PUBLIC_RADAR_APP_URL` is set to an https public host. The public site never reads Radar data.
+- The five real drafts stay out of the public build; the private preview build is unchanged.
+- No section named «العروض الجاهزة» exists in this repository or its history (see the delivery note); nothing was invented in its place.

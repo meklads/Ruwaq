@@ -7,6 +7,7 @@ import {
 } from "@/shared/constants/brand";
 import { DEFAULT_MARKETING_HERO } from "@/content/marketing-images";
 import type { Locale } from "@/shared/i18n/locale";
+import { getSiteCopy } from "@/modules/site/copy";
 
 export function buildOrganizationJsonLd(locale: Locale) {
   const name = locale === "ar" ? "رواق" : "Ruwaq";
@@ -18,10 +19,7 @@ export function buildOrganizationJsonLd(locale: Locale) {
     url: RUWQ_PUBLIC_URL,
     email: RUWQ_PUBLIC_EMAIL,
     logo: `${RUWQ_PUBLIC_URL}${DEFAULT_MARKETING_HERO}`,
-    description:
-      locale === "ar"
-        ? "منصة استخبارات فرص تجارية تبدأ بالسوق السعودي. الرادار في مرحلة بناء الإصدار الداخلي ولم يُفتح للاستخدام التجاري بعد."
-        : "Business-opportunity intelligence platform starting with the Saudi market. Radar is at the stage of building its internal release and has not been opened for commercial use.",
+    description: getSiteCopy(locale).meta.jsonLd,
     areaServed: [
       { "@type": "City", name: "Jeddah" },
       { "@type": "City", name: "Makkah" },
