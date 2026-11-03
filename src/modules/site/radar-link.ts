@@ -1,6 +1,6 @@
 /**
- * Public entry to the Radar app. Optional: the "Enter Radar" button renders only when
- * NEXT_PUBLIC_RADAR_APP_URL is set to an approved https URL on a public host.
+ * Address of the Radar app, read at runtime from RADAR_APP_URL (or NEXT_PUBLIC_RADAR_APP_URL).
+ * Only an approved https URL on a public host is accepted.
  * Local, private or non-https addresses are rejected so they can never surface as a destination.
  */
 function isLocalOrPrivateHost(host: string): boolean {
@@ -11,7 +11,7 @@ function isLocalOrPrivateHost(host: string): boolean {
   return false;
 }
 
-export function getRadarAppUrl(raw: string | undefined = process.env.NEXT_PUBLIC_RADAR_APP_URL): string | null {
+export function getRadarAppUrl(raw: string | undefined = process.env.RADAR_APP_URL ?? process.env.NEXT_PUBLIC_RADAR_APP_URL): string | null {
   const value = raw?.trim();
   if (!value) return null;
   try {

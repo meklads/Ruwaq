@@ -45,3 +45,9 @@ Fixes made on the way: blank first page and two blank pages in the themed export
 Not tested: Google sign-in, the saved list «عروضي» for signed-in users, claiming a guest proposal. The palette «free / subscription» wording is not enforced anywhere in export (only the premium templates are limited by entitlement). Needs a business decision: `/listing/*` and `/directory/*` → `/pro`, and `/visualization` → an external site.
 
 Pages that respond 200 but are not linked from the unified site (owner-advisor direction, left as they are by decision): `/charter`, `/checklist`, `/check`, `/check/sample`, `/estimate`, `/project-file`, `/faq`, `/how-it-works`, `/join`. `/tours` pages exist only in Git history (0edd30c).
+
+## Site quality round — 2026-11-03
+- Header: «المعرفة» menu (three sections with their status beside each), نَسَق (`/proposals`), عن الرادار, من نحن, تواصل, language switch, and «دخول المشتركين» (`/subscribers`). Below 1100px a drawer lists the same links grouped. Footer repeats NASAQ, the ready proposals and subscriber sign-in.
+- `/subscribers` redirects to the Radar app's `/sign-in` when `RADAR_APP_URL` (server env, read at runtime, https public host only) is set; otherwise it says plainly that the sign-in is not connected yet. The public site never holds Radar data and does not know whether a visitor is signed in to Radar (different origin).
+- Home: shorter hero with an index panel (sections + tools, status chip beside each), section cards, a methodology block that carries the coverage limits, a NASAQ band, a quiet Radar note. Status wording appears next to each section only.
+- Radar gate (in RuwaqRadar, not in this repository): username + password, workspace fixed by server setting, ANALYST role, rate limiting, dashboard after sign-in.

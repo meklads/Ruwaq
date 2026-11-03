@@ -10,22 +10,25 @@ type Card = { title: string; body: string };
 type Step = { title: string; body: string };
 
 type Copy = {
-  header: { radar: string; about: string; contact: string; cta: string; enter: string; menu: string };
+  header: {
+    knowledge: string; nasaq: string; radar: string; about: string; contact: string; subscribers: string;
+    menu: string; openMenu: string; closeMenu: string; soon: string; available: string;
+  };
   footer: {
-    about: string; sections: string; radar: string; tools: string; nasaq: string; ready: string; guides: string;
-    company: string; aboutLink: string; contact: string; privacy: string; terms: string; enter: string;
-    rights: string; cta: string; ctaBody: string; ctaButton: string;
+    about: string; sections: string; tools: string; company: string;
+    nasaq: string; ready: string; guides: string; aboutLink: string; aboutRadar: string; contact: string;
+    privacy: string; terms: string; subscribers: string; rights: string; cta: string; ctaBody: string; ctaButton: string;
   };
   home: {
     eyebrow: string; title: string; lead: string; cta: string; ctaSecondary: string; trust: string[];
-    status: { label: string; title: string; footnote: string; available: string; soon: string; internal: string; radarName: string };
+    index: { label: string; tools: string; soon: string; available: string; tool: string; internal: string; nasaq: string; radar: string };
     sections: {
       eyebrow: string; title: string; body: string; open: string;
       items: { updates: Card; insights: Card; specialists: Card };
     };
     how: { eyebrow: string; title: string; body: string; cards: Card[] };
+    nasaq: { eyebrow: string; title: string; body: string; primary: string; secondary: string; link: string };
     radar: { eyebrow: string; title: string; body: string; cta: string };
-    tools: { eyebrow: string; title: string; body: string; link: string; ready: string };
   };
   radar: {
     eyebrow: string; title: string; lead: string; status: string;
@@ -43,30 +46,29 @@ type Copy = {
 };
 
 const ar: Copy = {
-  header: { radar: "الرادار", about: "من نحن", contact: "تواصل", cta: "تواصل", enter: "دخول العملاء", menu: "القائمة الرئيسية" },
+  header: {
+    knowledge: "المعرفة", nasaq: "نَسَق", radar: "عن الرادار", about: "من نحن", contact: "تواصل", subscribers: "دخول المشتركين",
+    menu: "القائمة الرئيسية", openMenu: "فتح القائمة", closeMenu: "إغلاق القائمة", soon: "قريبًا", available: "متاح",
+  },
   footer: {
-    about: "مظلة معرفية قيد البناء عن المشاريع والجهات في السوق السعودي.",
-    sections: "الأقسام", radar: "الرادار (تجربة داخلية)", tools: "أدوات", nasaq: "نَسَق: إعداد عروض الأسعار", ready: "العروض الجاهزة (نماذج نَسَق)", guides: "الأدلة",
-    company: "رواق", aboutLink: "من نحن", contact: "تواصل", privacy: "الخصوصية", terms: "الشروط", enter: "دخول العملاء",
+    about: "مظلة معرفية عن المشاريع والجهات في السوق السعودي.",
+    sections: "الأقسام", tools: "أدوات", company: "رواق",
+    nasaq: "نَسَق: إعداد عروض الأسعار", ready: "العروض الجاهزة", guides: "الأدلة", aboutLink: "من نحن", aboutRadar: "عن الرادار", contact: "تواصل",
+    privacy: "الخصوصية", terms: "الشروط", subscribers: "دخول المشتركين",
     rights: "جميع الحقوق محفوظة", cta: "تواصل معنا", ctaBody: "للاستفسار عن رواق أو لإبداء ملاحظاتك.", ctaButton: "تواصل",
   },
   home: {
-    eyebrow: "مظلة معرفية قيد البناء",
-    title: "رواق: معرفة موثّقة عن المشاريع والجهات في السوق السعودي",
-    lead: "نبني رواق لتكون مرجعًا للمشاريع والجهات وما يتغيّر في السوق السعودي، مع المصدر والتاريخ وما لم يتأكد بعد. المنصة قيد البناء، ونعلن بوضوح ما هو متاح منها.",
+    eyebrow: "رواق",
+    title: "ما يتغيّر في مشاريع السوق السعودي وجهاته، بمصدره وتاريخه",
+    lead: "تجمع رواق التحديثات والتحليلات وملفات الجهات المتخصصة في مكان واحد، وتفصل في كل مادة بين ما نُشر وما نستنتجه.",
     cta: "استكشف الأقسام",
-    ctaSecondary: "من نحن",
-    trust: ["نركّز على السوق السعودي", "المصدر والتاريخ حين يتوفران", "الحقيقة منفصلة عن الاستنتاج"],
-    status: {
-      label: "حالة الأقسام اليوم",
-      title: "أين وصلنا",
-      footnote: "نعرض الحالة كما هي: لا محتوى وهميًا، ولا نعدّ قسمًا متاحًا قبل مراجعة مادته.",
-      available: "متاح", soon: "قريبًا", internal: "تجربة داخلية", radarName: "الرادار",
-    },
+    ctaSecondary: "نَسَق لعروض الأسعار",
+    trust: ["المصدر والتاريخ لكل مادة", "الحقيقة منفصلة عن الاستنتاج", "تحرير انتقائي لا ادعاء شمول"],
+    index: { label: "داخل رواق", tools: "أدوات", soon: "قريبًا", available: "متاح", tool: "أداة", internal: "تجربة داخلية", nasaq: "نَسَق", radar: "الرادار" },
     sections: {
       eyebrow: "الأقسام",
-      title: "ثلاثة أقسام تُبنى بعناية",
-      body: "كل قسم له غرض واضح، وسيُفتح حين تكتمل مواده ومراجعتها.",
+      title: "ثلاثة أقسام، لكل منها غرضه",
+      body: "نفتح كل قسم حين تكتمل مواده وتُراجع.",
       open: "تفاصيل القسم",
       items: {
         updates: { title: "المشاريع والتحديثات", body: "ماذا أُعلن أو تغيّر في مشاريع مختارة، مع المصدر وتاريخ النشر وما لم يتضح بعد." },
@@ -75,28 +77,28 @@ const ar: Copy = {
       },
     },
     how: {
-      eyebrow: "كيف نعمل",
-      title: "مبادئ نلتزم بها",
-      body: "الاختيار تحريري، ولا نعد بتغطية شاملة للسوق.",
+      eyebrow: "المنهجية",
+      title: "كيف نعمل، وأين تنتهي تغطيتنا",
+      body: "الاختيار تحريري: نعرض مواد محددة بمصادرها، ولا نزعم أنها تمثل السوق كله.",
       cards: [
         { title: "المصدر والتاريخ", body: "نعرض المصدر وتاريخ النشر وتاريخ الحدث حين يتوفران، ونفرّق بينها." },
-        { title: "الحقيقة منفصلة عن الاستنتاج", body: "ما ورد في مصدر يُعرض كما ورد، وما نستنتجه يُعلَّم أنه استنتاج." },
+        { title: "الحقيقة والاستنتاج", body: "ما ورد في مصدر يُعرض كما ورد، وما نستنتجه يُعلَّم أنه استنتاج." },
         { title: "ما ينقص ظاهر", body: "نذكر ما لا نعرفه بدل أن نملأه بتخمين." },
-        { title: "لا تغطية شاملة", body: "نختار مواد محددة ونعرضها بمصادرها، ولا نزعم أنها تمثل السوق كله." },
       ],
     },
-    radar: {
-      eyebrow: "قيد التطوير والتجربة الداخلية",
-      title: "الرادار: تجربة داخلية لمتابعة الفرص",
-      body: "الرادار أداة نطوّرها داخل رواق لمتابعة تغيّرات المشاريع والجهات وتحويلها إلى فرص تجارية قابلة للمراجعة. نختبره حاليًا داخل جرافيكس هاوس، وهو غير متاح للاشتراك أو الاستخدام الخارجي. وسنقرر تقديمه للغير بناءً على نتائج التجربة.",
-      cta: "عن الرادار",
+    nasaq: {
+      eyebrow: "نَسَق",
+      title: "عروض أسعار احترافية بهوية شركتك",
+      body: "أداة مستقلة لإعداد عرض سعر منظّم بالعربية والإنجليزية، مع نماذج جاهزة تعاينها قبل أن تبدأ.",
+      primary: "ابدأ عرضًا",
+      secondary: "العروض الجاهزة",
+      link: "عن نَسَق",
     },
-    tools: {
-      eyebrow: "أدوات",
-      title: "نَسَق لإعداد عروض الأسعار",
-      body: "أداة مستقلة لإعداد عروض أسعار احترافية، وهي قائمة بذاتها ولا ترتبط بمحتوى رواق.",
-      link: "تعرّف على نَسَق",
-      ready: "العروض الجاهزة",
+    radar: {
+      eyebrow: "الرادار",
+      title: "تجربة داخلية لمتابعة الفرص",
+      body: "أداة نطوّرها داخل رواق ونختبرها حاليًا في جرافيكس هاوس، وهي غير متاحة للاشتراك أو للاستخدام الخارجي.",
+      cta: "عن الرادار",
     },
   },
   radar: {
@@ -179,30 +181,29 @@ const ar: Copy = {
 };
 
 const en: Copy = {
-  header: { radar: "Radar", about: "About", contact: "Contact", cta: "Contact", enter: "Client login", menu: "Main menu" },
+  header: {
+    knowledge: "Knowledge", nasaq: "NASAQ", radar: "About Radar", about: "About", contact: "Contact", subscribers: "Subscriber sign-in",
+    menu: "Main menu", openMenu: "Open menu", closeMenu: "Close menu", soon: "Soon", available: "Available",
+  },
   footer: {
-    about: "A knowledge umbrella, under construction, about projects and organisations in the Saudi market.",
-    sections: "Sections", radar: "Radar (internal trial)", tools: "Tools", nasaq: "NASAQ: quotation builder", ready: "Ready proposals (NASAQ samples)", guides: "Guides",
-    company: "Ruwaq", aboutLink: "About", contact: "Contact", privacy: "Privacy", terms: "Terms", enter: "Client login",
+    about: "A knowledge umbrella about projects and organisations in the Saudi market.",
+    sections: "Sections", tools: "Tools", company: "Ruwaq",
+    nasaq: "NASAQ: quotation builder", ready: "Ready proposals", guides: "Guides", aboutLink: "About", aboutRadar: "About Radar", contact: "Contact",
+    privacy: "Privacy", terms: "Terms", subscribers: "Subscriber sign-in",
     rights: "All rights reserved", cta: "Get in touch", ctaBody: "Questions about Ruwaq, or your feedback.", ctaButton: "Contact",
   },
   home: {
-    eyebrow: "A knowledge umbrella under construction",
-    title: "Ruwaq: documented knowledge about projects and organisations in the Saudi market",
-    lead: "We are building Ruwaq as a reference for projects, organisations and what changes in the Saudi market, with the source, the date and what is not yet confirmed. The platform is under construction, and we say plainly what is available.",
+    eyebrow: "Ruwaq",
+    title: "What is changing in Saudi projects and organisations, with its source and date",
+    lead: "Ruwaq brings project updates, short analyses and specialist profiles together, and keeps what was published apart from what we infer.",
     cta: "Explore the sections",
-    ctaSecondary: "About",
-    trust: ["Focused on the Saudi market", "Source and date when available", "Fact kept apart from inference"],
-    status: {
-      label: "Section status today",
-      title: "Where we are",
-      footnote: "We show the status as it is: no placeholder content, and a section is not counted as available until its material has been reviewed.",
-      available: "Available", soon: "Coming soon", internal: "Internal trial", radarName: "Radar",
-    },
+    ctaSecondary: "NASAQ for quotations",
+    trust: ["Source and date on every item", "Fact kept apart from inference", "Editorial selection, not a coverage claim"],
+    index: { label: "Inside Ruwaq", tools: "Tools", soon: "Soon", available: "Available", tool: "Tool", internal: "Internal trial", nasaq: "NASAQ", radar: "Radar" },
     sections: {
       eyebrow: "Sections",
-      title: "Three sections, built with care",
-      body: "Each section has a clear purpose and opens once its material has been written and reviewed.",
+      title: "Three sections, each with its purpose",
+      body: "We open each section once its material has been written and reviewed.",
       open: "Section details",
       items: {
         updates: { title: "Projects & updates", body: "What was announced or changed in selected projects, with the source, publication date and what is still unclear." },
@@ -211,28 +212,28 @@ const en: Copy = {
       },
     },
     how: {
-      eyebrow: "How we work",
-      title: "Principles we hold to",
-      body: "Selection is editorial, and we do not promise full market coverage.",
+      eyebrow: "Method",
+      title: "How we work, and where our coverage ends",
+      body: "Selection is editorial: we show specific items with their sources, and we do not claim they represent the whole market.",
       cards: [
         { title: "Source and date", body: "We show the source, publication date and event date when available, and keep them distinct." },
-        { title: "Fact apart from inference", body: "What a source says is shown as stated; what we infer is marked as inference." },
+        { title: "Fact and inference", body: "What a source says is shown as stated; what we infer is marked as inference." },
         { title: "Gaps stay visible", body: "We state what we do not know instead of filling it with a guess." },
-        { title: "No full coverage claim", body: "We pick specific items and show them with their sources, without claiming they represent the whole market." },
       ],
     },
-    radar: {
-      eyebrow: "In development and internal trial",
-      title: "Radar: an internal trial for following opportunities",
-      body: "Radar is a tool we are developing inside Ruwaq to follow changes in projects and organisations and turn them into opportunities a person can review. We are testing it inside Graphics House, and it is not available for subscription or external use. We will decide whether to offer it to others based on the results of the trial.",
-      cta: "About Radar",
+    nasaq: {
+      eyebrow: "NASAQ",
+      title: "Professional quotations in your company’s identity",
+      body: "A standalone tool for preparing a well-structured quotation in Arabic or English, with ready samples you can preview before you start.",
+      primary: "Start a proposal",
+      secondary: "Ready proposals",
+      link: "About NASAQ",
     },
-    tools: {
-      eyebrow: "Tools",
-      title: "NASAQ for quotations",
-      body: "A standalone tool for preparing professional quotations. It stands on its own and is not tied to Ruwaq’s content.",
-      link: "Discover NASAQ",
-      ready: "Ready proposals",
+    radar: {
+      eyebrow: "Radar",
+      title: "An internal trial for following opportunities",
+      body: "A tool we are developing inside Ruwaq and testing at Graphics House. It is not available for subscription or external use.",
+      cta: "About Radar",
     },
   },
   radar: {

@@ -11,6 +11,7 @@ import {
 import "./globals.css";
 import "./ruwaq-v3.css";
 import "./ruwaq-radar.css";
+import "./ruwaq-polish.css";
 import { Providers } from "./providers";
 import { GoogleAnalytics } from "@/shared/components/google-analytics";
 import { getLocale } from "@/shared/i18n/server";
