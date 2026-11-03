@@ -322,7 +322,9 @@ function buildCommercialTerms(
   const totalValue =
     commercialMode === "estimate_only" && budget <= 0
       ? 0
-      : (parsed.totalValue ?? budget);
+      : budget > 0
+        ? budget
+        : (parsed.totalValue ?? budget);
 
   if (!parsed.paymentSchedule?.length) {
     return {

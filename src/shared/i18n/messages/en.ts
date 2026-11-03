@@ -22,7 +22,7 @@ export const en: Messages = {
   browseCategories: "Categories",
   contractorHub: "NASAQ",
   aboutPlatform: "About the platform",
-  backToDirectory: "← Client directory",
+  backToDirectory: "← Ruwaq site",
   closeModal: "Close",
  },
  marketplace: {

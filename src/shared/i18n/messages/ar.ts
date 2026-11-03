@@ -20,7 +20,7 @@ export const ar = {
   browseCategories: "القطاعات",
   contractorHub: "نَسَق",
   aboutPlatform: "عن المنصة",
-  backToDirectory: "← الدليل للعملاء",
+  backToDirectory: "← موقع رواق",
   closeModal: "إغلاق",
  },
  marketplace: {

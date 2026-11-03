@@ -28,3 +28,15 @@ Published reference: `Websites/RuwaqPublished` @ `3cf2d19`. Pre-change backup: `
 - The header and footer show a quiet «دخول العملاء» link only when `NEXT_PUBLIC_RADAR_APP_URL` is set to an https public host. The public site never reads Radar data.
 - The five real drafts stay out of the public build; the private preview build is unchanged.
 - No section named «العروض الجاهزة» exists in this repository or its history (see the delivery note); nothing was invented in its place.
+
+## NASAQ restoration and comparison audit — 2026-11-03
+Rule from the owner: no existing function or content is hidden, removed or shortened for the sake of design unification without a stated impact and explicit approval.
+
+NASAQ path (guest, tested on an isolated local database): `/proposals` (landing + ready proposals gallery + letterhead library) → `/proposals/new` → editor `/workspace/proposals/[id]` (review gates, scope, BOQ, clause pack) → PDF preview and download (`/api/proposals/[id]/export/pdf`) → reopen by URL. The first guest proposal is free; the second asks for Google sign-in.
+
+Known gaps (not fixed):
+- The look chosen in the gallery («ابدأ بهذا المظهر») is saved only for signed-in users (company profile). Guests lose it, and the react-pdf PDF ignores palette and letterhead entirely. The themed output exists only as the legacy HTML print export `/api/proposals/[id]/export/html`, which no screen links to (it never did, in any commit).
+- Google sign-in, saved proposal list for signed-in users, claiming a guest proposal and the share link were not exercised (no OAuth credentials locally).
+- In no-AI mode the mock generator takes the first number in the description as the total; fixed so the price typed by the user wins. Not re-verified end to end (guest limit).
+
+Pages that exist and respond 200 but are no longer linked from the unified header, footer or home (they were linked in the published version, 3cf2d19): `/charter`, `/checklist`, `/check/sample`, `/estimate`, `/project-file`, `/faq`, `/how-it-works`, `/join`, `/pro`'s sibling pages. They belong to the owner-advisor / contractor-directory direction. Decision needed per page: relink, keep unlinked, or retire. `/tours` pages were deleted from the repository by an earlier commit and exist only in history (0edd30c).
