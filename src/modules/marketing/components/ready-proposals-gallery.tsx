@@ -195,7 +195,7 @@ export function ReadyProposalsGallery({ locale, items, labels, startCta }: Props
 
   const modalItem = items.find((item) => item.slug === modalSlug) ?? null;
   const modalSrc = modalItem ? buildSampleUrl(modalItem.slug, locale, palette) : "";
-  const startHref = `/proposals/new?${paletteToQuery(palette)}`;
+  const startHref = `/proposals/new?${paletteToQuery(palette)}${modalItem ? `&template=${modalItem.slug}` : ""}`;
 
   return (
     <div className="nasaq-template-gallery">

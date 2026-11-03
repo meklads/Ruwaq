@@ -712,6 +712,8 @@ export type Messages = {
     regenerateFailed: string;
     downloadPdf: string;
     previewPdf: string;
+    printThemed: string;
+    printThemedHint: string;
     closePreview: string;
     printHint: string;
     exporting: string;

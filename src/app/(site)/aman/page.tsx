@@ -4,5 +4,5 @@ import { redirect } from "next/navigation";
 // The site now offers commercial owner advice only; technical work is
 // handed to a licensed office outside the website.
 export default function AmanPage() {
-  redirect("/check");
+  redirect("/");
 }

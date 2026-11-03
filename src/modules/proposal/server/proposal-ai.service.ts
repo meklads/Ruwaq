@@ -9,6 +9,7 @@ import {
 } from "./proposal-ai.prompts";
 import { runPostGenerationTrustLayer } from "./trust-layer.pipeline";
 import { logUsageEvent } from "@/shared/lib/usage-events";
+import { readLook, withLook } from "@/modules/proposal/lib/proposal-look";
 
 const openai = process.env.OPENAI_API_KEY
   ? new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
@@ -238,19 +239,22 @@ export async function generateProposalContent(proposalId: string) {
         assumptions: assumptions as any,
         exclusions: exclusions as any,
         timeline: timeline as any,
-        confidence: {
-          scopeItems: scopeItems.length > 2 ? "high" : "medium",
-          deliverables: deliverables.length > 0 ? "medium" : "low",
-          timeline: timeline.milestones?.length > 1 ? "medium" : "low",
-          commercialTerms:
-            commercialMode === "estimate_only"
-              ? "always_warn"
-              : commercialTerms?.paymentSchedule?.length
-                ? "high"
-                : "medium",
-          assumptions: "always_warn",
-          exclusions: "always_warn",
-        } as any,
+        confidence: withLook(
+          {
+            scopeItems: scopeItems.length > 2 ? "high" : "medium",
+            deliverables: deliverables.length > 0 ? "medium" : "low",
+            timeline: timeline.milestones?.length > 1 ? "medium" : "low",
+            commercialTerms:
+              commercialMode === "estimate_only"
+                ? "always_warn"
+                : commercialTerms?.paymentSchedule?.length
+                  ? "high"
+                  : "medium",
+            assumptions: "always_warn",
+            exclusions: "always_warn",
+          },
+          readLook(proposal.confidence)
+        ) as any,
         status: "generating",
       },
     });

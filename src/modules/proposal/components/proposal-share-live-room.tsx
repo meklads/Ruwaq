@@ -6,7 +6,8 @@ import type { ShareProposalView } from "@/modules/proposal/server/share.service"
 import type { Messages } from "@/shared/i18n/messages/types";
 import type { LiveRoomSectionKey } from "@/shared/types/trust-layer.types";
 
-type LiveRoomLabels = Messages["share"]["liveRoom"];
+/** Labels reach this client component as plain data: the one parameterised label is passed pre-rendered. */
+type LiveRoomLabels = Omit<Messages["share"]["liveRoom"], "estimateAck"> & { estimateAckText: string };
 
 type Props = {
   data: ShareProposalView;
@@ -265,7 +266,7 @@ export function ProposalShareLiveRoom({
                       onChange={(e) => setAckEstimate(e.target.checked)}
                     />
                     <span>
-                      {liveRoomLabels.estimateAck(data.estimateVariancePercent)}
+                      {liveRoomLabels.estimateAckText}
                     </span>
                   </label>
                 ) : null}

@@ -25,6 +25,8 @@ type Props = {
   /** Home: hero above + tool section. Page: compact app hero (legacy route). */
   variant?: "embedded" | "page";
   prefill?: LeadProposalPrefill | null;
+  /** Template / letterhead / palette chosen in the gallery, stored with the new proposal. */
+  look?: import("@/modules/proposal/lib/proposal-look").ProposalLook | null;
 };
 
 const EMPTY_OPTIONAL: OptionalDetailsValues = {
@@ -68,7 +70,7 @@ function stepForField(field: ProposalTextField): Step {
   return field === "description" ? "details" : "project";
 }
 
-export function NewProposalForm({ variant = "embedded", prefill = null }: Props) {
+export function NewProposalForm({ variant = "embedded", prefill = null, look = null }: Props) {
   const t = useT();
   const locale = useLocale();
   const router = useRouter();
@@ -195,6 +197,7 @@ export function NewProposalForm({ variant = "embedded", prefill = null }: Props)
         areaSqm: form.areaSqm > 0 ? form.areaSqm : undefined,
         durationHint: form.durationHint || undefined,
         specifications: form.specifications || undefined,
+        look: look ?? undefined,
       });
 
       if (!created.success) {

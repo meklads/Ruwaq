@@ -153,10 +153,14 @@ export function buildCoverPageCss(
   return `
     .cover-page {
       position: relative;
-      min-height: 297mm;
+      /* Must fit inside the A4 page content area (297mm minus the 48mm/40mm running header and
+         footer margins in print-pagination.ts), otherwise Paged.js splits the cover over extra
+         blank pages. */
+      box-sizing: border-box;
+      height: 207mm;
+      min-height: 0;
       padding: 0;
       background: linear-gradient(165deg, ${colors.white} 0%, #f7f4ef 48%, ${colors.white} 100%);
-      border-bottom: 1px solid rgba(47, 74, 110, 0.1);
       break-after: page;
       page-break-after: always;
       overflow: hidden;
