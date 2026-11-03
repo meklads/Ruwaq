@@ -20,8 +20,8 @@ export function buildOrganizationJsonLd(locale: Locale) {
     logo: `${RUWQ_PUBLIC_URL}${DEFAULT_MARKETING_HERO}`,
     description:
       locale === "ar"
-        ? "دليل هندسي وعقاري للمنطقة الغربية مع نَسَق — أداة صناعة العروض الاحترافية."
-        : "Engineering & property directory for Western Region KSA with NASAQ — Professional Proposal Tool.",
+        ? "منصة استخبارات فرص تجارية تبدأ بالسوق السعودي. الرادار في مرحلة بناء الإصدار الداخلي ولم يُفتح للاستخدام التجاري بعد."
+        : "Business-opportunity intelligence platform starting with the Saudi market. Radar is at the stage of building its internal release and has not been opened for commercial use.",
     areaServed: [
       { "@type": "City", name: "Jeddah" },
       { "@type": "City", name: "Makkah" },

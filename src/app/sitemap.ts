@@ -8,6 +8,7 @@ import {
 import { getAllShowcaseProjects } from "@/content/showcase-projects";
 import { RUWQ_GUIDES } from "@/content/guides";
 import { getAllJeddahIntentSlugs } from "@/content/jeddah-landings";
+import { getEntities, getInsights, getUpdates, publishedOnly } from "@/modules/site/content/loader";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = env.NEXT_PUBLIC_APP_URL;
@@ -22,6 +23,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const staticRoutes: RouteEntry[] = [
     { path: "/", priority: 1, changeFrequency: "weekly" as const },
+    { path: "/radar", priority: 0.95, changeFrequency: "monthly" as const },
     { path: "/request-quote", priority: 0.9, changeFrequency: "weekly" as const },
     { path: "/categories", priority: 0.9, changeFrequency: "weekly" as const },
     { path: "/tours", priority: 0.9, changeFrequency: "weekly" as const },
@@ -94,8 +96,23 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     changeFrequency: "weekly" as const,
   }));
 
+  // Editorial sections: published items only (never previews); a section without items has no URL at all.
+  const sectionRoutes = (list: string, items: { slug: string }[]): RouteEntry[] =>
+    items.length === 0
+      ? []
+      : [
+          { path: `/${list}`, priority: 0.8, changeFrequency: "weekly" as const },
+          ...items.map((i) => ({ path: `/${list}/${i.slug}`, priority: 0.7, changeFrequency: "monthly" as const })),
+        ];
+  const contentRoutes: RouteEntry[] = [
+    ...sectionRoutes("updates", publishedOnly(getUpdates())),
+    ...sectionRoutes("insights", publishedOnly(getInsights())),
+    ...sectionRoutes("specialists", publishedOnly(getEntities())),
+  ];
+
   const allRoutes: RouteEntry[] = [
     ...staticRoutes,
+    ...contentRoutes,
     ...cityRoutes,
     ...seoRoutes,
     ...jeddahIntentRoutes,

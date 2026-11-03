@@ -1,0 +1,52 @@
+/* Radar public pages — additions to the Ruwaq v4 design (ruwaq-v3.css). Uses its tokens only. */
+
+.rw-opp {
+  background: #fff;
+  border-radius: 6px;
+  padding: 1.5rem;
+  max-width: 32rem;
+  margin-inline: auto;
+  box-shadow: 0 1px 2px rgba(18, 55, 42, 0.08), 0 16px 36px -20px rgba(18, 55, 42, 0.35);
+}
+.rw-opp__label {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--rw-ink);
+  background: var(--rw-mark-soft);
+  border-radius: 999px;
+  padding: 0.2rem 0.75rem;
+}
+.rw-opp__title { margin-block-start: 0.9rem; font-weight: 700; font-size: 16px; line-height: 1.5; }
+.rw-opp__rows { margin-block-start: 1rem; display: grid; }
+.rw-opp__row { display: grid; gap: 0.25rem; padding-block: 0.8rem; border-block-start: 1px solid var(--rw-stone-2); }
+.rw-opp__k { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; font-size: 12px; color: var(--rw-muted); font-weight: 600; }
+.rw-opp__v { font-size: 14px; line-height: 1.7; color: var(--rw-ink-soft); }
+.rw-opp__tag {
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 4px;
+  padding: 0.05rem 0.45rem;
+  background: var(--rw-stone);
+  color: var(--rw-ink);
+}
+.rw-opp__tag--inferred { background: var(--rw-mark-soft); color: var(--rw-mark); }
+.rw-opp__foot { margin-block-start: 1rem; font-size: 12px; color: var(--rw-muted); line-height: 1.7; }
+
+.rw-status {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--rw-muted);
+  border: 1px solid var(--rw-line);
+  border-radius: 999px;
+  padding: 0.1rem 0.65rem;
+  margin-inline-start: 0.5rem;
+  white-space: nowrap;
+}
+.rw-states { display: grid; gap: 0.75rem; }
+@media (min-width: 720px) { .rw-states { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .rw-states { grid-template-columns: repeat(4, 1fr); } }
+.rw-states li { background: #fff; border: 1px solid var(--rw-line); border-radius: var(--rw-radius); padding: 0.9rem 1rem; }
+.rw-states strong { display: block; font-size: 15px; }
+.rw-states span { display: block; margin-block-start: 0.2rem; font-size: 13.5px; color: var(--rw-ink-soft); line-height: 1.7; }

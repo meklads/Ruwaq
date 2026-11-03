@@ -1,0 +1,47 @@
+/* Editorial content (updates, insights, specialist profiles). Scoped: every selector is .rwc-*
+   and relies on tokens from ruwaq-v3.css. Loaded only where these components render. */
+.rwc-grid { display: grid; gap: 1.25rem; }
+@media (min-width: 720px) { .rwc-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .rwc-grid--3 { grid-template-columns: repeat(3, 1fr); } }
+
+.rwc-card {
+  display: flex; flex-direction: column; gap: 0.7rem; background: #fff; color: var(--rw-ink);
+  border: 1px solid var(--rw-line); border-radius: var(--rw-radius-lg); padding: 1.4rem;
+  transition: border-color 0.15s;
+}
+a.rwc-card:hover { border-color: var(--rw-ink); }
+.rwc-card__title { font-size: var(--rw-fs-h3); font-weight: 700; line-height: 1.55; }
+.rwc-card__body { font-size: var(--rw-fs-small); color: var(--rw-ink-soft); line-height: 1.75; }
+.rwc-card__meta { margin-block-start: auto; padding-block-start: 0.4rem; font-size: 13px; color: var(--rw-muted); }
+
+.rwc-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; }
+.rwc-tag { display: inline-block; font-size: 12px; font-weight: 700; border-radius: 4px; padding: 0.1rem 0.55rem; }
+.rwc-tag--update { background: var(--rw-mark-soft); color: var(--rw-mark); }
+.rwc-tag--insight { background: var(--rw-ink); color: #fff; }
+.rwc-tag--entity { background: #fff; color: var(--rw-ink); border: 1px solid var(--rw-ink); }
+.rwc-tag--preview { background: #fff; color: var(--rw-muted); border: 1px dashed var(--rw-muted); font-weight: 600; }
+.rwc-tag--draft { background: #fff; color: var(--rw-mark); border: 1px solid var(--rw-mark); }
+.rwc-tag--lang { background: var(--rw-stone); color: var(--rw-ink-soft); font-weight: 600; }
+
+.rwc-notice { background: var(--rw-stone); border-radius: var(--rw-radius); padding: 0.85rem 1.1rem; font-size: 14px; color: var(--rw-ink-soft); }
+.rwc-notice--preview { background: #fff; border: 1px dashed var(--rw-muted); }
+
+.rwc-dates { display: grid; gap: 0.75rem 2rem; grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); margin-block-start: 1.5rem; }
+.rwc-dates dt { font-size: 12px; color: var(--rw-muted); font-weight: 600; }
+.rwc-dates dd { font-size: 15px; font-weight: 600; }
+
+.rwc-section { margin-block-start: 2.25rem; }
+.rwc-section > h2 { font-size: var(--rw-fs-sub); font-weight: 700; margin-block-end: 0.75rem; line-height: 1.4; }
+.rwc-list { display: grid; gap: 0.6rem; padding-inline-start: 1.1rem; list-style: disc; color: var(--rw-ink-soft); line-height: 1.8; }
+.rwc-analysis { background: var(--rw-stone); border-inline-start: 3px solid var(--rw-mark); border-radius: var(--rw-radius); padding: 1.1rem 1.3rem; }
+.rwc-analysis__note { font-size: 13px; color: var(--rw-mark); font-weight: 700; margin-block-end: 0.4rem; }
+.rwc-sources { display: grid; gap: 0.9rem; }
+.rwc-sources li { border-block-start: 1px solid var(--rw-line); padding-block-start: 0.75rem; font-size: 14.5px; line-height: 1.7; }
+.rwc-sources small { display: block; color: var(--rw-muted); font-size: 13px; }
+
+.rwc-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; margin-block-end: 1.75rem; font-size: 14px; }
+.rwc-chip { border: 1px solid var(--rw-line); border-radius: 999px; padding: 0.2rem 0.85rem; background: #fff; }
+.rwc-chip[aria-current="true"] { background: var(--rw-ink); color: #fff; border-color: var(--rw-ink); }
+.rwc-triad { display: grid; gap: 1.25rem; }
+.rwc-triad > section { border: 1px solid var(--rw-line); border-radius: var(--rw-radius-lg); padding: 1.3rem; background: #fff; }
+.rwc-triad h2 { font-size: var(--rw-fs-h3); font-weight: 700; margin-block-end: 0.6rem; }

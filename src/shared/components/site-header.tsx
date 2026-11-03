@@ -1,81 +1,61 @@
 import Link from "next/link";
-import { getMessages } from "@/shared/i18n";
 import { getLocale } from "@/shared/i18n/server";
-import { RuwaqLogo } from "@/shared/components/ruwaq-logo";
 import { LocaleSwitcher } from "@/shared/i18n/locale-switcher";
+import { RuwaqLogo } from "@/shared/components/ruwaq-logo";
+import { getSiteCopy } from "@/modules/site/copy";
+import { getRadarAppUrl } from "@/modules/site/radar-link";
+import { getContentCopy } from "@/modules/site/content/copy";
+import { sectionAvailability } from "@/modules/site/content/loader";
 
 export async function SiteHeader() {
   const locale = await getLocale();
-  const t = getMessages(locale);
-  const nav = t.site.header;
+  const c = getSiteCopy(locale).header;
+  const radarApp = getRadarAppUrl();
 
-  const mainLinks = [
-    { href: "/categories?city=jeddah", label: nav.directory },
-    { href: "/tours", label: nav.tours },
-    { href: "/guides", label: nav.guides },
-    { href: "/how-it-works", label: nav.howItWorks },
+  const nav = getContentCopy(locale).nav;
+  const has = sectionAvailability();
+  const links = [
+    { href: "/radar", label: c.radar },
+    ...(has.updates ? [{ href: "/updates", label: nav.updates }] : []),
+    ...(has.specialists ? [{ href: "/specialists", label: nav.specialists }] : []),
+    ...(has.insights ? [{ href: "/insights", label: nav.insights }] : []),
+    { href: "/about", label: c.about },
+    { href: "/contact", label: c.contact },
   ];
 
-  const proNavLink = { href: "/proposals", label: nav.forContractors };
-
   return (
-    <header className="ruwaq-ad-header">
-      <div className="ruwaq-ad-pro-bar">
-        <div className="ruwaq-ad-container flex flex-wrap items-center justify-between gap-3 py-2.5 sm:gap-4">
-          <div className="flex min-w-0 flex-col gap-0.5 sm:flex-row sm:items-center sm:gap-4">
-            <Link href="/pro" className="ruwaq-ad-pro-bar-label">
-              {t.marketplace.proDirectory.directoryLabel}
-            </Link>
-            <span className="ruwaq-ad-pro-bar-tagline">{nav.proBarTagline}</span>
-          </div>
-          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-            <Link href="/request-quote" className="ruwaq-ad-pro-bar-link">
-              {t.nav.requestQuote}
-            </Link>
-            <Link href="/join" className="ruwaq-ad-pro-bar-apply">
-              {nav.applyNow}
-            </Link>
-          </div>
-        </div>
-      </div>
+    <header className="rw rw-header">
+      <div className="rw-wrap rw-header__bar">
+        <RuwaqLogo href="/" variant="editorial" className="rw-header__logo" />
 
-      <div className="border-b border-neutral-200 bg-white">
-        <div className="ruwaq-ad-container flex items-center justify-between gap-4 py-3 lg:py-4">
-          <RuwaqLogo href="/" variant="editorial" />
-
-          <nav
-            className="hidden flex-1 items-center justify-center gap-6 lg:flex"
-            aria-label={nav.mainNavLabel}
-          >
-            {mainLinks.map((link) => (
-              <Link key={link.href} href={link.href} className="ruwaq-ad-nav-link">
-                {link.label}
-              </Link>
-            ))}
-            <Link href={proNavLink.href} className="ruwaq-ad-nav-link ruwaq-ad-nav-link--pro" title={`${t.nasaq.name} — ${t.nasaq.tagline}`}>
-              {proNavLink.label}
-            </Link>
-          </nav>
-
-          <div className="flex shrink-0 items-center gap-3">
-            <LocaleSwitcher />
-          </div>
-        </div>
-
-        <nav
-          className="flex gap-0 overflow-x-auto border-t border-neutral-100 lg:hidden"
-          aria-label={nav.mainNavLabel}
-        >
-          {mainLinks.map((link) => (
-            <Link key={link.href} href={link.href} className="ruwaq-ad-mobile-nav-link">
-              {link.label}
+        <nav className="rw-nav" aria-label={c.menu}>
+          {links.map((l) => (
+            <Link key={l.href} href={l.href}>
+              {l.label}
             </Link>
           ))}
-          <Link href={proNavLink.href} className="ruwaq-ad-mobile-nav-link ruwaq-ad-mobile-nav-link--pro">
-            {proNavLink.label}
-          </Link>
         </nav>
+
+        <div className="rw-header__actions">
+          {radarApp && (
+            <a href={radarApp} className="rw-btn rw-btn--outline rw-btn--sm rw-header__contractors">
+              {c.enter}
+            </a>
+          )}
+          <Link href="/radar" className="rw-btn rw-btn--primary rw-btn--sm rw-header__cta">
+            {c.cta}
+          </Link>
+          <LocaleSwitcher />
+        </div>
       </div>
+
+      <nav className="rw-mobile-nav rw-wrap" aria-label={c.menu}>
+        {links.map((l) => (
+          <Link key={l.href} href={l.href}>
+            {l.label}
+          </Link>
+        ))}
+      </nav>
     </header>
   );
 }

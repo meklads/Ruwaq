@@ -1,9 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 
-/** Official header lockup — gold wordmark on black (793×506 source). */
+/** Official lockup (793×506 source): deep green on light surfaces, white on dark. */
 export const RUWQ_HEADER_LOCKUP = {
-  src: "/brand/ruwaq-logo2.png",
+  src: "/brand/ruwaq-logo-green.png",
+  srcOnDark: "/brand/ruwaq-logo-white.png",
   width: 793,
   height: 506,
 } as const;
@@ -39,7 +40,7 @@ export function RuwaqLogo({
         className={`ruwaq-brand-lockup ruwaq-brand-lockup--header-img ${variant === "dark" ? "ruwaq-brand-lockup--footer-img" : ""} ${className}`.trim()}
       >
         <Image
-          src={RUWQ_HEADER_LOCKUP.src}
+          src={variant === "dark" ? RUWQ_HEADER_LOCKUP.srcOnDark : RUWQ_HEADER_LOCKUP.src}
           alt="رواق RUWAQ"
           width={RUWQ_HEADER_LOCKUP.width}
           height={RUWQ_HEADER_LOCKUP.height}

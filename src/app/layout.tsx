@@ -9,6 +9,8 @@ import {
   Tajawal,
 } from "next/font/google";
 import "./globals.css";
+import "./ruwaq-v3.css";
+import "./ruwaq-radar.css";
 import { Providers } from "./providers";
 import { GoogleAnalytics } from "@/shared/components/google-analytics";
 import { getLocale } from "@/shared/i18n/server";
@@ -30,7 +32,7 @@ const ibmPlexArabic = IBM_Plex_Sans_Arabic({
 
 const tajawal = Tajawal({
   subsets: ["arabic"],
-  weight: ["200", "300", "400", "500", "700"],
+  weight: ["200", "300", "400", "500", "700", "800"],
   variable: "--font-ar-alt",
   display: "swap",
 });
@@ -75,14 +77,15 @@ export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
   const title =
     locale === "ar"
-      ? "رواق | منصة الهندسة والعقار، المنطقة الغربية"
-      : "Ruwaq | Engineering & property marketplace, Western Region";
+      ? "رواق | من إشارات السوق إلى فرص تجارية"
+      : "Ruwaq | From market signals to business opportunities";
   const description =
     locale === "ar"
-      ? "دليل مقاولات وتكييف وتشطيبات معتمد في جدة ومكة والمدينة، مع نَسَق — أداة صناعة العروض الاحترافية."
-      : "Verified contractors directory in Jeddah, Makkah, and Madinah, plus NASAQ — Professional Proposal Tool.";
+      ? "رواق منصة استخبارات فرص تجارية: تابع المشاريع والأحداث والجهات، وافهم ما تغيّر وما قد يعنيه لنشاطك. الرادار في مرحلة بناء الإصدار الداخلي ولم يُفتح للاستخدام التجاري بعد."
+      : "Ruwaq is a business-opportunity intelligence platform: follow projects, events and organisations, and understand what changed and what it may mean for your business. Radar is at the stage of building its internal release and has not been opened for commercial use.";
 
   return {
+    robots: process.env.RUWAQ_PRIVATE_PREVIEW === "1" ? { index: false, follow: false } : undefined,
     title,
     description,
     metadataBase: new URL(RUWQ_PUBLIC_URL),

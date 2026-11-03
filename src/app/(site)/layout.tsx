@@ -1,6 +1,6 @@
 import { SiteHeader } from "@/shared/components/site-header";
 import { SiteFooter } from "@/shared/components/site-footer";
-import { RuwaqProApplyBand } from "@/modules/marketplace/components/ruwaq-pro-apply-band";
+import { PrivatePreviewBanner } from "@/modules/site/content/private-banner";
 
 export default function SiteShellLayout({
   children,
@@ -9,11 +9,11 @@ export default function SiteShellLayout({
 }) {
   return (
     <div className="flex min-h-screen flex-col">
+      <PrivatePreviewBanner />
       <SiteHeader />
       <main id="main" className="flex-1 bg-white">
         {children}
       </main>
-      <RuwaqProApplyBand />
       <SiteFooter />
     </div>
   );
