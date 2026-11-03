@@ -1,59 +1,40 @@
-import Link from "next/link";
 import { getLocale } from "@/shared/i18n/server";
 import { LocaleSwitcher } from "@/shared/i18n/locale-switcher";
 import { RuwaqLogo } from "@/shared/components/ruwaq-logo";
+import { HeaderNav } from "@/shared/components/header-nav";
 import { getSiteCopy } from "@/modules/site/copy";
-import { getRadarAppUrl } from "@/modules/site/radar-link";
 import { getContentCopy } from "@/modules/site/content/copy";
+import { sectionAvailability } from "@/modules/site/content/loader";
 
 export async function SiteHeader() {
   const locale = await getLocale();
   const c = getSiteCopy(locale).header;
-  const radarApp = getRadarAppUrl();
-
   const nav = getContentCopy(locale).nav;
-  const links = [
-    { href: "/updates", label: nav.updates },
-    { href: "/insights", label: nav.insights },
-    { href: "/specialists", label: nav.specialists },
-    { href: "/radar", label: c.radar },
-    { href: "/about", label: c.about },
-    { href: "/contact", label: c.contact },
-  ];
+  const has = sectionAvailability();
+  const status = (on: boolean) => (on ? ("available" as const) : ("soon" as const));
 
   return (
     <header className="rw rw-header">
+      <a href="#main" className="rw-skip">{locale === "ar" ? "تخطَّ إلى المحتوى" : "Skip to content"}</a>
       <div className="rw-wrap rw-header__bar">
         <RuwaqLogo href="/" variant="editorial" className="rw-header__logo" />
-
-        <nav className="rw-nav" aria-label={c.menu}>
-          {links.map((l) => (
-            <Link key={l.href} href={l.href}>
-              {l.label}
-            </Link>
-          ))}
-        </nav>
-
-        <div className="rw-header__actions">
-          {radarApp && (
-            <a href={radarApp} className="rw-link rw-header__enter" rel="noopener">
-              {c.enter}
-            </a>
-          )}
-          <Link href="/contact" className="rw-btn rw-btn--primary rw-btn--sm rw-header__cta">
-            {c.cta}
-          </Link>
-          <LocaleSwitcher />
-        </div>
+        <HeaderNav
+          labels={{ knowledge: c.knowledge, menu: c.menu, openMenu: c.openMenu, closeMenu: c.closeMenu, soon: c.soon, available: c.available, subscribers: c.subscribers }}
+          knowledge={[
+            { href: "/updates", label: nav.updates, status: status(has.updates) },
+            { href: "/insights", label: nav.insights, status: status(has.insights) },
+            { href: "/specialists", label: nav.specialists, status: status(has.specialists) },
+          ]}
+          links={[
+            { href: "/proposals", label: c.nasaq },
+            { href: "/radar", label: c.radar },
+            { href: "/about", label: c.about },
+            { href: "/contact", label: c.contact },
+          ]}
+          subscribersHref="/subscribers"
+          localeSwitcher={<LocaleSwitcher />}
+        />
       </div>
-
-      <nav className="rw-mobile-nav rw-wrap" aria-label={c.menu}>
-        {links.map((l) => (
-          <Link key={l.href} href={l.href}>
-            {l.label}
-          </Link>
-        ))}
-      </nav>
     </header>
   );
 }
