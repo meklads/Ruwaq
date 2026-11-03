@@ -20,7 +20,7 @@ export const ar = {
   browseCategories: "القطاعات",
   contractorHub: "نَسَق",
   aboutPlatform: "عن المنصة",
-  backToDirectory: "← الدليل للعملاء",
+  backToDirectory: "← موقع رواق",
   closeModal: "إغلاق",
  },
  marketplace: {
@@ -909,10 +909,13 @@ export const ar = {
   regenerateConfirm:
    "إعادة توليد العرض بالكامل؟ سيتم استبدال تعديلاتك الحالية.",
   regenerateFailed: "فشلت إعادة التوليد. حاول مرة أخرى.",
-  downloadPdf: "تحميل PDF",
-  previewPdf: "معاينة PDF",
+  downloadPdf: "تنزيل PDF قياسي",
+  previewPdf: "معاينة PDF قياسي",
+  printThemed: "طباعة / حفظ PDF بمظهرك",
+  printThemedHint:
+   "«طباعة / حفظ PDF بمظهرك» يفتح العرض بالنموذج والألوان والهيدر الذي اخترته، ثم تطبعه أو تحفظه من نافذة الطباعة (اختر «حفظ كملف PDF»). أما «تنزيل PDF قياسي» فملف جاهز بتنسيق موحّد لا يطبّق الألوان ولا الهيدر المختار.",
   closePreview: "إغلاق المعاينة",
-  printHint: "ملف PDF A4 بالعربية، جدول بنود، ضريبة 15%، وشروط الدفع.",
+  printHint: "كلا الخيارين: A4، جدول بنود، ضريبة 15%، وشروط الدفع.",
   exporting: "جاري إنشاء PDF...",
   preparedFor: "مُعد لـ:",
   preparedBy: "مُعد بواسطة:",

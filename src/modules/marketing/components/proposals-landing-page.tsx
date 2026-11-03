@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { TemplateSampleGallery } from "@/modules/marketing/components/template-sample-gallery";
+import { ReadyProposalsGallery } from "@/modules/marketing/components/ready-proposals-gallery";
+import { readyProposalsLabels } from "@/modules/marketing/components/ready-proposals-labels";
 import { getTrustCopy } from "@/modules/ruwaq/trust-copy";
 import type { Messages } from "@/shared/i18n/messages/types";
 import type { Locale } from "@/shared/i18n/locale";
@@ -68,6 +70,24 @@ export function ProposalsLandingPage({
                 <p className="rw-body">{item.body}</p>
               </article>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="samples" className="rw-section" style={{ scrollMarginTop: "5rem" }}>
+        <div className="rw-wrap">
+          <div className="rw-head">
+            <span className="rw-eyebrow">{sales.sample.eyebrow}</span>
+            <h2 className="rw-h2">{sales.sample.title}</h2>
+            <p className="rw-body">{sales.sample.body}</p>
+          </div>
+          <div className="rw-card">
+            <ReadyProposalsGallery
+              locale={locale}
+              items={templates.gallery}
+              labels={readyProposalsLabels(templates, locale)}
+              startCta={startProposalLabel}
+            />
           </div>
         </div>
       </section>

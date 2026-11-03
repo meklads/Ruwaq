@@ -22,7 +22,7 @@ export const en: Messages = {
   browseCategories: "Categories",
   contractorHub: "NASAQ",
   aboutPlatform: "About the platform",
-  backToDirectory: "← Client directory",
+  backToDirectory: "← Ruwaq site",
   closeModal: "Close",
  },
  marketplace: {
@@ -916,10 +916,13 @@ export const en: Messages = {
   regenerateConfirm:
    "Regenerate the entire proposal? Your current edits will be replaced.",
   regenerateFailed: "Regeneration failed. Please try again.",
-  downloadPdf: "Download PDF",
-  previewPdf: "Preview PDF",
+  downloadPdf: "Download standard PDF",
+  previewPdf: "Preview standard PDF",
+  printThemed: "Print / save PDF in your look",
+  printThemedHint:
+   "“Print / save PDF in your look” opens the proposal with the template, colours and header you chose; print it or save it from the print dialog (choose “Save as PDF”). “Download standard PDF” is a ready file in one fixed layout that does not apply the chosen colours or header.",
   closePreview: "Close preview",
-  printHint: "A4 PDF with line items, 15% VAT, and payment terms.",
+  printHint: "Both options: A4, line items, 15% VAT and payment terms.",
   exporting: "Generating PDF...",
   preparedFor: "Prepared for:",
   preparedBy: "Prepared by:",

@@ -19,6 +19,7 @@ import type {
   CommercialTerms,
   Timeline,
 } from "@/shared/types";
+import { sanitizeLook, withLook } from "@/modules/proposal/lib/proposal-look";
 import {
   gateProgressForProposal,
   proposalListGroup,
@@ -84,14 +85,17 @@ export async function createProposal(
       paymentType: input.paymentType,
       commercialMode: input.commercialMode ?? "fixed_price",
       status: "draft",
-      confidence: {
-        scopeItems: "medium" as const,
-        deliverables: "medium" as const,
-        timeline: "medium" as const,
-        commercialTerms: "medium" as const,
-        assumptions: "always_warn" as const,
-        exclusions: "always_warn" as const,
-      },
+      confidence: withLook(
+        {
+          scopeItems: "medium" as const,
+          deliverables: "medium" as const,
+          timeline: "medium" as const,
+          commercialTerms: "medium" as const,
+          assumptions: "always_warn" as const,
+          exclusions: "always_warn" as const,
+        },
+        sanitizeLook(input.look)
+      ) as any,
       reviewedSections: [],
     },
   });

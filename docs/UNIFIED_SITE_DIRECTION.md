@@ -28,3 +28,20 @@ Published reference: `Websites/RuwaqPublished` @ `3cf2d19`. Pre-change backup: `
 - The header and footer show a quiet «دخول العملاء» link only when `NEXT_PUBLIC_RADAR_APP_URL` is set to an https public host. The public site never reads Radar data.
 - The five real drafts stay out of the public build; the private preview build is unchanged.
 - No section named «العروض الجاهزة» exists in this repository or its history (see the delivery note); nothing was invented in its place.
+
+## NASAQ: restored path and what is still open — 2026-11-03
+Rule from the owner: no existing function or content is hidden, removed or shortened for design unification without a stated impact and explicit approval.
+
+Path (guest, tested on an isolated local database, Arabic and English): `/proposals` → ready proposals gallery (3 templates) → «ابدأ بهذا المظهر» (template + palette in the URL) → `/proposals/new` → editor → themed print / save-as-PDF (`/api/proposals/[id]/export/html`) or standard PDF download → reopen by URL.
+
+How the look is kept: it is stored with the proposal inside the existing `Proposal.confidence` JSON under `_look` (validated against known templates, frames, palettes and hex colours). No schema change: production runs `prisma db push` on every start (`scripts/start.sh`), so a new column would have changed the production database.
+
+Exports:
+- **Print / save PDF in your look** (primary): the themed, paginated A4 document (template, palette, letterhead frame). The browser prints it; the user chooses «Save as PDF». Same review gates as the PDF.
+- **Standard PDF** (secondary): fixed layout, does not apply palette or letterhead. The editor says so.
+
+Fixes made on the way: blank first page and two blank pages in the themed export (cover sized to the page area; a top margin that pushed the cover off-screen), clause headings alone at the bottom of a page in the standard PDF, the client share page `/share/[token]` that returned 500 (function labels passed to a client component), typed price now wins over numbers found in the description, mobile button overflow in the editor, and legacy URLs of the cancelled owner-advisor service now go to the home page.
+
+Not tested: Google sign-in, the saved list «عروضي» for signed-in users, claiming a guest proposal. The palette «free / subscription» wording is not enforced anywhere in export (only the premium templates are limited by entitlement). Needs a business decision: `/listing/*` and `/directory/*` → `/pro`, and `/visualization` → an external site.
+
+Pages that respond 200 but are not linked from the unified site (owner-advisor direction, left as they are by decision): `/charter`, `/checklist`, `/check`, `/check/sample`, `/estimate`, `/project-file`, `/faq`, `/how-it-works`, `/join`. `/tours` pages exist only in Git history (0edd30c).

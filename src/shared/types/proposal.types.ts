@@ -180,6 +180,8 @@ export interface Proposal {
 export type CreateProposalInput = Omit<ProposalInput, "commercialMode"> &
   ProposalOptionalContext & {
     commercialMode?: CommercialMode;
+    /** Template / letterhead / palette chosen in the gallery; validated on the server. */
+    look?: unknown;
   };
 
 export interface UpdateFieldInput {

@@ -19,13 +19,33 @@ export default async function ShareProposalPage({ params }: Props) {
   const t = getMessages(data.locale);
   const dir = localeDir(data.locale);
 
+  // Client components cannot receive functions: strip them, and pre-render the one label that
+  // needs a value (the share page used to fail with a 500 because of this).
+  const plain = <T,>(value: T): T => JSON.parse(JSON.stringify(value));
+
   return (
     <ProposalShareLiveRoom
       data={data}
-      labels={t.share}
-      reviewLabels={t.review}
-      exportLabels={t.export}
-      liveRoomLabels={t.share.liveRoom}
+      labels={plain(t.share)}
+      reviewLabels={
+        {
+          ...plain(t.review),
+          boq: {
+            ...plain(t.review.boq),
+            estimateDisclaimerTop: t.review.boq.estimateDisclaimerTop(data.estimateVariancePercent ?? 15),
+            estimateDisclaimerBottom: t.review.boq.estimateDisclaimerBottom(data.estimateVariancePercent ?? 15),
+          },
+          clauses: {
+            ...plain(t.review.clauses),
+            approvedCount: t.review.clauses.approvedCount(data.clauseItems?.length ?? 0),
+          },
+        } as unknown as typeof t.review
+      }
+      exportLabels={plain(t.export)}
+      liveRoomLabels={{
+        ...plain(t.share.liveRoom),
+        estimateAckText: t.share.liveRoom.estimateAck(data.estimateVariancePercent),
+      }}
       dir={dir}
       initialApproved={initialApproved}
     />

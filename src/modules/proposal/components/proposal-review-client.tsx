@@ -237,6 +237,35 @@ export function ProposalReviewClient({
     }
   };
 
+  /** Opens the themed, paginated proposal in a new tab, ready to print or save as PDF. */
+  const handlePrintThemed = async () => {
+    if (!gatesComplete) {
+      alert(t.review.exportBlocked);
+      return;
+    }
+    // Open the tab synchronously (popup blockers), then point it at the export once recorded.
+    const tab = window.open("", "_blank");
+    setExporting(true);
+    try {
+      const result = await exportPdfAction(proposal.id);
+      if (!result.success) {
+        tab?.close();
+        alert(result.error ?? t.form.errors.generic);
+        return;
+      }
+      setExported(true);
+      if (result.shareUrl) setShareUrl(result.shareUrl);
+      const url = `/api/proposals/${proposal.id}/export/html`;
+      if (tab) tab.location.href = url;
+      else window.location.href = url;
+    } catch {
+      tab?.close();
+      alert(t.form.errors.generic);
+    } finally {
+      setExporting(false);
+    }
+  };
+
   const handlePreviewPdf = () => {
     if (!gatesComplete) {
       alert(t.review.exportBlocked);
@@ -349,7 +378,7 @@ export function ProposalReviewClient({
               {t.review.draftBadge}
             </span>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <button
               onClick={handleCopyWhatsApp}
               className="btn-ruwaq-soft"
@@ -374,9 +403,17 @@ export function ProposalReviewClient({
               onClick={handleExport}
               disabled={exporting || !gatesComplete}
               title={!gatesComplete ? t.review.exportBlocked : undefined}
-              className="btn-ruwaq-primary px-4 py-2 disabled:opacity-50"
+              className="btn-ruwaq-soft disabled:opacity-50"
             >
               {exporting ? t.review.exporting : t.review.downloadPdf}
+            </button>
+            <button
+              onClick={handlePrintThemed}
+              disabled={exporting || !gatesComplete}
+              title={!gatesComplete ? t.review.exportBlocked : undefined}
+              className="btn-ruwaq-primary px-4 py-2 disabled:opacity-50"
+            >
+              {t.review.printThemed}
             </button>
           </div>
         </div>
@@ -385,6 +422,7 @@ export function ProposalReviewClient({
           <p className="mt-1 text-xs text-amber-700">{t.review.reviewGatesHint}</p>
         )}
         <p className="mt-1 text-xs text-ruwaq-ink-muted">{t.review.printHint}</p>
+        <p className="mt-1 text-xs text-ruwaq-ink-muted">{t.review.printThemedHint}</p>
       </div>
 
       <div className="ruwaq-review-trust-band text-sm text-ruwaq-ink">
@@ -860,9 +898,16 @@ export function ProposalReviewClient({
             <button
               onClick={handleExport}
               disabled={exporting || !gatesComplete}
-              className="btn-ruwaq-primary px-6 py-2.5 disabled:opacity-50"
+              className="btn-ruwaq-secondary px-4 py-2.5 disabled:opacity-50"
             >
               {exporting ? t.review.exporting : t.review.downloadPdf}
+            </button>
+            <button
+              onClick={handlePrintThemed}
+              disabled={exporting || !gatesComplete}
+              className="btn-ruwaq-primary px-6 py-2.5 disabled:opacity-50"
+            >
+              {t.review.printThemed}
             </button>
           </div>
         </div>

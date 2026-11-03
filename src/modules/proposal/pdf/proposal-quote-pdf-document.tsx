@@ -429,11 +429,14 @@ export function ProposalQuotePdfDocument({ payload }: Props) {
         </View>
 
         <View break={lines.length > 12}>
-          <Text style={styles.sectionTitle}>{pdfLabels.termsTitle}</Text>
+          <Text style={styles.sectionTitle} minPresenceAhead={80}>{pdfLabels.termsTitle}</Text>
           {termsBlocks.map((block, idx) => (
             <View key={`${block.title}-${idx}`} style={styles.clauseBlock}>
-              <Text style={styles.clauseCategory}>{block.title}</Text>
-              <Text style={styles.clauseText}>{block.body}</Text>
+              {/* One text flow: the heading can never be left alone at the bottom of a page. */}
+              <Text style={styles.clauseText} orphans={3} widows={2}>
+                <Text style={styles.clauseCategory}>{`${block.title}\n`}</Text>
+                {block.body}
+              </Text>
             </View>
           ))}
         </View>

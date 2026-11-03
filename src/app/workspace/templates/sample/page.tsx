@@ -1,6 +1,8 @@
 import { getMessages } from "@/shared/i18n";
 import { getLocale } from "@/shared/i18n/server";
 import { TemplateSampleGallery } from "@/modules/marketing/components/template-sample-gallery";
+import { ReadyProposalsGallery } from "@/modules/marketing/components/ready-proposals-gallery";
+import { readyProposalsLabels } from "@/modules/marketing/components/ready-proposals-labels";
 
 export const dynamic = "force-dynamic";
 
@@ -13,6 +15,14 @@ export default async function TemplateSamplePage() {
       <p className="ruwaq-eyebrow">{t.nav.previewSample}</p>
       <h1 className="nasaq-landing-title mt-3 max-w-2xl">{t.templates.title}</h1>
       <p className="mt-2 max-w-xl text-sm leading-relaxed text-neutral-600">{t.templates.subtitle}</p>
+      <div className="mt-6 rounded-2xl border border-neutral-200 bg-white p-4 sm:p-6">
+        <ReadyProposalsGallery
+          locale={locale}
+          items={t.templates.gallery}
+          labels={readyProposalsLabels(t.templates, locale)}
+          startCta={t.site.nav.startProposal}
+        />
+      </div>
       <div className="mt-6 rounded-2xl border border-neutral-200 bg-white p-4 sm:p-6">
         <TemplateSampleGallery
           locale={locale}

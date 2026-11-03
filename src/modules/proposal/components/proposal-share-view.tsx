@@ -28,6 +28,9 @@ export function ProposalShareView({
   const locale = data.locale;
   const isEstimate = data.commercialMode === "estimate_only";
   const variancePct = data.estimateVariancePercent ?? 15;
+  // Labels arrive pre-rendered (strings) from the share page; functions are still accepted.
+  const text = (value: unknown, ...args: number[]): string =>
+    typeof value === "function" ? (value as (...a: number[]) => string)(...args) : String(value ?? "");
   const currency = locale === "ar" ? "ريال" : "SAR";
   const watermarkDate = new Date(data.exportedAt).toLocaleDateString(
     localeToBcp47(locale),
@@ -192,7 +195,7 @@ export function ProposalShareView({
             <ShareSection title={exportLabels.commercialTerms}>
               {isEstimate && (
                 <div className="ruwaq-estimate-callout mb-4">
-                  {reviewLabels.boq.estimateDisclaimerTop(variancePct)}
+                  {text(reviewLabels.boq.estimateDisclaimerTop, variancePct)}
                 </div>
               )}
               <div className="inline-block rounded-xl bg-ruwaq-navy px-5 py-3 text-lg font-bold text-white">
@@ -269,7 +272,7 @@ export function ProposalShareView({
                   </div>
                   {isEstimate && (
                     <p className="ruwaq-estimate-footnote mt-3">
-                      {reviewLabels.boq.estimateDisclaimerBottom(variancePct)}
+                      {text(reviewLabels.boq.estimateDisclaimerBottom, variancePct)}
                     </p>
                   )}
                 </div>
@@ -295,7 +298,7 @@ export function ProposalShareView({
                     ? ` · v${data.clausePackVersion}`
                     : ""}
                   {" · "}
-                  {reviewLabels.clauses.approvedCount(data.clauseItems.length)}
+                  {text(reviewLabels.clauses.approvedCount, data.clauseItems.length)}
                 </p>
                 <div className="space-y-3">
                   {data.clauseItems.map((clause, i) => (

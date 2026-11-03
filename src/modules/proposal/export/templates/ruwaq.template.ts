@@ -759,8 +759,10 @@ export function renderRuwaqTemplate(
       color: ${colors.navy};
       font-family: ${fontFamily};
     }
+    /* No margin above .page-wrap: a top margin on the first block makes Paged.js push the cover
+       page off-screen (blank first page) in the watermarked export. */
     body.has-watermark .page-wrap {
-      margin-top: 36px;
+      margin-top: 0;
     }
     /* ===== Executive variant — formal "engineering office letterhead" identity =====
        Distinct from the warm cream/gold classic: deep navy header + footer,
@@ -889,7 +891,7 @@ export function renderRuwaqTemplate(
     @media print {
       .watermark-grid { opacity: 0.07; }
       .watermark-band { opacity: 1; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      body.has-watermark .page-wrap { margin-top: 32px; }
+      body.has-watermark .page-wrap { margin-top: 0; }
     }
     ${buildCoverPageCss(colors, dir, isExecutive)}
     ${hfStyle && !useLetterheadChrome ? hfStyle.css(dir) : ""}

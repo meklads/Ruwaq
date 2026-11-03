@@ -17,6 +17,7 @@ import {
   buildProposalExportHtml,
 } from "./proposal-export-html";
 import type { ProposalExportData } from "../export/proposal-export-types";
+import { readLook } from "../lib/proposal-look";
 
 export type BuildProposalExportOptions = {
   /** Default true — client name + date watermark on PDF/share exports. */
@@ -54,6 +55,7 @@ export async function loadProposalExportContext(
   const applyClientWatermark = applyBranding && options.watermarked !== false;
   const premiumExport = company ? hasPremiumExportAccess(company) : false;
 
+  const look = readLook(proposal.confidence);
   const locale: Locale = proposal.locale === "en" ? "en" : "ar";
   const messages = getMessages(locale);
   const commercialMode: CommercialMode =
@@ -147,13 +149,16 @@ export async function loadProposalExportContext(
     watermarkClientName: applyClientWatermark ? proposal.clientName : undefined,
     watermarkDate: applyClientWatermark ? issueDate : undefined,
     poweredByRuwaqFooter: applyBranding,
+    // The look chosen for this proposal wins over the account default; template access is still
+    // limited by what the account is entitled to.
     templateId: resolveEntitledExportTemplateId(
-      company?.exportTemplateId,
+      look?.templateId ?? company?.exportTemplateId,
       premiumExport
     ),
     headerFooterStyleId: company?.headerFooterStyleId ?? undefined,
-    letterheadFrameId: company?.letterheadFrameId ?? undefined,
-    paletteId: company?.paletteId ?? undefined,
+    letterheadFrameId: look?.frameId ?? company?.letterheadFrameId ?? undefined,
+    paletteId: look?.paletteId ?? (look?.primary ? undefined : company?.paletteId) ?? undefined,
+    ...(look?.primary ? { palettePrimary: look.primary, paletteAccent: look.accent, paletteSurface: look.surface } : {}),
   };
 
   return {

@@ -21,6 +21,7 @@ export async function SiteFooter() {
   ];
   const tools = [
     { href: "/proposals", label: f.nasaq },
+    { href: "/proposals#samples", label: f.ready },
     { href: "/guides", label: f.guides },
   ];
   const company = [

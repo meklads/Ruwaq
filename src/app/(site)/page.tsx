@@ -129,9 +129,14 @@ export default async function HomePage() {
               <h2 className="rw-h2">{h.tools.title}</h2>
               <p className="rw-body">{h.tools.body}</p>
             </div>
-            <Link href="/proposals" className="rw-link">
-              {h.tools.link}
-            </Link>
+            <span style={{ display: "flex", gap: "1.25rem", flexWrap: "wrap" }}>
+              <Link href="/proposals#samples" className="rw-link">
+                {h.tools.ready}
+              </Link>
+              <Link href="/proposals" className="rw-link">
+                {h.tools.link}
+              </Link>
+            </span>
           </div>
         </div>
       </section>
