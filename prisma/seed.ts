@@ -16,6 +16,16 @@ import { MARKETPLACE_CATEGORIES } from "../src/shared/constants/marketplace-taxo
 import { directoryFlagsForTier } from "../src/modules/billing/lib/tiers";
 import { MARKETPLACE_LISTING_SEEDS } from "./data/marketplace-listings.seed";
 
+
+// The seed is destructive (it deletes listings and leads that are not in the seed lists) and it
+// adds demonstration marketplace data. It must never run by accident against a real database.
+const SEED_TARGET = (() => { try { return new URL(process.env.DATABASE_URL ?? "").hostname; } catch { return ""; } })();
+const SEED_LOCAL = ["127.0.0.1", "localhost", "::1"].includes(SEED_TARGET);
+if ((process.env.NODE_ENV === "production" || !SEED_LOCAL) && process.env.ALLOW_PRODUCTION_SEED !== "yes") {
+  console.error("Refusing to seed a non-local or production database. Set ALLOW_PRODUCTION_SEED=yes only if you really mean it.");
+  process.exit(1);
+}
+
 const prisma = new PrismaClient();
 
 const ADMIN_EMAIL = "admin@ruwaq.co";

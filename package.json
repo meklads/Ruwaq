@@ -17,7 +17,9 @@
     "db:studio": "prisma studio",
     "postinstall": "prisma generate",
     "test:e2e": "node e2e-test.mjs",
-    "content:validate": "tsx scripts/validate-content.ts"
+    "content:validate": "tsx scripts/validate-content.ts",
+    "db:check": "sh scripts/db-setup.sh check",
+    "db:setup": "sh scripts/db-setup.sh push"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.2",
