@@ -6,7 +6,7 @@
   :root {
     --ruwaq-ink: #1d1d1f;
     --ruwaq-ink-soft: #6e6e73;
-    --ruwaq-ink-muted: #86868b;
+    --ruwaq-ink-muted: #6e6e73;
     --ruwaq-gold: #c9a063;
     --ruwaq-gold-light: #d4b47a;
     --ruwaq-gold-muted: #f5f0e6;
@@ -46,7 +46,7 @@
     --radius: 1rem;
     --df-ink: #1d1d1f;
     --df-ink-soft: #6e6e73;
-    --df-ink-muted: #86868b;
+    --df-ink-muted: #6e6e73;
     --font-ar-fallback: var(--font-ar-alt), "Tajawal", "Segoe UI", "Apple Color Emoji",
       "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
     --font-marketing-ar: var(--font-ar);
