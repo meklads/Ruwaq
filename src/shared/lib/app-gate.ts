@@ -14,6 +14,10 @@ function isStaticAssetPath(pathname: string): boolean {
   if (pathname.startsWith("/brand")) return true;
   if (pathname.startsWith("/uploads")) return true;
   if (pathname.startsWith("/favicon")) return true;
+  // Generated metadata assets: browser icon, social preview, crawler files.
+  if (pathname === "/icon" || pathname === "/apple-icon") return true;
+  if (pathname === "/opengraph-image" || pathname === "/twitter-image") return true;
+  if (pathname === "/robots.txt" || pathname === "/sitemap.xml") return true;
   return false;
 }
 

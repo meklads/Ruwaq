@@ -15,7 +15,7 @@ const config: Config = {
           /* Apple-neutral surfaces + Ruwaq logo gold accent */
           ink: "#1D1D1F",
           "ink-soft": "#6E6E73",
-          "ink-muted": "#86868B",
+          "ink-muted": "#6E6E73",
           white: "#FFFFFF",
           paper: "#FFFFFF",
           canvas: "#FFFFFF",
