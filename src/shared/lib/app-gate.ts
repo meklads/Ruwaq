@@ -58,6 +58,23 @@ export function isPublicAppPath(pathname: string): boolean {
     "/templates/sample",
     "/design",
     "/login",
+    "/subscribers",
+    "/proposals",
+    "/radar",
+    "/developers",
+    "/insights",
+    "/updates",
+    "/specialists",
+    "/quote",
+    "/charter",
+    "/check",
+    "/checklist",
+    "/estimate",
+    "/project-file",
+    "/aman",
+    // NASAQ guest flow: pages enforce their own guest/session ownership.
+    "/workspace/proposals",
+    "/workspace/templates",
   ];
 
   if (publicPrefixes.some((p) => pathname === p || pathname.startsWith(`${p}/`))) {
@@ -73,6 +90,7 @@ export function isPublicAppPath(pathname: string): boolean {
 export function isPublicApiPath(pathname: string): boolean {
   if (pathname === "/api/health") return true;
   if (pathname.startsWith("/api/templates/")) return true;
+  if (pathname.startsWith("/api/proposals")) return true;
   if (pathname.startsWith("/api/share/")) return true;
   if (pathname.startsWith("/api/design/")) return true;
   if (pathname.startsWith("/api/projects/")) return true;
