@@ -27,16 +27,17 @@ import { DEFAULT_MARKETING_HERO } from "@/content/marketing-images";
  */
 const ibmPlexArabic = IBM_Plex_Sans_Arabic({
   subsets: ["arabic"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-ar",
   display: "swap",
 });
 
 const tajawal = Tajawal({
   subsets: ["arabic"],
-  weight: ["200", "300", "400", "500", "700", "800"],
+  weight: ["400", "500", "700"],
   variable: "--font-ar-alt",
   display: "swap",
+  preload: false,
 });
 
 const amiri = Amiri({
@@ -44,33 +45,37 @@ const amiri = Amiri({
   weight: ["400", "700"],
   variable: "--font-ar-display",
   display: "swap",
+  preload: false,
 });
 
 const inter = Inter({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["400", "500", "600"],
   variable: "--font-inter",
   display: "swap",
+  preload: false,
 });
 
 const montserrat = Montserrat({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "600"],
   variable: "--font-latin",
   display: "swap",
+  preload: false,
 });
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "600"],
   variable: "--font-latin-display",
   display: "swap",
+  preload: false,
 });
 
 /** Marketing site, matches Graphics House ProjectLaunch™ stack (Inter on GH; Plus Jakarta on Ruwaq EN) */
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-marketing-latin",
   display: "swap",
 });
