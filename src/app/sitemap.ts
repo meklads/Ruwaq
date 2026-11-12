@@ -9,6 +9,7 @@ import { getAllShowcaseProjects } from "@/content/showcase-projects";
 import { RUWQ_GUIDES } from "@/content/guides";
 import { getAllJeddahIntentSlugs } from "@/content/jeddah-landings";
 import { getEntities, getInsights, getUpdates, publishedOnly } from "@/modules/site/content/loader";
+import { getStyles, getTerms, publishedKnowledge } from "@/modules/site/knowledge/loader";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = env.NEXT_PUBLIC_APP_URL;
@@ -108,6 +109,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...sectionRoutes("updates", publishedOnly(getUpdates())),
     ...sectionRoutes("insights", publishedOnly(getInsights())),
     ...sectionRoutes("specialists", publishedOnly(getEntities())),
+    ...sectionRoutes("glossary", publishedKnowledge(getTerms())),
+    ...sectionRoutes("atlas", publishedKnowledge(getStyles())),
   ];
 
   const allRoutes: RouteEntry[] = [

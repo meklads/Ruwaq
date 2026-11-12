@@ -5,12 +5,15 @@ import { HeaderNav } from "@/shared/components/header-nav";
 import { getSiteCopy } from "@/modules/site/copy";
 import { getContentCopy } from "@/modules/site/content/copy";
 import { sectionAvailability } from "@/modules/site/content/loader";
+import { getKnowledgeCopy } from "@/modules/site/knowledge/copy";
+import { getStyles, getTerms } from "@/modules/site/knowledge/loader";
 
 export async function SiteHeader() {
   const locale = await getLocale();
   const c = getSiteCopy(locale).header;
   const nav = getContentCopy(locale).nav;
   const has = sectionAvailability();
+  const kn = getKnowledgeCopy(locale).nav;
   const status = (on: boolean) => (on ? ("available" as const) : ("soon" as const));
 
   return (
@@ -24,6 +27,8 @@ export async function SiteHeader() {
             { href: "/updates", label: nav.updates, status: status(has.updates) },
             { href: "/insights", label: nav.insights, status: status(has.insights) },
             { href: "/specialists", label: nav.specialists, status: status(has.specialists) },
+            { href: "/glossary", label: kn.glossary, status: status(getTerms().length > 0) },
+            { href: "/atlas", label: kn.atlas, status: status(getStyles().length > 0) },
           ]}
           links={[
             { href: "/proposals", label: c.nasaq },
