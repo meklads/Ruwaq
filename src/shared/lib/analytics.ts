@@ -23,7 +23,8 @@ export type AnalyticsEvent =
   | "estimate_to_check"
   | "checklist_submit"
   | "sample_report_print"
-  | "check_whatsapp_fastlane";
+  | "check_whatsapp_fastlane"
+  | "group_referral";
 
 type EventParams = Record<string, string | number | boolean | undefined>;
 

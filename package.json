@@ -18,6 +18,7 @@
     "postinstall": "prisma generate",
     "test:e2e": "node e2e-test.mjs",
     "content:validate": "tsx scripts/validate-content.ts",
+    "knowledge:validate": "tsx scripts/validate-knowledge.ts",
     "db:check": "sh scripts/db-setup.sh check",
     "db:setup": "sh scripts/db-setup.sh push"
   },
