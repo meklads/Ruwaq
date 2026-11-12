@@ -89,6 +89,8 @@ export async function generateMetadata(): Promise<Metadata> {
     title,
     description,
     metadataBase: new URL(RUWQ_PUBLIC_URL),
+    // Google Search Console ownership (property https://ruwaq.co/). Public by design; keep it to stay verified.
+    verification: { google: "VWf_PkqBx_tOvYyLm9G3Q2slT-B-bjGyKuoqxpWkQuA" },
     openGraph: {
       title,
       description,
