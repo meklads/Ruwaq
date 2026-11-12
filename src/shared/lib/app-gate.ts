@@ -65,6 +65,8 @@ export function isPublicAppPath(pathname: string): boolean {
     "/insights",
     "/updates",
     "/specialists",
+    "/glossary",
+    "/atlas",
     "/quote",
     "/charter",
     "/check",
