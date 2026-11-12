@@ -4,6 +4,7 @@ import { RUWQ_PUBLIC_EMAIL, RUWQ_SUPPORT_WHATSAPP_E164 } from "@/shared/constant
 import { getSiteCopy } from "@/modules/site/copy";
 import { RuwaqLogo } from "@/shared/components/ruwaq-logo";
 import { getContentCopy } from "@/modules/site/content/copy";
+import { getKnowledgeCopy } from "@/modules/site/knowledge/copy";
 
 export async function SiteFooter() {
   const locale = await getLocale();
@@ -15,6 +16,8 @@ export async function SiteFooter() {
     { href: "/updates", label: nav.updates },
     { href: "/insights", label: nav.insights },
     { href: "/specialists", label: nav.specialists },
+    { href: "/glossary", label: getKnowledgeCopy(locale).nav.glossary },
+    { href: "/atlas", label: getKnowledgeCopy(locale).nav.atlas },
   ];
   const tools = [
     { href: "/proposals", label: f.nasaq },

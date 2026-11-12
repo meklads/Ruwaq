@@ -10,6 +10,7 @@ const MAP_STYLES_AR = [
 ];
 
 const ar = {
+  nav: { glossary: "المعجم", atlas: "أطلس العمارة" },
   glossary: {
     title: "معجم العمارة والتطوير",
     lead: "شرح مبسط لمصطلحات الإظهار المعماري والمجسمات والتطوير العقاري، لكل مصطلح تعريف ومثال.",
@@ -45,6 +46,7 @@ const ar = {
 type K = typeof ar;
 
 const en: K = {
+  nav: { glossary: "Glossary", atlas: "Architecture atlas" },
   glossary: {
     title: "Architecture and development glossary",
     lead: "Plain explanations of terms in architectural visualisation, scale models and real estate development, each with a definition and an example.",

@@ -1,7 +1,9 @@
 /**
- * PUBLISHED knowledge content (glossary terms and atlas styles). Empty on purpose until the owner
- * reviews the drafts in ./drafts.ts; an item moves here only after that review (and, for styles,
- * an architect's review). See src/modules/site/knowledge/schema.ts for the required fields.
+ * PUBLISHED knowledge content. Terms live in ./terms.ts after the owner approves them.
+ * Styles stay empty until a style passes the owner's review and an architect's review.
+ * See src/modules/site/knowledge/schema.ts for the required fields.
  */
-export const TERMS: unknown[] = [];
+import { APPROVED_TERMS } from "./terms";
+
+export const TERMS: unknown[] = APPROVED_TERMS;
 export const STYLES: unknown[] = [];
