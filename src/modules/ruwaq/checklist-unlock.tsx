@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { trackEvent } from "@/shared/lib/analytics";
 import { getTrustCopy } from "@/modules/ruwaq/trust-copy";
@@ -57,9 +58,9 @@ export function ChecklistUnlock({ locale }: { locale: "ar" | "en" }) {
             <div className="rw-note-box" style={{ marginBlockStart: "0.5rem" }}>
               <h3 className="rw-h3">{c.ctaTitle}</h3>
               <div style={{ marginBlockStart: "0.85rem" }}>
-                <a href="/check" className="rw-btn rw-btn--primary rw-btn--sm">
+                <Link href="/check" className="rw-btn rw-btn--primary rw-btn--sm">
                   {c.cta}
-                </a>
+                </Link>
               </div>
             </div>
           </div>
