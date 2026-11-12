@@ -14,6 +14,8 @@ function isStaticAssetPath(pathname: string): boolean {
   if (pathname.startsWith("/brand")) return true;
   if (pathname.startsWith("/uploads")) return true;
   if (pathname.startsWith("/favicon")) return true;
+  // Crawlers must read these even while unlisted pages stay gated.
+  if (pathname === "/sitemap.xml" || pathname === "/robots.txt") return true;
   return false;
 }
 
