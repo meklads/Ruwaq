@@ -4,6 +4,7 @@
  * See src/modules/site/knowledge/schema.ts for the required fields.
  */
 import { APPROVED_TERMS } from "./terms";
+import { APPROVED_TERMS_BATCH2 } from "./terms-batch2";
 
-export const TERMS: unknown[] = APPROVED_TERMS;
+export const TERMS: unknown[] = [...APPROVED_TERMS, ...APPROVED_TERMS_BATCH2];
 export const STYLES: unknown[] = [];
