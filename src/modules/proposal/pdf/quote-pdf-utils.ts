@@ -69,7 +69,7 @@ export async function resolveLogoDataUri(logoUrl?: string): Promise<string | und
 }
 
 export function formatPdfMoney(amount: number, locale: Locale): string {
-  const formatted = new Intl.NumberFormat(locale === "ar" ? "ar-SA" : "en-SA", {
+  const formatted = new Intl.NumberFormat(locale === "ar" ? "ar-SA-u-nu-latn" : "en-SA", {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   }).format(amount);

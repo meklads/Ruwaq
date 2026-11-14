@@ -14,7 +14,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function ContractorsPage() {
   const locale = (await getLocale()) === "en" ? "en" : "ar";
   const c = getSiteCopy(locale).contractors;
-  const n = (i: number) => (i + 1).toLocaleString(locale === "ar" ? "ar-SA" : "en-US");
+  const n = (i: number) => (i + 1).toLocaleString(locale === "ar" ? "ar-SA-u-nu-latn" : "en-US");
 
   return (
     <div className="rw">

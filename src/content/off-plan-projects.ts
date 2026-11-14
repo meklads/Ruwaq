@@ -131,7 +131,7 @@ export function getOffPlanGallery(project: OffPlanProject): string[] {
 }
 
 export function formatOffPlanPrice(amount: number, locale: "ar" | "en"): string {
-  const formatted = new Intl.NumberFormat(locale === "ar" ? "ar-SA" : "en-SA", {
+  const formatted = new Intl.NumberFormat(locale === "ar" ? "ar-SA-u-nu-latn" : "en-SA", {
     maximumFractionDigits: 0,
   }).format(amount);
   return locale === "ar" ? `${formatted} ر.س` : `SAR ${formatted}`;

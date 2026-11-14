@@ -20,7 +20,7 @@ function formatResultMeta(
   tierLabel: string,
   locale: Locale
 ): string {
-  const area = areaSqm.toLocaleString(locale === "ar" ? "ar-SA" : "en-SA");
+  const area = areaSqm.toLocaleString(locale === "ar" ? "ar-SA-u-nu-latn" : "en-SA");
   return template.replace("{area}", area).replace("{tier}", tierLabel);
 }
 

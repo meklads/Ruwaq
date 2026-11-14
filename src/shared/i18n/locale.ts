@@ -24,7 +24,7 @@ export function localeDir(locale: Locale): "rtl" | "ltr" {
 }
 
 export function localeToBcp47(locale: Locale): string {
-  return locale === "ar" ? "ar-SA" : "en-US";
+  return locale === "ar" ? "ar-SA-u-nu-latn" : "en-US";
 }
 
 export function hasArabicScript(text: string): boolean {

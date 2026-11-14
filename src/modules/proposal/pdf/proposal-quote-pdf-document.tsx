@@ -345,7 +345,7 @@ export function ProposalQuotePdfDocument({ payload }: Props) {
   const styles = createStyles(locale);
   const money = (n: number) => formatPdfMoney(n, locale);
   const formatQty = (n: number) =>
-    new Intl.NumberFormat(locale === "ar" ? "ar-SA" : "en-SA").format(n);
+    new Intl.NumberFormat(locale === "ar" ? "ar-SA-u-nu-latn" : "en-SA").format(n);
 
   const termsBlocks = [
     ...(data.clauseItems ?? []).map((c) => ({

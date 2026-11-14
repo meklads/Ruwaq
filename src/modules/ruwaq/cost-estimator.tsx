@@ -15,7 +15,7 @@ function toNumber(raw: string): number {
 
 export function CostEstimator({ locale }: { locale: "ar" | "en" }) {
   const c = getTrustCopy(locale).estimate;
-  const fmt = (n: number) => Math.round(n).toLocaleString(locale === "ar" ? "ar-SA" : "en-US");
+  const fmt = (n: number) => Math.round(n).toLocaleString(locale === "ar" ? "ar-SA-u-nu-latn" : "en-US");
   const roundK = (n: number) => Math.round(n / 1000) * 1000;
 
   const [area, setArea] = useState("");

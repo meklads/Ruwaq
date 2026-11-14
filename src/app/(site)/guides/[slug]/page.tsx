@@ -50,7 +50,7 @@ export default async function GuideArticlePage({ params }: Props) {
   const blocks = locale === "ar" ? guide.blocksAr : guide.blocksEn;
 
   const c = getTrustCopy(locale).guides;
-  const num = (n: number) => n.toLocaleString(locale === "ar" ? "ar-SA" : "en-US");
+  const num = (n: number) => n.toLocaleString(locale === "ar" ? "ar-SA-u-nu-latn" : "en-US");
 
   return (
     <article className="rw">

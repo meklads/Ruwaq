@@ -42,7 +42,7 @@ export default async function AtlasPage() {
       },
     ]),
   );
-  const fmt = (n: number) => n.toLocaleString(locale === "ar" ? "ar-SA" : "en-US");
+  const fmt = (n: number) => n.toLocaleString(locale === "ar" ? "ar-SA-u-nu-latn" : "en-US");
 
   return (
     <div className="rw rwh">
@@ -65,6 +65,7 @@ export default async function AtlasPage() {
               close: a.mapClose, prev: a.mapPrev, next: a.mapNext, region: a.region, characteristics: a.characteristics,
               materials: a.materials, colours: a.colours, gallery: a.gallery, concept: a.concept, documentary: a.documentary,
               soonBody: a.mapSoonBody, tryLive: a.mapTryLive, source: a.mapSource, sourceUrl: a.mapSourceUrl,
+              tour: a.mapTour, stopTour: a.mapStopTour, details: a.mapDetails, overview: a.mapOverview, drag: a.mapDrag, reliefNote: a.mapReliefNote,
             }}
           />
           <p className="rw-fineprint" style={{ marginBlockStart: "1rem" }}>

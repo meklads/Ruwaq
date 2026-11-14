@@ -15,7 +15,7 @@ export default async function GuidesIndexPage() {
   const locale = (await getLocale()) === "en" ? "en" : "ar";
   const c = getTrustCopy(locale).guides;
   const ar = locale === "ar";
-  const num = (n: number) => n.toLocaleString(ar ? "ar-SA" : "en-US");
+  const num = (n: number) => n.toLocaleString(ar ? "ar-SA-u-nu-latn" : "en-US");
 
   return (
     <div className="rw">

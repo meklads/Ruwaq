@@ -23,7 +23,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function QuoteCheckPage() {
   const locale = (await getLocale()) === "en" ? "en" : "ar";
   const c = getQuoteCheckCopy(locale);
-  const n = (i: number) => (i + 1).toLocaleString(locale === "ar" ? "ar-SA" : "en-US");
+  const n = (i: number) => (i + 1).toLocaleString(locale === "ar" ? "ar-SA-u-nu-latn" : "en-US");
   const t = getTrustCopy(locale);
   const x = t.checkExtras;
   const wa = (process.env.NEXT_PUBLIC_RUWQ_SUPPORT_WHATSAPP?.trim() || RUWQ_SUPPORT_WHATSAPP_E164).replace(/\D/g, "");
