@@ -43,7 +43,7 @@ export default async function SampleReportPage() {
   const locale = (await getLocale()) === "en" ? "en" : "ar";
   const c = getTrustCopy(locale).sample;
   const ar = locale === "ar";
-  const sec = (i: number) => (i).toLocaleString(ar ? "ar-SA" : "en-US");
+  const sec = (i: number) => (i).toLocaleString(ar ? "ar-SA-u-nu-latn" : "en-US");
 
   return (
     <div className="rw">

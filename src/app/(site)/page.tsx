@@ -18,7 +18,7 @@ export default async function HomePage() {
   const has = sectionAvailability();
   const terms = publishedKnowledge(getTerms());
   const stylesLive = publishedKnowledge(getStyles()).length > 0;
-  const fmt = (n: number) => n.toLocaleString(locale === "ar" ? "ar-SA" : "en-US");
+  const fmt = (n: number) => n.toLocaleString(locale === "ar" ? "ar-SA-u-nu-latn" : "en-US");
   const featured = FEATURED_TERMS.map((s) => terms.find((t) => t.slug === s)).filter((t): t is NonNullable<typeof t> => Boolean(t));
 
   const cards = [

@@ -35,7 +35,7 @@ export default async function JoinDirectoryPage({ searchParams }: Props) {
   const about = profile?.about?.trim() ?? "";
 
   const tc = getTrustCopy(locale).join;
-  const n = (i: number) => (i + 1).toLocaleString(locale === "ar" ? "ar-SA" : "en-US");
+  const n = (i: number) => (i + 1).toLocaleString(locale === "ar" ? "ar-SA-u-nu-latn" : "en-US");
 
   return (
     <div className="rw">

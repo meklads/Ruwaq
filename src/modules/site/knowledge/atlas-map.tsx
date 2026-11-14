@@ -1,5 +1,6 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -24,7 +25,20 @@ export type AtlasMapLabels = {
   close: string; prev: string; next: string; region: string; characteristics: string; materials: string;
   colours: string; gallery: string; concept: string; documentary: string; soonBody: string; tryLive: string;
   source: string; sourceUrl: string;
+  tour: string; stopTour: string; details: string; overview: string; drag: string; reliefNote: string;
 };
+
+/** Three.js is loaded only on this page, and only when the browser can draw WebGL. */
+const AtlasMap3D = dynamic(() => import("./atlas-map-3d"), { ssr: false });
+
+function canUseWebGL(): boolean {
+  try {
+    const c = document.createElement("canvas");
+    return Boolean(c.getContext("webgl2") ?? c.getContext("webgl"));
+  } catch {
+    return false;
+  }
+}
 
 const [, , VB_W, VB_H] = KSA_VIEWBOX.split(" ").map(Number) as [number, number, number, number];
 
@@ -36,11 +50,17 @@ const [, , VB_W, VB_H] = KSA_VIEWBOX.split(" ").map(Number) as [number, number, 
 export function AtlasMap({ styles, panels, locale, labels }: { styles: MapStyle[]; panels: Record<string, StylePanel>; locale: "ar" | "en"; labels: AtlasMapLabels }) {
   const [hover, setHover] = useState<string | null>(null);
   const [active, setActive] = useState<string | null>(null);
+  const [three, setThree] = useState(false);
+  const [touring, setTouring] = useState(false);
   const panelRef = useRef<HTMLDivElement>(null);
-  const num = (n: number) => n.toLocaleString(locale === "ar" ? "ar-SA" : "en-US");
+  const stageRef = useRef<HTMLDivElement>(null);
+  const num = (n: number) => n.toLocaleString(locale === "ar" ? "ar-SA-u-nu-latn" : "en-US");
   const name = (s: MapStyle) => (locale === "ar" ? s.ar : s.en);
   const panelOf = (s: MapStyle) => (s.slug ? panels[s.slug] : undefined);
   const firstLive = styles.find((s) => panelOf(s));
+
+  // Pick the 3D map when WebGL works; the SVG map stays as the fallback and first paint.
+  useEffect(() => { setThree(canUseWebGL()); }, []);
 
   // Open a style from a shared link (?s=key).
   useEffect(() => {
@@ -48,12 +68,13 @@ export function AtlasMap({ styles, panels, locale, labels }: { styles: MapStyle[
     if (k && styles.some((s) => s.key === k)) setActive(k);
   }, [styles]);
 
-  const select = useCallback((key: string | null, scroll = true) => {
+  const select = useCallback((key: string | null, scroll = true, fromTour = false) => {
+    if (!fromTour) setTouring(false);
     setActive(key);
     const url = new URL(window.location.href);
     if (key) url.searchParams.set("s", key); else url.searchParams.delete("s");
     window.history.replaceState(null, "", url.toString());
-    if (key) trackEvent("atlas_style_select", { style: key });
+    if (key && !fromTour) trackEvent("atlas_style_select", { style: key });
     if (key && scroll) {
       const smooth = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       requestAnimationFrame(() => panelRef.current?.scrollIntoView({ behavior: smooth ? "smooth" : "auto", block: "start" }));
@@ -68,57 +89,120 @@ export function AtlasMap({ styles, panels, locale, labels }: { styles: MapStyle[
   };
   const tip = styles.find((s) => s.key === hover);
 
+  // Guided tour: fly from style to style until the visitor takes over.
+  useEffect(() => {
+    if (!touring) return;
+    let i = idx;
+    const go = () => { i = (i + 1) % styles.length; select(styles[i]!.key, false, true); };
+    if (idx < 0) go();
+    const id = window.setInterval(go, 5200);
+    return () => window.clearInterval(id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [touring]);
+
+  const pickFromList = (key: string) => {
+    select(key, false);
+    if (three) {
+      const smooth = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      stageRef.current?.scrollIntoView({ behavior: smooth ? "smooth" : "auto", block: "center" });
+    } else {
+      select(key, true);
+    }
+  };
+  const toPanel = () => {
+    const smooth = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    panelRef.current?.scrollIntoView({ behavior: smooth ? "smooth" : "auto", block: "start" });
+  };
+  const curPanel = cur ? panelOf(cur) : undefined;
+
   return (
     <div className="rwk-mapwrap">
-      <div className="rwk-mapbox">
-        <div className="rwk-mapstage">
-          <svg viewBox={KSA_VIEWBOX} className="rwk-map-svg" role="group" aria-label={labels.hint}>
-            <defs>
-              <linearGradient id="rwk-land" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stopColor="#1e4d3b" />
-                <stop offset="100%" stopColor="#0c2a20" />
-              </linearGradient>
-            </defs>
-            <path d={KSA_PATH} fill="url(#rwk-land)" stroke="#c9a35b" strokeWidth="1.5" strokeLinejoin="round" />
-            {styles.map((s, i) => {
-              const on = s.key === active;
-              return (
-                <g
-                  key={s.key}
-                  className={`rwk-pin${on ? " is-active" : ""}${panelOf(s) ? " is-live" : ""}${s.key === hover ? " is-hover" : ""}`}
-                  transform={`translate(${s.x} ${s.y})`}
-                  tabIndex={0}
-                  role="button"
-                  aria-pressed={on}
-                  aria-label={name(s)}
-                  onMouseEnter={() => setHover(s.key)}
-                  onMouseLeave={() => setHover((h) => (h === s.key ? null : h))}
-                  onFocus={() => setHover(s.key)}
-                  onBlur={() => setHover((h) => (h === s.key ? null : h))}
-                  onClick={() => select(s.key)}
-                  onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); select(s.key); } }}
-                >
-                  <circle r={on ? 24 : 18} className="rwk-pin__halo" />
-                  <circle r={on ? 16 : 13} className="rwk-pin__dot" />
-                  <text y="5" textAnchor="middle" className="rwk-pin__num">{num(i + 1)}</text>
-                </g>
-              );
-            })}
-          </svg>
-          {tip && (
-            <div className="rwk-tip" style={{ left: `${(tip.x / VB_W) * 100}%`, top: `${(tip.y / VB_H) * 100}%` }} role="tooltip">
-              <b>{num(styles.indexOf(tip) + 1)}</b> {name(tip)}
-              {panelOf(tip) ? <span className="rwk-tip__live">●</span> : null}
+      <div className={`rwk-mapbox${three ? " rwk-mapbox--3d" : ""}`} ref={stageRef}>
+        {three ? (
+          <div className="rwk-3dwrap">
+            <AtlasMap3D
+              styles={styles}
+              live={new Set(styles.filter((s) => panelOf(s)).map((s) => s.key))}
+              active={active}
+              hover={hover}
+              onSelect={(k) => select(k, false)}
+              onHover={setHover}
+              name={name}
+              num={num}
+              ariaLabel={labels.hint}
+            />
+            <div className="rwk-3d__tools">
+              <button type="button" className={`rwk-3d__tool${touring ? " is-on" : ""}`} onClick={() => setTouring((v) => !v)}>
+                {touring ? `■ ${labels.stopTour}` : `▶ ${labels.tour}`}
+              </button>
+              {active && <button type="button" className="rwk-3d__tool" onClick={() => select(null, false)}>⤢ {labels.overview}</button>}
             </div>
-          )}
-        </div>
-        <p className="rwk-mapbox__hint">{labels.hint} {labels.approx}</p>
+            {cur && (
+              <div key={cur.key} className="rwk-3d__card" aria-live="polite">
+                <span className="rwk-panel__num">{num(idx + 1)} / {num(styles.length)}{curPanel ? ` · ${curPanel.region}` : ""}</span>
+                <h3>{name(cur)}</h3>
+                <p>{curPanel ? curPanel.summary : labels.soonBody}</p>
+                <div className="rwk-3d__actions">
+                  {curPanel && <Link href={`/atlas/${curPanel.slug}`} className="rwh-btn rwh-btn--gold">{labels.open}</Link>}
+                  <button type="button" className="rwh-btn rwh-btn--ghost" onClick={toPanel}>{labels.details} ↓</button>
+                </div>
+                <div className="rwk-3d__step">
+                  <button type="button" onClick={() => step(-1)} aria-label={labels.prev}>{locale === "ar" ? "→" : "←"}</button>
+                  <button type="button" onClick={() => step(1)} aria-label={labels.next}>{locale === "ar" ? "←" : "→"}</button>
+                </div>
+              </div>
+            )}
+          </div>
+        ) : (
+          <div className="rwk-mapstage">
+            <svg viewBox={KSA_VIEWBOX} className="rwk-map-svg" role="group" aria-label={labels.hint}>
+              <defs>
+                <linearGradient id="rwk-land" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stopColor="#1e4d3b" />
+                  <stop offset="100%" stopColor="#0c2a20" />
+                </linearGradient>
+              </defs>
+              <path d={KSA_PATH} fill="url(#rwk-land)" stroke="#c9a35b" strokeWidth="1.5" strokeLinejoin="round" />
+              {styles.map((s, i) => {
+                const on = s.key === active;
+                return (
+                  <g
+                    key={s.key}
+                    className={`rwk-pin${on ? " is-active" : ""}${panelOf(s) ? " is-live" : ""}${s.key === hover ? " is-hover" : ""}`}
+                    transform={`translate(${s.x} ${s.y})`}
+                    tabIndex={0}
+                    role="button"
+                    aria-pressed={on}
+                    aria-label={name(s)}
+                    onMouseEnter={() => setHover(s.key)}
+                    onMouseLeave={() => setHover((h) => (h === s.key ? null : h))}
+                    onFocus={() => setHover(s.key)}
+                    onBlur={() => setHover((h) => (h === s.key ? null : h))}
+                    onClick={() => select(s.key)}
+                    onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); select(s.key); } }}
+                  >
+                    <circle r={on ? 24 : 18} className="rwk-pin__halo" />
+                    <circle r={on ? 16 : 13} className="rwk-pin__dot" />
+                    <text y="5" textAnchor="middle" className="rwk-pin__num">{num(i + 1)}</text>
+                  </g>
+                );
+              })}
+            </svg>
+            {tip && (
+              <div className="rwk-tip" style={{ left: `${(tip.x / VB_W) * 100}%`, top: `${(tip.y / VB_H) * 100}%` }} role="tooltip">
+                <b>{num(styles.indexOf(tip) + 1)}</b> {name(tip)}
+                {panelOf(tip) ? <span className="rwk-tip__live">●</span> : null}
+              </div>
+            )}
+          </div>
+        )}
+        <p className="rwk-mapbox__hint">{three ? `${labels.drag} ` : ""}{labels.hint} {labels.approx} {three ? labels.reliefNote : ""}</p>
       </div>
 
       <div className="rwk-chips" role="list">
         {styles.map((s, i) => (
           <button key={s.key} type="button" role="listitem" className={`rwk-chip${s.key === active ? " is-active" : ""}${panelOf(s) ? " is-live" : ""}`}
-            onClick={() => select(s.key)} onMouseEnter={() => setHover(s.key)} onMouseLeave={() => setHover(null)}>
+            onClick={() => pickFromList(s.key)} onMouseEnter={() => setHover(s.key)} onMouseLeave={() => setHover(null)}>
             <b>{num(i + 1)}</b>{name(s)}
           </button>
         ))}

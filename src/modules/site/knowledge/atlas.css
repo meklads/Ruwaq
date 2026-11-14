@@ -118,3 +118,37 @@
 
 /* Style cards on the atlas index: keep summaries short */
 .rwh-card .rwh-card__text { display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+
+/* 3D map */
+.rwk-mapbox--3d { padding: 0; overflow: hidden; background: #04130e; }
+.rwk-mapbox--3d .rwk-mapbox__hint { padding: 0.75rem 1rem 1rem; margin: 0 auto; }
+.rwk-3dwrap { position: relative; }
+.rwk-3d { position: relative; inline-size: 100%; block-size: clamp(26rem, 74vh, 46rem); touch-action: pan-y; }
+.rwk-3d__canvas { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; display: block; cursor: grab; }
+.rwk-3d__canvas:active { cursor: grabbing; }
+.rwk-3d__badges { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.rwk-3d__badge { position: absolute; left: 0; top: 0; pointer-events: auto; display: inline-flex; align-items: center; gap: 0.4rem; padding: 0; border: 0; background: none; cursor: pointer; will-change: transform; transition: opacity 0.2s ease; direction: inherit; }
+.rwk-3d__num { inline-size: 1.85rem; block-size: 1.85rem; border-radius: 50%; display: grid; place-items: center; font-size: 12.5px; font-weight: 800; background: rgba(247, 242, 232, 0.92); color: #0c2a20; border: 2px solid #c9a35b; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.45); transition: transform 0.2s ease, background 0.2s ease; }
+.rwk-3d__badge.is-live .rwk-3d__num { background: #c9a35b; border-color: #f7f2e8; }
+.rwk-3d__badge.is-hover .rwk-3d__num, .rwk-3d__badge:focus-visible .rwk-3d__num { transform: scale(1.18); }
+.rwk-3d__badge.is-active .rwk-3d__num { transform: scale(1.3); background: #e3c88f; border-color: #fff; }
+.rwk-3d__badge:focus-visible { outline: none; }
+.rwk-3d__name { white-space: nowrap; padding: 0.35rem 0.75rem; border-radius: 10px; font-size: 14px; font-weight: 800; background: rgba(4, 19, 14, 0.82); color: #f7f2e8; border: 1px solid rgba(201, 163, 91, 0.6); backdrop-filter: blur(6px); box-shadow: 0 8px 22px rgba(0, 0, 0, 0.4); animation: rwk-tipin 0.15s ease-out; }
+.rwk-3d__tools { position: absolute; inset-block-start: 1rem; inset-inline-start: 1rem; display: flex; gap: 0.5rem; flex-wrap: wrap; z-index: 2000; }
+.rwk-3d__tool { padding: 0.45rem 0.95rem; border-radius: 999px; font-size: 13px; font-weight: 700; cursor: pointer; background: rgba(4, 19, 14, 0.7); color: #f7f2e8; border: 1px solid rgba(201, 163, 91, 0.55); backdrop-filter: blur(6px); }
+.rwk-3d__tool:hover, .rwk-3d__tool.is-on { background: #c9a35b; color: #0c2a20; }
+.rwk-3d__card { position: absolute; z-index: 2000; inset-block-end: 1rem; inset-inline-end: 1rem; inline-size: min(26rem, calc(100% - 2rem)); padding: 1.25rem 1.35rem; border-radius: 18px; background: rgba(247, 242, 232, 0.94); color: #1d2a25; box-shadow: 0 24px 50px -20px rgba(0, 0, 0, 0.7); backdrop-filter: blur(10px); display: grid; gap: 0.6rem; animation: rwk-cardin 0.45s cubic-bezier(0.2, 0.8, 0.2, 1); }
+@keyframes rwk-cardin { from { opacity: 0; transform: translateY(18px) scale(0.98); } }
+.rwk-3d__card h3 { font-size: clamp(20px, 2.2vw, 26px); font-weight: 800; color: #0c2a20; line-height: 1.3; }
+.rwk-3d__card p { font-size: 14px; line-height: 1.85; color: #3b4741; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+.rwk-3d__actions { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.rwk-3d__actions .rwh-btn { padding-block: 0.55rem; font-size: 14px; }
+.rwk-3d__step { position: absolute; inset-block-start: 0.9rem; inset-inline-end: 0.9rem; display: flex; gap: 0.35rem; }
+.rwk-3d__step button { inline-size: 2rem; block-size: 2rem; border-radius: 50%; border: 1px solid #ece4d3; background: #fff; color: #0c2a20; font-weight: 800; cursor: pointer; }
+@media (max-width: 640px) {
+  .rwk-3d { block-size: 68vh; }
+  .rwk-3d__card { inset-inline: 0.75rem; inline-size: auto; inset-block-end: 0.75rem; padding: 1rem; }
+  .rwk-3d__card p { -webkit-line-clamp: 3; }
+  .rwk-3d__num { inline-size: 1.6rem; block-size: 1.6rem; font-size: 11px; }
+}
+@media (prefers-reduced-motion: reduce) { .rwk-3d__card, .rwk-3d__name { animation: none; } }

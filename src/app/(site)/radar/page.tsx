@@ -66,7 +66,7 @@ export default async function RadarPage() {
             {r.journey.steps.map((s, i) => (
               <li key={s.title} className="rw-card">
                 <span className="rw-eyebrow" aria-hidden="true">
-                  {(i + 1).toLocaleString(locale === "ar" ? "ar-SA" : "en-US")}
+                  {(i + 1).toLocaleString(locale === "ar" ? "ar-SA-u-nu-latn" : "en-US")}
                 </span>
                 <h3 className="rw-h3">{s.title}</h3>
                 <p className="rw-body">{s.body}</p>

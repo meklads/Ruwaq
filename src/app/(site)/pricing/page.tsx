@@ -12,7 +12,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function PricingPage() {
   const locale = (await getLocale()) === "en" ? "en" : "ar";
   const c = getTrustCopy(locale).pricing;
-  const fmt = (n: number) => n.toLocaleString(locale === "ar" ? "ar-SA" : "en-US");
+  const fmt = (n: number) => n.toLocaleString(locale === "ar" ? "ar-SA-u-nu-latn" : "en-US");
 
   return (
     <div className="rw">

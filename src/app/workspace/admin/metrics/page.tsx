@@ -201,7 +201,7 @@ export default async function AdminMetricsPage() {
                   {last14Days.map((d) => (
                     <tr key={d.day.toISOString()} className="border-t border-ruwaq-stone/50 first:border-t-0">
                       <td className="px-4 py-2 text-ruwaq-ink-muted">
-                        {new Date(d.day).toLocaleDateString("ar-SA", {
+                        {new Date(d.day).toLocaleDateString("ar-SA-u-nu-latn", {
                           year: "numeric",
                           month: "short",
                           day: "numeric",
@@ -236,7 +236,7 @@ export default async function AdminMetricsPage() {
                     return (
                       <tr key={e.id} className="border-t border-ruwaq-stone/50 first:border-t-0">
                         <td className="px-4 py-3 align-top text-xs text-ruwaq-ink-muted whitespace-nowrap">
-                          {e.createdAt.toLocaleString("ar-SA")}
+                          {e.createdAt.toLocaleString("ar-SA-u-nu-latn")}
                         </td>
                         <td className="px-4 py-3 align-top text-xs font-semibold text-ruwaq-ink whitespace-nowrap">
                           {meta.context ?? "—"}

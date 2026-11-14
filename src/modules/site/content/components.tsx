@@ -20,7 +20,7 @@ export function Tx({ l, locale, as: As = "span" }: { l: Localized | undefined; l
 
 export function fmtDate(d: string, locale: Locale, unknown: string): string {
   if (d === "unknown") return unknown;
-  return new Date(`${d}T00:00:00Z`).toLocaleDateString(locale === "ar" ? "ar-SA-u-ca-gregory" : "en-GB", {
+  return new Date(`${d}T00:00:00Z`).toLocaleDateString(locale === "ar" ? "ar-SA-u-ca-gregory-nu-latn" : "en-GB", {
     year: "numeric", month: "long", day: "numeric", timeZone: "UTC",
   });
 }

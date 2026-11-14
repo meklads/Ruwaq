@@ -38,7 +38,7 @@ function roundToNearest(value: number, step: number): number {
 }
 
 export function formatEstimateAmount(amount: number, locale: Locale): string {
-  return new Intl.NumberFormat(locale === "ar" ? "ar-SA" : "en-SA", {
+  return new Intl.NumberFormat(locale === "ar" ? "ar-SA-u-nu-latn" : "en-SA", {
     maximumFractionDigits: 0,
   }).format(amount);
 }
