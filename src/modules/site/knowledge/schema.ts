@@ -49,7 +49,42 @@ const needsSource = (v: { regulatory: boolean; sources: unknown[] }, ctx: z.Refi
   if (v.regulatory && v.sources.length === 0) ctx.addIssue({ code: "custom", path: ["sources"], message: "regulatory terms need an official source" });
 };
 
+/**
+ * A style image. `nature` says what it is: a real photograph (documentary) or an AI concept image.
+ * Concept images are always labelled as such on the page. Every image carries its credit and licence.
+ */
+const styleImage = z
+  .object({
+    src: z.string().startsWith("/"),
+    kind: z.enum(["aerial", "street", "detail", "materials", "diagram"]),
+    nature: z.enum(["documentary", "concept"]),
+    alt: localized,
+    caption: localized,
+    credit: text,
+    license: text,
+    width: z.number().int().positive(),
+    height: z.number().int().positive(),
+  })
+  .strict();
+
+const beforeAfter = z
+  .object({
+    before: z.object({ src: z.string().startsWith("/"), alt: localized }).strict(),
+    after: z.object({ src: z.string().startsWith("/"), alt: localized }).strict(),
+    nature: z.enum(["documentary", "concept"]),
+    caption: localized,
+    credit: text,
+    width: z.number().int().positive(),
+    height: z.number().int().positive(),
+  })
+  .strict();
+
 const styleBase = {
+  /** Key of this style in the Saudi Architecture Map (map-data.ts), when it is one of the 19. */
+  mapKey: z.string().optional(),
+  hero: styleImage.optional(),
+  gallery: z.array(styleImage).default([]),
+  beforeAfter: beforeAfter.optional(),
   slug,
   name: localized,
   region: localized,

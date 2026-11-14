@@ -1,0 +1,75 @@
+/* Visual atlas: map, gallery, before/after. Uses the .rwh brand tokens from home.css. */
+
+/* Map */
+.rwk-mapwrap { display: grid; gap: 1.5rem; align-items: start; }
+@media (min-width: 980px) { .rwk-mapwrap { grid-template-columns: 1.35fr 1fr; } }
+.rwk-mapbox { border-radius: 22px; padding: clamp(0.75rem, 2vw, 1.5rem); background: radial-gradient(40rem 30rem at 30% 20%, #133b2e, #071b14); box-shadow: 0 30px 60px -36px rgba(7, 27, 20, 0.8); }
+.rwk-map-svg { inline-size: 100%; block-size: auto; display: block; overflow: visible; }
+.rwk-pin { cursor: pointer; outline: none; }
+.rwk-pin__halo { fill: rgba(201, 163, 91, 0.18); transition: r 0.2s ease, fill 0.2s ease; }
+.rwk-pin__dot { fill: #f7f2e8; stroke: #c9a35b; stroke-width: 2; transition: r 0.2s ease, fill 0.2s ease; }
+.rwk-pin__num { font-size: 14px; font-weight: 800; fill: #0c2a20; pointer-events: none; }
+.rwk-pin.is-live .rwk-pin__dot { fill: #c9a35b; }
+.rwk-pin.is-live .rwk-pin__halo { fill: rgba(201, 163, 91, 0.4); animation: rwk-pulse 2.4s ease-in-out infinite; }
+.rwk-pin.is-active .rwk-pin__dot { fill: #e3c88f; stroke: #fff; }
+.rwk-pin:focus-visible .rwk-pin__halo { fill: rgba(255, 255, 255, 0.45); }
+@keyframes rwk-pulse { 50% { fill: rgba(201, 163, 91, 0.12); } }
+
+.rwk-mapcard { border-radius: 22px; padding: 1.5rem; background: #fff; border: 1px solid var(--h-stone, #ece4d3); display: grid; gap: 0.75rem; align-content: start; }
+.rwk-mapcard__num { font-size: 12px; font-weight: 800; color: var(--h-gold, #c9a35b); }
+.rwk-mapcard__title { font-size: clamp(22px, 2.4vw, 30px); font-weight: 800; color: var(--h-emerald, #0c2a20); line-height: 1.3; }
+.rwk-mapcard .rwh-btn { justify-self: start; }
+.rwk-mapcard__soon { justify-self: start; padding: 0.3rem 0.9rem; border-radius: 999px; background: var(--h-stone, #ece4d3); color: var(--h-soft, #55615b); font-size: 13px; font-weight: 700; }
+.rwk-maplist { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.15rem 0.75rem; margin-block-start: 0.5rem; max-block-size: 22rem; overflow: auto; }
+.rwk-maplist button { inline-size: 100%; text-align: start; padding: 0.3rem 0.4rem; border-radius: 8px; font-size: 13.5px; color: var(--h-ink, #1d2a25); background: none; border: 0; cursor: pointer; }
+.rwk-maplist button b { color: var(--h-gold, #c9a35b); margin-inline-end: 0.3rem; }
+.rwk-maplist button:hover, .rwk-maplist button.is-active { background: var(--h-sand, #f7f2e8); color: var(--h-emerald, #0c2a20); font-weight: 700; }
+.rwk-mapcard__note { font-size: 12.5px; color: var(--h-soft, #55615b); line-height: 1.7; }
+
+/* Style page hero */
+.rwk-shero { position: relative; min-block-size: min(78vh, 40rem); display: grid; align-items: end; color: #fff; overflow: hidden; isolation: isolate; }
+.rwk-shero__img { position: absolute; inset: 0; z-index: -2; object-fit: cover; }
+.rwk-shero::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(to top, rgba(8, 30, 23, 0.95) 0%, rgba(8, 30, 23, 0.55) 40%, rgba(8, 30, 23, 0.1) 75%); }
+.rwk-shero__inner { inline-size: 100%; padding-block: 8rem 2.5rem; }
+.rwk-shero h1 { font-size: clamp(34px, 5vw, 62px); font-weight: 800; line-height: 1.2; margin-block: 0.75rem; text-shadow: 0 2px 18px rgba(0, 0, 0, 0.35); }
+.rwk-shero p { max-inline-size: 44rem; font-size: clamp(16px, 1.3vw, 19px); line-height: 1.9; color: rgba(255, 255, 255, 0.86); }
+.rwk-badges { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-block-end: 0.5rem; }
+.rwk-badge { padding: 0.2rem 0.75rem; border-radius: 999px; font-size: 12px; font-weight: 700; background: rgba(255, 255, 255, 0.14); color: #fff; backdrop-filter: blur(6px); }
+.rwk-badge--gold { background: var(--h-gold, #c9a35b); color: var(--h-emerald, #0c2a20); }
+
+/* Gallery */
+.rwk-gallery { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(21rem, 1fr)); grid-auto-flow: dense; }
+.rwk-shot { position: relative; margin: 0; border-radius: 16px; overflow: hidden; background: #0c2a20; }
+.rwk-shot--wide { grid-column: span 2; }
+@media (max-width: 640px) { .rwk-shot--wide { grid-column: span 1; } }
+.rwk-shot img { inline-size: 100%; block-size: 100%; object-fit: cover; display: block; transition: transform 0.6s ease; }
+.rwk-shot:hover img { transform: scale(1.04); }
+.rwk-shot figcaption { position: absolute; inset-inline: 0; inset-block-end: 0; padding: 2.5rem 1rem 0.85rem; background: linear-gradient(to top, rgba(8, 30, 23, 0.9), transparent); color: #fff; font-size: 13.5px; line-height: 1.6; }
+.rwk-shot figcaption b { display: block; font-size: 11.5px; color: var(--h-gold-2, #e3c88f); letter-spacing: 0.03em; margin-block-end: 0.15rem; }
+.rwk-shot__tag { position: absolute; inset-block-start: 0.7rem; inset-inline-start: 0.7rem; padding: 0.15rem 0.6rem; border-radius: 999px; font-size: 11px; font-weight: 700; background: rgba(8, 30, 23, 0.7); color: #fff; }
+
+/* Before / after */
+.rwk-ba { position: relative; inline-size: 100%; border-radius: 20px; overflow: hidden; background: #0c2a20; user-select: none; touch-action: pan-y; }
+.rwk-ba__img { object-fit: cover; }
+.rwk-ba__after { position: absolute; inset: 0; }
+.rwk-ba__handle { position: absolute; inset-block: 0; inline-size: 3px; background: #fff; pointer-events: none; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15); }
+.rwk-ba__handle span { position: absolute; inset-block-start: 50%; inset-inline-start: 50%; transform: translate(-50%, -50%); inline-size: 2.75rem; block-size: 2.75rem; border-radius: 50%; display: grid; place-items: center; background: var(--h-gold, #c9a35b); color: var(--h-emerald, #0c2a20); font-weight: 800; font-size: 18px; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35); }
+.rwk-ba__range { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; opacity: 0; cursor: ew-resize; margin: 0; }
+.rwk-ba__tag { position: absolute; inset-block-start: 1rem; padding: 0.25rem 0.8rem; border-radius: 999px; font-size: 12.5px; font-weight: 800; pointer-events: none; }
+.rwk-ba__tag--before { inset-inline-end: 1rem; background: rgba(8, 30, 23, 0.75); color: #fff; }
+.rwk-ba__tag--after { inset-inline-start: 1rem; background: var(--h-gold, #c9a35b); color: var(--h-emerald, #0c2a20); }
+
+/* Facts */
+.rwk-facts { display: grid; gap: 1rem; }
+@media (min-width: 860px) { .rwk-facts { grid-template-columns: repeat(2, 1fr); } }
+.rwk-fact { padding: 1.25rem 1.4rem; border-radius: 16px; background: #fff; border-inline-start: 3px solid var(--h-gold, #c9a35b); font-size: 15px; line-height: 1.9; color: var(--h-ink, #1d2a25); }
+.rwk-note { padding: 1rem 1.25rem; border-radius: 12px; background: var(--h-stone, #ece4d3); font-size: 13.5px; line-height: 1.8; color: var(--h-soft, #55615b); }
+
+@media (prefers-reduced-motion: reduce) {
+  .rwk-pin.is-live .rwk-pin__halo { animation: none; }
+  .rwk-shot img { transition: none; }
+  .rwk-shot:hover img { transform: none; }
+}
+
+/* Style cards on the atlas index: keep summaries short */
+.rwh-card .rwh-card__text { display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
