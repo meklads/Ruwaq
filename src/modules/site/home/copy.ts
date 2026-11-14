@@ -25,7 +25,7 @@ const ar = {
     open: "ادخل القسم",
     items: {
       glossary: { title: "معجم العمارة والتطوير", body: "رندر، ماكيت، صالة بيع، بيع على الخارطة... تعريف واضح ومثال لكل مصطلح.", alt: "مجسم معماري أبيض لحي متعدد الاستخدامات على طاولة خضراء بإضاءة نحاسية" },
-      atlas: { title: "أطلس العمارة السعودية", body: "طرز المناطق من النجدية إلى الحجازية والعسيرية: الخصائص والمواد، وكيف تُطبّق اليوم.", alt: "تفاصيل من العمارة النجدية والحجازية والعسيرية متجاورة" },
+      atlas: { title: "أطلس العمارة السعودية", body: "من الطين النجدي إلى الرواشين الحجازية وألوان عسير: ملامح كل طراز وموادّه، وكيف يُبعث من جديد في مشروع اليوم.", alt: "تفاصيل من العمارة النجدية والحجازية والعسيرية متجاورة" },
       updates: { title: "المشاريع والتحديثات", body: "ما أُعلن وما تغيّر في مشاريع مختارة، مع المصدر وما لم يتضح بعد.", alt: "منظر جوي لمشروع ساحلي قيد الإنشاء على البحر الأحمر وقت الغروب" },
       specialists: { title: "دليل الجهات المتخصصة", body: "مكاتب هندسية ومقيّمون ووسطاء مرخّصون، يُدرجون بعد التحقق من ترخيصهم.", alt: "مخططات معمارية وعينات خامات على مكتب معماري" },
     },
@@ -39,7 +39,7 @@ const ar = {
   atlas: {
     eyebrow: "أطلس العمارة",
     title: "تسعة عشر طرازًا، لكل منطقة لغتها",
-    body: "أعلنت خريطة العمارة السعودية في مارس 2025. نبني صفحة لكل طراز، يراجعها معماري قبل نشرها.",
+    body: "من رواشين جدة المطلّة على البحر، إلى قصور نجد الطينية، وبيوت عسير المزدانة بألوانها، وواحات الأحساء الوارفة؛ تلبس العمارة السعودية تسعة عشر ثوبًا، نسج كلًّا منها مناخُ المكان وحِرفة أهله. حلّق فوق الخريطة، واقترب من كل طراز لترى كيف صاغ الإنسان بيته من أرضه.",
     cta: "إلى الأطلس",
   },
   method: {
@@ -81,7 +81,7 @@ const en: K = {
     open: "Open section",
     items: {
       glossary: { title: "Architecture and development glossary", body: "Render, scale model, sales gallery, off-plan sale... a clear definition and an example for every term.", alt: "White architectural scale model of a mixed-use district on a green table under brass light" },
-      atlas: { title: "Atlas of Saudi architecture", body: "Regional styles from Najdi to Hijazi and Asiri: characteristics, materials, and how they apply today.", alt: "Najdi, Hijazi and Asiri architectural details side by side" },
+      atlas: { title: "Atlas of Saudi architecture", body: "From Najdi mud to Hijazi rawashin and the colours of Asir: the features and materials of each style, and how it can live again in a project today.", alt: "Najdi, Hijazi and Asiri architectural details side by side" },
       updates: { title: "Projects and updates", body: "What was announced or changed in selected projects, with the source and what is still unclear.", alt: "Aerial view of a coastal development under construction on the Red Sea at sunset" },
       specialists: { title: "Specialist directory", body: "Engineering offices, licensed valuers and brokers, listed after their licence is checked.", alt: "Architectural drawings and material samples on an architect's desk" },
     },
@@ -95,7 +95,7 @@ const en: K = {
   atlas: {
     eyebrow: "Architecture atlas",
     title: "Nineteen styles, each region with its own language",
-    body: "The Saudi Architecture Map was announced in March 2025. We are building a page for each style, reviewed by an architect before publication.",
+    body: "From the sea-facing rawashin of Jeddah to the mud palaces of Najd, the painted houses of Asir and the green oases of Al-Ahsa, Saudi architecture wears nineteen robes, each woven by its climate and the craft of its people. Fly over the map and come close to each style to see how people shaped their homes from their land.",
     cta: "To the atlas",
   },
   method: {
