@@ -6,7 +6,8 @@ import { Tx } from "@/modules/site/content/components";
 import { getKnowledgeCopy } from "@/modules/site/knowledge/copy";
 import { getStyles } from "@/modules/site/knowledge/loader";
 import { MAP_STYLES } from "@/modules/site/knowledge/map-data";
-import { AtlasMap } from "@/modules/site/knowledge/atlas-map";
+import { AtlasMap, type StylePanel } from "@/modules/site/knowledge/atlas-map";
+import { pickText } from "@/modules/site/content/localize";
 import { DraftBadge } from "@/modules/site/knowledge/components";
 import "@/modules/site/home/home.css";
 import "@/modules/site/knowledge/atlas.css";
@@ -24,6 +25,23 @@ export default async function AtlasPage() {
   const locale = await getLocale();
   const a = getKnowledgeCopy(locale).atlas;
   const styles = getStyles();
+  const tx = (l: { ar?: string; en?: string } | undefined) => (l ? pickText(l, locale)?.text ?? "" : "");
+  const panels: Record<string, StylePanel> = Object.fromEntries(
+    styles.map((s) => [
+      s.slug,
+      {
+        slug: s.slug,
+        name: tx(s.name),
+        region: tx(s.region),
+        summary: tx(s.summary),
+        characteristics: s.characteristics.map(tx),
+        materials: s.materials.map(tx),
+        colours: s.colours.map(tx),
+        hero: s.hero ? { src: s.hero.src, alt: tx(s.hero.alt), concept: s.hero.nature === "concept" } : undefined,
+        gallery: s.gallery.map((g) => ({ src: g.src, alt: tx(g.alt), caption: tx(g.caption), kind: a.kinds[g.kind], concept: g.nature === "concept", width: g.width, height: g.height })),
+      },
+    ]),
+  );
   const fmt = (n: number) => n.toLocaleString(locale === "ar" ? "ar-SA" : "en-US");
 
   return (
@@ -40,9 +58,14 @@ export default async function AtlasPage() {
         <div className="rw-wrap">
           <AtlasMap
             styles={MAP_STYLES}
-            available={styles.map((s) => s.slug)}
+            panels={panels}
             locale={locale}
-            labels={{ hint: a.mapHint, approx: a.mapApprox, open: a.mapOpen, soon: a.mapSoon }}
+            labels={{
+              hint: a.mapHint, approx: a.mapApprox, open: a.mapOpen, soon: a.mapSoon, pick: a.mapPick, pickBody: a.mapPickBody,
+              close: a.mapClose, prev: a.mapPrev, next: a.mapNext, region: a.region, characteristics: a.characteristics,
+              materials: a.materials, colours: a.colours, gallery: a.gallery, concept: a.concept, documentary: a.documentary,
+              soonBody: a.mapSoonBody, tryLive: a.mapTryLive, source: a.mapSource, sourceUrl: a.mapSourceUrl,
+            }}
           />
           <p className="rw-fineprint" style={{ marginBlockStart: "1rem" }}>
             <a className="rw-link" href={a.mapSourceUrl} target="_blank" rel="noopener noreferrer nofollow">{a.mapSource}</a>
