@@ -1,13 +1,5 @@
 import type { Metadata } from "next";
-import {
-  Amiri,
-  IBM_Plex_Sans_Arabic,
-  Inter,
-  Montserrat,
-  Playfair_Display,
-  Plus_Jakarta_Sans,
-  Tajawal,
-} from "next/font/google";
+import "./fonts.css";
 import "./globals.css";
 import "./ruwaq-v3.css";
 import "./ruwaq-radar.css";
@@ -21,64 +13,10 @@ import { RUWQ_PUBLIC_URL } from "@/shared/constants/brand";
 import { DEFAULT_MARKETING_HERO } from "@/content/marketing-images";
 
 /**
- * Arabic stack: IBM Plex Sans Arabic primary (Saudi DGA / institutional feel —
- * closest free stand-in for Vision 2030’s licensed 29LT Bukra; we do not embed Bukra).
- * Tajawal kept as soft marketing fallback.
+ * Fonts are self-hosted in ./fonts.css (files in public/fonts/gf) so the production build never
+ * downloads from Google: the Coolify server's fetch of fonts.googleapis.com failed and broke deploys.
+ * Arabic stack: IBM Plex Sans Arabic primary, Tajawal as soft marketing fallback, Amiri for display.
  */
-const ibmPlexArabic = IBM_Plex_Sans_Arabic({
-  subsets: ["arabic"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-ar",
-  display: "swap",
-});
-
-const tajawal = Tajawal({
-  subsets: ["arabic"],
-  weight: ["400", "500", "700"],
-  variable: "--font-ar-alt",
-  display: "swap",
-  preload: false,
-});
-
-const amiri = Amiri({
-  subsets: ["arabic"],
-  weight: ["400", "700"],
-  variable: "--font-ar-display",
-  display: "swap",
-  preload: false,
-});
-
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-inter",
-  display: "swap",
-  preload: false,
-});
-
-const montserrat = Montserrat({
-  subsets: ["latin"],
-  weight: ["400", "600"],
-  variable: "--font-latin",
-  display: "swap",
-  preload: false,
-});
-
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["400", "600"],
-  variable: "--font-latin-display",
-  display: "swap",
-  preload: false,
-});
-
-/** Marketing site, matches Graphics House ProjectLaunch™ stack (Inter on GH; Plus Jakarta on Ruwaq EN) */
-const plusJakarta = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-marketing-latin",
-  display: "swap",
-});
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
@@ -128,10 +66,9 @@ export default async function RootLayout({
       lang={locale}
       dir={dir}
       data-lang={locale}
-      className={`${tajawal.variable} ${ibmPlexArabic.variable} ${amiri.variable} ${inter.variable} ${montserrat.variable} ${playfair.variable} ${plusJakarta.variable}`}
     >
       <body
-        className={`min-h-screen bg-white ${locale === "ar" ? ibmPlexArabic.className : plusJakarta.className}`}
+        className={`min-h-screen bg-white ${locale === "ar" ? "rw-font-ar" : "rw-font-latin"}`}
       >
         <GoogleAnalytics />
         <Providers locale={locale}>{children}</Providers>

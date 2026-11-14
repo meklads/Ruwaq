@@ -44,6 +44,6 @@ export const config = {
      * Run on all routes except static files at root (images, etc.)
      * Marketing pages are allowed through via isPublicAppPath().
      */
-    "/((?!_next/static|_next/image|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico)$).*)",
+    "/((?!_next/static|_next/image|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|woff2)$).*)",
   ],
 };
