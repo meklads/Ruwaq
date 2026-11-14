@@ -1,13 +1,10 @@
 import type { Locale } from "@/shared/i18n/locale";
 import type { GroupTarget, TermCategory } from "./schema";
 
-/** The 19 styles of the Saudi Architecture Map, as named in public reporting of its launch (16 March 2025). */
-const MAP_STYLES_AR = [
-  "العمارة النجدية", "عمارة نجد الشمالية", "عمارة ساحل تبوك", "عمارة المدينة المنورة", "عمارة ريف المدينة المنورة",
-  "العمارة الحجازية الساحلية", "عمارة الطائف", "عمارة جبال السروات", "عمارة أصدار عسير", "عمارة سفوح تهامة",
-  "عمارة ساحل تهامة", "عمارة مرتفعات أبها", "عمارة جزر فرسان", "عمارة صحراء بيشة", "عمارة نجران",
-  "عمارة واحات الأحساء", "عمارة القطيف", "عمارة الساحل الشرقي", "عمارة نجد الشرقية",
-];
+import { MAP_SOURCE, MAP_STYLES } from "./map-data";
+
+/** The 19 styles of the Saudi Architecture Map, official Arabic names (see map-data.ts for the source). */
+const MAP_STYLES_AR = MAP_STYLES.map((m) => m.ar);
 
 const ar = {
   nav: { glossary: "المعجم", atlas: "أطلس العمارة" },
@@ -26,12 +23,26 @@ const ar = {
     soon: "نجهّز الأطلس الآن، وتُفتح صفحاته بعد مراجعتها من معماري.",
     mapTitle: "الطرز الـ19 في خريطة العمارة السعودية",
     mapNote: "أُعلنت الخريطة في 16 مارس 2025. نضيف صفحة لكل طراز تباعًا.",
-    mapSource: "المصدر: CNBC عربية، نقلًا عن وكالة الأنباء السعودية",
-    mapSourceUrl: "https://www.cnbcarabia.com/135559/2025/16/03/تشمل-19-طرازاً-معمارياً..-ولي-العهد-السعودي-يطلق-خريطة-العمارة-السعودية",
+    mapSource: "المصدر: سعوديبيديا، «خريطة العمارة السعودية» (17 مارس 2025)",
+    mapSourceUrl: MAP_SOURCE.url,
     mapStyles: MAP_STYLES_AR,
     region: "النطاق", characteristics: "الخصائص", materials: "المواد", colours: "الألوان", readings: "التقليدي والانتقالي والمعاصر",
     reading: { traditional: "تقليدي", transitional: "انتقالي", contemporary: "معاصر" },
-    apply: "كيف تطبّقه في مشروعك", unclear: "ما لم نتحقق منه بعد", sources: "المصادر", back: "الأطلس",
+    apply: "كيف تطبّقه في مشروعك", unclear: "ما لم نتحقق منه بعد", sources: "المصادر", mapHint: "مرّر المؤشر أو اضغط على أي نقطة لتعرف الطراز.",
+    mapApprox: "المواقع تقريبية؛ الطرز لا تتبع الحدود الإدارية.",
+    mapOpen: "افتح صفحة الطراز",
+    mapSoon: "صفحته قيد الإعداد",
+    gallery: "المعرض",
+    concept: "صورة تصوّرية",
+    documentary: "صورة توثيقية",
+    kinds: { aerial: "عين الطائر", street: "عين الإنسان", detail: "تفصيل", materials: "المواد", diagram: "مخطط" },
+    beforeAfter: "من التقليدي إلى المعاصر",
+    before: "تقليدي",
+    after: "معاصر",
+    slider: "اسحب لتقارن بين التقليدي والمعاصر",
+    conceptNote: "الصور في هذه الصفحة تصوّرية من إنتاج مجموعة تسامي بالذكاء الاصطناعي، لا صور لمبانٍ بعينها.",
+    styleCount: "طرازًا",
+    back: "الأطلس",
     architect: "راجعه معماري في", notArchitect: "لم يراجعه معماري بعد.", reviewed: "آخر مراجعة",
   },
   group: {
@@ -62,12 +73,26 @@ const en: K = {
     soon: "The atlas is being prepared; pages open after an architect's review.",
     mapTitle: "The 19 styles of the Saudi Architecture Map",
     mapNote: "The map was announced on 16 March 2025. We add a page for each style in turn.",
-    mapSource: "Source: CNBC Arabia, citing the Saudi Press Agency",
+    mapSource: "Source: Saudipedia, \"Saudi Architecture Map\" (17 March 2025)",
     mapSourceUrl: ar.atlas.mapSourceUrl,
     mapStyles: MAP_STYLES_AR,
     region: "Area", characteristics: "Characteristics", materials: "Materials", colours: "Colours", readings: "Traditional, transitional, contemporary",
     reading: { traditional: "Traditional", transitional: "Transitional", contemporary: "Contemporary" },
-    apply: "Applying it in your project", unclear: "Not yet confirmed", sources: "Sources", back: "Atlas",
+    apply: "Applying it in your project", unclear: "Not yet confirmed", sources: "Sources", mapHint: "Hover or tap any point to see the style.",
+    mapApprox: "Positions are approximate; styles do not follow administrative borders.",
+    mapOpen: "Open the style page",
+    mapSoon: "Page in preparation",
+    gallery: "Gallery",
+    concept: "Concept image",
+    documentary: "Documentary photo",
+    kinds: { aerial: "Bird's-eye", street: "Street level", detail: "Detail", materials: "Materials", diagram: "Diagram" },
+    beforeAfter: "From traditional to contemporary",
+    before: "Traditional",
+    after: "Contemporary",
+    slider: "Drag to compare traditional and contemporary",
+    conceptNote: "Images on this page are AI concept images produced by Tasami group, not photos of specific buildings.",
+    styleCount: "styles",
+    back: "Atlas",
     architect: "Reviewed by an architect on", notArchitect: "Not yet reviewed by an architect.", reviewed: "Last reviewed",
   },
   group: {

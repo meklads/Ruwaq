@@ -110,7 +110,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...sectionRoutes("insights", publishedOnly(getInsights())),
     ...sectionRoutes("specialists", publishedOnly(getEntities())),
     ...sectionRoutes("glossary", publishedKnowledge(getTerms())),
-    ...sectionRoutes("atlas", publishedKnowledge(getStyles())),
+    // The atlas index is public from day one (the map of the 19 styles); style pages only once published.
+    { path: "/atlas", priority: 0.8, changeFrequency: "weekly" as const },
+    ...publishedKnowledge(getStyles()).map((st) => ({ path: `/atlas/${st.slug}`, priority: 0.7, changeFrequency: "monthly" as const })),
   ];
 
   const allRoutes: RouteEntry[] = [
