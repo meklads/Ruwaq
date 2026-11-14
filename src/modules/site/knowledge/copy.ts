@@ -19,7 +19,7 @@ const ar = {
   },
   atlas: {
     title: "أطلس العمارة السعودية المرئي",
-    lead: "صفحة لكل طراز: خصائصه وموادّه وألوانه، وكيف يُطبّق في مشروع معاصر. نلخّص المصادر الرسمية ونربط بها، ولا نحل محلها.",
+    lead: "لكل طراز صفحةٌ تروي حكايته: ملامحه وموادّه وألوانه، وكيف يعود إلى الحياة في مشروع معاصر. نستقي من المصادر الرسمية، ونحيل إليها في كل صفحة.",
     soon: "نجهّز الأطلس الآن، وتُفتح صفحاته بعد مراجعتها من معماري.",
     mapTitle: "الطرز الـ19 في خريطة العمارة السعودية",
     mapNote: "أُعلنت الخريطة في 16 مارس 2025. نضيف صفحة لكل طراز تباعًا.",
@@ -77,7 +77,7 @@ const en: K = {
   },
   atlas: {
     title: "Visual atlas of Saudi architecture",
-    lead: "One page per style: its characteristics, materials and colours, and how it applies to a contemporary project. We summarise and link to official sources; we do not replace them.",
+    lead: "Each style has a page that tells its story: its features, materials and colours, and how it can live again in a contemporary project. We draw on the official sources and cite them on every page.",
     soon: "The atlas is being prepared; pages open after an architect's review.",
     mapTitle: "The 19 styles of the Saudi Architecture Map",
     mapNote: "The map was announced on 16 March 2025. We add a page for each style in turn.",
