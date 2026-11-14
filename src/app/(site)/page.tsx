@@ -6,7 +6,11 @@ import { Tx } from "@/modules/site/content/components";
 import { getKnowledgeCopy } from "@/modules/site/knowledge/copy";
 import { getStyles, getTerms, publishedKnowledge } from "@/modules/site/knowledge/loader";
 import { getHomeCopy } from "@/modules/site/home/copy";
+import { AtlasMap } from "@/modules/site/knowledge/atlas-map";
+import { atlasMapProps } from "@/modules/site/knowledge/map-props";
+import { MAP_STYLES } from "@/modules/site/knowledge/map-data";
 import "@/modules/site/home/home.css";
+import "@/modules/site/knowledge/atlas.css";
 
 /** Terms featured on the home page, in this order, when they are published. */
 const FEATURED_TERMS = ["render", "maquette", "smart-model", "sales-gallery", "off-plan-sale", "digital-twin"];
@@ -19,6 +23,7 @@ export default async function HomePage() {
   const terms = publishedKnowledge(getTerms());
   const stylesLive = publishedKnowledge(getStyles()).length > 0;
   const fmt = (n: number) => n.toLocaleString(locale === "ar" ? "ar-SA-u-nu-latn" : "en-US");
+  const atlas = atlasMapProps(locale);
   const featured = FEATURED_TERMS.map((s) => terms.find((t) => t.slug === s)).filter((t): t is NonNullable<typeof t> => Boolean(t));
 
   const cards = [
@@ -103,22 +108,17 @@ export default async function HomePage() {
         </section>
       )}
 
-      {/* Atlas */}
+      {/* Atlas: the interactive 3D map */}
       <section className="rwh-section">
-        <div className="rw-wrap rwh-atlas">
-          <div>
+        <div className="rw-wrap">
+          <div className="rwh-atlas-head">
             <span className="rwh-eyebrow">{h.atlas.eyebrow}</span>
             <h2 className="rwh-title">{h.atlas.title}</h2>
             <p className="rwh-body">{h.atlas.body}</p>
-            <ul className="rwh-styles">
-              {k.atlas.mapStyles.map((n, i) => (
-                <li key={n}><b>{fmt(i + 1)}</b>{n}</li>
-              ))}
-            </ul>
-            <Link href="/atlas" className="rwh-btn rwh-btn--dark">{h.atlas.cta}</Link>
           </div>
-          <div className="rwh-atlas__img">
-            <Image src="/images/home/atlas.webp" alt={h.sections.items.atlas.alt} width={900} height={678} sizes="(min-width: 960px) 45vw, 100vw" />
+          <AtlasMap styles={MAP_STYLES} panels={atlas.panels} labels={atlas.labels} locale={locale} variant="home" />
+          <div className="rwh-atlas-cta">
+            <Link href="/atlas" className="rwh-btn rwh-btn--dark">{h.atlas.cta}</Link>
           </div>
         </div>
       </section>

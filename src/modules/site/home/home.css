@@ -122,3 +122,8 @@
   .rwh-card:hover, .rwh-btn:hover { transform: none; }
   .rwh-card:hover .rwh-card__media img { transform: none; }
 }
+
+/* Home atlas: centred heading above the 3D map, button below */
+.rwh-atlas-head { text-align: center; max-inline-size: 46rem; margin: 0 auto 2rem; }
+.rwh-atlas-head .rwh-eyebrow { justify-content: center; }
+.rwh-atlas-cta { display: flex; justify-content: center; margin-block-start: 1.75rem; }

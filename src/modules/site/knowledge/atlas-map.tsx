@@ -47,7 +47,8 @@ const [, , VB_W, VB_H] = KSA_VIEWBOX.split(" ").map(Number) as [number, number, 
  * map with everything Ruwaq has published on that style. Unpublished styles say so plainly; we never
  * invent facts for them. The selection is kept in ?s= so a style can be shared as a link.
  */
-export function AtlasMap({ styles, panels, locale, labels }: { styles: MapStyle[]; panels: Record<string, StylePanel>; locale: "ar" | "en"; labels: AtlasMapLabels }) {
+export function AtlasMap({ styles, panels, locale, labels, variant = "full" }: { styles: MapStyle[]; panels: Record<string, StylePanel>; locale: "ar" | "en"; labels: AtlasMapLabels; variant?: "full" | "home" }) {
+  const home = variant === "home";
   const [hover, setHover] = useState<string | null>(null);
   const [active, setActive] = useState<string | null>(null);
   const [three, setThree] = useState(false);
@@ -64,22 +65,25 @@ export function AtlasMap({ styles, panels, locale, labels }: { styles: MapStyle[
 
   // Open a style from a shared link (?s=key).
   useEffect(() => {
+    if (home) return;
     const k = new URLSearchParams(window.location.search).get("s");
     if (k && styles.some((s) => s.key === k)) setActive(k);
-  }, [styles]);
+  }, [styles, home]);
 
   const select = useCallback((key: string | null, scroll = true, fromTour = false) => {
     if (!fromTour) setTouring(false);
     setActive(key);
-    const url = new URL(window.location.href);
-    if (key) url.searchParams.set("s", key); else url.searchParams.delete("s");
-    window.history.replaceState(null, "", url.toString());
+    if (!home) {
+      const url = new URL(window.location.href);
+      if (key) url.searchParams.set("s", key); else url.searchParams.delete("s");
+      window.history.replaceState(null, "", url.toString());
+    }
     if (key && !fromTour) trackEvent("atlas_style_select", { style: key });
     if (key && scroll) {
       const smooth = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       requestAnimationFrame(() => panelRef.current?.scrollIntoView({ behavior: smooth ? "smooth" : "auto", block: "start" }));
     }
-  }, []);
+  }, [home]);
 
   const idx = active ? styles.findIndex((s) => s.key === active) : -1;
   const cur = idx >= 0 ? styles[idx] : undefined;
@@ -144,7 +148,9 @@ export function AtlasMap({ styles, panels, locale, labels }: { styles: MapStyle[
                 <p>{curPanel ? curPanel.summary : labels.soonBody}</p>
                 <div className="rwk-3d__actions">
                   {curPanel && <Link href={`/atlas/${curPanel.slug}`} className="rwh-btn rwh-btn--gold">{labels.open}</Link>}
-                  <button type="button" className="rwh-btn rwh-btn--ghost" onClick={toPanel}>{labels.details} ↓</button>
+                  {home
+                    ? <Link href={`/atlas?s=${cur.key}`} className="rwh-btn rwh-btn--ghost">{labels.details}</Link>
+                    : <button type="button" className="rwh-btn rwh-btn--ghost" onClick={toPanel}>{labels.details} ↓</button>}
                 </div>
                 <div className="rwk-3d__step">
                   <button type="button" onClick={() => step(-1)} aria-label={labels.prev}>{locale === "ar" ? "→" : "←"}</button>
@@ -178,8 +184,8 @@ export function AtlasMap({ styles, panels, locale, labels }: { styles: MapStyle[
                     onMouseLeave={() => setHover((h) => (h === s.key ? null : h))}
                     onFocus={() => setHover(s.key)}
                     onBlur={() => setHover((h) => (h === s.key ? null : h))}
-                    onClick={() => select(s.key)}
-                    onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); select(s.key); } }}
+                    onClick={() => (home ? window.location.assign(`/atlas?s=${s.key}`) : select(s.key))}
+                    onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); if (home) window.location.assign(`/atlas?s=${s.key}`); else select(s.key); } }}
                   >
                     <circle r={on ? 24 : 18} className="rwk-pin__halo" />
                     <circle r={on ? 16 : 13} className="rwk-pin__dot" />
@@ -199,6 +205,8 @@ export function AtlasMap({ styles, panels, locale, labels }: { styles: MapStyle[
         <p className="rwk-mapbox__hint">{three ? `${labels.drag} ` : ""}{labels.hint} {labels.approx} {three ? labels.reliefNote : ""}</p>
       </div>
 
+      {!home && (
+        <>
       <div className="rwk-chips" role="list">
         {styles.map((s, i) => (
           <button key={s.key} type="button" role="listitem" className={`rwk-chip${s.key === active ? " is-active" : ""}${panelOf(s) ? " is-live" : ""}`}
@@ -228,6 +236,8 @@ export function AtlasMap({ styles, panels, locale, labels }: { styles: MapStyle[
           </article>
         )}
       </div>
+        </>
+      )}
     </div>
   );
 }
