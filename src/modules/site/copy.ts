@@ -157,7 +157,7 @@ const ar: Copy = {
     title: "رواق",
     lead: "رواق مشروع ضمن مجموعة تسامي، يبني مظلة معرفية عن المشاريع والجهات في السوق السعودي. المنصة قيد البناء.",
     sections: [
-      { title: "ما نبنيه", body: "ثلاثة أقسام: المشاريع والتحديثات، والرؤى والتقارير، ودليل الجهات المتخصصة. لكل قسم مادة موثقة بالمصدر والتاريخ، وتُفتح الأقسام تدريجيًا بعد مراجعة موادها." },
+      { title: "ما نبنيه", body: "معجم يشرح لغة المهنة، وأطلس يطوف بطرز العمارة السعودية التسعة عشر، وهما متاحان الآن. وتتبعهما أقسام المشاريع والتحديثات، والرؤى والتقارير، ودليل الجهات المتخصصة، ويُفتح كل قسم حين تكتمل مراجعة مادته." },
       { title: "كيف نعمل", body: "نفصل بين المعلومة والاستنتاج، ونُظهر المصدر والتاريخ حين يتوفران، ونذكر ما ينقص. الاختيار تحريري ولا نزعم تغطية شاملة للسوق." },
       { title: "من يملك رواق", body: "رواق تملكه مجموعة تسامي، ومن شركاتها جرافيكس هاوس وتوريفا وبيزموشن. حين تقترح صفحة خدمة لإحدى هذه الشركات نذكر أنها من المجموعة، ولا تأخذ شركات المجموعة أي أفضلية في الدليل أو في ترتيب المحتوى." },
       { title: "منهجية التحرير", body: "كل معلومة تنظيمية من مصدر رسمي مع رابطه وتاريخ الاطلاع. صفحات الطرز المعمارية يراجعها معماري قبل نشرها. الصور من إنتاج المجموعة أو بترخيص مذكور. لا نقدّم تحليلًا عقاريًا ولا تقييمًا ولا توصيات استثمارية. وإن وجدت خطأ فراسلنا لنصححه ونذكر تاريخ التصحيح." },
@@ -294,7 +294,7 @@ const en: Copy = {
     title: "Ruwaq",
     lead: "Ruwaq is a project within the Tasami group, building a knowledge umbrella about projects and organisations in the Saudi market. The platform is under construction.",
     sections: [
-      { title: "What we are building", body: "Three sections: projects and updates, insights and reports, and a specialist directory. Each carries material documented with its source and date, and sections open gradually once their material has been reviewed." },
+      { title: "What we are building", body: "A glossary that explains the language of the trade and an atlas that tours the nineteen styles of Saudi architecture, both open now. Projects and updates, insights and reports, and the specialist directory follow, each opening once its material has been reviewed." },
       { title: "How we work", body: "We keep fact apart from inference, show the source and date when available, and say what is missing. Selection is editorial and we do not claim full market coverage." },
       { title: "Who owns Ruwaq", body: "Ruwaq is owned by the Tasami group, whose companies include Graphics House, Turriva and Bees Motion. When a page suggests one of these companies we say it belongs to the group, and group companies get no preference in the directory or in how content is ordered." },
       { title: "Editorial method", body: "Every regulatory fact comes from an official source with its link and access date. Architectural style pages are reviewed by an architect before publication. Images are produced by the group or used under a stated licence. We give no real estate analysis, valuation or investment advice. If you find an error, write to us and we will correct it and note the date." },

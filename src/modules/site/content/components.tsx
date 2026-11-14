@@ -1,9 +1,13 @@
+import Image from "next/image";
 import Link from "next/link";
+import { PageHero } from "@/modules/site/home/page-hero";
+import { getPagesCopy } from "@/modules/site/pages/copy";
 import type { Locale } from "@/shared/i18n/locale";
 import { getContentCopy } from "./copy";
 import { availableLocales, pickText, type Picked } from "./localize";
 import type { Entity, Insight, Localized, Source, Update } from "./schema";
 import "./content.css";
+import "@/modules/site/home/home.css";
 
 /** Renders localized text; marks language and direction when it is a fallback language. */
 export function Tx({ l, locale, as: As = "span" }: { l: Localized | undefined; locale: Locale; as?: "span" | "p" | "div" }) {
@@ -129,17 +133,41 @@ export function FallbackNotice({ title, locale }: { title: Localized; locale: Lo
 /** Public placeholder for a section that has no published content yet. Never shows items or drafts. */
 export function ComingSoon({ section, locale }: { section: "updates" | "insights" | "specialists"; locale: Locale }) {
   const c = getContentCopy(locale);
+  const pc = getPagesCopy(locale);
+  const s = pc.soon.sections[section];
+  const cards = [
+    { href: "/glossary", ...pc.soon.cards.glossary },
+    { href: "/atlas", ...pc.soon.cards.atlas },
+  ];
   return (
-    <div className="rw">
-      <section className="rw-page-hero">
-        <div className="rw-wrap rw-narrow">
-          <p className="rw-eyebrow">{c.soon.badge}</p>
-          <h1 className="rw-display">{c.list[section].title}</h1>
-          <p className="rw-lead">{c.soon[section]}</p>
-          <p className="rw-fineprint" style={{ marginBlockStart: "1rem" }}>{c.soon.note}</p>
-          <div className="rw-actions">
-            <Link href="/radar" className="rw-btn rw-btn--primary">{c.soon.radarCta}</Link>
-            <Link href="/contact" className="rw-btn rw-btn--outline">{c.soon.contactCta}</Link>
+    <div className="rw rwh">
+      <PageHero
+        img={s.img}
+        alt={s.alt}
+        eyebrow={c.soon.badge}
+        title={c.list[section].title}
+        lead={s.lead}
+        credit={pc.credit}
+        actions={<Link href="/contact" className="rwh-btn rwh-btn--ghost">{c.soon.contactCta}</Link>}
+      >
+        <p className="rwh-note">{c.soon.note}</p>
+      </PageHero>
+      <section className="rwh-section">
+        <div className="rw-wrap">
+          <span className="rwh-eyebrow">{pc.soon.startHere}</span>
+          <h2 className="rwh-title">{pc.soon.startBody}</h2>
+          <div className="rwh-cards" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 22rem), 1fr))" }}>
+            {cards.map((k) => (
+              <Link key={k.href} href={k.href} className="rwh-card">
+                <div className="rwh-card__media">
+                  <Image src={k.img} alt="" fill sizes="(min-width: 900px) 45vw, 100vw" />
+                </div>
+                <div className="rwh-card__body">
+                  <h3 className="rwh-card__title">{k.title}</h3>
+                  <p className="rwh-card__text">{k.body}</p>
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </section>

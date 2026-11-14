@@ -7,7 +7,9 @@ import { JsonLdScript } from "@/modules/marketplace/components/json-ld-script";
 import { SourcesList, Tx, fmtDate } from "@/modules/site/content/components";
 import { pickText } from "@/modules/site/content/localize";
 import { getKnowledgeCopy } from "@/modules/site/knowledge/copy";
-import { getTerm } from "@/modules/site/knowledge/loader";
+import { getTerm, getTerms } from "@/modules/site/knowledge/loader";
+import { getPagesCopy } from "@/modules/site/pages/copy";
+import "@/modules/site/home/home.css";
 import { DraftBadge, GroupBox } from "@/modules/site/knowledge/components";
 
 type Props = { params: { slug: string } };
@@ -30,9 +32,11 @@ export default async function TermPage({ params }: Props) {
   const g = getKnowledgeCopy(locale).glossary;
   const related = t.related.map((s) => getTerm(s)).filter((x): x is NonNullable<typeof x> => Boolean(x));
   const name = pickText(t.term, locale)?.text ?? t.slug;
+  const pc = getPagesCopy(locale).term;
+  const more = getTerms().filter((x) => x.category === t.category && x.slug !== t.slug && !t.related.includes(x.slug)).slice(0, 3);
 
   return (
-    <div className="rw">
+    <div className="rw rwh">
       {!t.draft && (
         <JsonLdScript
           data={{
@@ -46,37 +50,69 @@ export default async function TermPage({ params }: Props) {
           }}
         />
       )}
-      <article className="rw-section">
+      <header className="rwt-head">
         <div className="rw-wrap rw-narrow">
-          <Link href="/glossary" className="rw-link">{g.back}</Link>
-          <div className="rwc-tags" style={{ marginBlockStart: "1.25rem" }}>
-            <span className="rwc-tag rwc-tag--lang">{g.categories[t.category]}</span>
+          <nav className="rwt-crumbs" aria-label="breadcrumb">
+            <Link href="/">{pc.home}</Link><span aria-hidden="true">/</span>
+            <Link href="/glossary">{g.title}</Link><span aria-hidden="true">/</span>
+            <span>{g.categories[t.category]}</span>
+          </nav>
+          <div style={{ marginBlockStart: "1.5rem", display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
+            <span className="rwt-chip">{g.categories[t.category]}</span>
             {t.draft && <DraftBadge locale={locale} />}
           </div>
-          <h1 className="rw-display" style={{ marginBlockStart: "0.9rem" }}>{name}</h1>
-          {t.aliases.length > 0 && <p className="rw-fineprint">{g.aliases}: {t.aliases.join("، ")}</p>}
+          <h1>{name}</h1>
+          {t.aliases.length > 0 && <p className="rwt-aliases">{g.aliases}: {t.aliases.join(locale === "ar" ? "، " : ", ")}</p>}
+        </div>
+      </header>
 
-          <section className="rwc-section"><h2>{g.definition}</h2><p className="rw-body"><Tx l={t.definition} locale={locale} /></p></section>
-          <section className="rwc-section"><h2>{g.example}</h2><p className="rw-body"><Tx l={t.example} locale={locale} /></p></section>
+      <article className="rwh-section" style={{ paddingBlockStart: "clamp(2.5rem, 5vw, 3.5rem)" }}>
+        <div className="rw-wrap rw-narrow">
+          <span className="rwh-eyebrow">{g.definition}</span>
+          <p className="rwt-def" style={{ marginBlockStart: "0.85rem" }}><Tx l={t.definition} locale={locale} /></p>
+
+          <section className="rwt-example">
+            <h2>{g.example}</h2>
+            <p><Tx l={t.example} locale={locale} /></p>
+          </section>
 
           {related.length > 0 && (
-            <section className="rwc-section">
-              <h2>{g.related}</h2>
-              <div className="rwc-chips">
-                {related.map((r) => <Link key={r.slug} className="rwc-chip" href={`/glossary/${r.slug}`}><Tx l={r.term} locale={locale} /></Link>)}
+            <section className="rwt-block">
+              <h2 className="rwh-eyebrow">{g.related}</h2>
+              <div className="rwt-related" style={{ marginBlockStart: "0.85rem" }}>
+                {related.map((r) => <Link key={r.slug} href={`/glossary/${r.slug}`}><Tx l={r.term} locale={locale} /></Link>)}
               </div>
             </section>
           )}
 
-          <section className="rwc-section">
-            <h2>{g.sources}</h2>
-            {t.sources.length > 0 ? <SourcesList sources={t.sources} locale={locale} /> : <p className="rw-fineprint">{g.noSources}</p>}
-            <p className="rw-fineprint" style={{ marginBlockStart: "0.5rem" }}>{g.reviewed}: {fmtDate(t.reviewedAt, locale, "—")}</p>
+          <section className="rwt-block">
+            <h2 className="rwh-eyebrow">{g.sources}</h2>
+            <div style={{ marginBlockStart: "0.75rem" }}>
+              {t.sources.length > 0 ? <SourcesList sources={t.sources} locale={locale} /> : <p className="rw-fineprint">{g.noSources}</p>}
+            </div>
+            <p className="rwt-meta">{g.reviewed}: {fmtDate(t.reviewedAt, locale, "—")}</p>
           </section>
 
           {t.next && <GroupBox target={t.next} section="glossary" page={t.slug} locale={locale} />}
         </div>
       </article>
+
+      {more.length > 0 && (
+        <section className="rwh-section rwh-method" style={{ paddingBlock: "clamp(3rem, 6vw, 4.5rem)" }}>
+          <div className="rw-wrap">
+            <span className="rwh-eyebrow">{pc.more}</span>
+            <h2 className="rwh-title">{g.categories[t.category]}</h2>
+            <div className="rwg-grid">
+              {more.map((m) => (
+                <Link key={m.slug} href={`/glossary/${m.slug}`} className="rwg-term">
+                  <h3><Tx l={m.term} locale={locale} /></h3>
+                  <p><Tx l={m.definition} locale={locale} /></p>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
     </div>
   );
 }

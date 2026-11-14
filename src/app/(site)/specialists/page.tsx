@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getLocale } from "@/shared/i18n/server";
+import { PageHero } from "@/modules/site/home/page-hero";
+import { getPagesCopy } from "@/modules/site/pages/copy";
+import "@/modules/site/home/home.css";
 import { getContentCopy } from "@/modules/site/content/copy";
 import { getEntities } from "@/modules/site/content/loader";
 import { pickText } from "@/modules/site/content/localize";
@@ -15,6 +18,7 @@ type Props = { searchParams: { discipline?: string; city?: string } };
 
 export default async function SpecialistsPage({ searchParams }: Props) {
   const locale = await getLocale();
+  const pc = getPagesCopy(locale);
   const all = getEntities();
   if (all.length === 0) return <ComingSoon section="specialists" locale={locale} />;
   const c = getContentCopy(locale);
@@ -49,15 +53,11 @@ export default async function SpecialistsPage({ searchParams }: Props) {
     );
 
   return (
-    <div className="rw">
-      <section className="rw-page-hero">
-        <div className="rw-wrap rw-narrow">
-          <h1 className="rw-display">{c.list.specialists.title}</h1>
-          <p className="rw-lead">{c.list.specialists.lead}</p>
-          <p className="rw-fineprint" style={{ marginBlockStart: "1rem" }}>{c.list.specialists.fine}</p>
-        </div>
-      </section>
-      <section className="rw-section">
+    <div className="rw rwh">
+      <PageHero img={pc.soon.sections.specialists.img} alt={pc.soon.sections.specialists.alt} eyebrow={pc.soon.sections.specialists.eyebrow} title={c.list.specialists.title} lead={c.list.specialists.lead} credit={pc.credit}>
+        <p className="rwh-note">{c.list.specialists.fine}</p>
+      </PageHero>
+      <section className="rwh-section">
         <div className="rw-wrap">
           {chips(c.entity.filterDiscipline, disciplines, discipline, "discipline")}
           {chips(c.entity.filterCity, cities, city, "city")}
