@@ -24,7 +24,8 @@ export type AnalyticsEvent =
   | "checklist_submit"
   | "sample_report_print"
   | "check_whatsapp_fastlane"
-  | "group_referral";
+  | "group_referral"
+  | "atlas_style_select";
 
 type EventParams = Record<string, string | number | boolean | undefined>;
 
