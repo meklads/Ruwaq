@@ -127,3 +127,79 @@
 .rwh-atlas-head { text-align: center; max-inline-size: 46rem; margin: 0 auto 2rem; }
 .rwh-atlas-head .rwh-eyebrow { justify-content: center; }
 .rwh-atlas-cta { display: flex; justify-content: center; margin-block-start: 1.75rem; }
+
+/* ===== Main pages (2026-11-14): shared hero, glossary, term, soon, about, contact ===== */
+.rwh-hero--page { min-block-size: min(70vh, 38rem); }
+.rwh-hero--page .rwh-hero__title { font-size: clamp(32px, 4.4vw, 58px); max-inline-size: 20ch; }
+@media (max-width: 640px) { .rwh-stats__grid { grid-template-columns: 1fr !important; } }
+
+/* Section heading row */
+.rwh-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 1rem 2rem; }
+.rwh-head .rwh-title { margin-block-end: 0; }
+
+/* Glossary: sticky category bar */
+.rwg-bar { position: sticky; inset-block-start: 4.8rem; z-index: 30; background: rgba(247, 242, 232, 0.92); backdrop-filter: blur(10px); border-block-end: 1px solid var(--h-stone); }
+.rwg-bar__inner { display: flex; gap: 0.5rem; overflow-x: auto; padding-block: 0.85rem; scrollbar-width: none; }
+.rwg-bar__inner::-webkit-scrollbar { display: none; }
+.rwg-bar a { flex: none; padding: 0.45rem 1rem; border-radius: 999px; border: 1px solid var(--h-stone); background: #fff; color: var(--h-emerald); font-size: 14px; font-weight: 700; white-space: nowrap; transition: background 0.2s ease, border-color 0.2s ease; }
+.rwg-bar a:hover { border-color: var(--h-gold); background: var(--h-sand); }
+.rwg-bar a b { color: var(--h-gold); margin-inline-start: 0.4rem; font-weight: 800; }
+
+.rwg-cat { scroll-margin-block-start: 9rem; padding-block: clamp(2.5rem, 5vw, 4rem); border-block-end: 1px solid var(--h-stone); }
+.rwg-cat:last-child { border-block-end: 0; }
+.rwg-cat__num { font-size: 13px; font-weight: 800; color: var(--h-gold); letter-spacing: 0.05em; }
+.rwg-grid { display: grid; gap: 1rem; margin-block-start: 1.75rem; }
+@media (min-width: 720px) { .rwg-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1100px) { .rwg-grid { grid-template-columns: repeat(3, 1fr); } }
+.rwg-term { position: relative; display: flex; flex-direction: column; gap: 0.55rem; padding: 1.4rem 1.45rem 1.3rem; border-radius: 16px; background: #fff; color: inherit; box-shadow: 0 1px 0 rgba(12, 42, 32, 0.05), 0 16px 34px -28px rgba(12, 42, 32, 0.5); border-block-start: 3px solid transparent; transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease; }
+.rwg-term:hover { transform: translateY(-3px); border-block-start-color: var(--h-gold); box-shadow: 0 1px 0 rgba(12, 42, 32, 0.05), 0 24px 44px -26px rgba(12, 42, 32, 0.55); }
+.rwg-term h3 { font-size: 19px; font-weight: 800; color: var(--h-emerald); line-height: 1.45; }
+.rwg-term p { font-size: 14.5px; line-height: 1.85; color: var(--h-soft); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.rwg-term span { margin-block-start: auto; font-size: 13.5px; font-weight: 700; color: var(--h-emerald-3); }
+.rwg-term--reg::after { content: ""; position: absolute; inset-block-start: 1.2rem; inset-inline-end: 1.2rem; inline-size: 0.55rem; block-size: 0.55rem; border-radius: 50%; background: var(--h-gold); }
+
+/* Term page */
+.rwt-head { position: relative; overflow: hidden; background: var(--h-emerald); color: #fff; padding-block: clamp(6rem, 11vw, 8rem) clamp(2.75rem, 5vw, 3.75rem); }
+.rwt-head::before { content: ""; position: absolute; inset: 0; background: radial-gradient(50rem 26rem at 90% -20%, rgba(201, 163, 91, 0.22), transparent 60%), radial-gradient(30rem 20rem at 0% 120%, rgba(30, 77, 59, 0.8), transparent 70%); pointer-events: none; }
+.rwt-head > * { position: relative; }
+.rwt-crumbs { display: flex; flex-wrap: wrap; gap: 0.5rem; font-size: 13.5px; color: rgba(255, 255, 255, 0.65); }
+.rwt-crumbs a { color: var(--h-gold-2); }
+.rwt-head h1 { font-size: clamp(36px, 5vw, 64px); font-weight: 800; line-height: 1.2; margin-block: 1rem 0.75rem; }
+.rwt-aliases { font-size: 15px; color: rgba(255, 255, 255, 0.72); }
+.rwt-chip { display: inline-block; padding: 0.25rem 0.85rem; border-radius: 999px; font-size: 12.5px; font-weight: 800; background: var(--h-gold); color: var(--h-emerald); }
+.rwt-def { font-size: clamp(19px, 1.8vw, 24px); line-height: 1.95; color: var(--h-ink); font-weight: 500; }
+.rwt-example { margin-block-start: 2.25rem; padding: 1.6rem 1.75rem; border-radius: 18px; background: #fff; border-inline-start: 4px solid var(--h-gold); box-shadow: 0 18px 40px -32px rgba(12, 42, 32, 0.5); }
+.rwt-example h2, .rwt-block h2 { font-size: 14px; font-weight: 800; letter-spacing: 0.04em; color: var(--h-gold); margin-block-end: 0.6rem; }
+.rwt-example p { font-size: 16.5px; line-height: 1.95; color: var(--h-ink); }
+.rwt-block { margin-block-start: 2.5rem; }
+.rwt-related { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.rwt-related a { padding: 0.45rem 1rem; border-radius: 999px; background: var(--h-emerald); color: #fff; font-size: 14px; font-weight: 700; transition: background 0.2s ease; }
+.rwt-related a:hover { background: var(--h-emerald-3); }
+.rwt-meta { margin-block-start: 0.75rem; font-size: 13px; color: var(--h-soft); }
+
+/* Coming-soon and "start here" cards */
+.rwh-badge-soon { display: inline-block; margin-block-end: 0.75rem; padding: 0.25rem 0.9rem; border-radius: 999px; background: var(--h-gold); color: var(--h-emerald); font-size: 12.5px; font-weight: 800; }
+.rwh-note { margin-block-start: 1.25rem; font-size: 14px; line-height: 1.8; color: rgba(255, 255, 255, 0.7); max-inline-size: 40rem; }
+
+/* About: numbered principles */
+.rwa-list { display: grid; gap: 1.25rem; margin-block-start: 2.5rem; }
+@media (min-width: 900px) { .rwa-list { grid-template-columns: repeat(2, 1fr); } }
+.rwa-item { display: grid; grid-template-columns: auto 1fr; gap: 1rem 1.25rem; padding: 1.75rem; border-radius: 18px; background: #fff; box-shadow: 0 18px 40px -32px rgba(12, 42, 32, 0.5); }
+.rwa-item__n { font-size: 34px; font-weight: 800; line-height: 1; color: var(--h-gold); }
+.rwa-item h3 { font-size: 20px; font-weight: 800; color: var(--h-emerald); margin-block-end: 0.5rem; }
+.rwa-item p { font-size: 15px; line-height: 1.9; color: var(--h-soft); }
+
+/* Contact cards */
+.rwct-grid { display: grid; gap: 1.25rem; }
+@media (min-width: 760px) { .rwct-grid { grid-template-columns: repeat(2, 1fr); } }
+.rwct-card { display: flex; flex-direction: column; gap: 0.75rem; padding: 2rem; border-radius: 20px; background: #fff; color: inherit; box-shadow: 0 22px 46px -34px rgba(12, 42, 32, 0.55); border-block-start: 3px solid var(--h-gold); transition: transform 0.25s ease; }
+.rwct-card:hover { transform: translateY(-3px); }
+.rwct-card__icon { inline-size: 3rem; block-size: 3rem; border-radius: 14px; display: grid; place-items: center; background: var(--h-emerald); color: var(--h-gold-2); font-size: 20px; }
+.rwct-card h2 { font-size: 15px; font-weight: 800; color: var(--h-gold); }
+.rwct-card strong { font-size: clamp(18px, 2vw, 22px); font-weight: 800; color: var(--h-emerald); word-break: break-all; }
+.rwct-card span { font-size: 14px; color: var(--h-soft); }
+
+@media (prefers-reduced-motion: reduce) {
+  .rwg-term, .rwct-card { transition: none; }
+  .rwg-term:hover, .rwct-card:hover { transform: none; }
+}
