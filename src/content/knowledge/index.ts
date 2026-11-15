@@ -5,7 +5,8 @@
  */
 import { APPROVED_TERMS } from "./terms";
 import { APPROVED_TERMS_BATCH2 } from "./terms-batch2";
+import { APPROVED_TERMS_BATCH3 } from "./terms-batch3";
 import { APPROVED_STYLES } from "./styles";
 
-export const TERMS: unknown[] = [...APPROVED_TERMS, ...APPROVED_TERMS_BATCH2];
+export const TERMS: unknown[] = [...APPROVED_TERMS, ...APPROVED_TERMS_BATCH2, ...APPROVED_TERMS_BATCH3];
 export const STYLES: unknown[] = APPROVED_STYLES;
