@@ -14,6 +14,10 @@ export default function robots(): MetadataRoute.Robots {
           "/proposals/",
           "/settings/",
           "/admin/",
+          // App area behind the pre-launch gate (401 for crawlers). Legacy /admin, /settings and
+          // /leads redirect into it, so keep crawlers out instead of letting them report 401.
+          "/workspace/",
+          "/leads",
           "/login",
           "/join/status/",
           "/quote/status/",
