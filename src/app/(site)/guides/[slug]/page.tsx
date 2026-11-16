@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getMessages } from "@/shared/i18n";
 import { getLocale } from "@/shared/i18n/server";
+import { env } from "@/shared/lib/env";
 import { getGuide, RUWQ_GUIDES } from "@/content/guides";
 import { GuideArticleBody } from "@/modules/marketplace/components/guide-article-body";
 import { getTrustCopy } from "@/modules/ruwaq/trust-copy";
@@ -26,6 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title,
     description,
     keywords,
+    alternates: { canonical: `${env.NEXT_PUBLIC_APP_URL}/guides/${params.slug}` },
     openGraph: {
       title,
       description,

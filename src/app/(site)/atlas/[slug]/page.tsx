@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getLocale } from "@/shared/i18n/server";
+import { env } from "@/shared/lib/env";
 import { SourcesList, Tx, fmtDate } from "@/modules/site/content/components";
 import { pickText } from "@/modules/site/content/localize";
 import { getKnowledgeCopy } from "@/modules/site/knowledge/copy";
@@ -22,6 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: pickText(s.name, locale)?.text,
     description: pickText(s.summary, locale)?.text,
     robots: s.draft ? { index: false, follow: false } : undefined,
+    alternates: { canonical: `${env.NEXT_PUBLIC_APP_URL}/atlas/${params.slug}` },
     openGraph: s.hero ? { images: [{ url: s.hero.src }] } : undefined,
   };
 }

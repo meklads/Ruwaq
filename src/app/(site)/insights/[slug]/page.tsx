@@ -19,6 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: pickText(item.title, locale)?.text,
     description: pickText(item.summary, locale)?.text,
     robots: item.preview || item.draft ? { index: false, follow: false } : undefined,
+    alternates: { canonical: `${RUWQ_PUBLIC_URL}/insights/${params.slug}` },
   };
 }
 
