@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getMessages } from "@/shared/i18n";
 import { getLocale } from "@/shared/i18n/server";
+import { env } from "@/shared/lib/env";
 import { getSession } from "@/modules/auth/server/session";
 import { ProposalsLandingPage } from "@/modules/marketing/components/proposals-landing-page";
 
@@ -12,6 +13,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: `${nasaq.name} — ${nasaq.tagline}`,
     description: copy.intro,
+    alternates: { canonical: `${env.NEXT_PUBLIC_APP_URL}/proposals` },
   };
 }
 
