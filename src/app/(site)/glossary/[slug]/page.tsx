@@ -22,6 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: pickText(t.term, locale)?.text,
     description: pickText(t.definition, locale)?.text,
     robots: t.draft ? { index: false, follow: false } : undefined,
+    alternates: { canonical: `${RUWQ_PUBLIC_URL}/glossary/${params.slug}` },
   };
 }
 
