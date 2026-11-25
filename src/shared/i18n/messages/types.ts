@@ -947,7 +947,6 @@ export type Messages = {
       contactLead: string;
       contactCta: string;
       contactAlt: string;
-      vstaroCta: string;
     };
     nav: {
       howItWorks: string;
