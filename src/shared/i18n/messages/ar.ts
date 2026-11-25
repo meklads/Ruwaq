@@ -1450,6 +1450,7 @@ export const ar = {
     "شاركنا slug المشروع، المدينة، وتاريخ الإطلاق — يرد فريق Ruwaq خلال يوم عمل مع عرض مخصّص.",
    contactCta: "سجّل مشروعك (CGI + Launch)",
    contactAlt: "تواصل معنا",
+   vstaroCta: "صالة بيع أو جناح معرض؟ ابدأ من VSTARO",
   },
   nav: {
    howItWorks: "كيف يعمل",

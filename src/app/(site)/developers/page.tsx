@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { SPONSORED_LAUNCH_PACKAGES } from "@/content/sponsored-launch-packages";
 import { GraphicsHousePromoBanner } from "@/modules/marketplace/components/graphics-house-promo-banner";
 import { getMessages } from "@/shared/i18n";
+import { VSTARO_REFERRAL_URL_AR, VSTARO_REFERRAL_URL_EN } from "@/shared/constants/brand";
 import { getLocale } from "@/shared/i18n/server";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -66,6 +67,16 @@ export default async function DevelopersPage() {
               {copy.contactAlt}
             </Link>
           </div>
+          <p className="mt-6 border-t border-neutral-200 pt-5 text-sm">
+            <a
+              href={isAr ? VSTARO_REFERRAL_URL_AR : VSTARO_REFERRAL_URL_EN}
+              target="_blank"
+              rel="noopener"
+              className="font-medium text-neutral-900 underline underline-offset-4 hover:text-neutral-600"
+            >
+              {copy.vstaroCta}
+            </a>
+          </p>
         </section>
       </div>
 

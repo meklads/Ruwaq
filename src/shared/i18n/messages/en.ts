@@ -1459,6 +1459,7 @@ export const en: Messages = {
     "Share your project slug, city, and launch date — Ruwaq replies within one business day with a tailored quote.",
    contactCta: "Register your project (CGI + Launch)",
    contactAlt: "Contact us",
+   vstaroCta: "Sales center or exhibition booth? Start with VSTARO",
   },
   nav: {
    howItWorks: "How it works",
