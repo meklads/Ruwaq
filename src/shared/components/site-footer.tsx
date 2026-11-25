@@ -1,6 +1,11 @@
 import Link from "next/link";
 import { getLocale } from "@/shared/i18n/server";
-import { RUWQ_PUBLIC_EMAIL, RUWQ_SUPPORT_WHATSAPP_E164 } from "@/shared/constants/brand";
+import {
+  RUWQ_PUBLIC_EMAIL,
+  RUWQ_SUPPORT_WHATSAPP_E164,
+  VSTARO_REFERRAL_URL_AR,
+  VSTARO_REFERRAL_URL_EN,
+} from "@/shared/constants/brand";
 import { getSiteCopy } from "@/modules/site/copy";
 import { RuwaqLogo } from "@/shared/components/ruwaq-logo";
 import { getContentCopy } from "@/modules/site/content/copy";
@@ -12,19 +17,25 @@ export async function SiteFooter() {
   const waDigits = RUWQ_SUPPORT_WHATSAPP_E164.replace(/\D/g, "");
 
   const nav = getContentCopy(locale).nav;
-  const sections = [
+  type FooterLink = { href: string; label: string; external?: boolean };
+  const sections: FooterLink[] = [
     { href: "/updates", label: nav.updates },
     { href: "/insights", label: nav.insights },
     { href: "/specialists", label: nav.specialists },
     { href: "/glossary", label: getKnowledgeCopy(locale).nav.glossary },
     { href: "/atlas", label: getKnowledgeCopy(locale).nav.atlas },
   ];
-  const tools = [
+  const tools: FooterLink[] = [
     { href: "/proposals", label: f.nasaq },
     { href: "/proposals#samples", label: f.ready },
     { href: "/guides", label: f.guides },
+    {
+      href: locale === "ar" ? VSTARO_REFERRAL_URL_AR : VSTARO_REFERRAL_URL_EN,
+      label: f.vstaro,
+      external: true,
+    },
   ];
-  const company = [
+  const company: FooterLink[] = [
     { href: "/about", label: f.aboutLink },
     { href: "/radar", label: f.aboutRadar },
     { href: "/contact", label: f.contact },
@@ -81,7 +92,13 @@ export async function SiteFooter() {
                 <ul>
                   {col.links.map((l) => (
                     <li key={l.href}>
-                      <Link href={l.href}>{l.label}</Link>
+                      {l.external ? (
+                        <a href={l.href} target="_blank" rel="noopener">
+                          {l.label}
+                        </a>
+                      ) : (
+                        <Link href={l.href}>{l.label}</Link>
+                      )}
                     </li>
                   ))}
                 </ul>
