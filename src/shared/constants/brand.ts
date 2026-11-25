@@ -20,6 +20,12 @@ export const GRAPHICS_HOUSE_PROJECT_LAUNCH_URL =
 export const TURRIVA_URL = "https://turriva.com";
 export const BEESMOTION_URL = "https://beesmotion.com";
 
+/** VSTARO — sales centers & exhibition booths (developer entry point). */
+export const VSTARO_REFERRAL_URL_AR =
+  "https://vstaro.com/?utm_source=ruwaq&utm_medium=referral";
+export const VSTARO_REFERRAL_URL_EN =
+  "https://vstaro.com/en/?utm_source=ruwaq&utm_medium=referral";
+
 export function graphicsHouseReferralUrl(campaign: string, path = "/"): string {
   const url = new URL(path, GRAPHICS_HOUSE_URL);
   url.searchParams.set("utm_source", "ruwaq");

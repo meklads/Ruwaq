@@ -16,7 +16,7 @@ type Copy = {
   };
   footer: {
     about: string; sections: string; tools: string; company: string;
-    nasaq: string; ready: string; guides: string; aboutLink: string; aboutRadar: string; contact: string;
+    nasaq: string; ready: string; guides: string; vstaro: string; aboutLink: string; aboutRadar: string; contact: string;
     privacy: string; terms: string; subscribers: string; rights: string; cta: string; ctaBody: string; ctaButton: string;
   };
   home: {
@@ -53,7 +53,7 @@ const ar: Copy = {
   footer: {
     about: "مظلة معرفية عن المشاريع والجهات في السوق السعودي.",
     sections: "الأقسام", tools: "أدوات", company: "رواق",
-    nasaq: "نَسَق: إعداد عروض الأسعار", ready: "العروض الجاهزة", guides: "الأدلة", aboutLink: "من نحن", aboutRadar: "عن الرادار", contact: "تواصل",
+    nasaq: "نَسَق: إعداد عروض الأسعار", ready: "العروض الجاهزة", guides: "الأدلة", vstaro: "صالة بيع أو جناح معرض؟ ابدأ من VSTARO", aboutLink: "من نحن", aboutRadar: "عن الرادار", contact: "تواصل",
     privacy: "الخصوصية", terms: "الشروط", subscribers: "دخول المشتركين",
     rights: "جميع الحقوق محفوظة", cta: "تواصل معنا", ctaBody: "للاستفسار عن رواق أو لإبداء ملاحظاتك.", ctaButton: "تواصل",
   },
@@ -190,7 +190,7 @@ const en: Copy = {
   footer: {
     about: "A knowledge umbrella about projects and organisations in the Saudi market.",
     sections: "Sections", tools: "Tools", company: "Ruwaq",
-    nasaq: "NASAQ: quotation builder", ready: "Ready proposals", guides: "Guides", aboutLink: "About", aboutRadar: "About Radar", contact: "Contact",
+    nasaq: "NASAQ: quotation builder", ready: "Ready proposals", guides: "Guides", vstaro: "Sales center or exhibition booth? Start with VSTARO", aboutLink: "About", aboutRadar: "About Radar", contact: "Contact",
     privacy: "Privacy", terms: "Terms", subscribers: "Subscriber sign-in",
     rights: "All rights reserved", cta: "Get in touch", ctaBody: "Questions about Ruwaq, or your feedback.", ctaButton: "Contact",
   },
